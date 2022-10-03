@@ -1,0 +1,57 @@
+body {
+  margin: 0;
+  font-family: GT Walsheim Pro;
+  /* -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale; */
+}
+
+code {
+  font-family: GT Walsheim Pro;
+}
+
+@font-face {
+  font-family: "GT Walsheim Pro";
+  src: local("GT Walsheim Pro"),
+    url("./assets/fonts/Walsheim/GTWalsheimProRegular.ttf") format("truetype");
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "GT Walsheim Pro";
+  src: local("GT Walsheim Pro Bold"),
+    url("./assets/fonts/Walsheim//GTWalsheimProBold.ttf") format("truetype");
+  font-weight: bold;
+}
+
+/* @font-face {
+  font-family: "DIN Alternate Bold";
+  src: local("DIN Alternate Bold"),
+    url("./assets/fonts/DIN Alternate/DIN Alternate Bold.ttf") format("truetype");
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: "DIN Condensed Bold";
+  src: local("DIN Condensed Bold"),
+    url("./assets/fonts/DIN Condensed/DIN Condensed Bold.ttf") format("truetype");
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: "Futura";
+  src: local("Futura"),
+    url("./assets/fonts/Futura/Futura.ttc") format("truetype");
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: "MyriadPro";
+  src: local("MyriadPro"),
+    url("./assets/fonts/MyriadPro/MyriadPro-Regular.otf") format("truetype");
+  font-weight: normal;
+} */
+
+*{
+  font-family: "GT Walsheim Pro";
+}
+

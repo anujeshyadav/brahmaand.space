@@ -1,0 +1,189 @@
+.login-container {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.login-card {
+  width: 350px;
+    max-width: 600px;
+    background-color: white !important;
+    border: 1px solid #9d9e9f !important;
+    border-radius: 0px !important;
+    margin-top: 100px;
+    margin-left: 700px;
+    margin-right: auto;
+    margin-bottom: 200px;
+  /* width: 100%;
+  max-width: 600px;
+  background-color: white !important;
+  border: 1px solid #9d9e9f !important;
+  border-radius: 0px !important;
+  margin-top: 100px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 200px; */
+
+
+}
+
+.login-card h2{
+  margin-top: 20px;
+  font-size: 2rem;
+  margin-left: -100px;
+  font-family: 'GT Walsheim Pro';
+}
+
+.login-card-header {
+  background-color: #4d22f8 !important;
+  color: white !important;
+  border-radius: 0px !important;
+  text-align: center;
+}
+
+
+.from-label{
+  margin-right: 225px;
+  font-weight: 550;
+}
+.login-card-header-h2 {
+  font-family: "DIN Alternate Bold" !important;
+  font-weight: bold !important;
+}
+
+.login-form {
+  margin-top: 50px;
+}
+
+.login-form-group {
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.login-form-control {
+  height: 45px;
+  border-radius: 0px;
+  border-color: #9d9e9f;
+}
+
+.login-button-div {
+  width: 100% !important;
+  margin-top: 30px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+.login-button {
+  /* width: 250px !important;
+  height: 60px;
+  background-color: #5F56C6 !important;
+  border: 1px solid #5F56C6 !important;
+  border-radius: 0 !important;
+  font-size: 1.1rem;
+  font-weight: bold;
+  margin-left: auto;
+  margin-right: auto; */
+  width: 325px !important;
+    height: 50px;
+    
+    background-color: #5F56C6 !important;
+    border: 1px solid #5F56C6 !important;
+    border-radius: 7 !important;
+    font-size: 1.1rem;
+    font-weight: bold;
+}
+
+.login-button:hover,
+.login-button:active,
+.login-button:after,
+.login:focus {
+  background-color: #35363a !important;
+  border: 1px solid #35363a !important;
+}
+
+.login-signup-res-pass-div {
+  width: 90%;
+  margin-top: 30px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+.login-new-account-p {
+  color: #35363a !important;
+  /* font-weight: bold; */
+  margin-top: -30px;
+    margin-left: 210px;
+}
+
+.login-new-account-link{
+  /* outline: none !important;
+  color: #f89422 !important;
+  cursor: pointer;
+  text-decoration: underline 1px #f89422 !important; */
+  
+    outline: none !important;
+    color: #000 !important;
+    cursor: pointer;
+    text-decoration: none;
+    font-size: small;
+}
+
+.login-br{
+  display:none;
+}
+
+@media screen and (max-width: 578px) {
+  .login-card {
+    margin-top: 50px;
+  }
+
+  .login-card-header-h2 {
+    font-size: 40px;
+  }
+
+  .login-form-group {
+    width: 308px;
+    margin-left: initial;
+    /* margin-right: unset; */
+    margin-top: 35px;
+  }
+
+  .login-br{
+    display:inline;
+  }
+}
+.login-img{
+
+  height: 460px;
+  margin-top: 45px;
+  width: 745px;
+}
+
+    .head h2 {
+      margin-top: 55px;
+    }
+
+    .check{
+      margin-left: 15px;
+
+    }
+
+.label-button{
+  margin-top: 12px;
+  margin-left: 5px;
+}
+   .last{
+        margin-left: 70px;
+        font-size: 12px;
+        margin-top: 10px;
+        color: #6E757C;
+      }
+   
+
+   .google{
+    margin-top: 25px;
+    margin-left: 110px;
+
+   }

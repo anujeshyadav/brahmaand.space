@@ -1,0 +1,130 @@
+*{
+    /* background-color: red; */
+}
+h2 {
+    color: black;
+    font-family: 'GT Walsheim Pro';
+    font-weight: 500;
+    font-size: 40px;
+}
+h3.Pointtext {
+    text-align: left;
+    font-family: 'GT Walsheim Pro';
+    color: black;
+    font-weight: 500;
+    font-size: 35px;
+   
+}
+p-2 {
+    padding: 1.5rem!important;
+}
+
+
+img.img1 {
+    float: left;
+    /* position: absolute; */
+}
+.h4, h4 {
+    font-size: 22px;
+    font-weight: 500;
+    font-size: 44p;
+    font-family: 'GT Walsheim Pro';
+    color: black;
+    margin: 0px;
+}
+
+h5.points {
+    justify-content: center;
+    padding: 10px;
+    background: #5f56c6;
+    border-bottom-left-radius: 12px;
+}
+
+.images6 {
+   
+    display: flex;
+       align-content: center;
+    align-items: baseline;
+    
+}
+.maincol.col {
+    margin: 8px 18px 27px;
+    width: 320px;
+    box-shadow: 0px 6px 11px -3px;
+    padding: 18px;
+    text-align: center;
+    height: auto;
+    border-radius: 10px;
+    cursor: pointer;
+    background: white;
+}
+
+img.avatar {
+    position: relative;
+    width: 206px;
+}
+
+
+.maindiv {
+    display: flex;
+    clear: both;
+    width: 50%;
+}
+
+.maindiv1 {
+    margin-top: 16px;
+    width: 50%;
+    clear: both;
+   
+    width: 50;
+}
+img.first {
+    position: relative;
+    float: inline-end;
+    float: right;
+    margin-top: -103px !important;
+    margin-right: 46px !important;
+}
+
+@media screen and (min-width: 350px) {
+    /* img.first {
+        position: relative;
+        float: inline-end;
+        float: right;
+        width: 102px;
+        margin-top: -103px ;
+        margin-right: 42px ;
+    } */
+
+    /* .firstal{
+        position: relative;
+        float: inline-end;
+        float: right;
+        margin-top: -115px;
+        margin-right: 85px;
+    } */
+
+  }
+  h3 {
+    font-weight: 500;
+    font-family: 'GT Walsheim Pro';
+}
+
+  @media screen and (min-width: 450px){
+   
+
+  }
+
+  .leadertext {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    font-size: 56px;
+    font-family: 'GT Walsheim Pro';
+    font-weight: 500;
+    color: black;
+}
+
+@media screen and (min-width: 700px){
+
+}
