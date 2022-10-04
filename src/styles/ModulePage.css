@@ -9,6 +9,11 @@ h1{
 .list-st ul {
     padding: 0px;
   }
+
+  button.btn1:hover {
+    color: white;
+    background-color: #000;
+}
   
 .list-st ul li{
     list-style: none;

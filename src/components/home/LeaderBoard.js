@@ -19,6 +19,7 @@ import winsix from "../../images/winsix.png";
 import { FaBook, FaThumbsUp, FaInfinity, FaChartBar } from "react-icons/fa";
 
 function LeaderBoard() {
+  
   return (
     <>
       <div className="leaderb mt-4 text-center">
