@@ -50,13 +50,7 @@ function Header() {
           <div className="text-center mt-3">
             <Button className="btn btn-success">Search</Button>
           </div>
-          {/* <div className="btn2">
-              <Row className="d-flex justify-content-center my-2">
-                <button className="sBtn">
-                  <span className="sText">SEARCH</span>
-                </button>
-              </Row>
-            </div> */}
+         
         </div>
       </section>
       <br />
@@ -69,18 +63,7 @@ function Header() {
       <Container>
         <br />
         <br />
-        {/* <Row>
-          <Col lg="6" className="bg-success">
-            <Container className="d-flex justify-content-center bg-danger">
-              <Card>
-                <h1>djfhdhfj</h1>
-              </Card>
-            </Container>
-          </Col>
-          <Col lg="6" className="bg-warning">
-            <h1>hello</h1>
-          </Col>
-        </Row> */}
+       
       </Container>
     </>
   );
