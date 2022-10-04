@@ -79,6 +79,11 @@ function Footer() {
                                         Eat & Food
                                     </Link>
                                 </li>
+                                <li>
+                                    <Link to="/leaderboard">
+                                       LeaderBoard
+                                    </Link>
+                                </li>
                             </ul>
                         </div>
                     </Col>
