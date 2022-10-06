@@ -67,7 +67,7 @@ const send_request_reset_password = async (email, setMessage, navigate) => {
         email,
     });
 
-    const info_url = `${domain}/user-account/send-request-reset-password`;
+    const info_url = `${domain}/Login/send-request-reset-password`;
     axios
         .post(info_url, body, config)
         .then(async (res) => {

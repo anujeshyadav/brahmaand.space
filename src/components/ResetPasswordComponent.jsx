@@ -84,7 +84,7 @@ const reset_password = async (password, re_password, uid, token, navigate) => {
         re_password,
     });
 
-    const info_url = `${domain}/user-account/reset-password/${uid}/${token}`;
+    const info_url = `${domain}/UserAccountInfo/reset-password/${uid}/${token}`;
     axios
         .post(info_url, body, config)
         .then(async (res) => {

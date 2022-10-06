@@ -14,7 +14,7 @@ export const getUser = async () => {
 
   const user_token = window.localStorage.getItem("user_token");
 
-  const auth_url =  `${domain}/user-account/check-auth`;
+  const auth_url =  `${domain}/UserAccountInfo/check-auth`;
 
   if (user_token !== "undefined") {
 
@@ -67,7 +67,7 @@ export const AuthProvider = ({ children }) => {
       },
     };
 
-    const login_url = `${domain}/user-account/login`;
+    const login_url = `${domain}/UserAccountInfo/login`;
 
     return await axios
       .post(login_url, body, config)
@@ -102,7 +102,7 @@ export const AuthProvider = ({ children }) => {
       },
     };
 
-    const edit_url = `${domain}/user-account/edit-info`;
+    const edit_url = `${domain}/UserAccountInfo/edit-info`;
 
     return await axios
       .post(edit_url, body, config)
@@ -132,7 +132,7 @@ export const AuthProvider = ({ children }) => {
       },
     };
 
-    const reset_url = `${domain}/user-account/reset-password`;
+    const reset_url = `${domain}/UserAccountInfo/reset-password`;
 
     return await axios
       .post(reset_url, body, config)

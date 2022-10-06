@@ -280,7 +280,7 @@ const createNewAccount = async(body) => {
     }
   }
 
-  const url = `${domain}/user-account/signup`;
+  const url = `${domain}/Login/signup`;
 
   const axios_result = await axios.post(url, body, config).then(async(res) => {
     const result = await res.data
@@ -317,7 +317,7 @@ const uploadFiles = async (email, authority_letter_document, w9_document, insura
 
 
 
-  const url = `${domain}/user-account/upload-documents/${email}`;
+  const url = `${domain}/UserAccountInfo/upload-documents/${email}`;
 
   await axios.post(url, formData, config).then(async(res) => {
     const result = await res.data

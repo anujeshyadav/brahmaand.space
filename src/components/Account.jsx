@@ -207,7 +207,7 @@ function Account({
                       <div className="account-info-box-div">
                         <p className="account-info-box-p">
                           <a
-                            href={`http://localhost:5000/user-account/pdf-viewer/${user_info.email}/${doc_info.filename}`}
+                            href={`http://localhost:5000/UserAccountInfo/pdf-viewer/${user_info.email}/${doc_info.filename}`}
                             target="_blank"
                             className="account-info-box-a"
                           >

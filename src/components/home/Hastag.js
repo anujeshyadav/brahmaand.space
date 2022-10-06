@@ -3,6 +3,7 @@ import has1 from "../../images/has1.png";
 import business from "../../images/business.png";
 import education from "../../images/education.png";
 import healthcare from "../../images/healthcare.png";
+import Brahmaand from "../../images/Brahmaand.png";
 import eatfoods from "../../images/eatfoods.png";
 import entertainment from "../../images/entertainment.png";
 import finance from "../../images/finance.png";
@@ -184,6 +185,8 @@ function Hastag() {
             </Col>
             <Col lg="6" md="6" sm="12">
               <img className="imgCol2" src={emoji2} alt="img" />
+              {/* <img className="imgCol2 img com12" src={Brahmaand} alt="img" /> */}
+
               <div className="text">{/* <p>Brahmaand.space</p> */}</div>
 
               <div className="content-emoji1">

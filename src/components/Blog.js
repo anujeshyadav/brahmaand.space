@@ -67,7 +67,8 @@ function Blog() {
                         Besides Stackoverflow
                       </b>
                     </Row>
-                    <h6 style={{ color: "#5F56C6" }}>Sep 14, 2022</h6>
+
+                    <h6 style={{ color: "#5F56C6"}}>Sep 14, 2022</h6>
                     <h6>
                       Introduction to Java + Installing Java JDK and IntelliJ
                       IDEA for Java 19:00 Basic Structure of a Java Program:
@@ -146,7 +147,7 @@ function Blog() {
               <CardBody>
                 <CardTitle>
                   <b>
-                    {" "}
+                    
                     5 Terrific Sites to Ask Your Programming Questions Besides
                     Stackoverflow
                   </b>
@@ -159,7 +160,7 @@ function Blog() {
                 <br></br>
                 <CardText>
                   <span>
-                    {" "}
+                    
                     Introduction to java + installing java JDK and intelliJ IDEA
                     for Java 19:00 Basic Structure of a Java Program:
                     Understanding our First Java Hello World Program 14:09
@@ -180,7 +181,7 @@ function Blog() {
               <CardBody>
                 <CardTitle>
                   <b>
-                    {" "}
+                    
                     5 Terrific Sites to Ask Your Programming Questions Besides
                     Stackoverflow
                   </b>
@@ -193,7 +194,7 @@ function Blog() {
                 <br></br>
                 <CardText>
                   <span>
-                    {" "}
+                    
                     Introduction to java + installing java JDK and intelliJ IDEA
                     for Java 19:00 Basic Structure of a Java Program:
                     Understanding our First Java Hello World Program 14:09
@@ -214,20 +215,21 @@ function Blog() {
               <CardBody>
                 <CardTitle>
                   <b>
-                    {" "}
+                    
                     5 Terrific Sites to Ask Your Programming Questions Besides
                     Stackoverflow
                   </b>
                 </CardTitle>
                 <CardSubtitle>
                   <span>
-                    <b style={{ color: "#5F56C6" }}>Sep 14,2022 </b>
+                  <Row> <b style={{ color: "#5F56C6" }}>Sep 14,2022 </b></Row>
+                   
                   </span>
                 </CardSubtitle>
                 <br></br>
                 <CardText>
                   <span>
-                    {" "}
+                    
                     Introduction to java + installing java JDK and intelliJ IDEA
                     for Java 19:00 Basic Structure of a Java Program:
                     Understanding our First Java Hello World Program 14:09
@@ -250,7 +252,7 @@ function Blog() {
               <CardBody>
                 <CardTitle>
                   <b>
-                    {" "}
+                    
                     5 Terrific Sites to Ask Your Programming Questions Besides
                     Stackoverflow
                   </b>
@@ -263,7 +265,7 @@ function Blog() {
                 <br></br>
                 <CardText>
                   <span>
-                    {" "}
+                    
                     Introduction to java + installing java JDK and intelliJ IDEA
                     for Java 19:00 Basic Structure of a Java Program:
                     Understanding our First Java Hello World Program 14:09
@@ -283,7 +285,7 @@ function Blog() {
               <CardBody>
                 <CardTitle>
                   <b>
-                    {" "}
+                   
                     5 Terrific Sites to Ask Your Programming Questions Besides
                     Stackoverflow
                   </b>
@@ -296,7 +298,7 @@ function Blog() {
                 <br></br>
                 <CardText>
                   <span>
-                    {" "}
+                   
                     Introduction to java + installing java JDK and intelliJ IDEA
                     for Java 19:00 Basic Structure of a Java Program:
                     Understanding our First Java Hello World Program 14:09
@@ -316,7 +318,7 @@ function Blog() {
               <CardBody>
                 <CardTitle>
                   <b>
-                    {" "}
+                    
                     5 Terrific Sites to Ask Your Programming Questions Besides
                     Stackoverflow
                   </b>
@@ -329,7 +331,7 @@ function Blog() {
                 <br></br>
                 <CardText>
                   <span>
-                    {" "}
+                    
                     Introduction to java + installing java JDK and intelliJ IDEA
                     for Java 19:00 Basic Structure of a Java Program:
                     Understanding our First Java Hello World Program 14:09

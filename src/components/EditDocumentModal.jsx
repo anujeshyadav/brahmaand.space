@@ -100,7 +100,7 @@ const updateDocument = async(new_document, close_modal, user_email, document_fil
 
     formData.append('document', new_document, `${document_filename}-${user_email}.pdf`);
 
-  const url = `${domain}/user-account/update-document/${user_email}/${document_filename}`;
+  const url = `${domain}/Login/update-document/${user_email}/${document_filename}`;
 
   await axios.post(url, formData, config).then(async(res) => {
     const result = await res.data

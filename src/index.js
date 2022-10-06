@@ -19,8 +19,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 // Import Pages
 import Landing from "./pages/index";
-import CreateAccount from "./pages/create-account";
-import UserAccountInfo from "./pages/user-account";
+import CreateAccount from "./pages/";
+// import UserAccountInfo from "./pages/UserAccountInfo";
 import Service from "./pages/service";
 import Logout from "./pages/logout";
 import ResetPasswordComponent from "./components/ResetPasswordComponent";
@@ -49,6 +49,7 @@ import { MenuProvider } from "./context/MenuContext";
 import { AuthProvider } from "./context/AuthContext";
 import { Navbar } from "reactstrap";
 import Signup from './components/Signup'
+import Login from "./components/Login";
 
 const rootElement = document.getElementById("root");
 render(
@@ -60,10 +61,14 @@ render(
             {/* <Route exact path="/" element={<Landing />} /> */}
             <Route exact path="/" element={<Home />} />
 
-            <Route exact path="/create-account" element={<CreateAccount />} />
+
+            <Route exact path="/login" element={<Login/>} />
+
+            {/* <Route exact path="/create-account" element={<CreateAccount />} /> */}
             <Route exact path="/service" element={<Service />} />
             <Route exact path="/multiModule" element={<MultiModule />} />
-            <Route exact path="/user-account" element={<UserAccountInfo />} />
+            {/* <Route exact path="/UserAccountInfo" element={<UserAccountInfo />} /> */}
+            <Route exact path="/Login" element={<Login />} />
             <Route exact path="/navbar" element={<Navbar />} />
             <Route exact path="/logout" element={<Logout />} />
             <Route exact path="/signup" element={<Signup />} />

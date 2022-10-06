@@ -67,17 +67,17 @@ function Login({ loginFunction }) {
                 <Input
                   type="password"
                   className="login-form-control"
-                  placeholder="CONTRASEÑA"
+                  placeholder="Password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                 />
               </FormGroup>
-              <div className="login-signup-res-pass-div">
-                <p className="login-new-account-p">
+              <div className="login-signup-res-pass-div text-align-left">
+                {/* <p className="login-new-account-p "> */}
                   <Link to="/send-reset-password-request" className="login-new-account-link">
                     Forgot Password?
                   </Link>
-                </p>
+                {/* </p> */}
               </div>
 
               <Input className="check"
@@ -99,7 +99,9 @@ function Login({ loginFunction }) {
                   LOGIN
                 </Button>
               </div>
-              <div className="last"><span>Don't have an account yet ? <Link to="">Sign Up</Link>  </span></div>
+              <div className="last"><span>Don't have an account yet ? 
+              <Link to="/signup">Sign Up</Link>  </span>
+              </div>
               <div className="google">   <Row>
                 <Col lg='12' className="d-flex justify-content-center">
                   <img style={{
@@ -109,7 +111,7 @@ function Login({ loginFunction }) {
                 </Col>
 
               </Row></div>
-              {/* <Link to="">Sign Up</Link>       */}
+              {/* <Link to="">Sign Up</Link> */}
               {/* <Row> */}
 
               {/* </Row> */}
