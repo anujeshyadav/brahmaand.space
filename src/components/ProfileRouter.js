@@ -14,7 +14,7 @@ function ProfileRouter() {
                 <Tabs
                     // defaultActiveKey="profile"
                     // id="justify-tab-example"
-                    className="mb-2"
+                    className="mb-2 mt-3"
                     justify
                 >
                     <Tab className='' eventKey="video" title="VideoPosted">

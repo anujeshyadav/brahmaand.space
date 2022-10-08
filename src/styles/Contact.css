@@ -41,8 +41,8 @@ p {
 
 
 
-  button.btn.btn-secondary {
-    padding: 8px 27px;
+.button.btn.btn-secondary {
+    padding: 1px 0px;
 }
 
 /* .searchon {

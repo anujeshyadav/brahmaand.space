@@ -12,7 +12,10 @@ background: #011D2B !important;
     align-items: left;
     background-color: #011D2B !important;
 }
-
+.navbar-nav {
+    padding-left: 100px;
+    padding-right: 83px;
+}
 .tgl{
     color: white;
 
@@ -24,6 +27,18 @@ background: #011D2B !important;
     height: 66px;
     /* left: 84px;
     top: 26px; */
+}
+
+.rLogin {
+    width: 146px;
+    font-family: 'GT Walsheim Pro';
+    font-size: 18px;
+    font-weight: 600;
+    color: #FFFFFF;
+    text-align: center;
+    line-height: 35px;
+    margin-top: 5px;
+    border-radius: 8px;
 }
 .rsugnup:hover{
     background-color: #FC9358;
@@ -69,16 +84,15 @@ background: #011D2B !important;
 }
 
 
-.rLogin {
+/* .rLogin {
     margin: 8px;
     width: 121px;
     height: 48.66px;
-    /* left: 1534px; */
-    /* top: 52px; */
+  
     background: #5F56C6;
     box-shadow: 0px 0px 24px rgb(65 65 65 / 25%);
     border-radius: 11px;
-}
+} */
 
 .lText{
 width: 69px;
@@ -135,7 +149,7 @@ color: #FFFFFF;
     /* padding: 0 8px 12px; */
         }
 
-.rLogin {
+/* .rLogin {
     width: 205px;
     height: 41.66px;
     left: 0;
@@ -143,20 +157,8 @@ color: #FFFFFF;
     background: #5F56C6;
     box-shadow: 0px 0px 24px rgb(65 65 65 / 25%);
     border-radius: 11px;
-}
+} */
 
-    .rsugnup {
-        /* text-align: center; */
-        width: 177px;
-        height: 62px;
-        /* left: 0; */
-        /* top: 74px; */
-        font-family: 'GT Walsheim Pro';
-        font-style: normal;
-        font-weight: 300;
-        font-size: 29px;
-        /* line-height: 29px; */
-        color: #FFFFFF;
-    }
+
 
 }

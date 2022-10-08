@@ -25,7 +25,7 @@ function NavBar() {
         <div className="collapse navbar-collapse tgl" id="navbarSupportedContent">
           <ul className="navbar-nav me-auto mb-2 mb-lg-0"></ul>
           <button className="btn rbutton mobile" type="submit">
-           <span className='rText'>+ Submit a resource</span> 
+           <span className='rText'>+ Submit a Resource</span> 
           </button>
 
           <form className="d-flex" role="search">
@@ -36,7 +36,7 @@ function NavBar() {
               <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                 <li className="nav-item">
                   <a className="nav-link rsugnup mobile" aria-current="page" href="#">
-                    SignUp
+                    Sign up
                   </a>
                 </li>
                 <li className="nav-item">

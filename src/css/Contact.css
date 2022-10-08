@@ -1,10 +1,10 @@
 .form-control {
     display: block;
     width: 100%;
-    padding: 1.375rem 0.75rem;
+    /* padding: 1.375rem 0.75rem; */
     font-size: 1rem;
     font-weight: 500;
-    line-height: 1.5;
+    line-height: 1.75;
     color: #212529;
     background-color: #fff;
     background-clip: padding-box;
@@ -42,7 +42,7 @@ p {
 
 
   button.btn.btn-secondary {
-    padding: 8px 27px;
+    padding: 3px 27px;
 }
 
 /* .searchon {

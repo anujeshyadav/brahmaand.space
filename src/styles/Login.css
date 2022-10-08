@@ -4,15 +4,15 @@
 }
 
 .login-card {
-  width: 350px;
+  width: 367px;
     max-width: 600px;
-    background-color: white !important;
-    border: 1px solid #9d9e9f !important;
-    border-radius: 0px !important;
-    margin-top: 100px;
+    background-color: white ;
+    border: 1px solid #9d9e9f ;
+    border-radius: 12px;
+    /* margin-top: 100px;
     margin-left: 700px;
     margin-right: auto;
-    margin-bottom: 200px;
+    margin-bottom: 200px; */
   /* width: 100%;
   max-width: 600px;
   background-color: white !important;
@@ -27,16 +27,17 @@
 }
 
 .login-card h2{
-  margin-top: 20px;
-  font-size: 2rem;
-  margin-left: -100px;
+  color: white;
+  margin-top: 11px;
+  font-size: 1.5rem;
+  margin-left: 0;
   font-family: 'GT Walsheim Pro';
 }
 
 .login-card-header {
-  background-color: #4d22f8 !important;
+  background-color: #011D2B !important;
   color: white !important;
-  border-radius: 0px !important;
+  border-radius: 12px  ;
   text-align: center;
 }
 
@@ -62,7 +63,7 @@
 
 .login-form-control {
   height: 45px;
-  border-radius: 0px;
+  border-radius: 10px;
   border-color: #9d9e9f;
 }
 

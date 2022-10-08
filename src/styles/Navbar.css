@@ -2,12 +2,41 @@
   height: 100px;
   background: #011D2B !important;
 }
+.loginboard:hover{
+color: none;
 
-.navbar-brand,
-.navbar-nav {
-  padding-left: 50px;
-  padding-right: 50px;
-  
+}
+
+.userboard{
+  color: rgb(0, 0, 0);
+}
+hr {
+  margin: 0rem 0;
+  color: inherit;
+  background-color: currentColor;
+  border: 0;
+  opacity: .25;
+}
+
+.dropdown-menu {
+  position: absolute;
+  z-index: 1000;
+  display: none;
+  min-width: 14rem;
+  padding: 0.5rem 0;
+  margin: 3px 4px;
+  font-size: 17px;
+  color: #212529;
+  text-align: left;
+  list-style: none;
+  background-color:  #f9f9f9;
+  background-clip: padding-box;
+  border: 1px solid rgba(0,0,0,.15);
+  border-radius: 0.25rem;
+}
+.navbar-brand, .navbar-nav {
+  padding-left: 90px;
+  padding-right: 0px;
 }
 
 .navbar-link {
@@ -64,6 +93,21 @@
     height: 50px;
     margin-left: 25px !important;
   }
+
+  .dropdown-item {
+    margin: 2px 2px;
+    /* display: block; */
+    width: 100%;
+    padding: 0.25rem 1rem;
+    clear: both;
+    /* font-weight: 300; */
+    color: #212529;
+    text-align: inherit;
+    text-decoration: none;
+    white-space: nowrap;
+    background-color: transparent;
+    border: 0;
+}
 
   .navbar-toggle{
     margin-right: 25px;
@@ -124,45 +168,74 @@
       border-radius: 7px;
   }
   .rText {
-       /* width: 191px; */
-    /* height: 29px; */
-    /* left: 1111px; */
-    /* top: 70px; */
+    font-size: 18px;
     font-family: 'GT Walsheim Pro';
-    /* font-style: normal; */
     font-weight: 700;
-    /* font-size: 18px; */
-    /* line-height: 23px; */
-    /* text-align: center; */
     color: #FFFFFF;
+  }
+
+  dropdown-item {
+    
+    font-family: 'GT Walsheim Pro';
+    }
+
+    img.imgloginb {
+      margin: 22px;
+  }
+
+  .loginboard.dropdown:hover {
+      color:none;
+      background-color: none;
+    }
+
+    button.dropdown-toggle {
+      color: white;
+      margin: -5px 10px;
+      
+      background-color: #011D2B;
+      border: none;
   }
   .rsugnup {
       text-align: center;
       width: 177px;
-      /* height: 1px; */
+   
       left: 1400px;
       top: 69px;
-      /* font-family: 'GT Walsheim Pro'; */
+     
       font-style: normal;
       font-weight: 300;
       font-size: 26px;
-      /* line-height: 29px; */
+      
       color: #FFFFFF;
   }
   
   
-  .rLogin {
-    width: 100px;
+ 
+element.style {
+}
+* {
+    /* background-color: red; */
+}
+*, ::after, ::before {
+    box-sizing: border-box;
+}
+* {
+    font-family: "GT Walsheim Pro";
+}
+[type=button]:not(:disabled), [type=reset]:not(:disabled), [type=submit]:not(:disabled), button:not(:disabled) {
+    cursor: pointer;
+}
+.rLogin {
+    width: 133px;
     font-family: 'GT Walsheim Pro';
-    font-size: 20px;
-    font-weight: 700;
+    font-size: 16px;
+    font-weight: 600;
     color: #FFFFFF;
     text-align: center;
-    line-height: 30px;
+    line-height: 31px;
     margin-top: 10px;
-  }
-  
-  
+    border-radius: 8px;
+}
   @media only screen and (min-width: 350px) {
       .navbar-collapse {
           flex-basis: 100%;
@@ -227,12 +300,12 @@
       }
   
   }
-  .bSignUp{
-    font-size: 25px;
+  .bSignUp {
+    margin: 17px;
+    font-size: 23px;
     color: #FFFFFF;
-    /* margin-top: 20px; */
-  }
-
+    font-weight: 200;
+}
 
 
 

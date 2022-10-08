@@ -254,16 +254,15 @@ function Hastag() {
             </Card>
           </Col>
 
+
           <Col lg="4" md="6" sm="12" className="Card-Text">
             <Card>
               <Container>
-                <img
-                  height="140"
-                  className="imgCard"
-                  src={socialnetwork}
-                  alt="img"
-                />
-                <p>The best resources are ranked higher </p>
+                <img height="140" className="imgCard" src={socialnetwork} alt="img" />
+                <p>
+                  Community and experts will rate the resources and give their
+                  reviews.
+                </p>
                 <span>
                   Lorem Ipsum is simply dummy text of the printing and
                   typesetting industry.
@@ -272,6 +271,25 @@ function Hastag() {
               </Container>
             </Card>
           </Col>
+
+          {/* <Col lg="4" md="6" sm="12" className="Card-Text ">
+            <Card>
+              <Container>
+                <img
+                  height="140"
+                  className="imgCard"
+                  src={socialnetwork}
+                  alt="img"
+                />
+                <p </p>
+                <span>
+                  Lorem Ipsum is simply dummy text of the printing and
+                  typesetting industry.
+                </span>
+                <Button>Learn more</Button>
+              </Container>
+            </Card>
+          </Col> */}
         </Row>
       </div>
 
@@ -282,11 +300,11 @@ function Hastag() {
             Select a category that best suits your interest. Use filters to
             customize your search and to find exactly what you want.
           </span>
-          {/* <Row> */}{" "}
+          {/* <Row> */}
           {/* <div lg="3" md="3" sm="12" className="Card-Form"> */}
           <InputGroup lg="3" md="3" sm="12" className="Card-Form">
-            <Input type="text" placholder="Enter email address"></Input>
-            <Button>Subscribe</Button>
+            <Input type="text" placholder="Enter email address" className="subinput"></Input>
+            <Button className="subbtn">Subscribe</Button>
           </InputGroup>
           {/* </div> */}
         </Col>

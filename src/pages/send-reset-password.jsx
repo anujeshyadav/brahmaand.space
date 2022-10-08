@@ -23,10 +23,10 @@ const SendRequestResetPasswordComponent = () => {
     };
 
     return (
-        <Container className="login-container">
+        <Container className="login-container mt-5 mx-15">
         <Card className="login-card">
           <Card.Header className="login-card-header">
-            <h2 className="login-card-header-h2">Login</h2>
+            <h2 className="login-card-header-h2">Reset Password</h2>
           </Card.Header>
   
           <Card.Body className="login-card-body">

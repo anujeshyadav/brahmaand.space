@@ -22,8 +22,8 @@ function LeaderBoard() {
   
   return (
     <>
-      <div className="leaderb mt-4 text-center">
-        <Container ClassName="d-flex justify-content-center ">
+      <div className="leaderb mt-4 text-center"  >
+        <Container   ClassName="d-flex justify-content-center " >
           <Container
             fluid
             ClassName="d-flex justify-content-center maincon "
@@ -31,10 +31,10 @@ function LeaderBoard() {
               position: "relative",
               backgroundImage: `url(${Glass})`,
               backgroundSize: "cover",
-              padding: "21px 48px",
+              
               opacity: 0.8,
             }}
-          >
+            >
             <Row>
               <h1 className="leadertext"> Leaderboards</h1>
             </Row>
@@ -63,8 +63,8 @@ function LeaderBoard() {
                     </div>
                   </Col>
                   <Col lg="8">
-                    <h4>Submit Resources</h4>
-                    <h3 style={{ color: "#FC9357" }}> 2 Point</h3>
+                    <h4>Submit a content </h4>
+                    <h3 style={{ color: "#FC9357" }}> 10 meteors</h3>
                   </Col>
                 </Row>
               </Col>
@@ -86,8 +86,8 @@ function LeaderBoard() {
                     </div>
                   </Col>
                   <Col lg="8">
-                    <h4>Like/Review</h4>
-                    <h3 style={{ color: "#5F56C6" }}> 1 Point</h3>
+                    <h4> Rating </h4>
+                    <h3 style={{ color: "#5F56C6" }}> 2 meteors</h3>
                   </Col>
                 </Row>
               </Col>
@@ -109,8 +109,8 @@ function LeaderBoard() {
                     </div>
                   </Col>
                   <Col lg="8">
-                    <h4>Open Link</h4>
-                    <h3 style={{ color: "#F35F5F" }}> 1 Point</h3>
+                    <h4> Review </h4>
+                    <h3 style={{ color: "#F35F5F" }}>5 meteors</h3>
                   </Col>
                 </Row>
               </Col>
@@ -132,13 +132,13 @@ function LeaderBoard() {
                     </div>
                   </Col>
                   <Col lg="8">
-                    <h4>Level</h4>
-                    <h3 style={{ color: "#1BCBF2" }}> 1 Point</h3>
+                    <h4>Reaching a level </h4>
+                    <h3 style={{ color: "#1BCBF2" }}>50 meteors</h3>
                   </Col>
                 </Row>
               </Col>
             </Row>
-            <br />
+          
 
             <Row className="mt-2 " style={{ textAlign: "left" }}>
               <h2 ClassName="mb-3 karmacur">Karma - Current Month</h2>

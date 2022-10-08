@@ -6,6 +6,17 @@
 
 }
 
+.imageuserupload{
+    height: auto;
+     background: rgb(255, 255, 255);
+}
+.editprofiletext{
+    color: white;
+}
+.edituseprofile{
+    color: #5F56C6;
+}
+
 .userName{
     width: 323px;
     height: 27px;

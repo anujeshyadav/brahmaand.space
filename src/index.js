@@ -20,6 +20,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 // Import Pages
 import Landing from "./pages/index";
 import CreateAccount from "./pages/";
+// import Myaccount from "../src/components/Myaccount.jsx";
+
 // import UserAccountInfo from "./pages/UserAccountInfo";
 import Service from "./pages/service";
 import Logout from "./pages/logout";
@@ -50,6 +52,7 @@ import { AuthProvider } from "./context/AuthContext";
 import { Navbar } from "reactstrap";
 import Signup from './components/Signup'
 import Login from "./components/Login";
+import Myaccount from "./components/Myaccount";
 
 const rootElement = document.getElementById("root");
 render(
@@ -63,6 +66,7 @@ render(
 
 
             <Route exact path="/login" element={<Login/>} />
+            <Route exact path="/myaccount" element={<Myaccount/>} />
 
             {/* <Route exact path="/create-account" element={<CreateAccount />} /> */}
             <Route exact path="/service" element={<Service />} />

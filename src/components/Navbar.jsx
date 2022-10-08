@@ -1,22 +1,36 @@
-import React from "react";
 import { Button, Modal, ModalBody, Label, FormGroup, Input } from "reactstrap";
-import Dropdown from "react-bootstrap/Dropdown";
+// import Dropdown from "react-bootstrap/Dropdown";
+import React from "react";
 import DropdownButton from "react-bootstrap/DropdownButton";
 
+
+// import {BiLogOut } from "react-icons/Bi";
+
+
+import {
+  Dropdown,
+  DropdownToggle,
+  DropdownMenu,
+  DropdownItem,
+} from "reactstrap";
 import { Navbar, Nav, Container, Col, Row } from "react-bootstrap";
 
 import "../styles/Navbar.css";
 import Logo from "../assets/logos/logo.png";
 
 import { useEffect, useState } from "react";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 import { useContextMenu } from "../context/MenuContext";
 import { useAuth } from "../context/AuthContext";
 
 import agreement_download from "../assets/files/Dispatch305-agreement.pdf";
+import UserPage from "./UserPage";
 
 function CustomNavbar() {
+ 
+
+ 
   const { current_link, setCurrentLinkHelper } = useContextMenu();
   const { user, login, logout } = useAuth();
   const [modal, setModal] = useState(false);
@@ -66,36 +80,27 @@ function CustomNavbar() {
       />
       <Navbar.Collapse id="responsive-navbar-nav">
         <Nav className="ms-auto navbar-nav">
-          {/* <Nav.Link
-              exact to="/"
-              as={NavLink}
-              className="navbar-link"
-            >
-              <span onClick={()=>setCurrentLinkHelper("Home")} className="secondary-color-span">Home</span>
-            </Nav.Link> */}
 
-          <Nav.Link exact to="/" as={NavLink} className="navbar-link">
-            <button
-              className="btn rbutton mobile"
-              type="submit"
-              onClick={toggle}
-            >
-              <span className="rText">+ Submit a resource</span>
+
+        <Nav.Link exact to="/" as={NavLink} className="navbar-link">
+            <button className="btn rbutton mobile" type="submit" onClick={toggle}>
+              <h4 className='rText'>+ Submit a Content</h4>
             </button>
             <Container>
               <Modal className="mdlg" isOpen={modal}>
                 <div className="p-3 w-100">
                   {/* <h6 toggle={toggle}> */}
                   <h2 style={{ font: "GT Walsheim Pro", fontSize: "25px" }}>
-                    Submit a Resource
+                    Submit a Content
                   </h2>
                   <hr></hr>
                   <p>
-                    Found a cool tutorial or course that will help your fellow
-                    programmers? Send it to us and we will add it to the
-                    database!
-                  </p>
-                  {/* </h6> */}
+                  Post the content and we will publish it on our website which can be rated and reviewed by users and has potential to become viral. It will also help the content reach a global audience.</p>   
+                  <Link  onClick={() => setModal(false)} to="/leaderboard">
+                  <h5 className="mt-2" style={{color:"#5F56C6"}}>Moreover it will help you win cool prizes daily. Checkout Leaderboard.</h5>
+                 </Link>
+                  
+                 
                   <ModalBody>
                     <div className="">
                       <Row>
@@ -107,13 +112,58 @@ function CustomNavbar() {
                             type="text"
                             style={{ background: "#F1F1F1" }}
                             className="form-control"
-                            placeholder="https://... "
+                            placeholder="https:/.../../ "
                           />
                         </h5>
                       </Row>
                     </div>
                     <div>
                       <Row>
+
+                      <Col>
+                          <Label style={{ font: "GT Walsheim Pro" }}>
+                            <b>Category </b>
+                          </Label>
+                          <select
+                            className="form-control"
+                            style={{ background: "#F1F1F1" }}
+                          >
+                            <option>Select Type</option>
+                            <option>Astrology</option>
+                            <option>Product Comparison</option>
+                            <option>Professional Skills</option>
+                            <option>Education</option>
+                            <option>  Comedy</option>
+                            <option>Cinema Gossipsp</option>
+                            <option>Movie Trailers</option>
+                            <option>TV Showsp</option>
+                            <option>Unboxing Videos</option>
+                            <option>Sports</option>
+                            <option>Music</option>
+                            <option>Fashions</option>
+                            <option>pranks</option>
+                            <option>timelapse</option>
+                            <option>Interviews</option>
+                            <option>Real Estate Videos</option>
+                            <option>Facts</option>
+
+                          </select>
+                        </Col>
+
+                        <Col>
+                          <Label style={{ font: "GT Walsheim Pro" }}>
+                            <b>Sub Category</b>
+                          </Label>
+                          <select
+                            className="form-control"
+                            style={{ background: "#F1F1F1" }}
+                          >
+                            <option>Select Type</option>
+                            <option>Free</option>
+                            <option>Paid</option>
+                          </select>
+                        </Col>
+
                         <Col>
                           <Label style={{ font: "GT Walsheim Pro" }}>
                             <b>Type</b>
@@ -127,6 +177,9 @@ function CustomNavbar() {
                             <option>Paid</option>
                           </select>
                         </Col>
+                        
+
+
                         <Col>
                           <Label style={{ font: "GT Walsheim Pro" }}>
                             <b>Format</b>
@@ -136,8 +189,8 @@ function CustomNavbar() {
                             style={{ background: "#F1F1F1" }}
                           >
                             <option>Video</option>
-                            <option>1</option>
-                            <option>2</option>
+                            <option>Text</option>
+                            <option>Video & Text</option>
                           </select>
                         </Col>
                       </Row>
@@ -145,7 +198,7 @@ function CustomNavbar() {
 
                     <div>
                       <Row>
-                        <Col>
+                        {/* <Col>
                           <Label style={{ font: "GT Walsheim Pro" }}>
                             <b>Level</b>
                           </Label>
@@ -157,7 +210,7 @@ function CustomNavbar() {
                             <option>1</option>
                             <option>2</option>
                           </select>
-                        </Col>
+                        </Col> */}
                       </Row>
                     </div>
                     {inputList.map((x, i) => {
@@ -166,16 +219,20 @@ function CustomNavbar() {
                           <Row>
                             <Col>
                               <Label style={{ font: "GT Walsheim Pro" }}>
-                                <b>Language</b>
+                                <b>Language of Content </b>
                               </Label>
                               <select
                                 className="form-control"
                                 style={{ background: "#F1F1F1" }}
                                 onChange={(e) => handleinputcahnge(e, i)}
                               >
-                                <option>select Language</option>
+                                <option>Select Language</option>
                                 <option>1</option>
                                 <option>2</option>
+                                <option>1</option>
+                                <option>2</option>
+                                <option>1</option>
+                                <option>2</option>  
                               </select>
                             </Col>
                           </Row>
@@ -219,10 +276,10 @@ function CustomNavbar() {
                             placeholder="e.g.javaScript,react native"
                           />
                         </h5>
-                        <p>
+                        <h6>
                           Add the topics that is resource covers.Separate
                           multiple topic with commas.
-                        </p>
+                        </h6>
                       </Row>
                     </div>
                     <div>
@@ -231,11 +288,11 @@ function CustomNavbar() {
                           <b>Descriptions</b>
                         </Label>
                         <h5>
-                          <input
+                          <textarea
                             type="text"
                             style={{ background: "#F1F1F1" }}
                             className="form-control"
-                            placeholder=""
+                            placeholder=" Enter blog description here"
                           />
                         </h5>
                       </Row>
@@ -258,12 +315,12 @@ function CustomNavbar() {
                               <option>Select.....</option>
                             </Input>
                           </FormGroup>
-                          {/* <DropdownButton id="dropdown button" title="Optional">
+                         {/* <DropdownButton id="dropdown button" title="Optional">
                     <Dropdown.ItemText>Dropdown item text</Dropdown.ItemText>
                     <Dropdown.Item as="button">Action</Dropdown.Item>
                     <Dropdown.Item as="button">Another action</Dropdown.Item>
                     <Dropdown.Item as="button">Something else</Dropdown.Item>
-                    </DropdownButton> */}
+                    </DropdownButton>  */}
                         </Col>
                       </Row>
                     </div>
@@ -271,7 +328,9 @@ function CustomNavbar() {
                       <Row>
                         <Col></Col>
                         <Col>
-                          <Button color="danger" className="m-1">
+                          <Button 
+                          onClick={() => setModal(false)}
+                           color="danger" className="m-1">
                             Discard
                           </Button>
                           <Button color="success" className="m-1">
@@ -294,7 +353,7 @@ function CustomNavbar() {
             style={{ marginTop: 25 }}
           >
             <span className="text bSignUp" aria-current="page">
-              SignUp
+              Sign up
             </span>
           </Nav.Link>
 
@@ -303,10 +362,53 @@ function CustomNavbar() {
               <span className="">LOGIN</span>
             </button>
           </Nav.Link>
+          
+
+           {/* <div className="d-flex loginboard ">
+            
+            <Dropdown className="loginboard" isOpen={dropdownOpen} toggle={toggle} direction={direction}>
+            <DropdownToggle caret>
+            <img className="imgloginb" src={avatar2} alt="image" style={{width:"50x", height:"50px"}} /> 
+            Mr.abcde
+            </DropdownToggle>
+            <DropdownMenu {...args}>
+            
+            <DropdownItem >  
+            <Link to="/topbar">
+            <FaEdit size={25} color="black" />
+            Edit Your Profile
+            </Link>
+            </DropdownItem>
+
+            <DropdownItem >
+
+            <Link to="/profilerouter">
+            <FaRegHandPointRight size={25} color="black" />
+            
+            Your likes
+            </Link>
+          
+            </DropdownItem>
+            
+            <hr />
+            <DropdownItem >
+            <Link to="/login">
+            
+            LogOut
+            </Link>
+            </DropdownItem>
+              
+            </DropdownMenu>
+          </Dropdown>
+           
+                    
+          </div>  */}
         </Nav>
       </Navbar.Collapse>
+      <UserPage/>
       {/* </Container> */}
     </Navbar>
+   
   );
 }
 

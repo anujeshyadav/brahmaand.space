@@ -1,3 +1,72 @@
+/* .prsearch {
+       width: 97%;
+    height: 85px;
+    align-items: center;
+    margin-right: 1px;
+    margin: 12px 68px;;
+} */
+.seachareapr{
+    /* width: 100%; */
+}
+
+/* .searchpr
+{
+    width: 92%;
+    height: 85px;
+    align-items: center;
+} */
+
+.probtn{padding: 12px 9px;
+margin: none none;
+    padding-top: 0px;
+     margin-top: 0px;} 
+.text-center {
+    padding: 12px 9px;
+    text-align: center;
+}
+
+.searchprd {
+    margin-top: 18px;
+    background: #ffffff;
+    border-color: -internal-light-dark(rgb(242, 242, 242), rgb(250, 249, 249));
+    border-radius: 52px;
+    width: 99%;
+    height: 75px;
+    align-items: center;
+}
+
+.searchproduct{
+    display: inline;
+    font-family: 'GT Walsheim Pro'  ;
+    margin-top:12px;
+    display: flex;
+    font-size: 20px;
+    text-align: center;
+    font-weight: 700;
+}
+.probtn {
+    display: flex;
+    justify-content: left;
+    padding: 20px 80px;
+    border-radius: 41px;
+}
+
+.seachproduct{
+    padding: 11px;
+    background-color: #011D2B;
+}
+
+.inputarea {
+    /* padding: 21px; */
+    text-align: center;
+} 
+.searchbarpr{
+    background-color:  #011D2B;;
+}
+
+
+
+
 
 h1{
   font-weight: 700;
@@ -266,7 +335,7 @@ font-style: normal;
 font-weight: 500;
 font-size: 30px;
 line-height: 29px;
-color: #A3B6BF;
+color: #ffffff;
 opacity: 0.8;
 }
 
@@ -430,7 +499,13 @@ button.btn.btn-success.btn.btn-secondary{
        margin-top: 46px;
 }
 
+.button.subbtn.btn.btn-secondary {
+    margin: -1px;
+}
 
+.subinput{
+    
+}
 
 
 .imgCol3 {
@@ -438,7 +513,7 @@ button.btn.btn-success.btn.btn-secondary{
     /* margin: 10px; */
     /* height: 324px; */
     /* width: 953px; */
-    height: 250px;
+    height: 350px;
     width: -webkit-fill-available;
     background: #000;
     opacity: 0.7;

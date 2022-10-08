@@ -44,7 +44,8 @@ function Signup() {
                 </div>
               </Row>
               <div>
-                <button style={{ paddingRight: "104px", paddingLeft: "104px" }}
+                <button style={{ padding: "10px 136px",
+                 borderRadius: "11px"}}
                   type="button" class="btn btn-primary"><b>CREATE ACCOUNT</b></button>
               </div>
               <div className="last">Already have an account ?<Link to="/login">Log In</Link> </div>

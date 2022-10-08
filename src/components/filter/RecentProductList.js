@@ -1,6 +1,7 @@
 import React, { useRef, useState } from "react";
 // Import Swiper React components
-import { Swiper, SwiperSlide } from "swiper/react";
+import { Container, Row, Col, Card, Button } from "reactstrap";
+import { Swiper, SwiperSlide, } from "swiper/react";
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/pagination";
@@ -9,7 +10,7 @@ import "../../styles/Filter.css";
 
 // import required modules
 import { Pagination } from "swiper";
-import { Container } from "reactstrap";
+
 import { Link } from "react-router-dom";
 import { FaHeart, FaStar } from "react-icons/fa";
 import business  from  "../../images/business.png"
@@ -18,6 +19,7 @@ function RecentProductList () {
     return (
     <>
       <Container>
+     
       <Swiper
         slidesPerView={4}
         spaceBetween={20}

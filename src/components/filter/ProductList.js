@@ -36,8 +36,37 @@ function ProductList(args) {
     const toggle = () => setModal(!modal);
 
     return (
+<>
+<section className="seachproduct" >
+<Container>
+ <Row  className="searchbarpr">
+
+        <Col className="seachareapr" lg="10">
+        <div className="searchba">
+          <div className="inputarea">
+            
+            <input
+              type="text"
+              placeholder="Searching best quality content here . . . "
+              className="searchprd"
+            />
+           
+          </div>
+          </div>
+        </Col>
+        <Col lg="2">
+            <div className="text-center ">
+            <Button className="probtn"><p className="searchproduct">Search</p></Button>
+          </div>
+         </Col>
+     
+        </Row>
+        </Container>
+   </section>
+
 
         <section>
+
 
             <FilterList />
 
@@ -53,6 +82,7 @@ function ProductList(args) {
 
             </div>
 
+           
             <Container>
                 <div className="stt-main">
                     <Row>
@@ -121,38 +151,56 @@ function ProductList(args) {
                                     </Col>
                                     <Col lg="12" className="py-3">
                                         <div className="ft-type">
-                                            <h5>Level</h5>
+                                            <h5>Source</h5>
                                             <ul>
                                                 <li>
                                                     <input type="checkbox" className="ft-check" />
                                                     <span>
-                                                        Beginner (81)
+                                                        Youtube
                                                     </span>
                                                 </li>
                                                 <li>
                                                     <input type="checkbox" className="ft-check" />
                                                     <span>
-                                                        Advanced (18)
+                                                        Others
                                                     </span>
                                                 </li>
-                                            </ul>
+
+                                                <br></br>
+                                                <li>
+                                                    <input type="checkbox" className="ft-check" />
+                                                    <span>
+                                                   <b>Not Older Than a Year</b> 
+                                                    </span>
+                                                </li>
+                                           
+
+                                            {/* <li>
+                                                    <input type="checkbox" className="ft-check" />
+                                                    <span>
+                                                       Not Older Than a Year
+                                                    </span>
+                                        </li> */}
+                                        </ul>
                                         </div>
                                     </Col>
                                     <Col lg="12" className="py-3">
-                                        <h5>Not older than</h5>
-                                        <Form.Select>
+                                       
+                                        {/* <Form.Select>
                                             <option>Any Year</option>
-                                        </Form.Select>
+                                            <option>Any Year</option>
+                                            
+                                        </Form.Select> */}
                                     </Col>
                                     <Col lg="12" className="py-3">
                                         <div className="ft-type">
-                                            <h5>Language</h5>
+                                            <h5> Content Language</h5>
                                             <ul>
                                                 <li>
                                                     <input type="checkbox" className="ft-check" />
-                                                    <span>
+                                                    
                                                         Arabic (3)
-                                                    </span>
+                                                    
                                                 </li>
                                                 <li>
                                                     <input type="checkbox" className="ft-check" />
@@ -187,18 +235,34 @@ function ProductList(args) {
                                             <hr></hr>
                                             <ul>
                                                 <li>
+                                                <Link>
                                                     Relevance
+                                                </Link>
                                                 </li>
                                                 <li>
+                                                <Link>
                                                     Rating
+                                                </Link>
+                                                    
                                                 </li>
                                                 <li>
+                                                <Link>
                                                     Low to High
+                                                </Link>
+                                                    
                                                 </li>
                                                 <li>
+                                                <Link>
                                                     High to Low
+                                                </Link>
+                                                    
                                                 </li>
+
+                                                
+                                                
                                             </ul>
+                                            <Button color="info">Clear Filter</Button>
+                                            
                                         </div>
                                     </Col>
                                 </Row>
@@ -1688,6 +1752,7 @@ function ProductList(args) {
                 </div>
             </Container>
         </section>
+        </>
     );
 }
 
