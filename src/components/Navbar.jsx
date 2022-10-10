@@ -381,7 +381,12 @@ function CustomNavbar() {
                 </span>
               </Nav.Link>
 
-              <Nav.Link to="/login" className="navbar-link lText">
+              <Nav.Link
+                exact
+                to="/login"
+                as={NavLink}
+                className="navbar-link lText"
+              >
                 <button className="btn rLogin mobile" type="submit">
                   <span className="">LOGIN</span>
                 </button>
