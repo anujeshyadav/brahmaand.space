@@ -149,7 +149,7 @@ function Hastag() {
 
       <Container className="d-flex justify-content-center">
         <Button className="viewall" size="lg">
-          View All
+          VIEW All
         </Button>
       </Container>
       <div>
@@ -254,11 +254,15 @@ function Hastag() {
             </Card>
           </Col>
 
-
           <Col lg="4" md="6" sm="12" className="Card-Text">
             <Card>
               <Container>
-                <img height="140" className="imgCard" src={socialnetwork} alt="img" />
+                <img
+                  height="140"
+                  className="imgCard"
+                  src={socialnetwork}
+                  alt="img"
+                />
                 <p>
                   Community and experts will rate the resources and give their
                   reviews.
@@ -271,40 +275,37 @@ function Hastag() {
               </Container>
             </Card>
           </Col>
-
-          {/* <Col lg="4" md="6" sm="12" className="Card-Text ">
-            <Card>
-              <Container>
-                <img
-                  height="140"
-                  className="imgCard"
-                  src={socialnetwork}
-                  alt="img"
-                />
-                <p </p>
-                <span>
-                  Lorem Ipsum is simply dummy text of the printing and
-                  typesetting industry.
-                </span>
-                <Button>Learn more</Button>
-              </Container>
-            </Card>
-          </Col> */}
         </Row>
       </div>
 
       <Row>
         <Col lg="6" md="6" sm="12" className="Card-Form">
-          <p>Get Our Monthly Newsletter</p>
-          <span>
-            Select a category that best suits your interest. Use filters to
-            customize your search and to find exactly what you want.
-          </span>
+          <Container>
+            <p>Get Our Monthly Newsletter</p>
+            <span>
+              Select a category that best suits your interest. Use filters to
+              customize your search and to find exactly what you want.
+            </span>
+          </Container>
           {/* <Row> */}
           {/* <div lg="3" md="3" sm="12" className="Card-Form"> */}
-          <InputGroup lg="3" md="3" sm="12" className="Card-Form">
-            <Input type="text" placholder="Enter email address" className="subinput"></Input>
-            <Button className="subbtn">Subscribe</Button>
+          <InputGroup lg="6" md="6" sm="12" className="Card-Form">
+            <div className="searchbara col-md-8 ">
+              <div className="inputareea">
+                <input
+                  type="text"
+                  placeholder="Enter Email Address"
+                  className="searchnew"
+                />
+              </div>
+            </div>
+            <Button className="subscribebtn col-md-4">Subscribe</Button>
+            {/* <Input
+              type="text"
+              placholder="Enter email address"
+              className="subinput"
+            ></Input> */}
+            {/* <Button className="subbtn">Subscribe</Button> */}
           </InputGroup>
           {/* </div> */}
         </Col>

@@ -1,13 +1,12 @@
 .navbar {
   height: 100px;
-  background: #011D2B !important;
+  background: #011d2b !important;
 }
-.loginboard:hover{
-color: none;
-
+.loginboard:hover {
+  color: none;
 }
 
-.userboard{
+.userboard {
   color: rgb(0, 0, 0);
 }
 hr {
@@ -15,7 +14,7 @@ hr {
   color: inherit;
   background-color: currentColor;
   border: 0;
-  opacity: .25;
+  opacity: 0.25;
 }
 
 .dropdown-menu {
@@ -29,14 +28,15 @@ hr {
   color: #212529;
   text-align: left;
   list-style: none;
-  background-color:  #f9f9f9;
+  background-color: #f9f9f9;
   background-clip: padding-box;
-  border: 1px solid rgba(0,0,0,.15);
+  border: 1px solid rgba(0, 0, 0, 0.15);
   border-radius: 0.25rem;
 }
-.navbar-brand, .navbar-nav {
+.navbar-brand,
+.navbar-nav {
   padding-left: 90px;
-  padding-right: 0px;
+  padding-right: 78px;
 }
 
 .navbar-link {
@@ -45,8 +45,6 @@ hr {
   font-weight: bold;
   outline: none !important;
   margin-top: 15px;
- 
-
 }
 
 .navbar-link:after {
@@ -78,16 +76,16 @@ hr {
   width: 100%;
 }
 
-@media screen and (max-width: 578px){
+@media screen and (max-width: 578px) {
   .navbar {
     z-index: 999999;
   }
 
-  .navbar-brand{
-    padding:0px;
+  .navbar-brand {
+    padding: 0px;
   }
 
-  .navbar-brand-img{
+  .navbar-brand-img {
     width: 100%;
     max-width: 200px;
     height: 50px;
@@ -107,9 +105,9 @@ hr {
     white-space: nowrap;
     background-color: transparent;
     border: 0;
-}
+  }
 
-  .navbar-toggle{
+  .navbar-toggle {
     margin-right: 25px;
   }
 
@@ -123,145 +121,145 @@ hr {
   } */
 }
 
-
-.main { 
+.main {
   width: 100%;
   height: 99px;
   left: 0px;
-  top: 0px; 
-  background: #011D2B !important;
-  }
-  
-  .navbar-collapse {
-      flex-basis: 100%;
-      flex-grow: 1;
-      align-items: left;
-      background-color: #011D2B !important;
-  }
-  
-  .tgl{
-      color: white;
-  
-  }
-  
-  .logo {
-      /* position: absolute; */
-      width: 221px;
-      height: 66px;
-      /* left: 84px;
+  top: 0px;
+  background: #011d2b !important;
+}
+
+.navbar-collapse {
+  flex-basis: 100%;
+  flex-grow: 1;
+  align-items: left;
+  background-color: #011d2b !important;
+}
+
+.tgl {
+  color: white;
+}
+
+.logo {
+  /* position: absolute; */
+  width: 221px;
+  height: 66px;
+  /* left: 84px;
       top: 26px; */
-  }
-  .rsugnup:hover{
-      background-color: #FC9358;
-      border-radius: 10px;
-      height: 60px;
-  }
-  .rbutton {
-      /* position: absolute; */
-      margin: 8px;
-      width: 215px;
-      height: 47px;
-      left: 0px;
-      top: 0px;
-      background: #FC9358;
-      box-shadow: 0px 0px 24px rgb(65 65 65 / 25%);
-      border-radius: 7px;
-  }
-  .rText {
-    font-size: 18px;
-    font-family: 'GT Walsheim Pro';
-    font-weight: 700;
-    color: #FFFFFF;
-  }
+}
+.rsugnup:hover {
+  background-color: #fc9358;
+  border-radius: 10px;
+  height: 60px;
+}
+.rbutton {
+  /* position: absolute; */
+  margin: 8px;
+  width: 215px;
+  height: 47px;
+  left: 0px;
+  top: 0px;
+  background: #fc9358;
+  box-shadow: 0px 0px 24px rgb(65 65 65 / 25%);
+  border-radius: 7px;
+}
+.rText {
+  font-size: 18px;
+  font-family: "GT Walsheim Pro";
+  font-weight: 700;
+  color: #ffffff;
+}
 
-  dropdown-item {
-    
-    font-family: 'GT Walsheim Pro';
-    }
+dropdown-item {
+  font-family: "GT Walsheim Pro";
+}
 
-    img.imgloginb {
-      margin: 22px;
-  }
+img.imgloginb {
+  margin: 22px;
+}
 
-  .loginboard.dropdown:hover {
-      color:none;
-      background-color: none;
-    }
+.loginboard.dropdown:hover {
+  color: none;
+  background-color: none;
+}
 
-    button.dropdown-toggle {
-      color: white;
-      margin: -5px 10px;
-      
-      background-color: #011D2B;
-      border: none;
-  }
-  .rsugnup {
-      text-align: center;
-      width: 177px;
-   
-      left: 1400px;
-      top: 69px;
-     
-      font-style: normal;
-      font-weight: 300;
-      font-size: 26px;
-      
-      color: #FFFFFF;
-  }
-  
-  
- 
+button.dropdown-toggle {
+  color: white;
+  margin: -5px 10px;
+
+  background-color: #011d2b;
+  border: none;
+}
+.rsugnup {
+  text-align: center;
+  width: 177px;
+
+  left: 1400px;
+  top: 69px;
+
+  font-style: normal;
+  font-weight: 300;
+  font-size: 26px;
+
+  color: #ffffff;
+}
+
 element.style {
 }
 * {
-    /* background-color: red; */
+  /* background-color: red; */
 }
-*, ::after, ::before {
-    box-sizing: border-box;
+*,
+::after,
+::before {
+  box-sizing: border-box;
 }
 * {
-    font-family: "GT Walsheim Pro";
+  font-family: "GT Walsheim Pro";
 }
-[type=button]:not(:disabled), [type=reset]:not(:disabled), [type=submit]:not(:disabled), button:not(:disabled) {
-    cursor: pointer;
+[type="button"]:not(:disabled),
+[type="reset"]:not(:disabled),
+[type="submit"]:not(:disabled),
+button:not(:disabled) {
+  cursor: pointer;
 }
 .rLogin {
-    width: 133px;
-    font-family: 'GT Walsheim Pro';
-    font-size: 16px;
-    font-weight: 600;
-    color: #FFFFFF;
-    text-align: center;
-    line-height: 31px;
-    margin-top: 10px;
-    border-radius: 8px;
+  width: 133px;
+  font-family: "GT Walsheim Pro";
+  font-size: 16px;
+  font-weight: 600;
+  color: #ffffff;
+  text-align: center;
+  line-height: 31px;
+  margin-top: 10px;
+  border-radius: 8px;
 }
-  @media only screen and (min-width: 350px) {
-      .navbar-collapse {
-          flex-basis: 100%;
-          flex-grow: 1;
-          align-items: left;
-          background-color: #41433a;
-      }
-  
-      .rsugnup:hover{
-          /* margin: 14px; */
-          background-color: #FC9358;
-          /* border-radius: 10px;
+@media only screen and (min-width: 350px) {
+  .navbar-collapse {
+    flex-basis: 100%;
+    flex-grow: 1;
+    align-items: left;
+    background-color: #41433a;
+  }
+
+  .rsugnup:hover {
+    /* margin: 14px; */
+    background-color: #fc9358;
+    /* border-radius: 10px;
           height: 60px; */
-      }
-  
-      div#navbarSupportedContent {
-          /* display: inline-grid; */
-          justify-content: space-around;
-          align-items: start;
-          justify-items: end;
-      }
-      span.navbar-toggler-icon {
-          background-color: #FFE9E9;
-      }
-      
-/*       
+  }
+
+  div#navbarSupportedContent {
+    /* display: inline-grid; */
+    justify-content: space-around;
+    align-items: start;
+    justify-items: end;
+  }
+  span.navbar-toggler-icon {
+    background-color: #ffe9e9;
+  }
+
+  /*       
   .rbutton {
       margin-right: 19px;
     
@@ -274,7 +272,7 @@ element.style {
       border-radius: 7px;
       padding: 0 8px 12px;
           } */
-  
+
   /* .rLogin {
       width: 205px;
       height: 41.66px;
@@ -284,32 +282,28 @@ element.style {
       box-shadow: 0px 0px 24px rgb(65 65 65 / 25%);
       border-radius: 11px;
   } */
-  
-      .rsugnup {
-          /* text-align: center; */
-          width: 177px;
-          height: 62px;
-          /* left: 0; */
-          /* top: 74px; */
-          font-family: 'GT Walsheim Pro';
-          font-style: normal;
-          font-weight: 300;
-          font-size: 29px;
-          /* line-height: 29px; */
-          color: #FFFFFF;
-      }
-  
+
+  .rsugnup {
+    /* text-align: center; */
+    width: 177px;
+    height: 62px;
+    /* left: 0; */
+    /* top: 74px; */
+    font-family: "GT Walsheim Pro";
+    font-style: normal;
+    font-weight: 300;
+    font-size: 29px;
+    /* line-height: 29px; */
+    color: #ffffff;
   }
-  .bSignUp {
-    margin: 17px;
-    font-size: 23px;
-    color: #FFFFFF;
-    font-weight: 200;
+}
+.bSignUp {
+  margin: 17px;
+  font-size: 23px;
+  color: #ffffff;
+  font-weight: 200;
 }
 
-
-
-
 /* .text-h6{ */
-  /* font-size: 1rem; */
-  /* text-align: center;} */
+/* font-size: 1rem; */
+/* text-align: center;} */

@@ -5,8 +5,47 @@
     margin-right: 1px;
     margin: 12px 68px;;
 } */
-.seachareapr{
-    /* width: 100%; */
+
+button.subscribebtn.col-md-4.btn.btn-secondary {
+  padding: 13px 33px;
+  color: white;
+  background-color: black;
+  border-radius: 18px;
+  margin-left: -1px;
+
+  margin: -3px -1px;
+}
+.searchnew {
+  color: black;
+  border-radius: 18px;
+  display: flex;
+  width: 98%;
+  height: 67px;
+  background-color: white;
+}
+
+button.viewall.btn.btn-secondary.btn-lg {
+  background-color: black;
+  border-radius: none;
+  padding: 14px 48px;
+}
+
+.subscribebtn {
+  background: #000;
+  padding: 1px 3px;
+  border-radius: 100px;
+  font-size: 23px;
+  font-weight: 500;
+}
+
+.input-group
+  > :not(:first-child):not(.dropdown-menu):not(.valid-tooltip):not(.valid-feedback):not(.invalid-tooltip):not(.invalid-feedback) {
+  margin-left: -1px;
+  border-radius: 24px;
+}
+
+.seachareapr {
+  /* width: 100%; */
 }
 
 /* .searchpr
@@ -16,170 +55,165 @@
     align-items: center;
 } */
 
-.probtn{padding: 12px 9px;
-margin: none none;
-    padding-top: 0px;
-     margin-top: 0px;} 
+.probtn {
+  padding: 12px 9px;
+  margin: none none;
+  padding-top: 0px;
+  margin-top: 0px;
+}
 .text-center {
-    padding: 12px 9px;
-    text-align: center;
+  padding: 12px 9px;
+  text-align: center;
 }
 
 .searchprd {
-    margin-top: 18px;
-    background: #ffffff;
-    border-color: -internal-light-dark(rgb(242, 242, 242), rgb(250, 249, 249));
-    border-radius: 52px;
-    width: 99%;
-    height: 75px;
-    align-items: center;
+  margin-top: 18px;
+  background: #ffffff;
+  border-color: -internal-light-dark(rgb(242, 242, 242), rgb(250, 249, 249));
+  border-radius: 52px;
+  width: 99%;
+  height: 75px;
+  align-items: center;
 }
 
-.searchproduct{
-    display: inline;
-    font-family: 'GT Walsheim Pro'  ;
-    margin-top:12px;
-    display: flex;
-    font-size: 20px;
-    text-align: center;
-    font-weight: 700;
+.searchproduct {
+  display: inline;
+  font-family: "GT Walsheim Pro";
+  margin-top: 12px;
+  display: flex;
+  font-size: 20px;
+  text-align: center;
+  font-weight: 700;
 }
 .probtn {
-    display: flex;
-    justify-content: left;
-    padding: 20px 80px;
-    border-radius: 41px;
+  display: flex;
+  justify-content: left;
+  padding: 20px 80px;
+  border-radius: 41px;
 }
 
-.seachproduct{
-    padding: 11px;
-    background-color: #011D2B;
+.seachproduct {
+  padding: 11px;
+  background-color: #011d2b;
 }
 
 .inputarea {
-    /* padding: 21px; */
-    text-align: center;
-} 
-.searchbarpr{
-    background-color:  #011D2B;;
+  /* padding: 21px; */
+  text-align: center;
+  margin-top: 60px;
+}
+.searchbarpr {
+  background-color: #011d2b;
 }
 
-
-
-
-
-h1{
+h1 {
   font-weight: 700;
 }
 .modal-dialog {
-    max-width: 800px;
-    margin: 1.75rem auto;
+  max-width: 800px;
+  margin: 1.75rem auto;
 }
 .list-st ul {
-    padding: 0px;
-  }
-
-  button.btn1:hover {
-    color: white;
-    background-color: #000;
+  padding: 0px;
 }
-  
-.list-st ul li{
-    list-style: none;
-    line-height: 37px;
-    font-size: 20px;
-    font-weight: 600;
-    color: #837474cc;
+
+button.btn1:hover {
+  color: white;
+  background-color: #000;
+}
+
+.list-st ul li {
+  list-style: none;
+  line-height: 37px;
+  font-size: 20px;
+  font-weight: 600;
+  color: #837474cc;
 }
 .list-st ul li span {
-    color: #000;
-    margin-left: 40px;
+  color: #000;
+  margin-left: 40px;
 }
 .modal-content {
-    padding: 30px;
+  padding: 30px;
 }
 /* Rectangle 4245 */
-.modal-topic{
-    position: absolute;
-width: 311px;
-height: 181px;
-left: 292px;
-top: 1000px;
+.modal-topic {
+  position: absolute;
+  width: 311px;
+  height: 181px;
+  left: 292px;
+  top: 1000px;
 
-background: #FFFFFF;
-box-shadow: 0px 10px 93px rgba(186, 198, 207, 0.3);
-border-radius: 8px;
+  background: #ffffff;
+  box-shadow: 0px 10px 93px rgba(186, 198, 207, 0.3);
+  border-radius: 8px;
 }
-
 
 /* solid */
 
 .modal-bt button {
-    padding: revert !important;
-    margin: 0 4px;
-    margin-bottom: 10px;
-    
+  padding: revert !important;
+  margin: 0 4px;
+  margin-bottom: 10px;
 }
 
 /* 
 css for 4 boxes */
 .icon-bx {
-    width: 50px;
-    float: left;
+  width: 50px;
+  float: left;
 }
 .bt-1 {
-    background: #ccc;
-    padding: 12px;
-    border-radius: 5px;
+  background: #ccc;
+  padding: 12px;
+  border-radius: 5px;
 }
 
-.imghead{
-    width: 500px ;
+.imghead {
+  width: 500px;
 }
-.py-20{
-    margin-top: 120px;
+.py-20 {
+  margin-top: 120px;
 }
 
 .hastag {
-    width: 52;
-    left: 702px;
-    font-family: 'GT Walsheim Pro';
-    font-size: 45px;
-    align-items: center;
-    text-align: center;
+  width: 52;
+  left: 702px;
+  font-family: "GT Walsheim Pro";
+  font-size: 45px;
+  align-items: center;
+  text-align: center;
 }
 
- p.category {
-    font-family: 'GT Walsheim Pro';
-    text-align: center;
-    font-weight: 700;
-    font-size: 39px;
+p.category {
+  font-family: "GT Walsheim Pro";
+  text-align: center;
+  font-weight: 700;
+  font-size: 39px;
 }
 
 p.category3 {
-    font-family: 'GT Walsheim Pro';
-    text-align: center;
-    font-weight: 700;
-    font-size: 39px;
-    margin-top: 100px;
+  font-family: "GT Walsheim Pro";
+  text-align: center;
+  font-weight: 700;
+  font-size: 39px;
+  margin-top: 100px;
 }
-.Row{
-    margin-top: 50px;
-
+.Row {
+  margin-top: 50px;
 }
 
 .p.Trending {
-    font-weight: 500;
-    text-align: center;
-    font-size: 32px;
-    /* width: 122px; */
-    /* float: left; */
-    /* float: right; */
+  font-weight: 500;
+  text-align: center;
+  font-size: 32px;
+  /* width: 122px; */
+  /* float: left; */
+  /* float: right; */
 }
 
-
 /* .hastah_btn{ */
-    /* box-sizing: border-box;
+/* box-sizing: border-box;
     position: absolute;
     width: 273px;
     height: 78px;
@@ -190,132 +224,122 @@ p.category3 {
     border-radius: 49px */
 /* } */
 
-
 .card {
-    margin: 2px 2px 14px;
-    box-shadow: 7px 0px 19px -3px;
-    padding: 2px;
-    text-align: center;
-    cursor: pointer;
-    padding: 10px;
-  }
-  .btm_card {
-    --bs-card-spacer-y: 1rem;
-
-  }
-.section.bottom_card {
-    display: flex;
-    padding: 20px 0px;
-    margin: 0px 28px;
-    flex-wrap: wrap;
-  }
-
-  .my-2 {
-    padding: 20px;
-    margin-top: 0.5rem!important;
-    margin-bottom: 0.5rem!important;
+  margin: 2px 2px 14px;
+  box-shadow: 7px 0px 19px -3px;
+  padding: 2px;
+  text-align: center;
+  cursor: pointer;
+  padding: 10px;
 }
-.viewall{
-    background-color: black;
-    color: white;
-    justify-content: center;
+.btm_card {
+  --bs-card-spacer-y: 1rem;
+}
+.section.bottom_card {
+  display: flex;
+  padding: 20px 0px;
+  margin: 0px 28px;
+  flex-wrap: wrap;
+}
+
+.my-2 {
+  padding: 20px;
+  margin-top: 0.5rem !important;
+  margin-bottom: 0.5rem !important;
+}
+.viewall {
+  background-color: black;
+  color: white;
+  justify-content: center;
 }
 .btn1 {
-    background-color:  #F1F1F1;
-    border: none;
-    font-weight: 400;
-    border-style: dotted;
-    border-radius: 9px;
-    height: 45px;
+  background-color: #f1f1f1;
+  border: none;
+  font-weight: 400;
+  border-style: dotted;
+  border-radius: 9px;
+  height: 45px;
 }
 
 .imgCol {
-    width: 100%;
-    border-radius: 12px;
-    margin-bottom: 18px;
-    height: 218px;
-    opacity: 0.7;
-    border-radius: 20px;
-    padding: 6px;
+  width: 100%;
+  border-radius: 12px;
+  margin-bottom: 18px;
+  height: 218px;
+  opacity: 0.7;
+  border-radius: 20px;
+  padding: 6px;
 }
 
-
-p.category2  {
-    font-family: 'GT Walsheim Pro';
-    font-weight: bold;
-    font-size: 35px;
-    margin-left: 34px;
+p.category2 {
+  font-family: "GT Walsheim Pro";
+  font-weight: bold;
+  font-size: 35px;
+  margin-left: 34px;
 }
 
-.content-emoji{
-     
-    font-weight: 122px;
-    font-size: 24px;
-    font-weight: bold;
+.content-emoji {
+  font-weight: 122px;
+  font-size: 24px;
+  font-weight: bold;
 }
 
-
-.content-emoji1 p{
-    position: sticky; 
-    font-weight: bold;
-    font-weight: 122px;
-    font-size: 24px;
-    margin-top: 145px;
+.content-emoji1 p {
+  position: sticky;
+  font-weight: bold;
+  font-weight: 122px;
+  font-size: 24px;
+  margin-top: 145px;
 }
 
-
-
-
-
-
-.mainBg{
-    background: #dfe7fe;
-    /* filter: blur(2px); */
+.mainBg {
+  background: #dfe7fe;
+  /* filter: blur(2px); */
 }
 
 .textBg {
-    /* position: absolute; */
-    /* width: 636px; */
-    height: 26px;
-    left: 150px;
-    top: 203px;
-    font-family: 'GT Walsheim Pro';
-    font-style: normal;
-    font-weight: 600;
-    font-size: 48px;
-    line-height: 69px;
-    color: #161616;
+  /* position: absolute; */
+  /* width: 636px; */
+  height: 26px;
+  left: 150px;
+  top: 203px;
+  font-family: "GT Walsheim Pro";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 48px;
+  line-height: 69px;
+  color: #161616;
 }
 .newText {
-    /* position: absolute; */
-    /* width: 550px; */
-    height: 63px;
-    left: 154px;
-    top: 360px;
-    font-family: 'GT Walsheim Pro';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 29px;
-    line-height: 45px;
-    color: #161616;
+  /* position: absolute; */
+  /* width: 550px; */
+  height: 63px;
+  left: 154px;
+  top: 360px;
+  font-family: "GT Walsheim Pro";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 29px;
+  line-height: 45px;
+  color: #161616;
 }
 .hImage {
-    width: 100%;
-    float: right;
+  width: 100%;
+  float: right;
 }
 
-.imghead{
-    width: 98%;
+.imghead {
+  width: 98%;
 }
 
 .search {
-    width: 80%;
-    height: 85px;
-    background: #FFFFFF;
-    box-shadow: 0px 0px 70px rgb(170 170 170 / 30%);
-    border-radius: 66.5px;
-    /* margin: -2px 136px; */
-    align-items: center;
+  width: 80%;
+  height: 85px;
+  background: #ffffff;
+  box-shadow: 0px 0px 70px rgb(170 170 170 / 30%);
+  border-radius: 66.5px;
+  /* margin: -2px 136px; */
+  align-items: center;
 }
 /* .search {
        width: 95%;
@@ -325,470 +349,444 @@ p.category2  {
     border-radius: 66.5px;
        margin: 0 16px;
 } */
-input{
-    /* font-size: 40px; */
-    /* position: absolute; */
-width: 531px;
-height: 29px;
-font-family: 'GT Walsheim Pro';
-font-style: normal;
-font-weight: 500;
-font-size: 30px;
-line-height: 29px;
-color: #ffffff;
-opacity: 0.8;
+input {
+  /* font-size: 40px; */
+  /* position: absolute; */
+  width: 531px;
+  height: 29px;
+  font-family: "GT Walsheim Pro";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 30px;
+  line-height: 29px;
+  color: #ffffff;
+  opacity: 0.8;
 }
 
-.inputarea{
-    text-align: center;
+.inputarea {
+  text-align: center;
 }
 .btn1 {
-    background-color: #011D2B;
-    border: darkseagreen;
-    font-weight: 400;
-    border: 1px;
-    border-style: dashed;
-    border-radius: 49px;
-    height: 46px;
-    width: auto;
-    padding: 8px 16px;}
-
-.btn1 {
-    margin: 14px;
-    text-align: center;
+  background-color: #011d2b;
+  border: darkseagreen;
+  font-weight: 400;
+  border: 1px;
+  border-style: dashed;
+  border-radius: 49px;
+  height: 46px;
+  width: auto;
+  padding: 8px 16px;
 }
 
+.btn1 {
+  margin: 14px;
+  text-align: center;
+}
 
 .sBtn {
-    width: 150px;
-    height: 60px;
-    background: #011D2B;
-    border-radius: 15.6923px;
-    /* margin: 12px 0; */
+  width: 150px;
+  height: 60px;
+  background: #011d2b;
+  border-radius: 15.6923px;
+  /* margin: 12px 0; */
 }
-.sText{
-width: 122px;
+.sText {
+  width: 122px;
 
-font-style: normal;
-font-weight: 200;
-font-size: 25px;
+  font-style: normal;
+  font-weight: 200;
+  font-size: 25px;
 
-text-align: center;
-letter-spacing: 0.02em;
-color: #FFFFFF;
+  text-align: center;
+  letter-spacing: 0.02em;
+  color: #ffffff;
 }
 
-.hastag{
-    /* position: absolute; */
-    position: absolute;
-    width: 71px;
-    height: 69px;
-    left: 702px;
-    top: 1379px;
-    
-    font-family: 'GT Walsheim Pro';
-    font-style: normal;
-    font-weight: 500;
-    font-size: 132px;
-    line-height: 69px;
-    /* identical to box height, or 52% */
-    
-    letter-spacing: -0.02em;
-    
-    color: #000000;
-    
-    opacity: 0.1;
+.hastag {
+  /* position: absolute; */
+  position: absolute;
+  width: 71px;
+  height: 69px;
+  left: 702px;
+  top: 1379px;
+
+  font-family: "GT Walsheim Pro";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 132px;
+  line-height: 69px;
+  /* identical to box height, or 52% */
+
+  letter-spacing: -0.02em;
+
+  color: #000000;
+
+  opacity: 0.1;
 }
-.trendingtag{
-width: 416px;
-height: 69px;
-left: 752px;
-top: 1405px;
+.trendingtag {
+  width: 416px;
+  height: 69px;
+  left: 752px;
+  top: 1405px;
 
-font-family: 'GT Walsheim Pro';
-font-style: normal;
-font-weight: 500;
-font-size: 52px;
-line-height: 69px;
-/* identical to box height, or 133% */
+  font-family: "GT Walsheim Pro";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 52px;
+  line-height: 69px;
+  /* identical to box height, or 133% */
 
-letter-spacing: -0.02em;
+  letter-spacing: -0.02em;
 
-color: #000000;
+  color: #000000;
 }
 
 p.Trending {
-    text-align: center;
-    font-weight: 600;
-    font-size: 32px;
+  text-align: center;
+  font-weight: 600;
+  font-size: 32px;
 }
-.hastagbtn{
-    box-sizing: border-box;
-    position: absolute;
-    width: 273px;
-    height: 78px;
-    left: 213px;
-    top: 1544px;
-        background: #F1F1F1;
-    border: 2px dashed #011D2B;
-    border-radius: 49px;
+.hastagbtn {
+  box-sizing: border-box;
+  position: absolute;
+  width: 273px;
+  height: 78px;
+  left: 213px;
+  top: 1544px;
+  background: #f1f1f1;
+  border: 2px dashed #011d2b;
+  border-radius: 49px;
 }
 
-.tag1{
-    /* position: absolute; */
-width: 180px;
-height: 69px;
-left: 259px;
-top: 1548px;
-font-family: 'GT Walsheim Pro';
-font-style: normal;
-font-weight: 500;
-font-size: 32px;
-line-height: 69px;
-/* identical to box height, or 216% */
+.tag1 {
+  /* position: absolute; */
+  width: 180px;
+  height: 69px;
+  left: 259px;
+  top: 1548px;
+  font-family: "GT Walsheim Pro";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 32px;
+  line-height: 69px;
+  /* identical to box height, or 216% */
 
-letter-spacing: -0.02em;
+  letter-spacing: -0.02em;
 
-color: #011D2B;
+  color: #011d2b;
 }
 
 .py-20 {
-    margin-top: 120px;
+  margin-top: 120px;
 }
 
-button.btn.btn-success.btn.btn-secondary{
-    background: #000;
-    padding: 12px 45px;
-    border-radius: 50px;
-    font-size: 23px;
-    font-weight: 600;
+button.btn.btn-success.btn.btn-secondary {
+  background: #000;
+  padding: 12px 45px;
+  border-radius: 50px;
+  font-size: 23px;
+  font-weight: 600;
 }
 .content-bt {
-    margin-top: -135px;
-    position: absolute;
-    margin-left: 35px;
-    color: white;
+  margin-top: -135px;
+  position: absolute;
+  margin-left: 35px;
+  color: white;
 }
-.content-bt p{
-    font-weight: 700;
-    font-size: 24px;
-    
-
+.content-bt p {
+  font-weight: 700;
+  font-size: 24px;
 }
-.content-bt button{
-    background: #6c757d;
-    padding-top: 5px;
-    margin-top: 6px;
-    border-radius: 20px;
+.content-bt button {
+  background: #6c757d;
+  padding-top: 5px;
+  margin-top: 6px;
+  border-radius: 20px;
 }
 
-.vI{
-    width: -webkit-fill-available;
-    height: -webkit-fill-available;
-
+.vI {
+  width: -webkit-fill-available;
+  height: -webkit-fill-available;
 }
-
 
 .imgCol1 {
-    width: 418px;
-    height: 418px;
-    left: 345px;
- 
+  width: 418px;
+  height: 418px;
+  left: 345px;
 }
 .imgCol2 {
-       margin-top: 46px;
+  margin-top: 46px;
 }
 
 .button.subbtn.btn.btn-secondary {
-    margin: -1px;
+  margin: -1px;
 }
 
-.subinput{
-    
+.subinput {
 }
-
 
 .imgCol3 {
-    border-radius: 12px; 
-    /* margin: 10px; */
-    /* height: 324px; */
-    /* width: 953px; */
-    height: 350px;
-    width: -webkit-fill-available;
-    background: #000;
-    opacity: 0.7;
-    border-radius: 30px;
+  border-radius: 12px;
+  /* margin: 10px; */
+  /* height: 324px; */
+  /* width: 953px; */
+  height: 350px;
+  width: -webkit-fill-available;
+  background: #000;
+  opacity: 0.7;
+  border-radius: 30px;
 }
 .content-text {
-    text-align: center;
-    margin-top: -199px;
-    position: absolute;
-    margin-left: 183px;
-    color: white;
-    font-weight: bold;
-    margin-left: 264px;
-    font-weight: 122px;
-    font-size: 24px;
-    line-height: 17px;
-   
+  text-align: center;
+  margin-top: -199px;
+  position: absolute;
+  margin-left: 183px;
+  color: white;
+  font-weight: bold;
+  margin-left: 264px;
+  font-weight: 122px;
+  font-size: 24px;
+  line-height: 17px;
 }
 
-.content-text button
-{
-    margin-top: 50px;
-    background: #5F56C6;
-    font-weight: bold;
+.content-text button {
+  margin-top: 50px;
+  background: #5f56c6;
+  font-weight: bold;
 }
 
-
- .text p{
-    position: absolute;
-    width: 256px;
-    left: 712px;
-    margin-top: -84px;
-    font-family: 'GT Walsheim Pro';
-    font-size: 32px;
-    line-height: 71px;
-    text-align: center;
-    letter-spacing: -0.02em;
-    color: #011D2B;
+.text p {
+  position: absolute;
+  width: 256px;
+  left: 712px;
+  margin-top: -84px;
+  font-family: "GT Walsheim Pro";
+  font-size: 32px;
+  line-height: 71px;
+  text-align: center;
+  letter-spacing: -0.02em;
+  color: #011d2b;
 }
 
-.imgCard{
-    width: 150px;
-height: 150px;
-border-radius: 100%;
-margin-top: 33px;
+.imgCard {
+  width: 150px;
+  height: 150px;
+  border-radius: 100%;
+  margin-top: 33px;
 }
-.Card-Text p{
-    font-size: 17px;
-line-height: 27px;
-letter-spacing: -0.02em;
-color: #000000;
-font-weight: bold;
-margin-top: 10px;
-}
-
-.Card-Text span{
-    color: #6E757C;
-   
+.Card-Text p {
+  font-size: 17px;
+  line-height: 27px;
+  letter-spacing: -0.02em;
+  color: #000000;
+  font-weight: bold;
+  margin-top: 10px;
 }
 
-.Card-Text button
-{
-    background: #FFFFFF;
-    /* border: 1px solid #F3F3F3; */
-    border-radius: 10px;
-    color: #011D2B; 
-    margin-top: 50px;
+.Card-Text span {
+  color: #6e757c;
 }
 
-.Card-Form{
-    padding: 0px
+.Card-Text button {
+  background: #ffffff;
+  /* border: 1px solid #F3F3F3; */
+  border-radius: 10px;
+  color: #011d2b;
+  margin-top: 50px;
 }
 
 .Card-Form {
-    font-size: 50px;
-    line-height: 46px;
-    letter-spacing: -0.02em;
-    color: #000000;
-    font-weight: 1000;
-    margin-top: 92px;
-    /* text-align: center; */
-    margin-left: -2px;
-
-}
-.Card-Form span{
-    color: #6E757C;
-    font-size: 17px;
-    line-height: 30px;
-    letter-spacing: -0.02em;
-    text-align: center;
-
+  padding: 0px;
 }
 
+.Card-Form {
+  font-size: 50px;
+  line-height: 46px;
+  letter-spacing: -0.02em;
+  color: #000000;
+  font-weight: 1000;
+  margin-top: 92px;
+  /* text-align: center; */
+  margin-left: -2px;
+}
+.Card-Form span {
+  color: #6e757c;
+  font-size: 17px;
+  line-height: 30px;
+  letter-spacing: -0.02em;
+  text-align: center;
+}
 
 .imgColF {
-    opacity: 0.7;
-    width: 100%;
-    border-radius: 10px;
-}
-   
-
-
-.Card-Blog p{
-    color: #6E757C;
-    font-size: 12px;
-    margin-top: 15px;
+  opacity: 0.7;
+  width: 100%;
+  border-radius: 10px;
 }
 
-
-.Card-Blog span{
-    color: #FF823A;
-  
-    font-size: x-small;
-    margin-left: -200px;
+.Card-Blog p {
+  color: #6e757c;
+  font-size: 12px;
+  margin-top: 15px;
 }
 
-.Card-Blog h5{
-    font-size: 16px;
-    font-weight: bold;
-    margin-top: 10px;
+.Card-Blog span {
+  color: #ff823a;
 
+  font-size: x-small;
+  margin-left: -200px;
 }
 
+.Card-Blog h5 {
+  font-size: 16px;
+  font-weight: bold;
+  margin-top: 10px;
+}
 
 /* rohit css start */
 
-
-
 .modal-dialog {
-    max-width: 800px;
-    margin: 1.75rem auto;
+  max-width: 800px;
+  margin: 1.75rem auto;
 }
 .modal-body {
-    position: relative;
-    flex: 1 1 auto;
-    padding: 30px;
+  position: relative;
+  flex: 1 1 auto;
+  padding: 30px;
 }
 
 /* rohit css start */
 .main-content h2 {
-    font-size: 29px;
-    font-weight: 700;
+  font-size: 29px;
+  font-weight: 700;
 }
-.top-icon img{
-   width: 40px;
-   margin-right: 10px;
+.top-icon img {
+  width: 40px;
+  margin-right: 10px;
 }
-.tag-list p{
-    font-size: 20px;
+.tag-list p {
+  font-size: 20px;
 }
 
-.tag-list{
-    width: 100%;
-    display: inline-flex;
-    margin: 13px 0px;
+.tag-list {
+  width: 100%;
+  display: inline-flex;
+  margin: 13px 0px;
 }
 
 .tag-2 {
-    width: 85%;
-    float: left;
+  width: 85%;
+  float: left;
 }
 
 .tag-2 a {
-    background: #f1f1f1;
-    margin-right: 10px;
-    font-size: 15px;
-    padding: 4px 15px;
-    border-radius: 2px;
-    color: #000000;
-    text-decoration: none;
-    text-align: center;
-    display: inline-block;
-    margin-bottom: 10px;
-    border: 1px solid#d0c6c6;
+  background: #f1f1f1;
+  margin-right: 10px;
+  font-size: 15px;
+  padding: 4px 15px;
+  border-radius: 2px;
+  color: #000000;
+  text-decoration: none;
+  text-align: center;
+  display: inline-block;
+  margin-bottom: 10px;
+  border: 1px solid#d0c6c6;
 }
 .tag-1 {
-    width: 15%;
-    float: left;
+  width: 15%;
+  float: left;
 }
-.mid h5 span{
-    color: #5F56C6;
-    font-size: 18px;
+.mid h5 span {
+  color: #5f56c6;
+  font-size: 18px;
 }
 
-.mid-1{
-   width: 100%;
-   display: inline-flex;
-   width: 100%;
-    display: inline-flex;
-    background: #fff;
-    padding: 18px;
-    border-radius: 6px;
+.mid-1 {
+  width: 100%;
+  display: inline-flex;
+  width: 100%;
+  display: inline-flex;
+  background: #fff;
+  padding: 18px;
+  border-radius: 6px;
 }
-.mid-1-a{
-    padding: 10px;
- }
- .mid-1-b{
-   
- }
+.mid-1-a {
+  padding: 10px;
+}
+.mid-1-b {
+}
 
 .mid-content {
-    background: #f5f7f7;
-    padding: 10px;
+  background: #f5f7f7;
+  padding: 10px;
 }
 .mid-1-b p {
-    color: #666666;
-    margin-bottom: 4px;
+  color: #666666;
+  margin-bottom: 4px;
 }
 .mid-1-b h4 {
-    color: #000000;
-    font-size: 20px;
+  color: #000000;
+  font-size: 20px;
 }
 .mid-1-b.tt-1 p {
-    font-size: 15px;
+  font-size: 15px;
 }
 .mid-1.mb-3.tt-2 {
-    padding: 8px;
+  padding: 8px;
 }
 .mid-1-b.tt-1 a {
-    text-decoration: none;
-    padding: 4px 12px;
-    border-radius: 3px;
-    background: #f5f7f7;
-    border: 1px solid#fc9357;
-    color: #FF1919;
-    font-size: 12px;
+  text-decoration: none;
+  padding: 4px 12px;
+  border-radius: 3px;
+  background: #f5f7f7;
+  border: 1px solid#fc9357;
+  color: #ff1919;
+  font-size: 12px;
 }
 textarea.form-control.st-taetarea {
-    background: #F1F1F1;
-    height: 150px;
-    margin-top: 20px;
-    border: none;
+  background: #f1f1f1;
+  height: 150px;
+  margin-top: 20px;
+  border: none;
 }
 button.bt-st.btn.btn-secondary {
-    background: #5F56C6;
-    border-color: #5f56c6;
-    float: right;
-    margin-top: -49px;
-    margin-right: 15px;
-    padding: 5px 20px;
-
+  background: #5f56c6;
+  border-color: #5f56c6;
+  float: right;
+  margin-top: -49px;
+  margin-right: 15px;
+  padding: 5px 20px;
 }
 .re-listimg {
-    width: 100px;
-    float: left;
+  width: 100px;
+  float: left;
 }
-.re-listimg img{
-   width: 80px;
-   height: 80px;
-   border-radius: 100%;
-} 
-.re-listcont h5 span{
-    float: right;
-    font-size: 14px;
-    font-weight: 300;
+.re-listimg img {
+  width: 80px;
+  height: 80px;
+  border-radius: 100%;
 }
-.re-btext{
-    width: 100%;
-    display: inline-block;
+.re-listcont h5 span {
+  float: right;
+  font-size: 14px;
+  font-weight: 300;
 }
-.re-btext p{
-    margin: 4px 0px;
+.re-btext {
+  width: 100%;
+  display: inline-block;
+}
+.re-btext p {
+  margin: 4px 0px;
 }
 .re-list {
-    padding: 15px 0px;
+  padding: 15px 0px;
 }
-.star-1{
-    color: #5F56C6;
+.star-1 {
+  color: #5f56c6;
 }
-
-
 
 @media screen and (max-width: 600px) {
-    .modal-dialog {
-        max-width: 100%;
-        margin-top: 150px;
-    }
+  .modal-dialog {
+    max-width: 100%;
+    margin-top: 150px;
   }
+}
