@@ -1,31 +1,20 @@
 import React from "react";
 import { useEffect, useState } from "react";
-// import socialnetwork from "../../images/socialnetwork.jpg";
-import banner3 from "../assets/images/banner3.jpg";
-import { Navigate } from "react-router-dom";
+
 import "../styles/Login.css";
 import { Check } from "react-feather";
-// import Form from "react-bootstrap/Form";
+
 import google from "../images/g1.png";
-// import InputGroup from "react-bootstrap/InputGroup";
+
 import logo from "../images/logo.png";
 import Logo1 from "../images/Logo1.png";
-import { Routes, Route, useNavigate } from "react-router-dom";
-import {
-  Card,
-  Col,
-  Row,
-  Container,
-  Form,
-  Button,
-  FormGroup,
-  InputGroup,
-} from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
+import { Col, Row, Container, Form, Button, FormGroup } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { Input, Label } from "reactstrap";
 import axios from "axios";
 
-function Login({ loginFunction }) {
+function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   function performValidation() {
@@ -143,7 +132,6 @@ function Login({ loginFunction }) {
                 />
               </FormGroup>
               <div className="login-signup-res-pass-div text-align-left">
-                {/* <p className="login-new-account-p "> */}
                 <Link
                   to="/send-reset-password-request"
                   className="login-new-account-link"
@@ -159,7 +147,6 @@ function Login({ loginFunction }) {
                 icon={<Check className="vx-icon" size={12} />}
                 label="Remember me"
                 defaultChecked={false}
-                // onChange={this.handleRemember}
                 required
               />
               <Label className="label-button">Remember me</Label>

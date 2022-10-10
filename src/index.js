@@ -51,7 +51,7 @@ import { MenuProvider } from "./context/MenuContext";
 import { AuthProvider } from "./context/AuthContext";
 import { Navbar } from "reactstrap";
 import Signup from "./components/Signup";
-import Login from "./components/Login";
+import Login from "./components/Login.jsx";
 import Myaccount from "./components/Myaccount";
 
 const rootElement = document.getElementById("root");
@@ -61,16 +61,13 @@ render(
       <MenuProvider>
         <Layout>
           <Routes>
-            {/* <Route exact path="/" element={<Landing />} /> */}
             <Route exact path="/" element={<Home />} />
 
-            <Route exact path="/login" element={<Login />} />
+            <Route path="/login" element={<Login />} />
             <Route exact path="/myaccount" element={<Myaccount />} />
 
-            {/* <Route exact path="/create-account" element={<CreateAccount />} /> */}
             <Route exact path="/service" element={<Service />} />
             <Route exact path="/multiModule" element={<MultiModule />} />
-            {/* <Route exact path="/UserAccountInfo" element={<UserAccountInfo />} /> */}
 
             <Route exact path="/navbar" element={<Navbar />} />
             <Route exact path="/logout" element={<Logout />} />
@@ -78,7 +75,7 @@ render(
             <Route exact path="/blog" element={<Blog />} />
             <Route exact path="/topBar" element={<TopBar />} />
             <Route exact path="/videoPosted" element={<VideoPosted />} />
-            {/* <Route exact path="/points" element={<Points />} /> */}
+
             <Route exact path="/profileRouter" element={<ProfileRouter />} />
             <Route exact path="/leaderBoard" element={<LeaderBoard />} />
             <Route exact path="/productList" element={<ProductList />} />
@@ -86,8 +83,6 @@ render(
             <Route exact path="/privacy" element={<Privacy />} />
             <Route exact path="/work" element={<Work />} />
             <Route exact path="/contactUs" element={<ContactUs />} />
-            {/* <Route exact path="/contactus" element={<ContactUs />} /> */}
-            {/* <Route exact path="/resource" element={<Resource />} /> */}
 
             <Route
               exact
