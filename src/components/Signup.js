@@ -25,14 +25,14 @@ function Signup() {
         console.log(response.data.data);
         if (
           response.data.data._id !== null &&
-          response.data.data._id !== '' &&
+          response.data.data._id !== "" &&
           response.data.data._id !== undefined
         ) {
-          localStorage.setItem('userId', response.data.data._id)
+          localStorage.setItem("userId", response.data.data._id);
         }
-        setUsername('')
-        setEmail('')
-        setPassword('')
+        setUsername("");
+        setEmail("");
+        setPassword("");
       })
       .catch((error) => {
         console.log(error.response.data);
@@ -139,7 +139,7 @@ function Signup() {
                 </button>
               </div>
               <div className="last">
-                Already have an account ?<Link to="/login">Log In</Link>{" "}
+                Already have an account ?<Link to="/login">Log In</Link>
               </div>
             </form>
             <div className style={{ marginTop: "40px" }}>

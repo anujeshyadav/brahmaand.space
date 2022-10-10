@@ -1,11 +1,8 @@
 import React from "react";
 import { useEffect, useState } from "react";
-
 import "../styles/Login.css";
 import { Check } from "react-feather";
-
 import google from "../images/g1.png";
-
 import logo from "../images/logo.png";
 import Logo1 from "../images/Logo1.png";
 import { useNavigate } from "react-router-dom";
