@@ -50,7 +50,7 @@ import LeaderBoard from "./components/home/LeaderBoard";
 import { MenuProvider } from "./context/MenuContext";
 import { AuthProvider } from "./context/AuthContext";
 import { Navbar } from "reactstrap";
-import Signup from './components/Signup'
+import Signup from "./components/Signup";
 import Login from "./components/Login";
 import Myaccount from "./components/Myaccount";
 
@@ -64,15 +64,14 @@ render(
             {/* <Route exact path="/" element={<Landing />} /> */}
             <Route exact path="/" element={<Home />} />
 
-
-            <Route exact path="/login" element={<Login/>} />
-            <Route exact path="/myaccount" element={<Myaccount/>} />
+            <Route exact path="/login" element={<Login />} />
+            <Route exact path="/myaccount" element={<Myaccount />} />
 
             {/* <Route exact path="/create-account" element={<CreateAccount />} /> */}
             <Route exact path="/service" element={<Service />} />
             <Route exact path="/multiModule" element={<MultiModule />} />
             {/* <Route exact path="/UserAccountInfo" element={<UserAccountInfo />} /> */}
-            <Route exact path="/Login" element={<Login />} />
+
             <Route exact path="/navbar" element={<Navbar />} />
             <Route exact path="/logout" element={<Logout />} />
             <Route exact path="/signup" element={<Signup />} />
@@ -89,7 +88,6 @@ render(
             <Route exact path="/contactUs" element={<ContactUs />} />
             {/* <Route exact path="/contactus" element={<ContactUs />} /> */}
             {/* <Route exact path="/resource" element={<Resource />} /> */}
-
 
             <Route
               exact
