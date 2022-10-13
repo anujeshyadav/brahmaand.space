@@ -2,8 +2,48 @@
   height: 100px;
   background: #011d2b !important;
 }
-.loginboard:hover {
+.d-flex .loginboard :hover {
+  background-color: none;
+}
+/* .multiselctdropdown {
+  width: 100%;
+  height: 20px;
+
+  color: black;
+} */
+
+.swal-button {
+  background-color: #5f56c6;
+  color: #fff;
+  border: none;
+  box-shadow: none;
+  border-radius: 9px;
+  font-weight: 600;
+  font-size: 18px;
+  padding: 10px 33px;
+  margin: 6px;
+  cursor: pointer;
+}
+.loginboard .dropdown:hover {
   color: none;
+  background-color: none;
+}
+
+.swal-button:hover {
+  background-color: #fc9358;
+  color: #fff;
+  border: none;
+  box-shadow: none;
+  border-radius: 9px;
+  font-weight: 600;
+  font-size: 18px;
+  padding: 10px 33px;
+  margin: 6px;
+  cursor: pointer;
+}
+
+.swal-button:not([disabled]):hover {
+  background-color: #fc9358;
 }
 
 .userboard {

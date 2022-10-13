@@ -19,11 +19,10 @@ import winsix from "../../images/winsix.png";
 import { FaBook, FaThumbsUp, FaInfinity, FaChartBar } from "react-icons/fa";
 
 function LeaderBoard() {
-  
   return (
     <>
-      <div className="leaderb mt-4 text-center"  >
-        <Container   ClassName="d-flex justify-content-center " >
+      <div className="leaderb mt-4 text-center">
+        <Container ClassName="d-flex justify-content-center ">
           <Container
             fluid
             ClassName="d-flex justify-content-center maincon "
@@ -31,10 +30,10 @@ function LeaderBoard() {
               position: "relative",
               backgroundImage: `url(${Glass})`,
               backgroundSize: "cover",
-              
+
               opacity: 0.8,
             }}
-            >
+          >
             <Row>
               <h1 className="leadertext"> Leaderboards</h1>
             </Row>
@@ -138,9 +137,8 @@ function LeaderBoard() {
                 </Row>
               </Col>
             </Row>
-          
 
-            <Row className="mt-2 " style={{ textAlign: "left" }}>
+            <Row className="mt-5 mb-4 " style={{ textAlign: "left" }}>
               <h2 ClassName="mb-3 karmacur">Karma - Current Month</h2>
             </Row>
           </Container>

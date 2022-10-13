@@ -1,17 +1,16 @@
 import { Button, Modal, ModalBody, Label, FormGroup, Input } from "reactstrap";
-// import Dropdown from "react-bootstrap/Dropdown";
+import { MultiSelect } from "react-multi-select-component";
+import ReactMultiSelectCheckboxes from "react-multiselect-checkboxes";
 import React from "react";
-import DropdownButton from "react-bootstrap/DropdownButton";
-// import Alert from 'react-bootstrap/Alert';
 
-// import {BiLogOut } from "react-icons/Bi";
-
+import swal from "sweetalert";
 import {
-  Dropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem,
+  Accordion,
+  AccordionBody,
+  AccordionHeader,
+  AccordionItem,
 } from "reactstrap";
+
 import { Navbar, Nav, Container, Col, Row } from "react-bootstrap";
 
 import "../styles/Navbar.css";
@@ -25,8 +24,25 @@ import { useAuth } from "../context/AuthContext";
 
 import agreement_download from "../assets/files/Dispatch305-agreement.pdf";
 import UserPage from "./UserPage";
+const options = [
+  { label: "English", value: "English" },
+  { label: "urdu", value: "urdu " },
+  { label: "Arabia", value: "Arabia" },
+  { label: "hindi", value: "hindi" },
+  { label: "Russian", value: "Russian" },
+  { label: "telgu", value: "telgu" },
+];
 
 function CustomNavbar() {
+  const [selected, setSelected] = useState([]);
+  const [open, setOpen] = useState("1");
+  const toggler = (id) => {
+    if (open === id) {
+      setOpen();
+    } else {
+      setOpen(id);
+    }
+  };
   const { current_link, setCurrentLinkHelper } = useContextMenu();
   const { user, login, logout } = useAuth();
   // const [show, setShow] = useState(true);
@@ -54,15 +70,6 @@ function CustomNavbar() {
   useEffect(() => {
     // console.log(current_link);
   }, [current_link]);
-
-  // if (show) {
-  //   return (
-  //     <Alert variant="danger" onClose={() => setShow(false)} dismissible>
-  //       <Alert.Heading className="mt-20">You Need to login before submit a content</Alert.Heading>
-
-  //     </Alert>
-  //   );
-  // }
 
   return (
     <Navbar
@@ -113,11 +120,13 @@ function CustomNavbar() {
                       which can be rated and reviewed by users and has potential
                       to become viral. It will also help the content reach a
                       global audience.
+                      <p>
+                        <b> Moreover it will help you win cool prizes daily.</b>
+                      </p>
                     </p>
                     <Link onClick={() => setModal(false)} to="/leaderboard">
                       <h5 className="mt-2" style={{ color: "#5F56C6" }}>
-                        Moreover it will help you win cool prizes daily.
-                        Checkout Leaderboard.
+                        Checkout Leaderboard Here.
                       </h5>
                     </Link>
 
@@ -132,7 +141,7 @@ function CustomNavbar() {
                               type="text"
                               style={{ background: "#F1F1F1" }}
                               className="form-control"
-                              placeholder="https:/.../../ "
+                              placeholder="https://www.abdf.com/dfld/dsfld "
                             />
                           </h5>
                         </Row>
@@ -141,7 +150,7 @@ function CustomNavbar() {
                         <Row>
                           <Col>
                             <Label style={{ font: "GT Walsheim Pro" }}>
-                              <b>Category </b>
+                              <b className="mt-5">Category </b>
                             </Label>
                             <select
                               className="form-control"
@@ -165,6 +174,26 @@ function CustomNavbar() {
                               <option>Interviews</option>
                               <option>Real Estate Videos</option>
                               <option>Facts</option>
+                              <option> General Knowledge</option>
+                              <option>Life Hacks</option>
+                              <option>Web3</option>
+                              <option>Dance</option>
+                              <option>Events</option>
+                              <option>Finance</option>
+                              <option>Gaming</option>
+                              <option>Gym & Workout</option>
+                              <option>Motivational Videos</option>
+                              <option> Music</option>
+                              <option>Finance</option>
+                              <option>Photography</option>
+                              <option>Pets and Animals</option>
+                              <option>Parenting</option>
+                              <option> News and Politics </option>
+                              <option>Religion</option>
+                              <option> Spiritual</option>
+                              <option>Startups</option>
+                              <option>Memes </option>
+                              <option>Podcasts</option>
                             </select>
                           </Col>
 
@@ -204,7 +233,10 @@ function CustomNavbar() {
                           </Col>
 
                           <Col>
-                            <Label style={{ font: "GT Walsheim Pro" }}>
+                            <Label
+                              className="mt-2"
+                              style={{ font: "GT Walsheim Pro" }}
+                            >
                               <b>Format</b>
                             </Label>
                             <select
@@ -219,62 +251,50 @@ function CustomNavbar() {
                         </Row>
                       </div>
 
-                      <div>
-                        <Row></Row>
-                      </div>
-                      {inputList.map((x, i) => {
-                        return (
-                          <div>
-                            <Row>
-                              <Col>
-                                <Label style={{ font: "GT Walsheim Pro" }}>
-                                  <b>Language of Content </b>
-                                </Label>
-                                <select
+                      <Row className="d-flex w-100%">
+                        <Label
+                          className="mt-3"
+                          style={{ font: "GT Walsheim Pro" }}
+                        >
+                          <b>Language of Content </b>
+                        </Label>
+
+                        {/* <ReactMultiSelectCheckboxes options={options} /> */}
+
+                        <pre>{JSON.stringify(selected)}</pre>
+                        <MultiSelect
+                          style={{
+                            width: "100%",
+                            height: "18px",
+                            color: "black",
+                          }}
+                          className="multiselctdropdown"
+                          options={options}
+                          value={selected}
+                          onChange={setSelected}
+                          labelledBy="Select language"
+                        />
+
+                        {/* <select
                                   className="form-control"
                                   style={{ background: "#F1F1F1" }}
                                   onChange={(e) => handleinputcahnge(e, i)}
                                 >
                                   <option>Select Language</option>
-                                  <option>1</option>
-                                  <option>2</option>
-                                  <option>1</option>
-                                  <option>2</option>
-                                  <option>1</option>
-                                  <option>2</option>
-                                </select>
-                              </Col>
-                            </Row>
-                            {inputList.length !== 1 && (
-                              <Row>
-                                <Col>
-                                  <button
-                                    className="btn btn-danger"
-                                    onClick={() => handleremove(i)}
-                                  >
-                                    -Remove another language
-                                  </button>
-                                </Col>
-                              </Row>
-                            )}
-                            {inputList.length - 1 === i && (
-                              <Row>
-                                <Col>
-                                  <button
-                                    className="btn btn-success"
-                                    onClick={handleaddclick}
-                                  >
-                                    + Add another language
-                                  </button>
-                                </Col>
-                              </Row>
-                            )}
-                          </div>
-                        );
-                      })}
+                                  <option>Arabic</option>
+                                  <option>Russian</option>
+                                  <option>Hindi</option>
+                                  <option>Urdu</option>
+                                  <option>English</option>
+                                </select> */}
+                      </Row>
+
                       <div>
                         <Row>
-                          <Label style={{ font: "GT Walsheim Pro" }}>
+                          <Label
+                            className="mt-3"
+                            style={{ font: "GT Walsheim Pro" }}
+                          >
                             <b>Topic</b>
                           </Label>
                           <h5>
@@ -293,7 +313,10 @@ function CustomNavbar() {
                       </div>
                       <div>
                         <Row>
-                          <Label style={{ font: "GT Walsheim Pro" }}>
+                          <Label
+                            className="mt-3"
+                            style={{ font: "GT Walsheim Pro" }}
+                          >
                             <b>Descriptions</b>
                           </Label>
                           <h5>
@@ -310,19 +333,111 @@ function CustomNavbar() {
                         <Row>
                           <Col lg="12">
                             <FormGroup>
-                              <Label>
+                              <Label className="mt-3">
                                 <h6>
                                   <b>Optional</b>
                                 </h6>
                               </Label>
-                              <Input type="select">
-                                <option>Select.....</option>
-                                <option>Select.....</option>
-                                <option>Select.....</option>
-                                <option>Select.....</option>
-                                <option>Select.....</option>
-                                <option>Select.....</option>
-                              </Input>
+
+                              <Accordion open={open} toggle={toggler}>
+                                <AccordionItem>
+                                  <AccordionHeader targetId="1">
+                                    Optional Fields
+                                  </AccordionHeader>
+
+                                  <AccordionBody accordionId="1">
+                                    <div>
+                                      <Row>
+                                        <Label
+                                          style={{ font: "GT Walsheim Pro" }}
+                                        >
+                                          <b>Title of your Resource</b>
+                                        </Label>
+                                        <input
+                                          type="text"
+                                          style={{ background: "#F1F1F1" }}
+                                          className="form-control mb-3"
+                                          placeholder="Title of the resource?"
+                                        />
+                                      </Row>
+
+                                      <Row>
+                                        <Label
+                                          style={{ font: "GT Walsheim Pro" }}
+                                        >
+                                          <b>Creator Name</b>
+                                        </Label>
+                                        <input
+                                          type="text"
+                                          style={{ background: "#F1F1F1" }}
+                                          className="form-control mb-3"
+                                          placeholder="author of the resource?"
+                                        />
+                                      </Row>
+
+                                      <Row>
+                                        <Label
+                                          style={{ font: "GT Walsheim Pro" }}
+                                        >
+                                          <b>Release year/last Updated</b>
+                                        </Label>
+                                        <input
+                                          type="text"
+                                          style={{ background: "#F1F1F1" }}
+                                          className="form-control "
+                                          placeholder="type year of Release or update content Ex. 2022"
+                                        />
+                                        <p className=" mb-3">
+                                          What year was this resource released
+                                          or last updated?
+                                        </p>
+                                      </Row>
+
+                                      <Row>
+                                        <Label
+                                          style={{ font: "GT Walsheim Pro" }}
+                                        >
+                                          <b>Description</b>
+                                        </Label>
+                                        <h5>
+                                          <textarea
+                                            type="text"
+                                            style={{ background: "#F1F1F1" }}
+                                            className="form-control mb-3"
+                                            placeholder="describe the resource in a few sentences, topics it covers?"
+                                          />
+                                        </h5>
+                                        {/* <h6>
+                                          Add the topics that is resource
+                                          covers.Separate multiple topic with
+                                          commas.
+                                        </h6> */}
+                                      </Row>
+
+                                      <Row>
+                                        <Label
+                                          style={{ font: "GT Walsheim Pro" }}
+                                        >
+                                          <b>Comments</b>
+                                        </Label>
+                                        <h5>
+                                          <textarea
+                                            type="text"
+                                            style={{ background: "#F1F1F1" }}
+                                            className="form-control "
+                                            placeholder="Add anything you want to let us know"
+                                          />
+                                        </h5>
+                                      </Row>
+                                      <h6>
+                                        Thesefields are optional, but it will
+                                        help others find the resource more
+                                        easily.
+                                      </h6>
+                                    </div>
+                                  </AccordionBody>
+                                </AccordionItem>
+                              </Accordion>
                             </FormGroup>
                           </Col>
                         </Row>
@@ -353,7 +468,12 @@ function CustomNavbar() {
             <Nav.Link as={NavLink} className="navbar-link">
               <button
                 className="btn rbutton mobile"
-                onClick={() => alert("Please Login")}
+                onClick={() =>
+                  swal(
+                    "For Submit a content",
+                    "Need To login for submit content"
+                  )
+                }
               >
                 <h4 className="rText">+ Submit a Content</h4>
               </button>

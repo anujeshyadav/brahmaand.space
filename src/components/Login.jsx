@@ -9,18 +9,31 @@ import { useNavigate } from "react-router-dom";
 import { Col, Row, Container, Form, Button, FormGroup } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { Input, Label } from "reactstrap";
+import swal from "sweetalert";
 import axios from "axios";
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState(null);
+
+  function isValidEmail(email) {
+    return /\S+@\S+\.\S+/.test(email);
+  }
+
   function performValidation() {
-    return email.length > 0 && password.length > 0;
+    return email.length > 5 && password.length > 5;
   }
 
   const navigate = useNavigate();
 
   const handleLoginSubmit = (e) => {
+    if (!isValidEmail(e.target.value)) {
+      // swal("Email is invalid");
+    } else {
+      setError(null);
+    }
+
     e.preventDefault();
     console.log(email, password);
     axios
@@ -29,19 +42,17 @@ function Login() {
         password: password,
       })
       .then((response) => {
-        console.log("dara", response.data);
+        console.log("data", response.data);
         console.log(response.data.user);
         console.log("you logged in");
         console.log(response.data.msg);
         console.log(response.data.status);
-        setEmail("");
-        setPassword("");
 
         if (response.data.status === true) {
-          alert("you loged in succesfully");
+          swal("Good job!", "Successfully login");
         } else if (response.data.status === false) {
           console.log(response.data.status);
-          alert("failed to login");
+          swal("Failed to login try again ");
         }
 
         if (
@@ -59,11 +70,13 @@ function Login() {
       .catch((error) => {
         console.log(error.response.data);
         if (error.response.data.msg === "User Doesnot Exist") {
-          alert("User Does Not exists");
+          swal("User Does Not exists");
         } else if (error.response.data.msg === "Incorrect Password") {
-          alert("you Entered Incorrect password");
+          swal("you Entered Incorrect password ", "try again");
         }
       });
+    setEmail("");
+    setPassword("");
   };
 
   return (
@@ -164,13 +177,13 @@ function Login() {
                   Don't have an account yet ?<Link to="/signup">Sign Up</Link>
                 </span>
               </div>
-
+              <Row className=" d-flex justify-content-center mt-3">OR</Row>
               <Row className="google">
                 <Col lg="12" className="d-flex justify-content-center">
                   <img
                     style={{
-                      margin: "1px",
-                      height: "15px",
+                      margin: "3px",
+                      height: "17px",
                     }}
                     src={google}
                   />

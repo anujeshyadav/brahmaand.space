@@ -1,11 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   FaEdit,
   FaRegHandPointRight,
   FaInfinity,
   FaChartBar,
 } from "react-icons/fa";
-import DropdownButton from "react-bootstrap/DropdownButton";
+import axios from "axios";
+import swal from "sweetalert";
+
 import {
   Dropdown,
   DropdownToggle,
@@ -13,16 +15,27 @@ import {
   DropdownItem,
 } from "reactstrap";
 import { BiLogOut } from "react-icons/bi";
-
-//   import { Navbar, Nav, Container, Col, Row } from "react-bootstrap"
 import avatar2 from "../images/avatar2.png";
-import { Link, NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import "../styles/Navbar.css";
 
 function UserPage({ direction, ...args }) {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const toggle = () => setDropdownOpen((prevState) => !prevState);
+  const [userdata, setUserData] = useState({});
+
+  useEffect(() => {
+    axios
+      .get(`http://43.205.82.226:9000/user/getoneUser/634117a7f105488a6b1088c6`)
+      .then((response) => {
+        console.log("getdata", response.data.data);
+        setUserData(response.data.data);
+      })
+      .catch((error) => {
+        console.log(error.response.data.data);
+      });
+  }, []);
 
   return (
     <div>
@@ -36,11 +49,12 @@ function UserPage({ direction, ...args }) {
           <DropdownToggle caret>
             <img
               className="imgloginb"
-              src={avatar2}
+              src={userdata?.profileImg}
               alt="image"
-              style={{ width: "50x", height: "50px" }}
+              className=" "
+              style={{ width: "50px", height: "50px", borderRadius: "50%" }}
             />
-            Mr.abcde
+            Welcome, {userdata?.username}
           </DropdownToggle>
           <DropdownMenu className="dropmenuitems" {...args}>
             <DropdownItem>

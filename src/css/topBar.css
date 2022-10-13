@@ -1,95 +1,90 @@
-
-.userDiv{
-    padding: 30px;
-    /* border-radius: 10px; */
-    background: #FFFFFF;
-
+.userDiv {
+  padding: 30px;
+  /* border-radius: 10px; */
+  background: #ffffff;
 }
 
-.imageuserupload{
-    height: auto;
-     background: rgb(255, 255, 255);
+.imageuserupload {
+  height: auto;
+  background: rgb(255, 255, 255);
 }
-.editprofiletext{
-    color: white;
+.editprofiletext {
+  color: white;
 }
-.edituseprofile{
-    color: #5F56C6;
-}
-
-.userName{
-    width: 323px;
-    height: 27px;
-    left: 276px;
-    top: 570px;
-    
-    font-family: 'GT Walsheim Pro';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 24px;
-    line-height: 27px;
-    
-    color: #000000;
-}
-.btn{
-    background:#5F56C6;
-    padding-top: 5px;
-    margin-top: 6px;
-}
-.btn1{
-    padding-top: 5px;
-    margin-top: 6px;
-    background-color: white;
+.edituseprofile {
+  color: #5f56c6;
 }
 
+.userName {
+  width: 323px;
+  height: 27px;
+  left: 276px;
+  top: 570px;
+
+  font-family: "GT Walsheim Pro";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 27px;
+
+  color: #000000;
+}
+.btn {
+  background: #5f56c6;
+  padding-top: 5px;
+  margin-top: 29px;
+}
+.btn1 {
+  padding-top: 5px;
+  margin-top: 6px;
+  background-color: white;
+}
 
 .st-1.text-center {
-    margin-top: 0px;
+  margin-top: 0px;
 }
-.list-st ul li{
-    list-style: none;
+.list-st ul li {
+  list-style: none;
 }
-.tab{
-    background:#5F56C6;
-    border-radius: 10px;
+.tab {
+  background: #5f56c6;
+  border-radius: 10px;
 }
-section{
-    /* padding-top: 200px !important; */
-    /* background: #fff !important; */
-    /* background: linear-gradient(to bottom, #9999ff 11%, #ff99cc 100%); */
-
+section {
+  /* padding-top: 200px !important; */
+  /* background: #fff !important; */
+  /* background: linear-gradient(to bottom, #9999ff 11%, #ff99cc 100%); */
 }
 section.st-1 {
-    padding-top: 0px !important;
-    /* border-radius: 10px; */
+  padding-top: 0px !important;
+  /* border-radius: 10px; */
 }
-.cardImage{
-    height: 40vh;
+.cardImage {
+  height: 40vh;
 }
 /* .cate {
     /* border-radius: 10px; */
 /* } */
 
 .text-align {
-    color: blue;
-    margin-right: 565px;
+  color: blue;
+  margin-right: 565px;
 }
 /* .card-subtitle{
     margin-right: 380px;
 } */
-.card-subtitle span{
-    margin-right: 252px;
+.card-subtitle span {
+  margin-right: 252px;
 }
 .card-subtitle {
-    /* margin-right: 380px; */
+  /* margin-right: 380px; */
 }
 
-.text-align p{
-    float: right;
+.text-align p {
+  float: right;
 }
-.date b{
-    margin-right: 5px;
-
+.date b {
+  margin-right: 5px;
 }
 /* .card-subtitle b {
     margin-right: 380px;

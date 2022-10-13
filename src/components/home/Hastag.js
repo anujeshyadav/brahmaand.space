@@ -149,7 +149,12 @@ function Hastag() {
 
       <Container className="d-flex justify-content-center">
         <Button className="viewall" size="lg">
-          VIEW All
+          <Link
+            to="/ProductList"
+            style={{ color: "white", textDecoration: "none" }}
+          >
+            VIEW All
+          </Link>
         </Button>
       </Container>
       <div>

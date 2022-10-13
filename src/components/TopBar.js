@@ -1,70 +1,91 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Container, Row, Col, Button } from "reactstrap";
-import { Modal, ModalBody, Label, FormGroup, Input } from "reactstrap";
+import { Modal, ModalBody, Label, FormGroup, Input, Alert } from "reactstrap";
 import { Navbar, Nav } from "react-bootstrap";
 import { Link, NavLink } from "react-router-dom";
 import Glass from "../../src/images/Glass.png";
 import axios from "axios";
+import swal from "sweetalert";
 
 import profile from "../images/1.png";
+import boy from "../images/boy.png";
 import topBar from "../css/topBar.css";
 import ProfileRouter from "./ProfileRouter";
-// const [modal, setModal] = useState(false);
 
 function TopBar() {
   const [modal, setModal] = useState(false);
   const toggle = () => setModal(!modal);
 
-  // const [username, setUsername] = useState("");
-  // const [dname, setDname] = useState("");
-  // const [aboutus, setAboutus] = useState("");
-  // const [imgupdate, setImgupdate] = useState("");
+  const [username, setUsername] = useState("");
+  const [display_name, setDisplay_name] = useState("");
+  const [abt_us, seAbt_us] = useState("");
+  const [selectedFile, setSelectedFile] = useState("");
+  const [createdAt, setCreatedAt] = useState("");
+  const [profileImg, setroProfileImg] = useState();
 
-  // const handleLoginSubmit = (e) => {
-  //   e.preventDefault();
-  //   console.log(email, password);
-  //   axios
-  //     .post(`http://43.205.82.226:9000/user/login`, {
-  //       email: email,
-  //       password: password,
-  //     })
-  //     .then((response) => {
-  //       console.log("dara", response.data);
-  //       console.log(response.data.user);
-  //       console.log("you logged in");
-  //       console.log(response.data.msg);
-  //       console.log(response.data.status);
-  //       setEmail("");
-  //       setPassword("");
+  var fileUpload = (e) => {
+    setSelectedFile(e.target.files[0]);
+  };
+  // console.log("imageupload", selectedFile);
 
-  //       if (response.data.status === true) {
-  //         alert("you loged in succesfully");
-  //       } else if (response.data.status === false) {
-  //         console.log(response.data.status);
-  //         alert("failed to login");
-  //       }
+  useEffect(() => {
+    axios
+      .get(
+        `http://43.205.82.226:9000/user/getoneUser/634117a7f105488a6b1088c6`,
+        {
+          username: username,
+          display_name: display_name,
+          abt_us: abt_us,
+          profileImg: profileImg,
+          createdAt: createdAt,
+        }
+      )
+      .then((response) => {
+        console.log("getdata", response);
+        console.log("getdata", response.data);
+        console.log("aboutGet", response.data.data.abt_us);
 
-  //       if (
-  //         response.data.user._id !== null &&
-  //         response.data.user._id !== "" &&
-  //         response.data.user._id !== undefined
-  //       ) {
-  //         localStorage.setItem("userId", response.data.user._id);
-  //       }
+        setUsername(response.data.data.username);
+        seAbt_us(response.data.data.abt_us);
+        setDisplay_name(response.data.data.display_name);
+        setCreatedAt(response.data.data.createdAt.slice(0, 10));
+        setroProfileImg(response.data.data.profileImg);
+      })
+      .catch((error) => {
+        console.log(error.response.data.data);
+      });
+  }, []);
 
-  //       if (localStorage.getItem("userId")) {
-  //         navigate("/topbar");
-  //       } else navigate('/login"');
-  //     })
-  //     .catch((error) => {
-  //       console.log(error.response.data);
-  //       if (error.response.data.msg === "User Doesnot Exist") {
-  //         alert("User Does Not exists");
-  //       } else if (error.response.data.msg === "Incorrect Password") {
-  //         alert("you Entered Incorrect password");
-  //       }
-  //     });
-  // };
+  const handleLoginSubmit = async (e) => {
+    console.log(username, display_name, abt_us, selectedFile);
+    const formData = new FormData();
+    formData.append("profileImg", selectedFile);
+    formData.append("username", username);
+    formData.append("display_name", display_name);
+    formData.append("abt_us", abt_us);
+
+    axios
+      .post(
+        `http://43.205.82.226:9000/user/updateProfile/634117a7f105488a6b1088c6`,
+        formData,
+        {
+          header: { userId: await localStorage.getItem("userId") },
+        }
+      )
+      .then((response) => {
+        if (response.data.message === "success") {
+          swal("Updated Successfully👍");
+        } else {
+          swal("Something went wrong try again");
+        }
+        setroProfileImg(response.data.data.profileImg[0]);
+      })
+
+      .catch((error) => {
+        console.log(error);
+      });
+    setModal(false);
+  };
 
   return (
     <section className="mt-200">
@@ -81,7 +102,15 @@ function TopBar() {
           <div className=" ">
             <div className="st-1 text-center  ">
               <div className="imagewite ">
-                <img src={profile} className="imageone" />
+                <img
+                  src={profileImg}
+                  className="imageone"
+                  style={{
+                    height: "263px",
+                    width: "263px",
+                    borderRadius: "50%",
+                  }}
+                />
               </div>
             </div>
             <Row className=" m-2 bg-white ">
@@ -91,14 +120,14 @@ function TopBar() {
                     <ul>
                       <li style={{ color: "black" }}>
                         Username: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <b>CromSoldier</b>
+                        <b>{username}</b>
                       </li>
                       <li style={{ color: "black" }}>
-                        Display name: <b>CromSoldier</b>
+                        Display name: <b>{display_name}</b>
                       </li>
                       <li style={{ color: "black" }}>
                         User Since: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <b>jun 26,2022</b>
+                        <b>{createdAt}</b>
                       </li>
                       <li style={{ color: "black" }}>
                         Karma: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -111,11 +140,7 @@ function TopBar() {
 
               <Col lg="8">
                 <b>About Us:</b>
-                <p>
-                  Professionnal embedded software engineer in real life,
-                  moonlighting with Android dev. From the land of wine and
-                  cheese
-                </p>
+                <p>{abt_us}</p>
               </Col>
             </Row>
           </div>
@@ -123,7 +148,11 @@ function TopBar() {
             <h4 className="rText">Edit your Profile</h4>
           </button>
           <Container>
-            <Modal className="mdlg" isOpen={modal}>
+            <Modal
+              className="mdlg"
+              isOpen={modal}
+              // onSubmit={handleLoginSubmit}
+            >
               <div className="p-3 w-100">
                 {/* <h6 toggle={toggle}> */}
                 <h2 style={{ font: "GT Walsheim Pro", fontSize: "25px" }}>
@@ -143,6 +172,8 @@ function TopBar() {
                           style={{ background: "#F1F1F1" }}
                           className="form-control"
                           placeholder="Enter Your User Name here "
+                          value={username}
+                          onChange={(e) => setUsername(e.target.value)}
                         />
                       </h5>
                     </Row>
@@ -158,6 +189,8 @@ function TopBar() {
                           style={{ background: "#F1F1F1" }}
                           className="form-control"
                           placeholder="Enter Your Display Name "
+                          value={display_name}
+                          onChange={(e) => setDisplay_name(e.target.value)}
                         />
                       </Col>
                     </Row>
@@ -174,6 +207,8 @@ function TopBar() {
                           style={{ background: "#F1F1F1" }}
                           className="form-control"
                           placeholder="write something about you"
+                          value={abt_us}
+                          onChange={(e) => seAbt_us(e.target.value)}
                         />
                       </h5>
                       {/* <h6>
@@ -192,7 +227,7 @@ function TopBar() {
                           type="file"
                           style={{ background: "#F1F1F1" }}
                           className="form-control imageuserupload"
-                          placeholder=" "
+                          onChange={fileUpload}
                         />
                       </h5>
                     </Row>
@@ -209,7 +244,13 @@ function TopBar() {
                         >
                           Discard
                         </Button>
-                        <Button color="success" className="m-1">
+
+                        <Button
+                          type="submit"
+                          color="success"
+                          onClick={handleLoginSubmit}
+                          className="m-1"
+                        >
                           SUBMIT
                         </Button>
                       </Col>

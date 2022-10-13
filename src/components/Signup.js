@@ -6,11 +6,18 @@ import { Label } from "reactstrap";
 import google from "../images/g1.png";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import swal from "sweetalert";
+// import validator from "validator";
 
 function Signup() {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState(null);
+
+  function performValidation() {
+    return username.length > 5 && email.length > 13 && password.length > 6;
+  }
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
@@ -33,10 +40,23 @@ function Signup() {
         setUsername("");
         setEmail("");
         setPassword("");
+        swal("Account created Successfully");
       })
       .catch((error) => {
         console.log(error.response.data);
       });
+  };
+  function isValidEmail(email) {
+    return /\S+@\S+\.\S+/.test(email);
+  }
+  const handleChange = (event) => {
+    if (!isValidEmail(event.target.value)) {
+      setError("Please enter correct email to Signup");
+    } else {
+      setError(null);
+    }
+
+    setEmail(event.target.value);
   };
 
   return (
@@ -99,10 +119,12 @@ function Signup() {
                     type="email"
                     style={{ background: "#F1F1F1" }}
                     className="form-control"
-                    placeholder="Enter Here "
+                    placeholder="Enter Here your mail Id "
                     value={email}
-                    onChange={(e) => setEmail(e.target.value)}
+                    // onChange={(e) => setEmail(e.target.value)}
+                    onChange={handleChange}
                   />
+                  {error && <h6 style={{ color: "red" }}>{error}</h6>}
                 </h5>
               </Row>
               <Row>
@@ -130,6 +152,7 @@ function Signup() {
               </Row>
               <div>
                 <button
+                  disabled={!performValidation()}
                   style={{ padding: "10px 136px", borderRadius: "11px" }}
                   type="button"
                   class="btn btn-primary"
@@ -142,17 +165,20 @@ function Signup() {
                 Already have an account ?<Link to="/login">Log In</Link>
               </div>
             </form>
+            <Row className="d-flex justify-content-center mt-3">OR</Row>
             <div className style={{ marginTop: "40px" }}>
               <Row>
                 <Col lg="12" className="d-flex justify-content-center">
                   <img
                     style={{
-                      margin: "5px",
-                      height: "15px",
+                      margin: "3px",
+                      height: "17px",
                     }}
                     src={google}
                   />
-                  <p>Sign in with Google</p>
+                  <Link>
+                    <a to="https://accounts.google.com/">Sign in with Google</a>
+                  </Link>
                 </Col>
               </Row>
             </div>

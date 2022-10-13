@@ -16,11 +16,12 @@ button.subscribebtn.col-md-4.btn.btn-secondary {
   margin: -3px -1px;
 }
 .searchnew {
+  border-color: -internal-light-dark(rgb(253, 253, 253), rgb(255, 255, 255));
   color: black;
   border-radius: 18px;
   display: flex;
-  width: 98%;
-  height: 67px;
+  width: 97%;
+  height: 62px;
   background-color: white;
 }
 
@@ -32,10 +33,11 @@ button.viewall.btn.btn-secondary.btn-lg {
 
 .subscribebtn {
   background: #000;
-  padding: 1px 3px;
+  padding: 2px 3px;
   border-radius: 100px;
   font-size: 23px;
   font-weight: 500;
+  height: 62px;
 }
 
 .input-group
@@ -67,6 +69,7 @@ button.viewall.btn.btn-secondary.btn-lg {
 }
 
 .searchprd {
+  color: black;
   margin-top: 18px;
   background: #ffffff;
   border-color: -internal-light-dark(rgb(242, 242, 242), rgb(250, 249, 249));
@@ -96,11 +99,18 @@ button.viewall.btn.btn-secondary.btn-lg {
   padding: 11px;
   background-color: #011d2b;
 }
+input.searchprd.inputareaa.searchba {
+  margin: 0px;
+}
+
+button.probtn.text-center.btn.btn-primary {
+  margin: 3px;
+}
 
 .inputarea {
   /* padding: 21px; */
   text-align: center;
-  margin-top: 60px;
+  margin-top: 14px;
 }
 .searchbarpr {
   background-color: #011d2b;
