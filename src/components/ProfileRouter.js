@@ -11,22 +11,17 @@ function ProfileRouter() {
   return (
     <div>
       <Container>
-        <Tabs
-          // defaultActiveKey="profile"
-          // id="justify-tab-example"
-          className="mb-4 mt-3"
-          justify
-        >
+        <Tabs className="mb-4 mt-3 mx-2" justify>
           <Tab className="" eventKey="video" title="VideoPosted">
             <VideoPosted />
           </Tab>
-          <Tab eventKey="bookmark" title="Bookmarks">
+          <Tab eventKey="bookmark" title="Bookmarks" className="mx-4">
             <Bookmarks />
           </Tab>
-          <Tab eventKey="activity" title="Activity">
+          <Tab eventKey="activity" title="Activity" className="mx-4">
             <Activity />
           </Tab>
-          <Tab eventKey="points" title="Points">
+          <Tab eventKey="points" title="Points" className="mx-4">
             <Points />
           </Tab>
         </Tabs>

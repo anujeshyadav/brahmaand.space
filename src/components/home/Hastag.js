@@ -38,13 +38,13 @@ function Hastag() {
           <div className="hastag_heading">
             <Row className="d-flex justify-content-center">
               <p className="Trending">
-                <img className="" src={has1} alt="img" width="50px" />
+                <img className="mb-5" src={has1} alt="img" width="45px" />
                 Trending hastags
               </p>
             </Row>
           </div>
 
-          <div className=" row ">
+          <div className=" row mt-3">
             <div className="col col-lg-12 col-md-8 col-sm-4 col-xs-3">
               <button className="btn1">#Brahmaand</button>
               <button className="btn1">#Brahmaand_space</button>
@@ -70,19 +70,19 @@ function Hastag() {
       </section>
 
       <p className="category">Top Categories</p>
-      <Container fluid className="mb-5 d-flex justify-content-center">
-        <Row className="m-2">
+      <Container fluid className=" d-flex justify-content-center">
+        <Row className="m-3 mb-4">
           <Col lg="3" md="6" sm="12" className="">
-            <Link to="/productList">
+            <Link to="/subcategory">
               <img className="imgCol" src={business} alt="img" />
               <div className="content-bt">
                 <p>Business</p>
-                <Button className="bt">12 Listing</Button>
+                <Button className="btlisting">12 Listing</Button>
               </div>
             </Link>
           </Col>
           <Col lg="3" md="6" sm="12">
-            <Link to="/productList">
+            <Link to="/subcategory">
               <img className="imgCol" src={education} alt="img" />
               <div className="content-bt">
                 <p>Education</p>
@@ -91,7 +91,7 @@ function Hastag() {
             </Link>
           </Col>
           <Col lg="3" md="6" sm="12">
-            <Link to="/productList">
+            <Link to="/subcategory">
               <img className="imgCol" src={healthcare} alt="img" />
               <div className="content-bt">
                 <p>Healthcare</p>
@@ -100,7 +100,7 @@ function Hastag() {
             </Link>
           </Col>
           <Col lg="3" md="6" sm="12">
-            <Link to="/productList">
+            <Link to="/subcategory">
               <img className="imgCol" src={eatfoods} alt="img" />
               <div className="content-bt">
                 <p>Eat & Foods</p>
@@ -109,7 +109,7 @@ function Hastag() {
             </Link>
           </Col>
           <Col lg="3" className="">
-            <Link to="/productList">
+            <Link to="/subcategory">
               <img className="imgCol" src={entertainment} alt="img" />
               <div className="content-bt">
                 <p>Entertainment</p>
@@ -118,7 +118,7 @@ function Hastag() {
             </Link>
           </Col>
           <Col lg="3">
-            <Link to="/productList">
+            <Link to="/subcategory">
               <img className="imgCol" src={finance} alt="img" />
               <div className="content-bt">
                 <p>Finance</p>
@@ -127,7 +127,7 @@ function Hastag() {
             </Link>
           </Col>
           <Col lg="3">
-            <Link to="/productList">
+            <Link to="/subcategory">
               <img className="imgCol" src={technology} alt="img" />
               <div className="content-bt">
                 <p>Technology</p>
@@ -136,7 +136,7 @@ function Hastag() {
             </Link>
           </Col>
           <Col lg="3">
-            <Link to="/productList">
+            <Link to="/subcategory">
               <img className="imgCol" src={travel} alt="img" />
               <div className="content-bt">
                 <p>Travel</p>
@@ -147,10 +147,10 @@ function Hastag() {
         </Row>
       </Container>
 
-      <Container className="d-flex justify-content-center">
+      <Container className="d-flex justify-content-center ">
         <Button className="viewall" size="lg">
           <Link
-            to="/ProductList"
+            to="/allcategory"
             style={{ color: "white", textDecoration: "none" }}
           >
             VIEW All
@@ -158,10 +158,10 @@ function Hastag() {
         </Button>
       </Container>
       <div>
-        <p className="category2">Featured content</p>
+        <p className="category2 mt-4">Featured content</p>
 
-        <Container fluid className="mb-5 d-flex justify-content-center">
-          <Row className="m-2">
+        <Container fluid className=" d-flex justify-content-center">
+          <Row className="m-3">
             <Col lg="6" md="6" sm="12" className="">
               <img className="imgColF" src={business} alt="img" />
               <div className="content-bt">
@@ -211,11 +211,6 @@ function Hastag() {
             {" "}
             <Col lg="12" md="12" sm="12" className="">
               <img className="imgCol3" src={youtubevideo} alt="img" />
-              {/* <div lg="8" md="8" sm="12" className="content-text">
-                <p>Are you a Youtube content creator and want to </p>
-                <p> promote your content and earn money.</p>
-                <Button>JOIN US!</Button>
-              </div> */}
             </Col>
           </Row>
         </Container>
@@ -382,11 +377,3 @@ function Hastag() {
 }
 
 export default Hastag;
-
-{
-  /* <img className="top_img mx-3 my-3" src={business} alt="img" />
-                <img className="top_img mx-3 my-3" src={business} alt="img" />
-                <img className="top_img mx-3 my-3" src={business} alt="img" />
-                <img className="top_img mx-3 my-3" src={business} alt="img" />
-               */
-}

@@ -1,8 +1,9 @@
 import { Button, Modal, ModalBody, Label, FormGroup, Input } from "reactstrap";
-import { MultiSelect } from "react-multi-select-component";
-import ReactMultiSelectCheckboxes from "react-multiselect-checkboxes";
-import React from "react";
 
+import Multiselect from "multiselect-react-dropdown";
+// import ReactMultiSelectCheckboxes from "react-multiselect-checkboxes";
+import React from "react";
+import axios from "axios";
 import swal from "sweetalert";
 import {
   Accordion,
@@ -10,31 +11,88 @@ import {
   AccordionHeader,
   AccordionItem,
 } from "reactstrap";
-
 import { Navbar, Nav, Container, Col, Row } from "react-bootstrap";
-
 import "../styles/Navbar.css";
 import Logo from "../assets/logos/logo.png";
-
 import { useEffect, useState } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
-
 import { useContextMenu } from "../context/MenuContext";
 import { useAuth } from "../context/AuthContext";
-
 import agreement_download from "../assets/files/Dispatch305-agreement.pdf";
 import UserPage from "./UserPage";
-const options = [
-  { label: "English", value: "English" },
-  { label: "urdu", value: "urdu " },
-  { label: "Arabia", value: "Arabia" },
-  { label: "hindi", value: "hindi" },
-  { label: "Russian", value: "Russian" },
-  { label: "telgu", value: "telgu" },
-];
 
 function CustomNavbar() {
+  const options = [
+    { label: "English", value: "English" },
+    { label: "urdu", value: "urdu " },
+    { label: "Arabia", value: "Arabia" },
+    { label: "hindi", value: "hindi" },
+    { label: "Russian", value: "Russian" },
+    { label: "telgu", value: "telgu" },
+  ];
   const [selected, setSelected] = useState([]);
+  const [link, setLink] = useState({});
+  const [catgry, setCatgry] = useState({});
+  const [subcatry, setSubcatry] = useState({});
+  const [type, setType] = useState({});
+  const [formate, setformate] = useState({});
+
+  const [Topic, setTopic] = useState({});
+  const [Desc, setDesc] = useState({});
+  const [Optitle, setOptitle] = useState({});
+  const [updatedAt, setUpdatedAt] = useState({});
+  const [createdAt, setCreatedAt] = useState({});
+  const [first, setfirst] = useState({});
+  const [lngage, setLngage] = useState({});
+  const [tview, setTview] = useState({});
+  const [cat_img, setCat_img] = useState({});
+  const [Opcname, setOpcname] = useState({});
+  const [Opdes, setOpdes] = useState({});
+  const [Opcomm, setOpcomm] = useState({});
+
+  var fileUpload = (e) => {
+    setSelected(e.target.files[0]);
+  };
+
+  const allcategory = () => {
+    axios
+      .get(`http://43.205.82.226:9000/admin/getallCategory`, {
+        // title: username,
+        desc: Desc,
+        cat_img: cat_img,
+        updatedAt: updatedAt,
+        createdAt: createdAt,
+        __v: tview,
+      })
+      .then((response) => {
+        console.log(response.data);
+        console.log("getallcategory", response.data.data);
+      })
+      .catch((error) => {
+        console.log(error.response.data.data);
+      });
+  };
+
+  const [subctgry, setSubctgry] = useState({});
+
+  const allsubcategory = () => {
+    axios
+      .get(`http://43.205.82.226:9000/admin/getallSubCategory`)
+      .then((response) => {
+        setSubctgry(response);
+        console.log(subctgry);
+        console.log("subcategory", response.data.data);
+      })
+      .catch((error) => {
+        console.log(error.response.data.data);
+      });
+  };
+
+  useEffect(() => {
+    allcategory();
+    allsubcategory();
+  }, []);
+
   const [open, setOpen] = useState("1");
   const toggler = (id) => {
     if (open === id) {
@@ -52,6 +110,8 @@ function CustomNavbar() {
   };
   const [inputList, setinputList] = useState([{ Languages: "" }]);
   const navigate = useNavigate();
+  const [selectedList, setSelectedList] = useState([]);
+  const [selectedItem, setSelectedItem] = useState([]);
 
   const handleaddclick = () => {
     setinputList([...inputList, { Languages: "" }]);
@@ -70,6 +130,14 @@ function CustomNavbar() {
   useEffect(() => {
     // console.log(current_link);
   }, [current_link]);
+
+  const onSelect = (selectedList, selectedItem) => {
+    console.log(selectedList);
+  };
+
+  const onRemove = (selectedList, removedItem) => {
+    console.log(selectedList);
+  };
 
   return (
     <Navbar
@@ -116,10 +184,11 @@ function CustomNavbar() {
                     </h2>
                     <hr></hr>
                     <p>
-                      Post the content and we will publish it on our website
-                      which can be rated and reviewed by users and has potential
-                      to become viral. It will also help the content reach a
-                      global audience.
+                      You know a content of any niche
+                      (Education/Politics/General Affairs etc.) Post the content
+                      and we will publish it on our website which can be rated
+                      and reviewed by users and has potential to become viral.
+                      It will also help the content reach a global audience.
                       <p>
                         <b> Moreover it will help you win cool prizes daily.</b>
                       </p>
@@ -134,14 +203,15 @@ function CustomNavbar() {
                       <div className="">
                         <Row>
                           <Label>
-                            <b>Link:</b>
+                            <b>Link *</b>
                           </Label>
                           <h5>
                             <input
                               type="text"
                               style={{ background: "#F1F1F1" }}
                               className="form-control"
-                              placeholder="https://www.abdf.com/dfld/dsfld "
+                              placeholder="https://www. "
+                              onChange={fileUpload}
                             />
                           </h5>
                         </Row>
@@ -150,7 +220,7 @@ function CustomNavbar() {
                         <Row>
                           <Col>
                             <Label style={{ font: "GT Walsheim Pro" }}>
-                              <b className="mt-5">Category </b>
+                              <b className="mt-5">Category *</b>
                             </Label>
                             <select
                               className="form-control"
@@ -199,7 +269,7 @@ function CustomNavbar() {
 
                           <Col>
                             <Label style={{ font: "GT Walsheim Pro" }}>
-                              <b>Sub Category</b>
+                              <b>Sub Category *</b>
                             </Label>
                             <select
                               className="form-control"
@@ -215,18 +285,16 @@ function CustomNavbar() {
                         <Row>
                           <Col>
                             <Label
-                              style={{
-                                padding: "0.375rem 0.75rem",
-                                font: "GT Walsheim Pro",
-                              }}
+                              className="mt-3"
+                              style={{ font: "GT Walsheim Pro" }}
                             >
-                              <b>Type</b>
+                              <b>Type *</b>
                             </Label>
                             <select
                               className="form-control"
                               style={{ background: "#F1F1F1" }}
                             >
-                              <option>Select Type</option>
+                              <option>Select Type </option>
                               <option>Free</option>
                               <option>Paid</option>
                             </select>
@@ -234,10 +302,10 @@ function CustomNavbar() {
 
                           <Col>
                             <Label
-                              className="mt-2"
+                              className="mt-3"
                               style={{ font: "GT Walsheim Pro" }}
                             >
-                              <b>Format</b>
+                              <b>Format *</b>
                             </Label>
                             <select
                               className="form-control"
@@ -252,41 +320,23 @@ function CustomNavbar() {
                       </div>
 
                       <Row className="d-flex w-100%">
-                        <Label
-                          className="mt-3"
-                          style={{ font: "GT Walsheim Pro" }}
-                        >
-                          <b>Language of Content </b>
-                        </Label>
-
-                        {/* <ReactMultiSelectCheckboxes options={options} /> */}
-
-                        <pre>{JSON.stringify(selected)}</pre>
-                        <MultiSelect
-                          style={{
-                            width: "100%",
-                            height: "18px",
-                            color: "black",
-                          }}
-                          className="multiselctdropdown"
-                          options={options}
-                          value={selected}
-                          onChange={setSelected}
-                          labelledBy="Select language"
-                        />
-
-                        {/* <select
-                                  className="form-control"
-                                  style={{ background: "#F1F1F1" }}
-                                  onChange={(e) => handleinputcahnge(e, i)}
-                                >
-                                  <option>Select Language</option>
-                                  <option>Arabic</option>
-                                  <option>Russian</option>
-                                  <option>Hindi</option>
-                                  <option>Urdu</option>
-                                  <option>English</option>
-                                </select> */}
+                        <Col lg="12">
+                          <Label
+                            className="mt-3"
+                            style={{ font: "GT Walsheim Pro" }}
+                          >
+                            <b>Language of Content * </b>
+                          </Label>
+                          <Multiselect
+                            style={{ borderRadius: "14px" }}
+                            placeholder="Select"
+                            className="w-100%"
+                            options={options}
+                            onSelect={onSelect}
+                            onRemove={onRemove}
+                            displayValue="label"
+                          />
+                        </Col>
                       </Row>
 
                       <div>
@@ -295,18 +345,19 @@ function CustomNavbar() {
                             className="mt-3"
                             style={{ font: "GT Walsheim Pro" }}
                           >
-                            <b>Topic</b>
+                            <b>Topic *</b>
                           </Label>
                           <h5>
                             <textarea
                               type="text"
                               style={{ background: "#F1F1F1" }}
                               className="form-control"
-                              placeholder="e.g.javaScript,react native"
+                              placeholder="like- #javaScript, #react, #native"
+                              onChange={(e) => setTopic(e.target.value)}
                             />
                           </h5>
                           <h6>
-                            Add the topics that is resource covers.Separate
+                            Add the topics that covers Resource.Separate
                             multiple topic with commas.
                           </h6>
                         </Row>
@@ -314,7 +365,7 @@ function CustomNavbar() {
                       <div>
                         <Row>
                           <Label
-                            className="mt-3"
+                            className="mt-4"
                             style={{ font: "GT Walsheim Pro" }}
                           >
                             <b>Descriptions</b>
@@ -325,6 +376,24 @@ function CustomNavbar() {
                               style={{ background: "#F1F1F1" }}
                               className="form-control"
                               placeholder=" Enter blog description here"
+                              onChange={(e) => setDesc(e.target.value)}
+                            />
+                          </h5>
+                        </Row>
+
+                        <Row>
+                          <Label
+                            className="mt-3"
+                            style={{ font: "GT Walsheim Pro" }}
+                          >
+                            <b>Upload Image</b>
+                          </Label>
+                          <h5>
+                            <input
+                              type="file"
+                              style={{ background: "#F1F1F1" }}
+                              className="form-control imageuserupload"
+                              onChange={fileUpload}
                             />
                           </h5>
                         </Row>
@@ -358,6 +427,9 @@ function CustomNavbar() {
                                           style={{ background: "#F1F1F1" }}
                                           className="form-control mb-3"
                                           placeholder="Title of the resource?"
+                                          onChange={(e) =>
+                                            setOptitle(e.target.value)
+                                          }
                                         />
                                       </Row>
 
@@ -372,6 +444,9 @@ function CustomNavbar() {
                                           style={{ background: "#F1F1F1" }}
                                           className="form-control mb-3"
                                           placeholder="author of the resource?"
+                                          onChange={(e) =>
+                                            setOpcname(e.target.value)
+                                          }
                                         />
                                       </Row>
 
@@ -405,13 +480,11 @@ function CustomNavbar() {
                                             style={{ background: "#F1F1F1" }}
                                             className="form-control mb-3"
                                             placeholder="describe the resource in a few sentences, topics it covers?"
+                                            onChange={(e) =>
+                                              setOpdes(e.target.value)
+                                            }
                                           />
                                         </h5>
-                                        {/* <h6>
-                                          Add the topics that is resource
-                                          covers.Separate multiple topic with
-                                          commas.
-                                        </h6> */}
                                       </Row>
 
                                       <Row>
@@ -426,9 +499,13 @@ function CustomNavbar() {
                                             style={{ background: "#F1F1F1" }}
                                             className="form-control "
                                             placeholder="Add anything you want to let us know"
+                                            onChange={(e) =>
+                                              setOpcomm(e.target.value)
+                                            }
                                           />
                                         </h5>
                                       </Row>
+
                                       <h6>
                                         Thesefields are optional, but it will
                                         help others find the resource more

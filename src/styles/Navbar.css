@@ -6,6 +6,15 @@
   background-color: none;
 }
 
+.searchWrapper {
+  border: 1px solid #ccc;
+  border-radius: 13px;
+  min-height: 22px;
+  padding: 9px;
+  position: relative;
+  font-size: 22px;
+}
+
 .swal-button {
   background-color: #5f56c6;
   color: #fff;
@@ -219,10 +228,20 @@ img.imgloginb {
 
 button.dropdown-toggle {
   color: white;
-  margin: -5px 10px;
-
+  margin: 10px 20px;
   background-color: #011d2b;
   border: none;
+}
+
+button.dropdown-toggle:hover {
+  color: white;
+
+  background-color: none !important;
+  border: none;
+}
+
+Multiselect.placeholder {
+  font-size: 12px;
 }
 .rsugnup {
   text-align: center;

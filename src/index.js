@@ -42,6 +42,8 @@ import Privacy from "./components/Privacy";
 import TermsConditions from "./components/TermsConditions";
 import ContactUs from "./components/home/ContactUs";
 import Work from "./components/Work";
+import Allcategory from "./components/home/Allcategory";
+import AllSubCategory from "./components/home/AllSubCategory";
 
 // Import Components
 import Layout from "./components/Layout";
@@ -82,6 +84,8 @@ render(
             <Route exact path="/autoSearch" element={<AutoSearch />} />
             <Route exact path="/privacy" element={<Privacy />} />
             <Route exact path="/work" element={<Work />} />
+            <Route exact path="/allcategory" element={<Allcategory />} />
+            <Route exact path="/subcategory" element={<AllSubCategory />} />
             <Route exact path="/contactUs" element={<ContactUs />} />
 
             <Route

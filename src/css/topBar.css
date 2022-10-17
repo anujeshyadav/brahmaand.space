@@ -4,6 +4,23 @@
   background: #ffffff;
 }
 
+.nav-tabs .nav-link {
+  margin-bottom: -1px;
+  background: 0 0;
+  border: 1px solid transparent;
+  border-radius: 12px;
+}
+
+img.imageone {
+  margin-right: 0px;
+  padding-top: 2px;
+  /* margin-top: -41px; */
+  margin-bottom: -169px;
+}
+.m-2 {
+  padding-top: 169px;
+  margin: 0.5rem 1px !important;
+}
 .imageuserupload {
   height: auto;
   background: rgb(255, 255, 255);
@@ -61,6 +78,7 @@ section.st-1 {
 }
 .cardImage {
   height: 40vh;
+  border-radius: 5px;
 }
 /* .cate {
     /* border-radius: 10px; */

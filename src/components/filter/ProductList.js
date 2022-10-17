@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+
 //import ReactDOM from "react-dom";
 import { Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 import "../../styles/ModulePage.css";
@@ -34,6 +36,38 @@ function ProductList(args) {
 
   const toggle = () => setModal(!modal);
 
+  const [categry, setCategry] = useState({});
+
+  useEffect(() => {
+    allcategory();
+    allsubcategory();
+  }, []);
+
+  const allcategory = () => {
+    axios
+      .get(`http://43.205.82.226:9000/admin/getallCategory`)
+      .then((response) => {
+        setCategry(response.data);
+        console.log("getallcategory", response.data.data);
+      })
+      .catch((error) => {
+        console.log(error.response.data.data);
+      });
+  };
+  const [subcatgry, setsubCatgry] = useState({});
+  const allsubcategory = () => {
+    axios
+      .get(`http://43.205.82.226:9000/admin/getallSubCategory`)
+      .then((response) => {
+        setsubCatgry(response);
+        console.log(subcatgry);
+        console.log("subcategory", response.data.data);
+      })
+      .catch((error) => {
+        console.log(error.response.data.data);
+      });
+  };
+
   return (
     <>
       <section className="seachproduct">
@@ -45,7 +79,7 @@ function ProductList(args) {
                 <input
                   type="text"
                   placeholder="   Searching best quality content here . . . "
-                  className="searchprd inputareaa searchba"
+                  className="searchprd inputareaa searchba bg-white"
                 />
               </div>
               {/* </div> */}
@@ -53,7 +87,7 @@ function ProductList(args) {
             <Col lg="2">
               {/* <div className=""> */}
               <Button className="probtn text-center ">
-                <p className="searchproduct">Search</p>
+                <p className="searchproduct">SEARCH</p>
               </Button>
               {/* </div> */}
             </Col>
@@ -102,13 +136,13 @@ function ProductList(args) {
                       <div className="ft-type">
                         <h5>Type</h5>
                         <ul>
-                          <li>
+                          {/* <li>
                             <input type="checkbox" className="ft-check" />
                             <span>Free - No registration required (86)</span>
-                          </li>
+                          </li> */}
                           <li>
                             <input type="checkbox" className="ft-check" />
-                            <span>Free - Registration required (2)</span>
+                            <span>Free </span>
                           </li>
                           <li>
                             <input type="checkbox" className="ft-check" />
@@ -225,7 +259,7 @@ function ProductList(args) {
                   <h4>
                     Promotions
                     <span>
-                      <Link to="/">See All</Link>
+                      <Link to="/blog">See All</Link>
                     </span>
                   </h4>
 
@@ -575,6 +609,8 @@ function ProductList(args) {
                             <FaHeart />
                           </span>
                         </div>
+
+                        {/* {categry.map((value) => {})} */}
                         <div class="product-content">
                           <ul class="rating">
                             <li>

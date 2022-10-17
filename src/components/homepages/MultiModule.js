@@ -29,9 +29,7 @@ function MultiModule(args) {
 
   return (
     <div>
-      <Button onClick={toggle}>
-        Click Me
-      </Button>
+      <Button onClick={toggle}>Click Me</Button>
       <Modal className="mdlg" isOpen={modal}>
         <ModalBody>
           <div className="main-content">
@@ -47,10 +45,9 @@ function MultiModule(args) {
             <div className="tag-list">
               <div className="tag-1">
                 <h5>
-                  {" "}
                   <span>
                     <img src={icons} alt="" width="30px" />{" "}
-                  </span>{" "}
+                  </span>
                   Topic:
                 </h5>
               </div>

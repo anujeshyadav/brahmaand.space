@@ -367,7 +367,7 @@ input {
   font-family: "GT Walsheim Pro";
   font-style: normal;
   font-weight: 500;
-  font-size: 30px;
+  font-size: 23px;
   line-height: 29px;
   color: #ffffff;
   opacity: 0.8;
@@ -511,7 +511,17 @@ button.btn.btn-success.btn.btn-secondary {
   background: #6c757d;
   padding-top: 5px;
   margin-top: 6px;
+  padding: 6px 21px;
   border-radius: 20px;
+}
+
+.content-bt button:hover {
+  /* background: #6c757d;
+  padding-top: 5px;
+  margin-top: 6px;
+  padding: 6px 21px;
+  border-radius: 20px; */
+  background-color: none;
 }
 
 .vI {
@@ -540,7 +550,7 @@ button.btn.btn-success.btn.btn-secondary {
   /* margin: 10px; */
   /* height: 324px; */
   /* width: 953px; */
-  height: 350px;
+  height: 415px;
   width: -webkit-fill-available;
   background: #000;
   opacity: 0.7;

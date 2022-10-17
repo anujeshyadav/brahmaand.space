@@ -2,6 +2,10 @@
   display: block;
   width: 100%;
   padding: 1.375rem 0.75rem;
+  padding-top: 1.375rem;
+  padding-right: 0.75rem;
+  padding-bottom: 1.375rem;
+  padding-left: 0.75rem;
   font-size: 1rem;
   font-weight: 500;
   line-height: 0.75;
@@ -38,19 +42,17 @@ p {
   align-items: center;
 }
 
-button.btn.btn-secondary {
-  padding: 22px 27px;
+/* button.btn.btn-secondary.btlisting {
+  padding: 2px 9px !important;
+} */
+button.dropdown-toggle.btn.btn-secondary. {
+  padding: 22px 17px;
 }
 
-/* .d-flex .loginboard.loginboard .dropdown .button.btn.btn-secondary:hover {
+button.dropdown-toggle.btn.btn-secondary:hover {
   background-color: none;
-  color: none;
-} */
+}
 
-/* .searchon {
-    display: flex;
-    justify-content: center;
-} */
 .searchtwo.col {
   border-right: 1px solid rgb(5, 26, 5);
   height: 200px;

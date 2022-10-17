@@ -50,7 +50,6 @@ function Header() {
           <div className="text-center mt-3">
             <Button className="btn btn-success">Search</Button>
           </div>
-         
         </div>
       </section>
       <br />
@@ -63,7 +62,6 @@ function Header() {
       <Container>
         <br />
         <br />
-       
       </Container>
     </>
   );
