@@ -1,5 +1,7 @@
 import { Button, Modal, ModalBody, Label, FormGroup, Input } from "reactstrap";
 
+import Dropdown from "react-dropdown";
+import "react-dropdown/style.css";
 import Multiselect from "multiselect-react-dropdown";
 // import ReactMultiSelectCheckboxes from "react-multiselect-checkboxes";
 import React from "react";
@@ -22,75 +24,137 @@ import agreement_download from "../assets/files/Dispatch305-agreement.pdf";
 import UserPage from "./UserPage";
 
 function CustomNavbar() {
-  const options = [
-    { label: "English", value: "English" },
-    { label: "urdu", value: "urdu " },
-    { label: "Arabia", value: "Arabia" },
-    { label: "hindi", value: "hindi" },
-    { label: "Russian", value: "Russian" },
-    { label: "telgu", value: "telgu" },
-  ];
-  const [selected, setSelected] = useState([]);
-  const [link, setLink] = useState({});
+  const [link, setLink] = useState([]);
   const [catgry, setCatgry] = useState({});
   const [subcatry, setSubcatry] = useState({});
   const [type, setType] = useState({});
   const [formate, setformate] = useState({});
-
-  const [Topic, setTopic] = useState({});
+  const [topic, setTopic] = useState({});
   const [Desc, setDesc] = useState({});
   const [Optitle, setOptitle] = useState({});
   const [updatedAt, setUpdatedAt] = useState({});
   const [createdAt, setCreatedAt] = useState({});
   const [first, setfirst] = useState({});
-  const [lngage, setLngage] = useState({});
+  const [lngage, setLngage] = useState([]);
+  const [sellang, setSellang] = useState([]);
+  const [relyear, setRelyear] = useState([]);
+  const [selectedyear, setSelectedyear] = useState("");
   const [tview, setTview] = useState({});
   const [cat_img, setCat_img] = useState({});
   const [Opcname, setOpcname] = useState({});
   const [Opdes, setOpdes] = useState({});
   const [Opcomm, setOpcomm] = useState({});
+  const [userid, setUserid] = useState({});
+  const [title, settitle] = useState({});
 
   var fileUpload = (e) => {
-    setSelected(e.target.files[0]);
+    setCat_img(e.target.files[0]);
   };
+  const handleSubmitResource = (e) => {
+    e.preventDefault();
+    console.log(
+      "??????",
+      link,
+      catgry,
+      type,
+      subcatry,
+      formate,
+      sellang,
+      topic,
+      Desc,
+      Optitle,
+      Opcname,
+      selectedyear,
+      Opdes,
+      cat_img
+    );
+    const formData = new FormData();
 
+    formData.append("link", link);
+    formData.append("category", catgry);
+    formData.append("sub_category", subcatry);
+    formData.append("type", type);
+    formData.append("format", formate);
+    formData.append("language", sellang);
+    formData.append("topics", topic);
+    formData.append("desc", Desc);
+    formData.append("resTitle", Optitle);
+    formData.append("creatorName", Opcname);
+    formData.append("relYear", selectedyear);
+    formData.append("res_desc", Opdes);
+    formData.append("comment", Opcomm);
+    formData.append("img", cat_img);
+    formData.append("userid", userid);
+    formData.append("createdAt", createdAt);
+
+    axios
+      .post(`http://43.205.82.226:9000/user/addSub_resrc`, formData)
+      .then((res) => {
+        console.log(res.data.data);
+      })
+
+      .catch((error) => {
+        console.log(error.res.data);
+      });
+    setModal(false);
+  };
+  // all category
+  const [allcatego, setAllcatego] = useState([]);
   const allcategory = () => {
     axios
-      .get(`http://43.205.82.226:9000/admin/getallCategory`, {
-        // title: username,
-        desc: Desc,
-        cat_img: cat_img,
-        updatedAt: updatedAt,
-        createdAt: createdAt,
-        __v: tview,
-      })
+      .get(`http://43.205.82.226:9000/admin/getallCategory`)
       .then((response) => {
-        console.log(response.data);
-        console.log("getallcategory", response.data.data);
+        setAllcatego(response.data.data);
+        //console.log("getallcategory", response.data.data);
       })
       .catch((error) => {
         console.log(error.response.data.data);
       });
   };
 
-  const [subctgry, setSubctgry] = useState({});
+  const [subctgry, setSubctgry] = useState([]);
 
   const allsubcategory = () => {
     axios
       .get(`http://43.205.82.226:9000/admin/getallSubCategory`)
       .then((response) => {
-        setSubctgry(response);
-        console.log(subctgry);
-        console.log("subcategory", response.data.data);
+        setSubctgry(response.data.data);
       })
       .catch((error) => {
         console.log(error.response.data.data);
       });
   };
 
+  // all year selection api
+  const getYear = () => {
+    axios
+      .get(`http://43.205.82.226:9000/user/allYear`)
+      .then((response) => {
+        setRelyear(response.data.data);
+        console.log(response.data.data);
+      })
+      .catch((error) => {
+        console.log(error.response.data);
+      });
+  };
+
+  const getLanguage = () => {
+    axios
+      .get(`http://43.205.82.226:9000/user/allLang`)
+      .then((response) => {
+        setLngage(response.data.data);
+        console.log(response.data.data);
+      })
+      .catch((error) => {
+        console.log(error.response.data);
+      });
+  };
+
   useEffect(() => {
+    getYear();
     allcategory();
     allsubcategory();
+    getLanguage();
   }, []);
 
   const [open, setOpen] = useState("1");
@@ -102,8 +166,7 @@ function CustomNavbar() {
     }
   };
   const { current_link, setCurrentLinkHelper } = useContextMenu();
-  const { user, login, logout } = useAuth();
-  // const [show, setShow] = useState(true);
+
   const [modal, setModal] = useState(false);
   const toggle = () => {
     setModal(!modal);
@@ -113,32 +176,27 @@ function CustomNavbar() {
   const [selectedList, setSelectedList] = useState([]);
   const [selectedItem, setSelectedItem] = useState([]);
 
-  const handleaddclick = () => {
-    setinputList([...inputList, { Languages: "" }]);
-  };
-  const handleremove = (index) => {
-    const list = [...inputList];
-    list.splice(index, 1);
-    setinputList(list);
-  };
-  const handleinputcahnge = (e, index) => {
-    const { Languages, value } = e.target;
-    const list = [...inputList];
-    list[index][Languages] = value;
-    setinputList(list);
-  };
   useEffect(() => {
     // console.log(current_link);
   }, [current_link]);
 
   const onSelect = (selectedList, selectedItem) => {
-    console.log(selectedList);
+    setSellang(selectedList);
   };
 
   const onRemove = (selectedList, removedItem) => {
     console.log(selectedList);
   };
+  // const onSelectyear = (selectedyear, selectedItem) => {
+  //   setSelectedyear(selectedList);
+  // };
+  // const onSelecat = (e) => {
+  //   setCatgry({ [e.target.name]: e.target.value });
 
+  // };
+  const onSelesubcat = (selectedsubcat, selectedItem) => {
+    // setLngage(selectedList);
+  };
   return (
     <Navbar
       bg="light"
@@ -203,15 +261,17 @@ function CustomNavbar() {
                       <div className="">
                         <Row>
                           <Label>
-                            <b>Link *</b>
+                            <b>
+                              Link <span style={{ color: "red" }}>*</span>
+                            </b>
                           </Label>
                           <h5>
                             <input
                               type="text"
-                              style={{ background: "#F1F1F1" }}
+                              // style={{ background: "#F1F1F1" }}
                               className="form-control"
                               placeholder="https://www. "
-                              onChange={fileUpload}
+                              onChange={(e) => setLink(e.target.value)}
                             />
                           </h5>
                         </Row>
@@ -220,64 +280,55 @@ function CustomNavbar() {
                         <Row>
                           <Col>
                             <Label style={{ font: "GT Walsheim Pro" }}>
-                              <b className="mt-5">Category *</b>
+                              <b className="mt-5">
+                                Category <span style={{ color: "red" }}>*</span>
+                              </b>
                             </Label>
-                            <select
+                            <Input
+                              type="select"
+                              name="title"
                               className="form-control"
-                              style={{ background: "#F1F1F1" }}
+                              onChange={(e) => setCatgry(e.target.value)}
                             >
-                              <option>Select Type</option>
-                              <option>Astrology</option>
-                              <option>Product Comparison</option>
-                              <option>Professional Skills</option>
-                              <option>Education</option>
-                              <option> Comedy</option>
-                              <option>Cinema Gossipsp</option>
-                              <option>Movie Trailers</option>
-                              <option>TV Showsp</option>
-                              <option>Unboxing Videos</option>
-                              <option>Sports</option>
-                              <option>Music</option>
-                              <option>Fashions</option>
-                              <option>pranks</option>
-                              <option>timelapse</option>
-                              <option>Interviews</option>
-                              <option>Real Estate Videos</option>
-                              <option>Facts</option>
-                              <option> General Knowledge</option>
-                              <option>Life Hacks</option>
-                              <option>Web3</option>
-                              <option>Dance</option>
-                              <option>Events</option>
-                              <option>Finance</option>
-                              <option>Gaming</option>
-                              <option>Gym & Workout</option>
-                              <option>Motivational Videos</option>
-                              <option> Music</option>
-                              <option>Finance</option>
-                              <option>Photography</option>
-                              <option>Pets and Animals</option>
-                              <option>Parenting</option>
-                              <option> News and Politics </option>
-                              <option>Religion</option>
-                              <option> Spiritual</option>
-                              <option>Startups</option>
-                              <option>Memes </option>
-                              <option>Podcasts</option>
-                            </select>
+                              <option>Select Category</option>
+                              {allcatego?.map((allCategory) => {
+                                return (
+                                  <option
+                                    value={allCategory?.title}
+                                    key={allCategory?._id}
+                                  >
+                                    {allCategory?.title}
+                                  </option>
+                                );
+                              })}
+                            </Input>
                           </Col>
 
                           <Col>
                             <Label style={{ font: "GT Walsheim Pro" }}>
-                              <b>Sub Category *</b>
+                              <b>
+                                Sub Category
+                                <span style={{ color: "red" }}>*</span>
+                              </b>
                             </Label>
+
                             <select
+                              type="select"
+                              name="title"
                               className="form-control"
-                              style={{ background: "#F1F1F1" }}
+                              onChange={(e) => setSubcatry(e.target.value)}
                             >
-                              <option>Select Type</option>
-                              <option>Free</option>
-                              <option>Paid</option>
+                              <option>Select Sub-Category</option>
+                              {subctgry?.map((subctgry) => {
+                                return (
+                                  <option
+                                    value={subctgry?.title}
+                                    key={subctgry?._id}
+                                  >
+                                    {subctgry?.title}
+                                  </option>
+                                );
+                              })}
                             </select>
                           </Col>
                         </Row>
@@ -288,16 +339,25 @@ function CustomNavbar() {
                               className="mt-3"
                               style={{ font: "GT Walsheim Pro" }}
                             >
-                              <b>Type *</b>
+                              <b>
+                                Type <span style={{ color: "red" }}>*</span>
+                              </b>
                             </Label>
                             <select
+                              onChange={(e) => setType(e.target.value)}
                               className="form-control"
-                              style={{ background: "#F1F1F1" }}
                             >
-                              <option>Select Type </option>
                               <option>Free</option>
                               <option>Paid</option>
                             </select>
+
+                            {/* <select
+                              onChange={(e) => setType(e.target.value)}
+                              className="form-control"
+                            >
+                              <option></option>
+                              <option></option>
+                            </select> */}
                           </Col>
 
                           <Col>
@@ -305,11 +365,13 @@ function CustomNavbar() {
                               className="mt-3"
                               style={{ font: "GT Walsheim Pro" }}
                             >
-                              <b>Format *</b>
+                              <b>
+                                Format <span style={{ color: "red" }}>*</span>
+                              </b>
                             </Label>
                             <select
+                              onChange={(e) => setformate(e.target.value)}
                               className="form-control"
-                              style={{ background: "#F1F1F1" }}
                             >
                               <option>Video</option>
                               <option>Text</option>
@@ -325,16 +387,19 @@ function CustomNavbar() {
                             className="mt-3"
                             style={{ font: "GT Walsheim Pro" }}
                           >
-                            <b>Language of Content * </b>
+                            <b>
+                              Language of Content{" "}
+                              <span style={{ color: "red" }}>*</span>
+                            </b>
                           </Label>
                           <Multiselect
                             style={{ borderRadius: "14px" }}
                             placeholder="Select"
                             className="w-100%"
-                            options={options}
+                            options={lngage}
                             onSelect={onSelect}
                             onRemove={onRemove}
-                            displayValue="label"
+                            displayValue="language"
                           />
                         </Col>
                       </Row>
@@ -345,12 +410,14 @@ function CustomNavbar() {
                             className="mt-3"
                             style={{ font: "GT Walsheim Pro" }}
                           >
-                            <b>Topic *</b>
+                            <b>
+                              Topic <span style={{ color: "red" }}>*</span>
+                            </b>
                           </Label>
                           <h5>
                             <textarea
                               type="text"
-                              style={{ background: "#F1F1F1" }}
+                              // style={{ background: "#F1F1F1" }}
                               className="form-control"
                               placeholder="like- #javaScript, #react, #native"
                               onChange={(e) => setTopic(e.target.value)}
@@ -368,12 +435,15 @@ function CustomNavbar() {
                             className="mt-4"
                             style={{ font: "GT Walsheim Pro" }}
                           >
-                            <b>Descriptions</b>
+                            <b>
+                              Descriptions
+                              <span style={{ color: "red" }}>*</span>
+                            </b>
                           </Label>
                           <h5>
                             <textarea
                               type="text"
-                              style={{ background: "#F1F1F1" }}
+                              // style={{ background: "#F1F1F1" }}
                               className="form-control"
                               placeholder=" Enter blog description here"
                               onChange={(e) => setDesc(e.target.value)}
@@ -386,12 +456,12 @@ function CustomNavbar() {
                             className="mt-3"
                             style={{ font: "GT Walsheim Pro" }}
                           >
-                            <b>Upload Image</b>
+                            <b>Upload Image of Related Content </b>
                           </Label>
                           <h5>
                             <input
                               type="file"
-                              style={{ background: "#F1F1F1" }}
+                              // style={{ background: "#F1F1F1" }}
                               className="form-control imageuserupload"
                               onChange={fileUpload}
                             />
@@ -424,7 +494,7 @@ function CustomNavbar() {
                                         </Label>
                                         <input
                                           type="text"
-                                          style={{ background: "#F1F1F1" }}
+                                          // style={{ background: "#F1F1F1" }}
                                           className="form-control mb-3"
                                           placeholder="Title of the resource?"
                                           onChange={(e) =>
@@ -441,7 +511,7 @@ function CustomNavbar() {
                                         </Label>
                                         <input
                                           type="text"
-                                          style={{ background: "#F1F1F1" }}
+                                          // style={{ background: "#F1F1F1" }}
                                           className="form-control mb-3"
                                           placeholder="author of the resource?"
                                           onChange={(e) =>
@@ -456,12 +526,44 @@ function CustomNavbar() {
                                         >
                                           <b>Release year/last Updated</b>
                                         </Label>
-                                        <input
+
+                                        <Input
+                                          type="select"
+                                          className="form-control"
+                                          name="yrName"
+                                          onChange={(e) => {
+                                            setSelectedyear(e.target.value);
+                                          }}
+                                        >
+                                          <option>Select Year</option>
+                                          {relyear?.map((yr) => {
+                                            return (
+                                              <option
+                                                value={yr?.yrName}
+                                                key={yr?._id}
+                                              >
+                                                {yr?.yrName}
+                                              </option>
+                                            );
+                                          })}
+                                        </Input>
+
+                                        {/* </CustomInput> */}
+                                        {/* <input
                                           type="text"
                                           style={{ background: "#F1F1F1" }}
                                           className="form-control "
                                           placeholder="type year of Release or update content Ex. 2022"
-                                        />
+                                        /> */}
+                                        {/* <Dropdown
+                                          type="select"
+                                          // name="yrName"
+                                          displayValue="yrName"
+                                          options={relyear}
+                                          onChange={onSelectyear}
+                                          placeholder="Select Year of Content"
+                                        /> */}
+
                                         <p className=" mb-3">
                                           What year was this resource released
                                           or last updated?
@@ -477,7 +579,7 @@ function CustomNavbar() {
                                         <h5>
                                           <textarea
                                             type="text"
-                                            style={{ background: "#F1F1F1" }}
+                                            // style={{ background: "#F1F1F1" }}
                                             className="form-control mb-3"
                                             placeholder="describe the resource in a few sentences, topics it covers?"
                                             onChange={(e) =>
@@ -496,7 +598,7 @@ function CustomNavbar() {
                                         <h5>
                                           <textarea
                                             type="text"
-                                            style={{ background: "#F1F1F1" }}
+                                            // style={{ background: "#F1F1F1" }}
                                             className="form-control "
                                             placeholder="Add anything you want to let us know"
                                             onChange={(e) =>
@@ -530,7 +632,11 @@ function CustomNavbar() {
                             >
                               Discard
                             </Button>
-                            <Button color="success" className="m-1">
+                            <Button
+                              color="success"
+                              className="m-1"
+                              onClick={handleSubmitResource}
+                            >
                               SUBMIT
                             </Button>
                           </Col>

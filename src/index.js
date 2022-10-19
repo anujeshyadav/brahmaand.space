@@ -85,7 +85,7 @@ render(
             <Route exact path="/privacy" element={<Privacy />} />
             <Route exact path="/work" element={<Work />} />
             <Route exact path="/allcategory" element={<Allcategory />} />
-            <Route exact path="/subcategory" element={<AllSubCategory />} />
+            <Route exact path="/subcategory/:id" element={<AllSubCategory />} />
             <Route exact path="/contactUs" element={<ContactUs />} />
 
             <Route

@@ -26,7 +26,7 @@ function Allcategory() {
       .get(`http://43.205.82.226:9000/admin/getallCategory`)
       .then((response) => {
         setCategry(response.data.data);
-        console.log(response.data.data);
+        //console.log(response.data.data);
       })
       .catch((error) => {
         console.log(error.response.data.data);
@@ -41,7 +41,7 @@ function Allcategory() {
           <Row className="m-3 mb-4">
             {categry?.map((value) => (
               <Col lg="3" md="6" sm="12" className="" key={value?._id}>
-                <Link to="/subcategory">
+                <Link to={`/subcategory/${value?._id}`}>
                   <img className="imgCol" src={value?.cat_img} alt="img" />
                   <div className="content-bt">
                     <p>{value?.title}</p>

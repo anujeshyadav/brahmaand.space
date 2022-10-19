@@ -21,24 +21,27 @@ import {
   CardMedia,
 } from "reactstrap";
 import { InputGroup } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 function AllSubCategory() {
-  const [subcatgry, setsubCatgry] = useState({});
+  let Params = useParams();
+
+  const [subcatgry, setsubCatgry] = useState([]);
 
   useEffect(() => {
+    console.log("Params", Params);
     allsubcategory();
-  }, []);
+  }, [Params]);
   const allsubcategory = () => {
     axios
-      .get(`http://43.205.82.226:9000/admin/getallSubCategory`)
+      .get(`http://43.205.82.226:9000/admin/getallSubCategory/${Params.id}`)
       .then((response) => {
-        setsubCatgry(response);
+        setsubCatgry(response.data.data);
         console.log(subcatgry);
         console.log("subcategory", response.data.data);
       })
       .catch((error) => {
-        console.log(error.response.data.data);
+        console.log(error.response.data);
       });
   };
   return (
@@ -56,6 +59,7 @@ function AllSubCategory() {
                 </div>
               </Link>
             </Col>
+
             <Col lg="3" md="6" sm="12">
               <Link to="/productList">
                 <img className="imgCol" src={education} alt="img" />
