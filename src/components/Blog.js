@@ -1,6 +1,10 @@
 import React from "react";
+import { useEffect, useState, useMemo } from "react";
+
 import "../components/blog.css";
 import blog from "../images/2.png";
+import axios from "axios";
+import swal from "sweetalert";
 import { Container, Row, Col } from "reactstrap";
 import {
   Card,
@@ -24,7 +28,26 @@ import pic2 from "../images/8.png";
 import pic1 from "../images/9.png";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
+
 function Blog() {
+  const [popblog, setPopblog] = useState([]);
+  useEffect(() => {
+    popularblog();
+  }, []);
+
+  const popularblog = () => {
+    axios
+      .get(`http://43.205.82.226:9000/user/popularBlog`)
+
+      .then((response) => {
+        setPopblog(response.data.data);
+        console.log(popblog);
+      })
+      .catch((error) => {
+        console.log(error.response.data.data);
+      });
+  };
+
   return (
     <div className="" style={{ background: "white" }}>
       <Container fluid className="" style={{ position: "relative" }}>
@@ -44,9 +67,13 @@ function Blog() {
       </Container>
 
       <Container>
+        {/* this is working blog */}
         <Row className=" m-2 ">
           <h1 style={{ font: "GT Walsheim Pro" }}>Recommended Blogs</h1>
         </Row>
+
+        {/* api down here */}
+
         <Swiper
           spaceBetween={50}
           slidesPerView={2}
@@ -54,7 +81,48 @@ function Blog() {
           onSwiper={(swiper) => console.log(swiper)}
         >
           <Row>
-            <SwiperSlide>
+            {popblog?.map((value) => (
+              <SwiperSlide>
+                <Col lg="12">
+                  <Row>
+                    {/* <h3>{value.blog_type}</h3> */}
+                    <Col lg="6">
+                      <img
+                        src={value.blogImg}
+                        className=""
+                        style={{ width: "280px", height: "280px" }}
+                      />
+                    </Col>
+                    <Col lg="6">
+                      <Row>
+                        <b>
+                          5 Terrific Sites to Ask Your Programming Questions
+                          Besides Stackoverflow
+                        </b>
+                      </Row>
+
+                      <h6 style={{ color: "#5F56C6" }}>{value.createdAt}</h6>
+                      <h6>{value.desc}</h6>
+                      <h6>
+                        posted by
+                        <img
+                          className="mx-3"
+                          src={value.posted_by_img}
+                          style={{
+                            width: "70px",
+                            height: "65px",
+                            borderRadius: "50%",
+                          }}
+                        />
+                        <b>{value.posted_by}</b>
+                      </h6>
+                    </Col>
+                  </Row>
+                </Col>
+              </SwiperSlide>
+            ))}
+
+            {/* {/* <SwiperSlide>
               <Col lg="12">
                 <Row>
                   <Col lg="6">
@@ -80,8 +148,9 @@ function Blog() {
                   </Col>
                 </Row>
               </Col>
-            </SwiperSlide>
-            <SwiperSlide>
+            </SwiperSlide> */}
+
+            {/* <SwiperSlide>
               <Col lg="12">
                 <Row>
                   <Col lg="6">
@@ -107,6 +176,7 @@ function Blog() {
                 </Row>
               </Col>
             </SwiperSlide>
+
             <SwiperSlide>
               <Col lg="12">
                 <Row>
@@ -132,7 +202,7 @@ function Blog() {
                   </Col>
                 </Row>
               </Col>
-            </SwiperSlide>
+            </SwiperSlide> */}
           </Row>
         </Swiper>
       </Container>

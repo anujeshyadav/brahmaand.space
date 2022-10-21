@@ -1,9 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
+import { Navbar, Nav, Container, Col, Row } from "react-bootstrap";
+
+import { Link, NavLink } from "react-router-dom";
+import { BsPlay } from "react-icons/bs";
 import has1 from "../../images/has1.png";
 import business from "../../images/business.png";
 import education from "../../images/education.png";
 import healthcare from "../../images/healthcare.png";
-import Brahmaand from "../../images/Brahmaand.png";
+
 import eatfoods from "../../images/eatfoods.png";
 import entertainment from "../../images/entertainment.png";
 import finance from "../../images/finance.png";
@@ -15,22 +19,21 @@ import youtubevideo from "../../images/youtubevideo.jpg";
 import edu from "../../images/edu.jpg";
 import rate from "../../images/rate.jpg";
 import socialnetwork from "../../images/socialnetwork.jpg";
+import { Navigation, Pagination, Scrollbar, A11y } from "swiper";
 
+import { Swiper, SwiperSlide } from "swiper/react";
+import ModalVideo from "react-modal-video";
+import "swiper/css";
 import "../../styles/ModulePage.css";
+import "../../styles/Hastag.scss";
 
-import {
-  Container,
-  Card,
-  Input,
-  Row,
-  Button,
-  Col,
-  CardMedia,
-} from "reactstrap";
+import { Card, Input, Button, CardMedia } from "reactstrap";
 import { InputGroup } from "react-bootstrap";
-import { Link } from "react-router-dom";
 
 function Hastag() {
+  const [modal, setModal] = useState(false);
+
+  const [isOpen, setOpen] = useState(false);
   return (
     <>
       <section>
@@ -157,48 +160,253 @@ function Hastag() {
           </Link>
         </Button>
       </Container>
-      <div>
-        <p className="category2 mt-4">Featured content</p>
+      <h2 className="category2 mt-4 mb-3">Featured content</h2>
+      <Swiper
+        breakpoints={{
+          // when window width is >= 640px
+          768: {
+            slidesPerView: 3,
+            direction: "horizontal",
+            spaceBetween: 20,
+          },
+          640: {
+            slidesPerView: 2,
+            direction: "horizontal",
+            spaceBetween: 20,
+          },
+          320: {
+            slidesPerView: 1,
+            direction: "horizontal",
+            spaceBetween: 20,
+          },
+        }}
+        // install Swiper modules
+        modules={[Navigation, Pagination, Scrollbar, A11y]}
+        spaceBetween={70}
+        slidesPerView={3}
+        navigation
+        pagination={{ clickable: true }}
+        scrollbar={{ draggable: true }}
+        onSwiper={(swiper) => console.log(swiper)}
+        onSlideChange={() => console.log("slide change")}
+      >
+        <SwiperSlide>
+          <div className="ty-6">
+            <div className="ty-5">
+              <Nav.Link as={NavLink} className="navbar-link">
+                <div className="ty-4">
+                  <BsPlay
+                    className="bsplaybutton"
+                    size={75}
+                    style={{ backgroundColor: "white" }}
+                    type="submit"
+                    onClick={() => setOpen(true)}
+                  />
+                </div>
 
+                <ModalVideo
+                  style={{ borderRadius: "12px" }}
+                  channel="youtube"
+                  autoplay
+                  isOpen={isOpen}
+                  videoId="L61p2uyiMSo"
+                  onClose={() => setOpen(false)}
+                />
+              </Nav.Link>
+            </div>
+          </div>
+        </SwiperSlide>
+        <SwiperSlide>
+          <div className="ty-6">
+            <div className="ty-5">
+              <Nav.Link as={NavLink} className="navbar-link">
+                <div className="ty-4">
+                  <BsPlay
+                    className="bsplaybutton"
+                    size={75}
+                    style={{ backgroundColor: "white" }}
+                    type="submit"
+                    onClick={() => setOpen(true)}
+                  />
+                </div>
+
+                <ModalVideo
+                  style={{ borderRadius: "12px" }}
+                  channel="youtube"
+                  autoplay
+                  isOpen={isOpen}
+                  videoId="L61p2uyiMSo"
+                  onClose={() => setOpen(false)}
+                />
+              </Nav.Link>
+            </div>
+          </div>
+        </SwiperSlide>
+        <SwiperSlide>
+          <div className="ty-6">
+            <div className="ty-5">
+              <Nav.Link as={NavLink} className="navbar-link">
+                <div className="ty-4">
+                  <BsPlay
+                    className="bsplaybutton"
+                    size={75}
+                    style={{ backgroundColor: "white" }}
+                    type="submit"
+                    onClick={() => setOpen(true)}
+                  />
+                </div>
+
+                <ModalVideo
+                  style={{ borderRadius: "12px" }}
+                  channel="youtube"
+                  autoplay
+                  isOpen={isOpen}
+                  videoId="L61p2uyiMSo"
+                  onClose={() => setOpen(false)}
+                />
+              </Nav.Link>
+            </div>
+          </div>
+        </SwiperSlide>
+        <SwiperSlide>
+          <div className="ty-6">
+            <div className="ty-5">
+              <Nav.Link as={NavLink} className="navbar-link">
+                <div className="ty-4">
+                  <BsPlay
+                    className="bsplaybutton"
+                    size={75}
+                    style={{ backgroundColor: "white" }}
+                    type="submit"
+                    onClick={() => setOpen(true)}
+                  />
+                </div>
+
+                <ModalVideo
+                  style={{ borderRadius: "12px" }}
+                  channel="youtube"
+                  autoplay
+                  isOpen={isOpen}
+                  videoId="L61p2uyiMSo"
+                  onClose={() => setOpen(false)}
+                />
+              </Nav.Link>
+            </div>
+          </div>
+        </SwiperSlide>
+        <SwiperSlide>
+          <div className="ty-6">
+            <div className="ty-5">
+              <Nav.Link as={NavLink} className="navbar-link">
+                <div className="ty-4">
+                  <BsPlay
+                    className="bsplaybutton"
+                    size={75}
+                    style={{ backgroundColor: "white" }}
+                    type="submit"
+                    onClick={() => setOpen(true)}
+                  />
+                </div>
+
+                <ModalVideo
+                  style={{ borderRadius: "12px" }}
+                  channel="youtube"
+                  autoplay
+                  isOpen={isOpen}
+                  videoId="L61p2uyiMSo"
+                  onClose={() => setOpen(false)}
+                />
+              </Nav.Link>
+            </div>
+          </div>
+        </SwiperSlide>
+        <SwiperSlide>
+          <div className="ty-6">
+            <div className="ty-5">
+              <Nav.Link as={NavLink} className="navbar-link">
+                <div className="ty-4">
+                  <BsPlay
+                    className="bsplaybutton"
+                    size={75}
+                    style={{ backgroundColor: "white" }}
+                    type="submit"
+                    onClick={() => setOpen(true)}
+                  />
+                </div>
+
+                <ModalVideo
+                  style={{ borderRadius: "12px" }}
+                  channel="youtube"
+                  autoplay
+                  isOpen={isOpen}
+                  videoId="L61p2uyiMSo"
+                  onClose={() => setOpen(false)}
+                />
+              </Nav.Link>
+            </div>
+          </div>
+        </SwiperSlide>
+        <SwiperSlide>
+          <div className="ty-6">
+            <div className="ty-5">
+              <Nav.Link as={NavLink} className="navbar-link">
+                <div className="ty-4">
+                  <BsPlay
+                    className="bsplaybutton"
+                    size={75}
+                    style={{ backgroundColor: "white" }}
+                    type="submit"
+                    onClick={() => setOpen(true)}
+                  />
+                </div>
+
+                <ModalVideo
+                  style={{ borderRadius: "12px" }}
+                  channel="youtube"
+                  autoplay
+                  isOpen={isOpen}
+                  videoId="L61p2uyiMSo"
+                  onClose={() => setOpen(false)}
+                />
+              </Nav.Link>
+            </div>
+          </div>
+        </SwiperSlide>
+      </Swiper>
+
+      <div>
         <Container fluid className=" d-flex justify-content-center">
-          <Row className="m-3">
+          {/* <Row className="mx-3">
             <Col lg="6" md="6" sm="12" className="">
               <img className="imgColF" src={business} alt="img" />
-              <div className="content-bt">
-                {/* <h4>Business</h4>
-                <Button>12 Listing</Button> */}
-              </div>
             </Col>
             <Col lg="6" md="6" sm="12">
               <img className="imgColF" src={business} alt="img" />
-              <div className="content-bt">
-                {/* IoPlayOutline */}
-                {/* <h4>Education</h4>
-                <Button>Listing</Button> */}
-              </div>
             </Col>
-
+          </Row> */}
+          <Row>
             <Col lg="6" md="6" sm="12">
               <img className="imgCol1" src={emoji} alt="img" />
               <div className="content-emoji">
                 <p>
-                  Content is scattered all over the web and finding quality,
-                  best content is a challenge. People waste their time and money
-                  consuming irrelevant, unauthentic resources.
+                  <Container>
+                    Content is scattered all over the web and finding quality,
+                    best content is a challenge. People waste their time and
+                    money consuming irrelevant, unauthentic resources.
+                  </Container>
                 </p>
               </div>
             </Col>
             <Col lg="6" md="6" sm="12">
               <img className="imgCol2" src={emoji2} alt="img" />
-              {/* <img className="imgCol2 img com12" src={Brahmaand} alt="img" /> */}
-
-              <div className="text">{/* <p>Brahmaand.space</p> */}</div>
 
               <div className="content-emoji1">
                 <p>
-                  Brahmaand.Space brings you the community and expert rated
-                  tutorials, courses, articles, blogs, vlogs, tv, movies etc. in
-                  all niche
+                  <Container>
+                    Brahmaand.Space brings you the community and expert rated
+                    tutorials, courses, articles, blogs, vlogs, tv, movies etc.
+                    in all niche
+                  </Container>
                 </p>
               </div>
             </Col>
@@ -207,8 +415,7 @@ function Hastag() {
       </div>
       <div>
         <Container>
-          <Row>
-            {" "}
+          <Row className="mt-5">
             <Col lg="12" md="12" sm="12" className="">
               <img className="imgCol3" src={youtubevideo} alt="img" />
             </Col>
@@ -278,7 +485,7 @@ function Hastag() {
         </Row>
       </div>
 
-      <Row>
+      <Row className="mt-5">
         <Col lg="6" md="6" sm="12" className="Card-Form">
           <Container>
             <p>Get Our Monthly Newsletter</p>
@@ -312,7 +519,30 @@ function Hastag() {
         {/* </Row> */}
 
         <Col lg="6" md="6" sm="12" className="">
-          <img className="vI" src={socialnetwork} alt="img" />
+          <div className="ty-3">
+            <div className="ty-2">
+              <Nav.Link as={NavLink} className="navbar-link">
+                <div className="ty-1">
+                  <BsPlay
+                    className="bsplaybutton"
+                    size={75}
+                    style={{ backgroundColor: "white" }}
+                    type="submit"
+                    onClick={() => setOpen(true)}
+                  />
+                </div>
+
+                <ModalVideo
+                  style={{ borderRadius: "12px" }}
+                  channel="youtube"
+                  autoplay
+                  isOpen={isOpen}
+                  videoId="L61p2uyiMSo"
+                  onClose={() => setOpen(false)}
+                />
+              </Nav.Link>
+            </div>
+          </div>
         </Col>
       </Row>
 
@@ -321,40 +551,60 @@ function Hastag() {
         <Row>
           <Col lg="4" md="6" sm="12" className="Card-Blog">
             <Card>
-              <Container>
-                <img height="140" className="imgBlog" src={edu} alt="img" />
+              <Container className="imageslastblog ">
+                <img
+                  style={{ borderRadius: "13px" }}
+                  height="250"
+                  width="350"
+                  className="imgBloglast"
+                  src={edu}
+                  alt="img"
+                />
                 <h5>30 popular business listings of this pandemic year 2021</h5>
                 <p>
                   You’ve probably noticed there are dozens of platforms that
                   offer business listings. Let’s look at a few of the most
                   popular sites and...
                 </p>
-                <span>24th Dec, 2021 . 5 min read</span>
+                <span>
+                  <b>24th Dec, 2021 . 5 min read</b>
+                </span>
               </Container>
             </Card>
           </Col>
 
           <Col lg="4" md="6" sm="12" className="Card-Blog">
             <Card>
-              <Container>
-                <img height="140" className="imgBlog" src={rate} alt="img" />
+              <Container className="imageslastblog ">
+                <img
+                  style={{ borderRadius: "13px" }}
+                  height="250"
+                  width="350"
+                  className="imgBloglast"
+                  src={rate}
+                  alt="img"
+                />
                 <h5>Most visited places & top rated shops from our listing</h5>
                 <p>
                   You’ve probably noticed there are dozens of platforms that
                   offer business listings. Let’s look at a few of the most
                   popular sites and...
                 </p>
-                <span>24th Dec, 2021 . 5 min read</span>
+                <span>
+                  <b>24th Dec, 2021 . 5 min read</b>
+                </span>
               </Container>
             </Card>
           </Col>
 
           <Col lg="4" md="6" sm="12" className="Card-Blog">
             <Card>
-              <Container>
+              <Container className="imageslastblog ">
                 <img
-                  height="140"
-                  className="imgBlog"
+                  style={{ borderRadius: "13px" }}
+                  height="250"
+                  width="350"
+                  className="imgBloglast"
                   src={socialnetwork}
                   alt="img"
                 />
@@ -366,7 +616,9 @@ function Hastag() {
                   offer business listings. Let’s look at a few of the most
                   popular sites and...
                 </p>
-                <span>24th Dec, 2021 . 5 min read</span>
+                <span>
+                  <b>24th Dec, 2021 . 5 min read</b>
+                </span>
               </Container>
             </Card>
           </Col>

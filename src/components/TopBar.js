@@ -26,7 +26,7 @@ function TopBar() {
     setSelectedFile(e.target.files[0]);
   };
   const id = localStorage.getItem("userId");
-  console.log(id);
+  // console.log(id);
 
   useEffect(() => {
     axios

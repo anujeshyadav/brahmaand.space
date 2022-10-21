@@ -22,7 +22,7 @@ code {
     url("./assets/fonts/Walsheim//GTWalsheimProBold.ttf") format("truetype");
   font-weight: bold;
 }
-
+/* @import "node_modules/react-modal-video/scss/modal-video.scss"; */
 /* @font-face {
   font-family: "DIN Alternate Bold";
   src: local("DIN Alternate Bold"),
@@ -51,7 +51,6 @@ code {
   font-weight: normal;
 } */
 
-*{
+* {
   font-family: "GT Walsheim Pro";
 }
-

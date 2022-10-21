@@ -25,13 +25,12 @@ function UserPage({ direction, ...args }) {
   const toggle = () => setDropdownOpen((prevState) => !prevState);
   const [userdata, setUserData] = useState({});
   const id = localStorage.getItem("userId");
-  console.log(id);
 
   useEffect(() => {
     axios
       .get(`http://43.205.82.226:9000/user/getoneUser/${id}`)
       .then((response) => {
-        console.log("getdata", response.data.data);
+        // console.log("getdata", response.data.data);
         setUserData(response.data.data);
       })
       .catch((error) => {

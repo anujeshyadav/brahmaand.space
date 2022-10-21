@@ -1,5 +1,4 @@
 import { Button, Modal, ModalBody, Label, FormGroup, Input } from "reactstrap";
-
 import Dropdown from "react-dropdown";
 import "react-dropdown/style.css";
 import Multiselect from "multiselect-react-dropdown";
@@ -16,7 +15,7 @@ import {
 import { Navbar, Nav, Container, Col, Row } from "react-bootstrap";
 import "../styles/Navbar.css";
 import Logo from "../assets/logos/logo.png";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { useContextMenu } from "../context/MenuContext";
 import { useAuth } from "../context/AuthContext";
@@ -33,7 +32,7 @@ function CustomNavbar() {
   const [Desc, setDesc] = useState({});
   const [Optitle, setOptitle] = useState({});
   const [updatedAt, setUpdatedAt] = useState({});
-  const [createdAt, setCreatedAt] = useState({});
+  // const [createdAt, setCreatedAt] = useState({});
   const [first, setfirst] = useState({});
   const [lngage, setLngage] = useState([]);
   const [sellang, setSellang] = useState([]);
@@ -46,15 +45,35 @@ function CustomNavbar() {
   const [Opcomm, setOpcomm] = useState({});
   const [userid, setUserid] = useState({});
   const [title, settitle] = useState({});
+  const [error, setError] = useState(null);
 
   var fileUpload = (e) => {
     setCat_img(e.target.files[0]);
   };
+
   const handleSubmitResource = (e) => {
+    if (catgry === "Select Category") {
+      swal("Please Select Category");
+    }
+    function urlPatternValidation(link) {
+      const regex = new RegExp(
+        "(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\www.-]*/?"
+      );
+      return regex.test(link);
+    }
+
+    if (!urlPatternValidation(e.target.value)) {
+      setError("Please enter correct URL to Submit Content");
+    } else {
+      setError(null);
+    }
+    setUserid(localStorage.getItem("userId"));
+
     e.preventDefault();
     console.log(
-      "??????",
+      "all data",
       link,
+      userid,
       catgry,
       type,
       subcatry,
@@ -69,7 +88,6 @@ function CustomNavbar() {
       cat_img
     );
     const formData = new FormData();
-
     formData.append("link", link);
     formData.append("category", catgry);
     formData.append("sub_category", subcatry);
@@ -85,27 +103,35 @@ function CustomNavbar() {
     formData.append("comment", Opcomm);
     formData.append("img", cat_img);
     formData.append("userid", userid);
-    formData.append("createdAt", createdAt);
+    // formData.append("createdAt", createdAt);
 
     axios
       .post(`http://43.205.82.226:9000/user/addSub_resrc`, formData)
       .then((res) => {
         console.log(res.data.data);
+        // if (response.data.message === "success") {
+        //   swal("Resource Submitted Successfully👍");
+        // } else {
+        //   swal("Something went wrong, Try again");
+        // }
       })
 
       .catch((error) => {
-        console.log(error.res.data);
+        console.log(error.response);
       });
+
     setModal(false);
   };
+
   // all category
   const [allcatego, setAllcatego] = useState([]);
   const allcategory = () => {
     axios
       .get(`http://43.205.82.226:9000/admin/getallCategory`)
+
       .then((response) => {
         setAllcatego(response.data.data);
-        //console.log("getallcategory", response.data.data);
+        //console.log("submit resorcecat", response.data.data);
       })
       .catch((error) => {
         console.log(error.response.data.data);
@@ -114,14 +140,17 @@ function CustomNavbar() {
 
   const [subctgry, setSubctgry] = useState([]);
 
+  // useMemo(() => allsubcategory(), []);
   const allsubcategory = () => {
     axios
-      .get(`http://43.205.82.226:9000/admin/getallSubCategory`)
+
+      .get(`http://43.205.82.226:9000/admin/listbycategory/${catgry}`)
       .then((response) => {
+        console.log(response.data.data);
         setSubctgry(response.data.data);
       })
       .catch((error) => {
-        console.log(error.response.data.data);
+        console.log(error.response.data);
       });
   };
 
@@ -131,7 +160,7 @@ function CustomNavbar() {
       .get(`http://43.205.82.226:9000/user/allYear`)
       .then((response) => {
         setRelyear(response.data.data);
-        console.log(response.data.data);
+        // console.log(response.data.data);
       })
       .catch((error) => {
         console.log(error.response.data);
@@ -143,7 +172,7 @@ function CustomNavbar() {
       .get(`http://43.205.82.226:9000/user/allLang`)
       .then((response) => {
         setLngage(response.data.data);
-        console.log(response.data.data);
+        // console.log(response.data.data);
       })
       .catch((error) => {
         console.log(error.response.data);
@@ -176,12 +205,25 @@ function CustomNavbar() {
   const [selectedList, setSelectedList] = useState([]);
   const [selectedItem, setSelectedItem] = useState([]);
 
-  useEffect(() => {
-    // console.log(current_link);
-  }, [current_link]);
+  // useEffect(() => {
+  //   // console.log(current_link);
+  // }, [current_link]);
 
   const onSelect = (selectedList, selectedItem) => {
     setSellang(selectedList);
+
+    const [id, language] = sellang;
+    console.log(id._id);
+    var newId = [];
+    for (let i = 0; i < sellang.length; i++) {
+      newId = id._id;
+      newId = newId.push(newId);
+      newId = [...newId];
+      debugger;
+    }
+    id = id.push;
+
+    // const language = selectedList;
   };
 
   const onRemove = (selectedList, removedItem) => {
@@ -268,12 +310,14 @@ function CustomNavbar() {
                           <h5>
                             <input
                               type="text"
+                              value={link}
                               // style={{ background: "#F1F1F1" }}
                               className="form-control"
                               placeholder="https://www. "
                               onChange={(e) => setLink(e.target.value)}
                             />
                           </h5>
+                          {error && <h6 style={{ color: "red" }}>{error}</h6>}
                         </Row>
                       </div>
                       <div>
@@ -286,7 +330,7 @@ function CustomNavbar() {
                             </Label>
                             <Input
                               type="select"
-                              name="title"
+                              name="catgry"
                               className="form-control"
                               onChange={(e) => setCatgry(e.target.value)}
                             >
@@ -294,7 +338,7 @@ function CustomNavbar() {
                               {allcatego?.map((allCategory) => {
                                 return (
                                   <option
-                                    value={allCategory?.title}
+                                    value={allCategory?._id}
                                     key={allCategory?._id}
                                   >
                                     {allCategory?.title}
@@ -322,7 +366,7 @@ function CustomNavbar() {
                               {subctgry?.map((subctgry) => {
                                 return (
                                   <option
-                                    value={subctgry?.title}
+                                    value={subctgry?._id}
                                     key={subctgry?._id}
                                   >
                                     {subctgry?.title}
@@ -347,6 +391,7 @@ function CustomNavbar() {
                               onChange={(e) => setType(e.target.value)}
                               className="form-control"
                             >
+                              <option>Select type</option>
                               <option>Free</option>
                               <option>Paid</option>
                             </select>
@@ -373,6 +418,7 @@ function CustomNavbar() {
                               onChange={(e) => setformate(e.target.value)}
                               className="form-control"
                             >
+                              <option>Select Formate</option>
                               <option>Video</option>
                               <option>Text</option>
                               <option>Video & Text</option>
@@ -396,6 +442,7 @@ function CustomNavbar() {
                             style={{ borderRadius: "14px" }}
                             placeholder="Select"
                             className="w-100%"
+                            // selectedValues={lngage._id}
                             options={lngage}
                             onSelect={onSelect}
                             onRemove={onRemove}
@@ -539,7 +586,7 @@ function CustomNavbar() {
                                           {relyear?.map((yr) => {
                                             return (
                                               <option
-                                                value={yr?.yrName}
+                                                value={yr?._id}
                                                 key={yr?._id}
                                               >
                                                 {yr?.yrName}
