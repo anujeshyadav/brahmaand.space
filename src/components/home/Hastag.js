@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import { Navbar, Nav, Container, Col, Row } from "react-bootstrap";
-
+import axios from "axios";
+import swal from "sweetalert";
 import { Link, NavLink } from "react-router-dom";
 import { BsPlay } from "react-icons/bs";
 import has1 from "../../images/has1.png";
 import business from "../../images/business.png";
 import education from "../../images/education.png";
 import healthcare from "../../images/healthcare.png";
-
 import eatfoods from "../../images/eatfoods.png";
 import entertainment from "../../images/entertainment.png";
 import finance from "../../images/finance.png";
@@ -20,7 +20,6 @@ import edu from "../../images/edu.jpg";
 import rate from "../../images/rate.jpg";
 import socialnetwork from "../../images/socialnetwork.jpg";
 import { Navigation, Pagination, Scrollbar, A11y } from "swiper";
-
 import { Swiper, SwiperSlide } from "swiper/react";
 import ModalVideo from "react-modal-video";
 import "swiper/css";
@@ -31,7 +30,43 @@ import { Card, Input, Button, CardMedia } from "reactstrap";
 import { InputGroup } from "react-bootstrap";
 
 function Hastag() {
-  const [modal, setModal] = useState(false);
+  const [email, setEmail] = useState("");
+  const [error, setError] = useState("");
+  function performValidation() {
+    return email.length > 13;
+  }
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const userid = localStorage.getItem("userid");
+
+    axios
+      .post(`http://43.205.82.226:9000/user/add_news_ltr`, {
+        email: email,
+        userid: userid,
+      })
+      .then((response) => {
+        console.log(response.data);
+        setEmail("");
+        swal("Subscribed Successfully");
+      })
+      .catch((error) => {
+        console.log(error.response.data);
+      });
+  };
+  function isValidEmail(email) {
+    const expression =
+      /(?!.*\.{2})^([a-z\d!#$%&'*+\-\/=?^_`{|}~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]+(\.[a-z\d!#$%&'*+\-\/=?^_`{|}~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]+)*|"((([\t]*\r\n)?[\t]+)?([\x01-\x08\x0b\x0c\x0e-\x1f\x7f\x21\x23-\x5b\x5d-\x7e\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|\\[\x01-\x09\x0b\x0c\x0d-\x7f\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))*(([\t]*\r\n)?[\t]+)?")@(([a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|[a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF][a-z\d\-._~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]*[a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])\.)+([a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|[a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF][a-z\d\-._~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]*[a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])\.?$/i;
+
+    return expression.test(String(email).toLowerCase());
+  }
+  const handleChange = (event) => {
+    if (!isValidEmail(event.target.value)) {
+      setError("Please enter correct email to Subscribe");
+    } else {
+      setError(null);
+    }
+    setEmail(event.target.value);
+  };
 
   const [isOpen, setOpen] = useState(false);
   return (
@@ -494,29 +529,47 @@ function Hastag() {
               customize your search and to find exactly what you want.
             </span>
           </Container>
-          {/* <Row> */}
-          {/* <div lg="3" md="3" sm="12" className="Card-Form"> */}
+          {/* news letter */}
           <InputGroup lg="6" md="6" sm="12" className="Card-Form">
             <div className="searchbara col-md-8 ">
               <div className="inputareea">
                 <input
-                  type="text"
-                  placeholder="Enter Email Address"
+                  value={email}
+                  onChange={handleChange}
+                  type="email"
+                  placeholder="Enter Email Address to Subscribe"
                   className="searchnew"
                 />
+                {error && <h6 style={{ color: "red" }}>{error}</h6>}
               </div>
             </div>
-            <Button className="subscribebtn col-md-4">Subscribe</Button>
-            {/* <Input
-              type="text"
-              placholder="Enter email address"
-              className="subinput"
-            ></Input> */}
-            {/* <Button className="subbtn">Subscribe</Button> */}
+            {/* login to subscribe */}
+
+            {localStorage.getItem("userId") !== "" &&
+            localStorage.getItem("userId") !== null &&
+            localStorage.getItem("userId") !== undefined ? (
+              <Button
+                type="submit"
+                disabled={!performValidation()}
+                onClick={handleSubmit}
+                className="subscribebtn col-md-4"
+              >
+                Subscribe
+              </Button>
+            ) : (
+              <Button
+                type="submit"
+                disabled={!performValidation()}
+                onClick={() => {
+                  swal("Please Login to Subscribe");
+                }}
+                className="subscribebtn col-md-4"
+              >
+                Subscribe
+              </Button>
+            )}
           </InputGroup>
-          {/* </div> */}
         </Col>
-        {/* </Row> */}
 
         <Col lg="6" md="6" sm="12" className="">
           <div className="ty-3">

@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { Container, Row, Col, Button } from "reactstrap";
 import { Modal, ModalBody, Label, FormGroup, Input, Alert } from "reactstrap";
 import { Navbar, Nav } from "react-bootstrap";
+import Moment from "react-moment";
+import "moment-timezone";
 import { Link, NavLink } from "react-router-dom";
 import Glass from "../../src/images/Glass.png";
 import axios from "axios";
@@ -112,13 +114,14 @@ function TopBar() {
                     <pre>
                       <ul>
                         <li style={{ color: "black" }}>
-                          {`Username           :   ${username}`}
+                          {`Username            :   ${username}`}
                         </li>
                         <li style={{ color: "black" }}>
                           {`Display name    :  ${display_name}`}
                         </li>
                         <li style={{ color: "black" }}>
-                          {`User Since          :   ${createdAt}`}
+                          {`User Since          :  `}
+                          <Moment format="lll">{` :   ${createdAt}`}</Moment>
                         </li>
                         <li style={{ color: "black" }}>
                           {`Karma                  :   ${createdAt}`}

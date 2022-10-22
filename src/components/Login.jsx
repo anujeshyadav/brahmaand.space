@@ -35,7 +35,7 @@ function Login() {
     }
 
     e.preventDefault();
-    console.log(email, password);
+    // console.log(email, password);
     axios
       .post(`http://43.205.82.226:9000/user/login`, {
         email: email,

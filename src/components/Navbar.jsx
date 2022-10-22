@@ -701,7 +701,7 @@ function CustomNavbar() {
                 onClick={() =>
                   swal(
                     "For Submit a content",
-                    "Need To login for submit content"
+                    "Need To login for Submit Content"
                   )
                 }
               >

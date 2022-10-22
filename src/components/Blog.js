@@ -1,6 +1,7 @@
 import React from "react";
 import { useEffect, useState, useMemo } from "react";
-
+import Moment from "react-moment";
+import "moment-timezone";
 import "../components/blog.css";
 import blog from "../images/2.png";
 import axios from "axios";
@@ -14,15 +15,11 @@ import {
   CardBody,
   CardImg,
 } from "reactstrap";
-import profile3 from "../images/5.png";
-import profile4 from "../images/7.png";
-import profile5 from "../images/14.png";
+
 import profile6 from "../images/12.png";
 import profile7 from "../images/11.png";
 import profile8 from "../images/13.png";
-import profile from "../images/3.png";
-import profile1 from "../images/6.png";
-import profile2 from "../images/4.png";
+
 import pic3 from "../images/10.png";
 import pic2 from "../images/8.png";
 import pic1 from "../images/9.png";
@@ -30,18 +27,32 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 
 function Blog() {
-  const [popblog, setPopblog] = useState([]);
+  const [recomblog, setRecomblog] = useState([]);
   useEffect(() => {
+    reconmendedblog();
     popularblog();
   }, []);
 
+  const reconmendedblog = () => {
+    axios
+      .get(`http://43.205.82.226:9000/user/recomanded_Blog`)
+
+      .then((response) => {
+        setRecomblog(response.data.data);
+        console.log(recomblog);
+      })
+      .catch((error) => {
+        console.log(error.response.data.data);
+      });
+  };
+  const [popblog, setPop] = useState([]);
   const popularblog = () => {
     axios
       .get(`http://43.205.82.226:9000/user/popularBlog`)
 
       .then((response) => {
-        setPopblog(response.data.data);
-        console.log(popblog);
+        setPop(response.data.data);
+        console.log(recomblog);
       })
       .catch((error) => {
         console.log(error.response.data.data);
@@ -81,11 +92,10 @@ function Blog() {
           onSwiper={(swiper) => console.log(swiper)}
         >
           <Row>
-            {popblog?.map((value) => (
+            {recomblog?.map((value) => (
               <SwiperSlide>
                 <Col lg="12">
                   <Row>
-                    {/* <h3>{value.blog_type}</h3> */}
                     <Col lg="6">
                       <img
                         src={value.blogImg}
@@ -96,12 +106,14 @@ function Blog() {
                     <Col lg="6">
                       <Row>
                         <b>
-                          5 Terrific Sites to Ask Your Programming Questions
-                          Besides Stackoverflow
+                          <h3>{value.blog_title}</h3>{" "}
                         </b>
                       </Row>
 
-                      <h6 style={{ color: "#5F56C6" }}>{value.createdAt}</h6>
+                      <h6 style={{ color: "#5F56C6" }}>
+                        <Moment format="lll">{value.createdAt}</Moment>
+                        {/* <Moment >{}</Moment> */}
+                      </h6>
                       <h6>{value.desc}</h6>
                       <h6>
                         posted by
@@ -121,88 +133,6 @@ function Blog() {
                 </Col>
               </SwiperSlide>
             ))}
-
-            {/* {/* <SwiperSlide>
-              <Col lg="12">
-                <Row>
-                  <Col lg="6">
-                    <img src={profile} className="" width={"100%"} />
-                  </Col>
-                  <Col lg="6">
-                    <Row>
-                      <b>
-                        5 Terrific Sites to Ask Your Programming Questions
-                        Besides Stackoverflow
-                      </b>
-                    </Row>
-
-                    <h6 style={{ color: "#5F56C6" }}>Sep 14, 2022</h6>
-                    <h6>
-                      Introduction to Java + Installing Java JDK and IntelliJ
-                      IDEA for Java 19:00 Basic Structure of a Java Program:
-                      Understanding our First Java Hello World Program 14:09{" "}
-                    </h6>
-                    <h6>
-                      posted by <img src={profile1} /> <b>Florian</b>
-                    </h6>
-                  </Col>
-                </Row>
-              </Col>
-            </SwiperSlide> */}
-
-            {/* <SwiperSlide>
-              <Col lg="12">
-                <Row>
-                  <Col lg="6">
-                    <img src={profile2} className="" width={"100%"} />
-                  </Col>
-                  <Col lg="6">
-                    <Row>
-                      <b>
-                        5 Terrific Sites to Ask Your Programming Questions
-                        Besides Stackoverflow
-                      </b>
-                    </Row>
-                    <h6 style={{ color: "#5F56C6" }}>Sep 14, 2022</h6>
-                    <h6>
-                      Introduction to Java + Installing Java JDK and IntelliJ
-                      IDEA for Java 19:00 Basic Structure of a Java Program:
-                      Understanding our First Java Hello World Program 14:09{" "}
-                    </h6>
-                    <h6>
-                      posted by <img src={profile1} /> <b>Florian</b>
-                    </h6>
-                  </Col>
-                </Row>
-              </Col>
-            </SwiperSlide>
-
-            <SwiperSlide>
-              <Col lg="12">
-                <Row>
-                  <Col lg="6">
-                    <img src={profile2} className="" width={"100%"} />
-                  </Col>
-                  <Col lg="6">
-                    <Row>
-                      <b>
-                        5 Terrific Sites to Ask Your Programming Questions
-                        Besides Stackoverflow
-                      </b>
-                    </Row>
-                    <h6 style={{ color: "#5F56C6" }}>Sep 14, 2022</h6>
-                    <h6>
-                      Introduction to Java + Installing Java JDK and IntelliJ
-                      IDEA for Java 19:00 Basic Structure of a Java Program:
-                      Understanding our First Java Hello World Program 14:09{" "}
-                    </h6>
-                    <h6>
-                      posted by <img src={profile1} /> <b>Florian</b>
-                    </h6>
-                  </Col>
-                </Row>
-              </Col>
-            </SwiperSlide> */}
           </Row>
         </Swiper>
       </Container>
@@ -211,104 +141,47 @@ function Blog() {
           <h1 style={{ font: "GT Walsheim Pro" }}>Popular Blogs</h1>
         </Row>
         <Row>
-          <Col lg="4">
-            <Card>
-              <CardImg src={profile3} className="photo" />
-              <CardBody>
-                <CardTitle>
-                  <b>
-                    5 Terrific Sites to Ask Your Programming Questions Besides
-                    Stackoverflow
-                  </b>
-                </CardTitle>
-                <CardSubtitle>
-                  <span>
-                    <b style={{ color: "#5F56C6" }}>Sep 14,2022 </b>
-                  </span>
-                </CardSubtitle>
-                <br></br>
-                <CardText>
-                  <span>
-                    Introduction to java + installing java JDK and intelliJ IDEA
-                    for Java 19:00 Basic Structure of a Java Program:
-                    Understanding our First Java Hello World Program 14:09
-                  </span>
-                </CardText>
-                <CardText>
-                  posted by &nbsp;&nbsp;
-                  <img src={pic1} className="photo" />
-                  &nbsp;&nbsp;<b>Florian</b>
-                </CardText>
-              </CardBody>
-            </Card>
-          </Col>
-
-          <Col lg="4">
-            <Card>
-              <CardImg src={profile4} className="photo" />
-              <CardBody>
-                <CardTitle>
-                  <b>
-                    5 Terrific Sites to Ask Your Programming Questions Besides
-                    Stackoverflow
-                  </b>
-                </CardTitle>
-                <CardSubtitle>
-                  <span>
-                    <b style={{ color: "#5F56C6" }}>Sep 14,2022 </b>
-                  </span>
-                </CardSubtitle>
-                <br></br>
-                <CardText>
-                  <span>
-                    Introduction to java + installing java JDK and intelliJ IDEA
-                    for Java 19:00 Basic Structure of a Java Program:
-                    Understanding our First Java Hello World Program 14:09
-                  </span>
-                </CardText>
-                <CardText>
-                  posted by &nbsp;&nbsp;
-                  <img src={pic2} className="photo" />
-                  &nbsp;&nbsp;<b>Florian</b>
-                </CardText>
-              </CardBody>
-            </Card>
-          </Col>
-
-          <Col lg="4">
-            <Card>
-              <CardImg src={profile5} className="photo" />
-              <CardBody>
-                <CardTitle>
-                  <b>
-                    5 Terrific Sites to Ask Your Programming Questions Besides
-                    Stackoverflow
-                  </b>
-                </CardTitle>
-                <CardSubtitle>
-                  <span>
-                    <Row>
-                      {" "}
-                      <b style={{ color: "#5F56C6" }}>Sep 14,2022 </b>
-                    </Row>
-                  </span>
-                </CardSubtitle>
-                <br></br>
-                <CardText>
-                  <span>
-                    Introduction to java + installing java JDK and intelliJ IDEA
-                    for Java 19:00 Basic Structure of a Java Program:
-                    Understanding our First Java Hello World Program 14:09
-                  </span>
-                </CardText>
-                <CardText>
-                  posted by &nbsp;&nbsp;
-                  <img src={pic3} className="photo" />
-                  &nbsp;&nbsp;<b>Florian</b>
-                </CardText>
-              </CardBody>
-            </Card>
-          </Col>
+          {popblog?.map((value) => (
+            <Col lg="4">
+              <Card>
+                <CardImg
+                  style={{
+                    width: "390px",
+                    height: "280px",
+                  }}
+                  src={value.blogImg}
+                  className="photo"
+                />
+                <CardBody>
+                  <CardTitle>
+                    <b>{value.blog_title}</b>
+                  </CardTitle>
+                  <CardSubtitle>
+                    <b style={{ color: "#5F56C6" }}>
+                      <Moment format="lll">{value.createdAt}</Moment>
+                    </b>
+                  </CardSubtitle>
+                  <br></br>
+                  <CardText>
+                    <span>{value.desc}</span>
+                  </CardText>
+                  <CardText>
+                    posted by
+                    <img
+                      className="mx-3"
+                      src={value.posted_by_img}
+                      style={{
+                        width: "70px",
+                        height: "65px",
+                        borderRadius: "50%",
+                      }}
+                    />
+                    <b>{value.posted_by}</b>
+                  </CardText>
+                </CardBody>
+              </Card>
+            </Col>
+          ))}
         </Row>
         <br></br>
         <Row>
