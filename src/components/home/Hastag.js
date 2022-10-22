@@ -32,8 +32,9 @@ import { InputGroup } from "react-bootstrap";
 function Hastag() {
   const [email, setEmail] = useState("");
   const [error, setError] = useState("");
+
   function performValidation() {
-    return email.length > 13;
+    return email.length > 14;
   }
   const handleSubmit = (e) => {
     e.preventDefault();
