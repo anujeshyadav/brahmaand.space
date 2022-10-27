@@ -141,10 +141,19 @@ function CustomNavbar() {
   const [subctgry, setSubctgry] = useState([]);
 
   // useMemo(() => allsubcategory(), []);
-  const allsubcategory = () => {
+
+  const fetchallget = () => {
+    // catgry = catgry;
+    // console.log(catgry);
+  };
+
+  useEffect(() => {
+    const params = catgry;
+    console.log(params);
+    // function allsubcategory() {
     axios
 
-      .get(`http://43.205.82.226:9000/admin/listbycategory/${catgry}`)
+      .get(`http://43.205.82.226:9000/admin/listbycategory/${params}`)
       .then((response) => {
         console.log(response.data.data);
         setSubctgry(response.data.data);
@@ -152,7 +161,21 @@ function CustomNavbar() {
       .catch((error) => {
         console.log(error.response.data);
       });
-  };
+    // }
+  }, [catgry]);
+
+  // const allsubcategory = () => {
+  //   axios
+
+  //     .get(`http://43.205.82.226:9000/admin/listbycategory/${catgry}`)
+  //     .then((response) => {
+  //       console.log(response.data.data);
+  //       setSubctgry(response.data.data);
+  //     })
+  //     .catch((error) => {
+  //       console.log(error.response.data);
+  //     });
+  // };
 
   // all year selection api
   const getYear = () => {
@@ -181,8 +204,9 @@ function CustomNavbar() {
 
   useEffect(() => {
     getYear();
+    fetchallget();
     allcategory();
-    allsubcategory();
+
     getLanguage();
   }, []);
 
@@ -215,13 +239,17 @@ function CustomNavbar() {
     const [id, language] = sellang;
     console.log(id._id);
     var newId = [];
-    for (let i = 0; i < sellang.length; i++) {
-      newId = id._id;
-      newId = newId.push(newId);
-      newId = [...newId];
-      debugger;
-    }
-    id = id.push;
+    newId = newId.push(id._id);
+    newId = [...newId, newId];
+    console.log(newId);
+
+    // for (let i = 0; i < sellang.length; i++) {
+    //   newId = id._id;
+    //   newId = newId.push(newId);
+    //   newId = [...newId];
+    //   debugger;
+    // }
+    // id = id.push;
 
     // const language = selectedList;
   };

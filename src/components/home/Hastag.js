@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Navbar, Nav, Container, Col, Row } from "react-bootstrap";
 import axios from "axios";
 import swal from "sweetalert";
@@ -30,6 +30,22 @@ import { Card, Input, Button, CardMedia } from "reactstrap";
 import { InputGroup } from "react-bootstrap";
 
 function Hastag() {
+  const [categry, setCategry] = useState([]);
+  useEffect(() => {
+    allcategory();
+  }, []);
+  const allcategory = () => {
+    axios
+      .get(`http://43.205.82.226:9000/admin/getallCategory`)
+      .then((response) => {
+        setCategry(response.data.data);
+        console.log(response.data.data);
+      })
+      .catch((error) => {
+        console.log(error.response.data.data);
+      });
+  };
+
   const [email, setEmail] = useState("");
   const [error, setError] = useState("");
 
@@ -62,7 +78,7 @@ function Hastag() {
   }
   const handleChange = (event) => {
     if (!isValidEmail(event.target.value)) {
-      setError("Please enter correct email to Subscribe");
+      setError("Please Enter correct Email to Subscribe");
     } else {
       setError(null);
     }
@@ -84,7 +100,7 @@ function Hastag() {
           </div>
 
           <div className=" row mt-3">
-            <div className="col col-lg-12 col-md-8 col-sm-4 col-xs-3">
+            <div className="col col-lg-12 col-md-12 col-sm-12 col-xs-3">
               <button className="btn1">#Brahmaand</button>
               <button className="btn1">#Brahmaand_space</button>
               <button className="btn1">#Go_Brahmaand_space</button>
@@ -111,7 +127,19 @@ function Hastag() {
       <p className="category">Top Categories</p>
       <Container fluid className=" d-flex justify-content-center">
         <Row className="m-3 mb-4">
-          <Col lg="3" md="6" sm="12" className="">
+          {categry?.slice(0, 8).map((value) => (
+            <Col lg="3" md="6" sm="12" className="" key={value?._id}>
+              <Link to={`/subcategory/${value?._id}`}>
+                <img className="imgCol" src={value?.cat_img} alt="img" />
+                <div className="content-bt">
+                  <p>{value?.title}</p>
+                  <Button className="btlisting">12 Listing</Button>
+                </div>
+              </Link>
+            </Col>
+          ))}
+
+          {/* <Col lg="3" md="6" sm="12" className="">
             <Link to="/subcategory">
               <img className="imgCol" src={business} alt="img" />
               <div className="content-bt">
@@ -119,7 +147,8 @@ function Hastag() {
                 <Button className="btlisting">12 Listing</Button>
               </div>
             </Link>
-          </Col>
+          </Col> */}
+          {/* 
           <Col lg="3" md="6" sm="12">
             <Link to="/subcategory">
               <img className="imgCol" src={education} alt="img" />
@@ -147,7 +176,7 @@ function Hastag() {
               </div>
             </Link>
           </Col>
-          <Col lg="3" className="">
+          <Col lg="3" md="6" sm="12" className="">
             <Link to="/subcategory">
               <img className="imgCol" src={entertainment} alt="img" />
               <div className="content-bt">
@@ -156,7 +185,7 @@ function Hastag() {
               </div>
             </Link>
           </Col>
-          <Col lg="3">
+          <Col lg="3" md="6" sm="12">
             <Link to="/subcategory">
               <img className="imgCol" src={finance} alt="img" />
               <div className="content-bt">
@@ -165,7 +194,7 @@ function Hastag() {
               </div>
             </Link>
           </Col>
-          <Col lg="3">
+          <Col lg="3" md="6" sm="12">
             <Link to="/subcategory">
               <img className="imgCol" src={technology} alt="img" />
               <div className="content-bt">
@@ -174,7 +203,7 @@ function Hastag() {
               </div>
             </Link>
           </Col>
-          <Col lg="3">
+          <Col lg="3" md="6" sm="12">
             <Link to="/subcategory">
               <img className="imgCol" src={travel} alt="img" />
               <div className="content-bt">
@@ -182,7 +211,7 @@ function Hastag() {
                 <Button className="bt">Listing</Button>
               </div>
             </Link>
-          </Col>
+          </Col> */}
         </Row>
       </Container>
 
@@ -520,29 +549,31 @@ function Hastag() {
           </Col>
         </Row>
       </div>
+      <br />
+      <br />
 
-      <Row className="mt-5">
+      <Row className="mt-3">
         <Col lg="6" md="6" sm="12" className="Card-Form">
           <Container>
-            <p>Get Our Monthly Newsletter</p>
-            <span>
+            <p className="d-flex  ">Get Our Monthly Newsletter</p>
+            <span className="d-flex  mt-3">
               Select a category that best suits your interest. Use filters to
               customize your search and to find exactly what you want.
             </span>
           </Container>
           {/* news letter */}
           <InputGroup lg="6" md="6" sm="12" className="Card-Form">
-            <div className="searchbara col-md-8 ">
-              <div className="inputareea">
+            <div className=" searchbara col-md-8 ">
+              <div className=" d-flex inputareea">
                 <input
                   value={email}
                   onChange={handleChange}
                   type="email"
                   placeholder="Enter Email Address to Subscribe"
-                  className="searchnew"
+                  className="d-flex searchnew"
                 />
-                {error && <h6 style={{ color: "red" }}>{error}</h6>}
               </div>
+              {error && <span style={{ color: "red" }}>{error}</span>}
             </div>
             {/* login to subscribe */}
 
@@ -553,18 +584,17 @@ function Hastag() {
                 type="submit"
                 disabled={!performValidation()}
                 onClick={handleSubmit}
-                className="subscribebtn col-md-4"
+                className=" d-flex subscribebtn col-md-4"
               >
                 Subscribe
               </Button>
             ) : (
               <Button
                 type="submit"
-                disabled={!performValidation()}
                 onClick={() => {
                   swal("Please Login to Subscribe");
                 }}
-                className="subscribebtn col-md-4"
+                className="d-flex subscribebtn col-md-4"
               >
                 Subscribe
               </Button>
@@ -608,8 +638,8 @@ function Hastag() {
               <Container className="imageslastblog ">
                 <img
                   style={{ borderRadius: "13px" }}
-                  height="250"
-                  width="350"
+                  // height="250"
+                  // width="350"
                   className="imgBloglast"
                   src={edu}
                   alt="img"
@@ -620,9 +650,11 @@ function Hastag() {
                   offer business listings. Let’s look at a few of the most
                   popular sites and...
                 </p>
-                <span>
-                  <b>24th Dec, 2021 . 5 min read</b>
-                </span>
+                <p>
+                  <span>
+                    <b>24th Dec, 2021 . 5 min read</b>
+                  </span>
+                </p>
               </Container>
             </Card>
           </Col>
@@ -632,8 +664,8 @@ function Hastag() {
               <Container className="imageslastblog ">
                 <img
                   style={{ borderRadius: "13px" }}
-                  height="250"
-                  width="350"
+                  // height="250"
+                  // width="350"
                   className="imgBloglast"
                   src={rate}
                   alt="img"
@@ -644,9 +676,11 @@ function Hastag() {
                   offer business listings. Let’s look at a few of the most
                   popular sites and...
                 </p>
-                <span>
-                  <b>24th Dec, 2021 . 5 min read</b>
-                </span>
+                <p>
+                  <span>
+                    <b>24th Dec, 2021 . 5 min read</b>
+                  </span>
+                </p>
               </Container>
             </Card>
           </Col>
@@ -656,8 +690,8 @@ function Hastag() {
               <Container className="imageslastblog ">
                 <img
                   style={{ borderRadius: "13px" }}
-                  height="250"
-                  width="350"
+                  // height="250"
+                  // width="350"
                   className="imgBloglast"
                   src={socialnetwork}
                   alt="img"
@@ -670,9 +704,11 @@ function Hastag() {
                   offer business listings. Let’s look at a few of the most
                   popular sites and...
                 </p>
-                <span>
-                  <b>24th Dec, 2021 . 5 min read</b>
-                </span>
+                <p>
+                  <span>
+                    <b>24th Dec, 2021 . 5 min read</b>
+                  </span>
+                </p>
               </Container>
             </Card>
           </Col>

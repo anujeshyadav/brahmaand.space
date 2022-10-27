@@ -34,11 +34,15 @@ function AllSubCategory() {
   }, [Params]);
   const allsubcategory = () => {
     axios
-      .get(`http://43.205.82.226:9000/admin/getallSubCategory/${Params.id}`)
+
+      .get(`http://43.205.82.226:9000/admin/listbycategory/${Params.id}`)
+
+      // .get(`http://43.205.82.226:9000/admin/getallSubCategory/${Params.id}`)
       .then((response) => {
         setsubCatgry(response.data.data);
+        // console.log(response.data.data);
         console.log(subcatgry);
-        console.log("subcategory", response.data.data);
+        // console.log("subcategory", response.data.data);
       })
       .catch((error) => {
         console.log(error.response);
@@ -50,17 +54,23 @@ function AllSubCategory() {
       <Container fluid className=" d-flex justify-content-center">
         <Container>
           <Row className="m-3 mb-4">
-            <Col lg="3" md="6" sm="12" className="">
-              <Link to="/productList">
-                <img className="imgCol" src={business} alt="img" />
-                <div className="content-bt">
-                  <p>Business</p>
-                  <Button className="btlisting">12 Listing</Button>
-                </div>
-              </Link>
-            </Col>
+            {subcatgry?.map((value) => (
+              <Col lg="3" md="6" sm="12" className="" key={value?.category._id}>
+                <Link to={`/productList/${value?._id}`}>
+                  <img
+                    className="imgCol"
+                    src={value?.category.cat_img}
+                    alt="img"
+                  />
+                  <div className="content-bt">
+                    <p>{value?.title}</p>
+                    <Button className="btlisting">12 Listing</Button>
+                  </div>
+                </Link>
+              </Col>
+            ))}
 
-            <Col lg="3" md="6" sm="12">
+            {/* <Col lg="3" md="6" sm="12">
               <Link to="/productList">
                 <img className="imgCol" src={education} alt="img" />
                 <div className="content-bt">
@@ -122,9 +132,9 @@ function AllSubCategory() {
                   <Button className="bt">Listing</Button>
                 </div>
               </Link>
-            </Col>
+            </Col> */}
           </Row>
-          <Row className="m-3 mb-4">
+          {/* <Row className="m-3 mb-4">
             <Col lg="3" md="6" sm="12" className="">
               <Link to="/productList">
                 <img className="imgCol" src={business} alt="img" />
@@ -197,7 +207,7 @@ function AllSubCategory() {
                 </div>
               </Link>
             </Col>
-          </Row>
+          </Row> */}
         </Container>
       </Container>
     </div>

@@ -40,9 +40,41 @@ function UserPage({ direction, ...args }) {
 
   return (
     <div>
-      <div className="d-flex loginboard ">
+      <div className="dropdown">
+        <img
+          className="imgloginb"
+          src={userdata?.profileImg}
+          alt="image"
+          style={{ width: "50px", height: "40px", borderRadius: "50%" }}
+        />
+        <span style={{ color: "white" }}>Welcome, {userdata?.username}</span>
+        <div className="dropdown-content">
+          <Link className="userboard" to="/topbar">
+            <FaEdit
+              size={25}
+              style={{ fontFamily: "GT Walsheim Pro" }}
+              color="black"
+              className="mx-3"
+            />
+            Edit Your Profile
+          </Link>
+          <Link className="userboard" to="/profilerouter">
+            <FaRegHandPointRight size={25} color="black" className="mx-3 " />
+            Your likes
+          </Link>
+          <Link
+            className="userboard"
+            to="/login"
+            onClick={() => localStorage.removeItem("userId")}
+          >
+            <BiLogOut size={25} color="black" className="mx-3" />
+            LogOut
+          </Link>
+        </div>
+      </div>
+      {/* <div className="d-flex loginboard ">
         <Dropdown
-          className="loginboard"
+          className="loginboard "
           isOpen={dropdownOpen}
           toggle={toggle}
           direction={direction}
@@ -94,7 +126,7 @@ function UserPage({ direction, ...args }) {
             </DropdownItem>
           </DropdownMenu>
         </Dropdown>
-      </div>
+      </div> */}
     </div>
   );
 }

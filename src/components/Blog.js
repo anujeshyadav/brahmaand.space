@@ -106,7 +106,7 @@ function Blog() {
                     <Col lg="6">
                       <Row>
                         <b>
-                          <h3>{value.blog_title}</h3>{" "}
+                          <h3>{value.blog_title}</h3>
                         </b>
                       </Row>
 
@@ -142,11 +142,11 @@ function Blog() {
         </Row>
         <Row>
           {popblog?.map((value) => (
-            <Col lg="4">
+            <Col lg="4" sm="6" xs="12">
               <Card>
                 <CardImg
                   style={{
-                    width: "390px",
+                    width: "auto",
                     height: "280px",
                   }}
                   src={value.blogImg}
@@ -184,7 +184,7 @@ function Blog() {
           ))}
         </Row>
         <br></br>
-        <Row>
+        {/* <Row>
           <Col lg="4">
             <Card>
               <CardImg src={profile6} className="photo" />
@@ -278,7 +278,7 @@ function Blog() {
               </CardBody>
             </Card>
           </Col>
-        </Row>
+        </Row> */}
       </Container>
     </div>
   );
