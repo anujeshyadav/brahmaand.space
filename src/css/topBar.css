@@ -4,11 +4,36 @@
   background: #ffffff;
 }
 
+.videopostedcard {
+  margin: 5px 2px 14px;
+  box-shadow: 2px 7px 7px -7px;
+  padding: 2px;
+  text-align: center;
+  cursor: pointer;
+  padding: 10px;
+}
+
+.review {
+  padding-top: 55px;
+}
+
 .nav-tabs .nav-link {
   margin-bottom: -1px;
   background: 0 0;
   border: 1px solid transparent;
-  border-radius: 12px;
+  border-radius: 8px;
+}
+.nav-fill .nav-item .nav-link,
+.nav-justified .nav-item .nav-link {
+  width: 84%;
+
+  padding: 16px;
+  margin-bottom: 35px;
+}
+.nav-fill .nav-item .nav-link,
+.nav-justified .nav-item .nav-link:hover {
+  background-color: #5f56c6;
+  color: white;
 }
 
 img.imageone {

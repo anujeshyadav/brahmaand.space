@@ -22,7 +22,7 @@ function LeaderBoard() {
   return (
     <>
       <div className="leaderb mt-4 text-center">
-        <Container ClassName="d-flex justify-content-center ">
+        <Container ClassName="d-flex justify-content-center  ">
           <Container
             fluid
             ClassName="d-flex justify-content-center maincon "
@@ -41,10 +41,7 @@ function LeaderBoard() {
               <h3 className="Pointtext"> Points Counter</h3>
             </Row>
             <br />
-            <Row
-              className="p-2"
-              style={{ shadow: "10px", backgroundColor: "white" }}
-            >
+            <Row className="p-2 leaderboardpoints">
               <Col lg="3" md="" sm="">
                 <Row>
                   <Col

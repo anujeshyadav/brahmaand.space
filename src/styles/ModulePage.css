@@ -5,13 +5,19 @@
     margin-right: 1px;
     margin: 12px 68px;;
 } */
+.newslettertext {
+  text-align: left;
+}
+.learnMore:hover {
+  background-color: black;
+}
 img.imgBloglast {
   display: flex;
   justify-content: center;
   width: -webkit-fill-available;
 }
 button.subscribebtn.col-md-4.btn.btn-secondary {
-  padding: 13px 33px;
+  padding: 13px 57px;
   color: white;
   background-color: black;
   border-radius: 18px;
@@ -20,6 +26,7 @@ button.subscribebtn.col-md-4.btn.btn-secondary {
   margin: -3px -1px;
 }
 .searchnew {
+  padding: 14px;
   border-color: -internal-light-dark(rgb(253, 253, 253), rgb(255, 255, 255));
   color: black;
   border-radius: 18px;
@@ -348,6 +355,7 @@ p.category2 {
 }
 
 .search {
+  padding: 31px;
   width: 80%;
   height: 85px;
   background: #ffffff;
@@ -374,7 +382,7 @@ input {
   font-weight: 500;
   font-size: 23px;
   line-height: 29px;
-  color: #ffffff;
+  color: black;
   opacity: 0.8;
 }
 
@@ -556,7 +564,7 @@ button.btn.btn-success.btn.btn-secondary {
   /* margin: 10px; */
   /* height: 324px; */
   /* width: 953px; */
-  height: 415px;
+  height: 500px;
   width: -webkit-fill-available;
   background: #000;
   opacity: 0.7;
@@ -640,7 +648,7 @@ button.btn.btn-success.btn.btn-secondary {
   font-size: 17px;
   line-height: 30px;
   letter-spacing: -0.02em;
-  text-align: center;
+  /* text-align: center; */
 }
 
 .imgColF {
@@ -949,14 +957,32 @@ svg.bsplaybutton {
 
 @media screen and (min-width: 768px) {
   .swiper-container {
-    width: 640px;
+    width: 768px;
+  }
+  ty-4 {
+    position: absolute;
+    top: 101px;
+    left: 215px;
   }
 }
+@media (min-width: 576px) {
+}
+
+/* @media screen and (min-width: 768px) {
+  .swiper-container {
+    width: 640px;
+  }
+} */
 
 @media screen and (min-width: 640px) {
   .swiper-container {
     width: 768px;
   }
+  /* .ty-4 {
+    position: absolute;
+    top: 98px;
+    left: 218px;
+  } */
 }
 @media screen and (min-width: 320px) {
   .swiper-container {

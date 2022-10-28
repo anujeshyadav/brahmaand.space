@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import {
   FaEdit,
+  FaBell,
   FaRegHandPointRight,
   FaInfinity,
   FaChartBar,
@@ -57,6 +58,16 @@ function UserPage({ direction, ...args }) {
               className="mx-3"
             />
             Edit Your Profile
+          </Link>
+
+          <Link className="userboard" to="/notification">
+            <FaBell
+              size={25}
+              style={{ fontFamily: "GT Walsheim Pro" }}
+              color="black"
+              className="mx-3"
+            />
+            Notifications
           </Link>
           <Link className="userboard" to="/profilerouter">
             <FaRegHandPointRight size={25} color="black" className="mx-3 " />

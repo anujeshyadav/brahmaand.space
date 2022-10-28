@@ -6,13 +6,19 @@ import Activity from "./Activity";
 import Bookmarks from "./Bookmarks";
 import Points from "./Points";
 import VideoPosted from "./VideoPosted";
+import Button from "react-bootstrap/Button";
 
 function ProfileRouter() {
   return (
     <div>
       <Container>
         <Tabs className="mb-4 mt-3 mx-2" justify>
-          <Tab className="" eventKey="video" title="VideoPosted">
+          <Tab
+            className="videoposted "
+            eventKey="video"
+            title="VideoPosted"
+            typeof="button"
+          >
             <VideoPosted />
           </Tab>
           <Tab eventKey="bookmark" title="Bookmarks" className="mx-4">

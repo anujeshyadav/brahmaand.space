@@ -316,16 +316,32 @@ a.btt {
   margin: 26px 0px;
 }
 
-span.product-discount-label.st-1 {
-  display: block;
-  padding: 4px 15px 4px 30px;
-  color: #fff;
+.span.product-discount-label.st-1:c {
+  color: red;
   background-color: #0081c2;
+}
+
+span.product-discount-label.st-1 {
+  border-radius: 9px;
+  display: block;
+  padding: 5px 16px;
+  padding: 5px 11px 4px 11px;
+  color: rgb(89, 53, 211);
+  background-color: #f9f9f9;
   position: absolute;
-  top: 0px;
-  right: 0px;
-  -webkit-clip-path: polygon(34% 0, 100% 0, 100% 100%, 0 100%);
-  clip-path: polygon(34% 0, 100% 0, 100% 100%, 0 100%);
+  top: 12px;
+  right: 12px;
+}
+.videopostedall {
+  box-shadow: 4px 7px 20px -12px;
+}
+
+.heartlike,
+.faregheart {
+  height: 29px;
+  fill: transparent;
+  stroke: rgb(84, 35, 207);
+  stroke-width: 1px;
 }
 
 .product-image8.st-2 {

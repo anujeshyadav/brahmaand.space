@@ -229,20 +229,31 @@ function Hastag() {
       <Swiper
         breakpoints={{
           // when window width is >= 640px
-          768: {
+          820: {
             slidesPerView: 3,
             direction: "horizontal",
             spaceBetween: 20,
           },
-          640: {
-            slidesPerView: 2,
+          780: {
+            slidesPerView: 1,
             direction: "horizontal",
             spaceBetween: 20,
+          },
+
+          768: {
+            slidesPerView: 1,
+            direction: "horizontal",
+            spaceBetween: 20,
+          },
+          640: {
+            slidesPerView: 1,
+            direction: "horizontal",
+            spaceBetween: 28,
           },
           320: {
             slidesPerView: 1,
             direction: "horizontal",
-            spaceBetween: 20,
+            spaceBetween: 25,
           },
         }}
         // install Swiper modules
@@ -504,7 +515,7 @@ function Hastag() {
                   Lorem Ipsum is simply dummy text of the printing and
                   typesetting industry.
                 </span>
-                <Button>Learn more</Button>
+                <Button className="learnMore">Learn more</Button>
               </Container>
             </Card>
           </Col>
@@ -556,31 +567,35 @@ function Hastag() {
         <Col lg="6" md="6" sm="12" className="Card-Form">
           <Container>
             <p className="d-flex  ">Get Our Monthly Newsletter</p>
-            <span className="d-flex  mt-3">
+          </Container>
+          <Container>
+            <span className="d-flex  mt-3 newslettertext">
               Select a category that best suits your interest. Use filters to
               customize your search and to find exactly what you want.
             </span>
           </Container>
           {/* news letter */}
-          <InputGroup lg="6" md="6" sm="12" className="Card-Form">
-            <div className=" searchbara col-md-8 ">
-              <div className=" d-flex inputareea">
-                <input
-                  value={email}
-                  onChange={handleChange}
-                  type="email"
-                  placeholder="Enter Email Address to Subscribe"
-                  className="d-flex searchnew"
-                />
-              </div>
+          <InputGroup className="Card-Form mb-4">
+            <Col lg="8" md="8" sm="8" className="searchbara ">
+              <input
+                value={email}
+                onChange={handleChange}
+                type="email"
+                placeholder="Enter Email Address to Subscribe"
+                className="d-flex searchnew  inputareea"
+              />
+
               {error && <span style={{ color: "red" }}>{error}</span>}
-            </div>
+            </Col>
             {/* login to subscribe */}
 
             {localStorage.getItem("userId") !== "" &&
             localStorage.getItem("userId") !== null &&
             localStorage.getItem("userId") !== undefined ? (
               <Button
+                lg="4"
+                md="4"
+                sm="6"
                 type="submit"
                 disabled={!performValidation()}
                 onClick={handleSubmit}
@@ -590,6 +605,9 @@ function Hastag() {
               </Button>
             ) : (
               <Button
+                lg="3"
+                md="3"
+                sm="3"
                 type="submit"
                 onClick={() => {
                   swal("Please Login to Subscribe");
@@ -615,15 +633,16 @@ function Hastag() {
                     onClick={() => setOpen(true)}
                   />
                 </div>
-
-                <ModalVideo
-                  style={{ borderRadius: "12px" }}
-                  channel="youtube"
-                  autoplay
-                  isOpen={isOpen}
-                  videoId="L61p2uyiMSo"
-                  onClose={() => setOpen(false)}
-                />
+                <div className="modalvideo">
+                  <ModalVideo
+                    style={{ borderRadius: "12px" }}
+                    channel="youtube"
+                    autoplay
+                    isOpen={isOpen}
+                    videoId="L61p2uyiMSo"
+                    onClose={() => setOpen(false)}
+                  />
+                </div>
               </Nav.Link>
             </div>
           </div>

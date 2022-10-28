@@ -44,6 +44,7 @@ import ContactUs from "./components/home/ContactUs";
 import Work from "./components/Work";
 import Allcategory from "./components/home/Allcategory";
 import AllSubCategory from "./components/home/AllSubCategory";
+import Notification from "./components/Notification";
 
 // Import Components
 import Layout from "./components/Layout";
@@ -64,20 +65,16 @@ render(
         <Layout>
           <Routes>
             <Route exact path="/" element={<Home />} />
-
             <Route path="/login" element={<Login />} />
             <Route exact path="/myaccount" element={<Myaccount />} />
-
             <Route exact path="/service" element={<Service />} />
             <Route exact path="/multiModule" element={<MultiModule />} />
-
             <Route exact path="/navbar" element={<Navbar />} />
             <Route exact path="/logout" element={<Logout />} />
             <Route exact path="/signup" element={<Signup />} />
             <Route exact path="/blog" element={<Blog />} />
             <Route exact path="/topBar" element={<TopBar />} />
             <Route exact path="/videoPosted" element={<VideoPosted />} />
-
             <Route exact path="/profileRouter" element={<ProfileRouter />} />
             <Route exact path="/leaderBoard" element={<LeaderBoard />} />
             <Route exact path="/productList" element={<ProductList />} />
@@ -87,13 +84,13 @@ render(
             <Route exact path="/allcategory" element={<Allcategory />} />
             <Route exact path="/subcategory/:id" element={<AllSubCategory />} />
             <Route exact path="/contactUs" element={<ContactUs />} />
+            <Route exact path="/notification" element={<Notification />} />
 
             <Route
               exact
               path="/termsConditions"
               element={<TermsConditions />}
             />
-
             <Route
               path="reset-password/:uid/:token"
               element={<ResetPasswordComponent />}

@@ -41,7 +41,7 @@ function AllSubCategory() {
       .then((response) => {
         setsubCatgry(response.data.data);
         // console.log(response.data.data);
-        console.log(subcatgry);
+        // console.log(subcatgry);
         // console.log("subcategory", response.data.data);
       })
       .catch((error) => {

@@ -1,0 +1,5 @@
+.notifications {
+  display: flex;
+  margin: 22px;
+  justify-content: center;
+}

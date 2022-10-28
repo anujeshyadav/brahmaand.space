@@ -35,6 +35,18 @@ function Header() {
                 </div>
               </Col>
             </Row>
+            <Row>
+              {/* <div className="inputarea">
+                <input
+                  type="text"
+                  placeholder="Searching best quality content here . . . "
+                  className="search"
+                />
+              </div> */}
+              {/* <div className="text-center mt-3">
+                <Button className="btn btn-success">Search</Button>
+              </div> */}
+            </Row>
           </Container>
         </section>
       </div>

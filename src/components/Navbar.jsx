@@ -35,7 +35,7 @@ function CustomNavbar() {
   // const [createdAt, setCreatedAt] = useState({});
   const [first, setfirst] = useState({});
   const [lngage, setLngage] = useState([]);
-  const [sellang, setSellang] = useState([]);
+  const [sellang, setSellang] = useState();
   const [relyear, setRelyear] = useState([]);
   const [selectedyear, setSelectedyear] = useState("");
   const [tview, setTview] = useState({});
@@ -43,7 +43,7 @@ function CustomNavbar() {
   const [Opcname, setOpcname] = useState({});
   const [Opdes, setOpdes] = useState({});
   const [Opcomm, setOpcomm] = useState({});
-  const [userid, setUserid] = useState({});
+  // const [userid, setUserid] = useState({});
   const [title, settitle] = useState({});
   const [error, setError] = useState(null);
 
@@ -67,16 +67,17 @@ function CustomNavbar() {
     } else {
       setError(null);
     }
-    setUserid(localStorage.getItem("userId"));
+
+    const userid = localStorage.getItem("userId");
 
     e.preventDefault();
     console.log(
       "all data",
-      link,
       userid,
+      link,
       catgry,
-      type,
       subcatry,
+      type,
       formate,
       sellang,
       topic,
@@ -85,6 +86,7 @@ function CustomNavbar() {
       Opcname,
       selectedyear,
       Opdes,
+      Opcomm,
       cat_img
     );
     const formData = new FormData();
@@ -109,15 +111,21 @@ function CustomNavbar() {
       .post(`http://43.205.82.226:9000/user/addSub_resrc`, formData)
       .then((res) => {
         console.log(res.data.data);
-        // if (response.data.message === "success") {
-        //   swal("Resource Submitted Successfully👍");
-        // } else {
-        //   swal("Something went wrong, Try again");
-        // }
+        if (res.data.message === "success") {
+          swal("Resource Submitted Successfully👍");
+        } else {
+          swal("Something went wrong, Try again");
+        }
       })
 
       .catch((error) => {
-        console.log(error.response);
+        console.log(error.response.data.message);
+        if (error.response.data.message === "error") {
+          swal(
+            "Resource Could not be Submitted please Try again and Fill all details "
+          );
+        } else {
+        }
       });
 
     setModal(false);
@@ -234,36 +242,19 @@ function CustomNavbar() {
   // }, [current_link]);
 
   const onSelect = (selectedList, selectedItem) => {
-    setSellang(selectedList);
-
-    const [id, language] = sellang;
-    console.log(id._id);
-    var newId = [];
-    newId = newId.push(id._id);
-    newId = [...newId, newId];
-    console.log(newId);
-
-    // for (let i = 0; i < sellang.length; i++) {
-    //   newId = id._id;
-    //   newId = newId.push(newId);
-    //   newId = [...newId];
-    //   debugger;
-    // }
-    // id = id.push;
-
-    // const language = selectedList;
+    console.log(selectedList);
+    var selectItem1 = [];
+    for (var i = 0; i < selectedList.length; i++) {
+      selectItem1.push(selectedList[i]._id);
+    }
+    console.log("aaaa", selectItem1);
+    setSellang(selectItem1);
   };
 
   const onRemove = (selectedList, removedItem) => {
     console.log(selectedList);
   };
-  // const onSelectyear = (selectedyear, selectedItem) => {
-  //   setSelectedyear(selectedList);
-  // };
-  // const onSelecat = (e) => {
-  //   setCatgry({ [e.target.name]: e.target.value });
 
-  // };
   const onSelesubcat = (selectedsubcat, selectedItem) => {
     // setLngage(selectedList);
   };
@@ -470,7 +461,6 @@ function CustomNavbar() {
                             style={{ borderRadius: "14px" }}
                             placeholder="Select"
                             className="w-100%"
-                            // selectedValues={lngage._id}
                             options={lngage}
                             onSelect={onSelect}
                             onRemove={onRemove}
@@ -499,8 +489,11 @@ function CustomNavbar() {
                             />
                           </h5>
                           <h6>
-                            Add the topics that covers Resource.Separate
-                            multiple topic with commas.
+                            Add Topics that covers Resource.Separate multiple
+                            topic with commas.
+                            <span style={{ color: "red" }}>
+                              At Least Five Topics
+                            </span>
                           </h6>
                         </Row>
                       </div>
