@@ -592,69 +592,73 @@ function Hastag() {
             {/* <Row className="mt-3"> */}
             <Container>
               <Container>
-                <Col className="  Card-Form ">
-                  <Container>
-                    <p className="d-flex  ">Get Our Monthly Newsletter</p>
-                  </Container>
-                  <Container>
-                    <span className="d-flex  mt-3 newslettertext">
-                      Select a category that best suits your interest. Use
-                      filters to customize your search and to find exactly what
-                      you want.
-                    </span>
-                  </Container>
-                  {/* news letter */}
-                  <Container>
-                    <InputGroup className="Card-Form mb-4">
-                      <Col lg="8" md="8" sm="8" className="searchbara ">
-                        <input
-                          value={email}
-                          onChange={handleChange}
-                          type="email"
-                          placeholder="Enter Email Address to Subscribe"
-                          className="d-flex searchnew  inputareea"
-                        />
+                <Container>
+                  <Col className="  Card-Form ">
+                    <Container>
+                      <p className="d-flex  ">Get Our Monthly Newsletter</p>
+                    </Container>
+                    <Container>
+                      <span className="d-flex  mt-3 newslettertext">
+                        Select a category that best suits your interest. Use
+                        filters to customize your search and to find exactly
+                        what you want.
+                      </span>
+                    </Container>
+                    {/* news letter */}
+                    <Container>
+                      <InputGroup className="Card-Form mb-4">
+                        <Col lg="8" md="8" sm="8" className="searchbara ">
+                          <input
+                            value={email}
+                            onChange={handleChange}
+                            type="email"
+                            placeholder="Enter Email Address to Subscribe"
+                            className="d-flex searchnew  inputareea"
+                          />
 
-                        {error && <span style={{ color: "red" }}>{error}</span>}
-                      </Col>
-                      {/* login to subscribe */}
+                          {error && (
+                            <span style={{ color: "red" }}>{error}</span>
+                          )}
+                        </Col>
+                        {/* login to subscribe */}
 
-                      {localStorage.getItem("userId") !== "" &&
-                      localStorage.getItem("userId") !== null &&
-                      localStorage.getItem("userId") !== undefined ? (
-                        <Button
-                          lg="4"
-                          md="4"
-                          sm="6"
-                          type="submit"
-                          disabled={!performValidation()}
-                          onClick={handleSubmit}
-                          className=" d-flex subscribebtn col-md-4"
-                        >
-                          Subscribe
-                        </Button>
-                      ) : (
-                        <Button
-                          lg="3"
-                          md="3"
-                          sm="3"
-                          type="submit"
-                          onClick={() => {
-                            swal("Please Login to Subscribe");
-                          }}
-                          className="d-flex subscribebtn col-md-4"
-                        >
-                          Subscribe
-                        </Button>
-                      )}
-                    </InputGroup>
-                  </Container>
-                </Col>
+                        {localStorage.getItem("userId") !== "" &&
+                        localStorage.getItem("userId") !== null &&
+                        localStorage.getItem("userId") !== undefined ? (
+                          <Button
+                            lg="4"
+                            md="4"
+                            sm="6"
+                            type="submit"
+                            disabled={!performValidation()}
+                            onClick={handleSubmit}
+                            className=" d-flex subscribebtn col-md-4"
+                          >
+                            Subscribe
+                          </Button>
+                        ) : (
+                          <Button
+                            lg="3"
+                            md="3"
+                            sm="3"
+                            type="submit"
+                            onClick={() => {
+                              swal("Please Login to Subscribe");
+                            }}
+                            className="d-flex subscribebtn col-md-4"
+                          >
+                            Subscribe
+                          </Button>
+                        )}
+                      </InputGroup>
+                    </Container>
+                  </Col>
+                </Container>
               </Container>
             </Container>
           </div>
-          <div className="col-lg-6 col-md-6 col-sm-12">
-            <Col className="">
+          <div className="  col-lg-6 col-md-6 col-sm-12">
+            <Col className="container">
               <div className="ty-3">
                 <div className="ty-2">
                   <Nav.Link as={NavLink} className="navbar-link">
