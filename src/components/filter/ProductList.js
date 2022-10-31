@@ -1500,7 +1500,13 @@ function ProductList(args) {
                             <Col md="4">
                               <div class="product-image8 st-2">
                                 <Link to="#" onClick={toggle}>
-                                  <img src={categry.img} alt="" width="100%" />
+                                  <img
+                                    style={{ borderRadius: "10px" }}
+                                    src={categry.img}
+                                    alt=""
+                                    width="100%"
+                                    height={195}
+                                  />
                                   <Modal
                                     className="mdlg"
                                     isOpen={modal}

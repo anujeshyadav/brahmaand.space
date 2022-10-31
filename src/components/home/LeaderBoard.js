@@ -31,259 +31,260 @@ import { FaBook, FaThumbsUp, FaInfinity, FaChartBar } from "react-icons/fa";
 function LeaderBoard() {
   return (
     <>
-      <div className="leaderb mt-4 text-center">
-        <Container ClassName="d-flex justify-content-center  ">
-          <Container
-            fluid
-            ClassName="d-flex justify-content-center maincon "
-            style={{
-              position: "relative",
-              backgroundImage: `url(${Glass})`,
-              backgroundSize: "cover",
+      <div className="leaderb  text-center">
+        <div
+          style={{
+            position: "relative",
+            backgroundImage: `url(${Glass})`,
+            backgroundSize: "cover",
 
-              opacity: 0.8,
-            }}
-          >
-            <Row>
-              <h1 className="leadertext"> Leaderboards</h1>
-            </Row>
-            <Row>
-              <h3 className="Pointtext"> Points Counter</h3>
-            </Row>
-            <br />
-            <Row className="p-2 leaderboardpoints">
-              <Col lg="3" md="" sm="">
-                <Row>
-                  <Col
-                    lg="4"
-                    className="d-flex justify-content-center align-items-center"
-                  >
-                    <div
-                      style={{
-                        backgroundColor: "#FC9357",
-                        padding: "25px",
-                        borderRadius: "50%",
-                      }}
-                    >
-                      <FaBook size={34} color="white" />
-                    </div>
-                  </Col>
-                  <Col lg="8">
-                    <h4>Submit a content </h4>
-                    <h3 style={{ color: "#FC9357" }}> 10 meteors</h3>
-                  </Col>
-                </Row>
-              </Col>
-
-              <Col lg="3" md="" sm="">
-                <Row>
-                  <Col
-                    lg="4"
-                    className="d-flex justify-content-center align-items-center"
-                  >
-                    <div
-                      style={{
-                        backgroundColor: "#5F56C6",
-                        padding: "25px",
-                        borderRadius: "50%",
-                      }}
-                    >
-                      <FaThumbsUp size={34} color="white" />
-                    </div>
-                  </Col>
-                  <Col lg="8">
-                    <h4> Rating </h4>
-                    <h3 style={{ color: "#5F56C6" }}> 2 meteors</h3>
-                  </Col>
-                </Row>
-              </Col>
-
-              <Col lg="3" md="" sm="">
-                <Row>
-                  <Col
-                    lg="4"
-                    className="d-flex justify-content-center align-items-center"
-                  >
-                    <div
-                      style={{
-                        backgroundColor: "#F35F5F",
-                        padding: "25px",
-                        borderRadius: "50%",
-                      }}
-                    >
-                      <FaInfinity size={34} color="white" />
-                    </div>
-                  </Col>
-                  <Col lg="8">
-                    <h4> Review </h4>
-                    <h3 style={{ color: "#F35F5F" }}>5 meteors</h3>
-                  </Col>
-                </Row>
-              </Col>
-
-              <Col lg="3" md="" sm="">
-                <Row>
-                  <Col
-                    lg="4"
-                    className="d-flex justify-content-center align-items-center"
-                  >
-                    <div
-                      style={{
-                        backgroundColor: "#1BCBF2",
-                        padding: "25px",
-                        borderRadius: "50%",
-                      }}
-                    >
-                      <FaChartBar size={34} color="white" />
-                    </div>
-                  </Col>
-                  <Col lg="8">
-                    <h4>Reaching a level </h4>
-                    <h3 style={{ color: "#1BCBF2" }}>50 meteors</h3>
-                  </Col>
-                </Row>
-              </Col>
-            </Row>
-
-            {/* rohit section start */}
-            <div className="planet-box">
-              <h3 class="Pointtext">Planet Position</h3>
+            opacity: 0.8,
+          }}
+        >
+          <Container ClassName="d-flex justify-content-center  ">
+            <Container fluid ClassName="d-flex justify-content-center maincon ">
               <Row>
-                <Col lg="4" md="4">
-                  <div className="planet-1">
-                    <div className="planet-img">
-                      <img src={itthree} alt="" />
-                    </div>
-                    <div className="planet-text">
-                      <h4>
-                        Sun
-                        <span>$10</span>
-                      </h4>
-                      <p>0 -500</p>
-                    </div>
-                  </div>
+                <h1 className="leadertext mt-5"> Leaderboards</h1>
+              </Row>
+              <Row>
+                <h3 className="Pointtext"> Points Counter</h3>
+              </Row>
+              <br />
+              <Row className="p-2 leaderboardpoints">
+                <Col lg="3" md="" sm="">
+                  <Row>
+                    <Col
+                      lg="4"
+                      className="d-flex justify-content-center align-items-center"
+                    >
+                      <div
+                        style={{
+                          backgroundColor: "#FC9357",
+                          padding: "25px",
+                          borderRadius: "50%",
+                        }}
+                      >
+                        <FaBook size={34} color="white" />
+                      </div>
+                    </Col>
+                    <Col lg="8">
+                      <h4>Submit a content </h4>
+                      <h3 style={{ color: "#FC9357" }}> 10 meteors</h3>
+                    </Col>
+                  </Row>
                 </Col>
-                <Col lg="4" md="4">
-                  <div className="planet-1">
-                    <div className="planet-img">
-                      <img src={ittwo} alt="" />
-                    </div>
-                    <div className="planet-text">
-                      <h4>
-                        Mercury
-                        <span>$15</span>
-                      </h4>
-                      <p>500 - 1000</p>
-                    </div>
-                  </div>
+
+                <Col lg="3" md="" sm="">
+                  <Row>
+                    <Col
+                      lg="4"
+                      className="d-flex justify-content-center align-items-center"
+                    >
+                      <div
+                        style={{
+                          backgroundColor: "#5F56C6",
+                          padding: "25px",
+                          borderRadius: "50%",
+                        }}
+                      >
+                        <FaThumbsUp size={34} color="white" />
+                      </div>
+                    </Col>
+                    <Col lg="8">
+                      <h4> Rating </h4>
+                      <h3 style={{ color: "#5F56C6" }}> 2 meteors</h3>
+                    </Col>
+                  </Row>
                 </Col>
-                <Col lg="4" md="4">
-                  <div className="planet-1">
-                    <div className="planet-img">
-                      <img src={itone} alt="" />
-                    </div>
-                    <div className="planet-text">
-                      <h4>
-                        Venus
-                        <span>$18</span>
-                      </h4>
-                      <p>1000- 2000</p>
-                    </div>
-                  </div>
+
+                <Col lg="3" md="" sm="">
+                  <Row>
+                    <Col
+                      lg="4"
+                      className="d-flex justify-content-center align-items-center"
+                    >
+                      <div
+                        style={{
+                          backgroundColor: "#F35F5F",
+                          padding: "25px",
+                          borderRadius: "50%",
+                        }}
+                      >
+                        <FaInfinity size={34} color="white" />
+                      </div>
+                    </Col>
+                    <Col lg="8">
+                      <h4> Review </h4>
+                      <h3 style={{ color: "#F35F5F" }}>5 meteors</h3>
+                    </Col>
+                  </Row>
                 </Col>
-                <Col lg="4" md="4">
-                  <div className="planet-1">
-                    <div className="planet-img">
-                      <img src={mars} alt="" />
-                    </div>
-                    <div className="planet-text">
-                      <h4>
-                        Mars
-                        <span>$20</span>
-                      </h4>
-                      <p>2000 - 5000</p>
-                    </div>
-                  </div>
-                </Col>
-                <Col lg="4" md="4">
-                  <div className="planet-1">
-                    <div className="planet-img">
-                      <img src={jupiter} alt="" />
-                    </div>
-                    <div className="planet-text">
-                      <h4>
-                        Jupiter
-                        <span>$25</span>
-                      </h4>
-                      <p>5000 - 7500</p>
-                    </div>
-                  </div>
-                </Col>
-                <Col lg="4" md="4">
-                  <div className="planet-1">
-                    <div className="planet-img">
-                      <img src={saterns} alt="" />
-                    </div>
-                    <div className="planet-text">
-                      <h4>
-                        Saturn
-                        <span>$40</span>
-                      </h4>
-                      <p>7500 - 10000</p>
-                    </div>
-                  </div>
-                </Col>
-                <Col lg="4" md="4">
-                  <div className="planet-1">
-                    <div className="planet-img">
-                      <img src={uranus} alt="" />
-                    </div>
-                    <div className="planet-text">
-                      <h4>
-                        Uranus
-                        <span>$50</span>
-                      </h4>
-                      <p>10000- 20000</p>
-                    </div>
-                  </div>
-                </Col>
-                <Col lg="4" md="4">
-                  <div className="planet-1">
-                    <div className="planet-img">
-                      <img src={naptune} alt="" />
-                    </div>
-                    <div className="planet-text">
-                      <h4>
-                        Neptune
-                        <span>$100</span>
-                      </h4>
-                      <p>20000-50000</p>
-                    </div>
-                  </div>
-                </Col>
-                <Col lg="4" md="4">
-                  <div className="planet-1">
-                    <div className="planet-img">
-                      <img src={earth} alt="" />
-                    </div>
-                    <div className="planet-text">
-                      <h4>
-                        Earth
-                        <span>$1000</span>
-                      </h4>
-                      <p>50000+</p>
-                    </div>
-                  </div>
+
+                <Col lg="3" md="" sm="">
+                  <Row>
+                    <Col
+                      lg="4"
+                      className="d-flex justify-content-center align-items-center"
+                    >
+                      <div
+                        style={{
+                          backgroundColor: "#1BCBF2",
+                          padding: "25px",
+                          borderRadius: "50%",
+                        }}
+                      >
+                        <FaChartBar size={34} color="white" />
+                      </div>
+                    </Col>
+                    <Col lg="8">
+                      <h4>Reaching a level </h4>
+                      <h3 style={{ color: "#1BCBF2" }}>50 meteors</h3>
+                    </Col>
+                  </Row>
                 </Col>
               </Row>
-            </div>
-            {/* rohit section start */}
 
-            <Row className="mt-5 mb-4 " style={{ textAlign: "left" }}>
-              <h2 ClassName="mb-3 karmacur">Karma - Current Month</h2>
-            </Row>
+              {/* rohit section start */}
+              <div className="planet-box">
+                <h3 class="Pointtext">Planet Position</h3>
+                <Row>
+                  <Col lg="4" md="4" className="mb-3">
+                    <div className="planet-1">
+                      <div className="planet-img">
+                        <img src={itthree} alt="" />
+                      </div>
+                      <div className="planet-text">
+                        <h4>
+                          Sun
+                          <span>$10</span>
+                        </h4>
+                        <p>0 -500</p>
+                      </div>
+                    </div>
+                  </Col>
+                  <Col lg="4" md="4">
+                    <div className="planet-1">
+                      <div className="planet-img">
+                        <img src={ittwo} alt="" />
+                      </div>
+                      <div className="planet-text">
+                        <h4>
+                          Mercury
+                          <span>$15</span>
+                        </h4>
+                        <p>500 - 1000</p>
+                      </div>
+                    </div>
+                  </Col>
+                  <Col lg="4" md="4">
+                    <div className="planet-1">
+                      <div className="planet-img">
+                        <img src={itone} alt="" />
+                      </div>
+                      <div className="planet-text">
+                        <h4>
+                          Venus
+                          <span>$18</span>
+                        </h4>
+                        <p>1000- 2000</p>
+                      </div>
+                    </div>
+                  </Col>
+                  <Col lg="4" md="4" className="mb-3">
+                    <div className="planet-1">
+                      <div className="planet-img">
+                        <img src={mars} alt="" />
+                      </div>
+                      <div className="planet-text">
+                        <h4>
+                          Mars
+                          <span>$20</span>
+                        </h4>
+                        <p>2000 - 5000</p>
+                      </div>
+                    </div>
+                  </Col>
+                  <Col lg="4" md="4">
+                    <div className="planet-1">
+                      <div className="planet-img">
+                        <img src={jupiter} alt="" />
+                      </div>
+                      <div className="planet-text">
+                        <h4>
+                          Jupiter
+                          <span>$25</span>
+                        </h4>
+                        <p>5000 - 7500</p>
+                      </div>
+                    </div>
+                  </Col>
+                  <Col lg="4" md="4">
+                    <div className="planet-1">
+                      <div className="planet-img">
+                        <img src={saterns} alt="" />
+                      </div>
+                      <div className="planet-text">
+                        <h4>
+                          Saturn
+                          <span>$40</span>
+                        </h4>
+                        <p>7500 - 10000</p>
+                      </div>
+                    </div>
+                  </Col>
+                  <Col lg="4" md="4">
+                    <div className="planet-1">
+                      <div className="planet-img">
+                        <img src={uranus} alt="" />
+                      </div>
+                      <div className="planet-text">
+                        <h4>
+                          Uranus
+                          <span>$50</span>
+                        </h4>
+                        <p>10000- 20000</p>
+                      </div>
+                    </div>
+                  </Col>
+                  <Col lg="4" md="4">
+                    <div className="planet-1">
+                      <div className="planet-img">
+                        <img src={naptune} alt="" />
+                      </div>
+                      <div className="planet-text">
+                        <h4>
+                          Neptune
+                          <span>$100</span>
+                        </h4>
+                        <p>20000-50000</p>
+                      </div>
+                    </div>
+                  </Col>
+                  <Col lg="4" md="4">
+                    <div className="planet-1">
+                      <div className="planet-img">
+                        <img src={earth} alt="" />
+                      </div>
+                      <div className="planet-text">
+                        <h4>
+                          Earth
+                          <span>$1000</span>
+                        </h4>
+                        <p>50000+</p>
+                      </div>
+                    </div>
+                  </Col>
+                </Row>
+              </div>
+              {/* rohit section start */}
+
+              <Row className="mt-5 mb-4 " style={{ textAlign: "left" }}>
+                <h2 ClassName="mb-3 karmacur">Karma - Current Month</h2>
+              </Row>
+            </Container>
           </Container>
-
+        </div>
+        <Container ClassName="d-flex justify-content-center  ">
           <Row className="  d-flex justify-content-center winnerone" lg="4">
             <Col className="maincol">
               <Row>

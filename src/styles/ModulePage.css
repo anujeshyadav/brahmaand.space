@@ -639,7 +639,7 @@ button.btn.btn-success.btn.btn-secondary {
   letter-spacing: -0.02em;
   color: #000000;
   font-weight: 1000;
-  margin-top: 92px;
+  margin-top: 49px;
   /* text-align: center; */
   margin-left: -2px;
 }
@@ -818,13 +818,11 @@ button.bt-st.btn.btn-secondary {
   color: #5f56c6;
 }
 
-
-
 /* rohit css */
 .ty-1 {
   position: absolute;
   top: 178px;
-  left: 274px;
+  left: 312px;
 }
 .ty-2 {
   position: relative;
@@ -997,26 +995,21 @@ svg.bsplaybutton {
   }
 } */
 
-
-@media only screen 
-  and (min-device-width: 768px) 
-  and (max-device-width: 1024px) 
-  and (-webkit-min-device-pixel-ratio: 1) {
-
-    .ty-1 {
-      position: absolute;
-      top: 112px;
-      left: 140px;
-    }
-    .imgCol1{
-      width: 100%;
-      height: 0px;
-   }
-   .imgCol2{
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (-webkit-min-device-pixel-ratio: 1) {
+  .ty-1 {
+    position: absolute;
+    top: 112px;
+    left: 140px;
+  }
+  .imgCol1 {
     width: 100%;
     height: 0px;
-   }
-   .ty-4 {
+  }
+  .imgCol2 {
+    width: 100%;
+    height: 0px;
+  }
+  .ty-4 {
     position: absolute;
     top: 94px;
     left: 136px;
@@ -1027,10 +1020,10 @@ svg.bsplaybutton {
     letter-spacing: -0.02em;
     color: #000000;
     font-weight: 1000;
-     margin-top: 0px;
+    margin-top: 0px;
     margin-left: -2px;
-   }
-   button.subscribebtn.col-md-4.btn.btn-secondary {
+  }
+  button.subscribebtn.col-md-4.btn.btn-secondary {
     padding: 13px 14px;
     color: white;
     background-color: black;
@@ -1038,13 +1031,12 @@ svg.bsplaybutton {
     margin-left: -1px;
     margin: -3px -1px;
     font-size: 20px;
-   }
-   .rs-bg h3 {
+  }
+  .rs-bg h3 {
     color: #fff;
     font-size: 18px;
-   }
+  }
 }
-
 
 @media screen and (max-width: 600px) {
   .modal-dialog {
@@ -1053,19 +1045,19 @@ svg.bsplaybutton {
   }
   .ty-4 {
     position: absolute;
-    top: 94px;
-    left: 140px;
+    top: 96px;
+    left: 218px;
   }
   .ty-1 {
     position: absolute;
-    top: 110px;
-    left: 150px;
+    top: 117px;
+    left: 219px;
   }
-  .imgCol1{
-      width: 100%;
-      height: auto;
+  .imgCol1 {
+    width: 100%;
+    height: auto;
   }
-  .imgCol2{
+  .imgCol2 {
     width: 100%;
     height: auto;
   }
@@ -1083,6 +1075,5 @@ svg.bsplaybutton {
     margin: 10px 0px;
     font-size: 15px;
     height: 40px;
-   }    
-  
+  }
 }

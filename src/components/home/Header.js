@@ -66,10 +66,10 @@ function Header() {
       </section>
       <br />
       <br />
-
-      <Container>
+      <Hastag />
+      {/* <Container>
         <Hastag />
-      </Container>
+      </Container> */}
 
       <Container>
         <br />
