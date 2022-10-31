@@ -46,9 +46,11 @@ function UserPage({ direction, ...args }) {
           className="imgloginb"
           src={userdata?.profileImg}
           alt="image"
-          style={{ width: "50px", height: "40px", borderRadius: "50%" }}
+          style={{ width: "50px", height: "42px", borderRadius: "50%" }}
         />
-        <span style={{ color: "white" }}>Welcome, {userdata?.username}</span>
+        <span style={{ color: "white" }}>
+          Welcome, {userdata?.display_name}
+        </span>
         <div className="dropdown-content">
           <Link className="userboard" to="/topbar">
             <FaEdit
@@ -69,7 +71,7 @@ function UserPage({ direction, ...args }) {
             />
             Notifications
           </Link>
-          <Link className="userboard" to="/profilerouter">
+          <Link className="userboard" to="/Bookmark">
             <FaRegHandPointRight size={25} color="black" className="mx-3 " />
             Your likes
           </Link>

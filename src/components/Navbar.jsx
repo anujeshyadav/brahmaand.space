@@ -35,7 +35,7 @@ function CustomNavbar() {
   // const [createdAt, setCreatedAt] = useState({});
   const [first, setfirst] = useState({});
   const [lngage, setLngage] = useState([]);
-  const [sellang, setSellang] = useState();
+  const [sellang, setSellang] = useState("");
   const [relyear, setRelyear] = useState([]);
   const [selectedyear, setSelectedyear] = useState("");
   const [tview, setTview] = useState({});
@@ -119,7 +119,7 @@ function CustomNavbar() {
       })
 
       .catch((error) => {
-        console.log(error.response.data.message);
+        console.log(error.response.data);
         if (error.response.data.message === "error") {
           swal(
             "Resource Could not be Submitted please Try again and Fill all details "
@@ -147,6 +147,7 @@ function CustomNavbar() {
   };
 
   const [subctgry, setSubctgry] = useState([]);
+  // console.log(subctgry);
 
   // useMemo(() => allsubcategory(), []);
 
@@ -244,8 +245,10 @@ function CustomNavbar() {
   const onSelect = (selectedList, selectedItem) => {
     console.log(selectedList);
     var selectItem1 = [];
+    // debugger;
     for (var i = 0; i < selectedList.length; i++) {
       selectItem1.push(selectedList[i]._id);
+      // selectItem1 = JSON.stringify(selectItem1);
     }
     console.log("aaaa", selectItem1);
     setSellang(selectItem1);
@@ -453,7 +456,7 @@ function CustomNavbar() {
                             style={{ font: "GT Walsheim Pro" }}
                           >
                             <b>
-                              Language of Content{" "}
+                              Language of Content
                               <span style={{ color: "red" }}>*</span>
                             </b>
                           </Label>

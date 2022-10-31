@@ -40,12 +40,12 @@ function AllSubCategory() {
       // .get(`http://43.205.82.226:9000/admin/getallSubCategory/${Params.id}`)
       .then((response) => {
         setsubCatgry(response.data.data);
-        // console.log(response.data.data);
+        console.log(response.data.data);
         // console.log(subcatgry);
-        // console.log("subcategory", response.data.data);
+        console.log("subcategory", response.data.data);
       })
       .catch((error) => {
-        console.log(error.response);
+        console.log(error.response.data);
       });
   };
   return (
@@ -57,11 +57,7 @@ function AllSubCategory() {
             {subcatgry?.map((value) => (
               <Col lg="3" md="6" sm="12" className="" key={value?.category._id}>
                 <Link to={`/productList/${value?._id}`}>
-                  <img
-                    className="imgCol"
-                    src={value?.category.cat_img}
-                    alt="img"
-                  />
+                  <img className="imgCol" src={value?.Subcat_img} alt="img" />
                   <div className="content-bt">
                     <p>{value?.title}</p>
                     <Button className="btlisting">12 Listing</Button>

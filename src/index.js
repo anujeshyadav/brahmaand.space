@@ -76,8 +76,10 @@ render(
             <Route exact path="/topBar" element={<TopBar />} />
             <Route exact path="/videoPosted" element={<VideoPosted />} />
             <Route exact path="/profileRouter" element={<ProfileRouter />} />
+            <Route exact path="/Bookmark" element={<Bookmarks />} />
+
             <Route exact path="/leaderBoard" element={<LeaderBoard />} />
-            <Route exact path="/productList" element={<ProductList />} />
+            <Route exact path="/productList/:id" element={<ProductList />} />
             <Route exact path="/autoSearch" element={<AutoSearch />} />
             <Route exact path="/privacy" element={<Privacy />} />
             <Route exact path="/work" element={<Work />} />

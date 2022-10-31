@@ -125,3 +125,45 @@ h3 {
 
 @media screen and (min-width: 700px) {
 }
+
+
+
+/* rohit css 29/10/2022 */
+.planet-img {
+  width: 90px;
+  float: left;
+}
+.planet-img img {
+  width: 100%;
+}
+.planet-1 {
+    text-align: left;
+    padding: 16px;
+    width: 100%;
+    display: inline-block;
+    background: #fff;
+    border-radius: 7px;
+    box-shadow: rgb(149 157 165 / 20%) 0px 8px 24px
+}
+.planet-text h4 span {
+  float: right;
+}
+.planet-box {
+  padding: 70px 0px;
+}
+.planet-text {
+  width: 72%;
+  float: left;
+  margin-left: 10px;
+  margin-top: 15px;
+}
+.planet-text p {
+  color: #5F56C6;
+  font-size: 20px;
+  font-weight: 600;
+}
+.planet-text h4 {
+  color: #000;
+  font-size: 22px;
+  font-weight: 600;
+}

@@ -15,6 +15,16 @@ import winthree from "../../images/winthree.png";
 import winfour from "../../images/winfour.png";
 import winfive from "../../images/winfive.png";
 import winsix from "../../images/winsix.png";
+import itone from "../../images/it-1.png";
+import ittwo from "../../images/it-2.png";
+import itthree from "../../images/it-3.png";
+import mars from "../../images/mars.png";
+import jupiter from "../../images/jupiter.png";
+import saterns from "../../images/saterns.png";
+// import saterns from "../../images/saterns.png";
+import uranus from "../../images/uranus.png";
+import naptune from "../../images/naptune.png";
+import earth from "../../images/earth.png";
 
 import { FaBook, FaThumbsUp, FaInfinity, FaChartBar } from "react-icons/fa";
 
@@ -134,6 +144,140 @@ function LeaderBoard() {
                 </Row>
               </Col>
             </Row>
+
+            {/* rohit section start */}
+            <div className="planet-box">
+              <h3 class="Pointtext">Planet Position</h3>
+              <Row>
+                <Col lg="4" md="4">
+                  <div className="planet-1">
+                    <div className="planet-img">
+                      <img src={itthree} alt="" />
+                    </div>
+                    <div className="planet-text">
+                      <h4>
+                        Sun
+                        <span>$10</span>
+                      </h4>
+                      <p>0 -500</p>
+                    </div>
+                  </div>
+                </Col>
+                <Col lg="4" md="4">
+                  <div className="planet-1">
+                    <div className="planet-img">
+                      <img src={ittwo} alt="" />
+                    </div>
+                    <div className="planet-text">
+                      <h4>
+                        Mercury
+                        <span>$15</span>
+                      </h4>
+                      <p>500 - 1000</p>
+                    </div>
+                  </div>
+                </Col>
+                <Col lg="4" md="4">
+                  <div className="planet-1">
+                    <div className="planet-img">
+                      <img src={itone} alt="" />
+                    </div>
+                    <div className="planet-text">
+                      <h4>
+                        Venus
+                        <span>$18</span>
+                      </h4>
+                      <p>1000- 2000</p>
+                    </div>
+                  </div>
+                </Col>
+                <Col lg="4" md="4">
+                  <div className="planet-1">
+                    <div className="planet-img">
+                      <img src={mars} alt="" />
+                    </div>
+                    <div className="planet-text">
+                      <h4>
+                        Mars
+                        <span>$20</span>
+                      </h4>
+                      <p>2000 - 5000</p>
+                    </div>
+                  </div>
+                </Col>
+                <Col lg="4" md="4">
+                  <div className="planet-1">
+                    <div className="planet-img">
+                      <img src={jupiter} alt="" />
+                    </div>
+                    <div className="planet-text">
+                      <h4>
+                        Jupiter
+                        <span>$25</span>
+                      </h4>
+                      <p>5000 - 7500</p>
+                    </div>
+                  </div>
+                </Col>
+                <Col lg="4" md="4">
+                  <div className="planet-1">
+                    <div className="planet-img">
+                      <img src={saterns} alt="" />
+                    </div>
+                    <div className="planet-text">
+                      <h4>
+                        Saturn
+                        <span>$40</span>
+                      </h4>
+                      <p>7500 - 10000</p>
+                    </div>
+                  </div>
+                </Col>
+                <Col lg="4" md="4">
+                  <div className="planet-1">
+                    <div className="planet-img">
+                      <img src={uranus} alt="" />
+                    </div>
+                    <div className="planet-text">
+                      <h4>
+                        Uranus
+                        <span>$50</span>
+                      </h4>
+                      <p>10000- 20000</p>
+                    </div>
+                  </div>
+                </Col>
+                <Col lg="4" md="4">
+                  <div className="planet-1">
+                    <div className="planet-img">
+                      <img src={naptune} alt="" />
+                    </div>
+                    <div className="planet-text">
+                      <h4>
+                        Neptune
+                        <span>$100</span>
+                      </h4>
+                      <p>20000-50000</p>
+                    </div>
+                  </div>
+                </Col>
+                <Col lg="4" md="4">
+                  <div className="planet-1">
+                    <div className="planet-img">
+                      <img src={earth} alt="" />
+                    </div>
+                    <div className="planet-text">
+                      <h4>
+                        Earth
+                        <span>$1000</span>
+                      </h4>
+                      <p>50000+</p>
+                    </div>
+                  </div>
+                </Col>
+              </Row>
+            </div>
+            {/* rohit section start */}
 
             <Row className="mt-5 mb-4 " style={{ textAlign: "left" }}>
               <h2 ClassName="mb-3 karmacur">Karma - Current Month</h2>
@@ -358,7 +502,7 @@ function LeaderBoard() {
             <Col className="maincol">
               <Row>
                 <div className="maindiv">
-                  <img src={one} alt="img" height={70} width={70} />
+                  <img src={saterns} alt="img" height={80} width={80} />
                 </div>
 
                 <div className="maindiv1">
@@ -394,7 +538,7 @@ function LeaderBoard() {
             <Col className="maincol">
               <Row>
                 <div className="maindiv">
-                  <img src={two} alt="img" height={70} width={70} />
+                  <img src={itthree} alt="img" height={80} width={80} />
                 </div>
 
                 <div className="maindiv1">
@@ -428,7 +572,7 @@ function LeaderBoard() {
             <Col className="maincol">
               <Row>
                 <div className="maindiv">
-                  <img src={three} alt="img" height={70} width={70} />
+                  <img src={uranus} alt="img" height={80} width={80} />
                 </div>
 
                 <div className="maindiv1">
@@ -462,7 +606,7 @@ function LeaderBoard() {
             <Col className="maincol">
               <Row>
                 <div className="maindiv">
-                  <img src={four} alt="img" height={80} width={80} />
+                  <img src={itone} alt="img" height={70} width={70} />
                 </div>
 
                 <div className="maindiv1">
@@ -496,7 +640,7 @@ function LeaderBoard() {
             <Col className="maincol">
               <Row>
                 <div className="maindiv">
-                  <img src={five} alt="img" height={80} width={80} />
+                  <img src={earth} alt="img" height={70} width={70} />
                 </div>
 
                 <div className="maindiv1">
@@ -530,7 +674,7 @@ function LeaderBoard() {
             <Col className="maincol">
               <Row>
                 <div className="maindiv">
-                  <img src={six} alt="img" height={80} width={80} />
+                  <img src={jupiter} alt="img" height={70} width={70} />
                 </div>
 
                 <div className="maindiv1">

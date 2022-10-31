@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
+import axios from "axios";
+
 import {
   //Alert,
   Container,
@@ -14,19 +16,75 @@ import { FaSearchLocation, FaBlogger } from "react-icons/fa";
 import { BsFillTelephoneFill } from "react-icons/bs";
 import "../../css/Contact.css";
 import woman from "../../images/woman.png";
+import swal from "sweetalert";
 
 function ContactUs() {
+  const [name, setName] = useState("");
+  const [mobile, setMobile] = useState("");
+  const [email, setEmail] = useState("");
+  const [mesg, setMesg] = useState("");
+  const [error, setError] = useState(null);
+
+  const userid = localStorage.getItem("userId");
+
+  const contactsubmit = (e) => {
+    e.preventDefault();
+    console.log(name, mobile, email, mesg);
+    const userid = localStorage.getItem("userId");
+    debugger;
+    if (
+      name == "" ||
+      name.length < 4 ||
+      mobile == "" ||
+      mobile.length < 11 ||
+      email == "" ||
+      email.length < 10 ||
+      mesg == "" ||
+      mesg.length < 10
+    ) {
+      swal("Please Enter details Correctly");
+    } else {
+      axios
+        .post(`http://43.205.82.226:9000/user/add_contactus`, {
+          name: name,
+          mobile: mobile,
+          email: email,
+          msg: mesg,
+          userid: userid,
+        })
+        .then((response) => {
+          console.log("data", response.data);
+          if (response.data.message === "success");
+          {
+            swal("Your Details are Submitted Successfully");
+          }
+          setEmail("");
+          setMesg("");
+          setName("");
+          setMobile("");
+        })
+        .catch((error) => {
+          console.log(error.response.data);
+        });
+    }
+  };
+
   return (
     <>
       <Row>
-         <Col className="mt-3 " lg="5">
-           <Row className="mx-2 my-1">
-            <img src={woman} alt="image" />
+        <Col className="mt-3 " lg="5">
+          <Row className="mx-2 my-1">
+            <img
+              src={woman}
+              alt="image"
+              height={440}
+              style={{ borderRadius: "10px" }}
+            />
           </Row>
-         </Col>
+        </Col>
 
-          <Col lg="7">
-           <Container>
+        <Col lg="7">
+          <Container>
             <Row className="mb-5 mt-5">
               <h2 className="lmessage ">
                 <b> Leave a Message</b>
@@ -38,54 +96,76 @@ function ContactUs() {
                 <Row>
                   <Col md={4}>
                     <FormGroup>
-                      <Label for="Name">Name</Label>
+                      <Label for="Name">
+                        Name <span style={{ color: "red" }}>*</span>
+                      </Label>
                       <Input
                         id="Name"
                         name="Name"
+                        value={name}
                         placeholder="Enter Name here"
                         type="text"
+                        onChange={(e) => setName(e.target.value)}
                       />
+                      {error && <h6 style={{ color: "red" }}>{error}</h6>}
                     </FormGroup>
                   </Col>
 
                   <Col md={4}>
                     <FormGroup>
-                      <Label for="Email">Email-ID</Label>
+                      <Label for="Email">
+                        Email-ID <span style={{ color: "red" }}>*</span>
+                      </Label>
                       <Input
                         id="Emailid"
                         name="EmailId"
+                        value={email}
                         placeholder="Enter Your Mail here"
-                        type="Email"
+                        type="email"
+                        onChange={(e) => setEmail(e.target.value)}
                       />
+                      {error && <h6 style={{ color: "red" }}>{error}</h6>}
                     </FormGroup>
                   </Col>
                   <Col md={4}>
                     <FormGroup>
-                      <Label for="Subject">Mobile No.</Label>
+                      <Label for="Subject">
+                        Mobile No. <span style={{ color: "red" }}>*</span>
+                      </Label>
                       <Input
                         id="Subject"
                         name="Subject"
+                        value={mobile}
                         placeholder="Enter Your Mobile No."
                         type="text"
+                        onChange={(e) => setMobile(e.target.value)}
                       />
                     </FormGroup>
                   </Col>
                 </Row>
                 <Row>
                   <Label style={{ font: "GT Walsheim Pro" }}>
-                    Type Your Message Here
+                    Type Your Message Here{" "}
+                    <span style={{ color: "red" }}>*</span>
                   </Label>
                   <h5>
                     <textarea
                       type="text"
                       style={{ background: "white" }}
                       className="form-control"
+                      value={mesg}
                       placeholder="Enter your message here"
+                      onChange={(e) => setMesg(e.target.value)}
                     />
+                    {error && <h6 style={{ color: "red" }}>{error}</h6>}
                   </h5>
                 </Row>
                 <div className=" d-flex justify-content-center ">
-                  <Button className="mt-3" style={{ justifyContent: "center" }}>
+                  <Button
+                    onClick={contactsubmit}
+                    className="mt-3"
+                    style={{ justifyContent: "center" }}
+                  >
                     <b>Leave a message</b>
                   </Button>
                 </div>
