@@ -5,6 +5,8 @@ import swal from "sweetalert";
 import { Link, NavLink } from "react-router-dom";
 import { BsPlay } from "react-icons/bs";
 import has1 from "../../images/has1.png";
+import axiosConfig from "../axiosConfig";
+
 import business from "../../images/business.png";
 import newsletter from "../../images/newsletter.png";
 
@@ -35,13 +37,14 @@ function Hastag() {
   const [categry, setCategry] = useState([]);
   useEffect(() => {
     allcategory();
+    featuredContent();
   }, []);
   const allcategory = () => {
     axios
       .get(`http://3.7.173.138:9000/admin/getallCategory`)
       .then((response) => {
         setCategry(response.data.data);
-        console.log(response.data.data);
+        // console.log(response.data.data);
       })
       .catch((error) => {
         console.log(error.response.data.data);
@@ -86,6 +89,31 @@ function Hastag() {
     }
     setEmail(event.target.value);
   };
+
+  // featured content api integration
+  const [feature, setFeature] = useState([]);
+  const featuredContent = () => {
+    axiosConfig
+      .get(`/user/get_featured_cnt`)
+      .then((res) => {
+        setFeature(res.data.data);
+
+        console.log(feature);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+  // news letter api for video
+  const [newslettervid, setNewslettervid] = useState([]);
+  axiosConfig
+    .get(`/user/getVideo`)
+    .then((res) => {
+      setNewslettervid(res.data.data);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 
   const [isOpen, setOpen] = useState(false);
   return (
@@ -271,7 +299,41 @@ function Hastag() {
           onSwiper={(swiper) => console.log(swiper)}
           onSlideChange={() => console.log("slide change")}
         >
-          <SwiperSlide>
+          {/* map from here to swiper slider */}
+          {feature?.map((features) => (
+            <SwiperSlide key={features?._id}>
+              <div
+                style={{ backgroundImage: `url(${features.thumbnail_img})` }}
+                className="ty-6"
+              >
+                <div className="ty-5">
+                  <Nav.Link as={NavLink} className="navbar-link">
+                    <div className="ty-4">
+                      <BsPlay
+                        className="bsplaybutton"
+                        size={75}
+                        style={{ backgroundColor: "white" }}
+                        type="submit"
+                        onClick={() => setOpen(true)}
+                      />
+                    </div>
+
+                    <ModalVideo
+                      style={{ borderRadius: "12px" }}
+                      channel="youtube"
+                      autoplay
+                      enablejsapi="1"
+                      isOpen={isOpen}
+                      videoId={features.video_link}
+                      onClose={() => setOpen(false)}
+                    />
+                  </Nav.Link>
+                </div>
+              </div>
+            </SwiperSlide>
+          ))}
+
+          {/* <SwiperSlide>
             <div className="ty-6">
               <div className="ty-5">
                 <Nav.Link as={NavLink} className="navbar-link">
@@ -426,33 +488,7 @@ function Hastag() {
                 </Nav.Link>
               </div>
             </div>
-          </SwiperSlide>
-          <SwiperSlide>
-            <div className="ty-6">
-              <div className="ty-5">
-                <Nav.Link as={NavLink} className="navbar-link">
-                  <div className="ty-4">
-                    <BsPlay
-                      className="bsplaybutton"
-                      size={75}
-                      style={{ backgroundColor: "white" }}
-                      type="submit"
-                      onClick={() => setOpen(true)}
-                    />
-                  </div>
-
-                  <ModalVideo
-                    style={{ borderRadius: "12px" }}
-                    channel="youtube"
-                    autoplay
-                    isOpen={isOpen}
-                    videoId="L61p2uyiMSo"
-                    onClose={() => setOpen(false)}
-                  />
-                </Nav.Link>
-              </div>
-            </div>
-          </SwiperSlide>
+          </SwiperSlide> */}
         </Swiper>
       </Container>
       <div className="container">
@@ -632,7 +668,7 @@ function Hastag() {
                             type="submit"
                             disabled={!performValidation()}
                             onClick={handleSubmit}
-                            className=" d-flex subscribebtn col-md-4"
+                            className=" d-flex justify-content-center subscribebtn col-md-4"
                           >
                             Subscribe
                           </Button>
@@ -645,7 +681,7 @@ function Hastag() {
                             onClick={() => {
                               swal("Please Login to Subscribe");
                             }}
-                            className="d-flex subscribebtn col-md-4"
+                            className="d-flex  justify-content-center subscribebtn col-md-4"
                           >
                             Subscribe
                           </Button>
@@ -658,33 +694,40 @@ function Hastag() {
             </Container>
           </div>
           <div className="  col-lg-6 col-md-6 col-sm-12">
-            <Col className="container">
-              <div className="ty-3">
-                <div className="ty-2">
-                  <Nav.Link as={NavLink} className="navbar-link">
-                    <div className="ty-1">
-                      <BsPlay
-                        className="bsplaybutton"
-                        size={75}
-                        style={{ backgroundColor: "white" }}
-                        type="submit"
-                        onClick={() => setOpen(true)}
-                      />
-                    </div>
-                    <div className="modalvideo">
-                      <ModalVideo
-                        style={{ borderRadius: "12px" }}
-                        channel="youtube"
-                        autoplay
-                        isOpen={isOpen}
-                        videoId="L61p2uyiMSo"
-                        onClose={() => setOpen(false)}
-                      />
-                    </div>
-                  </Nav.Link>
+            {/* api integrate form here */}
+            {newslettervid?.map((video) => (
+              <Col className="container" key={video._id}>
+                <div
+                  style={{ backgroundImage: `url(${video})` }}
+                  className="ty-3"
+                >
+                  <div className="ty-2">
+                    <Nav.Link as={NavLink} className="navbar-link">
+                      <div className="ty-1">
+                        <BsPlay
+                          className="bsplaybutton"
+                          size={75}
+                          style={{ backgroundColor: "white" }}
+                          type="submit"
+                          onClick={() => setOpen(true)}
+                        />
+                      </div>
+                      <div className="modalvideo">
+                        <ModalVideo
+                          style={{ borderRadius: "12px" }}
+                          channel="youtube"
+                          autoplay
+                          isOpen={isOpen}
+                          videoId={video.videoid}
+                          // videoId="XT0FLZymGE8"
+                          onClose={() => setOpen(false)}
+                        />
+                      </div>
+                    </Nav.Link>
+                  </div>
                 </div>
-              </div>
-            </Col>
+              </Col>
+            ))}
           </div>
         </div>
       </div>

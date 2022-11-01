@@ -33,14 +33,17 @@ import backimg from "../../assets/images/backimg.png";
 
 function ProductList(args) {
   const [active, setActive] = useState(false);
-  const [value, setValue] = useState(0);
+  const [value, setValue] = useState();
   const toggle = () => setModal(!modal);
   const [modal, setModal] = useState(false);
   let Params = useParams();
 
   const [categry, setCategry] = useState([]);
   console.log("Params", Params);
+
   const clicked = () => {
+    console.log(categry);
+
     setActive(!active);
     console.log("you clicked it");
   };
