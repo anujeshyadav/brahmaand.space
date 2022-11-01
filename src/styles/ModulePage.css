@@ -17,23 +17,25 @@ img.imgBloglast {
   width: -webkit-fill-available;
 }
 button.subscribebtn.col-md-4.btn.btn-secondary {
-  padding: 13px 57px;
+  padding: 10px 42px;
   color: white;
   background-color: black;
   border-radius: 18px;
   margin-left: -1px;
-
-  margin: -3px -1px;
+  margin: 0px 0px;
 }
-.searchnew {
+.searchbara .searchnew {
   padding: 14px;
   border-color: -internal-light-dark(rgb(253, 253, 253), rgb(255, 255, 255));
   color: black;
+  box-shadow: rgb(100 100 111 / 20%) 0px 7px 29px 0px;
+
+  border: none;
   border-radius: 18px;
   display: flex;
   width: 97%;
   height: 62px;
-  background-color: white;
+  background-color: rgb(255, 255, 255);
 }
 
 button.viewall.btn.btn-secondary.btn-lg {
@@ -1066,14 +1068,17 @@ svg.bsplaybutton {
     font-size: 16px;
   }
   button.subscribebtn.col-md-4.btn.btn-secondary {
-    padding: 9px 10px;
-    margin-top: 11px;
+    padding: 8px 93px;
+    margin-top: 13px;
     color: white;
     background-color: black;
     border-radius: 18px;
     margin-left: -1px;
-    margin: 10px 0px;
-    font-size: 15px;
-    height: 40px;
+    margin: 14px 0px;
+    font-size: 18px;
+    height: 49px;
+    box-shadow: rgb(100 100 111 / 20%) 0px 7px 29px 0px;
+
+    border: none;
   }
 }

@@ -71,10 +71,10 @@ function Header() {
         <Hastag />
       </Container> */}
 
-      <Container>
-        <br />
-        <br />
-      </Container>
+      {/* <Container> */}
+      <br />
+      <br />
+      {/* </Container> */}
     </>
   );
 }
