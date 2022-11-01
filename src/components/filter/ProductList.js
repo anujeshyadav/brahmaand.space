@@ -52,7 +52,7 @@ function ProductList(args) {
 
   const allsearchproduct = () => {
     axios
-      .get(`http://43.205.82.226:9000/admin/listbysubcategory/${Params.id}`)
+      .get(`http://3.7.173.138:9000/admin/listbysubcategory/${Params.id}`)
       .then((response) => {
         setCategry(response.data.data);
         console.log("getallproduct", response.data);
@@ -64,7 +64,7 @@ function ProductList(args) {
   // const [subcatgry, setsubCatgry] = useState({});
   // const allsubcategory = () => {
   //   axios
-  //     .get(`http://43.205.82.226:9000/admin/getallSubCategory`)
+  //     .get(`http://3.7.173.138:9000/admin/getallSubCategory`)
   //     .then((response) => {
   //       setsubCatgry(response);
   //       console.log(subcatgry);

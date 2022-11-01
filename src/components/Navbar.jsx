@@ -108,7 +108,7 @@ function CustomNavbar() {
     // formData.append("createdAt", createdAt);
 
     axios
-      .post(`http://43.205.82.226:9000/user/addSub_resrc`, formData)
+      .post(`http://3.7.173.138:9000/user/addSub_resrc`, formData)
       .then((res) => {
         console.log(res.data.data);
         if (res.data.message === "success") {
@@ -135,7 +135,7 @@ function CustomNavbar() {
   const [allcatego, setAllcatego] = useState([]);
   const allcategory = () => {
     axios
-      .get(`http://43.205.82.226:9000/admin/getallCategory`)
+      .get(`http://3.7.173.138:9000/admin/getallCategory`)
 
       .then((response) => {
         setAllcatego(response.data.data);
@@ -162,7 +162,7 @@ function CustomNavbar() {
     // function allsubcategory() {
     axios
 
-      .get(`http://43.205.82.226:9000/admin/listbycategory/${params}`)
+      .get(`http://3.7.173.138:9000/admin/listbycategory/${params}`)
       .then((response) => {
         console.log(response.data.data);
         setSubctgry(response.data.data);
@@ -176,7 +176,7 @@ function CustomNavbar() {
   // const allsubcategory = () => {
   //   axios
 
-  //     .get(`http://43.205.82.226:9000/admin/listbycategory/${catgry}`)
+  //     .get(`http://3.7.173.138:9000/admin/listbycategory/${catgry}`)
   //     .then((response) => {
   //       console.log(response.data.data);
   //       setSubctgry(response.data.data);
@@ -189,7 +189,7 @@ function CustomNavbar() {
   // all year selection api
   const getYear = () => {
     axios
-      .get(`http://43.205.82.226:9000/user/allYear`)
+      .get(`http://3.7.173.138:9000/user/allYear`)
       .then((response) => {
         setRelyear(response.data.data);
         // console.log(response.data.data);
@@ -201,7 +201,7 @@ function CustomNavbar() {
 
   const getLanguage = () => {
     axios
-      .get(`http://43.205.82.226:9000/user/allLang`)
+      .get(`http://3.7.173.138:9000/user/allLang`)
       .then((response) => {
         setLngage(response.data.data);
         // console.log(response.data.data);

@@ -35,7 +35,7 @@ function Blog() {
 
   const reconmendedblog = () => {
     axios
-      .get(`http://43.205.82.226:9000/user/recomanded_Blog`)
+      .get(`http:/3.7.173.1386:9000/user/recomanded_Blog`)
 
       .then((response) => {
         setRecomblog(response.data.data);
@@ -48,7 +48,7 @@ function Blog() {
   const [popblog, setPop] = useState([]);
   const popularblog = () => {
     axios
-      .get(`http://43.205.82.226:9000/user/popularBlog`)
+      .get(`http://3.7.173.138:9000/user/popularBlog`)
 
       .then((response) => {
         setPop(response.data.data);

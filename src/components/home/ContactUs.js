@@ -45,7 +45,7 @@ function ContactUs() {
       swal("Please Enter details Correctly");
     } else {
       axios
-        .post(`http://43.205.82.226:9000/user/add_contactus`, {
+        .post(`http://3.7.173.138:9000/user/add_contactus`, {
           name: name,
           mobile: mobile,
           email: email,

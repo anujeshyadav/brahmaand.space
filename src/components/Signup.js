@@ -22,7 +22,7 @@ function Signup() {
     evt.preventDefault();
     console.log(username, email, password);
     axios
-      .post(`http://43.205.82.226:9000/user/signup`, {
+      .post(`http://3.7.173.138:9000/user/signup`, {
         username: username,
         email: email,
         password: password,

@@ -35,9 +35,9 @@ function AllSubCategory() {
   const allsubcategory = () => {
     axios
 
-      .get(`http://43.205.82.226:9000/admin/listbycategory/${Params.id}`)
+      .get(`http://3.7.173.138:9000/admin/listbycategory/${Params.id}`)
 
-      // .get(`http://43.205.82.226:9000/admin/getallSubCategory/${Params.id}`)
+      // .get(`http://3.7.173.138:9000/admin/getallSubCategory/${Params.id}`)
       .then((response) => {
         setsubCatgry(response.data.data);
         console.log(response.data.data);

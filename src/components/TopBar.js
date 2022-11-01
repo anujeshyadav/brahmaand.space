@@ -32,7 +32,7 @@ function TopBar() {
 
   useEffect(() => {
     axios
-      .get(`http://43.205.82.226:9000/user/getoneUser/${id}`, {
+      .get(`http://3.7.173.138:9000/user/getoneUser/${id}`, {
         username: username,
         display_name: display_name,
         abt_us: abt_us,
@@ -63,7 +63,7 @@ function TopBar() {
     formData.append("display_name", display_name);
     formData.append("abt_us", abt_us);
     axios
-      .post(`http://43.205.82.226:9000/user/updateProfile/${id}`, formData, {
+      .post(`http://3.7.173.138:9000/user/updateProfile/${id}`, formData, {
         header: { userId: await localStorage.getItem("userId") },
       })
       .then((response) => {

@@ -29,7 +29,7 @@ function UserPage({ direction, ...args }) {
 
   useEffect(() => {
     axios
-      .get(`http://43.205.82.226:9000/user/getoneUser/${id}`)
+      .get(`http://3.7.173.138:9000/user/getoneUser/${id}`)
       .then((response) => {
         // console.log("getdata", response.data.data);
         setUserData(response.data.data);

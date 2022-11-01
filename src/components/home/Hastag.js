@@ -38,7 +38,7 @@ function Hastag() {
   }, []);
   const allcategory = () => {
     axios
-      .get(`http://43.205.82.226:9000/admin/getallCategory`)
+      .get(`http://3.7.173.138:9000/admin/getallCategory`)
       .then((response) => {
         setCategry(response.data.data);
         console.log(response.data.data);
@@ -59,7 +59,7 @@ function Hastag() {
     const userid = localStorage.getItem("userid");
 
     axios
-      .post(`http://43.205.82.226:9000/user/add_news_ltr`, {
+      .post(`http://3.7.173.138:9000/user/add_news_ltr`, {
         email: email,
         userid: userid,
       })
