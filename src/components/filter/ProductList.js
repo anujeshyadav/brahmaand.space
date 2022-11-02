@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Heart from "react-heart";
-
+import Pagination from "react-bootstrap/Pagination";
 //import ReactDOM from "react-dom";
 import { Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 import "../../styles/ModulePage.css";
@@ -1488,7 +1488,24 @@ function ProductList(args) {
                       </div>
                     </Col>
                   </Row>
+                  {/* for pagination here */}
+                  <Pagination>
+                    <Pagination.First />
+                    <Pagination.Prev />
+                    <Pagination.Item>{1}</Pagination.Item>
+                    <Pagination.Ellipsis />
 
+                    <Pagination.Item>{10}</Pagination.Item>
+                    <Pagination.Item>{11}</Pagination.Item>
+                    <Pagination.Item active>{12}</Pagination.Item>
+                    <Pagination.Item>{13}</Pagination.Item>
+                    <Pagination.Item disabled>{14}</Pagination.Item>
+
+                    <Pagination.Ellipsis />
+                    <Pagination.Item>{20}</Pagination.Item>
+                    <Pagination.Next />
+                    <Pagination.Last />
+                  </Pagination>
                   <div className="serach-product">
                     <h4>
                       Searching Product
@@ -1846,15 +1863,6 @@ function ProductList(args) {
                                         </div>
                                       </div>
                                     </ModalBody>
-
-                                    {/* <ModalFooter>
-          <Button color="primary" onClick={toggle}>
-            Do Something
-          </Button>{" "}
-          <Button color="secondary" onClick={toggle}>
-            Cancel
-          </Button>
-        </ModalFooter> */}
                                   </Modal>
                                 </Link>
                                 <span class="product-discount-label st-1">
@@ -1928,7 +1936,7 @@ function ProductList(args) {
                       </div>
 
                       <div className="search-st mb-3">
-                        <Row>
+                        {/* <Row>
                           <Col md="4">
                             <div class="product-image8 st-2">
                               <Link to="#">
@@ -1998,10 +2006,10 @@ function ProductList(args) {
                               </div>
                             </div>
                           </Col>
-                        </Row>
+                        </Row> */}
                       </div>
                       <div className="search-st mb-3">
-                        <Row>
+                        {/* <Row>
                           <Col md="4">
                             <div class="product-image8 st-2">
                               <Link to="#">
@@ -2333,15 +2341,6 @@ function ProductList(args) {
                                       </div>
                                     </div>
                                   </ModalBody>
-
-                                  {/* <ModalFooter>
-          <Button color="primary" onClick={toggle}>
-            Do Something
-          </Button>{" "}
-          <Button color="secondary" onClick={toggle}>
-            Cancel
-          </Button>
-        </ModalFooter> */}
                                 </Modal>
                               </Link>
                               <span class="product-discount-label st-1">
@@ -2408,10 +2407,11 @@ function ProductList(args) {
                               </div>
                             </div>
                           </Col>
-                        </Row>
+                        </Row> */}
                       </div>
                     </Row>
                   </div>
+                  {/* for pagination till here */}
                 </div>
               </Col>
             </Row>

@@ -59,7 +59,7 @@ function AllSubCategory() {
                 <Link to={`/productList/${value?._id}`}>
                   <img className="imgCol" src={value?.Subcat_img} alt="img" />
                   <div className="content-bt">
-                    <p>{value?.title}</p>
+                    <p style={{ color: "black" }}>{value?.title}</p>
                     <Button className="btlisting">12 Listing</Button>
                   </div>
                 </Link>

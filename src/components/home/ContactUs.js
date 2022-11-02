@@ -31,14 +31,14 @@ function ContactUs() {
     e.preventDefault();
     console.log(name, mobile, email, mesg);
     const userid = localStorage.getItem("userId");
-    debugger;
+
     if (
       name == "" ||
       name.length < 4 ||
       mobile == "" ||
-      mobile.length < 11 ||
+      mobile.length < 10 ||
       email == "" ||
-      email.length < 10 ||
+      email.length < 12 ||
       mesg == "" ||
       mesg.length < 10
     ) {
