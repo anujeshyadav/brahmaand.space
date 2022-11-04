@@ -6,6 +6,7 @@ import "../components/blog.css";
 import blog from "../images/2.png";
 import axios from "axios";
 import swal from "sweetalert";
+import ShowMore from "react-show-more";
 import { Container, Row, Col } from "reactstrap";
 import {
   Card,
@@ -35,7 +36,7 @@ function Blog() {
 
   const reconmendedblog = () => {
     axios
-      .get(`http:/3.7.173.1386:9000/user/recomanded_Blog`)
+      .get(`http://3.7.173.138:9000/user/recomanded_Blog`)
 
       .then((response) => {
         setRecomblog(response.data.data);
@@ -79,8 +80,10 @@ function Blog() {
 
       <Container>
         {/* this is working blog */}
-        <Row className=" m-2 ">
-          <h1 style={{ font: "GT Walsheim Pro" }}>Recommended Blogs</h1>
+        <Row className=" mt-5 ">
+          <h1 className="mb-5" style={{ font: "GT Walsheim Pro" }}>
+            Recommended Blogs
+          </h1>
         </Row>
 
         {/* api down here */}
@@ -93,18 +96,27 @@ function Blog() {
         >
           <Row>
             {recomblog?.map((value) => (
-              <SwiperSlide>
+              <SwiperSlide
+                className="mb-3 mt-4"
+                style={{
+                  boxShadow: "9px 13px 8px -11px",
+                  borderRadius: "10px",
+                }}
+              >
                 <Col lg="12">
                   <Row>
                     <Col lg="6">
                       <img
                         src={value.blogImg}
-                        className=""
-                        style={{ width: "280px", height: "280px" }}
+                        style={{
+                          borderRadius: "12px",
+                          width: "280px",
+                          height: "280px",
+                        }}
                       />
                     </Col>
                     <Col lg="6">
-                      <Row>
+                      <Row className="mt-3">
                         <b>
                           <h3>{value.blog_title}</h3>
                         </b>
@@ -114,7 +126,15 @@ function Blog() {
                         <Moment format="lll">{value.createdAt}</Moment>
                         {/* <Moment >{}</Moment> */}
                       </h6>
-                      <h6>{value.desc}</h6>
+                      <ShowMore
+                        lines={2}
+                        more="Show more"
+                        less="Show less"
+                        anchorClass=""
+                      >
+                        <h6>{value.desc}</h6>
+                      </ShowMore>
+
                       <h6>
                         posted by
                         <img
@@ -136,8 +156,9 @@ function Blog() {
           </Row>
         </Swiper>
       </Container>
-      <Container>
-        <Row className=" m-2 ">
+      <br></br>
+      <Container className=" mt-4 ">
+        <Row className="mb-4">
           <h1 style={{ font: "GT Walsheim Pro" }}>Popular Blogs</h1>
         </Row>
         <Row>
@@ -147,7 +168,7 @@ function Blog() {
                 <CardImg
                   style={{
                     width: "auto",
-                    height: "280px",
+                    height: "250px",
                   }}
                   src={value.blogImg}
                   className="photo"
@@ -163,7 +184,14 @@ function Blog() {
                   </CardSubtitle>
                   <br></br>
                   <CardText>
-                    <span>{value.desc}</span>
+                    <ShowMore
+                      lines={3}
+                      more="Show more"
+                      less="Show less"
+                      anchorClass=""
+                    >
+                      {value.desc}
+                    </ShowMore>
                   </CardText>
                   <CardText>
                     posted by

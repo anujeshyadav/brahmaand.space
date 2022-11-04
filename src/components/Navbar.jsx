@@ -158,7 +158,7 @@ function CustomNavbar() {
 
   useEffect(() => {
     const params = catgry;
-    console.log(params);
+
     // function allsubcategory() {
     axios
 

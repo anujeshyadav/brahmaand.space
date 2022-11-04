@@ -1,0 +1,38 @@
+.horizontal-slider {
+  /* height: 380px; */
+  width: 100%;
+}
+.example-track {
+  color: black;
+  position: relative;
+  background: #ddd;
+}
+.example-track.example-track-0 {
+  background: #00d4ff;
+}
+.example-mark {
+  width: 8px;
+  height: 8px;
+  border: 2px solid rgb(0, 0, 0);
+  background-color: rgb(255, 255, 255);
+  cursor: pointer;
+  border-radius: 50%;
+  vertical-align: middle;
+  margin: 0px calc(19px);
+  bottom: calc(50% - 6px);
+}
+.example-mark.example-mark-active {
+  border: 2px solid #00d4ff;
+  background-color: rgb(255, 255, 255);
+}
+.example-mark.example-mark-completed {
+  border: 2px solid rgb(255, 255, 255);
+  background-color: #00d4ff;
+}
+.example-track {
+  position: relative;
+  background: #ddd;
+}
+.example-track.example-track-0 {
+  background: #00d4ff;
+}

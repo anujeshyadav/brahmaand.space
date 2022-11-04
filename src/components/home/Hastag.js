@@ -248,14 +248,14 @@ function Hastag() {
         </Container>
       </Container>
       <Container className="d-flex justify-content-center ">
-        <Button className="viewall" size="lg">
-          <Link
-            to="/allcategory"
-            style={{ color: "white", textDecoration: "none" }}
-          >
+        <Link
+          to="/allcategory"
+          style={{ color: "white", textDecoration: "none" }}
+        >
+          <Button to="/allcategory" className="viewall" size="lg">
             VIEW All
-          </Link>
-        </Button>
+          </Button>
+        </Link>
       </Container>
       <Container>
         <h2 className="category2 mt-4 mb-3">Featured content</h2>
@@ -695,39 +695,41 @@ function Hastag() {
           </div>
           <div className="  col-lg-6 col-md-6 col-sm-12">
             {/* api integrate form here */}
-            {newslettervid?.map((video) => (
-              <Col className="container" key={video._id}>
-                <div
-                  style={{ backgroundImage: `url(${video})` }}
-                  className="ty-3"
-                >
-                  <div className="ty-2">
-                    <Nav.Link as={NavLink} className="navbar-link">
-                      <div className="ty-1">
-                        <BsPlay
-                          className="bsplaybutton"
-                          size={75}
-                          style={{ backgroundColor: "white" }}
-                          type="submit"
-                          onClick={() => setOpen(true)}
-                        />
-                      </div>
-                      <div className="modalvideo">
-                        <ModalVideo
-                          style={{ borderRadius: "12px" }}
-                          channel="youtube"
-                          autoplay
-                          isOpen={isOpen}
-                          videoId={video.videoid}
-                          // videoId="XT0FLZymGE8"
-                          onClose={() => setOpen(false)}
-                        />
-                      </div>
-                    </Nav.Link>
+            {newslettervid
+              ?.map((video) => (
+                <Col className="container" key={video._id}>
+                  <div
+                    style={{ backgroundImage: `url(${video})` }}
+                    className="ty-3"
+                  >
+                    <div className="ty-2">
+                      <Nav.Link as={NavLink} className="navbar-link">
+                        <div className="ty-1">
+                          <BsPlay
+                            className="bsplaybutton"
+                            size={75}
+                            style={{ backgroundColor: "white" }}
+                            type="submit"
+                            onClick={() => setOpen(true)}
+                          />
+                        </div>
+                        <div className="modalvideo">
+                          <ModalVideo
+                            style={{ borderRadius: "12px" }}
+                            channel="youtube"
+                            autoplay
+                            isOpen={isOpen}
+                            videoId={video.videoid}
+                            // videoId="XT0FLZymGE8"
+                            onClose={() => setOpen(false)}
+                          />
+                        </div>
+                      </Nav.Link>
+                    </div>
                   </div>
-                </div>
-              </Col>
-            ))}
+                </Col>
+              ))
+              .slice(0, 1)}
           </div>
         </div>
       </div>

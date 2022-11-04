@@ -34,6 +34,8 @@
     "react-router-sitemap-generator": "0.0.8",
     "react-scripts": "5.0.0",
     "react-search-autocomplete": "^8.0.0",
+    "react-show-more": "^2.0.0",
+    "react-slider": "^2.0.4",
     "react-swiper": "^0.1.5",
     "reactstrap": "^9.1.4",
     "sweetalert": "^2.1.2",

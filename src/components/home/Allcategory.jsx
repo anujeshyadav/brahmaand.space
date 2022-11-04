@@ -26,7 +26,7 @@ function Allcategory() {
       .get(`http://3.7.173.138:9000/admin/getallCategory`)
       .then((response) => {
         setCategry(response.data.data);
-        console.log(response.data.data);
+        // console.log(response.data.data);
       })
       .catch((error) => {
         console.log(error.response.data.data);

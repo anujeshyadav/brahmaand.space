@@ -25,7 +25,7 @@ import { Link, useParams } from "react-router-dom";
 
 function AllSubCategory() {
   let Params = useParams();
-
+  // console.log("Params", Params);
   const [subcatgry, setsubCatgry] = useState([]);
 
   useEffect(() => {
@@ -56,7 +56,7 @@ function AllSubCategory() {
           <Row className="m-3 mb-4">
             {subcatgry?.map((value) => (
               <Col lg="3" md="6" sm="12" className="" key={value?.category._id}>
-                <Link to={`/productList/${value?._id}`}>
+                <Link to={`/productList/${value._id}`}>
                   <img className="imgCol" src={value?.Subcat_img} alt="img" />
                   <div className="content-bt">
                     <p style={{ color: "black" }}>{value?.title}</p>
