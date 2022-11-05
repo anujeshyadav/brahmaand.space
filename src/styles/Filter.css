@@ -360,3 +360,7 @@ span.product-discount-label.st-1 {
 ul.d-flex.justify-content-right.float-right.pagination {
   float: right;
 }
+button.bt-st.reviewbutton.btn.btn-primary {
+  font-size: 18px;
+  padding: 7px 33px;
+}

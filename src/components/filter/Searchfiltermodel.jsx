@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-
+import StarsRating from "stars-rating";
+import { render } from "react-dom";
 import { Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 import "../../styles/ModulePage.css";
 import mdicon1 from "../../assets/icons/mdicon-1.png";
@@ -24,6 +25,7 @@ import "../../styles/Filter.css";
 import { FaHeart, FaStar } from "react-icons/fa";
 import Moment from "react-moment";
 import { CloudLightning } from "react-feather";
+import swal from "sweetalert";
 
 function Searchfiltermodel(...args) {
   const [Producdetail, setProductdetail] = useState({});
@@ -35,27 +37,43 @@ function Searchfiltermodel(...args) {
     settText(e.target.value);
   };
 
+  const [rating, setRating] = useState("");
+  const ratingChanged = (newRating) => {
+    setRating(newRating);
+    console.log(newRating);
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const userId = localStorage.getItem("userId");
-    console.log(userId);
+
     const selectedId = Producdetail._id;
-    console.log(selectedId);
+    console.log(selectedId, userId, text, rating);
 
     if (selectedId == Producdetail._id && userId !== "") {
       axios
         .post(`http://3.7.173.138:9000/user/add_blog_Comment`, {
-          // submitresrcId,
-          // userid,
-          // desc,
+          blogid: selectedId,
+          userid: userId,
+          desc: text,
+          rating: rating,
         })
-        .then()
-        .catch();
+        .then((res) => {
+          console.log(res.data);
+          if (res.data.message == "success") {
+            swal("your Review Submitted Successfully");
+          } else {
+            swal("Something went wrong review again ");
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     }
     console.log(text);
   };
   let Params = useParams();
-  console.log(text);
+
   useEffect(() => {
     individualdata();
   }, [Params]);
@@ -110,8 +128,8 @@ function Searchfiltermodel(...args) {
               <hr></hr>
             </div>
 
-            <div className="mid">
-              <h5>
+            <div className="mid mt-3 ">
+              <h5 className="mb-3">
                 Link :<span>{Producdetail?.link}</span>
               </h5>
               <div className="mid-content">
@@ -249,9 +267,15 @@ function Searchfiltermodel(...args) {
                 </Col>
                 <Col lg="8" key={Producdetail?._id}>
                   <div className="rat-right">
-                    <h4 className="mt-3">Write your review</h4>
+                    <h4 className="mt-3">Write your Review</h4>
                     <div className="">
-                      <img src={reviewstar} alt="" width="120px" />
+                      <StarsRating
+                        count={5}
+                        onChange={ratingChanged}
+                        size={40}
+                        color2={"#ffd700"}
+                      />
+
                       <form key={Producdetail?._id}>
                         <textarea
                           key={Producdetail?._id}
@@ -262,7 +286,10 @@ function Searchfiltermodel(...args) {
                           className="form-control st-taetarea"
                           placeholder=" Enter your Review if you want"
                         ></textarea>
-                        <Button onClick={handleSubmit} className="bt-st">
+                        <Button
+                          onClick={handleSubmit}
+                          className="bt-st reviewbutton"
+                        >
                           Send
                         </Button>
                       </form>
@@ -271,8 +298,8 @@ function Searchfiltermodel(...args) {
                 </Col>
               </Row>
             </div>
-            <hr></hr>
-            <div className="review-list">
+            <hr className="mt-3"></hr>
+            <div className="review-list mt-3">
               <h4>Reviews:</h4>
               <div className="re-list">
                 <div className="re-listimg">

@@ -38,6 +38,7 @@
     "react-slider": "^2.0.4",
     "react-swiper": "^0.1.5",
     "reactstrap": "^9.1.4",
+    "stars-rating": "^1.1.0",
     "sweetalert": "^2.1.2",
     "swiper": "^8.4.4",
     "web-vitals": "^2.1.4"
