@@ -357,3 +357,6 @@ span.product-discount-label.st-1 {
 .stt-main {
   margin-top: -180px;
 }
+ul.d-flex.justify-content-right.float-right.pagination {
+  float: right;
+}

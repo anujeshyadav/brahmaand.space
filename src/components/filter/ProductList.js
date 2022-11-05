@@ -1466,23 +1466,7 @@ function ProductList(args) {
                     </Col>
                   </Row>
                   {/* for pagination here */}
-                  {/* <Pagination>
-                    <Pagination.First />
-                    <Pagination.Prev />
-                    <Pagination.Item>{1}</Pagination.Item>
-                    <Pagination.Ellipsis />
 
-                    <Pagination.Item>{10}</Pagination.Item>
-                    <Pagination.Item>{11}</Pagination.Item>
-                    <Pagination.Item active>{12}</Pagination.Item>
-                    <Pagination.Item>{13}</Pagination.Item>
-                    <Pagination.Item disabled>{14}</Pagination.Item>
-
-                    <Pagination.Ellipsis />
-                    <Pagination.Item>{20}</Pagination.Item>
-                    <Pagination.Next />
-                    <Pagination.Last />
-                  </Pagination> */}
                   <div className="serach-product">
                     <h4>
                       Searching Product
@@ -1498,7 +1482,7 @@ function ProductList(args) {
                               <div class="product-image8 st-2">
                                 <Link
                                   to={`/searchfiltermodel/${categry?._id}`}
-                                  // key={categry?._id}
+                                  key={categry?._id}
                                   // onClick={(e) => handleSelection(categry?._id)}
                                   onClick={toggle}
                                 >
@@ -1942,9 +1926,7 @@ function ProductList(args) {
                                     <Link to="#" className="btt">
                                       {categry?.topics}
                                     </Link>
-                                    <Link to="#" className="btt">
-                                      {/* #study */}
-                                    </Link>
+                                    <Link to="#" className="btt"></Link>
                                   </li>
                                 </ul>
                                 <h3>{categry?.resTitle}</h3>
@@ -2069,6 +2051,20 @@ function ProductList(args) {
                         </Row> */}
                       </div>
                       <div className="search-st mb-3">
+                        <Pagination className="d-flex justify-content-right float-right">
+                          <Pagination.First />
+                          <Pagination.Prev />
+                          <Pagination.Item>{1}</Pagination.Item>
+                          <Pagination.Item>{2}</Pagination.Item>
+                          <Pagination.Ellipsis />
+
+                          <Pagination.Item active>{12}</Pagination.Item>
+
+                          <Pagination.Ellipsis />
+
+                          <Pagination.Next />
+                          <Pagination.Last />
+                        </Pagination>
                         {/* <Row>
                           <Col md="4">
                             <div class="product-image8 st-2">

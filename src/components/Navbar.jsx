@@ -35,7 +35,7 @@ function CustomNavbar() {
   // const [createdAt, setCreatedAt] = useState({});
   const [first, setfirst] = useState({});
   const [lngage, setLngage] = useState([]);
-  const [sellang, setSellang] = useState("");
+  const [sellang, setSellang] = useState([]);
   const [relyear, setRelyear] = useState([]);
   const [selectedyear, setSelectedyear] = useState("");
   const [tview, setTview] = useState({});
@@ -89,13 +89,21 @@ function CustomNavbar() {
       Opcomm,
       cat_img
     );
+    const langaone = sellang[0];
+    const langtwo = sellang[1];
+    const langthree = sellang[2];
+    console.log(langaone);
+    console.log(langtwo);
+    console.log(langthree);
     const formData = new FormData();
     formData.append("link", link);
     formData.append("category", catgry);
     formData.append("sub_category", subcatry);
     formData.append("type", type);
     formData.append("format", formate);
-    formData.append("language", sellang);
+    formData.append("language", langaone);
+    formData.append("language", langtwo);
+    formData.append("language", langthree);
     formData.append("topics", topic);
     formData.append("desc", Desc);
     formData.append("resTitle", Optitle);
