@@ -90,11 +90,8 @@ function CustomNavbar() {
       cat_img
     );
     const langaone = sellang[0];
-    const langtwo = sellang[1];
-    const langthree = sellang[2];
-    console.log(langaone);
-    console.log(langtwo);
-    console.log(langthree);
+    // const langtwo = sellang[1];
+
     const formData = new FormData();
     formData.append("link", link);
     formData.append("category", catgry);
@@ -102,8 +99,8 @@ function CustomNavbar() {
     formData.append("type", type);
     formData.append("format", formate);
     formData.append("language", langaone);
-    formData.append("language", langtwo);
-    formData.append("language", langthree);
+    //
+
     formData.append("topics", topic);
     formData.append("desc", Desc);
     formData.append("resTitle", Optitle);

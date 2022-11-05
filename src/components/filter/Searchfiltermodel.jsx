@@ -23,34 +23,49 @@ import { Link, useParams } from "react-router-dom";
 import "../../styles/Filter.css";
 import { FaHeart, FaStar } from "react-icons/fa";
 import Moment from "react-moment";
+import { CloudLightning } from "react-feather";
 
 function Searchfiltermodel(...args) {
   const [Producdetail, setProductdetail] = useState({});
 
   const [productdes, setProductdes] = useState({});
-  let Params = useParams();
+  const [text, settText] = useState("");
 
+  const onchangehandler = (e) => {
+    settText(e.target.value);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const userId = localStorage.getItem("userId");
+    console.log(userId);
+    const selectedId = Producdetail._id;
+    console.log(selectedId);
+
+    if (selectedId == Producdetail._id && userId !== "") {
+      axios
+        .post(`http://3.7.173.138:9000/user/add_blog_Comment`, {
+          // submitresrcId,
+          // userid,
+          // desc,
+        })
+        .then()
+        .catch();
+    }
+    console.log(text);
+  };
+  let Params = useParams();
+  console.log(text);
   useEffect(() => {
     individualdata();
   }, [Params]);
 
   const individualdata = () => {
     axios
-      .get(`http://43.205.82.226:9000/admin/getone_reslist/${Params.id}`)
-      //   .get(
-      //     `http://3.7.173.138:9000/admin/getone_reslist/63639ef6bca902a7968d51db`
-      //   )
-
+      .get(`http://3.7.173.138:9000/admin/getone_reslist/${Params.id}`)
       .then((res) => {
-        console.log(res.data.data._id);
-        if (
-          !res.data.data._id == "" ||
-          !res.data.data._id == null ||
-          !res.data.data._id == undefined
-        ) {
-          setProductdetail(res.data.data);
-          console.log(res.data.data);
-        }
+        setProductdetail(res.data.data);
+        console.log(res.data.data);
       })
       .catch((err) => {
         console.log(err);
@@ -59,266 +74,6 @@ function Searchfiltermodel(...args) {
 
   return (
     <>
-      {/* <ModalBody>
-        <div className="main-content">
-          <h2>{Producdetail?.desc}</h2>
-          <div className="top-icon">
-            <Link to="#">
-              <img src={mdicon1} alt="" />
-            </Link>
-            <Link to="#">
-              <img src={mdicon2} alt="" />
-            </Link>
-          </div>
-          <div className="tag-list">
-            <div className="tag-1">
-              <h5>
-                <span>
-                  <img src={icons} alt="" width="30px" />
-                </span>
-                Topic:
-              </h5>
-            </div>
-            <div className="tag-2">
-              {Producdetail?.topics.map((val) => (
-                <Link to="#">{val}</Link>
-              ))}
-            </div>
-          </div>
-
-          <hr></hr>
-        </div>
-
-        <div className="mid">
-          <h5>
-            Link :<span>{Producdetail?.link}</span>
-          </h5>
-          <div className="mid-content">
-            <Row>
-              <Col lg="6" md="6">
-                <div className="mid-1 mb-3">
-                  <div className="mid-1-a">
-                    <img src={createricon} alt="" />
-                  </div>
-                  <div className="mid-1-b">
-                    <p>Creator:</p>
-                    <h4>{Producdetail?.creatorName}</h4>
-                  </div>
-                </div>
-              </Col>
-              <Col lg="6" md="6">
-                <div className="mid-1 mb-3 ">
-                  <div className="mid-1-a">
-                    <img src={usericon} alt="" />
-                  </div>
-                  <div className="mid-1-b">
-                    <p>Submitted by:</p>
-                    <h4>{Producdetail?.creatorName}</h4>
-                  </div>
-                </div>
-              </Col>
-              <Col lg="3" md="3">
-                <div className="mid-1 mb-3 tt-2">
-                  <div className="mid-1-a">
-                    <img src={typeicon} alt="" width="35px" />
-                  </div>
-                  <div className="mid-1-b tt-1">
-                    <p>Type:</p>
-                    <Link to="#">{Producdetail?.type}</Link>
-                  </div>
-                </div>
-              </Col>
-              <Col lg="3" md="3">
-                <div className="mid-1 mb-3 tt-2">
-                  <div className="mid-1-a">
-                    <img src={formaticon} alt="" width="35px" />
-                  </div>
-                  <div className="mid-1-b tt-1">
-                    <p>Format:</p>
-                    <Link to="#">{Producdetail?.format}</Link>
-                  </div>
-                </div>
-              </Col>
-              <Col lg="3" md="3">
-                <div className="mid-1 mb-3 tt-2">
-                  <div className="mid-1-a">
-                    <img src={diffculty} alt="" width="35px" />
-                  </div>
-                  <div className="mid-1-b tt-1">
-                    <p>Category:</p>
-                    <Link to="#">{Producdetail?.category.title}</Link>
-                  </div>
-                </div>
-              </Col>
-
-              <Col lg="3" md="3">
-                <div className="mid-1 mb-3 tt-2">
-                  <div className="mid-1-a">
-                    <img src={yearicon} alt="" width="35px" />
-                  </div>
-                  <div className="mid-1-b tt-1">
-                    <p>Year:</p>
-                    <Link to="#">{Producdetail?.relYear[0].yrName}</Link>
-                  </div>
-                </div>
-              </Col>
-              <Col lg="3" md="3">
-                <div className="mid-1 mb-3 tt-2">
-                  <div className="mid-1-a">
-                    <img src={rating} alt="" width="35px" />
-                  </div>
-                  <div className="mid-1-b tt-1">
-                    <p>Ratings:</p>
-                    <Link to="#">(4.5)</Link>
-                  </div>
-                </div>
-              </Col>
-              <Col lg="4" md="4">
-                <div className="mid-1 mb-3 tt-2">
-                  <div className="mid-1-a">
-                    <img src={submiticon} alt="" width="35px" />
-                  </div>
-                  <div className="mid-1-b tt-1">
-                    <p>Submitted:</p>
-                    <Link to="#">
-                      <Moment format="ll">{Producdetail?.createdAt}</Moment>
-                    </Link>
-                  </div>
-                </div>
-              </Col>
-              <Col lg="4" md="4">
-                <div className="mid-1 mb-3 tt-2">
-                  <div className="mid-1-a">
-                    <img src={languageicon} alt="" width="35px" />
-                  </div>
-                  <div className="mid-1-b tt-1">
-                    <p>Language:</p>
-                    <Link className=" " to="#">
-                      {Producdetail?.language?.map((lang) => (
-                        <span>{lang?.language},</span>
-                      ))}
-                    </Link>
-                  </div>
-                </div>
-              </Col>
-            </Row>
-          </div>
-        </div>
-
-        <hr></hr>
-
-        <div className="description mt-3">
-          <h4>Description:</h4>
-          <p>{Producdetail?.desc}</p>
-        </div>
-
-        <hr></hr>
-        <div className="rating-box">
-          <Row>
-            <Col lg="4">
-              <div className="rat-left">
-                <h4>Customer Rating</h4>
-                <div className="">
-                  <img src={reviewstar} alt="" width="120px" />
-                  <span>4.7 of 5</span>
-                  <small className="mt-3">362 customers reviews</small>
-                  <img src={ratingstar} alt="" width="100%" />
-                </div>
-              </div>
-            </Col>
-            <Col lg="8">
-              <div className="rat-right">
-                <h4>Write your review</h4>
-                <div className="">
-                  <img src={reviewstar} alt="" width="120px" />
-                  <form>
-                    <textarea
-                      className="form-control st-taetarea"
-                      placeholder=""
-                    ></textarea>
-                    <Button className="bt-st">Send</Button>
-                  </form>
-                </div>
-              </div>
-            </Col>
-          </Row>
-        </div>
-        <hr></hr>
-        <div className="review-list">
-          <h4>Reviews:</h4>
-          <div className="re-list">
-            <div className="re-listimg">
-              <img src={usermdl} alt="" />
-            </div>
-            <div className="re-listcont">
-              <h5>
-                Jozef Kondratovich
-                <span>few secs ago</span>
-              </h5>
-              <div className="star-1">
-                <Link to="#">
-                  <FaStar className="star-1" />
-                </Link>
-                <Link to="#">
-                  <FaStar className="star-1" />
-                </Link>
-                <Link to="#">
-                  <FaStar className="star-1" />
-                </Link>
-                <Link to="#">
-                  <FaStar className="star-1" />
-                </Link>
-                <Link to="#">
-                  <FaStar className="star-1" />
-                </Link>
-              </div>
-            </div>
-            <div className="re-btext">
-              <p>
-                There're so many choices in their menu. I appreciated that it
-                also showed the calories. Good to know about that. Then I chose
-                the one with lower calories
-              </p>
-            </div>
-          </div>
-          <div className="re-list">
-            <div className="re-listimg">
-              <img src={usermdl} alt="" />
-            </div>
-            <div className="re-listcont">
-              <h5>
-                Jozef Kondratovich
-                <span>few secs ago</span>
-              </h5>
-              <div className="star-1">
-                <Link to="#">
-                  <FaStar className="star-1" />
-                </Link>
-                <Link to="#">
-                  <FaStar className="star-1" />
-                </Link>
-                <Link to="#">
-                  <FaStar className="star-1" />
-                </Link>
-                <Link to="#">
-                  <FaStar className="star-1" />
-                </Link>
-                <Link to="#">
-                  <FaStar className="star-1" />
-                </Link>
-              </div>
-            </div>
-            <div className="re-btext">
-              <p>
-                There're so many choices in their menu. I appreciated that it
-                also showed the calories. Good to know about that. Then I chose
-                the one with lower calories
-              </p>
-            </div>
-          </div>
-        </div>
-          </ModalBody> */}
-
       <div className="container">
         <div className="container">
           <ModalBody className="container mt-5  ">
@@ -342,16 +97,13 @@ function Searchfiltermodel(...args) {
                   </h5>
                 </div>
                 <div className="tag-2">
-                  <Link to="#">Android</Link>
-                  <Link to="#">clean architecture</Link>
-                  <Link to="#">multi-module</Link>
-                  <Link to="#">mvvm</Link>
-                  <Link to="#">use cases</Link>
-                  <Link to="#">solid</Link>
-                  <Link to="#">jetpack compose</Link>
-                  <Link to="#">kotlin</Link>
-                  <Link to="#">room</Link>
-                  <Link to="#">retrofit</Link>
+                  {Producdetail?.topics?.map((value, index) => {
+                    return (
+                      <>
+                        <Link key={index}>{value}</Link>
+                      </>
+                    );
+                  })}
                 </div>
               </div>
 
@@ -426,7 +178,9 @@ function Searchfiltermodel(...args) {
                       </div>
                       <div className="mid-1-b tt-1">
                         <p>Language:</p>
-                        <Link to="#">English</Link>
+                        {Producdetail?.language?.map((lang) => (
+                          <span>{lang?.language} </span>
+                        ))}
                       </div>
                     </div>
                   </Col>
@@ -437,7 +191,9 @@ function Searchfiltermodel(...args) {
                       </div>
                       <div className="mid-1-b tt-1">
                         <p>Year:</p>
-                        {/* <Link to="#">{Producdetail.relYear[0]?.yrName}</Link> */}
+                        {Producdetail?.relYear?.map((year) => (
+                          <Link>{year?.yrName}</Link>
+                        ))}
                       </div>
                     </div>
                   </Col>
@@ -491,17 +247,24 @@ function Searchfiltermodel(...args) {
                     </div>
                   </div>
                 </Col>
-                <Col lg="8">
+                <Col lg="8" key={Producdetail?._id}>
                   <div className="rat-right">
                     <h4 className="mt-3">Write your review</h4>
                     <div className="">
                       <img src={reviewstar} alt="" width="120px" />
-                      <form>
+                      <form key={Producdetail?._id}>
                         <textarea
+                          key={Producdetail?._id}
+                          // id="textarea"
+                          value={text}
+                          name="text"
+                          onChange={onchangehandler}
                           className="form-control st-taetarea"
-                          placeholder=""
+                          placeholder=" Enter your Review if you want"
                         ></textarea>
-                        <Button className="bt-st">Send</Button>
+                        <Button onClick={handleSubmit} className="bt-st">
+                          Send
+                        </Button>
                       </form>
                     </div>
                   </div>
