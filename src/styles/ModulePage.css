@@ -25,6 +25,7 @@ button.subscribebtn.col-md-4.btn.btn-secondary {
   margin: 0px 0px;
 }
 .searchbara .searchnew {
+  font-size: 16px;
   padding: 14px;
   border-color: -internal-light-dark(rgb(253, 253, 253), rgb(255, 255, 255));
   color: black;
