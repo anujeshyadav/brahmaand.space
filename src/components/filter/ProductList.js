@@ -1905,6 +1905,7 @@ function ProductList(args) {
                                             .post(`/user/add_like`, {
                                               submitresrcId: liked,
                                               userid: userId,
+                                              status: "like",
                                             })
                                             .then((response) => {
                                               console.log(response.data.data);

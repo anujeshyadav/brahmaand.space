@@ -543,7 +543,7 @@ function Hastag() {
                     Are you a Youtube content creator and want to <br></br>
                     promote your content and earn money.
                   </h3>
-                  <Link to="/">JOIN US !</Link>
+                  <Link to="/signup">JOIN US !</Link>
                 </div>
               </div>
               {/* <img className="imgCol3" src={youtubevideo} alt="img" /> */}

@@ -48,6 +48,9 @@ import Notification from "./components/Notification";
 // import PaginatedItems from "../src/components/PaginatedItems";
 // import PaginatedItems from "./../src/components/filter/PaginatedItems";
 import Blogdescription from "../src/components/Blogdescription";
+import DemoPaginate from "./components/DemoPaginate";
+import Pagination from "./components/Pagination";
+import Posts from "./components/Posts";
 
 import Layout from "./components/Layout";
 import LeaderBoard from "./components/home/LeaderBoard";
@@ -81,6 +84,9 @@ render(
             <Route exact path="/videoPosted" element={<VideoPosted />} />
             <Route exact path="/profileRouter" element={<ProfileRouter />} />
             <Route exact path="/Bookmark" element={<Bookmarks />} />
+            <Route exact path="/demopaginate" element={<DemoPaginate />} />
+            <Route exact path="/pagination" element={<Pagination />} />
+            <Route exact path="/posts" element={<Posts />} />
             {/* <Route exact path="/paginationitem" element={<PaginatedItems />} /> */}
             <Route
               exact
