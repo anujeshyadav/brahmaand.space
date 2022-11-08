@@ -37,7 +37,7 @@ import RecentProductList from "./RecentProductList";
 import backimg from "../../assets/images/backimg.png";
 import axiosConfig from "../axiosConfig";
 import Moment from "react-moment";
-import { CornerDownLeft } from "react-feather";
+import { CloudLightning, CornerDownLeft } from "react-feather";
 
 function ProductList(args) {
   const [active, setActive] = useState(false);
@@ -1538,14 +1538,7 @@ function ProductList(args) {
                                     width="100%"
                                     height={195}
                                   />
-                                  {/* <Modal
-                                    className="mdlg"
-                                    isOpen={modal}
-                                    toggle={toggle}
-                                    {...args}
-                                  >
-                                    <Searchfiltermodel />
-                                  </Modal> */}
+
                                   <Modal
                                     key={Producdetail?._Id}
                                     className="mdlg"
@@ -1906,13 +1899,15 @@ function ProductList(args) {
                                         } else {
                                           setliked(categry?._id);
                                           console.log(liked);
-                                          // setActive(!active);
+
+                                          // setActive(true);
                                           axiosConfig
                                             .post(`/user/add_like`, {
                                               submitresrcId: liked,
                                               userid: userId,
                                             })
                                             .then((response) => {
+                                              console.log(response.data.data);
                                               swal("you Liked it");
 
                                               console.log(
@@ -1921,13 +1916,18 @@ function ProductList(args) {
                                               );
                                             })
                                             .catch((error) => {
-                                              console.log(error.response);
+                                              console.log(error.response.data);
+                                              if (
+                                                error.response.data.message ===
+                                                "already exists"
+                                              ) {
+                                                swal("You Already Liked It ");
+                                              }
                                             });
                                         }
                                       }}
                                       animationTrigger="both"
                                       inactiveColor="blue"
-                                      activeColor="red"
                                       animationDuration={0.1}
                                       className="heartlike faregheart"
                                     />
@@ -2013,23 +2013,6 @@ function ProductList(args) {
                       </div>
 
                       <div className="search-st mb-3">
-                        <Pagination>
-                          <Pagination.First />
-                          <Pagination.Prev />
-                          <Pagination.Item>{1}</Pagination.Item>
-                          <Pagination.Ellipsis />
-
-                          <Pagination.Item>{10}</Pagination.Item>
-                          <Pagination.Item>{11}</Pagination.Item>
-                          <Pagination.Item active>{12}</Pagination.Item>
-                          <Pagination.Item>{13}</Pagination.Item>
-                          <Pagination.Item disabled>{14}</Pagination.Item>
-
-                          <Pagination.Ellipsis />
-                          <Pagination.Item>{20}</Pagination.Item>
-                          <Pagination.Next />
-                          <Pagination.Last />
-                        </Pagination>
                         {/* <Row>
                           <Col md="4">
                             <div class="product-image8 st-2">
