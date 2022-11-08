@@ -45,8 +45,8 @@ import Work from "./components/Work";
 import Allcategory from "./components/home/Allcategory";
 import AllSubCategory from "./components/home/AllSubCategory";
 import Notification from "./components/Notification";
+// import PaginatedItems from "./../src/components/filter/PaginatedItems";
 
-// Import Components
 import Layout from "./components/Layout";
 import LeaderBoard from "./components/home/LeaderBoard";
 // Import Context
@@ -56,7 +56,7 @@ import { Navbar } from "reactstrap";
 import Signup from "./components/Signup";
 import Login from "./components/Login.jsx";
 import Myaccount from "./components/Myaccount";
-import Searchfiltermodel from "./components/filter/Searchfiltermodel";
+// import Searchfiltermodel from "./components/filter/Searchfiltermodel";
 import FAQ from "./components/FAQ";
 
 const rootElement = document.getElementById("root");
@@ -79,11 +79,8 @@ render(
             <Route exact path="/videoPosted" element={<VideoPosted />} />
             <Route exact path="/profileRouter" element={<ProfileRouter />} />
             <Route exact path="/Bookmark" element={<Bookmarks />} />
-            <Route
-              exact
-              path="/searchfiltermodel/:id"
-              element={<Searchfiltermodel />}
-            />
+            {/* <Route exact path="/paginatedItems" element={<PaginatedItems />} /> */}
+
             <Route exact path="/faq" element={<FAQ />} />
             <Route exact path="/leaderBoard" element={<LeaderBoard />} />
             <Route exact path="/productList/:id" element={<ProductList />} />

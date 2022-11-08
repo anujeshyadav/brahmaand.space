@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Heart from "react-heart";
+import StarsRating from "stars-rating";
 import swal from "sweetalert";
-// import Moment from "react-moment";
+
 import Slider from "./Slider";
 import Pagination from "react-bootstrap/Pagination";
 //import ReactDOM from "react-dom";
@@ -36,6 +37,7 @@ import RecentProductList from "./RecentProductList";
 import backimg from "../../assets/images/backimg.png";
 import axiosConfig from "../axiosConfig";
 import Moment from "react-moment";
+import { CornerDownLeft } from "react-feather";
 
 function ProductList(args) {
   const [active, setActive] = useState(false);
@@ -48,51 +50,95 @@ function ProductList(args) {
   const [dislikeact, setDislikeact] = useState([]);
   let Params = useParams();
   const [Producdetail, setProductdetail] = useState({});
-  const [productdes, setProductdes] = useState({});
+  const [productdes, setProductdes] = useState("");
+  const [text, settText] = useState("");
+  const [getonecomment, setGetonecomment] = useState([]);
+  const onchangehandler = (e) => {
+    settText(e.target.value);
+  };
+  const [rating, setRating] = useState("");
+  const ratingChanged = (newRating) => {
+    setRating(newRating);
+    console.log(newRating);
+  };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const userId = localStorage.getItem("userId");
 
-  // const eachdetailpage = () => {};
-  // const handleSelection = (_id) => {
-  //   var selectedId = _id;
+    const selectedId = Producdetail._id;
+    console.log(selectedId, userId, text, rating);
 
-  //   console.log(selectedId);
-  //   if (selectedId === _id) {
-  //     setProductdes(selectedId);
-  //     toggle();
-  //     axios
-  //       // .get(`http://43.205.82.226:9000/admin/getone_reslist/${productdes}`)
-
-  //       .get(
-  //         `http://3.7.173.138:9000/admin/getone_reslist/63639ef6bca902a7968d51db`
-  //       )
-  //       .then((res) => {
-  //         console.log(res.data.data._id);
-  //         if (
-  //           !res.data.data._id == "" ||
-  //           !res.data.data._id == null ||
-  //           !res.data.data._id == undefined
-  //         ) {
-  //           setProductdetail(res.data.data);
-  //           console.log(res.data.data);
-  //         }
-  //       })
-  //       .catch((err) => {
-  //         console.log(err);
-  //       });
-  //   }
-  //   console.log(selectedId);
-  // };
+    if (selectedId == Producdetail._id && userId !== "") {
+      axios
+        .post(`http://3.7.173.138:9000/user/add_Comment`, {
+          submitresrcId: selectedId,
+          userid: userId,
+          comment: text,
+          rating: rating,
+        })
+        .then((res) => {
+          console.log(res.data);
+          if (res.data.message == "success") {
+            swal("your Review Submitted Successfully");
+          } else {
+            swal("Something went wrong review again ");
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+      settText("");
+      setRating("");
+    }
+    console.log(text);
+  };
+  const handleSelection = (_id) => {
+    var selectedId = _id;
+    console.log(selectedId);
+    if (selectedId === _id) {
+      setProductdes(selectedId);
+      axios
+        .get(`http://3.7.173.138:9000/admin/getone_reslist/${productdes}`)
+        .then((res) => {
+          console.log(res.data.data._id);
+          if (
+            res.data.data._id !== "" ||
+            res.data.data._id !== null ||
+            res.data.data._id !== undefined
+          ) {
+            setProductdetail(res.data.data);
+            console.log(res.data.data);
+            toggle();
+          }
+        })
+        .catch((err) => {
+          console.log(err.data.data);
+        });
+    }
+    console.log(selectedId);
+    // setGetonecomment(selectedId);
+    axios
+      .get(`http://3.7.173.138:9000/user/comment_list/${selectedId}`)
+      .then((res) => {
+        setGetonecomment(res.data.data);
+        console.log(res.data.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   useEffect(() => {
     allsearchproduct();
   }, [Params]);
 
   const [categry, setCategry] = useState([]);
+
   const allsearchproduct = () => {
     axios
       .get(`http://3.7.173.138:9000/admin/listbysubcategory/${Params.id}`)
       .then((response) => {
         setCategry(response.data.data);
-        // console.log("getallproductlist", response.data.data);
       })
       .catch((error) => {
         console.log(error.response.data);
@@ -1481,10 +1527,9 @@ function ProductList(args) {
                             <Col md="4">
                               <div class="product-image8 st-2">
                                 <Link
-                                  to={`/searchfiltermodel/${categry?._id}`}
                                   key={categry?._id}
-                                  // onClick={(e) => handleSelection(categry?._id)}
-                                  onClick={toggle}
+                                  onClick={() => handleSelection(categry?._id)}
+                                  // onClick={toggle}
                                 >
                                   <img
                                     style={{ borderRadius: "10px" }}
@@ -1493,15 +1538,15 @@ function ProductList(args) {
                                     width="100%"
                                     height={195}
                                   />
-                                  <Modal
+                                  {/* <Modal
                                     className="mdlg"
                                     isOpen={modal}
                                     toggle={toggle}
                                     {...args}
                                   >
                                     <Searchfiltermodel />
-                                  </Modal>
-                                  {/* <Modal
+                                  </Modal> */}
+                                  <Modal
                                     key={Producdetail?._Id}
                                     className="mdlg"
                                     isOpen={modal}
@@ -1533,9 +1578,11 @@ function ProductList(args) {
                                             </h5>
                                           </div>
                                           <div className="tag-2">
-                                            {Producdetail?.topics.map((val) => (
-                                              <Link to="#">{val}</Link>
-                                            ))}
+                                            {Producdetail?.topics?.map(
+                                              (val) => (
+                                                <Link to="#">{val}</Link>
+                                              )
+                                            )}
                                           </div>
                                         </div>
 
@@ -1543,7 +1590,7 @@ function ProductList(args) {
                                       </div>
 
                                       <div className="mid">
-                                        <h5>
+                                        <h5 className="mt-3">
                                           Link :
                                           <span>{Producdetail?.link}</span>
                                         </h5>
@@ -1623,10 +1670,10 @@ function ProductList(args) {
                                                 </div>
                                                 <div className="mid-1-b tt-1">
                                                   <p>Category:</p>
-                                                  <Link to="#">
+                                                  <Link>
                                                     {
                                                       Producdetail?.category
-                                                        .title
+                                                        ?.title
                                                     }
                                                   </Link>
                                                 </div>
@@ -1644,12 +1691,14 @@ function ProductList(args) {
                                                 </div>
                                                 <div className="mid-1-b tt-1">
                                                   <p>Year:</p>
-                                                  <Link to="#">
-                                                    {
-                                                      Producdetail?.relYear[0]
-                                                        .yrName
-                                                    }
-                                                  </Link>
+
+                                                  {Producdetail?.relYear?.map(
+                                                    (year) => (
+                                                      <Link>
+                                                        {year?.yrName}
+                                                      </Link>
+                                                    )
+                                                  )}
                                                 </div>
                                               </div>
                                             </Col>
@@ -1698,15 +1747,13 @@ function ProductList(args) {
                                                 </div>
                                                 <div className="mid-1-b tt-1">
                                                   <p>Language:</p>
-                                                  <Link className=" " to="#">
-                                                    {Producdetail?.language?.map(
-                                                      (lang) => (
-                                                        <span>
-                                                          {lang?.language},
-                                                        </span>
-                                                      )
-                                                    )}
-                                                  </Link>
+                                                  {Producdetail?.language?.map(
+                                                    (lang) => (
+                                                      <span>
+                                                        {lang?.language}{" "}
+                                                      </span>
+                                                    )
+                                                  )}
                                                 </div>
                                               </div>
                                             </Col>
@@ -1716,7 +1763,7 @@ function ProductList(args) {
 
                                       <hr></hr>
 
-                                      <div className="description mt-3">
+                                      <div className="description mt-3 mb-3">
                                         <h4>Description:</h4>
                                         <p>{Producdetail?.desc}</p>
                                       </div>
@@ -1725,7 +1772,7 @@ function ProductList(args) {
                                       <div className="rating-box">
                                         <Row>
                                           <Col lg="4">
-                                            <div className="rat-left">
+                                            <div className="rat-left mt-3">
                                               <h4>Customer Rating</h4>
                                               <div className="">
                                                 <img
@@ -1734,9 +1781,10 @@ function ProductList(args) {
                                                   width="120px"
                                                 />
                                                 <span>4.7 of 5</span>
-                                                <small className="mt-3">
+                                                <br></br>
+                                                <span className="mt-3">
                                                   362 customers reviews
-                                                </small>
+                                                </span>
                                                 <img
                                                   src={ratingstar}
                                                   alt=""
@@ -1745,21 +1793,33 @@ function ProductList(args) {
                                               </div>
                                             </div>
                                           </Col>
-                                          <Col lg="8">
+                                          <Col lg="8" key={Producdetail?._id}>
                                             <div className="rat-right">
-                                              <h4>Write your review</h4>
+                                              <h4 className="mt-3">
+                                                Write your Review
+                                              </h4>
                                               <div className="">
-                                                <img
-                                                  src={reviewstar}
-                                                  alt=""
-                                                  width="120px"
+                                                <StarsRating
+                                                  count={5}
+                                                  onChange={ratingChanged}
+                                                  size={40}
+                                                  color2={"#ffd700"}
                                                 />
-                                                <form>
+
+                                                <form key={Producdetail?._id}>
                                                   <textarea
+                                                    key={Producdetail?._id}
+                                                    // id="textarea"
+                                                    value={text}
+                                                    name="text"
+                                                    onChange={onchangehandler}
                                                     className="form-control st-taetarea"
-                                                    placeholder=""
+                                                    placeholder=" Enter your Review if you want"
                                                   ></textarea>
-                                                  <Button className="bt-st">
+                                                  <Button
+                                                    onClick={handleSubmit}
+                                                    className="bt-st reviewbutton mb-3"
+                                                  >
                                                     Send
                                                   </Button>
                                                 </form>
@@ -1769,85 +1829,60 @@ function ProductList(args) {
                                         </Row>
                                       </div>
                                       <hr></hr>
-                                      <div className="review-list">
+                                      <div className="review-list mt-3  ">
                                         <h4>Reviews:</h4>
-                                        <div className="re-list">
-                                          <div className="re-listimg">
-                                            <img src={usermdl} alt="" />
-                                          </div>
-                                          <div className="re-listcont">
-                                            <h5>
-                                              Jozef Kondratovich
-                                              <span>few secs ago</span>
-                                            </h5>
-                                            <div className="star-1">
-                                              <Link to="#">
-                                                <FaStar className="star-1" />
-                                              </Link>
-                                              <Link to="#">
-                                                <FaStar className="star-1" />
-                                              </Link>
-                                              <Link to="#">
-                                                <FaStar className="star-1" />
-                                              </Link>
-                                              <Link to="#">
-                                                <FaStar className="star-1" />
-                                              </Link>
-                                              <Link to="#">
-                                                <FaStar className="star-1" />
-                                              </Link>
+                                        {getonecomment?.map((value) => (
+                                          <div className="re-list">
+                                            <div className="re-listimg">
+                                              <img
+                                                src={value?.userid.profileImg}
+                                                alt="UserImage"
+                                              />
+                                            </div>
+                                            <div className="re-listcont">
+                                              <h5>
+                                                {value.userid.username}
+                                                <span>
+                                                  <Moment format="ll">
+                                                    {value?.createdAt}
+                                                  </Moment>
+                                                </span>
+                                              </h5>
+                                              <div className="star-1">
+                                                <StarsRating
+                                                  count={5}
+                                                  disableFillHover={false}
+                                                  onChange={ratingChanged}
+                                                  size={25}
+                                                  allowHover={false}
+                                                  readonly={true}
+                                                  color2={"#ffd700"}
+                                                />
+                                                {/* <Link to="#">
+                                                  <FaStar className="star-1" />
+                                                </Link>
+                                                <Link to="#">
+                                                  <FaStar className="star-1" />
+                                                </Link>
+                                                <Link to="#">
+                                                  <FaStar className="star-1" />
+                                                </Link>
+                                                <Link to="#">
+                                                  <FaStar className="star-1" />
+                                                </Link>
+                                                <Link to="#">
+                                                  <FaStar className="star-1" />
+                                                </Link> */}
+                                              </div>
+                                            </div>
+                                            <div className="re-btext mt-3">
+                                              <p>{value?.comment}</p>
                                             </div>
                                           </div>
-                                          <div className="re-btext">
-                                            <p>
-                                              There're so many choices in their
-                                              menu. I appreciated that it also
-                                              showed the calories. Good to know
-                                              about that. Then I chose the one
-                                              with lower calories
-                                            </p>
-                                          </div>
-                                        </div>
-                                        <div className="re-list">
-                                          <div className="re-listimg">
-                                            <img src={usermdl} alt="" />
-                                          </div>
-                                          <div className="re-listcont">
-                                            <h5>
-                                              Jozef Kondratovich
-                                              <span>few secs ago</span>
-                                            </h5>
-                                            <div className="star-1">
-                                              <Link to="#">
-                                                <FaStar className="star-1" />
-                                              </Link>
-                                              <Link to="#">
-                                                <FaStar className="star-1" />
-                                              </Link>
-                                              <Link to="#">
-                                                <FaStar className="star-1" />
-                                              </Link>
-                                              <Link to="#">
-                                                <FaStar className="star-1" />
-                                              </Link>
-                                              <Link to="#">
-                                                <FaStar className="star-1" />
-                                              </Link>
-                                            </div>
-                                          </div>
-                                          <div className="re-btext">
-                                            <p>
-                                              There're so many choices in their
-                                              menu. I appreciated that it also
-                                              showed the calories. Good to know
-                                              about that. Then I chose the one
-                                              with lower calories
-                                            </p>
-                                          </div>
-                                        </div>
+                                        ))}
                                       </div>
                                     </ModalBody>
-                                  </Modal> */}
+                                  </Modal>
                                 </Link>
                                 <span class="product-discount-label st-1">
                                   {localStorage.getItem("userId") !== "" &&
@@ -1978,6 +2013,23 @@ function ProductList(args) {
                       </div>
 
                       <div className="search-st mb-3">
+                        <Pagination>
+                          <Pagination.First />
+                          <Pagination.Prev />
+                          <Pagination.Item>{1}</Pagination.Item>
+                          <Pagination.Ellipsis />
+
+                          <Pagination.Item>{10}</Pagination.Item>
+                          <Pagination.Item>{11}</Pagination.Item>
+                          <Pagination.Item active>{12}</Pagination.Item>
+                          <Pagination.Item>{13}</Pagination.Item>
+                          <Pagination.Item disabled>{14}</Pagination.Item>
+
+                          <Pagination.Ellipsis />
+                          <Pagination.Item>{20}</Pagination.Item>
+                          <Pagination.Next />
+                          <Pagination.Last />
+                        </Pagination>
                         {/* <Row>
                           <Col md="4">
                             <div class="product-image8 st-2">
