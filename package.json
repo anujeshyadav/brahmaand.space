@@ -29,6 +29,7 @@
     "react-multi-select-component": "^4.3.4",
     "react-multilevel-dropdown": "^3.0.3",
     "react-multiselect-checkboxes": "^0.1.1",
+    "react-paginate": "^8.1.4",
     "react-player": "^2.11.0",
     "react-router-dom": "^6.4.1",
     "react-router-sitemap-generator": "0.0.8",

@@ -45,7 +45,9 @@ import Work from "./components/Work";
 import Allcategory from "./components/home/Allcategory";
 import AllSubCategory from "./components/home/AllSubCategory";
 import Notification from "./components/Notification";
+// import PaginatedItems from "../src/components/PaginatedItems";
 // import PaginatedItems from "./../src/components/filter/PaginatedItems";
+import Blogdescription from "../src/components/Blogdescription";
 
 import Layout from "./components/Layout";
 import LeaderBoard from "./components/home/LeaderBoard";
@@ -79,7 +81,12 @@ render(
             <Route exact path="/videoPosted" element={<VideoPosted />} />
             <Route exact path="/profileRouter" element={<ProfileRouter />} />
             <Route exact path="/Bookmark" element={<Bookmarks />} />
-            {/* <Route exact path="/paginatedItems" element={<PaginatedItems />} /> */}
+            {/* <Route exact path="/paginationitem" element={<PaginatedItems />} /> */}
+            <Route
+              exact
+              path="/blogdescription/:id"
+              element={<Blogdescription />}
+            />
 
             <Route exact path="/faq" element={<FAQ />} />
             <Route exact path="/leaderBoard" element={<LeaderBoard />} />
@@ -91,7 +98,6 @@ render(
             <Route exact path="/subcategory/:id" element={<AllSubCategory />} />
             <Route exact path="/contactUs" element={<ContactUs />} />
             <Route exact path="/notification" element={<Notification />} />
-
             <Route
               exact
               path="/termsConditions"

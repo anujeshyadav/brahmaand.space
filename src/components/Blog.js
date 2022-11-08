@@ -16,19 +16,13 @@ import {
   CardBody,
   CardImg,
 } from "reactstrap";
-
-import profile6 from "../images/12.png";
-import profile7 from "../images/11.png";
-import profile8 from "../images/13.png";
-
-import pic3 from "../images/10.png";
-import pic2 from "../images/8.png";
-import pic1 from "../images/9.png";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
+import { Link, useParams } from "react-router-dom";
 
 function Blog() {
   const [recomblog, setRecomblog] = useState([]);
+
   useEffect(() => {
     reconmendedblog();
     popularblog();
@@ -40,7 +34,6 @@ function Blog() {
 
       .then((response) => {
         setRecomblog(response.data.data);
-        console.log(recomblog);
       })
       .catch((error) => {
         console.log(error.response.data.data);
@@ -164,149 +157,57 @@ function Blog() {
         <Row>
           {popblog?.map((value) => (
             <Col lg="4" sm="6" xs="12">
-              <Card>
-                <CardImg
-                  style={{
-                    width: "auto",
-                    height: "250px",
-                  }}
-                  src={value.blogImg}
-                  className="photo"
-                />
-                <CardBody>
-                  <CardTitle>
-                    <b>{value.blog_title}</b>
-                  </CardTitle>
-                  <CardSubtitle>
-                    <b style={{ color: "#5F56C6" }}>
-                      <Moment format="lll">{value.createdAt}</Moment>
-                    </b>
-                  </CardSubtitle>
-                  <br></br>
-                  <CardText>
-                    <ShowMore
-                      lines={3}
-                      more="Show more"
-                      less="Show less"
-                      anchorClass=""
-                    >
-                      {value.desc}
-                    </ShowMore>
-                  </CardText>
-                  <CardText>
-                    posted by
-                    <img
-                      className="mx-3"
-                      src={value.posted_by_img}
-                      style={{
-                        width: "70px",
-                        height: "65px",
-                        borderRadius: "50%",
-                      }}
-                    />
-                    <b>{value.posted_by}</b>
-                  </CardText>
-                </CardBody>
+              <Card key={value?._id}>
+                <Link key={value?._id} to={`/blogdescription/${value?._id}`}>
+                  <CardImg
+                    style={{
+                      width: "380px",
+                      height: "250px",
+                    }}
+                    src={value.blogImg}
+                    className="photo"
+                    // onClick={blogdescription}
+                  />
+                  <CardBody>
+                    <CardTitle>
+                      <b>{value.blog_title}</b>
+                    </CardTitle>
+                    <CardSubtitle>
+                      <b style={{ color: "#5F56C6" }}>
+                        <Moment format="lll">{value.createdAt}</Moment>
+                      </b>
+                    </CardSubtitle>
+                    <br></br>
+                    <CardText>
+                      <ShowMore
+                        lines={3}
+                        more="Show more"
+                        less="Show less"
+                        anchorClass=""
+                      >
+                        {value.desc}
+                      </ShowMore>
+                    </CardText>
+                    <CardText>
+                      posted by
+                      <img
+                        className="mx-3"
+                        src={value.posted_by_img}
+                        style={{
+                          width: "70px",
+                          height: "65px",
+                          borderRadius: "50%",
+                        }}
+                      />
+                      <b>{value.posted_by}</b>
+                    </CardText>
+                  </CardBody>
+                </Link>
               </Card>
             </Col>
           ))}
         </Row>
         <br></br>
-        {/* <Row>
-          <Col lg="4">
-            <Card>
-              <CardImg src={profile6} className="photo" />
-              <CardBody>
-                <CardTitle>
-                  <b>
-                    5 Terrific Sites to Ask Your Programming Questions Besides
-                    Stackoverflow
-                  </b>
-                </CardTitle>
-                <CardSubtitle>
-                  <span>
-                    <b style={{ color: "#5F56C6" }}>Sep 14,2022 </b>
-                  </span>
-                </CardSubtitle>
-                <br></br>
-                <CardText>
-                  <span>
-                    Introduction to java + installing java JDK and intelliJ IDEA
-                    for Java 19:00 Basic Structure of a Java Program:
-                    Understanding our First Java Hello World Program 14:09
-                  </span>
-                </CardText>
-                <CardText>
-                  posted by &nbsp;&nbsp;
-                  <img src={pic1} className="photo" />
-                  &nbsp;&nbsp;<b>Florian</b>
-                </CardText>
-              </CardBody>
-            </Card>
-          </Col>
-          <Col lg="4">
-            <Card>
-              <CardImg src={profile7} className="photo" />
-              <CardBody>
-                <CardTitle>
-                  <b>
-                    5 Terrific Sites to Ask Your Programming Questions Besides
-                    Stackoverflow
-                  </b>
-                </CardTitle>
-                <CardSubtitle>
-                  <span>
-                    <b style={{ color: "#5F56C6" }}>Sep 14,2022 </b>
-                  </span>
-                </CardSubtitle>
-                <br></br>
-                <CardText>
-                  <span>
-                    Introduction to java + installing java JDK and intelliJ IDEA
-                    for Java 19:00 Basic Structure of a Java Program:
-                    Understanding our First Java Hello World Program 14:09
-                  </span>
-                </CardText>
-                <CardText>
-                  posted by &nbsp;&nbsp;
-                  <img src={pic2} className="photo" />
-                  &nbsp;&nbsp;<b>Florian</b>
-                </CardText>
-              </CardBody>
-            </Card>
-          </Col>
-          <Col lg="4">
-            <Card>
-              <CardImg src={profile8} className="photo" />
-              <CardBody>
-                <CardTitle>
-                  <b>
-                    5 Terrific Sites to Ask Your Programming Questions Besides
-                    Stackoverflow
-                  </b>
-                </CardTitle>
-                <CardSubtitle>
-                  <span>
-                    <b style={{ color: "#5F56C6" }}>Sep 14,2022 </b>
-                  </span>
-                </CardSubtitle>
-                <br></br>
-                <CardText>
-                  <span>
-                    Introduction to java + installing java JDK and intelliJ IDEA
-                    for Java 19:00 Basic Structure of a Java Program:
-                    Understanding our First Java Hello World Program 14:09
-                  </span>
-                </CardText>
-                <CardText>
-                  posted by &nbsp;&nbsp;
-                  <img src={pic3} className="photo" />
-                  &nbsp;&nbsp;<b>Florian</b>
-                </CardText>
-              </CardBody>
-            </Card>
-          </Col>
-        </Row> */}
       </Container>
     </div>
   );

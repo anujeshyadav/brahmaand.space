@@ -492,7 +492,7 @@ function Hastag() {
         </Swiper>
       </Container>
       <div className="container">
-        <Container fluid className=" d-flex justify-content-center">
+        <Container fluid className=" d-flex justify-content-center mt-3">
           <Row>
             <Col lg="6" md="6" sm="12">
               <img className="imgCol1" src={emoji} alt="img" />
@@ -507,7 +507,11 @@ function Hastag() {
               </div>
             </Col>
             <Col lg="6" md="6" sm="12">
-              <img className="imgCol2" src={emoji2} alt="img" />
+              <img
+                className="imgCol2 d-flex justify-content-center"
+                src={emoji2}
+                alt="img"
+              />
 
               <div className="content-emoji1">
                 <p>
