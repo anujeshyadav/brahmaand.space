@@ -92,7 +92,6 @@ function Bookmarks() {
                     <Col lg="2">
                       <b>
                         <span style={{ color: "#5F56C6" }}>
-                          {" "}
                           {data.submitresrcId.__v} Reviews
                         </span>
                       </b>
