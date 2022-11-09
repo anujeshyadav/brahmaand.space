@@ -3,6 +3,9 @@
   /* border-radius: 10px; */
   background: #ffffff;
 }
+ul.rating.mb-3.topicslike {
+  font-size: 21px;
+}
 
 .videopostedcard {
   margin: 5px 2px 14px;

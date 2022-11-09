@@ -23,6 +23,7 @@
     "react-dropdown": "^1.11.0",
     "react-feather": "^2.0.10",
     "react-heart": "^1.0.6",
+    "react-html-parser": "^2.0.2",
     "react-icons": "^4.4.0",
     "react-modal-video": "^1.2.10",
     "react-moment": "^1.1.2",

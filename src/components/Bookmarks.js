@@ -1,329 +1,113 @@
-import React from "react";
 import { Container, Row, Col } from "reactstrap";
 import { Card, CardText, CardTitle, CardSubtitle } from "reactstrap";
 import cate from "../images/24.png";
-import cate1 from "../images/25.png";
-import cate2 from "../images/26.png";
-import cate3 from "../images/27.png";
-import cate4 from "../images/28.png";
-import cate5 from "../images/29.png";
-import { FaCalendar } from "react-icons/fa";
+import axios from "axios";
 import { FaStar } from "react-icons/fa";
 import topBar from "../css/topBar.css";
+import React, { useState, useEffect } from "react";
+import Heart from "react-heart";
+import { Link } from "react-router-dom";
 
 function Bookmarks() {
+  const [active, setActive] = useState(false);
+  const [mylikes, setMylikes] = useState([]);
+  const clicked = () => {
+    setActive(!active);
+    console.log("you clicked it");
+  };
+  useEffect(() => {
+    mylikehandler();
+  }, []);
+
+  const mylikehandler = () => {
+    const userId = localStorage.getItem("userId");
+    console.log(userId);
+    axios
+      .get(`http://3.7.173.138:9000/user/my_likes/${userId}`)
+      .then((res) => {
+        setMylikes(res.data.data);
+        console.log(res.data.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   return (
-    <div className="test nohover">
+    <div className="container test nohover">
       <h3 className="d-flex justify-content-center mt-3 mb-3">Your Likes</h3>
-      <div className="">
-        <Card>
-          <Row className=" m-3 ">
-            <Col lg="4">
-              <div className="">
-                <img src={cate} className="cardImage" />
+      <div className="search-st mb-4">
+        {mylikes?.map((data) => (
+          <Row className="videopostedall mb-4" key={data?._id}>
+            <Col md="4">
+              <div class="product-image8 st-2">
+                <Link to="#">
+                  <img
+                    height={280}
+                    src={data.submitresrcId.img}
+                    alt=""
+                    style={{ borderRadius: "10px" }}
+                    width="90%"
+                  />
+                </Link>
+                <span
+                  class="product-discount-label st-1"
+                  // style={{ width: "2rem" }}
+                >
+                  {/* <Heart
+                    size={25}
+                    isActive={active}
+                    // onClick={clicked}
+                    className="heartlike faregheart"
+                  /> */}
+                </span>
               </div>
             </Col>
-            <Col lg="8" style={{ textAlign: "left" }}>
-              <CardTitle
-                className=""
-                style={{ color: "blue", textAlign: "left" }}
-              >
-                #best &nbsp; #study
-              </CardTitle>
-              <CardSubtitle>
-                <b>Java Tutorials For Begninner In Hindi </b>
-              </CardSubtitle>
-              <CardSubtitle>
-                by &nbsp; <b>CodeWithHarry</b>&nbsp;&nbsp;
-                <span style={{ color: "#5F56C6" }}>
-                  <FaCalendar color="#5F56C6" />
-                  12 September 2022
-                </span>
-              </CardSubtitle>
-              <CardText>
-                Introduction to java + installing java JDK and intelliJ IDEA for
-                Java 19:00 Basic Structure Program 14:09
-              </CardText>
-              <Row>
-                <Col lg="2" style={{ color: "#FCAF3B" }}>
-                  <FaStar />
-                  <FaStar />
-                  <FaStar />
-                  <FaStar />
-                  <FaStar />
-                </Col>
-                <Col lg="2" style={{ color: "#FCAF3B" }}>
-                  4.0
-                </Col>
-                <Col lg="3">
-                  <b>
-                    <span style={{ color: "#5F56C6" }}>12.2k Reviews</span>
-                  </b>
-                </Col>
-              </Row>
-              <Row>
-                <Col lg="2">2022</Col>
-                <Col lg="2">#Java</Col>
-                <Col lg="2">#Andorid</Col>
-              </Row>
-            </Col>
-          </Row>
-        </Card>
-        <Card>
-          <Row className=" m-2 ">
-            <Col lg="4">
-              <div className="">
-                <img src={cate1} className="cardImage" />
-              </div>
-            </Col>
-            <Col lg="8" style={{ textAlign: "left" }}>
-              <CardTitle className="text-align right" style={{ color: "blue" }}>
-                #best &nbsp; #study
-              </CardTitle>
-              <CardSubtitle>
-                <b>Java Tutorials For Begninner In Hindi </b>
-              </CardSubtitle>
-              <CardSubtitle>
-                by &nbsp; <b>CodeWithHarry</b>&nbsp;&nbsp;
-                <span style={{ color: "#5F56C6" }}>
-                  <FaCalendar color="#5F56C6" />
-                  12 September 2022
-                </span>
-              </CardSubtitle>
-              <CardText>
-                Introduction to java + installing java JDK and intelliJ IDEA for
-                Java 19:00 Basic Structure Program 14:09
-              </CardText>
-              <Row>
-                <Col lg="2" style={{ color: "#FCAF3B" }}>
-                  <FaStar />
-                  <FaStar />
-                  <FaStar />
-                  <FaStar />
-                  <FaStar />
-                </Col>
+            <Col md="8">
+              <div class="product-content">
+                <ul class="rating mb-3 topicslike">
+                  {data?.submitresrcId.topics?.map((val) => (
+                    <Link to="#">{val}</Link>
+                  ))}
 
-                <Col lg="2" style={{ color: "#FCAF3B" }}>
-                  4.0
-                </Col>
-                <Col lg="3">
-                  <b>
-                    <span style={{ color: "#5F56C6" }}>12.2k Reviews</span>
-                  </b>
-                </Col>
-              </Row>
-              <Row>
-                <Col lg="2">2022</Col>
-                <Col lg="2">#Java</Col>
-                <Col lg="2">#Andorid</Col>
-              </Row>
-            </Col>
-          </Row>
-        </Card>
-        <Card>
-          <Row className=" m-2 ">
-            <Col lg="4">
-              <div className="">
-                <img src={cate2} className="cardImage" />
+                  <li></li>
+                </ul>
+                <h3 className="mb-3">{data?.submitresrcId.resTitle}</h3>
+                <h5 className="mb-3">
+                  <span>By </span> {data.submitresrcId.creatorName}
+                </h5>
+                <h6 className="mb-3">{data.submitresrcId.desc}</h6>
+                <div className="">
+                  <Row className="review">
+                    <Col lg="2" style={{ color: "#FCAF3B" }}>
+                      <FaStar />
+                      <FaStar />
+                      <FaStar />
+                      <FaStar />
+                      <FaStar />
+                    </Col>
+                    <Col lg="2" style={{ color: "#FCAF3B" }}>
+                      4.0
+                    </Col>
+                    <Col lg="2">
+                      <b>
+                        <span style={{ color: "#5F56C6" }}>
+                          {" "}
+                          {data.submitresrcId.__v} Reviews
+                        </span>
+                      </b>
+                    </Col>
+                  </Row>
+                  <Row>
+                    <Col lg="2">{data.submitresrcId.relYear[0].yrName}</Col>
+                    {/* <Col lg="2">#Java</Col>
+                    <Col lg="2">#Andorid</Col> */}
+                  </Row>
+                </div>
               </div>
             </Col>
-            <Col lg="8" style={{ textAlign: "left" }}>
-              <CardTitle className="text-align right" style={{ color: "blue" }}>
-                #best &nbsp; #study
-              </CardTitle>
-              <CardSubtitle>
-                <b>Java Tutorials For Begninner In Hindi </b>
-              </CardSubtitle>
-              <CardSubtitle>
-                by &nbsp; <b>CodeWithHarry</b>&nbsp;&nbsp;
-                <span style={{ color: "#5F56C6" }}>
-                  <FaCalendar color="#5F56C6" />
-                  12 September 2022
-                </span>
-              </CardSubtitle>
-              <CardText>
-                Introduction to java + installing java JDK and intelliJ IDEA for
-                Java 19:00 Basic Structure Program 14:09
-              </CardText>
-              <Row>
-                <Col lg="2" style={{ color: "#FCAF3B" }}>
-                  <FaStar />
-                  <FaStar />
-                  <FaStar />
-                  <FaStar />
-                  <FaStar />
-                </Col>
-
-                <Col lg="2" style={{ color: "#FCAF3B" }}>
-                  4.0
-                </Col>
-                <Col lg="3">
-                  <b>
-                    <span style={{ color: "#5F56C6" }}>12.2k Reviews</span>
-                  </b>
-                </Col>
-              </Row>
-              <Row>
-                <Col lg="2">2022</Col>
-                <Col lg="2">#Java</Col>
-                <Col lg="2">#Andorid</Col>
-              </Row>
-            </Col>
           </Row>
-        </Card>
-        <Card>
-          <Row className=" m-2 ">
-            <Col lg="4">
-              <div className="">
-                <img src={cate3} className="cardImage" />
-              </div>
-            </Col>
-            <Col lg="8" style={{ textAlign: "left" }}>
-              <CardTitle className="text-align right" style={{ color: "blue" }}>
-                #best &nbsp; #study
-              </CardTitle>
-              <CardSubtitle>
-                <b>Java Tutorials For Begninner In Hindi </b>
-              </CardSubtitle>
-              <CardSubtitle>
-                by &nbsp; <b>CodeWithHarry</b>&nbsp;&nbsp;
-                <span style={{ color: "#5F56C6" }}>
-                  <FaCalendar color="#5F56C6" />
-                  12 September 2022
-                </span>
-              </CardSubtitle>
-              <CardText>
-                Introduction to java + installing java JDK and intelliJ IDEA for
-                Java 19:00 Basic Structure Program 14:09
-              </CardText>
-              <Row>
-                <Col lg="2" style={{ color: "#FCAF3B" }}>
-                  <FaStar />
-                  <FaStar />
-                  <FaStar />
-                  <FaStar />
-                  <FaStar />
-                </Col>
-
-                <Col lg="2" style={{ color: "#FCAF3B" }}>
-                  4.0
-                </Col>
-                <Col lg="3">
-                  <b>
-                    <span style={{ color: "#5F56C6" }}>12.2k Reviews</span>
-                  </b>
-                </Col>
-              </Row>
-              <Row>
-                <Col lg="2">2022</Col>
-                <Col lg="2">#Java</Col>
-                <Col lg="2">#Andorid</Col>
-              </Row>
-            </Col>
-          </Row>
-        </Card>
-        <Card>
-          <Row className=" m-2 ">
-            <Col lg="4">
-              <div className="">
-                <img src={cate4} className="cardImage" />
-              </div>
-            </Col>
-            <Col lg="8" style={{ textAlign: "left" }}>
-              <CardTitle className="text-align right" style={{ color: "blue" }}>
-                #best &nbsp; #study
-              </CardTitle>
-              <CardSubtitle>
-                <b>Java Tutorials For Begninner In Hindi </b>
-              </CardSubtitle>
-              <CardSubtitle>
-                by &nbsp; <b>CodeWithHarry</b>&nbsp;&nbsp;
-                <span style={{ color: "#5F56C6" }}>
-                  <FaCalendar color="#5F56C6" />
-                  12 September 2022
-                </span>
-              </CardSubtitle>
-              <CardText>
-                Introduction to java + installing java JDK and intelliJ IDEA for
-                Java 19:00 Basic Structure Program 14:09
-              </CardText>
-              <Row>
-                <Col lg="2" style={{ color: "#FCAF3B" }}>
-                  <FaStar />
-                  <FaStar />
-                  <FaStar />
-                  <FaStar />
-                  <FaStar />
-                </Col>
-
-                <Col lg="2" style={{ color: "#FCAF3B" }}>
-                  4.0
-                </Col>
-                <Col lg="3">
-                  <b>
-                    <span style={{ color: "#5F56C6" }}>12.2k Reviews</span>
-                  </b>
-                </Col>
-              </Row>
-              <Row>
-                <Col lg="2">2022</Col>
-                <Col lg="2">#Java</Col>
-                <Col lg="2">#Andorid</Col>
-              </Row>
-            </Col>
-          </Row>
-        </Card>
-        <Card>
-          <Row className=" m-2 ">
-            <Col lg="4">
-              <div className="">
-                <img src={cate5} className="cardImage" />
-              </div>
-            </Col>
-            <Col lg="8">
-              <CardTitle className="text-align right" style={{ color: "blue" }}>
-                #best &nbsp; #study
-              </CardTitle>
-              <CardSubtitle>
-                <b>Java Tutorials For Begninner In Hindi </b>
-              </CardSubtitle>
-              <CardSubtitle>
-                by &nbsp; <b>CodeWithHarry</b>&nbsp;&nbsp;
-                <span style={{ color: "#5F56C6" }}>
-                  <FaCalendar color="#5F56C6" />
-                  12 September 2022
-                </span>
-              </CardSubtitle>
-              <CardText>
-                Introduction to java + installing java JDK and intelliJ IDEA for
-                Java 19:00 Basic Structure Program 14:09
-              </CardText>
-              <Row>
-                <Col lg="2" style={{ color: "#FCAF3B" }}>
-                  <FaStar />
-                  <FaStar />
-                  <FaStar />
-                  <FaStar />
-                  <FaStar />
-                </Col>
-
-                <Col lg="2" style={{ color: "#FCAF3B" }}>
-                  4.0
-                </Col>
-                <Col lg="3">
-                  <b>
-                    <span style={{ color: "#5F56C6" }}>12.2k Reviews</span>
-                  </b>
-                </Col>
-              </Row>
-              <Row>
-                <Col lg="2">2022</Col>
-                <Col lg="2">#Java</Col>
-                <Col lg="2">#Andorid</Col>
-              </Row>
-            </Col>
-          </Row>
-        </Card>
+        ))}
       </div>
     </div>
   );
