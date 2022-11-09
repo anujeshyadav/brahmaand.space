@@ -97,6 +97,7 @@ function Hastag() {
       .get(`/user/get_featured_cnt`)
       .then((res) => {
         setFeature(res.data.data);
+        console.log(res.data.data);
 
         console.log(feature);
       })

@@ -28,7 +28,7 @@ function CustomNavbar() {
   const [subcatry, setSubcatry] = useState({});
   const [type, setType] = useState({});
   const [formate, setformate] = useState({});
-  const [topic, setTopic] = useState({});
+  const [topic, setTopic] = useState([]);
   const [Desc, setDesc] = useState({});
   const [Optitle, setOptitle] = useState({});
   const [updatedAt, setUpdatedAt] = useState({});
@@ -52,6 +52,10 @@ function CustomNavbar() {
   };
 
   const handleSubmitResource = (e) => {
+    const newTopic = topic.split(",");
+    newTopic.push(newTopic);
+    console.log(newTopic);
+    console.log(newTopic.length - 1);
     if (catgry === "Select Category") {
       swal("Please Select Category");
     }
@@ -69,8 +73,8 @@ function CustomNavbar() {
     }
 
     const userid = localStorage.getItem("userId");
-
     e.preventDefault();
+
     console.log(
       "all data",
       userid,
@@ -80,7 +84,7 @@ function CustomNavbar() {
       type,
       formate,
       sellang,
-      topic,
+      newTopic,
       Desc,
       Optitle,
       Opcname,
@@ -89,6 +93,9 @@ function CustomNavbar() {
       Opcomm,
       cat_img
     );
+    // for (let i = 0; (i = newTopic.length - 1); i++) {
+    //   formData.append("topics", newTopic[i]);
+    // }
     const langaone = sellang[0];
     // const langtwo = sellang[1];
 
@@ -99,9 +106,8 @@ function CustomNavbar() {
     formData.append("type", type);
     formData.append("format", formate);
     formData.append("language", langaone);
-    //
 
-    formData.append("topics", topic);
+    formData.append("topics", newTopic);
     formData.append("desc", Desc);
     formData.append("resTitle", Optitle);
     formData.append("creatorName", Opcname);
@@ -118,11 +124,24 @@ function CustomNavbar() {
         console.log(res.data.data);
         if (res.data.message === "success") {
           swal("Resource Submitted Successfully👍");
+          setLink("");
+          setCatgry("");
+          setSubcatry("");
+          setType("");
+          setformate("");
+          setSellang("");
+          setTopic("");
+          setDesc("");
+          setOptitle("");
+          setOpcname("");
+          setSelectedyear("");
+          setOpdes("");
+          setOpcomm("");
+          setCat_img("");
         } else {
           swal("Something went wrong, Try again");
         }
       })
-
       .catch((error) => {
         console.log(error.response.data);
         if (error.response.data.message === "error") {
@@ -422,14 +441,6 @@ function CustomNavbar() {
                               <option>Free</option>
                               <option>Paid</option>
                             </select>
-
-                            {/* <select
-                              onChange={(e) => setType(e.target.value)}
-                              className="form-control"
-                            >
-                              <option></option>
-                              <option></option>
-                            </select> */}
                           </Col>
 
                           <Col>
