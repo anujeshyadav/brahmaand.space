@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { Container, Row } from "reactstrap";
 import axios from "axios";
+import ReactHtmlParser from "react-html-parser";
 import Moment from "react-moment";
 import "moment-timezone";
 
@@ -68,7 +69,7 @@ function Blogdescription() {
           </Row>
           <Row className="mt-4 ">
             <div className="d-flex justify-content-center mt-3">
-              <h3>{blogdescription?.desc}</h3>
+              <h3>{ReactHtmlParser(blogdescription?.desc)}</h3>
             </div>
           </Row>
         </Container>

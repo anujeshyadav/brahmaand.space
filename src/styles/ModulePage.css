@@ -9,6 +9,10 @@ img.imgBloglast {
   justify-content: center;
   width: -webkit-fill-available;
 }
+
+button.learnMore.btn.btn-secondary {
+  margin: 23px;
+}
 button.subscribebtn.col-md-4.btn.btn-secondary {
   padding: 10px 42px;
   color: white;
@@ -76,6 +80,7 @@ button.viewall.btn.btn-secondary.btn-lg {
 }
 
 .searchprd {
+  padding: 24px;
   color: black;
   margin-top: 18px;
   background: #ffffff;
@@ -1075,4 +1080,22 @@ svg.bsplaybutton {
 
     border: none;
   }
+}
+
+datalist {
+  display: flex;
+
+  justify-content: space-between;
+  writing-mode: revert;
+  width: 200px;
+}
+
+option {
+  padding: 0;
+}
+
+input[type="range"] {
+  padding: 0px;
+  width: 100%;
+  margin: 0;
 }

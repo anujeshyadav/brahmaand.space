@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Container } from "reactstrap";
 import axios from "axios";
+import ReactHtmlParser from "react-html-parser";
 
 function TermsConditions() {
   const [first, setfirst] = useState([]);
@@ -33,7 +34,7 @@ function TermsConditions() {
           <h2> Terms and Conditions</h2>
           <hr />
           {first?.map((first) => (
-            <h3 className="mt-3">{first.desc}</h3>
+            <h3 className="mt-3">{ReactHtmlParser(first.desc)}</h3>
           ))}
         </Container>
       </div>

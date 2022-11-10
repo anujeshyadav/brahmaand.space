@@ -7,16 +7,8 @@ import { BsPlay } from "react-icons/bs";
 import has1 from "../../images/has1.png";
 import axiosConfig from "../axiosConfig";
 
-import business from "../../images/business.png";
 import newsletter from "../../images/newsletter.png";
 
-import education from "../../images/education.png";
-import healthcare from "../../images/healthcare.png";
-import eatfoods from "../../images/eatfoods.png";
-import entertainment from "../../images/entertainment.png";
-import finance from "../../images/finance.png";
-import technology from "../../images/technology.png";
-import travel from "../../images/travel.png";
 import emoji from "../../images/emoji.png";
 import emoji2 from "../../images/emoji2.png";
 import youtubevideo from "../../images/youtubevideo.jpg";
@@ -586,7 +578,7 @@ function Hastag() {
                   Lorem Ipsum is simply dummy text of the printing and
                   typesetting industry.
                 </span>
-                <Button>Learn more</Button>
+                <Button className="learnMore">Learn more</Button>
               </Container>
             </Card>
           </Col>
@@ -608,7 +600,7 @@ function Hastag() {
                   Lorem Ipsum is simply dummy text of the printing and
                   typesetting industry.
                 </span>
-                <Button>Learn more</Button>
+                <Button className="learnMore">Learn more</Button>
               </Container>
             </Card>
           </Col>
@@ -834,6 +826,7 @@ function Hastag() {
             <Card>
               <Container className="imageslastblog ">
                 <img
+                  height={250}
                   style={{ borderRadius: "13px" }}
                   className="imgBloglast"
                   src={edu}
@@ -843,7 +836,6 @@ function Hastag() {
                 <p>
                   You’ve probably noticed there are dozens of platforms that
                   offer business listings. Let’s look at a few of the most
-                  popular sites and...
                 </p>
                 <p>
                   <span>
@@ -858,6 +850,7 @@ function Hastag() {
             <Card>
               <Container className="imageslastblog ">
                 <img
+                  height={250}
                   style={{ borderRadius: "13px" }}
                   className="imgBloglast"
                   src={rate}
@@ -882,6 +875,7 @@ function Hastag() {
             <Card>
               <Container className="imageslastblog ">
                 <img
+                  height={250}
                   style={{ borderRadius: "13px" }}
                   className="imgBloglast"
                   src={socialnetwork}

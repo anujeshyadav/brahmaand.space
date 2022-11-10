@@ -94,7 +94,7 @@ function ProductList(args) {
   };
   const handleSelection = (_id) => {
     var selectedId = _id;
-    console.log(selectedId);
+
     if (selectedId === _id) {
       setProductdes(selectedId);
       axios
@@ -115,7 +115,7 @@ function ProductList(args) {
           console.log(err.data.data);
         });
     }
-    console.log(selectedId);
+
     // setGetonecomment(selectedId);
     axios
       .get(`http://3.7.173.138:9000/user/comment_list/${selectedId}`)
@@ -155,7 +155,7 @@ function ProductList(args) {
                 <input
                   type="text"
                   placeholder="   Searching best quality content here . . . "
-                  className="searchprd inputareaa searchba bg-white"
+                  className="searchprd inputareaa searchba "
                 />
               </div>
             </Col>
@@ -194,13 +194,35 @@ function ProductList(args) {
                     <Col lg="12" className="py-3">
                       <div className="ft-slider">
                         <h5>Review</h5>
-                        <RangeSlider
+                        <Row>
+                          <input
+                            min="0"
+                            max="5"
+                            step="1"
+                            type="range"
+                            id="temp"
+                            name="temp"
+                            list="tickmarks"
+                          />
+                          <datalist id="tickmarks">
+                            <option value="0" label="0"></option>
+                            <option value="1" label="1"></option>
+                            <option value="2" label="2"></option>
+                            <option value="3" label="3"></option>
+                            <option value="4  " label="4"></option>
+                            <option value="5" label="5"></option>
+                          </datalist>
+                        </Row>
+
+                        {/* <input
+                        
+                        {/* <RangeSlider
                           value={value}
                           className="ftr-range"
                           onChange={(changeEvent) =>
                             setValue(changeEvent.target.value)
                           }
-                        />
+                        /> */}
                         {/* <Slider /> */}
 
                         <p>Range</p>

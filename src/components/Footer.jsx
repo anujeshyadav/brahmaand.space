@@ -13,6 +13,7 @@ import { useAuth } from "../context/AuthContext";
 
 import agreement_download from "../assets/files/Dispatch305-agreement.pdf";
 import Logo from "../assets/logos/logo.png";
+import brahmaaandpremium from "../images/brahmaaandpremium.png";
 import { FaFacebook, FaInstagram, FaTwitter, FaYoutube } from "react-icons/fa";
 
 function Footer() {
@@ -30,7 +31,7 @@ function Footer() {
           <Col lg="3" md="3" sm="6">
             <div className="foot-1">
               <Link to="/">
-                <img src={Logo} alt="" width="150px" />
+                <img src={brahmaaandpremium} alt="" width="150px" />
               </Link>
               <ul>
                 <li>

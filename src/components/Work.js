@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Container, Row } from "reactstrap";
 import axios from "axios";
 import "moment-timezone";
+import ReactHtmlParser from "react-html-parser";
 import Moment from "react-moment";
 
 function Work() {
@@ -42,7 +43,9 @@ function Work() {
                 <p>{value.desc}</p>
                 <div className="container mt-4 ">
                   <span>UpdatedAt : </span>
-                  <Moment format="lll">{value.updatedAt}</Moment>
+                  <Moment format="lll">
+                    {ReactHtmlParser(value.updatedAt)}
+                  </Moment>
                 </div>
               </>
             ))}

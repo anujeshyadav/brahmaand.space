@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Container } from "reactstrap";
 import axios from "axios";
+import ReactHtmlParser from "react-html-parser";
 
 const Privacy = () => {
   const [first, setfirst] = useState([]);
@@ -29,11 +30,13 @@ const Privacy = () => {
           Privacy Policy
         </h1>
         <br />
-        <h2> Our Policy</h2>
+        <h2 className="d-flex justify-content-center"> Our Policies</h2>
         <hr />
-        {first?.map((first) => (
-          <h3 className="mt-3">{first.desc}</h3>
-        ))}
+        <div>
+          {first?.map((first) => (
+            <h3 className="mt-3">{ReactHtmlParser(first.desc)}</h3>
+          ))}
+        </div>
       </Container>
     </>
   );

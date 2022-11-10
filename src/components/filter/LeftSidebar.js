@@ -24,6 +24,14 @@ function LeftSidebar() {
                 <Col lg="12" className="py-3">
                   <div className=" col-lg-8 ft-slider">
                     <h5>Review</h5>
+                    <input type="range" min="0" max="5" step="1" />
+                    <datalist id="tickmarks">
+                      <option value="0"></option>
+                      <option value="25"></option>
+                      <option value="50"></option>
+                      <option value="75"></option>
+                      <option value="100"></option>
+                    </datalist>
                     <RangeSlider
                       value={value}
                       className="ftr-range"

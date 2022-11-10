@@ -67,10 +67,10 @@ function Bookmarks() {
               <div class="product-content">
                 <ul class="rating mb-3 topicslike">
                   {data?.submitresrcId.topics?.map((val) => (
-                    <Link to="#">{val}</Link>
+                    <Link style={{ textDecoration: "none" }} to="#">
+                      {val}
+                    </Link>
                   ))}
-
-                  <li></li>
                 </ul>
                 <h3 className="mb-3">{data?.submitresrcId.resTitle}</h3>
                 <h5 className="mb-3">
