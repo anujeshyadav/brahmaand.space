@@ -1566,7 +1566,7 @@ function ProductList(args) {
                                     src={categry?.img}
                                     alt="image"
                                     width="100%"
-                                    height={195}
+                                    height={220}
                                   />
 
                                   <Modal
