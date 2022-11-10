@@ -21,6 +21,35 @@ function RecentProductList() {
     <>
       <Container>
         <Swiper
+          breakpoints={{
+            // when window width is >= 640px
+            820: {
+              slidesPerView: 3,
+              direction: "horizontal",
+              spaceBetween: 20,
+            },
+            780: {
+              slidesPerView: 2,
+              direction: "horizontal",
+              spaceBetween: 20,
+            },
+
+            768: {
+              slidesPerView: 2,
+              direction: "horizontal",
+              spaceBetween: 20,
+            },
+            640: {
+              slidesPerView: 2,
+              direction: "horizontal",
+              spaceBetween: 28,
+            },
+            320: {
+              slidesPerView: 1,
+              direction: "horizontal",
+              spaceBetween: 25,
+            },
+          }}
           slidesPerView={4}
           spaceBetween={20}
           centeredSlides={true}

@@ -364,3 +364,28 @@ button.bt-st.reviewbutton.btn.btn-primary {
   font-size: 18px;
   padding: 7px 33px;
 }
+
+fifilter.col-lg-3 {
+  display: flex;
+  justify-content: right;
+}
+.searhfastarfilter.col-lg-2 {
+  display: flex;
+  padding: 0px;
+  justify-content: right;
+  color: #ffe506;
+}
+.fifilter.col-lg-3 {
+  display: flex;
+  justify-content: right;
+}
+.rangefil.col-lg-2 {
+  margin-top: 3px;
+  justify-content: center;
+  display: flex;
+}
+
+a {
+  color: var(--bs-link-color);
+  text-decoration: none;
+}

@@ -3,7 +3,7 @@ import axios from "axios";
 import Heart from "react-heart";
 import StarsRating from "stars-rating";
 import swal from "sweetalert";
-
+import { FiFilter } from "react-icons/fi";
 import Slider from "./Slider";
 import Pagination from "react-bootstrap/Pagination";
 //import ReactDOM from "react-dom";
@@ -193,7 +193,15 @@ function ProductList(args) {
                     </Col>
                     <Col lg="12" className="py-3">
                       <div className="ft-slider">
-                        <h5>Review</h5>
+                        <Row>
+                          <Col lg="9">
+                            <h5>Review</h5>
+                          </Col>
+                          <Col className="fifilter " lg="3">
+                            <FiFilter size={30} />
+                          </Col>
+                        </Row>
+
                         <Row>
                           <input
                             min="0"
@@ -209,14 +217,21 @@ function ProductList(args) {
                             <option value="1" label="1"></option>
                             <option value="2" label="2"></option>
                             <option value="3" label="3"></option>
-                            <option value="4  " label="4"></option>
+                            <option value="4" label="4"></option>
                             <option value="5" label="5"></option>
                           </datalist>
                         </Row>
-
-                        {/* <Slider /> */}
-
-                        <p>Range</p>
+                        <Row>
+                          <Col lg="9">
+                            <p>Range</p>
+                          </Col>
+                          <Col className="searhfastarfilter" lg="1">
+                            <FaStar color="#f3c60f" size={22} />
+                          </Col>
+                          <Col className="rangefil" lg="2">
+                            1 - 5
+                          </Col>
+                        </Row>
                       </div>
                     </Col>
                     <Col lg="12" className="py-3">
@@ -304,17 +319,17 @@ function ProductList(args) {
                       <div className="ft-type">
                         <h5>Sort By</h5>
                         <hr></hr>
-                        <ul>
-                          <li>
+                        <ul className="clearfiltertext">
+                          <li className="clearfiltertext">
                             <Link>Relevance</Link>
                           </li>
-                          <li>
+                          <li className="clearfiltertext">
                             <Link>Rating</Link>
                           </li>
                           <li>
                             <Link>Low to High</Link>
                           </li>
-                          <li>
+                          <li className="clearfiltertext">
                             <Link>High to Low</Link>
                           </li>
                         </ul>
@@ -1530,7 +1545,9 @@ function ProductList(args) {
                     <h4>
                       Searching Product
                       <span>
-                        <Link to="/">Filter</Link>
+                        <Col className="fifilters " lg="3">
+                          <FiFilter size={40} />
+                        </Col>
                       </span>
                     </h4>
                     <Row>
@@ -1583,10 +1600,15 @@ function ProductList(args) {
                                               Topic:
                                             </h5>
                                           </div>
-                                          <div className="tag-2">
+                                          <div className=" d-flex tag-2">
                                             {Producdetail?.topics?.map(
                                               (val) => (
-                                                <Link to="#">{val}</Link>
+                                                <span
+                                                  className="d-flex "
+                                                  to="#"
+                                                >
+                                                  {val}{" "}
+                                                </span>
                                               )
                                             )}
                                           </div>
@@ -2531,9 +2553,9 @@ function ProductList(args) {
               </span>
             </h4>
             <Row>
-              <Col>
-                <RecentProductList />
-              </Col>
+              {/* <Col> */}
+              <RecentProductList />
+              {/* </Col> */}
             </Row>
           </div>
         </Container>

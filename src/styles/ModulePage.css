@@ -1099,3 +1099,18 @@ input[type="range"] {
   width: 100%;
   margin: 0;
 }
+
+.searhfastarfilter.col-lg-2 {
+  display: flex;
+  padding: 0px;
+  justify-content: right;
+  color: #ffe506;
+}
+.fifilter.col-lg-3 {
+  display: flex;
+  justify-content: right;
+}
+.rangefil.col-lg-2 {
+  justify-content: center;
+  display: flex;
+}
