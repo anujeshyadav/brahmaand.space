@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import ReactDOM from "react-dom";
+import { useParams } from "react-router-dom";
 import axios from "axios";
 
 // import "../../css/topBar.css";
@@ -10,7 +11,23 @@ function DemoPaginate() {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-  const [postsPerPage, setPostsPerPage] = useState(10);
+  const [postsPerPage, setPostsPerPage] = useState(3);
+
+  const [categry, setCategry] = useState([]);
+  let Params = useParams();
+  // useEffect(() => {
+  //   allsearchproduct();
+  // }, [Params]);
+  const allsearchproduct = () => {
+    // axios;
+    // .get(`http://3.7.173.138:9000/admin/listbysubcategory/${Params.id}`)
+    // .then((response) => {
+    //   setCategry(response.data.data);
+    // })
+    // .catch((error) => {
+    //   console.log(error.response.data);
+    // });
+  };
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -30,6 +47,7 @@ function DemoPaginate() {
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
   // console.log("indexOfFirstPost: ", indexOfFirstPost);
 
+  // const currentPosts = categry.slice(indexOfFirstPost, indexOfLastPost);
   const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
 
   const paginate = (pageNumber) => {
@@ -42,6 +60,9 @@ function DemoPaginate() {
       <h1 className="text-primary mn-3">My Posts</h1>
       <Posts posts={currentPosts} loading={loading} />
       <Pagination
+        breakLabel="..."
+        nextLabel="next >"
+        previousLabel="< previous"
         paginate={paginate}
         postsPerPage={postsPerPage}
         totalPosts={posts.length}
