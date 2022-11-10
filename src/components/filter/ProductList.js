@@ -214,15 +214,6 @@ function ProductList(args) {
                           </datalist>
                         </Row>
 
-                        {/* <input
-                        
-                        {/* <RangeSlider
-                          value={value}
-                          className="ftr-range"
-                          onChange={(changeEvent) =>
-                            setValue(changeEvent.target.value)
-                          }
-                        /> */}
                         {/* <Slider /> */}
 
                         <p>Range</p>
