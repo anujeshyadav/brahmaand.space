@@ -49,7 +49,7 @@ function ProductList(args) {
   const [dislike, setDislike] = useState([]);
   const [dislikeact, setDislikeact] = useState([]);
   let Params = useParams();
-  const [Producdetail, setProductdetail] = useState({});
+  const [Producdetail, setProductdetail] = useState([]);
   const [productdes, setProductdes] = useState("");
   const [text, settText] = useState("");
   const [getonecomment, setGetonecomment] = useState([]);
@@ -107,7 +107,7 @@ function ProductList(args) {
             res.data.data._id !== undefined
           ) {
             setProductdetail(res.data.data);
-            console.log(res.data.data);
+            console.log(res);
             toggle();
           }
         })
@@ -1811,7 +1811,8 @@ function ProductList(args) {
                                                 <span>4.7 of 5</span>
                                                 <br></br>
                                                 <span className="mt-3">
-                                                  362 customers reviews
+                                                  {getonecomment?.length}-
+                                                  customers reviews
                                                 </span>
                                                 <img
                                                   src={ratingstar}
