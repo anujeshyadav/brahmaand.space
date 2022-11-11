@@ -1812,7 +1812,7 @@ function ProductList(args) {
                                                 <br></br>
                                                 <span className="mt-3">
                                                   {getonecomment?.length}-
-                                                  customers reviews
+                                                  Customers Reviews
                                                 </span>
                                                 <img
                                                   src={ratingstar}
