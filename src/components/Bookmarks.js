@@ -44,7 +44,7 @@ function Bookmarks() {
                 <Link to="#">
                   <img
                     height={280}
-                    src={data.submitresrcId.img}
+                    src={data?.submitresrcId?.img}
                     alt=""
                     style={{ borderRadius: "10px" }}
                     width="90%"
@@ -66,17 +66,17 @@ function Bookmarks() {
             <Col md="8">
               <div class="product-content">
                 <ul class="rating mb-3 topicslike">
-                  {data?.submitresrcId.topics?.map((val) => (
+                  {data?.submitresrcId?.topics?.map((val) => (
                     <Link style={{ textDecoration: "none" }} to="#">
                       {val}
                     </Link>
                   ))}
                 </ul>
-                <h3 className="mb-3">{data?.submitresrcId.resTitle}</h3>
+                <h3 className="mb-3">{data?.submitresrcId?.resTitle}</h3>
                 <h5 className="mb-3">
-                  <span>By </span> {data.submitresrcId.creatorName}
+                  <span>By </span> {data?.submitresrcId?.creatorName}
                 </h5>
-                <h6 className="mb-3">{data.submitresrcId.desc}</h6>
+                <h6 className="mb-3">{data?.submitresrcId?.desc}</h6>
                 <div className="">
                   <Row className="review">
                     <Col lg="2" style={{ color: "#FCAF3B" }}>
@@ -92,13 +92,13 @@ function Bookmarks() {
                     <Col lg="2">
                       <b>
                         <span style={{ color: "#5F56C6" }}>
-                          {data.submitresrcId.__v} Reviews
+                          {data?.submitresrcId?.__v} Reviews
                         </span>
                       </b>
                     </Col>
                   </Row>
                   <Row>
-                    <Col lg="2">{data.submitresrcId.relYear[0].yrName}</Col>
+                    <Col lg="2">{data?.submitresrcId?.relYear[0].yrName}</Col>
                     {/* <Col lg="2">#Java</Col>
                     <Col lg="2">#Andorid</Col> */}
                   </Row>

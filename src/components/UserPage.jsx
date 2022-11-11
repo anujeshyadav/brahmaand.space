@@ -31,7 +31,7 @@ function UserPage({ direction, ...args }) {
     axios
       .get(`http://3.7.173.138:9000/user/getoneUser/${id}`)
       .then((response) => {
-        // console.log("getdata", response.data.data);
+        console.log("getdata", response.data.data);
         setUserData(response.data.data);
       })
       .catch((error) => {

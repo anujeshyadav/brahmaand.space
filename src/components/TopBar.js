@@ -20,7 +20,7 @@ function TopBar() {
   const [username, setUsername] = useState("");
   const [display_name, setDisplay_name] = useState("");
   const [abt_us, seAbt_us] = useState("");
-  const [selectedFile, setSelectedFile] = useState("");
+  const [selectedFile, setSelectedFile] = useState([]);
   const [createdAt, setCreatedAt] = useState("");
   const [profileImg, setroProfileImg] = useState("");
 
