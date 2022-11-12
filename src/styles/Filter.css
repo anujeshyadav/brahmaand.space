@@ -388,7 +388,8 @@ a {
   color: var(--bs-link-color);
   text-decoration: none;
 }
-button.likebuttonbar {
+
+.likebuttonbar {
   border: none;
   background: none;
 }

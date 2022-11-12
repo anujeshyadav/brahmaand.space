@@ -69,9 +69,7 @@ function Notification() {
                 ))}
               </div>
             </Col>
-          </Row>
 
-          <Row>
             <Col lg="4" sm="12" md="6">
               <div className="container mt-3 notificationcard notificationsdistance">
                 <Card className="d-flex justify-content-center mb-3 mt-3">

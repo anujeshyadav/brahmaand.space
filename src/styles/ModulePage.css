@@ -1114,3 +1114,8 @@ input[type="range"] {
   justify-content: center;
   display: flex;
 }
+
+.likebuttonbar {
+  border: none;
+  background: none;
+}

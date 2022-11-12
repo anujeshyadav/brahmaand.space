@@ -31,12 +31,15 @@ import "../../styles/Filter.css";
 import AutoSearch from "./AutoSearch";
 import RangeSlider from "react-bootstrap-range-slider";
 import business from "../../images/business.png";
-import { FaHeart, FaStar } from "react-icons/fa";
+import { FaHeart, FaStar, FaRegHeart } from "react-icons/fa";
 import FilterList from "./FilterList";
 import RecentProductList from "./RecentProductList";
 import backimg from "../../assets/images/backimg.png";
 import axiosConfig from "../axiosConfig";
 import Moment from "react-moment";
+import PrettyRating from "pretty-rating-react";
+import { faStar, faStarHalfAlt } from "@fortawesome/free-solid-svg-icons";
+import { faStar as farStar } from "@fortawesome/free-regular-svg-icons";
 import { CloudLightning, CornerDownLeft } from "react-feather";
 
 function ProductList(args) {
@@ -53,6 +56,7 @@ function ProductList(args) {
   const [productdes, setProductdes] = useState("");
   const [text, settText] = useState("");
   const [getonecomment, setGetonecomment] = useState([]);
+  const [like, setLike] = useState(liked);
   const onchangehandler = (e) => {
     settText(e.target.value);
   };
@@ -60,6 +64,17 @@ function ProductList(args) {
   const ratingChanged = (newRating) => {
     setRating(newRating);
     console.log(newRating);
+  };
+
+  const icons = {
+    star: {
+      complete: faStar,
+      half: faStarHalfAlt,
+      empty: farStar,
+    },
+  };
+  const colors = {
+    star: ["#d9ad26", "#d9ad26", "#434b4d"],
   };
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -1878,14 +1893,19 @@ function ProductList(args) {
                                                 </span>
                                               </h5>
                                               <div className="star-1">
-                                                <StarsRating
+                                                {/* <StarsRating
                                                   count={5}
-                                                  disableFillHover={false}
+                                                  disableFillHover={true}
                                                   onChange={ratingChanged}
                                                   size={25}
-                                                  allowHover={false}
-                                                  readonly={true}
+                                                  allowHover={true}
+                                                  readonly
                                                   color2={"#ffd700"}
+                                                /> */}
+                                                <PrettyRating
+                                                  value={value?.rating}
+                                                  icons={icons.star}
+                                                  colors={colors.star}
                                                 />
                                                 {/* <Link to="#">
                                                   <FaStar className="star-1" />
@@ -1918,56 +1938,56 @@ function ProductList(args) {
                                   localStorage.getItem("userId") !== null &&
                                   localStorage.getItem("userId") !==
                                     undefined ? (
-                                    <Heart
-                                      size={20}
-                                      isActive={active}
+                                    <button
+                                      key={Producdetail?._Id}
+                                      type="button"
+                                      className="likebuttonbar"
                                       onClick={() => {
                                         const userId =
                                           localStorage.getItem("userId");
-                                        if (
-                                          userId == "" ||
-                                          userId == null ||
-                                          userId == undefined
-                                        ) {
-                                          swal(
-                                            "you Need to login for Like and dislike"
-                                          );
-                                        } else {
-                                          setliked(categry?._id);
-                                          console.log(liked);
 
-                                          // setActive(true);
-                                          axiosConfig
-                                            .post(`/user/add_like`, {
-                                              submitresrcId: liked,
-                                              userid: userId,
-                                              status: "like",
-                                            })
-                                            .then((response) => {
-                                              console.log(response.data.data);
-                                              swal("you Liked it");
+                                        setliked(categry?._id);
+                                        console.log(liked);
 
-                                              console.log(
-                                                "likeindividual",
-                                                response.data.data
-                                              );
-                                            })
-                                            .catch((error) => {
-                                              console.log(error.response.data);
-                                              if (
-                                                error.response.data.message ===
-                                                "already exists"
-                                              ) {
-                                                swal("You Already Liked It ");
-                                              }
-                                            });
-                                        }
+                                        // setActive(true);
+                                        axiosConfig
+                                          .post(`/user/add_like`, {
+                                            submitresrcId: liked,
+                                            userid: userId,
+                                            status: "like",
+                                          })
+                                          .then((response) => {
+                                            console.log(response.data.data);
+                                            swal("you Liked it");
+
+                                            console.log(
+                                              "likeindividual",
+                                              response.data.data
+                                            );
+                                          })
+                                          .catch((error) => {
+                                            console.log(error.response.data);
+                                            if (
+                                              error.response.data.message ===
+                                              "already exists"
+                                            ) {
+                                              swal("You Already Liked It ");
+                                            }
+                                          });
                                       }}
-                                      animationTrigger="both"
-                                      inactiveColor="blue"
-                                      animationDuration={0.1}
-                                      className="heartlike faregheart"
-                                    />
+                                      // onClick={async (e) => {
+                                      //   like
+                                      //     ? await removeLike(Producdetail?._Id)
+                                      //     : await addLike(Producdetail?._Id);
+                                      //   setLike(!like);
+                                      // }}
+                                    >
+                                      {like ? (
+                                        <FaHeart size={28} color="red" />
+                                      ) : (
+                                        <FaRegHeart size={25} />
+                                      )}
+                                    </button>
                                   ) : (
                                     <Heart
                                       size={20}
