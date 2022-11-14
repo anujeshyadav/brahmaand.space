@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Heart from "react-heart";
+import ReactPaginate from "react-paginate";
 import StarsRating from "stars-rating";
 import swal from "sweetalert";
+import "../../components/pagination.css";
 import { FiFilter } from "react-icons/fi";
 import Slider from "./Slider";
 import Pagination from "react-bootstrap/Pagination";
@@ -41,7 +43,7 @@ import PrettyRating from "pretty-rating-react";
 import { faStar, faStarHalfAlt } from "@fortawesome/free-solid-svg-icons";
 import { faStar as farStar } from "@fortawesome/free-regular-svg-icons";
 import { CloudLightning, CornerDownLeft } from "react-feather";
-
+// import Paginationnew from "../Paginationnew";
 function ProductList(args) {
   const [active, setActive] = useState(false);
   const [value, setValue] = useState();
@@ -51,19 +53,29 @@ function ProductList(args) {
   const [activelike, setActivelike] = useState([]);
   const [dislike, setDislike] = useState([]);
   const [dislikeact, setDislikeact] = useState([]);
-  let Params = useParams();
   const [Producdetail, setProductdetail] = useState([]);
   const [productdes, setProductdes] = useState("");
   const [text, settText] = useState("");
   const [getonecomment, setGetonecomment] = useState([]);
   const [like, setLike] = useState(liked);
+  const [categry, setCategry] = useState([]);
+  let Params = useParams();
+
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  const [itemOffset, setItemOffset] = useState(0);
+
+  const endOffset = itemOffset + 3;
+  const currentItems = categry?.slice(itemOffset, endOffset);
+
+  const pageCount = Math.ceil(categry?.length / 3);
   const onchangehandler = (e) => {
     settText(e.target.value);
   };
   const [rating, setRating] = useState("");
   const ratingChanged = (newRating) => {
     setRating(newRating);
-    console.log(newRating);
   };
 
   const icons = {
@@ -147,8 +159,6 @@ function ProductList(args) {
     allsearchproduct();
   }, [Params]);
 
-  const [categry, setCategry] = useState([]);
-
   const allsearchproduct = () => {
     axios
       .get(`http://3.7.173.138:9000/admin/listbysubcategory/${Params.id}`)
@@ -157,7 +167,16 @@ function ProductList(args) {
       })
       .catch((error) => {
         console.log(error.response.data);
+        setLoading(false);
       });
+  };
+
+  const handlePageClick = (event) => {
+    const newOffset = (event.selected * 3) % categry?.length;
+    console.log(
+      `User requested page number ${event.selected}, which is offset ${newOffset}`
+    );
+    setItemOffset(newOffset);
   };
 
   return (
@@ -336,16 +355,16 @@ function ProductList(args) {
                         <hr></hr>
                         <ul className="clearfiltertext">
                           <li className="clearfiltertext">
-                            <Link>Relevance</Link>
+                            <Link style={{ color: "blue" }}>Relevance</Link>
                           </li>
                           <li className="clearfiltertext">
-                            <Link>Rating</Link>
+                            <Link style={{ color: "blue" }}>Rating</Link>
                           </li>
                           <li>
-                            <Link>Low to High</Link>
+                            <Link style={{ color: "blue" }}>Low to High</Link>
                           </li>
                           <li className="clearfiltertext">
-                            <Link>High to Low</Link>
+                            <Link style={{ color: "blue" }}>High to Low</Link>
                           </li>
                         </ul>
                         <Button color="info">Clear Filter</Button>
@@ -1567,7 +1586,14 @@ function ProductList(args) {
                     </h4>
                     <Row>
                       <div className="search-st mb-4">
-                        {categry?.map((categry) => (
+                        {/* {currentItems?.map((item) => {
+                          return (
+                            <div>
+                              <h3>Item #{item.title}</h3> 
+                            </div>
+                          );
+                        })} */}
+                        {currentItems?.map((categry) => (
                           <Row className="mb-4" key={categry?._id}>
                             <Col md="4">
                               <div class="product-image8 st-2">
@@ -1879,13 +1905,13 @@ function ProductList(args) {
                                           <div className="re-list">
                                             <div className="re-listimg">
                                               <img
-                                                src={value?.userid.profileImg}
+                                                src={value?.userid?.profileImg}
                                                 alt="UserImage"
                                               />
                                             </div>
                                             <div className="re-listcont">
                                               <h5>
-                                                {value.userid.username}
+                                                {value?.userid?.username}
                                                 <span>
                                                   <Moment format="ll">
                                                     {value?.createdAt}
@@ -2143,20 +2169,6 @@ function ProductList(args) {
                         </Row> */}
                       </div>
                       <div className="search-st mb-3">
-                        <Pagination className="d-flex justify-content-right float-right">
-                          <Pagination.First />
-                          <Pagination.Prev />
-                          <Pagination.Item>{1}</Pagination.Item>
-                          <Pagination.Item>{2}</Pagination.Item>
-                          <Pagination.Ellipsis />
-
-                          <Pagination.Item active>{12}</Pagination.Item>
-
-                          <Pagination.Ellipsis />
-
-                          <Pagination.Next />
-                          <Pagination.Last />
-                        </Pagination>
                         {/* <Row>
                           <Col md="4">
                             <div class="product-image8 st-2">
@@ -2558,6 +2570,34 @@ function ProductList(args) {
                         </Row> */}
                       </div>
                     </Row>
+                    <>
+                      {/* {currentItems?.map((item) => {
+                        return (
+                          <div>
+                            <h3>Item #{item.title}</h3>
+                          </div>
+                        );
+                      })} */}
+                    </>
+                    <div className="container paginatediv d-flex">
+                      <ReactPaginate
+                        itemsPerPage={3}
+                        activeClassName="activeclassofpagination"
+                        pageClassName="pageclassforpage"
+                        className=" paginationsclass"
+                        breakLabel="..."
+                        nextLabel=">"
+                        onPageChange={handlePageClick}
+                        pageRangeDisplayed={1}
+                        pageCount={pageCount}
+                        previousLabel="<"
+                        renderOnZeroPageCount={null}
+                      />
+                    </div>
+                    {/* <Paginationnew
+                      className="d-flex"
+                      itemsPerPage={3}
+                    /> */}
                   </div>
                   {/* for pagination till here */}
                 </div>

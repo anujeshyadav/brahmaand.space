@@ -1,9 +1,36 @@
-@import "https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css";
-
-#container {
-  margin: 1rem;
+ul.paginationsclass {
+  display: flex;
+  float: right;
+  list-style-type: none;
 }
 
-.items {
-  margin-bottom: 1rem;
+li.previous {
+  padding: 7px 9px;
+  font-size: 20px;
+}
+
+li.next {
+  padding: 10px 14px;
+  font-size: 20px;
+}
+li {
+  /* padding: 0px 7px; */
+  box-sizing: border-box;
+}
+
+.container.paginatediv.d-flex {
+  justify-content: right;
+}
+li.selected {
+  padding: 0px 9px;
+}
+
+.pageclassforpage {
+  margin: 12px;
+}
+.activeclassofpagination {
+  color: rgb(11, 12, 12);
+}
+li.break {
+  padding: 8px 5px;
 }

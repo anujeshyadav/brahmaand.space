@@ -133,10 +133,10 @@ function LeftSidebar() {
                     <h5>Sort By</h5>
                     <hr></hr>
                     <ul>
-                      <li>Relevance</li>
-                      <li>Rating</li>
-                      <li>Low to High</li>
-                      <li>High to Low</li>
+                      <li style={{ color: "black" }}>Relevance</li>
+                      <li style={{ color: "black" }}>Rating</li>
+                      <li style={{ color: "black" }}>Low to High</li>
+                      <li style={{ color: "black" }}> High to Low</li>
                     </ul>
                   </div>
                 </Col>

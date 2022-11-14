@@ -1,0 +1,55 @@
+ul.paginationsclass {
+  display: flex;
+  float: right;
+  list-style-type: none;
+}
+
+li.previous {
+  color: white !important;
+  color: white;
+  padding: 0px 20px;
+  font-size: 20px;
+  border-radius: 10px;
+  background-color: black;
+  font-size: 40px;
+}
+
+li.next {
+  padding: 0px 20px;
+  font-size: 20px;
+  border-radius: 10px;
+  background-color: black;
+  font-size: 40px;
+}
+li {
+  /* padding: 0px 7px; */
+  box-sizing: border-box;
+}
+
+.container.paginatediv.d-flex {
+  justify-content: right;
+}
+li.selected {
+  padding: 0px 9px;
+}
+a {
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.pageclassforpage {
+  margin: 13px;
+  border: 1px solid;
+  padding: 6px 16px;
+  background-color: #8080803d;
+  color: #040404;
+  border-radius: 5px;
+}
+
+.activeclassofpagination {
+  background: black;
+  color: rgb(255 255 255);
+}
+li.break {
+  padding: 8px 5px;
+}

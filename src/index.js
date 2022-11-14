@@ -45,8 +45,7 @@ import Work from "./components/Work";
 import Allcategory from "./components/home/Allcategory";
 import AllSubCategory from "./components/home/AllSubCategory";
 import Notification from "./components/Notification";
-// import PaginatedItems from "../src/components/PaginatedItems";
-// import PaginatedItems from "./../src/components/filter/PaginatedItems";
+import Paginationnew from "./components/Paginationnew";
 import Blogdescription from "../src/components/Blogdescription";
 import DemoPaginate from "./components/DemoPaginate";
 import Pagination from "./components/Pagination";
@@ -87,13 +86,13 @@ render(
             <Route exact path="/demopaginate" element={<DemoPaginate />} />
             <Route exact path="/pagination" element={<Pagination />} />
             <Route exact path="/posts" element={<Posts />} />
-            {/* <Route exact path="/paginationitem" element={<PaginatedItems />} /> */}
+            <Route exact path="/paginationnew" element={<Paginationnew />} />
+
             <Route
               exact
               path="/blogdescription/:id"
               element={<Blogdescription />}
             />
-
             <Route exact path="/faq" element={<FAQ />} />
             <Route exact path="/leaderBoard" element={<LeaderBoard />} />
             <Route exact path="/productList/:id" element={<ProductList />} />

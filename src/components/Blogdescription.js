@@ -39,7 +39,7 @@ function Blogdescription() {
             </h4>
           </Row>
 
-          <p className="d-flex justify-content-center mt-4 ">
+          {/* <p className="d-flex justify-content-center mt-4 ">
             <h6>
               posted by -
               <img
@@ -53,7 +53,7 @@ function Blogdescription() {
               />
               {blogdescription?.posted_by}
             </h6>
-          </p>
+          </p> */}
           <p className="d-flex justify-content-center mb-4">
             Updated At:{" "}
             <Moment format="lll">{blogdescription?.updatedAt}</Moment>

@@ -60,8 +60,6 @@ function DemoPaginate() {
       <h1 className="text-primary mn-3">My Posts</h1>
       <Posts posts={currentPosts} loading={loading} />
       <Pagination
-        breakLabel="..."
-        nextLabel="next >"
         previousLabel="< previous"
         paginate={paginate}
         postsPerPage={postsPerPage}

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Container } from "reactstrap";
 import axios from "axios";
+
 function FAQ() {
   const [faq, setFaq] = useState([]);
   useEffect(() => {

@@ -1,14 +1,5 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import business from "../../images/business.png";
-import education from "../../images/education.png";
-import healthcare from "../../images/healthcare.png";
-
-import eatfoods from "../../images/eatfoods.png";
-import entertainment from "../../images/entertainment.png";
-import finance from "../../images/finance.png";
-import technology from "../../images/technology.png";
-import travel from "../../images/travel.png";
 
 import "../../styles/ModulePage.css";
 import {
@@ -25,7 +16,7 @@ import { Link, useParams } from "react-router-dom";
 
 function AllSubCategory() {
   let Params = useParams();
-  // console.log("Params", Params);
+
   const [subcatgry, setsubCatgry] = useState([]);
 
   useEffect(() => {
@@ -37,11 +28,10 @@ function AllSubCategory() {
 
       .get(`http://3.7.173.138:9000/admin/listbycategory/${Params.id}`)
 
-      // .get(`http://3.7.173.138:9000/admin/getallSubCategory/${Params.id}`)
       .then((response) => {
         setsubCatgry(response.data.data);
         console.log(response.data.data);
-        // console.log(subcatgry);
+
         console.log("subcategory", response.data.data);
       })
       .catch((error) => {
