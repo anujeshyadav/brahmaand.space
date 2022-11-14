@@ -5,21 +5,25 @@ ul.paginationsclass {
 }
 
 li.previous {
-  color: white !important;
   color: white;
-  padding: 0px 20px;
-  font-size: 20px;
+  padding: 0px 15px;
+
   border-radius: 10px;
   background-color: black;
-  font-size: 40px;
+  font-size: 32px;
+  width: 50px;
+  height: 50px;
 }
 
 li.next {
-  padding: 0px 20px;
-  font-size: 20px;
+  color: white;
+  padding: 0px 15px;
+
   border-radius: 10px;
   background-color: black;
-  font-size: 40px;
+  font-size: 32px;
+  width: 50px;
+  height: 50px;
 }
 li {
   /* padding: 0px 7px; */
@@ -38,17 +42,22 @@ a {
 }
 
 .pageclassforpage {
-  margin: 13px;
-  border: 1px solid;
-  padding: 6px 16px;
+  height: 49px;
   background-color: #8080803d;
-  color: #040404;
-  border-radius: 5px;
+  border-radius: 10px;
+  margin-top: 0px;
+  padding: 13px 24px;
 }
 
 .activeclassofpagination {
-  background: black;
+  background-color: black;
+  margin: 0px 16px;
+  height: 49px;
+  margin: black;
   color: rgb(255 255 255);
+  padding: 21px;
+  border-radius: 10px;
+  padding: 13px 23px;
 }
 li.break {
   padding: 8px 5px;
