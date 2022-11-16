@@ -8,8 +8,6 @@ import "../../components/pagination.css";
 import { FiFilter } from "react-icons/fi";
 import Slider from "./Slider";
 import Pagination from "react-bootstrap/Pagination";
-//import ReactDOM from "react-dom";
-import Searchfiltermodel from "../../components/filter/Searchfiltermodel";
 import { Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 import "../../styles/ModulePage.css";
 import mdicon1 from "../../assets/icons/mdicon-1.png";
@@ -19,14 +17,14 @@ import usericon from "../../assets/icons/usericon.png";
 import typeicon from "../../assets/icons/typeicon.png";
 import formaticon from "../../assets/icons/formaticon.png";
 import diffculty from "../../assets/icons/diffculty.png";
-import icons from "../../assets/icons/icon3.png";
+
 import languageicon from "../../assets/icons/languageicon.png";
-import rating from "../../assets/icons/rating.png";
+
 import yearicon from "../../assets/icons/yearicon.png";
 import submiticon from "../../assets/icons/submiticon.png";
 import reviewstar from "../../assets/icons/reviewstra.png";
 import ratingstar from "../../assets/icons/ratingstar.png";
-import usermdl from "../../assets/images/usermdl.jpg";
+
 import { Row, Col, Form, Button, Container } from "react-bootstrap";
 import { Link, useParams } from "react-router-dom";
 import "../../styles/Filter.css";
@@ -49,7 +47,9 @@ function ProductList(args) {
   const [active, setActive] = useState(false);
   const [value, setValue] = useState();
   const toggle = () => setModal(!modal);
+  const toggleone = () => setModalone(!modalone);
   const [modal, setModal] = useState(false);
+  const [modalone, setModalone] = useState(false);
   const [liked, setliked] = useState([]);
   const [activelike, setActivelike] = useState([]);
   const [dislike, setDislike] = useState([]);
@@ -61,8 +61,32 @@ function ProductList(args) {
   const [like, setLike] = useState(liked);
   const [categry, setCategry] = useState([]);
   const [promotion, setPromotion] = useState([]);
+  const [promotId, setPromotId] = useState("");
+  const [promotiondata, setPromotiondata] = useState({});
 
-  // const handlepromotion = () => {};
+  const handlepromotion = (_id) => {
+    var promotionId = _id;
+    if (promotionId === _id) {
+      setPromotId(promotionId);
+      axios
+        .get(`http://3.7.173.138:9000/admin/getone_reslist/${promotId}`)
+        .then((res) => {
+          console.log(res.data.data._id);
+          if (
+            res.data.data._id !== "" ||
+            res.data.data._id !== null ||
+            res.data.data._id !== undefined
+          ) {
+            setPromotiondata(res.data.data);
+            console.log(res.data.data);
+            toggleone();
+          }
+        })
+        .catch((err) => {
+          console.log(err.data.data);
+        });
+    }
+  };
   const promotionadmin = () => {
     axios
       .get(`http://3.7.173.138:9000/user/Promotions`)
@@ -158,7 +182,6 @@ function ProductList(args) {
         });
     }
 
-    // setGetonecomment(selectedId);
     axios
       .get(`http://3.7.173.138:9000/user/comment_list/${selectedId}`)
       .then((res) => {
@@ -408,28 +431,30 @@ function ProductList(args) {
 
                   <Row>
                     {promotion?.map((promotion) => (
-                      <Col lg="4" md="4" sm="6" key={promotion._id}>
+                      <Col lg="4" md="4" sm="6" key={promotion?._id}>
                         <div class="product-grid8">
                           <div class="product-image8">
                             <Link
-                              // onClick={handlepromotion}
-                              // to="#"
-                              onClick={toggle}
+                              key={promotion?._id}
+                              onClick={() => handlepromotion(promotion?._id)}
                             >
-                              <img src={business} alt="" />
+                              <img
+                                key={promotion?._id}
+                                height={220}
+                                className="promotionimageclass"
+                                src={promotion?.img}
+                                alt="image"
+                              />
                               <Modal
-                                key={promotion._id}
+                                key={promotiondata?._id}
                                 className="mdlg"
-                                isOpen={modal}
-                                toggle={toggle}
+                                isOpen={modalone}
+                                toggle={toggleone}
                                 {...args}
                               >
-                                <ModalBody>
+                                <ModalBody key={promotiondata?._id}>
                                   <div className="main-content">
-                                    <h2>
-                                      Building Industry-Level Apps With
-                                      Multi-Module Architecture
-                                    </h2>
+                                    <h2>{promotiondata?.desc}</h2>
                                     <div className="top-icon">
                                       <Link to="#">
                                         <img src={mdicon1} alt="" />
@@ -451,17 +476,12 @@ function ProductList(args) {
                                           Topic:
                                         </h5>
                                       </div>
-                                      <div className="tag-2">
-                                        <Link to="#">Android</Link>
-                                        <Link to="#">clean architecture</Link>
-                                        <Link to="#">multi-module</Link>
-                                        <Link to="#">mvvm</Link>
-                                        <Link to="#">use cases</Link>
-                                        <Link to="#">solid</Link>
-                                        <Link to="#">jetpack compose</Link>
-                                        <Link to="#">kotlin</Link>
-                                        <Link to="#">room</Link>
-                                        <Link to="#">retrofit</Link>
+                                      <div className=" d-flex tag-2">
+                                        {promotiondata?.topics?.map((val) => (
+                                          <Link className="d-flex " to="#">
+                                            {val}{" "}
+                                          </Link>
+                                        ))}
                                       </div>
                                     </div>
 
@@ -470,10 +490,7 @@ function ProductList(args) {
 
                                   <div className="mid">
                                     <h5>
-                                      Link :
-                                      <span>
-                                        https://pl-coding.com/multi-module-course
-                                      </span>
+                                      Link :<span>{promotiondata?.link}</span>
                                     </h5>
                                     <div className="mid-content">
                                       <Row>
@@ -484,7 +501,9 @@ function ProductList(args) {
                                             </div>
                                             <div className="mid-1-b">
                                               <p>Creator:</p>
-                                              <h4>Philipp Lackner</h4>
+                                              <h4>
+                                                {promotiondata?.creatorName}
+                                              </h4>
                                             </div>
                                           </div>
                                         </Col>
@@ -495,7 +514,9 @@ function ProductList(args) {
                                             </div>
                                             <div className="mid-1-b">
                                               <p>Submitted by:</p>
-                                              <h4>Philipp Lackner</h4>
+                                              <h4>
+                                                {promotiondata?.creatorName}
+                                              </h4>
                                             </div>
                                           </div>
                                         </Col>
@@ -510,7 +531,9 @@ function ProductList(args) {
                                             </div>
                                             <div className="mid-1-b tt-1">
                                               <p>Type:</p>
-                                              <Link to="#">Paid</Link>
+                                              <Link to="#">
+                                                {promotiondata?.type}
+                                              </Link>
                                             </div>
                                           </div>
                                         </Col>
@@ -525,7 +548,9 @@ function ProductList(args) {
                                             </div>
                                             <div className="mid-1-b tt-1">
                                               <p>Format:</p>
-                                              <Link to="#">Video</Link>
+                                              <Link to="#">
+                                                {promotiondata?.format}
+                                              </Link>
                                             </div>
                                           </div>
                                         </Col>
@@ -539,8 +564,10 @@ function ProductList(args) {
                                               />
                                             </div>
                                             <div className="mid-1-b tt-1">
-                                              <p>Difficulty:</p>
-                                              <Link to="#">Advanced</Link>
+                                              <p>Category:</p>
+                                              <Link to="#">
+                                                {promotiondata?.category?.title}
+                                              </Link>
                                             </div>
                                           </div>
                                         </Col>
@@ -555,7 +582,13 @@ function ProductList(args) {
                                             </div>
                                             <div className="mid-1-b tt-1">
                                               <p>Language:</p>
-                                              <Link to="#">English</Link>
+                                              {promotiondata?.language?.map(
+                                                (lang) => (
+                                                  <Link to="#">
+                                                    {lang?.language}
+                                                  </Link>
+                                                )
+                                              )}
                                             </div>
                                           </div>
                                         </Col>
@@ -570,7 +603,13 @@ function ProductList(args) {
                                             </div>
                                             <div className="mid-1-b tt-1">
                                               <p>Year:</p>
-                                              <Link to="#">2022</Link>
+                                              {promotiondata?.relYear?.map(
+                                                (year) => (
+                                                  <Link to="#">
+                                                    {year?.yrName}
+                                                  </Link>
+                                                )
+                                              )}
                                             </div>
                                           </div>
                                         </Col>
@@ -600,7 +639,9 @@ function ProductList(args) {
                                             </div>
                                             <div className="mid-1-b tt-1">
                                               <p>Submitted:</p>
-                                              <Link to="#">Aug 24, 2022</Link>
+                                              <Moment format="ll">
+                                                {Producdetail?.createdAt}
+                                              </Moment>
                                             </div>
                                           </div>
                                         </Col>
@@ -612,10 +653,7 @@ function ProductList(args) {
 
                                   <div className="description mt-3">
                                     <h4>Description:</h4>
-                                    <p>
-                                      Build a calorie counter app in Android
-                                      Studio using multi-modulearchitecture.
-                                    </p>
+                                    <p>{promotiondata?.desc}</p>
                                   </div>
 
                                   <hr></hr>
@@ -625,14 +663,16 @@ function ProductList(args) {
                                         <div className="rat-left">
                                           <h4>Customer Rating</h4>
                                           <div className="">
-                                            <img
-                                              src={reviewstar}
-                                              alt=""
-                                              width="120px"
+                                            <PrettyRating
+                                              // value={value?.rating}
+                                              value={2}
+                                              icons={icons.star}
+                                              colors={colors.star}
                                             />
-                                            <span>4.7 of 5</span>
+
                                             <small className="mt-3">
-                                              362 customers reviews
+                                              {getonecomment?.length}- customers
+                                              reviews
                                             </small>
                                             <img
                                               src={ratingstar}
@@ -646,17 +686,25 @@ function ProductList(args) {
                                         <div className="rat-right">
                                           <h4>Write your review</h4>
                                           <div className="">
-                                            <img
-                                              src={reviewstar}
-                                              alt=""
-                                              width="120px"
+                                            <StarsRating
+                                              count={5}
+                                              onChange={ratingChanged}
+                                              size={40}
+                                              color={"#ffd700"}
                                             />
+
                                             <form>
                                               <textarea
+                                                value={text}
+                                                name="text"
+                                                onChange={onchangehandler}
                                                 className="form-control st-taetarea"
                                                 placeholder=""
                                               ></textarea>
-                                              <Button className="bt-st">
+                                              <Button
+                                                onClick={handleSubmit}
+                                                className="bt-st"
+                                              >
                                                 Send
                                               </Button>
                                             </form>
@@ -668,80 +716,37 @@ function ProductList(args) {
                                   <hr></hr>
                                   <div className="review-list">
                                     <h4>Reviews:</h4>
-                                    <div className="re-list">
-                                      <div className="re-listimg">
-                                        <img src={usermdl} alt="" />
-                                      </div>
-                                      <div className="re-listcont">
-                                        <h5>
-                                          Jozef Kondratovich
-                                          <span>few secs ago</span>
-                                        </h5>
-                                        <div className="star-1">
-                                          <Link to="#">
-                                            <FaStar className="star-1" />
-                                          </Link>
-                                          <Link to="#">
-                                            <FaStar className="star-1" />
-                                          </Link>
-                                          <Link to="#">
-                                            <FaStar className="star-1" />
-                                          </Link>
-                                          <Link to="#">
-                                            <FaStar className="star-1" />
-                                          </Link>
-                                          <Link to="#">
-                                            <FaStar className="star-1" />
-                                          </Link>
+
+                                    {getonecomment?.map((value) => (
+                                      <div className="re-list">
+                                        <div className="re-listimg">
+                                          <img
+                                            src={value?.userid?.profileImg}
+                                            alt="UserImage"
+                                          />
+                                        </div>
+                                        <div className="re-listcont">
+                                          <h5>
+                                            {value?.userid?.username}
+                                            <span>
+                                              <Moment format="ll">
+                                                {value?.createdAt}
+                                              </Moment>
+                                            </span>
+                                          </h5>
+                                          <div className="star-1">
+                                            <PrettyRating
+                                              value={value?.rating}
+                                              icons={icons.star}
+                                              colors={colors.star}
+                                            />
+                                          </div>
+                                        </div>
+                                        <div className="re-btext mt-3">
+                                          <p>{value?.comment}</p>
                                         </div>
                                       </div>
-                                      <div className="re-btext">
-                                        <p>
-                                          There're so many choices in their
-                                          menu. I appreciated that it also
-                                          showed the calories. Good to know
-                                          about that. Then I chose the one with
-                                          lower calories
-                                        </p>
-                                      </div>
-                                    </div>
-                                    <div className="re-list">
-                                      <div className="re-listimg">
-                                        <img src={usermdl} alt="" />
-                                      </div>
-                                      <div className="re-listcont">
-                                        <h5>
-                                          Jozef Kondratovich
-                                          <span>few secs ago</span>
-                                        </h5>
-                                        <div className="star-1">
-                                          <Link to="#">
-                                            <FaStar className="star-1" />
-                                          </Link>
-                                          <Link to="#">
-                                            <FaStar className="star-1" />
-                                          </Link>
-                                          <Link to="#">
-                                            <FaStar className="star-1" />
-                                          </Link>
-                                          <Link to="#">
-                                            <FaStar className="star-1" />
-                                          </Link>
-                                          <Link to="#">
-                                            <FaStar className="star-1" />
-                                          </Link>
-                                        </div>
-                                      </div>
-                                      <div className="re-btext">
-                                        <p>
-                                          There're so many choices in their
-                                          menu. I appreciated that it also
-                                          showed the calories. Good to know
-                                          about that. Then I chose the one with
-                                          lower calories
-                                        </p>
-                                      </div>
-                                    </div>
+                                    ))}
                                   </div>
                                 </ModalBody>
                               </Modal>
@@ -754,24 +759,16 @@ function ProductList(args) {
                           <div class="product-content">
                             <ul class="rating">
                               <li>
-                                <Link to="#" className="btt">
-                                  #best
-                                </Link>
-                                <Link to="#" className="btt">
-                                  #study
-                                </Link>
+                                {promotion?.topics?.map((topic) => (
+                                  <Link className="btt">{topic}</Link>
+                                ))}
                               </li>
                             </ul>
                             <h3>{promotion?.desc}</h3>
                             <h5>
-                              <span>By</span> CodeWithHarry
+                              <span>By</span> {promotion?.creatorName}
                             </h5>
-                            <p>
-                              Introduction to Java + Installing Java JDK and
-                              IntelliJ IDEA for Java 19:00 Basic Structure of a
-                              Java Program: Understanding our First JavaHello
-                              World Program 14:09
-                            </p>
+                            <p>{promotion?.res_desc}</p>
                             <div className="">
                               <ul class="rating">
                                 <li class="fa fa-star">
@@ -790,19 +787,15 @@ function ProductList(args) {
                                   <FaStar />
                                 </li>
                                 <span>(4.0)</span>
-                                <span className="ft-star">12.2k Reviews</span>
+                                <span className="ft-star">
+                                  {promotion?.__v} Reviews
+                                </span>
                               </ul>
 
                               <ul class="rating">
                                 <li>
                                   <Link to="#" className="tag">
-                                    2022
-                                  </Link>
-                                  <Link to="#" className="tag">
-                                    #Java
-                                  </Link>
-                                  <Link to="#" className="tag">
-                                    #Android
+                                    {promotion?.relYear[0]?.yrName}
                                   </Link>
                                 </li>
                               </ul>
@@ -811,807 +804,7 @@ function ProductList(args) {
                         </div>
                       </Col>
                     ))}
-                    <Col lg="4" md="4" sm="6">
-                      <div class="product-grid8">
-                        <div class="product-image8">
-                          <Link
-                          // onClick={handlepromotion}
-                          // to="#"
-                          // onClick={toggle}
-                          >
-                            <img src={business} alt="" />
-                            {/* <Modal
-                              className="mdlg"
-                              isOpen={modal}
-                              toggle={toggle}
-                              {...args}
-                            >
-                              <ModalBody>
-                                <div className="main-content">
-                                  <h2>
-                                    Building Industry-Level Apps With
-                                    Multi-Module Architecture
-                                  </h2>
-                                  <div className="top-icon">
-                                    <Link to="#">
-                                      <img src={mdicon1} alt="" />
-                                    </Link>
-                                    <Link to="#">
-                                      <img src={mdicon2} alt="" />
-                                    </Link>
-                                  </div>
-                                  <div className="tag-list">
-                                    <div className="tag-1">
-                                      <h5>
-                                        <span>
-                                          <img
-                                            src={icons}
-                                            alt=""
-                                            width="30px"
-                                          />
-                                        </span>
-                                        Topic:
-                                      </h5>
-                                    </div>
-                                    <div className="tag-2">
-                                      <Link to="#">Android</Link>
-                                      <Link to="#">clean architecture</Link>
-                                      <Link to="#">multi-module</Link>
-                                      <Link to="#">mvvm</Link>
-                                      <Link to="#">use cases</Link>
-                                      <Link to="#">solid</Link>
-                                      <Link to="#">jetpack compose</Link>
-                                      <Link to="#">kotlin</Link>
-                                      <Link to="#">room</Link>
-                                      <Link to="#">retrofit</Link>
-                                    </div>
-                                  </div>
-
-                                  <hr></hr>
-                                </div>
-
-                                <div className="mid">
-                                  <h5>
-                                    Link :
-                                    <span>
-                                      https://pl-coding.com/multi-module-course
-                                    </span>
-                                  </h5>
-                                  <div className="mid-content">
-                                    <Row>
-                                      <Col lg="6" md="6">
-                                        <div className="mid-1 mb-3">
-                                          <div className="mid-1-a">
-                                            <img src={createricon} alt="" />
-                                          </div>
-                                          <div className="mid-1-b">
-                                            <p>Creator:</p>
-                                            <h4>Philipp Lackner</h4>
-                                          </div>
-                                        </div>
-                                      </Col>
-                                      <Col lg="6" md="6">
-                                        <div className="mid-1 mb-3 ">
-                                          <div className="mid-1-a">
-                                            <img src={usericon} alt="" />
-                                          </div>
-                                          <div className="mid-1-b">
-                                            <p>Submitted by:</p>
-                                            <h4>Philipp Lackner</h4>
-                                          </div>
-                                        </div>
-                                      </Col>
-                                      <Col lg="3" md="3">
-                                        <div className="mid-1 mb-3 tt-2">
-                                          <div className="mid-1-a">
-                                            <img
-                                              src={typeicon}
-                                              alt=""
-                                              width="35px"
-                                            />
-                                          </div>
-                                          <div className="mid-1-b tt-1">
-                                            <p>Type:</p>
-                                            <Link to="#">Paid</Link>
-                                          </div>
-                                        </div>
-                                      </Col>
-                                      <Col lg="3" md="3">
-                                        <div className="mid-1 mb-3 tt-2">
-                                          <div className="mid-1-a">
-                                            <img
-                                              src={formaticon}
-                                              alt=""
-                                              width="35px"
-                                            />
-                                          </div>
-                                          <div className="mid-1-b tt-1">
-                                            <p>Format:</p>
-                                            <Link to="#">Video</Link>
-                                          </div>
-                                        </div>
-                                      </Col>
-                                      <Col lg="3" md="3">
-                                        <div className="mid-1 mb-3 tt-2">
-                                          <div className="mid-1-a">
-                                            <img
-                                              src={diffculty}
-                                              alt=""
-                                              width="35px"
-                                            />
-                                          </div>
-                                          <div className="mid-1-b tt-1">
-                                            <p>Difficulty:</p>
-                                            <Link to="#">Advanced</Link>
-                                          </div>
-                                        </div>
-                                      </Col>
-                                      <Col lg="3" md="3">
-                                        <div className="mid-1 mb-3 tt-2">
-                                          <div className="mid-1-a">
-                                            <img
-                                              src={languageicon}
-                                              alt=""
-                                              width="35px"
-                                            />
-                                          </div>
-                                          <div className="mid-1-b tt-1">
-                                            <p>Language:</p>
-                                            <Link to="#">English</Link>
-                                          </div>
-                                        </div>
-                                      </Col>
-                                      <Col lg="3" md="3">
-                                        <div className="mid-1 mb-3 tt-2">
-                                          <div className="mid-1-a">
-                                            <img
-                                              src={yearicon}
-                                              alt=""
-                                              width="35px"
-                                            />
-                                          </div>
-                                          <div className="mid-1-b tt-1">
-                                            <p>Year:</p>
-                                            <Link to="#">2022</Link>
-                                          </div>
-                                        </div>
-                                      </Col>
-                                      <Col lg="3" md="3">
-                                        <div className="mid-1 mb-3 tt-2">
-                                          <div className="mid-1-a">
-                                            <img
-                                              src={rating}
-                                              alt=""
-                                              width="35px"
-                                            />
-                                          </div>
-                                          <div className="mid-1-b tt-1">
-                                            <p>Ratings:</p>
-                                            <Link to="#">(4.5)</Link>
-                                          </div>
-                                        </div>
-                                      </Col>
-                                      <Col lg="4" md="4">
-                                        <div className="mid-1 mb-3 tt-2">
-                                          <div className="mid-1-a">
-                                            <img
-                                              src={submiticon}
-                                              alt=""
-                                              width="35px"
-                                            />
-                                          </div>
-                                          <div className="mid-1-b tt-1">
-                                            <p>Submitted:</p>
-                                            <Link to="#">Aug 24, 2022</Link>
-                                          </div>
-                                        </div>
-                                      </Col>
-                                    </Row>
-                                  </div>
-                                </div>
-
-                                <hr></hr>
-
-                                <div className="description mt-3">
-                                  <h4>Description:</h4>
-                                  <p>
-                                    Build a calorie counter app in Android
-                                    Studio using multi-modulearchitecture.
-                                  </p>
-                                </div>
-
-                                <hr></hr>
-                                <div className="rating-box">
-                                  <Row>
-                                    <Col lg="4">
-                                      <div className="rat-left">
-                                        <h4>Customer Rating</h4>
-                                        <div className="">
-                                          <img
-                                            src={reviewstar}
-                                            alt=""
-                                            width="120px"
-                                          />
-                                          <span>4.7 of 5</span>
-                                          <small className="mt-3">
-                                            362 customers reviews
-                                          </small>
-                                          <img
-                                            src={ratingstar}
-                                            alt=""
-                                            width="100%"
-                                          />
-                                        </div>
-                                      </div>
-                                    </Col>
-                                    <Col lg="8">
-                                      <div className="rat-right">
-                                        <h4>Write your review</h4>
-                                        <div className="">
-                                          <img
-                                            src={reviewstar}
-                                            alt=""
-                                            width="120px"
-                                          />
-                                          <form>
-                                            <textarea
-                                              className="form-control st-taetarea"
-                                              placeholder=""
-                                            ></textarea>
-                                            <Button className="bt-st">
-                                              Send
-                                            </Button>
-                                          </form>
-                                        </div>
-                                      </div>
-                                    </Col>
-                                  </Row>
-                                </div>
-                                <hr></hr>
-                                <div className="review-list">
-                                  <h4>Reviews:</h4>
-                                  <div className="re-list">
-                                    <div className="re-listimg">
-                                      <img src={usermdl} alt="" />
-                                    </div>
-                                    <div className="re-listcont">
-                                      <h5>
-                                        Jozef Kondratovich
-                                        <span>few secs ago</span>
-                                      </h5>
-                                      <div className="star-1">
-                                        <Link to="#">
-                                          <FaStar className="star-1" />
-                                        </Link>
-                                        <Link to="#">
-                                          <FaStar className="star-1" />
-                                        </Link>
-                                        <Link to="#">
-                                          <FaStar className="star-1" />
-                                        </Link>
-                                        <Link to="#">
-                                          <FaStar className="star-1" />
-                                        </Link>
-                                        <Link to="#">
-                                          <FaStar className="star-1" />
-                                        </Link>
-                                      </div>
-                                    </div>
-                                    <div className="re-btext">
-                                      <p>
-                                        There're so many choices in their menu.
-                                        I appreciated that it also showed the
-                                        calories. Good to know about that. Then
-                                        I chose the one with lower calories
-                                      </p>
-                                    </div>
-                                  </div>
-                                  <div className="re-list">
-                                    <div className="re-listimg">
-                                      <img src={usermdl} alt="" />
-                                    </div>
-                                    <div className="re-listcont">
-                                      <h5>
-                                        Jozef Kondratovich
-                                        <span>few secs ago</span>
-                                      </h5>
-                                      <div className="star-1">
-                                        <Link to="#">
-                                          <FaStar className="star-1" />
-                                        </Link>
-                                        <Link to="#">
-                                          <FaStar className="star-1" />
-                                        </Link>
-                                        <Link to="#">
-                                          <FaStar className="star-1" />
-                                        </Link>
-                                        <Link to="#">
-                                          <FaStar className="star-1" />
-                                        </Link>
-                                        <Link to="#">
-                                          <FaStar className="star-1" />
-                                        </Link>
-                                      </div>
-                                    </div>
-                                    <div className="re-btext">
-                                      <p>
-                                        There're so many choices in their menu.
-                                        I appreciated that it also showed the
-                                        calories. Good to know about that. Then
-                                        I chose the one with lower calories
-                                      </p>
-                                    </div>
-                                  </div>
-                                </div>
-                              </ModalBody>
-
-                            
-                            </Modal>  */}
-                          </Link>
-                          <span class="product-discount-label">
-                            <FaHeart />
-                          </span>
-                        </div>
-
-                        <div class="product-content">
-                          <ul class="rating">
-                            <li>
-                              <Link to="#" className="btt">
-                                #best
-                              </Link>
-                              <Link to="#" className="btt">
-                                #study
-                              </Link>
-                            </li>
-                          </ul>
-                          <h3>Java Tutorials For Beginners In Hindi</h3>
-                          <h5>
-                            <span>By</span> CodeWithHarry
-                          </h5>
-                          <p>
-                            Introduction to Java + Installing Java JDK and
-                            IntelliJ IDEA for Java 19:00 Basic Structure of a
-                            Java Program: Understanding our First JavaHello
-                            World Program 14:09
-                          </p>
-                          <div className="">
-                            <ul class="rating">
-                              <li class="fa fa-star">
-                                <FaStar />
-                              </li>
-                              <li class="fa fa-star">
-                                <FaStar />
-                              </li>
-                              <li class="fa fa-star">
-                                <FaStar />
-                              </li>
-                              <li class="fa fa-star">
-                                <FaStar />
-                              </li>
-                              <li class="fa fa-star">
-                                <FaStar />
-                              </li>
-                              <span>(4.0)</span>
-                              <span className="ft-star">12.2k Reviews</span>
-                            </ul>
-
-                            <ul class="rating">
-                              <li>
-                                <Link to="#" className="tag">
-                                  2022
-                                </Link>
-                                <Link to="#" className="tag">
-                                  #Java
-                                </Link>
-                                <Link to="#" className="tag">
-                                  #Android
-                                </Link>
-                              </li>
-                            </ul>
-                          </div>
-                        </div>
-                      </div>
-                    </Col>
-
-                    <Col lg="4" md="4" sm="6">
-                      <div class="product-grid8">
-                        <div class="product-image8">
-                          <Link to="#" onClick={toggle}>
-                            <img src={business} alt="" />
-                            {/* <Modal
-                              className="mdlg"
-                              isOpen={modal}
-                              toggle={toggle}
-                              {...args}
-                            >
-                              <ModalBody>
-                                <div className="main-content">
-                                  <h2>
-                                    Building Industry-Level Apps With
-                                    Multi-Module Architecture
-                                  </h2>
-                                  <div className="top-icon">
-                                    <Link to="#">
-                                      <img src={mdicon1} alt="" />
-                                    </Link>
-                                    <Link to="#">
-                                      <img src={mdicon2} alt="" />
-                                    </Link>
-                                  </div>
-                                  <div className="tag-list">
-                                    <div className="tag-1">
-                                      <h5>
-                                        
-                                        <span>
-                                          <img
-                                            src={icons}
-                                            alt=""
-                                            width="30px"
-                                          />
-                                        </span>
-                                        Topic:
-                                      </h5>
-                                    </div>
-                                    <div className="tag-2">
-                                      <Link to="#">Android</Link>
-                                      <Link to="#">clean architecture</Link>
-                                      <Link to="#">multi-module</Link>
-                                      <Link to="#">mvvm</Link>
-                                      <Link to="#">use cases</Link>
-                                      <Link to="#">solid</Link>
-                                      <Link to="#">jetpack compose</Link>
-                                      <Link to="#">kotlin</Link>
-                                      <Link to="#">room</Link>
-                                      <Link to="#">retrofit</Link>
-                                    </div>
-                                  </div>
-
-                                  <hr></hr>
-                                </div>
-
-                                <div className="mid">
-                                  <h5>
-                                    Link :{" "}
-                                    <span>
-                                      https://pl-coding.com/multi-module-course
-                                    </span>
-                                  </h5>
-                                  <div className="mid-content">
-                                    <Row>
-                                      <Col lg="6" md="6">
-                                        <div className="mid-1 mb-3">
-                                          <div className="mid-1-a">
-                                            <img src={createricon} alt="" />
-                                          </div>
-                                          <div className="mid-1-b">
-                                            <p>Creator:</p>
-                                            <h4>Philipp Lackner</h4>
-                                          </div>
-                                        </div>
-                                      </Col>
-                                      <Col lg="6" md="6">
-                                        <div className="mid-1 mb-3 ">
-                                          <div className="mid-1-a">
-                                            <img src={usericon} alt="" />
-                                          </div>
-                                          <div className="mid-1-b">
-                                            <p>Submitted by:</p>
-                                            <h4>Philipp Lackner</h4>
-                                          </div>
-                                        </div>
-                                      </Col>
-                                      <Col lg="3" md="3">
-                                        <div className="mid-1 mb-3 tt-2">
-                                          <div className="mid-1-a">
-                                            <img
-                                              src={typeicon}
-                                              alt=""
-                                              width="35px"
-                                            />
-                                          </div>
-                                          <div className="mid-1-b tt-1">
-                                            <p>Type:</p>
-                                            <Link to="#">Paid</Link>
-                                          </div>
-                                        </div>
-                                      </Col>
-                                      <Col lg="3" md="3">
-                                        <div className="mid-1 mb-3 tt-2">
-                                          <div className="mid-1-a">
-                                            <img
-                                              src={formaticon}
-                                              alt=""
-                                              width="35px"
-                                            />
-                                          </div>
-                                          <div className="mid-1-b tt-1">
-                                            <p>Format:</p>
-                                            <Link to="#">Video</Link>
-                                          </div>
-                                        </div>
-                                      </Col>
-                                      <Col lg="3" md="3">
-                                        <div className="mid-1 mb-3 tt-2">
-                                          <div className="mid-1-a">
-                                            <img
-                                              src={diffculty}
-                                              alt=""
-                                              width="35px"
-                                            />
-                                          </div>
-                                          <div className="mid-1-b tt-1">
-                                            <p>Difficulty:</p>
-                                            <Link to="#">Advanced</Link>
-                                          </div>
-                                        </div>
-                                      </Col>
-                                      <Col lg="3" md="3">
-                                        <div className="mid-1 mb-3 tt-2">
-                                          <div className="mid-1-a">
-                                            <img
-                                              src={languageicon}
-                                              alt=""
-                                              width="35px"
-                                            />
-                                          </div>
-                                          <div className="mid-1-b tt-1">
-                                            <p>Language:</p>
-                                            <Link to="#">English</Link>
-                                          </div>
-                                        </div>
-                                      </Col>
-                                      <Col lg="3" md="3">
-                                        <div className="mid-1 mb-3 tt-2">
-                                          <div className="mid-1-a">
-                                            <img
-                                              src={yearicon}
-                                              alt=""
-                                              width="35px"
-                                            />
-                                          </div>
-                                          <div className="mid-1-b tt-1">
-                                            <p>Year:</p>
-                                            <Link to="#">2022</Link>
-                                          </div>
-                                        </div>
-                                      </Col>
-                                      <Col lg="3" md="3">
-                                        <div className="mid-1 mb-3 tt-2">
-                                          <div className="mid-1-a">
-                                            <img
-                                              src={rating}
-                                              alt=""
-                                              width="35px"
-                                            />
-                                          </div>
-                                          <div className="mid-1-b tt-1">
-                                            <p>Ratings:</p>
-                                            <Link to="#">(4.5)</Link>
-                                          </div>
-                                        </div>
-                                      </Col>
-                                      <Col lg="4" md="4">
-                                        <div className="mid-1 mb-3 tt-2">
-                                          <div className="mid-1-a">
-                                            <img
-                                              src={submiticon}
-                                              alt=""
-                                              width="35px"
-                                            />
-                                          </div>
-                                          <div className="mid-1-b tt-1">
-                                            <p>Submitted:</p>
-                                            <Link to="#">Aug 24, 2022</Link>
-                                          </div>
-                                        </div>
-                                      </Col>
-                                    </Row>
-                                  </div>
-                                </div>
-
-                                <hr></hr>
-
-                                <div className="description mt-3">
-                                  <h4>Description:</h4>
-                                  <p>
-                                    Build a calorie counter app in Android
-                                    Studio using multi-modulearchitecture.
-                                  </p>
-                                </div>
-
-                                <hr></hr>
-                                <div className="rating-box">
-                                  <Row>
-                                    <Col lg="4">
-                                      <div className="rat-left">
-                                        <h4>Customer Rating</h4>
-                                        <div className="">
-                                          <img
-                                            src={reviewstar}
-                                            alt=""
-                                            width="120px"
-                                          />
-                                          <span>4.7 of 5</span>
-                                          <small className="mt-3">
-                                            362 customers reviews
-                                          </small>
-                                          <img
-                                            src={ratingstar}
-                                            alt=""
-                                            width="100%"
-                                          />
-                                        </div>
-                                      </div>
-                                    </Col>
-                                    <Col lg="8">
-                                      <div className="rat-right">
-                                        <h4>Write your review</h4>
-                                        <div className="">
-                                          <img
-                                            src={reviewstar}
-                                            alt=""
-                                            width="120px"
-                                          />
-                                          <form>
-                                            <textarea
-                                              className="form-control st-taetarea"
-                                              placeholder=""
-                                            ></textarea>
-                                            <Button className="bt-st">
-                                              Send
-                                            </Button>
-                                          </form>
-                                        </div>
-                                      </div>
-                                    </Col>
-                                  </Row>
-                                </div>
-                                <hr></hr>
-                                <div className="review-list">
-                                  <h4>Reviews:</h4>
-                                  <div className="re-list">
-                                    <div className="re-listimg">
-                                      <img src={usermdl} alt="" />
-                                    </div>
-                                    <div className="re-listcont">
-                                      <h5>
-                                        Jozef Kondratovich
-                                        <span>few secs ago</span>
-                                      </h5>
-                                      <div className="star-1">
-                                        <Link to="#">
-                                          <FaStar className="star-1" />
-                                        </Link>
-                                        <Link to="#">
-                                          <FaStar className="star-1" />
-                                        </Link>
-                                        <Link to="#">
-                                          <FaStar className="star-1" />
-                                        </Link>
-                                        <Link to="#">
-                                          <FaStar className="star-1" />
-                                        </Link>
-                                        <Link to="#">
-                                          <FaStar className="star-1" />
-                                        </Link>
-                                      </div>
-                                    </div>
-                                    <div className="re-btext">
-                                      <p>
-                                        There're so many choices in their menu.
-                                        I appreciated that it also showed the
-                                        calories. Good to know about that. Then
-                                        I chose the one with lower calories
-                                      </p>
-                                    </div>
-                                  </div>
-                                  <div className="re-list">
-                                    <div className="re-listimg">
-                                      <img src={usermdl} alt="" />
-                                    </div>
-                                    <div className="re-listcont">
-                                      <h5>
-                                        Jozef Kondratovich
-                                        <span>few secs ago</span>
-                                      </h5>
-                                      <div className="star-1">
-                                        <Link to="#">
-                                          <FaStar className="star-1" />
-                                        </Link>
-                                        <Link to="#">
-                                          <FaStar className="star-1" />
-                                        </Link>
-                                        <Link to="#">
-                                          <FaStar className="star-1" />
-                                        </Link>
-                                        <Link to="#">
-                                          <FaStar className="star-1" />
-                                        </Link>
-                                        <Link to="#">
-                                          <FaStar className="star-1" />
-                                        </Link>
-                                      </div>
-                                    </div>
-                                    <div className="re-btext">
-                                      <p>
-                                        There're so many choices in their menu.
-                                        I appreciated that it also showed the
-                                        calories. Good to know about that. Then
-                                        I chose the one with lower calories
-                                      </p>
-                                    </div>
-                                  </div>
-                                </div>
-                              </ModalBody>
-
-                              
-                            </Modal> */}
-                          </Link>
-                          <span class="product-discount-label">
-                            <FaHeart />
-                          </span>
-                        </div>
-                        <div class="product-content">
-                          <ul class="rating">
-                            <li>
-                              <Link to="#" className="btt">
-                                #best
-                              </Link>
-                              <Link to="#" className="btt">
-                                #study
-                              </Link>
-                            </li>
-                          </ul>
-                          <h3>Java Tutorials For Beginners In Hindi</h3>
-                          <h5>
-                            <span>By</span> CodeWithHarry
-                          </h5>
-                          <p>
-                            Introduction to Java + Installing Java JDK and
-                            IntelliJ IDEA for Java 19:00 Basic Structure of a
-                            Java Program: Understanding our First JavaHello
-                            World Program 14:09
-                          </p>
-                          <div className="">
-                            <ul class="rating">
-                              <li class="fa fa-star">
-                                <FaStar />
-                              </li>
-                              <li class="fa fa-star">
-                                <FaStar />
-                              </li>
-                              <li class="fa fa-star">
-                                <FaStar />
-                              </li>
-                              <li class="fa fa-star">
-                                <FaStar />
-                              </li>
-                              <li class="fa fa-star">
-                                <FaStar />
-                              </li>
-                              <span>(4.0)</span>
-                              <span className="ft-star">12.2k Reviews</span>
-                            </ul>
-
-                            <ul class="rating">
-                              <li>
-                                <Link to="#" className="tag">
-                                  2022
-                                </Link>
-                                <Link to="#" className="tag">
-                                  #Java
-                                </Link>
-                                <Link to="#" className="tag">
-                                  #Android
-                                </Link>
-                              </li>
-                            </ul>
-                          </div>
-                        </div>
-                      </div>
-                    </Col>
                   </Row>
-                  {/* for pagination here */}
 
                   <div className="serach-product">
                     <h4>
@@ -1631,7 +824,6 @@ function ProductList(args) {
                                 <Link
                                   key={categry?._id}
                                   onClick={() => handleSelection(categry?._id)}
-                                  // onClick={toggle}
                                 >
                                   <img
                                     style={{ borderRadius: "10px" }}
@@ -1675,12 +867,12 @@ function ProductList(args) {
                                           <div className=" d-flex tag-2">
                                             {Producdetail?.topics?.map(
                                               (val) => (
-                                                <span
+                                                <Link
                                                   className="d-flex "
                                                   to="#"
                                                 >
                                                   {val}{" "}
-                                                </span>
+                                                </Link>
                                               )
                                             )}
                                           </div>
@@ -1960,35 +1152,11 @@ function ProductList(args) {
                                                 </span>
                                               </h5>
                                               <div className="star-1">
-                                                {/* <StarsRating
-                                                  count={5}
-                                                  disableFillHover={true}
-                                                  onChange={ratingChanged}
-                                                  size={25}
-                                                  allowHover={true}
-                                                  readonly
-                                                  color2={"#ffd700"}
-                                                /> */}
                                                 <PrettyRating
                                                   value={value?.rating}
                                                   icons={icons.star}
                                                   colors={colors.star}
                                                 />
-                                                {/* <Link to="#">
-                                                  <FaStar className="star-1" />
-                                                </Link>
-                                                <Link to="#">
-                                                  <FaStar className="star-1" />
-                                                </Link>
-                                                <Link to="#">
-                                                  <FaStar className="star-1" />
-                                                </Link>
-                                                <Link to="#">
-                                                  <FaStar className="star-1" />
-                                                </Link>
-                                                <Link to="#">
-                                                  <FaStar className="star-1" />
-                                                </Link> */}
                                               </div>
                                             </div>
                                             <div className="re-btext mt-3">
@@ -2042,12 +1210,6 @@ function ProductList(args) {
                                             }
                                           });
                                       }}
-                                      // onClick={async (e) => {
-                                      //   like
-                                      //     ? await removeLike(Producdetail?._Id)
-                                      //     : await addLike(Producdetail?._Id);
-                                      //   setLike(!like);
-                                      // }}
                                     >
                                       {like ? (
                                         <FaHeart size={28} color="red" />
@@ -2121,12 +1283,6 @@ function ProductList(args) {
                                       <Link to="#" className="tag">
                                         {categry?.relYear[0].yrName}
                                       </Link>
-                                      <Link to="#" className="tag">
-                                        #Java
-                                      </Link>
-                                      <Link to="#" className="tag">
-                                        #Android
-                                      </Link>
                                     </li>
                                   </ul>
                                 </div>
@@ -2135,491 +1291,8 @@ function ProductList(args) {
                           </Row>
                         ))}
                       </div>
-
-                      <div className="search-st mb-3">
-                        {/* <Row>
-                          <Col md="4">
-                            <div class="product-image8 st-2">
-                              <Link to="#">
-                                <img src={business} alt="" width="100%" />
-                              </Link>
-                              <span class="product-discount-label st-1">
-                                <FaHeart />
-                              </span>
-                            </div>
-                          </Col>
-                          <Col md="8">
-                            <div class="product-content">
-                              <ul class="rating">
-                                <li>
-                                  <Link to="#" className="btt">
-                                    #best
-                                  </Link>
-                                  <Link to="#" className="btt">
-                                    #study
-                                  </Link>
-                                </li>
-                              </ul>
-                              <h3>Java Tutorials For Beginners In Hindi</h3>
-                              <h5>
-                                <span>By</span> CodeWithHarry
-                              </h5>
-                              <p>
-                                Introduction to Java + Installing Java JDK and
-                                IntelliJ IDEA for Java 19:00 Basic Structure of
-                                a Java Program: Understanding our First
-                                JavaHello World Program 14:09
-                              </p>
-                              <div className="">
-                                <ul class="rating">
-                                  <li class="fa fa-star">
-                                    <FaStar />
-                                  </li>
-                                  <li class="fa fa-star">
-                                    <FaStar />
-                                  </li>
-                                  <li class="fa fa-star">
-                                    <FaStar />
-                                  </li>
-                                  <li class="fa fa-star">
-                                    <FaStar />
-                                  </li>
-                                  <li class="fa fa-star">
-                                    <FaStar />
-                                  </li>
-                                  <span>(4.0)</span>
-                                  <span className="ft-star">12.2k Reviews</span>
-                                </ul>
-
-                                <ul class="rating">
-                                  <li>
-                                    <Link to="#" className="tag">
-                                      2022
-                                    </Link>
-                                    <Link to="#" className="tag">
-                                      #Java
-                                    </Link>
-                                    <Link to="#" className="tag">
-                                      #Android
-                                    </Link>
-                                  </li>
-                                </ul>
-                              </div>
-                            </div>
-                          </Col>
-                        </Row> */}
-                      </div>
-                      <div className="search-st mb-3">
-                        {/* <Row>
-                          <Col md="4">
-                            <div class="product-image8 st-2">
-                              <Link to="#">
-                                <img src={business} alt="" width="100%" />
-                                <Modal
-                                  className="mdlg"
-                                  isOpen={modal}
-                                  toggle={toggle}
-                                  {...args}
-                                >
-                                  <ModalBody>
-                                    <div className="main-content">
-                                      <h2>
-                                        Building Industry-Level Apps With
-                                        Multi-Module Architecture
-                                      </h2>
-                                      <div className="top-icon">
-                                        <Link to="#">
-                                          <img src={mdicon1} alt="" />
-                                        </Link>
-                                        <Link to="#">
-                                          <img src={mdicon2} alt="" />
-                                        </Link>
-                                      </div>
-                                      <div className="tag-list">
-                                        <div className="tag-1">
-                                          <h5>
-                                            {" "}
-                                            <span>
-                                              <img
-                                                src={icons}
-                                                alt=""
-                                                width="30px"
-                                              />{" "}
-                                            </span>{" "}
-                                            Topic:
-                                          </h5>
-                                        </div>
-                                        <div className="tag-2">
-                                          <Link to="#">Android</Link>
-                                          <Link to="#">clean architecture</Link>
-                                          <Link to="#">multi-module</Link>
-                                          <Link to="#">mvvm</Link>
-                                          <Link to="#">use cases</Link>
-                                          <Link to="#">solid</Link>
-                                          <Link to="#">jetpack compose</Link>
-                                          <Link to="#">kotlin</Link>
-                                          <Link to="#">room</Link>
-                                          <Link to="#">retrofit</Link>
-                                        </div>
-                                      </div>
-
-                                      <hr></hr>
-                                    </div>
-
-                                    <div className="mid">
-                                      <h5>
-                                        Link :{" "}
-                                        <span>
-                                          https://pl-coding.com/multi-module-course
-                                        </span>
-                                      </h5>
-                                      <div className="mid-content">
-                                        <Row>
-                                          <Col lg="6" md="6">
-                                            <div className="mid-1 mb-3">
-                                              <div className="mid-1-a">
-                                                <img src={createricon} alt="" />
-                                              </div>
-                                              <div className="mid-1-b">
-                                                <p>Creator:</p>
-                                                <h4>Philipp Lackner</h4>
-                                              </div>
-                                            </div>
-                                          </Col>
-                                          <Col lg="6" md="6">
-                                            <div className="mid-1 mb-3 ">
-                                              <div className="mid-1-a">
-                                                <img src={usericon} alt="" />
-                                              </div>
-                                              <div className="mid-1-b">
-                                                <p>Submitted by:</p>
-                                                <h4>Philipp Lackner</h4>
-                                              </div>
-                                            </div>
-                                          </Col>
-                                          <Col lg="3" md="3">
-                                            <div className="mid-1 mb-3 tt-2">
-                                              <div className="mid-1-a">
-                                                <img
-                                                  src={typeicon}
-                                                  alt=""
-                                                  width="35px"
-                                                />
-                                              </div>
-                                              <div className="mid-1-b tt-1">
-                                                <p>Type:</p>
-                                                <Link to="#">Paid</Link>
-                                              </div>
-                                            </div>
-                                          </Col>
-                                          <Col lg="3" md="3">
-                                            <div className="mid-1 mb-3 tt-2">
-                                              <div className="mid-1-a">
-                                                <img
-                                                  src={formaticon}
-                                                  alt=""
-                                                  width="35px"
-                                                />
-                                              </div>
-                                              <div className="mid-1-b tt-1">
-                                                <p>Format:</p>
-                                                <Link to="#">Video</Link>
-                                              </div>
-                                            </div>
-                                          </Col>
-                                          <Col lg="3" md="3">
-                                            <div className="mid-1 mb-3 tt-2">
-                                              <div className="mid-1-a">
-                                                <img
-                                                  src={diffculty}
-                                                  alt=""
-                                                  width="35px"
-                                                />
-                                              </div>
-                                              <div className="mid-1-b tt-1">
-                                                <p>Difficulty:</p>
-                                                <Link to="#">Advanced</Link>
-                                              </div>
-                                            </div>
-                                          </Col>
-                                          <Col lg="3" md="3">
-                                            <div className="mid-1 mb-3 tt-2">
-                                              <div className="mid-1-a">
-                                                <img
-                                                  src={languageicon}
-                                                  alt=""
-                                                  width="35px"
-                                                />
-                                              </div>
-                                              <div className="mid-1-b tt-1">
-                                                <p>Language:</p>
-                                                <Link to="#">English</Link>
-                                              </div>
-                                            </div>
-                                          </Col>
-                                          <Col lg="3" md="3">
-                                            <div className="mid-1 mb-3 tt-2">
-                                              <div className="mid-1-a">
-                                                <img
-                                                  src={yearicon}
-                                                  alt=""
-                                                  width="35px"
-                                                />
-                                              </div>
-                                              <div className="mid-1-b tt-1">
-                                                <p>Year:</p>
-                                                <Link to="#">2022</Link>
-                                              </div>
-                                            </div>
-                                          </Col>
-                                          <Col lg="3" md="3">
-                                            <div className="mid-1 mb-3 tt-2">
-                                              <div className="mid-1-a">
-                                                <img
-                                                  src={rating}
-                                                  alt=""
-                                                  width="35px"
-                                                />
-                                              </div>
-                                              <div className="mid-1-b tt-1">
-                                                <p>Ratings:</p>
-                                                <Link to="#">(4.5)</Link>
-                                              </div>
-                                            </div>
-                                          </Col>
-                                          <Col lg="4" md="4">
-                                            <div className="mid-1 mb-3 tt-2">
-                                              <div className="mid-1-a">
-                                                <img
-                                                  src={submiticon}
-                                                  alt=""
-                                                  width="35px"
-                                                />
-                                              </div>
-                                              <div className="mid-1-b tt-1">
-                                                <p>Submitted:</p>
-                                                <Link to="#">Aug 24, 2022</Link>
-                                              </div>
-                                            </div>
-                                          </Col>
-                                        </Row>
-                                      </div>
-                                    </div>
-
-                                    <hr></hr>
-
-                                    <div className="description mt-3">
-                                      <h4>Description:</h4>
-                                      <p>
-                                        Build a calorie counter app in Android
-                                        Studio using multi-modulearchitecture.
-                                      </p>
-                                    </div>
-
-                                    <hr></hr>
-                                    <div className="rating-box">
-                                      <Row>
-                                        <Col lg="4">
-                                          <div className="rat-left">
-                                            <h4>Customer Rating</h4>
-                                            <div className="">
-                                              <img
-                                                src={reviewstar}
-                                                alt=""
-                                                width="120px"
-                                              />
-                                              <span>4.7 of 5</span>
-                                              <small className="mt-3">
-                                                362 customers reviews
-                                              </small>
-                                              <img
-                                                src={ratingstar}
-                                                alt=""
-                                                width="100%"
-                                              />
-                                            </div>
-                                          </div>
-                                        </Col>
-                                        <Col lg="8">
-                                          <div className="rat-right">
-                                            <h4>Write your review</h4>
-                                            <div className="">
-                                              <img
-                                                src={reviewstar}
-                                                alt=""
-                                                width="120px"
-                                              />
-                                              <form>
-                                                <textarea
-                                                  className="form-control st-taetarea"
-                                                  placeholder=""
-                                                ></textarea>
-                                                <Button className="bt-st">
-                                                  Send
-                                                </Button>
-                                              </form>
-                                            </div>
-                                          </div>
-                                        </Col>
-                                      </Row>
-                                    </div>
-                                    <hr></hr>
-                                    <div className="review-list">
-                                      <h4>Reviews:</h4>
-                                      <div className="re-list">
-                                        <div className="re-listimg">
-                                          <img src={usermdl} alt="" />
-                                        </div>
-                                        <div className="re-listcont">
-                                          <h5>
-                                            Jozef Kondratovich
-                                            <span>few secs ago</span>
-                                          </h5>
-                                          <div className="star-1">
-                                            <Link to="#">
-                                              <FaStar className="star-1" />
-                                            </Link>
-                                            <Link to="#">
-                                              <FaStar className="star-1" />
-                                            </Link>
-                                            <Link to="#">
-                                              <FaStar className="star-1" />
-                                            </Link>
-                                            <Link to="#">
-                                              <FaStar className="star-1" />
-                                            </Link>
-                                            <Link to="#">
-                                              <FaStar className="star-1" />
-                                            </Link>
-                                          </div>
-                                        </div>
-                                        <div className="re-btext">
-                                          <p>
-                                            There're so many choices in their
-                                            menu. I appreciated that it also
-                                            showed the calories. Good to know
-                                            about that. Then I chose the one
-                                            with lower calories
-                                          </p>
-                                        </div>
-                                      </div>
-                                      <div className="re-list">
-                                        <div className="re-listimg">
-                                          <img src={usermdl} alt="" />
-                                        </div>
-                                        <div className="re-listcont">
-                                          <h5>
-                                            Jozef Kondratovich
-                                            <span>few secs ago</span>
-                                          </h5>
-                                          <div className="star-1">
-                                            <Link to="#">
-                                              <FaStar className="star-1" />
-                                            </Link>
-                                            <Link to="#">
-                                              <FaStar className="star-1" />
-                                            </Link>
-                                            <Link to="#">
-                                              <FaStar className="star-1" />
-                                            </Link>
-                                            <Link to="#">
-                                              <FaStar className="star-1" />
-                                            </Link>
-                                            <Link to="#">
-                                              <FaStar className="star-1" />
-                                            </Link>
-                                          </div>
-                                        </div>
-                                        <div className="re-btext">
-                                          <p>
-                                            There're so many choices in their
-                                            menu. I appreciated that it also
-                                            showed the calories. Good to know
-                                            about that. Then I chose the one
-                                            with lower calories
-                                          </p>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </ModalBody>
-                                </Modal>
-                              </Link>
-                              <span class="product-discount-label st-1">
-                                <FaHeart />
-                              </span>
-                            </div>
-                          </Col>
-                          <Col md="8">
-                            <div class="product-content">
-                              <ul class="rating">
-                                <li>
-                                  <Link to="#" className="btt">
-                                    #best
-                                  </Link>
-                                  <Link to="#" className="btt">
-                                    #study
-                                  </Link>
-                                </li>
-                              </ul>
-                              <h3>Java Tutorials For Beginners In Hindi</h3>
-                              <h5>
-                                <span>By</span> CodeWithHarry
-                              </h5>
-                              <p>
-                                Introduction to Java + Installing Java JDK and
-                                IntelliJ IDEA for Java 19:00 Basic Structure of
-                                a Java Program: Understanding our First
-                                JavaHello World Program 14:09
-                              </p>
-                              <div className="">
-                                <ul class="rating">
-                                  <li class="fa fa-star">
-                                    <FaStar />
-                                  </li>
-                                  <li class="fa fa-star">
-                                    <FaStar />
-                                  </li>
-                                  <li class="fa fa-star">
-                                    <FaStar />
-                                  </li>
-                                  <li class="fa fa-star">
-                                    <FaStar />
-                                  </li>
-                                  <li class="fa fa-star">
-                                    <FaStar />
-                                  </li>
-                                  <span>(4.0)</span>
-                                  <span className="ft-star">12.2k Reviews</span>
-                                </ul>
-
-                                <ul class="rating">
-                                  <li>
-                                    <Link to="#" className="tag">
-                                      2022
-                                    </Link>
-                                    <Link to="#" className="tag">
-                                      #Java
-                                    </Link>
-                                    <Link to="#" className="tag">
-                                      #Android
-                                    </Link>
-                                  </li>
-                                </ul>
-                              </div>
-                            </div>
-                          </Col>
-                        </Row> */}
-                      </div>
                     </Row>
-                    <>
-                      {/* {currentItems?.map((item) => {
-                        return (
-                          <div>
-                            <h3>Item #{item.title}</h3>
-                          </div>
-                        );
-                      })} */}
-                    </>
+
                     <div className="container paginatediv d-flex">
                       <ReactPaginate
                         itemsPerPage={3}
@@ -2635,18 +1308,12 @@ function ProductList(args) {
                         renderOnZeroPageCount={null}
                       />
                     </div>
-                    {/* <Paginationnew
-                      className="d-flex"
-                      itemsPerPage={3}
-                    /> */}
                   </div>
-                  {/* for pagination till here */}
                 </div>
               </Col>
             </Row>
           </div>
 
-          {/* div recent product */}
           <div className="sec-bottom">
             <h4>
               Recently Viewed
@@ -2662,269 +1329,6 @@ function ProductList(args) {
           </div>
         </Container>
       </section>
-      {/* <>
-        <Modal className="mdlg" isOpen={modal} toggle={toggle} {...args}>
-          <ModalBody>
-            <div className="main-content">
-              <h2>{Producdetail?.desc}</h2>
-              <div className="top-icon">
-                <Link to="#">
-                  <img src={mdicon1} alt="" />
-                </Link>
-                <Link to="#">
-                  <img src={mdicon2} alt="" />
-                </Link>
-              </div>
-              <div className="tag-list">
-                <div className="tag-1">
-                  <h5>
-                    <span>
-                      <img src={icons} alt="" width="30px" />
-                    </span>
-                    Topic:
-                  </h5>
-                </div>
-                <div className="tag-2">
-                  {Producdetail?.topics.map((val) => (
-                    <Link to="#">{val}</Link>
-                  ))}
-                </div>
-              </div>
-
-              <hr></hr>
-            </div>
-
-            <div className="mid">
-              <h5>
-                Link :<span>{Producdetail?.link}</span>
-              </h5>
-              <div className="mid-content">
-                <Row>
-                  <Col lg="6" md="6">
-                    <div className="mid-1 mb-3">
-                      <div className="mid-1-a">
-                        <img src={createricon} alt="" />
-                      </div>
-                      <div className="mid-1-b">
-                        <p>Creator:</p>
-                        <h4>{Producdetail?.creatorName}</h4>
-                      </div>
-                    </div>
-                  </Col>
-                  <Col lg="6" md="6">
-                    <div className="mid-1 mb-3 ">
-                      <div className="mid-1-a">
-                        <img src={usericon} alt="" />
-                      </div>
-                      <div className="mid-1-b">
-                        <p>Submitted by:</p>
-                        <h4>{Producdetail?.creatorName}</h4>
-                      </div>
-                    </div>
-                  </Col>
-                  <Col lg="3" md="3">
-                    <div className="mid-1 mb-3 tt-2">
-                      <div className="mid-1-a">
-                        <img src={typeicon} alt="" width="35px" />
-                      </div>
-                      <div className="mid-1-b tt-1">
-                        <p>Type:</p>
-                        <Link to="#">{Producdetail?.type}</Link>
-                      </div>
-                    </div>
-                  </Col>
-                  <Col lg="3" md="3">
-                    <div className="mid-1 mb-3 tt-2">
-                      <div className="mid-1-a">
-                        <img src={formaticon} alt="" width="35px" />
-                      </div>
-                      <div className="mid-1-b tt-1">
-                        <p>Format:</p>
-                        <Link to="#">{Producdetail?.format}</Link>
-                      </div>
-                    </div>
-                  </Col>
-                  <Col lg="3" md="3">
-                    <div className="mid-1 mb-3 tt-2">
-                      <div className="mid-1-a">
-                        <img src={diffculty} alt="" width="35px" />
-                      </div>
-                      <div className="mid-1-b tt-1">
-                        <p>Category:</p>
-                        <Link to="#">{Producdetail?.category.title}</Link>
-                      </div>
-                    </div>
-                  </Col>
-
-                  <Col lg="3" md="3">
-                    <div className="mid-1 mb-3 tt-2">
-                      <div className="mid-1-a">
-                        <img src={yearicon} alt="" width="35px" />
-                      </div>
-                      <div className="mid-1-b tt-1">
-                        <p>Year:</p>
-                        <Link to="#">{Producdetail?.relYear[0].yrName}</Link>
-                      </div>
-                    </div>
-                  </Col>
-                  <Col lg="3" md="3">
-                    <div className="mid-1 mb-3 tt-2">
-                      <div className="mid-1-a">
-                        <img src={rating} alt="" width="35px" />
-                      </div>
-                      <div className="mid-1-b tt-1">
-                        <p>Ratings:</p>
-                        <Link to="#">(4.5)</Link>
-                      </div>
-                    </div>
-                  </Col>
-                  <Col lg="4" md="4">
-                    <div className="mid-1 mb-3 tt-2">
-                      <div className="mid-1-a">
-                        <img src={submiticon} alt="" width="35px" />
-                      </div>
-                      <div className="mid-1-b tt-1">
-                        <p>Submitted:</p>
-                        <Link to="#">
-                          <Moment format="ll">{Producdetail?.createdAt}</Moment>
-                        </Link>
-                      </div>
-                    </div>
-                  </Col>
-                  <Col lg="4" md="4">
-                    <div className="mid-1 mb-3 tt-2">
-                      <div className="mid-1-a">
-                        <img src={languageicon} alt="" width="35px" />
-                      </div>
-                      <div className="mid-1-b tt-1">
-                        <p>Language:</p>
-                        <Link className=" " to="#">
-                          {Producdetail?.language?.map((lang) => (
-                            <span>{lang?.language},</span>
-                          ))}
-                        </Link>
-                      </div>
-                    </div>
-                  </Col>
-                </Row>
-              </div>
-            </div>
-
-            <hr></hr>
-
-            <div className="description mt-3">
-              <h4>Description:</h4>
-              <p>{Producdetail?.desc}</p>
-            </div>
-
-            <hr></hr>
-            <div className="rating-box">
-              <Row>
-                <Col lg="4">
-                  <div className="rat-left">
-                    <h4>Customer Rating</h4>
-                    <div className="">
-                      <img src={reviewstar} alt="" width="120px" />
-                      <span>4.7 of 5</span>
-                      <small className="mt-3">362 customers reviews</small>
-                      <img src={ratingstar} alt="" width="100%" />
-                    </div>
-                  </div>
-                </Col>
-                <Col lg="8">
-                  <div className="rat-right">
-                    <h4>Write your review</h4>
-                    <div className="">
-                      <img src={reviewstar} alt="" width="120px" />
-                      <form>
-                        <textarea
-                          className="form-control st-taetarea"
-                          placeholder=""
-                        ></textarea>
-                        <Button className="bt-st">Send</Button>
-                      </form>
-                    </div>
-                  </div>
-                </Col>
-              </Row>
-            </div>
-            <hr></hr>
-            <div className="review-list">
-              <h4>Reviews:</h4>
-              <div className="re-list">
-                <div className="re-listimg">
-                  <img src={usermdl} alt="" />
-                </div>
-                <div className="re-listcont">
-                  <h5>
-                    Jozef Kondratovich
-                    <span>few secs ago</span>
-                  </h5>
-                  <div className="star-1">
-                    <Link to="#">
-                      <FaStar className="star-1" />
-                    </Link>
-                    <Link to="#">
-                      <FaStar className="star-1" />
-                    </Link>
-                    <Link to="#">
-                      <FaStar className="star-1" />
-                    </Link>
-                    <Link to="#">
-                      <FaStar className="star-1" />
-                    </Link>
-                    <Link to="#">
-                      <FaStar className="star-1" />
-                    </Link>
-                  </div>
-                </div>
-                <div className="re-btext">
-                  <p>
-                    There're so many choices in their menu. I appreciated that
-                    it also showed the calories. Good to know about that. Then I
-                    chose the one with lower calories
-                  </p>
-                </div>
-              </div>
-              <div className="re-list">
-                <div className="re-listimg">
-                  <img src={usermdl} alt="" />
-                </div>
-                <div className="re-listcont">
-                  <h5>
-                    Jozef Kondratovich
-                    <span>few secs ago</span>
-                  </h5>
-                  <div className="star-1">
-                    <Link to="#">
-                      <FaStar className="star-1" />
-                    </Link>
-                    <Link to="#">
-                      <FaStar className="star-1" />
-                    </Link>
-                    <Link to="#">
-                      <FaStar className="star-1" />
-                    </Link>
-                    <Link to="#">
-                      <FaStar className="star-1" />
-                    </Link>
-                    <Link to="#">
-                      <FaStar className="star-1" />
-                    </Link>
-                  </div>
-                </div>
-                <div className="re-btext">
-                  <p>
-                    There're so many choices in their menu. I appreciated that
-                    it also showed the calories. Good to know about that. Then I
-                    chose the one with lower calories
-                  </p>
-                </div>
-              </div>
-            </div>
-          </ModalBody>
-        </Modal>
-      </> */}
     </>
   );
 }
