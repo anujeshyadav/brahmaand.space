@@ -50,6 +50,7 @@ import Blogdescription from "../src/components/Blogdescription";
 import DemoPaginate from "./components/DemoPaginate";
 import Pagination from "./components/Pagination";
 import Posts from "./components/Posts";
+import Allpromotion from "./components/filter/Allpromotion";
 
 import Layout from "./components/Layout";
 import LeaderBoard from "./components/home/LeaderBoard";
@@ -87,7 +88,8 @@ render(
             <Route exact path="/pagination" element={<Pagination />} />
             <Route exact path="/posts" element={<Posts />} />
             <Route exact path="/paginationnew" element={<Paginationnew />} />
-
+            <Route exact path="/allpromotion" element={<Allpromotion />} />
+            Allpromotion
             <Route
               exact
               path="/blogdescription/:id"

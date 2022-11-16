@@ -34,9 +34,9 @@ function Bookmarks() {
   };
 
   return (
-    <div className="container test nohover">
-      <h3 className="d-flex justify-content-center mt-3 mb-3">Your Likes</h3>
-      <div className="search-st mb-4">
+    <div className="container test nohover mb-4">
+      <h3 className="d-flex justify-content-center mt-4 mb-4">Your Likes</h3>
+      <div className="search-st mt-3 mb-4">
         {mylikes?.map((data) => (
           <Row className="videopostedall mb-4" key={data?._id}>
             <Col md="4">

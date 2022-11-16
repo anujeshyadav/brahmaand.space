@@ -17,7 +17,7 @@ import usericon from "../../assets/icons/usericon.png";
 import typeicon from "../../assets/icons/typeicon.png";
 import formaticon from "../../assets/icons/formaticon.png";
 import diffculty from "../../assets/icons/diffculty.png";
-
+import Allpromotion from "./Allpromotion";
 import languageicon from "../../assets/icons/languageicon.png";
 
 import yearicon from "../../assets/icons/yearicon.png";
@@ -425,7 +425,7 @@ function ProductList(args) {
                   <h4>
                     Promotions
                     <span>
-                      <Link to="/blog">See All</Link>
+                      <Link to="/allpromotion">See All</Link>
                     </span>
                   </h4>
 
@@ -439,8 +439,12 @@ function ProductList(args) {
                               onClick={() => handlepromotion(promotion?._id)}
                             >
                               <img
+                                style={{
+                                  height: "200px",
+                                  borderRadius: "10px",
+                                }}
                                 key={promotion?._id}
-                                height={220}
+                                // height={220}
                                 className="promotionimageclass"
                                 src={promotion?.img}
                                 alt="image"
@@ -1322,9 +1326,7 @@ function ProductList(args) {
               </span>
             </h4>
             <Row>
-              {/* <Col> */}
               <RecentProductList />
-              {/* </Col> */}
             </Row>
           </div>
         </Container>
