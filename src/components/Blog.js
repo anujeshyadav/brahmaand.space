@@ -46,7 +46,6 @@ function Blog() {
 
       .then((response) => {
         setPop(response.data.data);
-        console.log(recomblog);
       })
       .catch((error) => {
         console.log(error.response.data.data);
@@ -96,54 +95,55 @@ function Blog() {
                   borderRadius: "10px",
                 }}
               >
-                <Col lg="12">
-                  <Row>
-                    <Col lg="6">
-                      <img
-                        src={value.blogImg}
-                        style={{
-                          borderRadius: "12px",
-                          width: "280px",
-                          height: "280px",
-                        }}
-                      />
-                    </Col>
-                    <Col lg="6">
-                      <Row className="mt-3">
-                        <b>
-                          <h3>{value.blog_title}</h3>
-                        </b>
-                      </Row>
-
-                      <h6 style={{ color: "#5F56C6" }}>
-                        <Moment format="lll">{value.createdAt}</Moment>
-                        {/* <Moment >{}</Moment> */}
-                      </h6>
-                      <ShowMore
-                        lines={2}
-                        more="Show more"
-                        less="Show less"
-                        anchorClass=""
-                      >
-                        <h6>{value.desc}</h6>
-                      </ShowMore>
-
-                      <h6>
-                        posted by
+                <Link to={`/recblogdesription/${value?._id}`} key={value?._id}>
+                  <Col lg="12">
+                    <Row>
+                      <Col lg="6">
                         <img
-                          className="mx-3"
-                          src={value.posted_by_img}
+                          src={value.blogImg}
                           style={{
-                            width: "70px",
-                            height: "65px",
-                            borderRadius: "50%",
+                            borderRadius: "12px",
+                            width: "280px",
+                            height: "280px",
                           }}
                         />
-                        <b>{value.posted_by}</b>
-                      </h6>
-                    </Col>
-                  </Row>
-                </Col>
+                      </Col>
+                      <Col lg="6">
+                        <Row className="mt-3">
+                          <b>
+                            <h3>{value.blog_title}</h3>
+                          </b>
+                        </Row>
+
+                        <h6 style={{ color: "#5F56C6" }}>
+                          <Moment format="lll">{value.createdAt}</Moment>
+                        </h6>
+                        <ShowMore
+                          lines={2}
+                          more="Show more"
+                          less="Show less"
+                          anchorClass=""
+                        >
+                          <h6>{value.desc}</h6>
+                        </ShowMore>
+
+                        <h6>
+                          posted by
+                          <img
+                            className="mx-3"
+                            src={value.posted_by_img}
+                            style={{
+                              width: "70px",
+                              height: "65px",
+                              borderRadius: "50%",
+                            }}
+                          />
+                          <b>{value.posted_by}</b>
+                        </h6>
+                      </Col>
+                    </Row>
+                  </Col>
+                </Link>
               </SwiperSlide>
             ))}
           </Row>

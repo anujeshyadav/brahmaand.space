@@ -6,10 +6,10 @@ import ReactHtmlParser from "react-html-parser";
 import Moment from "react-moment";
 import "moment-timezone";
 
-function Blogdescription() {
+function Recblogdescription() {
   const [blogdescription, setBlogdescription] = useState([]);
   const Param = useParams();
-  console.log(Param);
+
   useEffect(() => {
     axios
 
@@ -17,13 +17,11 @@ function Blogdescription() {
 
       .then((res) => {
         setBlogdescription(res.data.data);
-        console.log(res.data.data);
       })
       .catch((err) => {
         console.log(err);
       });
   }, [Param]);
-
   return (
     <div>
       <div className="color">
@@ -63,4 +61,4 @@ function Blogdescription() {
   );
 }
 
-export default Blogdescription;
+export default Recblogdescription;

@@ -90,8 +90,6 @@ function Hastag() {
       .then((res) => {
         setFeature(res.data.data);
         console.log(res.data.data);
-
-        console.log(feature);
       })
       .catch((err) => {
         console.log(err);
@@ -108,6 +106,7 @@ function Hastag() {
       console.log(err);
     });
 
+  const [isOpenone, setOpenone] = useState(false);
   const [isOpen, setOpen] = useState(false);
   return (
     <>
@@ -163,80 +162,6 @@ function Hastag() {
                 </Link>
               </Col>
             ))}
-
-            {/* <Col lg="3" md="6" sm="12" className="">
-            <Link to="/subcategory">
-              <img className="imgCol" src={business} alt="img" />
-              <div className="content-bt">
-                <p>Business</p>
-                <Button className="btlisting">12 Listing</Button>
-              </div>
-            </Link>
-          </Col> */}
-            {/* 
-          <Col lg="3" md="6" sm="12">
-            <Link to="/subcategory">
-              <img className="imgCol" src={education} alt="img" />
-              <div className="content-bt">
-                <p>Education</p>
-                <Button className="bt">Listing</Button>
-              </div>
-            </Link>
-          </Col>
-          <Col lg="3" md="6" sm="12">
-            <Link to="/subcategory">
-              <img className="imgCol" src={healthcare} alt="img" />
-              <div className="content-bt">
-                <p>Healthcare</p>
-                <Button className="bt">Listing</Button>
-              </div>
-            </Link>
-          </Col>
-          <Col lg="3" md="6" sm="12">
-            <Link to="/subcategory">
-              <img className="imgCol" src={eatfoods} alt="img" />
-              <div className="content-bt">
-                <p>Eat & Foods</p>
-                <Button className="bt">Listing</Button>
-              </div>
-            </Link>
-          </Col>
-          <Col lg="3" md="6" sm="12" className="">
-            <Link to="/subcategory">
-              <img className="imgCol" src={entertainment} alt="img" />
-              <div className="content-bt">
-                <p>Entertainment</p>
-                <Button className="bt">Listing</Button>
-              </div>
-            </Link>
-          </Col>
-          <Col lg="3" md="6" sm="12">
-            <Link to="/subcategory">
-              <img className="imgCol" src={finance} alt="img" />
-              <div className="content-bt">
-                <p>Finance</p>
-                <Button className="bt">Listing</Button>
-              </div>
-            </Link>
-          </Col>
-          <Col lg="3" md="6" sm="12">
-            <Link to="/subcategory">
-              <img className="imgCol" src={technology} alt="img" />
-              <div className="content-bt">
-                <p>Technology</p>
-                <Button className="bt">Listing</Button>
-              </div>
-            </Link>
-          </Col>
-          <Col lg="3" md="6" sm="12">
-            <Link to="/subcategory">
-              <img className="imgCol" src={travel} alt="img" />
-              <div className="content-bt">
-                <p>Travel</p>
-                <Button className="bt">Listing</Button>
-              </div>
-            </Link>
-          </Col> */}
           </Row>
         </Container>
       </Container>
@@ -301,10 +226,11 @@ function Hastag() {
           {feature?.map((features) => (
             <SwiperSlide key={features?._id}>
               <div
+                key={features?._id}
                 style={{ backgroundImage: `url(${features.thumbnail_img})` }}
                 className="ty-6"
               >
-                <div className="ty-5">
+                <div className="ty-5" key={features?._id}>
                   <Nav.Link as={NavLink} className="navbar-link">
                     <div className="ty-4">
                       <BsPlay
@@ -315,7 +241,6 @@ function Hastag() {
                         onClick={() => setOpen(true)}
                       />
                     </div>
-
                     <ModalVideo
                       style={{ borderRadius: "12px" }}
                       channel="youtube"
@@ -330,163 +255,6 @@ function Hastag() {
               </div>
             </SwiperSlide>
           ))}
-
-          {/* <SwiperSlide>
-            <div className="ty-6">
-              <div className="ty-5">
-                <Nav.Link as={NavLink} className="navbar-link">
-                  <div className="ty-4">
-                    <BsPlay
-                      className="bsplaybutton"
-                      size={75}
-                      style={{ backgroundColor: "white" }}
-                      type="submit"
-                      onClick={() => setOpen(true)}
-                    />
-                  </div>
-
-                  <ModalVideo
-                    style={{ borderRadius: "12px" }}
-                    channel="youtube"
-                    autoplay
-                    isOpen={isOpen}
-                    videoId="L61p2uyiMSo"
-                    onClose={() => setOpen(false)}
-                  />
-                </Nav.Link>
-              </div>
-            </div>
-          </SwiperSlide>
-          <SwiperSlide>
-            <div className="ty-6">
-              <div className="ty-5">
-                <Nav.Link as={NavLink} className="navbar-link">
-                  <div className="ty-4">
-                    <BsPlay
-                      className="bsplaybutton"
-                      size={75}
-                      style={{ backgroundColor: "white" }}
-                      type="submit"
-                      onClick={() => setOpen(true)}
-                    />
-                  </div>
-
-                  <ModalVideo
-                    style={{ borderRadius: "12px" }}
-                    channel="youtube"
-                    autoplay
-                    isOpen={isOpen}
-                    videoId="L61p2uyiMSo"
-                    onClose={() => setOpen(false)}
-                  />
-                </Nav.Link>
-              </div>
-            </div>
-          </SwiperSlide>
-          <SwiperSlide>
-            <div className="ty-6">
-              <div className="ty-5">
-                <Nav.Link as={NavLink} className="navbar-link">
-                  <div className="ty-4">
-                    <BsPlay
-                      className="bsplaybutton"
-                      size={75}
-                      style={{ backgroundColor: "white" }}
-                      type="submit"
-                      onClick={() => setOpen(true)}
-                    />
-                  </div>
-
-                  <ModalVideo
-                    style={{ borderRadius: "12px" }}
-                    channel="youtube"
-                    autoplay
-                    isOpen={isOpen}
-                    videoId="L61p2uyiMSo"
-                    onClose={() => setOpen(false)}
-                  />
-                </Nav.Link>
-              </div>
-            </div>
-          </SwiperSlide>
-          <SwiperSlide>
-            <div className="ty-6">
-              <div className="ty-5">
-                <Nav.Link as={NavLink} className="navbar-link">
-                  <div className="ty-4">
-                    <BsPlay
-                      className="bsplaybutton"
-                      size={75}
-                      style={{ backgroundColor: "white" }}
-                      type="submit"
-                      onClick={() => setOpen(true)}
-                    />
-                  </div>
-
-                  <ModalVideo
-                    style={{ borderRadius: "12px" }}
-                    channel="youtube"
-                    autoplay
-                    isOpen={isOpen}
-                    videoId="L61p2uyiMSo"
-                    onClose={() => setOpen(false)}
-                  />
-                </Nav.Link>
-              </div>
-            </div>
-          </SwiperSlide>
-          <SwiperSlide>
-            <div className="ty-6">
-              <div className="ty-5">
-                <Nav.Link as={NavLink} className="navbar-link">
-                  <div className="ty-4">
-                    <BsPlay
-                      className="bsplaybutton"
-                      size={75}
-                      style={{ backgroundColor: "white" }}
-                      type="submit"
-                      onClick={() => setOpen(true)}
-                    />
-                  </div>
-
-                  <ModalVideo
-                    style={{ borderRadius: "12px" }}
-                    channel="youtube"
-                    autoplay
-                    isOpen={isOpen}
-                    videoId="L61p2uyiMSo"
-                    onClose={() => setOpen(false)}
-                  />
-                </Nav.Link>
-              </div>
-            </div>
-          </SwiperSlide>
-          <SwiperSlide>
-            <div className="ty-6">
-              <div className="ty-5">
-                <Nav.Link as={NavLink} className="navbar-link">
-                  <div className="ty-4">
-                    <BsPlay
-                      className="bsplaybutton"
-                      size={75}
-                      style={{ backgroundColor: "white" }}
-                      type="submit"
-                      onClick={() => setOpen(true)}
-                    />
-                  </div>
-
-                  <ModalVideo
-                    style={{ borderRadius: "12px" }}
-                    channel="youtube"
-                    autoplay
-                    isOpen={isOpen}
-                    videoId="L61p2uyiMSo"
-                    onClose={() => setOpen(false)}
-                  />
-                </Nav.Link>
-              </div>
-            </div>
-          </SwiperSlide> */}
         </Swiper>
       </Container>
       <div className="container">
@@ -722,7 +490,6 @@ function Hastag() {
                             autoplay
                             isOpen={isOpen}
                             videoId={video.videoid}
-                            // videoId="XT0FLZymGE8"
                             onClose={() => setOpen(false)}
                           />
                         </div>

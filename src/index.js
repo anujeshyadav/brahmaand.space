@@ -51,7 +51,7 @@ import DemoPaginate from "./components/DemoPaginate";
 import Pagination from "./components/Pagination";
 import Posts from "./components/Posts";
 import Allpromotion from "./components/filter/Allpromotion";
-
+import Recblogdescription from "./components/Recblogdescription";
 import Layout from "./components/Layout";
 import LeaderBoard from "./components/home/LeaderBoard";
 // Import Context
@@ -89,7 +89,12 @@ render(
             <Route exact path="/posts" element={<Posts />} />
             <Route exact path="/paginationnew" element={<Paginationnew />} />
             <Route exact path="/allpromotion" element={<Allpromotion />} />
-            Allpromotion
+            <Route
+              exact
+              path="/recblogdesription/:id"
+              element={<Recblogdescription />}
+            />
+
             <Route
               exact
               path="/blogdescription/:id"

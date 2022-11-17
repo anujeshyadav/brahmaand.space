@@ -73,7 +73,7 @@ function UserPage({ direction, ...args }) {
           </Link>
           <Link className="userboard" to="/Bookmark">
             <FaRegHandPointRight size={25} color="black" className="mx-3 " />
-            Your likes
+            Your Bookmark's
           </Link>
           <Link
             className="userboard"

@@ -23,7 +23,6 @@ function Work() {
     <>
       <div
         style={{
-          // backgroundColor: "rgb(229 120 27 / 0.69)",
           margin: "40px",
           padding: "20px",
         }}
