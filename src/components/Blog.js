@@ -170,7 +170,7 @@ function Blog() {
                   />
                   <CardBody>
                     <CardTitle>
-                      <b>{value.blog_title}</b>
+                      <b style={{ color: "black" }}>{value.blog_title}</b>
                     </CardTitle>
                     <CardSubtitle>
                       <b style={{ color: "#5F56C6" }}>
@@ -178,8 +178,10 @@ function Blog() {
                       </b>
                     </CardSubtitle>
                     <br></br>
-                    <CardText>
+                    <CardText style={{ color: "black" }}>
                       <ShowMore
+                        className="showmore"
+                        style={{ color: "black" }}
                         lines={3}
                         more="Show more"
                         less="Show less"
@@ -188,7 +190,7 @@ function Blog() {
                         {value.desc}
                       </ShowMore>
                     </CardText>
-                    <CardText>
+                    <CardText style={{ color: "black" }}>
                       posted by
                       <img
                         className="mx-3"
