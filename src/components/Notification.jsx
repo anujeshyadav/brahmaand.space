@@ -46,7 +46,10 @@ function Notification() {
         </h3>
         <div className="container notificationcard mt-3 mb-4">
           <Row>
-            <Col lg="4" sm="12" md="6">
+            <Col lg="6" sm="12" md="6">
+              {/* <h2 className="d-flex justify-content-center ">
+                Your Notifications here
+              </h2> */}
               <div className="container mt-3 notificationsdistance">
                 {notification?.map((data) => (
                   <Card className="d-flex justify-content-center mb-3 mt-3">
@@ -70,7 +73,10 @@ function Notification() {
               </div>
             </Col>
 
-            <Col lg="4" sm="12" md="6">
+            <Col lg="6" sm="12" md="6">
+              {/* <h2 className="d-flex justify-content-center ">
+                Your Personal Notifications here
+              </h2> */}
               <div className="container mt-3 notificationcard notificationsdistance">
                 <Card className="d-flex justify-content-center mb-3 mt-3">
                   <Card.Header

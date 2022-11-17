@@ -34,3 +34,6 @@ li.selected {
 li.break {
   padding: 8px 5px;
 }
+.containerone {
+  border-radius: 16px;
+}

@@ -126,8 +126,8 @@ function Allpromotion(args) {
         <h3 className="d-flex justify-content-center mt-4 mb-4">
           All Promotions
         </h3>
-        <div className="container ">
-          <Row>
+        <div className="container mb-3">
+          <Row className="mb-2 mt-3">
             {promotion?.map((promotion) => (
               <Col lg="3" md="6" sm="12">
                 <div class="product-grid8">
@@ -436,28 +436,20 @@ function Allpromotion(args) {
                       <span>By</span> {promotion?.creatorName}
                     </h5>
                     <p>{promotion?.res_desc}</p>
-                    <div className="">
-                      <ul class="rating">
-                        <li class="fa fa-star">
-                          <FaStar />
-                        </li>
-                        <li class="fa fa-star">
-                          <FaStar />
-                        </li>
-                        <li class="fa fa-star">
-                          <FaStar />
-                        </li>
-                        <li class="fa fa-star">
-                          <FaStar />
-                        </li>
-                        <li class="fa fa-star">
-                          <FaStar />
-                        </li>
-                        <span>(4.0)</span>
-                        <span className="ft-star">
-                          {promotion?.__v} Reviews
-                        </span>
-                      </ul>
+                    <div className=" mb-2 mt-2">
+                      <Row>
+                        <Col lg="6">
+                          <PrettyRating
+                            // value={value?.rating}
+                            value={2.5}
+                            icons={icons.star}
+                            colors={colors.star}
+                          />
+                        </Col>
+                        <Col className="justify-content-left" lg="6">
+                          {2.5} Rating
+                        </Col>
+                      </Row>
 
                       <ul class="rating">
                         <li>

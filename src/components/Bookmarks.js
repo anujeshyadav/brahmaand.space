@@ -7,6 +7,9 @@ import topBar from "../css/topBar.css";
 import React, { useState, useEffect } from "react";
 import Heart from "react-heart";
 import { Link } from "react-router-dom";
+import PrettyRating from "pretty-rating-react";
+import { faStar, faStarHalfAlt } from "@fortawesome/free-solid-svg-icons";
+import { faStar as farStar } from "@fortawesome/free-regular-svg-icons";
 
 function Bookmarks() {
   const [active, setActive] = useState(false);
@@ -18,7 +21,16 @@ function Bookmarks() {
   useEffect(() => {
     mylikehandler();
   }, []);
-
+  const icons = {
+    star: {
+      complete: faStar,
+      half: faStarHalfAlt,
+      empty: farStar,
+    },
+  };
+  const colors = {
+    star: ["#d9ad26", "#d9ad26", "#434b4d"],
+  };
   const mylikehandler = () => {
     const userId = localStorage.getItem("userId");
     console.log(userId);
@@ -78,17 +90,19 @@ function Bookmarks() {
                 </h5>
                 <h6 className="mb-3">{data?.submitresrcId?.desc}</h6>
                 <div className="">
-                  <Row className="review">
-                    <Col lg="2" style={{ color: "#FCAF3B" }}>
-                      <FaStar />
-                      <FaStar />
-                      <FaStar />
-                      <FaStar />
-                      <FaStar />
+                  <Row className="review mb-3">
+                    <Col lg="4">
+                      <PrettyRating
+                        // value={value?.rating}
+                        value={2.5}
+                        icons={icons.star}
+                        colors={colors.star}
+                      />
                     </Col>
-                    <Col lg="2" style={{ color: "#FCAF3B" }}>
-                      4.0
+                    <Col className="justify-content-left" lg="4">
+                      {2.5} Rating
                     </Col>
+
                     <Col lg="2">
                       <b>
                         <span style={{ color: "#5F56C6" }}>
