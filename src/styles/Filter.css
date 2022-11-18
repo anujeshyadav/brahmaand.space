@@ -338,7 +338,7 @@ span.product-discount-label.st-1 {
 .heartlike,
 .faregheart {
   height: 29px;
-  fill: transparent;
+  /* fill: transparent; */
   stroke: rgb(84, 35, 207);
   stroke-width: 1px;
 }

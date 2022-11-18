@@ -6,7 +6,7 @@ import { Link, NavLink } from "react-router-dom";
 import { BsPlay } from "react-icons/bs";
 import has1 from "../../images/has1.png";
 import axiosConfig from "../axiosConfig";
-
+import ShowMore from "react-show-more";
 import newsletter from "../../images/newsletter.png";
 
 import emoji from "../../images/emoji.png";
@@ -330,11 +330,20 @@ function Hastag() {
                   Users submit resources they find relevant in respective
                   category
                 </p>
-                <span>
+
+                <ShowMore
+                  className="showmore"
+                  style={{ color: "black" }}
+                  lines={4}
+                  more="learn More"
+                  less="learn less"
+                  anchorClass=""
+                >
                   Lorem Ipsum is simply dummy text of the printing and
-                  typesetting industry.
-                </span>
-                <Button className="learnMore">Learn more</Button>
+                  typesetting industry..Users submit resources they find
+                  relevant in respective category.Lorem Ipsum is simply dummy
+                  text of the printing and typesetting industry.
+                </ShowMore>
               </Container>
             </Card>
           </Col>
@@ -347,11 +356,19 @@ function Hastag() {
                   Community and experts will rate the resources and give their
                   reviews.
                 </p>
-                <span>
+                <ShowMore
+                  className="showmore"
+                  style={{ color: "black" }}
+                  lines={4}
+                  more="learn More"
+                  less="learn less"
+                  anchorClass=""
+                >
                   Lorem Ipsum is simply dummy text of the printing and
-                  typesetting industry.
-                </span>
-                <Button className="learnMore">Learn more</Button>
+                  typesetting industry..Users submit resources they find
+                  relevant in respective category.Lorem Ipsum is simply dummy
+                  text of the printing and typesetting industry.
+                </ShowMore>
               </Container>
             </Card>
           </Col>
@@ -369,11 +386,19 @@ function Hastag() {
                   Community and experts will rate the resources and give their
                   reviews.
                 </p>
-                <span>
+                <ShowMore
+                  className="showmore"
+                  style={{ color: "black" }}
+                  lines={4}
+                  more="learn More"
+                  less="learn less"
+                  anchorClass=""
+                >
                   Lorem Ipsum is simply dummy text of the printing and
-                  typesetting industry.
-                </span>
-                <Button className="learnMore">Learn more</Button>
+                  typesetting industry..Users submit resources they find
+                  relevant in respective category.Lorem Ipsum is simply dummy
+                  text of the printing and typesetting industry.
+                </ShowMore>
               </Container>
             </Card>
           </Col>

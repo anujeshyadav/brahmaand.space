@@ -22,7 +22,7 @@ import { useAuth } from "../context/AuthContext";
 import agreement_download from "../assets/files/Dispatch305-agreement.pdf";
 import UserPage from "./UserPage";
 
-function CustomNavbar() {
+function CustomNavbar(args) {
   const [link, setLink] = useState([]);
   const [catgry, setCatgry] = useState({});
   const [subcatry, setSubcatry] = useState({});
@@ -323,7 +323,12 @@ function CustomNavbar() {
                 <h4 className="rText">+Submit a Content</h4>
               </button>
               <Container>
-                <Modal className="mdlg" isOpen={modal}>
+                <Modal
+                  toggle={toggle}
+                  {...args}
+                  className="mdlg"
+                  isOpen={modal}
+                >
                   <div className="p-3 w-100">
                     <h2 style={{ font: "GT Walsheim Pro", fontSize: "25px" }}>
                       Submit a Content

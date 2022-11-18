@@ -25,7 +25,14 @@ import submiticon from "../../assets/icons/submiticon.png";
 import reviewstar from "../../assets/icons/reviewstra.png";
 import ratingstar from "../../assets/icons/ratingstar.png";
 
-import { Row, Col, Form, Button, Container } from "react-bootstrap";
+import {
+  Row,
+  Col,
+  Form,
+  Button,
+  Container,
+  ToggleButton,
+} from "react-bootstrap";
 import { Link, useParams } from "react-router-dom";
 import "../../styles/Filter.css";
 
@@ -50,10 +57,10 @@ function ProductList(args) {
   const toggleone = () => setModalone(!modalone);
   const [modal, setModal] = useState(false);
   const [modalone, setModalone] = useState(false);
-  const [liked, setliked] = useState([]);
-  const [activelike, setActivelike] = useState([]);
-  const [dislike, setDislike] = useState([]);
-  const [dislikeact, setDislikeact] = useState([]);
+  const [liked, setliked] = useState("");
+  const [activelike, setActivelike] = useState("");
+  const [unlike, setUnlike] = useState("");
+  const [againlikeact, setAgainlikeact] = useState("");
   const [Producdetail, setProductdetail] = useState([]);
   const [productdes, setProductdes] = useState("");
   const [text, settText] = useState("");
@@ -64,8 +71,51 @@ function ProductList(args) {
   const [promotId, setPromotId] = useState("");
   const [promotiondata, setPromotiondata] = useState({});
   const [totalrateng, setTotalrateng] = useState("");
-  const [sum, setSum] = useState("");
+  const [all, setAll] = useState("");
 
+  const removebookmark = () => {
+    const userId = localStorage.getItem("userId");
+    setliked(categry?._id);
+    // console.log(liked);
+    axiosConfig
+      .post(`/user/add_like`, {
+        submitresrcId: categry?._id,
+        userid: userId,
+        status: "false",
+      })
+      .then((response) => {
+        // console.log(response.data.data);
+        setActivelike(response.data.data.status);
+        swal("you Removed your bookmark ");
+
+        console.log("removeindividual", response.data.data);
+      })
+      .catch((error) => {
+        console.log(error.response.data);
+      });
+  };
+
+  const addbookmark = () => {
+    const userId = localStorage.getItem("userId");
+    setliked(categry?._id);
+    // console.log(liked);
+    axiosConfig
+      .post(`/user/add_like`, {
+        submitresrcId: categry?._id,
+        userid: userId,
+        status: "true",
+      })
+      .then((response) => {
+        // console.log(response.data.data);
+        setActivelike(response.data.data.status);
+        swal("you bookmarked it");
+
+        console.log("likeindividual", response.data.data);
+      })
+      .catch((error) => {
+        console.log(error.response.data);
+      });
+  };
   const handlepromotion = (_id) => {
     var promotionId = _id;
     if (promotionId === _id) {
@@ -102,7 +152,7 @@ function ProductList(args) {
 
   let Params = useParams();
 
-  const [data, setData] = useState([]);
+  // const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
 
   const [itemOffset, setItemOffset] = useState(0);
@@ -132,32 +182,45 @@ function ProductList(args) {
   const handleSubmit = (e) => {
     e.preventDefault();
     const userId = localStorage.getItem("userId");
+    if (userId !== null && userId !== undefined && userId !== "") {
+      if (
+        text !== null &&
+        text !== undefined &&
+        text !== "" &&
+        rating !== null &&
+        rating !== undefined &&
+        rating !== ""
+      ) {
+        const selectedId = Producdetail._id;
+        console.log(selectedId, userId, text, rating);
 
-    const selectedId = Producdetail._id;
-    console.log(selectedId, userId, text, rating);
-
-    if (selectedId == Producdetail._id && userId !== "") {
-      axios
-        .post(`http://3.7.173.138:9000/user/add_Comment`, {
-          submitresrcId: selectedId,
-          userid: userId,
-          comment: text,
-          rating: rating,
-        })
-        .then((res) => {
-          console.log(res.data);
-          if (res.data.message == "success") {
-            swal("your Review Submitted Successfully");
-          } else {
-            swal("Something went wrong review again ");
-          }
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-      settText("");
-      setRating("");
+        axios
+          .post(`http://3.7.173.138:9000/user/add_Comment`, {
+            submitresrcId: selectedId,
+            userid: userId,
+            comment: text,
+            rating: rating,
+          })
+          .then((res) => {
+            console.log(res.data);
+            if (res.data.message == "success") {
+              swal("your Review Submitted Successfully");
+            } else {
+              swal("Something went wrong review again ");
+            }
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+        settText("");
+        setRating("");
+      } else {
+        swal(" Please Enter review and Rating");
+      }
+    } else {
+      swal("you need to Login first");
     }
+
     console.log(text);
   };
   const handleSelection = (_id) => {
@@ -192,14 +255,16 @@ function ProductList(args) {
         const totalRating = [];
         var sum = 0;
 
-        for (let i = 0; i <= res.data.data.length; i++) {
-          if (res.data.data[i].rating == undefined) {
+        for (let i = 0; i <= getonecomment.length; i++) {
+          if (getonecomment[i].rating == undefined) {
           } else {
-            sum += res.data.data[i].rating;
-            totalRating.push(res.data.data[i].rating);
+            sum += getonecomment[i].rating;
+            totalRating.push(getonecomment[i].rating);
           }
         }
-        setSum(sum);
+
+        setAll(sum);
+
         setTotalrateng(totalRating);
       })
       .catch((err) => {
@@ -888,7 +953,8 @@ function ProductList(args) {
                                       <div className="mid">
                                         <h5 className="mt-3">
                                           Link :
-                                          <span>{Producdetail?.link}</span>
+                                          <Link>{Producdetail?.link}</Link>
+                                          {/* <span>{Producdetail?.link}</span> */}
                                         </h5>
                                         <div className="mid-content">
                                           <Row>
@@ -1065,6 +1131,7 @@ function ProductList(args) {
                                       </div>
 
                                       <hr></hr>
+
                                       <div className="rating-box">
                                         <Row>
                                           <Col lg="4">
@@ -1083,11 +1150,7 @@ function ProductList(args) {
                                                   {getonecomment?.length}-
                                                   Customers Reviews
                                                 </span>
-                                                {/* <img
-                                                  src={ratingstar}
-                                                  alt=""
-                                                  width="100%"
-                                                /> */}
+
                                                 <Row>
                                                   <Col
                                                     className="d-flex justify-content-left "
@@ -1196,7 +1259,6 @@ function ProductList(args) {
                                                     className="mt-1 mb-1"
                                                     lg="8"
                                                   >
-                                                    {" "}
                                                     <ProgressBar
                                                       bgColor=" #fdb800"
                                                       height="13px"
@@ -1207,23 +1269,59 @@ function ProductList(args) {
                                                       completed={40}
                                                     />
                                                   </Col>
+                                                  <Col>
+                                                    {/* {localStorage.getItem(
+                                                      "userId"
+                                                    ) !== "" &&
+                                                    localStorage.getItem(
+                                                      "userId"
+                                                    ) !== null &&
+                                                    localStorage.getItem(
+                                                      "userId"
+                                                    ) !== undefined ? (
+                                                      <button className="likebuttonbar">
+                                                        {activelike ==
+                                                        "true" ? ( */}
+                                                    <button
+                                                      onClick={removebookmark}
+                                                      className="addbookmark addbookmark btn btn-secondary"
+                                                      color="success"
+                                                    >
+                                                      Remove bookmark
+                                                    </button>
+                                                    {/* ) : ( */}
+                                                    <button
+                                                      onClick={addbookmark}
+                                                      className="addbookmark addbookmark btn btn-secondary"
+                                                      color="warning "
+                                                    >
+                                                      Add Bookmark
+                                                    </button>
+                                                    {/* )} */}
+                                                    {/* </button> */}
+                                                    {/* ) : null} */}
+                                                  </Col>
                                                 </Row>
                                               </div>
                                             </div>
                                           </Col>
                                           <Col lg="8" key={Producdetail?._id}>
                                             <div className="rat-right">
-                                              <h4 className="mt-3">
-                                                Write your Review
-                                              </h4>
-                                              <div className="">
-                                                <StarsRating
-                                                  count={5}
-                                                  onChange={ratingChanged}
-                                                  size={40}
-                                                  color2={"#ffd700"}
-                                                />
+                                              <Row>
+                                                <Col lg="6">
+                                                  <h4 className="mt-3">
+                                                    Write your Review
+                                                  </h4>
+                                                  <StarsRating
+                                                    count={5}
+                                                    onChange={ratingChanged}
+                                                    size={40}
+                                                    color2={"#ffd700"}
+                                                  />
+                                                </Col>
+                                              </Row>
 
+                                              <div className="">
                                                 <form key={Producdetail?._id}>
                                                   <textarea
                                                     key={Producdetail?._id}
@@ -1238,7 +1336,7 @@ function ProductList(args) {
                                                     onClick={handleSubmit}
                                                     className="bt-st reviewbutton mb-3"
                                                   >
-                                                    Send
+                                                    Submit
                                                   </Button>
                                                 </form>
                                               </div>
@@ -1291,24 +1389,28 @@ function ProductList(args) {
                                     <button
                                       key={Producdetail?._Id}
                                       type="button"
+                                      color={
+                                        activelike === "true" ? "red" : "blue"
+                                      }
                                       className="likebuttonbar"
                                       onClick={() => {
                                         const userId =
                                           localStorage.getItem("userId");
-
                                         setliked(categry?._id);
-                                        console.log(liked);
+                                        // console.log(liked);
 
-                                        // setActive(true);
                                         axiosConfig
                                           .post(`/user/add_like`, {
-                                            submitresrcId: liked,
+                                            submitresrcId: categry?._id,
                                             userid: userId,
-                                            status: "like",
+                                            status: "true",
                                           })
                                           .then((response) => {
-                                            console.log(response.data.data);
-                                            swal("you Liked it");
+                                            // console.log(response.data.data);
+                                            setActivelike(
+                                              response.data.data.status
+                                            );
+                                            swal("you bookmarked it");
 
                                             console.log(
                                               "likeindividual",
@@ -1317,19 +1419,88 @@ function ProductList(args) {
                                           })
                                           .catch((error) => {
                                             console.log(error.response.data);
-                                            if (
-                                              error.response.data.message ===
-                                              "already exists"
-                                            ) {
-                                              swal("You Already Liked It ");
-                                            }
                                           });
                                       }}
                                     >
-                                      {like ? (
-                                        <FaHeart size={28} color="red" />
+                                      {liked ? (
+                                        <FaHeart
+                                          size={28}
+                                          color={
+                                            activelike === "false"
+                                              ? "blue"
+                                              : "red"
+                                          }
+                                          onClick={() => {
+                                            const userId =
+                                              localStorage.getItem("userId");
+                                            setUnlike(categry?._id);
+                                            // console.log(unlike);
+
+                                            axiosConfig
+                                              .post(`/user/add_like`, {
+                                                submitresrcId: categry?._id,
+                                                userid: userId,
+                                                status: "false",
+                                              })
+                                              .then((response) => {
+                                                console.log(response.data.data);
+                                                setActivelike(
+                                                  response.data.data.status
+                                                );
+                                                swal(
+                                                  "you Removed your bookmark"
+                                                );
+
+                                                console.log(
+                                                  "Unbookmark",
+                                                  response.data.data
+                                                );
+                                              })
+                                              .catch((error) => {
+                                                console.log(
+                                                  error.response.data
+                                                );
+                                              });
+                                          }}
+                                        />
                                       ) : (
-                                        <FaRegHeart size={25} />
+                                        <FaRegHeart
+                                          size={25}
+                                          color={
+                                            againlikeact === "true"
+                                              ? "red"
+                                              : "blue"
+                                          }
+                                          onClick={() => {
+                                            const userId =
+                                              localStorage.getItem("userId");
+                                            setAgainlikeact(categry?._id);
+                                            console.log(liked);
+
+                                            axiosConfig
+                                              .post(`/user/add_like`, {
+                                                submitresrcId: categry?._id,
+                                                userid: userId,
+                                                status: "true",
+                                              })
+                                              .then((response) => {
+                                                console.log(response.data.data);
+                                                swal("you bookmarked it");
+                                                setAgainlikeact(
+                                                  response.data.data.status
+                                                );
+                                                console.log(
+                                                  "likeindividual",
+                                                  response.data.data
+                                                );
+                                              })
+                                              .catch((error) => {
+                                                console.log(
+                                                  error.response.data
+                                                );
+                                              });
+                                          }}
+                                        />
                                       )}
                                     </button>
                                   ) : (
@@ -1339,9 +1510,9 @@ function ProductList(args) {
                                         const userId =
                                           localStorage.getItem("userId");
                                         if (
-                                          userId == "" ||
-                                          userId == null ||
-                                          userId == undefined
+                                          userId === "" ||
+                                          userId === null ||
+                                          userId === undefined
                                         ) {
                                           swal(
                                             "you Need to login or Signup for Like and dislike"
@@ -1353,6 +1524,45 @@ function ProductList(args) {
                                     />
                                   )}
                                 </span>
+                                {/* <span class="product-discount-label st-1">
+                                  <FaRegHeart
+                                    size={25}
+                                    color={
+                                      activelike === "true" ? "red" : "none"
+                                    }
+                                    className="heartlike faregheart"
+                                    onClick={() => {
+                                      const userId =
+                                        localStorage.getItem("userId");
+                                      setliked(categry?._id);
+                                      console.log(liked);
+
+                                      axiosConfig
+                                        .post(`/user/add_like`, {
+                                          submitresrcId: liked,
+                                          userid: userId,
+                                          status: "true",
+                                        })
+                                        .then((response) => {
+                                          // console.log(
+                                          //   response.data.data.status
+                                          // );
+                                          setActivelike(
+                                            response.data.data.status
+                                          );
+                                          swal("you bookmarked it");
+
+                                          console.log(
+                                            "likeindividual",
+                                            response.data.data
+                                          );
+                                        })
+                                        .catch((error) => {
+                                          console.log(error.response.data);
+                                        });
+                                    }}
+                                  />
+                                </span> */}
                               </div>
                             </Col>
                             <Col md="8">

@@ -54,7 +54,7 @@ function Bookmarks() {
         {mylikes?.map((data) => (
           <Row className="videopostedall mb-4" key={data?._id}>
             <Col md="4">
-              <div class="product-image8 st-2">
+              <div className="product-image8 st-2">
                 <Link to="#">
                   <img
                     height={280}
@@ -65,7 +65,7 @@ function Bookmarks() {
                   />
                 </Link>
                 <span
-                  class="product-discount-label st-1"
+                  className="product-discount-label st-1"
                   // style={{ width: "2rem" }}
                 >
                   {/* <Heart
@@ -78,8 +78,8 @@ function Bookmarks() {
               </div>
             </Col>
             <Col md="8">
-              <div class="product-content">
-                <ul class="rating mb-3 topicslike">
+              <div className="product-content">
+                <ul className="rating mb-3 topicslike">
                   {data?.submitresrcId?.topics?.map((val) => (
                     <Link style={{ textDecoration: "none" }} to="#">
                       {val}

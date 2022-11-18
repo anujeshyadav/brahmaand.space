@@ -53,11 +53,11 @@ function Paginationnew() {
           pageClassName="pageclassforpage"
           className=" paginationsclass"
           breakLabel="..."
-          nextLabel="Next >"
+          nextLabel=">"
           onPageChange={handlePageClick}
           pageRangeDisplayed={1}
           pageCount={pageCount}
-          previousLabel="< Previous"
+          previousLabel="< "
           renderOnZeroPageCount={null}
         />
       </div>
