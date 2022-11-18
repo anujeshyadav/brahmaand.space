@@ -334,7 +334,7 @@ function Hastag() {
                 <ShowMore
                   className="showmore"
                   style={{ color: "black" }}
-                  lines={4}
+                  lines={3}
                   more="learn More"
                   less="learn less"
                   anchorClass=""
@@ -359,7 +359,7 @@ function Hastag() {
                 <ShowMore
                   className="showmore"
                   style={{ color: "black" }}
-                  lines={4}
+                  lines={3}
                   more="learn More"
                   less="learn less"
                   anchorClass=""
@@ -389,7 +389,7 @@ function Hastag() {
                 <ShowMore
                   className="showmore"
                   style={{ color: "black" }}
-                  lines={4}
+                  lines={3}
                   more="learn More"
                   less="learn less"
                   anchorClass=""
@@ -527,94 +527,6 @@ function Hastag() {
           </div>
         </div>
       </div>
-      {/*  upper section added by anujesh */}
-      {/* <Row className="mt-3">
-        <Col lg="6" md="6" sm="12" className="Card-Form ">
-          <Container>
-            <p className="d-flex  ">Get Our Monthly Newsletter</p>
-          </Container>
-          <Container>
-            <span className="d-flex  mt-3 newslettertext">
-              Select a category that best suits your interest. Use filters to
-              customize your search and to find exactly what you want.
-            </span>
-          </Container>
-         
-          <Container>
-            <InputGroup className="Card-Form mb-4">
-              <Col lg="8" md="8" sm="8" className="searchbara ">
-                <input
-                  value={email}
-                  onChange={handleChange}
-                  type="email"
-                  placeholder="Enter Email Address to Subscribe"
-                  className="d-flex searchnew  inputareea"
-                />
-
-                {error && <span style={{ color: "red" }}>{error}</span>}
-              </Col>
-              
-
-              {localStorage.getItem("userId") !== "" &&
-              localStorage.getItem("userId") !== null &&
-              localStorage.getItem("userId") !== undefined ? (
-                <Button
-                  lg="3"
-                  md="3"
-                  sm="4"
-                  type="submit"
-                  disabled={!performValidation()}
-                  onClick={handleSubmit}
-                  className=" d-flex subscribebtn col-md-4"
-                >
-                  Subscribe
-                </Button>
-              ) : (
-                <Button
-                  lg="3"
-                  md="3"
-                  sm="3"
-                  type="submit"
-                  onClick={() => {
-                    swal("Please Login to Subscribe");
-                  }}
-                  className="d-flex subscribebtn col-md-4"
-                >
-                  Subscribe
-                </Button>
-              )}
-            </InputGroup>
-          </Container>
-        </Col>
-
-        <Col lg="6" md="6" sm="12" className="">
-          <div className="ty-3">
-            <div className="ty-2">
-              <Nav.Link as={NavLink} className="navbar-link">
-                <div className="ty-1">
-                  <BsPlay
-                    className="bsplaybutton"
-                    size={75}
-                    style={{ backgroundColor: "white" }}
-                    type="submit"
-                    onClick={() => setOpen(true)}
-                  />
-                </div>
-                <div className="modalvideo">
-                  <ModalVideo
-                    style={{ borderRadius: "12px" }}
-                    channel="youtube"
-                    autoplay
-                    isOpen={isOpen}
-                    videoId="L61p2uyiMSo"
-                    onClose={() => setOpen(false)}
-                  />
-                </div>
-              </Nav.Link>
-            </div>
-          </div>
-        </Col>
-      </Row> */}
 
       <div className="container">
         <p className="category3">Latest Blogs</p>
@@ -622,13 +534,15 @@ function Hastag() {
           <Col lg="4" md="6" sm="12" className="Card-Blog">
             <Card>
               <Container className="imageslastblog ">
-                <img
-                  height={250}
-                  style={{ borderRadius: "13px" }}
-                  className="imgBloglast"
-                  src={edu}
-                  alt="img"
-                />
+                <Link to={`/blog`}>
+                  <img
+                    height={250}
+                    style={{ borderRadius: "13px" }}
+                    className="imgBloglast"
+                    src={edu}
+                    alt="img"
+                  />
+                </Link>
                 <h5>30 popular business listings of this pandemic year 2021</h5>
                 <p>
                   You’ve probably noticed there are dozens of platforms that
@@ -646,13 +560,15 @@ function Hastag() {
           <Col lg="4" md="6" sm="12" className="Card-Blog">
             <Card>
               <Container className="imageslastblog ">
-                <img
-                  height={250}
-                  style={{ borderRadius: "13px" }}
-                  className="imgBloglast"
-                  src={rate}
-                  alt="img"
-                />
+                <Link to={`/blog`}>
+                  <img
+                    height={250}
+                    style={{ borderRadius: "13px" }}
+                    className="imgBloglast"
+                    src={rate}
+                    alt="img"
+                  />
+                </Link>
                 <h5>Most visited places & top rated shops from our listing</h5>
                 <p>
                   You’ve probably noticed there are dozens of platforms that
@@ -671,13 +587,15 @@ function Hastag() {
           <Col lg="4" md="6" sm="12" className="Card-Blog">
             <Card>
               <Container className="imageslastblog ">
-                <img
-                  height={250}
-                  style={{ borderRadius: "13px" }}
-                  className="imgBloglast"
-                  src={socialnetwork}
-                  alt="img"
-                />
+                <Link to={`/blog`}>
+                  <img
+                    height={250}
+                    style={{ borderRadius: "13px" }}
+                    className="imgBloglast"
+                    src={socialnetwork}
+                    alt="img"
+                  />
+                </Link>
                 <h5>
                   Optimize your business page for national/global customers
                 </h5>

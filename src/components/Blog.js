@@ -238,7 +238,7 @@ function Blog() {
           onPageChange={handlePageClick}
           pageRangeDisplayed={1}
           pageCount={pageCount}
-          previousLabel="< "
+          previousLabel="<"
           renderOnZeroPageCount={null}
         />
         <br></br>
