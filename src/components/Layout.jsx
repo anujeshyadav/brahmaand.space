@@ -7,7 +7,6 @@ function Layout({ children }) {
     <div>
       <CustomNavbar />
       <main>{children}</main>
-
       <Footer />
     </div>
   );

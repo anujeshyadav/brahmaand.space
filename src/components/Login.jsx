@@ -4,6 +4,7 @@ import "../styles/Login.css";
 import { Check } from "react-feather";
 import google from "../images/g1.png";
 import logo from "../images/logo.png";
+import newlogin from "../images/newlogin.png";
 import Logo1 from "../images/Logo1.png";
 import { useNavigate } from "react-router-dom";
 import { Col, Row, Container, Form, Button, FormGroup } from "react-bootstrap";
@@ -87,11 +88,11 @@ function Login() {
             <Col lg="8" md="6" sm="12">
               <div
                 style={{
-                  backgroundImage: `url(${logo})`,
+                  backgroundImage: `url(${newlogin})`,
                   backgroundPosition: "left",
                   backgroundSize: "cover",
                   backgroundRepeat: "no-repeat",
-                  height: "110vh",
+                  height: "90vh",
                   width: "100%",
                 }}
               >
@@ -99,7 +100,7 @@ function Login() {
                   className="d-flex justify-content-center"
                   style={{ paddingTop: "150px" }}
                 >
-                  <img src={Logo1} style={{ height: "35vh", width: "25%" }} />
+                  <img src={Logo1} style={{ height: "33vh", width: "25%" }} />
                 </div>
                 <h3
                   className="d-flex justify-content-center"
