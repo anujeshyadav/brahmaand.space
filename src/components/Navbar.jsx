@@ -93,11 +93,6 @@ function CustomNavbar(args) {
       Opcomm,
       cat_img
     );
-    // for (let i = 0; (i = newTopic.length - 1); i++) {
-    //   formData.append("topics", newTopic[i]);
-    // }
-    const langaone = sellang[0];
-    // const langtwo = sellang[1];
 
     const formData = new FormData();
     formData.append("link", link);
@@ -105,7 +100,7 @@ function CustomNavbar(args) {
     formData.append("sub_category", subcatry);
     formData.append("type", type);
     formData.append("format", formate);
-    formData.append("language", langaone);
+    formData.append("language", sellang);
 
     formData.append("topics", newTopic);
     formData.append("desc", Desc);
@@ -272,10 +267,10 @@ function CustomNavbar(args) {
     // debugger;
     for (var i = 0; i < selectedList.length; i++) {
       selectItem1.push(selectedList[i]._id);
-      // selectItem1 = JSON.stringify(selectItem1);
     }
     console.log("aaaa", selectItem1);
     setSellang(selectItem1);
+    // console.log(sellang);
   };
 
   const onRemove = (selectedList, removedItem) => {

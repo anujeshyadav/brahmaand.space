@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import "../styles/Login.css";
 import { Check } from "react-feather";
 import google from "../images/g1.png";
-import logo from "../images/logo.png";
 import newlogin from "../images/newlogin.png";
 import Logo1 from "../images/Logo1.png";
 import { useNavigate } from "react-router-dom";
@@ -81,121 +80,123 @@ function Login() {
   };
 
   return (
-    <Container className="login-container">
-      <div className="login">
-        <Form onSubmit={handleLoginSubmit} className="login-form">
-          <Row>
-            <Col lg="8" md="6" sm="12">
-              <div
-                style={{
-                  backgroundImage: `url(${newlogin})`,
-                  backgroundPosition: "left",
-                  backgroundSize: "cover",
-                  backgroundRepeat: "no-repeat",
-                  height: "90vh",
-                  width: "100%",
-                }}
-              >
+    <>
+      <Container className="login-container">
+        <div className="login">
+          <Form onSubmit={handleLoginSubmit} className="login-form">
+            <Row>
+              <Col lg="8" md="6" sm="12">
                 <div
-                  className="d-flex justify-content-center"
-                  style={{ paddingTop: "150px" }}
+                  style={{
+                    backgroundImage: `url(${newlogin})`,
+                    backgroundPosition: "left",
+                    backgroundSize: "cover",
+                    backgroundRepeat: "no-repeat",
+                    height: "75vh",
+                    width: "100%",
+                  }}
                 >
-                  <img src={Logo1} style={{ height: "33vh", width: "25%" }} />
+                  <div
+                    className="d-flex justify-content-center"
+                    style={{ paddingTop: "150px" }}
+                  >
+                    <img src={Logo1} style={{ height: "33vh", width: "25%" }} />
+                  </div>
+                  <h3
+                    className="d-flex justify-content-center"
+                    style={{ color: "white", textalign: "center" }}
+                  >
+                    <b>Brahmaand.Space</b>
+                  </h3>
                 </div>
-                <h3
-                  className="d-flex justify-content-center"
-                  style={{ color: "white", textalign: "center" }}
+              </Col>
+              <Col lg="4" md="6" sm="12" className="head">
+                <h2>Welcome Back!</h2>
+                <FormGroup
+                  className="mb-3 login-form-group"
+                  controlId="formBasicLoginEmail"
                 >
-                  <b>Brahmaand.Space</b>
-                </h3>
-              </div>
-            </Col>
-            <Col lg="4" md="6" sm="12" className="head">
-              <h2>Welcome Back!</h2>
-              <FormGroup
-                className="mb-3 login-form-group"
-                controlId="formBasicLoginEmail"
-              >
-                <Label className="from-label">Email Id</Label>
-                <Input
-                  required="true"
-                  for="exampleEmail"
-                  type="email"
-                  className="login-form-control"
-                  placeholder="EMAIL"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                />
-              </FormGroup>
-              <FormGroup
-                className="mb-3 login-form-group"
-                controlId="formBasicLoginEmail"
-              >
-                <Label className="from-label">Password</Label>
-
-                <Input
-                  type="password"
-                  required="required"
-                  className="login-form-control"
-                  placeholder="Password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                />
-              </FormGroup>
-              <div className="login-signup-res-pass-div text-align-left">
-                <Link
-                  to="/send-reset-password-request"
-                  className="login-new-account-link"
-                >
-                  Forgot Password?
-                </Link>
-              </div>
-
-              <Input
-                className="check"
-                type="checkbox"
-                color="primary"
-                icon={<Check className="vx-icon" size={12} />}
-                label="Remember me"
-                defaultChecked={false}
-                required
-              />
-              <Label className="label-button">Remember me</Label>
-
-              <div className="login-button-div">
-                <Button
-                  disabled={!performValidation()}
-                  variant="primary"
-                  className="login-button"
-                  type="submit"
-                  onClick={handleLoginSubmit}
-                >
-                  LOGIN
-                </Button>
-              </div>
-              <div className="last">
-                <span>
-                  Don't have an account yet ?<Link to="/signup">Sign Up</Link>
-                </span>
-              </div>
-              <Row className=" d-flex justify-content-center mt-3">OR</Row>
-              <Row className="google">
-                <Col lg="12" className="d-flex justify-content-center">
-                  <img
-                    style={{
-                      margin: "3px",
-                      height: "17px",
-                    }}
-                    src={google}
+                  <Label className="from-label">Email Id</Label>
+                  <Input
+                    required="true"
+                    for="exampleEmail"
+                    type="email"
+                    className="login-form-control"
+                    placeholder="EMAIL"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
                   />
-                  <p>Sign in with Google</p>
-                </Col>
-              </Row>
-            </Col>
-          </Row>
-        </Form>
-      </div>
-    </Container>
+                </FormGroup>
+                <FormGroup
+                  className="mb-3 login-form-group"
+                  controlId="formBasicLoginEmail"
+                >
+                  <Label className="from-label">Password</Label>
+
+                  <Input
+                    type="password"
+                    required="required"
+                    className="login-form-control"
+                    placeholder="Password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                  />
+                </FormGroup>
+                <div className="login-signup-res-pass-div text-align-left">
+                  <Link
+                    to="/send-reset-password-request"
+                    className="login-new-account-link"
+                  >
+                    Forgot Password?
+                  </Link>
+                </div>
+
+                <Input
+                  className="check"
+                  type="checkbox"
+                  color="primary"
+                  icon={<Check className="vx-icon" size={12} />}
+                  label="Remember me"
+                  defaultChecked={false}
+                  required
+                />
+                <Label className="label-button">Remember me</Label>
+
+                <div className="login-button-div">
+                  <Button
+                    disabled={!performValidation()}
+                    variant="primary"
+                    className="login-button"
+                    type="submit"
+                    onClick={handleLoginSubmit}
+                  >
+                    LOGIN
+                  </Button>
+                </div>
+                <div className="last">
+                  <span>
+                    Don't have an account yet ?<Link to="/signup">Sign Up</Link>
+                  </span>
+                </div>
+                {/* <Row className=" d-flex justify-content-center mt-3">OR</Row> */}
+                {/* <Row className="google">
+                  <Col lg="12" className="d-flex justify-content-center">
+                    <img
+                      style={{
+                        margin: "3px",
+                        height: "17px",
+                      }}
+                      src={google}
+                    />
+                    <p>Sign in with Google</p>
+                  </Col>
+                </Row> */}
+              </Col>
+            </Row>
+          </Form>
+        </div>
+      </Container>
+    </>
   );
 }
 
