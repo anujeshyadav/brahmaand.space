@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/static/css/main.965ba9aa.css",
-    "main.js": "/static/js/main.2d621a9b.js",
+    "main.js": "/static/js/main.881c550b.js",
     "static/js/787.2d6ec2d3.chunk.js": "/static/js/787.2d6ec2d3.chunk.js",
     "static/media/travel.png": "/static/media/travel.586669a1c2902b49d613.png",
     "static/media/entertainment.png": "/static/media/entertainment.d04af40f5dc2db01d536.png",
@@ -21,6 +21,7 @@
     "static/media/Arial Bold.ttf": "/static/media/Arial Bold.2e1c14639217f2abd40c.ttf",
     "static/media/banner4.jpg": "/static/media/banner4.8bb836af3fddbfe90339.jpg",
     "static/media/banner1.jpg": "/static/media/banner1.0dc4d210dda0ee53cf98.jpg",
+    "static/media/newlogin.png": "/static/media/newlogin.5bf49ad4d17cc183b9d5.png",
     "static/media/Dispatch305-agreement.pdf": "/static/media/Dispatch305-agreement.2aed9219856b76851a12.pdf",
     "static/media/Futura.ttc": "/static/media/Futura.b46917316df181e77834.ttc",
     "static/media/detention.jpg": "/static/media/detention.d61783ece3052a0ffcc7.jpg",
@@ -63,11 +64,11 @@
     "static/media/six.png": "/static/media/six.070a8aec339442205e77.png",
     "index.html": "/index.html",
     "main.965ba9aa.css.map": "/static/css/main.965ba9aa.css.map",
-    "main.2d621a9b.js.map": "/static/js/main.2d621a9b.js.map",
+    "main.881c550b.js.map": "/static/js/main.881c550b.js.map",
     "787.2d6ec2d3.chunk.js.map": "/static/js/787.2d6ec2d3.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.965ba9aa.css",
-    "static/js/main.2d621a9b.js"
+    "static/js/main.881c550b.js"
   ]
 }
