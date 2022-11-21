@@ -255,16 +255,16 @@ function ProductList(args) {
       .then((res) => {
         setGetonecomment(res.data.data);
         console.log(res.data.data);
-        const totalRating = [];
-        var sum = 0;
-        debugger;
-        for (let i = 0; i <= getonecomment.length; i++) {
-          if (getonecomment[i].rating == undefined) {
-          } else {
-            sum += getonecomment[i].rating;
-            totalRating.push(getonecomment[i].rating);
-          }
-        }
+        // const totalRating = [];
+        // var sum = 0;
+
+        // for (let i = 0; i <= getonecomment.length; i++) {
+        //   if (getonecomment[i].rating == undefined) {
+        //   } else {
+        //     sum += getonecomment[i].rating;
+        //     totalRating.push(getonecomment[i].rating);
+        //   }
+        // }
         // debugger;
         // const sumall = (total, value) => {
         //   return total + value;
