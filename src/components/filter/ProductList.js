@@ -73,13 +73,14 @@ function ProductList(args) {
   const [totalrateng, setTotalrateng] = useState("");
   const [all, setAll] = useState("");
 
-  const removebookmark = () => {
+  const removebookmark = (id) => {
+    console.log(id);
+    setliked(id);
     const userId = localStorage.getItem("userId");
-    setliked(categry?._id);
-    // console.log(liked);
+
     axiosConfig
       .post(`/user/add_like`, {
-        submitresrcId: categry?._id,
+        submitresrcId: liked,
         userid: userId,
         status: "false",
       })
@@ -95,13 +96,14 @@ function ProductList(args) {
       });
   };
 
-  const addbookmark = () => {
+  const addbookmark = (id) => {
+    console.log(id);
+    setliked(id);
     const userId = localStorage.getItem("userId");
-    setliked(categry?._id);
-    // console.log(liked);
+
     axiosConfig
       .post(`/user/add_like`, {
-        submitresrcId: categry?._id,
+        submitresrcId: liked,
         userid: userId,
         status: "true",
       })
@@ -224,6 +226,7 @@ function ProductList(args) {
     console.log(text);
   };
   const handleSelection = (_id) => {
+    console.log(_id);
     var selectedId = _id;
 
     if (selectedId === _id) {
@@ -903,7 +906,7 @@ function ProductList(args) {
                                   />
 
                                   <Modal
-                                    key={Producdetail?._Id}
+                                    key={Producdetail?._id}
                                     className="mdlg"
                                     isOpen={modal}
                                     toggle={toggle}
@@ -1144,7 +1147,9 @@ function ProductList(args) {
                                                   icons={icons.star}
                                                   colors={colors.star}
                                                 />
-                                                <span>2.7 of 5 Stars</span>
+                                                <span className="starratinginno">
+                                                  2.7 of 5 Stars
+                                                </span>
                                                 <br></br>
                                                 <span className="mt-3">
                                                   {getonecomment?.length}-
@@ -1283,16 +1288,26 @@ function ProductList(args) {
                                                         {activelike ==
                                                         "true" ? ( */}
                                                     <button
-                                                      onClick={removebookmark}
-                                                      className="addbookmark addbookmark btn btn-secondary"
+                                                      key={categry?._id}
+                                                      className="addbookmark  btn btn-secondary"
                                                       color="success"
+                                                      onClick={() =>
+                                                        removebookmark(
+                                                          categry?._id
+                                                        )
+                                                      }
                                                     >
                                                       Remove bookmark
                                                     </button>
-                                                    {/* ) : ( */}
+
                                                     <button
-                                                      onClick={addbookmark}
-                                                      className="addbookmark addbookmark btn btn-secondary"
+                                                      key={categry?._id}
+                                                      onClick={() =>
+                                                        addbookmark(
+                                                          categry?._id
+                                                        )
+                                                      }
+                                                      className="addbookmark  btn btn-secondary"
                                                       color="warning "
                                                     >
                                                       Add Bookmark

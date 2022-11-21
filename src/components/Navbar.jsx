@@ -101,7 +101,7 @@ function CustomNavbar(args) {
     formData.append("type", type);
     formData.append("format", formate);
     formData.append("language", sellang);
-
+    // debugger;
     formData.append("topics", newTopic);
     formData.append("desc", Desc);
     formData.append("resTitle", Optitle);
@@ -116,6 +116,7 @@ function CustomNavbar(args) {
     axios
       .post(`http://3.7.173.138:9000/user/addSub_resrc`, formData)
       .then((res) => {
+        // debugger;
         console.log(res.data.data);
         if (res.data.message === "success") {
           swal("Resource Submitted Successfully👍");
@@ -138,6 +139,7 @@ function CustomNavbar(args) {
         }
       })
       .catch((error) => {
+        // debugger;
         console.log(error.response.data);
         if (error.response.data.message === "error") {
           swal(
@@ -261,6 +263,10 @@ function CustomNavbar(args) {
   //   // console.log(current_link);
   // }, [current_link]);
 
+  // const onSelect = (selectedList, selectedItem) => {
+  //   setSellang(Sellang.concat(selectedItem._id));
+  //   console.log(sellang);
+  // };
   const onSelect = (selectedList, selectedItem) => {
     console.log(selectedList);
     var selectItem1 = [];

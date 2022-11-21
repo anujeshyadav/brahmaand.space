@@ -97,14 +97,15 @@ function Hastag() {
   };
   // news letter api for video
   const [newslettervid, setNewslettervid] = useState([]);
-  axiosConfig
-    .get(`/user/getVideo`)
-    .then((res) => {
-      setNewslettervid(res.data.data);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+  // axiosConfig
+  // .get(`/user/getVideo`)
+  // .then((res) => {
+  //   debugger;
+  //   setNewslettervid(res.data.data);
+  // })
+  // .catch((err) => {
+  //   console.log(err);
+  // });
 
   const [isOpenone, setOpenone] = useState(false);
   const [isOpen, setOpen] = useState(false);

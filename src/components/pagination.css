@@ -35,5 +35,12 @@ li.break {
   padding: 8px 5px;
 }
 .containerone {
+  padding: 8px;
   border-radius: 16px;
+  font-size: 12px;
+}
+
+button.addbookmark.btn.btn-secondary {
+  margin-top: 11px;
+  padding: 6px;
 }
