@@ -115,7 +115,10 @@ function ProductList(args) {
         console.log("likeindividual", response.data.data);
       })
       .catch((error) => {
-        console.log(error.response.data);
+        console.log(error.response.data.message);
+        if (error.response.data.message == "already exists") {
+          swal(" Your already bookmarked It");
+        }
       });
   };
   const handlepromotion = (_id) => {
@@ -758,11 +761,153 @@ function ProductList(args) {
                                               {/* {sum / totalrateng.length} */}
                                             </small>
 
-                                            <img
-                                              src={ratingstar}
-                                              alt=""
-                                              width="100%"
-                                            />
+                                            <Row>
+                                              <Col
+                                                className="d-flex justify-content-left mt-1"
+                                                style={{ color: "blue" }}
+                                                lg="4"
+                                              >
+                                                5 Stars
+                                              </Col>
+                                              <Col
+                                                className="mt-1 mb-1 "
+                                                lg="8"
+                                              >
+                                                {" "}
+                                                <ProgressBar
+                                                  bgColor=" #fdb800"
+                                                  height="13px"
+                                                  borderRadius="12px"
+                                                  className="progressbar"
+                                                  barContainerClassName="containerone"
+                                                  labelClassName="label"
+                                                  completed={60}
+                                                />
+                                              </Col>
+                                            </Row>
+                                            <Row>
+                                              <Col
+                                                className="d-flex justify-content-left mt-1 "
+                                                style={{ color: "blue" }}
+                                                lg="4"
+                                              >
+                                                4 Stars
+                                              </Col>
+                                              <Col className="mt-1 mb-1" lg="8">
+                                                {" "}
+                                                <ProgressBar
+                                                  bgColor=" #fdb800"
+                                                  height="13px"
+                                                  borderRadius="12px"
+                                                  className="progressbar"
+                                                  barContainerClassName="containerone"
+                                                  labelClassName="label"
+                                                  completed={40}
+                                                />
+                                              </Col>
+                                            </Row>
+                                            <Row>
+                                              <Col
+                                                className="d-flex justify-content-left mt-1 "
+                                                style={{ color: "blue" }}
+                                                lg="4"
+                                              >
+                                                3 Stars
+                                              </Col>
+                                              <Col className="mt-1 mb-1" lg="8">
+                                                {" "}
+                                                <ProgressBar
+                                                  bgColor=" #fdb800"
+                                                  height="13px"
+                                                  borderRadius="12px"
+                                                  className="progressbar"
+                                                  barContainerClassName="containerone"
+                                                  labelClassName="label"
+                                                  completed={50}
+                                                />
+                                              </Col>
+                                            </Row>
+                                            <Row>
+                                              <Col
+                                                className="d-flex justify-content-left mt-1 "
+                                                style={{ color: "blue" }}
+                                                lg="4"
+                                              >
+                                                2 Stars
+                                              </Col>
+                                              <Col className="mt-1 mb-1" lg="8">
+                                                {" "}
+                                                <ProgressBar
+                                                  bgColor=" #fdb800"
+                                                  height="13px"
+                                                  borderRadius="12px"
+                                                  className="progressbar"
+                                                  barContainerClassName="containerone"
+                                                  labelClassName="label"
+                                                  completed={70}
+                                                />
+                                              </Col>
+                                            </Row>
+                                            <Row>
+                                              <Col
+                                                className="d-flex justify-content-left mt-1 "
+                                                style={{ color: "blue" }}
+                                                lg="4"
+                                              >
+                                                1 Stars
+                                              </Col>
+                                              <Col className="mt-1 mb-1" lg="8">
+                                                <ProgressBar
+                                                  bgColor=" #fdb800"
+                                                  height="13px"
+                                                  borderRadius="12px"
+                                                  className="progressbar"
+                                                  barContainerClassName="containerone"
+                                                  labelClassName="label"
+                                                  completed={40}
+                                                />
+                                              </Col>
+                                              <Col>
+                                                {/* {localStorage.getItem(
+                                                      "userId"
+                                                    ) !== "" &&
+                                                    localStorage.getItem(
+                                                      "userId"
+                                                    ) !== null &&
+                                                    localStorage.getItem(
+                                                      "userId"
+                                                    ) !== undefined ? (
+                                                      <button className="likebuttonbar">
+                                                        {activelike ==
+                                                        "true" ? ( */}
+                                                <button
+                                                  key={promotion?._id}
+                                                  className="addbookmark  btn btn-secondary"
+                                                  color="success"
+                                                  onClick={() =>
+                                                    removebookmark(
+                                                      promotion?._id
+                                                    )
+                                                  }
+                                                >
+                                                  Remove bookmark
+                                                </button>
+
+                                                <button
+                                                  key={promotion?._id}
+                                                  onClick={() =>
+                                                    addbookmark(promotion?._id)
+                                                  }
+                                                  className="addbookmark  btn btn-secondary"
+                                                  color="warning "
+                                                >
+                                                  Add Bookmark
+                                                </button>
+                                                {/* )} */}
+                                                {/* </button> */}
+                                                {/* ) : null} */}
+                                              </Col>
+                                            </Row>
                                           </div>
                                         </div>
                                       </Col>
@@ -1162,7 +1307,7 @@ function ProductList(args) {
 
                                                 <Row>
                                                   <Col
-                                                    className="d-flex justify-content-left "
+                                                    className="d-flex justify-content-left mt-1"
                                                     style={{ color: "blue" }}
                                                     lg="4"
                                                   >
@@ -1186,7 +1331,7 @@ function ProductList(args) {
                                                 </Row>
                                                 <Row>
                                                   <Col
-                                                    className="d-flex justify-content-left "
+                                                    className="d-flex justify-content-left mt-1 "
                                                     style={{ color: "blue" }}
                                                     lg="4"
                                                   >
@@ -1210,7 +1355,7 @@ function ProductList(args) {
                                                 </Row>
                                                 <Row>
                                                   <Col
-                                                    className="d-flex justify-content-left "
+                                                    className="d-flex justify-content-left mt-1 "
                                                     style={{ color: "blue" }}
                                                     lg="4"
                                                   >
@@ -1234,7 +1379,7 @@ function ProductList(args) {
                                                 </Row>
                                                 <Row>
                                                   <Col
-                                                    className="d-flex justify-content-left "
+                                                    className="d-flex justify-content-left mt-1 "
                                                     style={{ color: "blue" }}
                                                     lg="4"
                                                   >
@@ -1258,7 +1403,7 @@ function ProductList(args) {
                                                 </Row>
                                                 <Row>
                                                   <Col
-                                                    className="d-flex justify-content-left "
+                                                    className="d-flex justify-content-left mt-1 "
                                                     style={{ color: "blue" }}
                                                     lg="4"
                                                   >

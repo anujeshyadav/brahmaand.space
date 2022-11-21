@@ -27,8 +27,10 @@ import { InputGroup } from "react-bootstrap";
 
 function Hastag() {
   const [categry, setCategry] = useState([]);
+  const [newslettervid, setNewslettervid] = useState([]);
   useEffect(() => {
     allcategory();
+    monthlynewslettervid();
     featuredContent();
   }, []);
   const allcategory = () => {
@@ -73,6 +75,17 @@ function Hastag() {
 
     return expression.test(String(email).toLowerCase());
   }
+
+  const monthlynewslettervid = () => {
+    axiosConfig
+      .get(`/user/getVideo`)
+      .then((res) => {
+        setNewslettervid(res.data.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
   const handleChange = (event) => {
     if (!isValidEmail(event.target.value)) {
       setError("Please Enter correct Email to Subscribe");
@@ -96,16 +109,15 @@ function Hastag() {
       });
   };
   // news letter api for video
-  const [newslettervid, setNewslettervid] = useState([]);
+  // const [newslettervid, setNewslettervid] = useState([]);
   // axiosConfig
-  // .get(`/user/getVideo`)
-  // .then((res) => {
-  //   debugger;
-  //   setNewslettervid(res.data.data);
-  // })
-  // .catch((err) => {
-  //   console.log(err);
-  // });
+  //   .get(`/user/getVideo`)
+  //   .then((res) => {
+  //     setNewslettervid(res.data.data);
+  //   })
+  //   .catch((err) => {
+  //     console.log(err);
+  //   });
 
   const [isOpenone, setOpenone] = useState(false);
   const [isOpen, setOpen] = useState(false);
