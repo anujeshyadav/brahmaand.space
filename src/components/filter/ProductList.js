@@ -257,7 +257,7 @@ function ProductList(args) {
         console.log(res.data.data);
         const totalRating = [];
         var sum = 0;
-
+        debugger;
         for (let i = 0; i <= getonecomment.length; i++) {
           if (getonecomment[i].rating == undefined) {
           } else {
@@ -265,7 +265,11 @@ function ProductList(args) {
             totalRating.push(getonecomment[i].rating);
           }
         }
-
+        // debugger;
+        // const sumall = (total, value) => {
+        //   return total + value;
+        // };
+        // console.log(sumall);
         setAll(sum);
 
         setTotalrateng(totalRating);

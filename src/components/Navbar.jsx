@@ -52,10 +52,10 @@ function CustomNavbar(args) {
   };
 
   const handleSubmitResource = (e) => {
-    const newTopic = topic.split(",");
-    newTopic.push(newTopic);
-    console.log(newTopic);
-    console.log(newTopic.length - 1);
+    // const newTopic = topic.split(",");
+    // newTopic.push(newTopic);
+    // console.log(newTopic);
+    // console.log(newTopic.length - 1);
     if (catgry === "Select Category") {
       swal("Please Select Category");
     }
@@ -84,7 +84,7 @@ function CustomNavbar(args) {
       type,
       formate,
       sellang,
-      newTopic,
+      topic,
       Desc,
       Optitle,
       Opcname,
@@ -102,7 +102,7 @@ function CustomNavbar(args) {
     formData.append("format", formate);
     formData.append("language", sellang);
     // debugger;
-    formData.append("topics", newTopic);
+    formData.append("topics", topic);
     formData.append("desc", Desc);
     formData.append("resTitle", Optitle);
     formData.append("creatorName", Opcname);
