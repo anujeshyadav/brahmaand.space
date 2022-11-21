@@ -270,9 +270,9 @@ function ProductList(args) {
         //   return total + value;
         // };
         // console.log(sumall);
-        setAll(sum);
+        // setAll(sum);
 
-        setTotalrateng(totalRating);
+        // setTotalrateng(totalRating);
       })
       .catch((err) => {
         console.log(err);
