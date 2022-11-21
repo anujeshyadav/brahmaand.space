@@ -362,6 +362,14 @@ ul.d-flex.justify-content-right.float-right.pagination {
 button.bt-st.reviewbutton.btn.btn-primary {
   font-size: 18px;
   padding: 7px 33px;
+  background: #5f56c6;
+  border-color: #5f56c6;
+  float: right;
+  margin-top: -49px;
+  margin-right: 15px;
+  padding: 5px 20px;
+  /* font-size: 18px;
+  padding: 7px 33px; */
 }
 
 fifilter.col-lg-3 {

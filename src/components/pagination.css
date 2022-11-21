@@ -41,6 +41,8 @@ li.break {
 }
 
 button.addbookmark.btn.btn-secondary {
+  margin-right: 23px;
+
   margin-top: 11px;
   padding: 6px;
 }

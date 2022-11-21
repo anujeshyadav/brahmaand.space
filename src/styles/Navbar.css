@@ -1,5 +1,5 @@
 .navbar {
-  height: 100px;
+  height: 102px;
   background: #011d2b !important;
 }
 .d-flex .loginboard :hover {
@@ -87,7 +87,7 @@ hr {
   font-size: 1.2rem;
   font-weight: bold;
   outline: none !important;
-  margin-top: 15px;
+  margin-top: 13px;
 }
 
 .navbar-link:after {

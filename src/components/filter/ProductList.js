@@ -932,7 +932,7 @@ function ProductList(args) {
                                               ></textarea>
                                               <Button
                                                 onClick={handleSubmit}
-                                                className="bt-st"
+                                                className=" bt-st reviewbutton mb-3 btn btn-primary"
                                               >
                                                 Send
                                               </Button>
@@ -1423,48 +1423,6 @@ function ProductList(args) {
                                                       completed={40}
                                                     />
                                                   </Col>
-                                                  <Col>
-                                                    {/* {localStorage.getItem(
-                                                      "userId"
-                                                    ) !== "" &&
-                                                    localStorage.getItem(
-                                                      "userId"
-                                                    ) !== null &&
-                                                    localStorage.getItem(
-                                                      "userId"
-                                                    ) !== undefined ? (
-                                                      <button className="likebuttonbar">
-                                                        {activelike ==
-                                                        "true" ? ( */}
-                                                    <button
-                                                      key={categry?._id}
-                                                      className="addbookmark  btn btn-secondary"
-                                                      color="success"
-                                                      onClick={() =>
-                                                        removebookmark(
-                                                          categry?._id
-                                                        )
-                                                      }
-                                                    >
-                                                      Remove bookmark
-                                                    </button>
-
-                                                    <button
-                                                      key={categry?._id}
-                                                      onClick={() =>
-                                                        addbookmark(
-                                                          categry?._id
-                                                        )
-                                                      }
-                                                      className="addbookmark  btn btn-secondary"
-                                                      color="warning "
-                                                    >
-                                                      Add Bookmark
-                                                    </button>
-                                                    {/* )} */}
-                                                    {/* </button> */}
-                                                    {/* ) : null} */}
-                                                  </Col>
                                                 </Row>
                                               </div>
                                             </div>
@@ -1508,6 +1466,47 @@ function ProductList(args) {
                                           </Col>
                                         </Row>
                                       </div>
+                                      <Row>
+                                        <Col lg="4"></Col>
+                                        <Col lg="8">
+                                          {/* {localStorage.getItem(
+                                                      "userId"
+                                                    ) !== "" &&
+                                                    localStorage.getItem(
+                                                      "userId"
+                                                    ) !== null &&
+                                                    localStorage.getItem(
+                                                      "userId"
+                                                    ) !== undefined ? (
+                                                      <button className="likebuttonbar">
+                                                        {activelike ==
+                                                        "true" ? ( */}
+                                          <button
+                                            key={categry?._id}
+                                            className="addbookmark  btn btn-secondary"
+                                            color="success"
+                                            onClick={() =>
+                                              removebookmark(categry?._id)
+                                            }
+                                          >
+                                            Remove bookmark
+                                          </button>
+
+                                          <button
+                                            key={categry?._id}
+                                            onClick={() =>
+                                              addbookmark(categry?._id)
+                                            }
+                                            className="addbookmark  btn btn-secondary"
+                                            color="warning "
+                                          >
+                                            Add Bookmark
+                                          </button>
+                                          {/* )} */}
+                                          {/* </button> */}
+                                          {/* ) : null} */}
+                                        </Col>
+                                      </Row>
                                       <hr></hr>
                                       <div className="review-list mt-3  ">
                                         <h4>Reviews:</h4>
