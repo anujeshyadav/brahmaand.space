@@ -322,8 +322,8 @@ function ProductList(args) {
               </div>
             </Col>
             <Col lg="2">
-              <Button className="probtn text-center ">
-                <p className="searchproduct">SEARCH</p>
+              <Button className=" d-flex probtn text-center ">
+                <p className="searchproduct d-flex">SEARCH</p>
               </Button>
             </Col>
           </Row>
@@ -1730,14 +1730,10 @@ function ProductList(args) {
                             </Col>
                             <Col md="8">
                               <div class="product-content">
-                                <ul class="rating">
-                                  <li>
-                                    <Link to="#" className="btt">
-                                      {categry?.topics}
-                                    </Link>
-                                    <Link to="#" className="btt"></Link>
-                                  </li>
-                                </ul>
+                                <div className="d-flex topicsdataapi">
+                                  <Link>{categry?.topics}</Link>
+                                </div>
+
                                 <h3>{categry?.resTitle}</h3>
                                 <h5>
                                   <span>By</span> {categry?.creatorName}
