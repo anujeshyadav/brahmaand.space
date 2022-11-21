@@ -1,6 +1,5 @@
 import { Container, Row, Col, Button } from "reactstrap";
-import { Card, CardText, CardTitle, CardSubtitle } from "reactstrap";
-import cate from "../images/24.png";
+
 import axios from "axios";
 import ProgressBar from "@ramonak/react-progress-bar";
 import { FaStar } from "react-icons/fa";
@@ -15,7 +14,7 @@ import yearicon from "../assets/icons/yearicon.png";
 import submiticon from "../assets/icons/submiticon.png";
 import reviewstar from "../assets/icons/reviewstra.png";
 import ratingstar from "../assets/icons/ratingstar.png";
-// import Allpromotion from "../../Allpromotion";
+
 import languageicon from "../assets/icons/languageicon.png";
 import topBar from "../css/topBar.css";
 import React, { useState, useEffect } from "react";
@@ -28,7 +27,7 @@ import { Link } from "react-router-dom";
 import PrettyRating from "pretty-rating-react";
 import { faStar, faStarHalfAlt } from "@fortawesome/free-solid-svg-icons";
 import { faStar as farStar } from "@fortawesome/free-regular-svg-icons";
-import { Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
+import { Modal, ModalBody } from "reactstrap";
 function Bookmarks(args) {
   const [modalone, setModalone] = useState(false);
   const [liked, setliked] = useState("");
