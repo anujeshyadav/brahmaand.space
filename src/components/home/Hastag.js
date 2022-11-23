@@ -130,7 +130,7 @@ function Hastag() {
               <Row className="d-flex justify-content-center">
                 <p className="Trending">
                   <img className="mb-5" src={has1} alt="img" width="45px" />
-                  Trending hastags
+                  Trending Searches
                 </p>
               </Row>
             </div>
@@ -465,8 +465,18 @@ function Hastag() {
                           )}
                         </Col>
                         {/* login to subscribe */}
-
-                        {localStorage.getItem("userId") !== "" &&
+                        <Button
+                          lg="4"
+                          md="4"
+                          sm="3"
+                          type="submit"
+                          disabled={!performValidation()}
+                          onClick={handleSubmit}
+                          className=" d-flex justify-content-center subscribebtn col-md-4"
+                        >
+                          Subscribe
+                        </Button>
+                        {/* {localStorage.getItem("userId") !== "" &&
                         localStorage.getItem("userId") !== null &&
                         localStorage.getItem("userId") !== undefined ? (
                           <Button
@@ -493,7 +503,7 @@ function Hastag() {
                           >
                             Subscribe
                           </Button>
-                        )}
+                        )} */}
                       </InputGroup>
                     </Container>
                   </Col>

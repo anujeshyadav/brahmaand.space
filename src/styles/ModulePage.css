@@ -286,11 +286,10 @@ p.category3 {
 
 .imgCol {
   width: 100%;
-  border-radius: 12px;
   margin-bottom: 18px;
   height: 218px;
   opacity: 0.7;
-  border-radius: 20px;
+  border-radius: 18px;
   padding: 6px;
 }
 
@@ -513,9 +512,9 @@ button.btn.btn-success.btn.btn-secondary {
   font-weight: 600;
 }
 .content-bt {
-  margin-top: -135px;
+  margin-top: -90px;
   position: absolute;
-  margin-left: 35px;
+  margin-left: 34px;
   color: white;
 }
 .content-bt p {
@@ -842,8 +841,8 @@ svg.bsplaybutton {
 }
 .ty-4 {
   position: absolute;
-  top: 94px;
-  left: 170px;
+  top: 88px;
+  left: 160px;
 }
 .ty-5 {
   position: relative;

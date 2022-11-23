@@ -36,7 +36,10 @@ const SendRequestResetPasswordComponent = () => {
             className="login-form"
             onSubmit={(e) => sendRequestResetPasswordHandler(e)}
           >
-            <p className="mb-2">Enter Correct Email for Reset Password</p>
+            <p className="mb-2">
+              Enter your Username or email address below and we'll send you a
+              link to reset your Password.
+            </p>
             <Form.Group
               className="mb-3 login-form-group"
               controlId="formBasicLoginEmail"
@@ -44,7 +47,7 @@ const SendRequestResetPasswordComponent = () => {
               <Form.Control
                 type="email"
                 className="login-form-control"
-                placeholder="EMAIL"
+                placeholder="Enter here your details"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
@@ -57,7 +60,7 @@ const SendRequestResetPasswordComponent = () => {
                 className="login-button"
                 type="submit"
               >
-                Send Email to Password
+                Send
               </Button>
             </div>
           </Form>

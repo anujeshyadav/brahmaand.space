@@ -7,6 +7,7 @@ import google from "../images/g1.png";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import swal from "sweetalert";
+import "../css/Signup.css";
 
 function Signup() {
   const [username, setUsername] = useState("");
@@ -72,7 +73,7 @@ function Signup() {
                 backgroundPosition: "left",
                 backgroundSize: "cover",
                 backgroundRepeat: "no-repeat",
-                height: "110vh",
+                height: "82vh",
                 width: "100%",
               }}
             >
@@ -80,7 +81,7 @@ function Signup() {
                 className="d-flex justify-content-center"
                 style={{ paddingTop: "150px" }}
               >
-                <img src={Logo1} style={{ height: "35vh", width: "25%" }} />
+                <img src={Logo1} style={{ height: "35vh", width: "26%" }} />
               </div>
               <h3
                 className="d-flex justify-content-center"
@@ -92,17 +93,19 @@ function Signup() {
           </Col>
           <Col lg="4">
             <form>
-              <Row>
+              <Row className="mb-3">
                 <Label
                   style={{
                     height: "25px",
                     width: "200px",
-                    marginBottom: "2.5rem",
+                    // marginBottom: "2.5rem",
                   }}
                 >
                   <h4>Sign Up</h4>
                 </Label>
-                <h6 style={{ font: "GT Walsheim Pro" }}>Username</h6>
+                <h6 className="mt-3" style={{ font: "GT Walsheim Pro" }}>
+                  Username
+                </h6>
                 <h5>
                   <input
                     type="text"
@@ -114,7 +117,7 @@ function Signup() {
                   />
                 </h5>
               </Row>
-              <Row>
+              <Row className="mb-3">
                 <h6 style={{ font: "GT Walsheim Pro" }}>Email</h6>
                 <h5>
                   <input
@@ -142,20 +145,20 @@ function Signup() {
                   />
                 </h5>
                 <div className="login-signup-res-pass-div">
-                  <p className="login-new-account-p">
+                  {/* <p className="login-new-account-p">
                     <Link
                       to="/send-reset-password-request"
                       className="login-new-account-link"
                     >
-                      Forgot Password?
+                      Forgot Password ?
                     </Link>
-                  </p>
+                  </p> */}
                 </div>
               </Row>
               <div>
                 <button
-                  disabled={!performValidation()}
-                  style={{ padding: "10px 136px", borderRadius: "11px" }}
+                  // disabled={!performValidation()}
+                  style={{ padding: "13px 136px", borderRadius: "11px" }}
                   type="button"
                   class="btn btn-primary"
                   onClick={handleSubmit}
@@ -168,20 +171,23 @@ function Signup() {
               </div>
             </form>
             <Row className="d-flex justify-content-center mt-3">OR</Row>
-            <div className style={{ marginTop: "40px" }}>
-              <Row>
-                <Col lg="12" className="d-flex justify-content-center">
+            <div className style={{ marginTop: "18px" }}>
+              <Row className="signupwithgoogle">
+                <button className="d-flex justify-content-center signupwithgoogle">
                   <img
                     style={{
                       margin: "3px",
-                      height: "17px",
+                      height: "20px",
                     }}
                     src={google}
                   />
-                  <Link>
-                    <a to="https://accounts.google.com/">Sign in with Google</a>
+                  <Link
+                    // style={{ color: "black" }}
+                    className=" signinwithgooglesignup"
+                  >
+                    Sign in with Google
                   </Link>
-                </Col>
+                </button>
               </Row>
             </div>
           </Col>

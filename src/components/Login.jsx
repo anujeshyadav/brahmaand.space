@@ -65,7 +65,7 @@ function Login() {
 
         if (localStorage.getItem("userId")) {
           navigate("/topbar");
-        } else navigate('/login"');
+        } else navigate("/login");
       })
       .catch((error) => {
         console.log(error.response.data);
@@ -92,7 +92,7 @@ function Login() {
                     backgroundPosition: "left",
                     backgroundSize: "cover",
                     backgroundRepeat: "no-repeat",
-                    height: "75vh",
+                    height: "78vh",
                     width: "100%",
                   }}
                 >
@@ -100,20 +100,20 @@ function Login() {
                     className="d-flex justify-content-center"
                     style={{ paddingTop: "150px" }}
                   >
-                    <img src={Logo1} style={{ height: "33vh", width: "25%" }} />
+                    <img src={Logo1} style={{ height: "33vh", width: "26%" }} />
                   </div>
                   <h3
                     className="d-flex justify-content-center"
                     style={{ color: "white", textalign: "center" }}
                   >
-                    <b>Brahmaand.Space</b>
+                    <b className="logologintext">Brahmaand.Space</b>
                   </h3>
                 </div>
               </Col>
               <Col lg="4" md="6" sm="12" className="head">
                 <h2>Welcome Back!</h2>
                 <FormGroup
-                  className="mb-3 login-form-group"
+                  className="mb-3 mt-3 login-form-group"
                   controlId="formBasicLoginEmail"
                 >
                   <Label className="from-label">Email Id</Label>
@@ -121,7 +121,7 @@ function Login() {
                     required="true"
                     for="exampleEmail"
                     type="email"
-                    className="login-form-control"
+                    className="login-form-control mt-2"
                     placeholder="EMAIL"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
@@ -142,55 +142,90 @@ function Login() {
                     onChange={(e) => setPassword(e.target.value)}
                   />
                 </FormGroup>
-                <div className="login-signup-res-pass-div text-align-left">
-                  <Link
-                    to="/send-reset-password-request"
-                    className="login-new-account-link"
-                  >
-                    Forgot Password?
-                  </Link>
-                </div>
-
-                <Input
-                  className="check"
-                  type="checkbox"
-                  color="primary"
-                  icon={<Check className="vx-icon" size={12} />}
-                  label="Remember me"
-                  defaultChecked={false}
-                  required
-                />
-                <Label className="label-button">Remember me</Label>
-
-                <div className="login-button-div">
-                  <Button
+                <Row>
+                  <Col lg="7"></Col>
+                  <Col lg="5">
+                    <Link
+                      to="/send-reset-password-request"
+                      className="login-new-account-link"
+                    >
+                      Forgot Password ?
+                    </Link>
+                  </Col>
+                </Row>
+                {/* <div className="login-signup-res-pass-div text-align-left"></div> */}
+                <Row className="d-flex ">
+                  <Col lg="2">
+                    <Input
+                      className="check"
+                      type="checkbox"
+                      color="primary"
+                      icon={<Check className="vx-icon" size={10} />}
+                      label="Remember me"
+                      defaultChecked={false}
+                      required
+                    />
+                  </Col>
+                  <Col>
+                    <Label className="label-button  d-flex">Remember me</Label>
+                  </Col>
+                </Row>
+                <div className="d-flex justify-content-center">
+                  <button
                     disabled={!performValidation()}
-                    variant="primary"
-                    className="login-button"
-                    type="submit"
+                    style={{ padding: "13px 162px", borderRadius: "11px" }}
+                    type="button"
+                    class="btn btn-primary"
                     onClick={handleLoginSubmit}
                   >
-                    LOGIN
-                  </Button>
+                    <b>LOGIN</b>
+                  </button>
                 </div>
-                <div className="last">
-                  <span>
-                    Don't have an account yet ?<Link to="/signup">Sign Up</Link>
-                  </span>
+
+                <div className="last"></div>
+                <span className="mx-4">
+                  Don't have an account yet ?<Link to="/signup">Sign Up</Link>
+                </span>
+                <Row className="d-flex justify-content-center mt-3">OR</Row>
+                <div className="mt-4">
+                  <Row className="signupwithgoogle">
+                    <button className="d-flex justify-content-center signupwithgoogle">
+                      <img
+                        style={{
+                          margin: "3px",
+                          height: "20px",
+                        }}
+                        src={google}
+                      />
+                      <Link
+                        // style={{ color: "black" }}
+                        className=" signinwithgooglesignup"
+                      >
+                        Sign in with Google
+                      </Link>
+                    </button>
+                  </Row>
+                  {/* <Row className="mt-3">
+                    <button className="signupwithgoogle">
+                      <Col
+                        lg="12"
+                        className="d-flex justify-content-center mt-2"
+                      >
+                        <img
+                          style={{
+                            margin: "3px",
+                            height: "20px",
+                          }}
+                          src={google}
+                        />
+                        <Link className="signinwithgooglesignup">
+                          Sign in with Google
+                        </Link>
+                      </Col>
+                    </button>
+                  </Row> */}
                 </div>
                 {/* <Row className=" d-flex justify-content-center mt-3">OR</Row> */}
-                {/* <Row className="google">
-                  <Col lg="12" className="d-flex justify-content-center">
-                    <img
-                      style={{
-                        margin: "3px",
-                        height: "17px",
-                      }}
-                      src={google}
-                    />
-                    <p>Sign in with Google</p>
-                  </Col>
-                </Row> */}
               </Col>
             </Row>
           </Form>
