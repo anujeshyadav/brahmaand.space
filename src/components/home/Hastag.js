@@ -81,6 +81,7 @@ function Hastag() {
       .get(`/user/getVideo`)
       .then((res) => {
         setNewslettervid(res.data.data);
+        console.log(res.data.data);
       })
       .catch((err) => {
         console.log(err);
@@ -240,7 +241,7 @@ function Hastag() {
             <SwiperSlide key={features?._id}>
               <div
                 key={features?._id}
-                style={{ backgroundImage: `url(${features.thumbnail_img})` }}
+                style={{ backgroundImage: `url(${features?.thumbnail_img})` }}
                 className="ty-6"
               >
                 <div className="ty-5" key={features?._id}>
@@ -260,7 +261,7 @@ function Hastag() {
                       autoplay
                       enablejsapi="1"
                       isOpen={isOpen}
-                      videoId={features.video_link}
+                      videoId={features?.video_link}
                       onClose={() => setOpen(false)}
                     />
                   </Nav.Link>
@@ -515,7 +516,7 @@ function Hastag() {
             {/* api integrate form here */}
             {newslettervid
               ?.map((video) => (
-                <Col className="container" key={video._id}>
+                <Col className="container" key={video?._id}>
                   <div
                     style={{ backgroundImage: `url(${video})` }}
                     className="ty-3"
@@ -528,7 +529,7 @@ function Hastag() {
                             size={75}
                             style={{ backgroundColor: "white" }}
                             type="submit"
-                            onClick={() => setOpen(true)}
+                            onClick={() => setOpenone(true)}
                           />
                         </div>
                         <div className="modalvideo">
@@ -536,9 +537,9 @@ function Hastag() {
                             style={{ borderRadius: "12px" }}
                             channel="youtube"
                             autoplay
-                            isOpen={isOpen}
-                            videoId={video.videoid}
-                            onClose={() => setOpen(false)}
+                            isOpen={isOpenone}
+                            videoId={video?.videoid}
+                            onClose={() => setOpenone(false)}
                           />
                         </div>
                       </Nav.Link>

@@ -11,11 +11,15 @@ import { Link } from "react-router-dom";
 import { Input, Label } from "reactstrap";
 import swal from "sweetalert";
 import axios from "axios";
+import { useForm } from "react-hook-form";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye } from "@fortawesome/free-solid-svg-icons";
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
+  const eye = <FontAwesomeIcon icon={faEye} />;
 
   function isValidEmail(email) {
     return /\S+@\S+\.\S+/.test(email);
@@ -121,7 +125,7 @@ function Login() {
                     required="true"
                     for="exampleEmail"
                     type="email"
-                    className="login-form-control mt-2"
+                    className="login form-control mt-2"
                     placeholder="EMAIL"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}

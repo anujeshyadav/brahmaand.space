@@ -742,17 +742,19 @@ function CustomNavbar(args) {
             </Nav.Link>
           ) : (
             <Nav.Link as={NavLink} className="navbar-link">
-              <button
-                className="btn rbutton mobile"
-                onClick={() =>
-                  swal(
-                    "For Submit a content",
-                    "Need To login for Submit Content"
-                  )
-                }
-              >
-                <h4 className="rText">+ Submit a Content</h4>
-              </button>
+              <Link to={`/signup`}>
+                <button
+                  className="btn rbutton mobile"
+                  onClick={() =>
+                    swal(
+                      "For Submit a content",
+                      "Need To Signup for Submit a Content"
+                    )
+                  }
+                >
+                  <h4 className="rText">+ Submit a Content</h4>
+                </button>
+              </Link>
             </Nav.Link>
           )}
 
