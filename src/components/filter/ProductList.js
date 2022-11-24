@@ -1738,7 +1738,7 @@ function ProductList(args) {
                                 <h5>
                                   <span>By</span> {categry?.creatorName}
                                 </h5>
-                                <p>{categry.desc}</p>
+                                <p>{categry?.desc}</p>
                                 <div className="">
                                   <Row>
                                     <Col lg="3">
@@ -1760,7 +1760,7 @@ function ProductList(args) {
                                   <ul class="rating mt-2">
                                     <li>
                                       <Link to="#" className="tag">
-                                        {categry?.relYear[0].yrName}
+                                        {categry?.relYear[0]?.yrName}
                                       </Link>
                                     </li>
                                   </ul>

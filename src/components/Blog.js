@@ -73,7 +73,11 @@ function Blog() {
 
   return (
     <div className="" style={{ background: "white" }}>
-      <Container fluid className="" style={{ position: "relative" }}>
+      <Container
+        fluid
+        className="blogimageblack"
+        style={{ position: "relative" }}
+      >
         <div
           style={{
             backgroundImage: `url(${blog})`,

@@ -47,10 +47,12 @@ function AllSubCategory() {
             {subcatgry?.map((value) => (
               <Col lg="3" md="6" sm="12" className="" key={value?.category._id}>
                 <Link to={`/productList/${value._id}`}>
-                  <img className="imgCol" src={value?.Subcat_img} alt="img" />
+                  <div className="blackimage">
+                    <img className="imgCol" src={value?.Subcat_img} alt="img" />
+                  </div>
                   <div className="content-bt">
                     <p style={{ color: "black" }}>{value?.title}</p>
-                    <Button className="btlisting">12 Listing</Button>
+                    {/* <Button className="btlisting">12 Listing</Button> */}
                   </div>
                 </Link>
               </Col>

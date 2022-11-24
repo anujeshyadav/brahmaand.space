@@ -38,16 +38,23 @@ function Allcategory() {
       <p className="category mt-5 mb-2">All Categories</p>
       <Container fluid className=" d-flex justify-content-center">
         <Container>
-          <Row className="m-3 mb-4">
+          <Row className="m-3 ">
             {categry?.map((value) => (
               <Col lg="3" md="6" sm="12" className="" key={value?._id}>
                 <Link to={`/subcategory/${value?._id}`}>
-                  <img className="imgCol" src={value?.cat_img} alt="img" />
+                  <div className="blackimage">
+                    <img
+                      className="imgCol allcategoryback"
+                      src={value?.cat_img}
+                      alt="img"
+                    />
+                  </div>
                   <div className="content-bt">
                     <p style={{ color: "black" }}>{value?.title}</p>
                     {/* <Button className="btlisting">12 Listing</Button> */}
                   </div>
                 </Link>
+                <Row></Row>
               </Col>
             ))}
 
