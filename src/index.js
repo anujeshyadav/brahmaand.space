@@ -54,6 +54,7 @@ import Allpromotion from "./components/filter/Allpromotion";
 import Recblogdescription from "./components/Recblogdescription";
 import Layout from "./components/Layout";
 import LeaderBoard from "./components/home/LeaderBoard";
+import Passwordhide from "./components/Passwordhide";
 // Import Context
 import { MenuProvider } from "./context/MenuContext";
 import { AuthProvider } from "./context/AuthContext";
@@ -94,6 +95,7 @@ render(
               path="/recblogdesription/:id"
               element={<Recblogdescription />}
             />
+            <Route exact path="/passwordhide" element={<Passwordhide />} />
 
             <Route
               exact

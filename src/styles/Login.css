@@ -108,6 +108,13 @@
   text-align: center;
 }
 
+span.d-flex.eyeiconhideshow {
+  margin-top: -36px;
+  margin-right: 10px;
+  justify-content: right;
+  position: relative;
+}
+
 .login-new-account-p {
   color: #35363a !important;
   /* font-weight: bold; */

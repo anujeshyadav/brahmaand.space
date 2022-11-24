@@ -11,6 +11,9 @@ import { Link } from "react-router-dom";
 import { Input, Label } from "reactstrap";
 import swal from "sweetalert";
 import axios from "axios";
+
+import { FaRegEyeSlash } from "react-icons/fa";
+import { AiOutlineEye } from "react-icons/ai";
 import { useForm } from "react-hook-form";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
@@ -18,6 +21,20 @@ import { faEye } from "@fortawesome/free-solid-svg-icons";
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [passwordType, setPasswordType] = useState("password");
+  const [passwordInput, setPasswordInput] = useState("");
+  const handlePasswordChange = (evnt) => {
+    setPasswordInput(evnt.target.value);
+    setPassword(evnt.target.value);
+  };
+  const togglePassword = () => {
+    if (passwordType === "password") {
+      setPasswordType("text");
+      return;
+    }
+    setPasswordType("password");
+  };
+
   const [error, setError] = useState(null);
   const eye = <FontAwesomeIcon icon={faEye} />;
 
@@ -125,26 +142,38 @@ function Login() {
                     required="true"
                     for="exampleEmail"
                     type="email"
-                    className="login form-control mt-2"
+                    className="login form-control mt-2 emailoflogin"
                     placeholder="EMAIL"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                   />
                 </FormGroup>
                 <FormGroup
-                  className="mb-3 login-form-group"
+                  className="mb-4 login-form-group"
                   controlId="formBasicLoginEmail"
                 >
                   <Label className="from-label">Password</Label>
+                  <div className="loginpassword">
+                    <Input
+                      type={passwordType}
+                      required="required"
+                      className="login form-control passwordloginforbutton"
+                      placeholder="Password"
+                      value={passwordInput}
+                      onChange={handlePasswordChange}
+                    />
 
-                  <Input
-                    type="password"
-                    required="required"
-                    className="login-form-control"
-                    placeholder="Password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                  />
+                    <span
+                      className="d-flex eyeiconhideshow"
+                      onClick={togglePassword}
+                    >
+                      {passwordType === "password" ? (
+                        <FaRegEyeSlash size={28} />
+                      ) : (
+                        <AiOutlineEye size={28} />
+                      )}
+                    </span>
+                  </div>
                 </FormGroup>
                 <Row>
                   <Col lg="7"></Col>
