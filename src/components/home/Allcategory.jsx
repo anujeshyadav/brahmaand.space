@@ -50,7 +50,7 @@ function Allcategory() {
                     />
                   </div>
                   <div className="content-bt">
-                    <p style={{ color: "black" }}>{value?.title}</p>
+                    <p style={{ color: "white" }}>{value?.title}</p>
                     {/* <Button className="btlisting">12 Listing</Button> */}
                   </div>
                 </Link>

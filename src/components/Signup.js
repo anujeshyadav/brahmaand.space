@@ -8,6 +8,8 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import swal from "sweetalert";
 import "../css/Signup.css";
+import { Form, Button } from "semantic-ui-react";
+import { useForm } from "react-hook-form";
 
 function Signup() {
   const [username, setUsername] = useState("");
@@ -15,36 +17,75 @@ function Signup() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
 
-  function performValidation() {
-    return username.length > 5 && email.length > 13 && password.length > 5;
-  }
-
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    console.log(username, email, password);
-    axios
-      .post(`http://3.7.173.138:9000/user/signup`, {
-        username: username,
-        email: email,
-        password: password,
-      })
-      .then((response) => {
-        console.log(response.data.data);
-        if (
-          response.data.data._id !== null &&
-          response.data.data._id !== "" &&
-          response.data.data._id !== undefined
-        ) {
-          localStorage.setItem("userId", response.data.data._id);
-        }
-        setUsername("");
-        setEmail("");
-        setPassword("");
-        swal("Account created Successfully");
-      })
-      .catch((error) => {
-        console.log(error.response.data);
-      });
+    // debugger;
+    if (
+      username !== "" &&
+      username !== null &&
+      email !== "" &&
+      email !== null &&
+      password !== undefined
+    ) {
+      console.log(username, email, password);
+      axios
+        .post(`http://3.7.173.138:9000/user/signup`, {
+          username: username,
+          email: email,
+          password: password,
+        })
+        .then((response) => {
+          console.log(response.data.data);
+
+          swal(
+            "Account created Successfully",
+            `Your-Email -${response.data.data.email} 
+            username- ${response.data.data.username}`
+          );
+          if (
+            response.data.data._id !== null &&
+            response.data.data._id !== "" &&
+            response.data.data._id !== undefined
+          ) {
+            localStorage.setItem("userId", response.data.data._id);
+          }
+          setUsername("");
+          setEmail("");
+          setPassword("");
+        })
+        .catch((error) => {
+          console.log(error.response.data);
+          if (error.response.data.message == "already exists") {
+            swal(
+              "This mail is already registered",
+              "Please login or Reset your password"
+            );
+          }
+        });
+    }
+    // axios
+    //   .post(`http://3.7.173.138:9000/user/signup`, {
+    //     username: username,
+    //     email: email,
+    //     password: password,
+    //   })
+    //   .then((response) => {
+    //     console.log(response.data.data);
+    //     if (
+    //       response.data.data._id !== null &&
+    //       response.data.data._id !== "" &&
+    //       response.data.data._id !== undefined
+    //     ) {
+    //       localStorage.setItem("userId", response.data.data._id);
+    //     }
+    //     setUsername("");
+    //     setEmail("");
+    //     setPassword("");
+    //     swal("Account created Successfully");
+    //   })
+    //   .catch((error) => {
+    //     console.log(error.response.data);
+    //   });
   };
   function isValidEmail(email) {
     const expression =
@@ -81,7 +122,7 @@ function Signup() {
                 className="d-flex justify-content-center"
                 style={{ paddingTop: "150px" }}
               >
-                <img src={Logo1} style={{ height: "35vh", width: "26%" }} />
+                <img src={Logo1} style={{ height: "35vh", width: "28%" }} />
               </div>
               <h3
                 className="d-flex justify-content-center"
@@ -144,16 +185,7 @@ function Signup() {
                     onChange={(e) => setPassword(e.target.value)}
                   />
                 </h5>
-                <div className="login-signup-res-pass-div">
-                  {/* <p className="login-new-account-p">
-                    <Link
-                      to="/send-reset-password-request"
-                      className="login-new-account-link"
-                    >
-                      Forgot Password ?
-                    </Link>
-                  </p> */}
-                </div>
+                <div className="login-signup-res-pass-div"></div>
               </Row>
               <div>
                 <button

@@ -55,6 +55,7 @@ import Recblogdescription from "./components/Recblogdescription";
 import Layout from "./components/Layout";
 import LeaderBoard from "./components/home/LeaderBoard";
 import Passwordhide from "./components/Passwordhide";
+import Formvalidation from "./components/Formvalidation";
 // Import Context
 import { MenuProvider } from "./context/MenuContext";
 import { AuthProvider } from "./context/AuthContext";
@@ -96,7 +97,7 @@ render(
               element={<Recblogdescription />}
             />
             <Route exact path="/passwordhide" element={<Passwordhide />} />
-
+            <Route exact path="/formvalidation" element={<Formvalidation />} />
             <Route
               exact
               path="/blogdescription/:id"
