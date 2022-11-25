@@ -144,7 +144,7 @@ function Login() {
                     for="exampleEmail"
                     type="email"
                     className="login form-control mt-2 emailoflogin"
-                    placeholder="EMAIL"
+                    placeholder="Email or Username  "
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                   />
