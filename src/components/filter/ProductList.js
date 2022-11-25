@@ -579,7 +579,7 @@ function ProductList(args) {
                     <Col lg="12" className="py-3">
                       <div className="ft-type">
                         <h5 className="mb-1"> Content Language</h5>
-                        <ul className="mb-3">
+                        <ul className="mx-2 mb-3">
                           <li>
                             <input
                               id="Arabic"
