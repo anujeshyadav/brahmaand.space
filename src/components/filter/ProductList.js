@@ -412,14 +412,36 @@ function ProductList(args) {
                     </Col>
                     <Col lg="12" className="py-3">
                       <div className="ft-type">
-                        <h5>Type</h5>
-                        <ul>
+                        <h5 className="mb-3">Type</h5>
+                        <Row className="mt-3 mx-2">
+                          <input
+                            id="Free"
+                            className="ft-check"
+                            type="radio"
+                            name="type"
+                            value="Free"
+                            onClick={freetypeChecking}
+                          />
+                          Free
+                        </Row>
+                        <Row className="mt-3  mx-2">
+                          <input
+                            id="Paid"
+                            className="ft-check"
+                            type="radio"
+                            name="type"
+                            value="Paid"
+                            onClick={typeChecking}
+                          />
+                          Paid
+                        </Row>
+                        {/* <ul>
                           <li>
                             <input
                               id="Free"
+                              name="test"
                               onClick={freetypeChecking}
                               type="checkbox"
-                              value="Free"
                               className="ft-check"
                             />
                             <span>Free </span>
@@ -429,18 +451,41 @@ function ProductList(args) {
                               id="Paid"
                               type="checkbox"
                               value="Paid"
+                              name="test"
                               className="ft-check"
                               onClick={typeChecking}
                             />
                             <span>Paid (11)</span>
                           </li>
-                        </ul>
+                        </ul> */}
                       </div>
                     </Col>
                     <Col lg="12" className="py-3">
                       <div className="ft-type">
-                        <h5>Format</h5>
-                        <ul>
+                        <h5 className="mb-3">Format</h5>
+                        <Row className="mt-3 mb-3 mx-2">
+                          <input
+                            id="Video"
+                            className="ft-check"
+                            type="radio"
+                            name="format"
+                            value="Video"
+                            // onClick={freetypeChecking}
+                          />
+                          Video (74)
+                        </Row>
+                        <Row className=" mb-3 mx-2">
+                          <input
+                            id="Text"
+                            className="ft-check"
+                            type="radio"
+                            name="format"
+                            value="Text"
+                            // onClick={typeChecking}
+                          />
+                          Text (29)
+                        </Row>
+                        {/* <ul>
                           <li>
                             <input
                               id="video"
@@ -459,13 +504,46 @@ function ProductList(args) {
                             />
                             <span>Text (29)</span>
                           </li>
-                        </ul>
+                        </ul> */}
                       </div>
                     </Col>
                     <Col lg="12" className="py-3">
                       <div className="ft-type">
-                        <h5>Source</h5>
-                        <ul>
+                        <h5 className="mb-1">Source</h5>
+                        <Row className="mt-3 mb-3 mx-2">
+                          <input
+                            id="Youtube"
+                            className="ft-check"
+                            type="radio"
+                            name="source"
+                            value="Youtube"
+                            // onClick={freetypeChecking}
+                          />
+                          Youtube
+                        </Row>
+                        <Row className=" mb-3 mx-2">
+                          <input
+                            id="others"
+                            className="ft-check"
+                            type="radio"
+                            name="source"
+                            value="others"
+                            // onClick={typeChecking}
+                          />
+                          Others
+                        </Row>
+                        <Row className=" mb-3 mx-2">
+                          <input
+                            id="older"
+                            className="ft-check"
+                            type="radio"
+                            name="source"
+                            value="older"
+                            // onClick={typeChecking}
+                          />
+                          Not Older Than a Year
+                        </Row>
+                        {/* <ul>
                           <li>
                             <input
                               id="youtube"
@@ -494,32 +572,57 @@ function ProductList(args) {
                               <b>Not Older Than a Year</b>
                             </span>
                           </li>
-                        </ul>
+                        </ul> */}
                       </div>
                     </Col>
-                    <Col lg="12" className="py-3"></Col>
+
                     <Col lg="12" className="py-3">
                       <div className="ft-type">
-                        <h5> Content Language</h5>
-                        <ul>
+                        <h5 className="mb-1"> Content Language</h5>
+                        <ul className="mb-3">
                           <li>
-                            <input type="checkbox" className="ft-check" />
+                            <input
+                              id="Arabic"
+                              type="radio"
+                              name="language"
+                              className="ft-check"
+                            />
                             Arabic (3)
                           </li>
                           <li>
-                            <input type="checkbox" className="ft-check" />
+                            <input
+                              id="English"
+                              type="radio"
+                              name="language"
+                              className="ft-check"
+                            />
                             <span>English (87)</span>
                           </li>
                           <li>
-                            <input type="checkbox" className="ft-check" />
+                            <input
+                              id="hindi"
+                              name="language"
+                              type="radio"
+                              className="ft-check"
+                            />
                             <span>Hindi (6)</span>
                           </li>
                           <li>
-                            <input type="checkbox" className="ft-check" />
+                            <input
+                              id="Russion"
+                              name="language"
+                              type="radio"
+                              className="ft-check"
+                            />
                             <span>Russian (3)</span>
                           </li>
                           <li>
-                            <input type="checkbox" className="ft-check" />
+                            <input
+                              id="Urdu"
+                              name="language"
+                              type="radio"
+                              className="ft-check"
+                            />
                             <span>Urdu (1)</span>
                           </li>
                         </ul>
