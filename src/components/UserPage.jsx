@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import Row from "react-bootstrap/Row";
 import {
   FaEdit,
   FaBell,
@@ -52,37 +53,44 @@ function UserPage({ direction, ...args }) {
           Welcome, {userdata?.display_name}
         </span>
         <div className="dropdown-content">
-          <Link className="userboard" to="/topbar">
-            <FaEdit
-              size={25}
-              style={{ fontFamily: "GT Walsheim Pro" }}
-              color="black"
-              className="mx-3"
-            />
-            Edit Your Profile
-          </Link>
-
-          <Link className="userboard" to="/notification">
-            <FaBell
-              size={25}
-              style={{ fontFamily: "GT Walsheim Pro" }}
-              color="black"
-              className="mx-3"
-            />
-            Notifications
-          </Link>
-          <Link className="userboard" to="/Bookmark">
-            <FaRegHandPointRight size={25} color="black" className="mx-3 " />
-            Your Bookmark's
-          </Link>
-          <Link
-            className="userboard"
-            to="/login"
-            onClick={() => localStorage.removeItem("userId")}
-          >
-            <BiLogOut size={25} color="black" className="mx-3" />
-            LogOut
-          </Link>
+          <Row>
+            <Link className="userboard" to="/topbar">
+              <FaEdit
+                size={25}
+                style={{ fontFamily: "GT Walsheim Pro" }}
+                color="black"
+                className="mx-3"
+              />
+              Edit Your Profile
+            </Link>
+          </Row>
+          <Row>
+            <Link className="userboard" to="/notification">
+              <FaBell
+                size={25}
+                style={{ fontFamily: "GT Walsheim Pro" }}
+                color="black"
+                className="mx-3"
+              />
+              Notifications
+            </Link>
+          </Row>
+          <Row>
+            <Link className="userboard" to="/Bookmark">
+              <FaRegHandPointRight size={25} color="black" className="mx-3 " />
+              Your Bookmark's
+            </Link>
+          </Row>
+          <Row>
+            <Link
+              className="userboard"
+              to="/login"
+              onClick={() => localStorage.removeItem("userId")}
+            >
+              <BiLogOut size={25} color="black" className="mx-3" />
+              LogOut
+            </Link>
+          </Row>
         </div>
       </div>
       {/* <div className="d-flex loginboard ">

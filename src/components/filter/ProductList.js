@@ -72,7 +72,7 @@ function ProductList(args) {
   const [promotiondata, setPromotiondata] = useState({});
   const [totalrateng, setTotalrateng] = useState("");
   const [all, setAll] = useState("");
-
+  const [handleData, setHandleData] = useState();
   const removebookmark = (id) => {
     console.log(id);
     setliked(id);
@@ -157,7 +157,6 @@ function ProductList(args) {
 
   let Params = useParams();
 
-  // const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
 
   const [itemOffset, setItemOffset] = useState(0);
@@ -183,6 +182,17 @@ function ProductList(args) {
   };
   const colors = {
     star: ["#d9ad26", "#d9ad26", "#434b4d"],
+  };
+  const typeChecking = () => {
+    const x = document.getElementById("Paid").value;
+    console.log(x);
+    axios
+      .get(`http://3.7.173.138:9000/user/filterbypaid_subresrc`)
+      .then((res) => {
+        console.log(res.data.data);
+        setCategry(res.data.data);
+      })
+      .catch((err) => console.log("err", err));
   };
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -244,7 +254,6 @@ function ProductList(args) {
             res.data.data._id !== undefined
           ) {
             setProductdetail(res.data.data);
-            console.log(res);
             toggle();
           }
         })
@@ -283,8 +292,8 @@ function ProductList(args) {
   };
 
   useEffect(() => {
-    promotionadmin();
     allsearchproduct();
+    promotionadmin();
   }, [Params]);
 
   const allsearchproduct = () => {
@@ -401,11 +410,21 @@ function ProductList(args) {
                         <h5>Type</h5>
                         <ul>
                           <li>
-                            <input type="checkbox" className="ft-check" />
+                            <input
+                              type="checkbox"
+                              value="Free"
+                              className="ft-check"
+                            />
                             <span>Free </span>
                           </li>
                           <li>
-                            <input type="checkbox" className="ft-check" />
+                            <input
+                              id="Paid"
+                              type="checkbox"
+                              value="Paid"
+                              className="ft-check"
+                              onClick={typeChecking}
+                            />
                             <span>Paid (11)</span>
                           </li>
                         </ul>
@@ -1040,6 +1059,7 @@ function ProductList(args) {
                       <div className="search-st mb-4">
                         {currentItems?.map((categry) => (
                           <Row className="mb-4" key={categry?._id}>
+                            {console.log("categry", categry.type)}
                             <Col md="4">
                               <div class="product-image8 st-2">
                                 <Link
@@ -1106,7 +1126,6 @@ function ProductList(args) {
                                         <h5 className="mt-3">
                                           Link :
                                           <Link>{Producdetail?.link}</Link>
-                                          {/* <span>{Producdetail?.link}</span> */}
                                         </h5>
                                         <div className="mid-content">
                                           <Row>
@@ -1291,7 +1310,6 @@ function ProductList(args) {
                                               <h4>Customer Rating</h4>
                                               <div className="">
                                                 <PrettyRating
-                                                  // value={value?.rating}
                                                   value={2.5}
                                                   icons={icons.star}
                                                   colors={colors.star}
@@ -1447,7 +1465,6 @@ function ProductList(args) {
                                                 <form key={Producdetail?._id}>
                                                   <textarea
                                                     key={Producdetail?._id}
-                                                    // id="textarea"
                                                     value={text}
                                                     name="text"
                                                     onChange={onchangehandler}
@@ -1469,18 +1486,6 @@ function ProductList(args) {
                                       <Row>
                                         <Col lg="4"></Col>
                                         <Col lg="8">
-                                          {/* {localStorage.getItem(
-                                                      "userId"
-                                                    ) !== "" &&
-                                                    localStorage.getItem(
-                                                      "userId"
-                                                    ) !== null &&
-                                                    localStorage.getItem(
-                                                      "userId"
-                                                    ) !== undefined ? (
-                                                      <button className="likebuttonbar">
-                                                        {activelike ==
-                                                        "true" ? ( */}
                                           <button
                                             key={categry?._id}
                                             className="addbookmark  btn btn-secondary"
@@ -1502,9 +1507,6 @@ function ProductList(args) {
                                           >
                                             Add Bookmark
                                           </button>
-                                          {/* )} */}
-                                          {/* </button> */}
-                                          {/* ) : null} */}
                                         </Col>
                                       </Row>
                                       <hr></hr>
@@ -1560,8 +1562,6 @@ function ProductList(args) {
                                         const userId =
                                           localStorage.getItem("userId");
                                         setliked(categry?._id);
-                                        // console.log(liked);
-
                                         axiosConfig
                                           .post(`/user/add_like`, {
                                             submitresrcId: categry?._id,
@@ -1569,7 +1569,6 @@ function ProductList(args) {
                                             status: "true",
                                           })
                                           .then((response) => {
-                                            // console.log(response.data.data);
                                             setActivelike(
                                               response.data.data.status
                                             );
@@ -1597,8 +1596,6 @@ function ProductList(args) {
                                             const userId =
                                               localStorage.getItem("userId");
                                             setUnlike(categry?._id);
-                                            // console.log(unlike);
-
                                             axiosConfig
                                               .post(`/user/add_like`, {
                                                 submitresrcId: categry?._id,
@@ -1687,45 +1684,6 @@ function ProductList(args) {
                                     />
                                   )}
                                 </span>
-                                {/* <span class="product-discount-label st-1">
-                                  <FaRegHeart
-                                    size={25}
-                                    color={
-                                      activelike === "true" ? "red" : "none"
-                                    }
-                                    className="heartlike faregheart"
-                                    onClick={() => {
-                                      const userId =
-                                        localStorage.getItem("userId");
-                                      setliked(categry?._id);
-                                      console.log(liked);
-
-                                      axiosConfig
-                                        .post(`/user/add_like`, {
-                                          submitresrcId: liked,
-                                          userid: userId,
-                                          status: "true",
-                                        })
-                                        .then((response) => {
-                                          // console.log(
-                                          //   response.data.data.status
-                                          // );
-                                          setActivelike(
-                                            response.data.data.status
-                                          );
-                                          swal("you bookmarked it");
-
-                                          console.log(
-                                            "likeindividual",
-                                            response.data.data
-                                          );
-                                        })
-                                        .catch((error) => {
-                                          console.log(error.response.data);
-                                        });
-                                    }}
-                                  />
-                                </span> */}
                               </div>
                             </Col>
                             <Col md="8">
@@ -1743,7 +1701,6 @@ function ProductList(args) {
                                   <Row>
                                     <Col lg="3">
                                       <PrettyRating
-                                        // value={value?.rating}
                                         value={2.5}
                                         icons={icons.star}
                                         colors={colors.star}

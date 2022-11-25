@@ -54,6 +54,7 @@ import Allpromotion from "./components/filter/Allpromotion";
 import Recblogdescription from "./components/Recblogdescription";
 import Layout from "./components/Layout";
 import LeaderBoard from "./components/home/LeaderBoard";
+import NewSignup from "./components/NewSignup";
 import Passwordhide from "./components/Passwordhide";
 import Formvalidation from "./components/Formvalidation";
 // Import Context
@@ -91,6 +92,8 @@ render(
             <Route exact path="/posts" element={<Posts />} />
             <Route exact path="/paginationnew" element={<Paginationnew />} />
             <Route exact path="/allpromotion" element={<Allpromotion />} />
+
+            {/* <Route exact path="/newsignup" element={<NewSignup />} /> */}
             <Route
               exact
               path="/recblogdesription/:id"

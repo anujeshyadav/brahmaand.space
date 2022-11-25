@@ -202,7 +202,7 @@ function Hastag() {
           breakpoints={{
             // when window width is >= 640px
             980: {
-              slidesPerView: 3,
+              slidesPerView: 2,
               direction: "horizontal",
               spaceBetween: 20,
             },
@@ -218,12 +218,12 @@ function Hastag() {
             },
 
             768: {
-              slidesPerView: 2,
+              slidesPerView: 1,
               direction: "horizontal",
               spaceBetween: 20,
             },
             640: {
-              slidesPerView: 2,
+              slidesPerView: 1,
               direction: "horizontal",
               spaceBetween: 28,
             },

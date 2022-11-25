@@ -3,6 +3,11 @@
   margin-right: auto;
 }
 
+.form-control:focus {
+  color: rgb(23, 6, 6);
+  background-color: #fff;
+}
+
 .login-card {
   width: 367px;
   max-width: 600px;
@@ -95,10 +100,10 @@
 .login-button:hover,
 .login-button:active,
 .login-button:after,
-.login:focus {
+/* .login:focus {
   background-color: #35363a !important;
   border: 1px solid #35363a !important;
-}
+} */
 
 .login-signup-res-pass-div {
   width: 90%;
