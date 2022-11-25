@@ -183,6 +183,11 @@ function ProductList(args) {
   const colors = {
     star: ["#d9ad26", "#d9ad26", "#434b4d"],
   };
+
+  const freetypeChecking = () => {
+    const free = document.getElementById("Free").value;
+    console.log(free);
+  };
   const typeChecking = () => {
     const x = document.getElementById("Paid").value;
     console.log(x);
@@ -411,6 +416,8 @@ function ProductList(args) {
                         <ul>
                           <li>
                             <input
+                              id="Free"
+                              onClick={freetypeChecking}
                               type="checkbox"
                               value="Free"
                               className="ft-check"
@@ -435,11 +442,21 @@ function ProductList(args) {
                         <h5>Format</h5>
                         <ul>
                           <li>
-                            <input type="checkbox" className="ft-check" />
+                            <input
+                              id="video"
+                              type="checkbox"
+                              className="ft-check"
+                              onClick={typeChecking}
+                            />
                             <span>Video (74)</span>
                           </li>
                           <li>
-                            <input type="checkbox" className="ft-check" />
+                            <input
+                              id="Text"
+                              type="checkbox"
+                              className="ft-check"
+                              onClick={typeChecking}
+                            />
                             <span>Text (29)</span>
                           </li>
                         </ul>
@@ -450,17 +467,29 @@ function ProductList(args) {
                         <h5>Source</h5>
                         <ul>
                           <li>
-                            <input type="checkbox" className="ft-check" />
+                            <input
+                              id="youtube"
+                              type="checkbox"
+                              className="ft-check"
+                            />
                             <span>Youtube</span>
                           </li>
                           <li>
-                            <input type="checkbox" className="ft-check" />
+                            <input
+                              id="others"
+                              type="checkbox"
+                              className="ft-check"
+                            />
                             <span>Others</span>
                           </li>
 
                           <br></br>
                           <li>
-                            <input type="checkbox" className="ft-check" />
+                            <input
+                              id="not older than year"
+                              type="checkbox"
+                              className="ft-check"
+                            />
                             <span>
                               <b>Not Older Than a Year</b>
                             </span>
@@ -1059,7 +1088,6 @@ function ProductList(args) {
                       <div className="search-st mb-4">
                         {currentItems?.map((categry) => (
                           <Row className="mb-4" key={categry?._id}>
-                            {console.log("categry", categry.type)}
                             <Col md="4">
                               <div class="product-image8 st-2">
                                 <Link

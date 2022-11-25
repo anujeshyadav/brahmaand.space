@@ -59,15 +59,16 @@ function Login() {
     // console.log(email, password);
     axios
       .post(`http://3.7.173.138:9000/user/login`, {
+        username: email,
         email: email,
         password: password,
       })
       .then((response) => {
-        console.log("data", response.data);
-        console.log(response.data.user);
-        console.log("you logged in");
-        console.log(response.data.msg);
-        console.log(response.data.status);
+        // console.log("data", response.data);
+        // console.log(response.data.user);
+        // console.log("you logged in");
+        // console.log(response.data.msg);
+        // console.log(response.data.status);
 
         if (response.data.status === true) {
           swal("Good job!", "Successfully login");
