@@ -194,19 +194,6 @@ function CustomNavbar(args) {
     // }
   }, [catgry]);
 
-  // const allsubcategory = () => {
-  //   axios
-
-  //     .get(`http://3.7.173.138:9000/admin/listbycategory/${catgry}`)
-  //     .then((response) => {
-  //       console.log(response.data.data);
-  //       setSubctgry(response.data.data);
-  //     })
-  //     .catch((error) => {
-  //       console.log(error.response.data);
-  //     });
-  // };
-
   // all year selection api
   const getYear = () => {
     axios
@@ -276,7 +263,7 @@ function CustomNavbar(args) {
     }
     console.log("aaaa", selectItem1);
     setSellang(selectItem1);
-    // console.log(sellang);
+    console.log(sellang);
   };
 
   const onRemove = (selectedList, removedItem) => {

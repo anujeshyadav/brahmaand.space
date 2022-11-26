@@ -71,6 +71,8 @@ function ProductList(args) {
   const [type, setType] = useState("");
   const [format, setFormat] = useState("");
   const [source, setSource] = useState("");
+  const [searchrating, setSearchrating] = useState("");
+  console.log(searchrating);
 
   const removebookmark = (id) => {
     console.log(id);
@@ -148,6 +150,7 @@ function ProductList(args) {
       .get(`http://3.7.173.138:9000/user/Promotions`)
       .then((res) => {
         setPromotion(res.data.data);
+        console.log(res.data.data);
       })
       .catch((err) => {
         console.log(err);
@@ -182,6 +185,8 @@ function ProductList(args) {
     star: ["#d9ad26", "#d9ad26", "#434b4d"],
   };
   const clearfilter = () => {
+    setType("");
+    setFormat("");
     allsearchproduct();
   };
 
@@ -283,13 +288,20 @@ function ProductList(args) {
   };
 
   useEffect(() => {
-    if (type === "" && format === "") {
+    promotionadmin();
+    if (type === "" && format === "" && searchrating == "") {
       allsearchproduct();
     }
-    promotionadmin();
-    gettypefilter();
-    getformatfilter();
-  }, [Params, type, format]);
+    if (type !== "") {
+      gettypefilter();
+    }
+    if (format !== "") {
+      getformatfilter();
+    }
+    if (searchrating !== "") {
+      getsearchbyratingfilter();
+    }
+  }, [Params, type, format, searchrating]);
 
   const gettypefilter = () => {
     axios
@@ -313,12 +325,24 @@ function ProductList(args) {
         console.log(err);
       });
   };
+  const getsearchbyratingfilter = () => {
+    axios
+      .get(`http://3.7.173.138:9000/user/filterByRating/${searchrating}`)
+      .then((res) => {
+        console.log(res.data.data);
+        // setCategry(res.data.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   const allsearchproduct = () => {
     axios
       .get(`http://3.7.173.138:9000/admin/listbysubcategory/${Params.id}`)
       .then((response) => {
         setCategry(response.data.data);
+        console.log(response.data.data);
       })
       .catch((error) => {
         console.log(error.response.data);
@@ -400,6 +424,9 @@ function ProductList(args) {
                             id="temp"
                             name="temp"
                             list="tickmarks"
+                            onChange={(e) => {
+                              setSearchrating(e.target.value);
+                            }}
                           />
                           <datalist id="tickmarks">
                             <option value="0" label="0"></option>
