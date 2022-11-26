@@ -20,7 +20,7 @@ function Paginationnew() {
   }, []);
 
   const [itemOffset, setItemOffset] = useState(0);
-
+  // fix three for three content in one time
   const endOffset = itemOffset + 3;
   console.log(`Loading items from ${itemOffset} to ${endOffset}`);
   const currentItems = data?.slice(itemOffset, endOffset);
@@ -55,7 +55,7 @@ function Paginationnew() {
           breakLabel="..."
           nextLabel=">"
           onPageChange={handlePageClick}
-          pageRangeDisplayed={1}
+          pageRangeDisplayed={3}
           pageCount={pageCount}
           previousLabel="< "
           renderOnZeroPageCount={null}

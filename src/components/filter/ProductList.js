@@ -22,8 +22,6 @@ import languageicon from "../../assets/icons/languageicon.png";
 
 import yearicon from "../../assets/icons/yearicon.png";
 import submiticon from "../../assets/icons/submiticon.png";
-import reviewstar from "../../assets/icons/reviewstra.png";
-import ratingstar from "../../assets/icons/ratingstar.png";
 
 import {
   Row,
@@ -35,10 +33,9 @@ import {
 } from "react-bootstrap";
 import { Link, useParams } from "react-router-dom";
 import "../../styles/Filter.css";
-
 import AutoSearch from "./AutoSearch";
 import RangeSlider from "react-bootstrap-range-slider";
-import business from "../../images/business.png";
+
 import { FaHeart, FaStar, FaRegHeart } from "react-icons/fa";
 import FilterList from "./FilterList";
 import RecentProductList from "./RecentProductList";
@@ -50,6 +47,7 @@ import { faStar, faStarHalfAlt } from "@fortawesome/free-solid-svg-icons";
 import { faStar as farStar } from "@fortawesome/free-regular-svg-icons";
 import { CloudLightning, CornerDownLeft } from "react-feather";
 import ProgressBar from "@ramonak/react-progress-bar";
+
 function ProductList(args) {
   const [active, setActive] = useState(false);
   const [value, setValue] = useState();
@@ -70,9 +68,10 @@ function ProductList(args) {
   const [promotion, setPromotion] = useState([]);
   const [promotId, setPromotId] = useState("");
   const [promotiondata, setPromotiondata] = useState({});
-  const [totalrateng, setTotalrateng] = useState("");
-  const [all, setAll] = useState("");
-  const [handleData, setHandleData] = useState();
+  const [type, setType] = useState("");
+  const [format, setFormat] = useState("");
+  const [source, setSource] = useState("");
+
   const removebookmark = (id) => {
     console.log(id);
     setliked(id);
@@ -158,7 +157,6 @@ function ProductList(args) {
   let Params = useParams();
 
   const [loading, setLoading] = useState(false);
-
   const [itemOffset, setItemOffset] = useState(0);
 
   const endOffset = itemOffset + 3;
@@ -183,22 +181,10 @@ function ProductList(args) {
   const colors = {
     star: ["#d9ad26", "#d9ad26", "#434b4d"],
   };
+  const clearfilter = () => {
+    allsearchproduct();
+  };
 
-  const freetypeChecking = () => {
-    const free = document.getElementById("Free").value;
-    console.log(free);
-  };
-  const typeChecking = () => {
-    const x = document.getElementById("Paid").value;
-    console.log(x);
-    axios
-      .get(`http://3.7.173.138:9000/user/filterbypaid_subresrc`)
-      .then((res) => {
-        console.log(res.data.data);
-        setCategry(res.data.data);
-      })
-      .catch((err) => console.log("err", err));
-  };
   const handleSubmit = (e) => {
     e.preventDefault();
     const userId = localStorage.getItem("userId");
@@ -297,9 +283,36 @@ function ProductList(args) {
   };
 
   useEffect(() => {
-    allsearchproduct();
+    if (type === "" && format === "") {
+      allsearchproduct();
+    }
     promotionadmin();
-  }, [Params]);
+    gettypefilter();
+    getformatfilter();
+  }, [Params, type, format]);
+
+  const gettypefilter = () => {
+    axios
+      .get(`http://3.7.173.138:9000/user/filter_type/${type}`)
+      .then((res) => {
+        console.log(res.data.data);
+        setCategry(res.data.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+  const getformatfilter = () => {
+    axios
+      .get(`http://3.7.173.138:9000/user/filterbyFormat/${format}`)
+      .then((res) => {
+        console.log(res.data.data);
+        setCategry(res.data.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   const allsearchproduct = () => {
     axios
@@ -420,7 +433,7 @@ function ProductList(args) {
                             type="radio"
                             name="type"
                             value="Free"
-                            onClick={freetypeChecking}
+                            onClick={() => setType("Free")}
                           />
                           Free
                         </Row>
@@ -431,33 +444,10 @@ function ProductList(args) {
                             type="radio"
                             name="type"
                             value="Paid"
-                            onClick={typeChecking}
+                            onClick={() => setType("Paid")}
                           />
                           Paid
                         </Row>
-                        {/* <ul>
-                          <li>
-                            <input
-                              id="Free"
-                              name="test"
-                              onClick={freetypeChecking}
-                              type="checkbox"
-                              className="ft-check"
-                            />
-                            <span>Free </span>
-                          </li>
-                          <li>
-                            <input
-                              id="Paid"
-                              type="checkbox"
-                              value="Paid"
-                              name="test"
-                              className="ft-check"
-                              onClick={typeChecking}
-                            />
-                            <span>Paid (11)</span>
-                          </li>
-                        </ul> */}
                       </div>
                     </Col>
                     <Col lg="12" className="py-3">
@@ -470,7 +460,7 @@ function ProductList(args) {
                             type="radio"
                             name="format"
                             value="Video"
-                            // onClick={freetypeChecking}
+                            onClick={() => setFormat("Video")}
                           />
                           Video (74)
                         </Row>
@@ -481,7 +471,7 @@ function ProductList(args) {
                             type="radio"
                             name="format"
                             value="Text"
-                            // onClick={typeChecking}
+                            onClick={() => setFormat("Text")}
                           />
                           Text (29)
                         </Row>
@@ -517,18 +507,22 @@ function ProductList(args) {
                             type="radio"
                             name="source"
                             value="Youtube"
-                            // onClick={freetypeChecking}
+                            onClick={() => {
+                              setSource("Youtube");
+                            }}
                           />
                           Youtube
                         </Row>
                         <Row className=" mb-3 mx-2">
                           <input
-                            id="others"
+                            id="Others"
                             className="ft-check"
                             type="radio"
                             name="source"
-                            value="others"
-                            // onClick={typeChecking}
+                            value="Others"
+                            onClick={() => {
+                              setSource("Others");
+                            }}
                           />
                           Others
                         </Row>
@@ -539,7 +533,9 @@ function ProductList(args) {
                             type="radio"
                             name="source"
                             value="older"
-                            // onClick={typeChecking}
+                            onClick={() => {
+                              setSource("Older");
+                            }}
                           />
                           Not Older Than a Year
                         </Row>
@@ -646,7 +642,9 @@ function ProductList(args) {
                             <Link style={{ color: "blue" }}>High to Low</Link>
                           </li>
                         </ul>
-                        <Button color="info">Clear Filter</Button>
+                        <Button onClick={clearfilter} color="info">
+                          Clear Filter
+                        </Button>
                       </div>
                     </Col>
                   </Row>
@@ -1677,8 +1675,8 @@ function ProductList(args) {
                                     </ModalBody>
                                   </Modal>
                                 </Link>
-                                <span class="product-discount-label st-1">
-                                  {localStorage.getItem("userId") !== "" &&
+                                {/* <span class="product-discount-label st-1"> */}
+                                {/* {localStorage.getItem("userId") !== "" &&
                                   localStorage.getItem("userId") !== null &&
                                   localStorage.getItem("userId") !==
                                     undefined ? (
@@ -1813,8 +1811,8 @@ function ProductList(args) {
                                       }}
                                       className="heartlike faregheart"
                                     />
-                                  )}
-                                </span>
+                                  )} */}
+                                {/* </span> */}
                               </div>
                             </Col>
                             <Col md="8">
