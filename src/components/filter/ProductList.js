@@ -72,7 +72,7 @@ function ProductList(args) {
   const [format, setFormat] = useState("");
   const [source, setSource] = useState("");
   const [searchrating, setSearchrating] = useState("");
-  console.log(searchrating);
+  const [handlebookmark, setHandlebookmark] = useState();
 
   const removebookmark = (id) => {
     console.log(id);
@@ -121,6 +121,18 @@ function ProductList(args) {
           swal(" Your already bookmarked It");
         }
       });
+  };
+
+  const hadlestatusbookmark = () => {
+    console.log(liked);
+    const userId = localStorage.getItem("userId");
+    axios
+      .get(`http://3.7.173.138:9000/user/getone_mylikes/${userId}/${liked}`)
+      .then((res) => {
+        console.log(res.data.data);
+        setHandlebookmark(res.data.data);
+      })
+      .catch();
   };
   const handlepromotion = (_id) => {
     var promotionId = _id;
@@ -301,6 +313,7 @@ function ProductList(args) {
     if (searchrating !== "") {
       getsearchbyratingfilter();
     }
+    hadlestatusbookmark();
   }, [Params, type, format, searchrating]);
 
   const gettypefilter = () => {
@@ -342,7 +355,7 @@ function ProductList(args) {
       .get(`http://3.7.173.138:9000/admin/listbysubcategory/${Params.id}`)
       .then((response) => {
         setCategry(response.data.data);
-        console.log(response.data.data);
+        // console.log(response.data.data);
       })
       .catch((error) => {
         console.log(error.response.data);
@@ -1641,7 +1654,7 @@ function ProductList(args) {
                                       </div>
                                       <Row>
                                         <Col lg="4"></Col>
-                                        <Col lg="8">
+                                        <Col lg="8" key={categry?._id}>
                                           <button
                                             key={categry?._id}
                                             className="addbookmark  btn btn-secondary"
