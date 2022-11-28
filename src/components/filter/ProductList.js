@@ -328,6 +328,7 @@ function ProductList(args) {
 
   useEffect(() => {
     getUser();
+    hadlestatusbookmark();
     promotionadmin();
     if (type === "" && format === "" && searchrating == "") {
       allsearchproduct();
@@ -341,8 +342,6 @@ function ProductList(args) {
     if (searchrating !== "") {
       getsearchbyratingfilter();
     }
-
-    hadlestatusbookmark();
   }, [Params, type, format, searchrating, myId, liked]);
 
   const [typelength, setTypelength] = useState([]);
