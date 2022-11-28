@@ -14,7 +14,7 @@ import yearicon from "../assets/icons/yearicon.png";
 import submiticon from "../assets/icons/submiticon.png";
 import reviewstar from "../assets/icons/reviewstra.png";
 import ratingstar from "../assets/icons/ratingstar.png";
-
+import { useNavigate } from "react-router-dom";
 import languageicon from "../assets/icons/languageicon.png";
 import topBar from "../css/topBar.css";
 import React, { useState, useEffect } from "react";
@@ -32,14 +32,10 @@ function Bookmarks(args) {
   const [modalone, setModalone] = useState(false);
   const [liked, setliked] = useState("");
   const [activelike, setActivelike] = useState("");
-
   const [text, settText] = useState("");
-
   const [categry, setCategry] = useState([]);
   const [modal, setModal] = useState(false);
-
   const toggle = () => setModal(!modal);
-
   const [active, setActive] = useState(false);
   const [getonecomment, setGetonecomment] = useState([]);
   const [mylikes, setMylikes] = useState([]);
@@ -47,8 +43,18 @@ function Bookmarks(args) {
   const [productdes, setProductdes] = useState("");
   const [totalrateng, setTotalrateng] = useState("");
   const [all, setAll] = useState("");
-
   const [rating, setRating] = useState("");
+  const [myId, setmyId] = useState("");
+  const [handlebookmark, setHandlebookmark] = useState("");
+  const navigate = useNavigate();
+  const getUser = async () => {
+    const user = await localStorage.getItem("userId");
+    if (user !== null && user !== "") {
+      setmyId(user);
+    } else {
+      console.log("no UserId Found");
+    }
+  };
   const ratingChanged = (newRating) => {
     setRating(newRating);
   };
@@ -100,48 +106,80 @@ function Bookmarks(args) {
   const onchangehandler = (e) => {
     settText(e.target.value);
   };
-  const removebookmark = () => {
-    const userId = localStorage.getItem("userId");
-    setliked(categry?._id);
-    // console.log(liked);
-    axiosConfig
-      .post(`/user/add_like`, {
-        submitresrcId: categry?._id,
-        userid: userId,
-        status: "false",
-      })
-      .then((response) => {
-        // console.log(response.data.data);
-        setActivelike(response.data.data.status);
-        swal("you Removed your bookmark ");
-
-        console.log("removeindividual", response.data.data);
-      })
-      .catch((error) => {
-        console.log(error.response.data);
-      });
+  const removebookmark = (id) => {
+    console.log(id);
+    setliked(id);
+    if (myId !== "" && myId !== null) {
+      axiosConfig
+        .post(`/user/add_like`, {
+          submitresrcId: liked,
+          userid: myId,
+          status: "false",
+        })
+        .then((response) => {
+          console.log(response.data.data.status);
+          setActivelike(response.data.data.status);
+          swal("you Removed your bookmark ");
+          hadlestatusbookmark();
+        })
+        .catch((error) => {
+          console.log(error.response.data);
+        });
+    } else {
+      swal("User Need to Login first ");
+      navigate("/login");
+    }
   };
 
-  const addbookmark = () => {
-    const userId = localStorage.getItem("userId");
-    setliked(categry?._id);
-    // console.log(liked);
-    axiosConfig
-      .post(`/user/add_like`, {
-        submitresrcId: categry?._id,
-        userid: userId,
-        status: "true",
-      })
-      .then((response) => {
-        // console.log(response.data.data);
-        setActivelike(response.data.data.status);
-        swal("you bookmarked it");
+  const addbookmark = (id) => {
+    console.log(id);
+    setliked(id);
 
-        console.log("likeindividual", response.data.data);
-      })
-      .catch((error) => {
-        console.log(error.response.data);
-      });
+    if (myId !== "" && myId !== null) {
+      axiosConfig
+        .post(`/user/add_like`, {
+          submitresrcId: liked,
+          userid: myId,
+          status: "true",
+        })
+        .then((response) => {
+          console.log(response.data.data.status);
+          setActivelike(response.data.data.status);
+          swal("you bookmarked it");
+          hadlestatusbookmark();
+
+          // console.log("likeindividual", response.data.data);
+        })
+        .catch((error) => {
+          console.log(error.response.data.message);
+          if (error.response.data.message == "already exists") {
+            swal(" Your already bookmarked It");
+          }
+        });
+    } else {
+      swal("login first");
+      navigate("/login");
+    }
+  };
+  const hadlestatusbookmark = () => {
+    if (
+      myId !== null &&
+      myId !== undefined &&
+      myId !== "" &&
+      liked !== "" &&
+      liked !== null &&
+      liked !== undefined
+    ) {
+      axios
+        .get(`http://3.7.173.138:9000/user/getone_mylikes/${myId}/${liked}`)
+        .then((res) => {
+          console.log(res.data.data);
+          setHandlebookmark(res.data.data.status);
+        })
+        .catch((err) => {
+          console.log(err.response.data);
+        });
+    }
   };
   const handleSelection = (_id) => {
     console.log(_id);
@@ -174,20 +212,6 @@ function Bookmarks(args) {
       .then((res) => {
         setGetonecomment(res.data.data);
         console.log(res);
-        // const totalRating = [];
-        // var sum = 0;
-
-        // for (let i = 0; i <= getonecomment.length; i++) {
-        //   if (getonecomment[i].rating == undefined) {
-        //   } else {
-        //     sum += getonecomment[i].rating;
-        //     totalRating.push(getonecomment[i].rating);
-        //   }
-        // }
-
-        // setAll(sum);
-
-        // setTotalrateng(totalRating);
       })
       .catch((err) => {
         console.log(err);
@@ -199,8 +223,10 @@ function Bookmarks(args) {
     console.log("you clicked it");
   };
   useEffect(() => {
+    getUser();
+    hadlestatusbookmark();
     mylikehandler();
-  }, []);
+  }, [myId, handlebookmark, activelike]);
   const icons = {
     star: {
       complete: faStar,
@@ -212,17 +238,18 @@ function Bookmarks(args) {
     star: ["#d9ad26", "#d9ad26", "#434b4d"],
   };
   const mylikehandler = () => {
-    const userId = localStorage.getItem("userId");
-    console.log(userId);
-    axios
-      .get(`http://3.7.173.138:9000/user/my_likes/${userId}`)
-      .then((res) => {
-        setMylikes(res.data.data);
-        console.log(res.data.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    console.log(myId);
+    if (myId !== null) {
+      axios
+        .get(`http://3.7.173.138:9000/user/my_likes/${myId}`)
+        .then((res) => {
+          setMylikes(res.data.data);
+          console.log(res.data.data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
   };
 
   return (
@@ -535,7 +562,7 @@ function Bookmarks(args) {
                                       completed={40}
                                     />
                                   </Col>
-                                  <Col>
+                                  {/* <Col>
                                     <button
                                       onClick={removebookmark}
                                       className="addbookmark  btn btn-secondary"
@@ -551,7 +578,7 @@ function Bookmarks(args) {
                                     >
                                       Add Bookmark
                                     </button>
-                                  </Col>
+                                  </Col> */}
                                 </Row>
                               </div>
                             </div>
@@ -592,6 +619,30 @@ function Bookmarks(args) {
                           </Col>
                         </Row>
                       </div>
+                      <Row key={data?.submitresrcId?._id}>
+                        <Col lg="4"></Col>
+                        <Col lg="8" key={data?.submitresrcId?._id}>
+                          <button
+                            key={data?.submitresrcId?._id}
+                            className="addbookmark  btn btn-secondary"
+                            color="success"
+                            onClick={() =>
+                              removebookmark(data?.submitresrcId?._id)
+                            }
+                          >
+                            Remove bookmark
+                          </button>
+
+                          {/* <button
+                            key={promotion?._id}
+                            onClick={() => addbookmark(data?._id)}
+                            className="addbookmark btn btn-secondary"
+                            color="warning "
+                          >
+                            Add Bookmark
+                          </button> */}
+                        </Col>
+                      </Row>
                       <hr></hr>
                       <div className="review-list mt-3  ">
                         <h4>Reviews:</h4>

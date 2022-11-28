@@ -150,11 +150,11 @@ function Login() {
                   />
                 </FormGroup>
                 <FormGroup
-                  className="mb-4 login-form-group"
+                  className=" login-form-group"
                   controlId="formBasicLoginEmail"
                 >
                   <Label className="from-label">Password</Label>
-                  <div className="loginpassword">
+                  <div className="justify-content-center loginpassword">
                     <Input
                       type={passwordType}
                       required="required"
@@ -169,16 +169,20 @@ function Login() {
                       onClick={togglePassword}
                     >
                       {passwordType === "password" ? (
-                        <FaRegEyeSlash size={28} />
+                        <span>
+                          <FaRegEyeSlash size={28} />
+                        </span>
                       ) : (
-                        <AiOutlineEye size={28} />
+                        <span>
+                          <AiOutlineEye size={28} />
+                        </span>
                       )}
                     </span>
                   </div>
                 </FormGroup>
                 <Row>
                   <Col lg="7"></Col>
-                  <Col lg="5">
+                  <Col lg="5" className="mt-3">
                     <Link
                       to="/send-reset-password-request"
                       className="login-new-account-link"
