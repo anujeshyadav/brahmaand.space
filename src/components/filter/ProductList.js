@@ -113,7 +113,7 @@ function ProductList(args) {
   const addbookmark = (id) => {
     console.log(id);
     setliked(id);
-    // const myId = localStorage.getItem("userId");
+
     if (myId !== "" && myId !== null) {
       axiosConfig
         .post(`/user/add_like`, {
@@ -189,7 +189,7 @@ function ProductList(args) {
       .get(`http://3.7.173.138:9000/user/Promotions`)
       .then((res) => {
         setPromotion(res.data.data);
-        // console.log(res.data.data);
+        console.log(res.data.data);
       })
       .catch((err) => {
         console.log(err);
@@ -1145,45 +1145,38 @@ function ProductList(args) {
                                               >
                                                 Send
                                               </Button>
-                                              <Row key={promotion?._id}>
-                                                <Col lg="4"></Col>
-                                                <Col
-                                                  lg="8"
-                                                  key={promotion?._id}
-                                                >
-                                                  <button
-                                                    key={promotion?._id}
-                                                    className="addbookmark  btn btn-secondary"
-                                                    color="success"
-                                                    onClick={() =>
-                                                      removebookmark(
-                                                        promotion?._id
-                                                      )
-                                                    }
-                                                  >
-                                                    Remove bookmark
-                                                  </button>
-
-                                                  <button
-                                                    key={promotion?._id}
-                                                    onClick={() =>
-                                                      addbookmark(
-                                                        promotion?._id
-                                                      )
-                                                    }
-                                                    className="addbookmark  btn btn-secondary"
-                                                    color="warning "
-                                                  >
-                                                    Add Bookmark
-                                                  </button>
-                                                </Col>
-                                              </Row>
                                             </form>
                                           </div>
                                         </div>
                                       </Col>
                                     </Row>
                                   </div>
+                                  <Row key={promotion?._id}>
+                                    <Col lg="4"></Col>
+                                    <Col lg="8" key={promotion?._id}>
+                                      <button
+                                        key={promotion?._id}
+                                        className="addbookmark  btn btn-secondary"
+                                        color="success"
+                                        onClick={() =>
+                                          removebookmark(promotion?._id)
+                                        }
+                                      >
+                                        Remove bookmark
+                                      </button>
+
+                                      <button
+                                        key={promotion?._id}
+                                        onClick={() =>
+                                          addbookmark(promotion?._id)
+                                        }
+                                        className="addbookmark btn btn-secondary"
+                                        color="warning "
+                                      >
+                                        Add Bookmark
+                                      </button>
+                                    </Col>
+                                  </Row>
                                   <hr></hr>
                                   <div className="review-list">
                                     <h4>Reviews:</h4>
@@ -1717,7 +1710,7 @@ function ProductList(args) {
                                                 removebookmark(categry?._id)
                                               }
                                             >
-                                              Remove bookmark
+                                              Remove Bookmark
                                             </button>
                                           ) : (
                                             <button
