@@ -63,7 +63,7 @@ function ProductList(args) {
   const [productdes, setProductdes] = useState("");
   const [text, settText] = useState("");
   const [getonecomment, setGetonecomment] = useState([]);
-  const [like, setLike] = useState(liked);
+  // const [like, setLike] = useState(liked);
   const [categry, setCategry] = useState([]);
   const [promotion, setPromotion] = useState([]);
   const [promotId, setPromotId] = useState("");
@@ -77,6 +77,7 @@ function ProductList(args) {
   const removebookmark = (id) => {
     console.log(id);
     setliked(id);
+
     const userId = localStorage.getItem("userId");
 
     axiosConfig
@@ -124,12 +125,12 @@ function ProductList(args) {
   };
 
   const hadlestatusbookmark = () => {
-    console.log(liked);
+    // console.log(liked);
     const userId = localStorage.getItem("userId");
     axios
       .get(`http://3.7.173.138:9000/user/getone_mylikes/${userId}/${liked}`)
       .then((res) => {
-        console.log(res.data.data);
+        // console.log(res.data.data);
         setHandlebookmark(res.data.data);
       })
       .catch();
@@ -162,7 +163,7 @@ function ProductList(args) {
       .get(`http://3.7.173.138:9000/user/Promotions`)
       .then((res) => {
         setPromotion(res.data.data);
-        console.log(res.data.data);
+        // console.log(res.data.data);
       })
       .catch((err) => {
         console.log(err);
@@ -247,7 +248,7 @@ function ProductList(args) {
     console.log(text);
   };
   const handleSelection = (_id) => {
-    console.log(_id);
+    // console.log(_id);
     var selectedId = _id;
 
     if (selectedId === _id) {
@@ -274,7 +275,7 @@ function ProductList(args) {
       .get(`http://3.7.173.138:9000/user/comment_list/${selectedId}`)
       .then((res) => {
         setGetonecomment(res.data.data);
-        console.log(res.data.data);
+        // console.log(res.data.data);
         // const totalRating = [];
         // var sum = 0;
 
@@ -315,13 +316,14 @@ function ProductList(args) {
     }
     hadlestatusbookmark();
   }, [Params, type, format, searchrating]);
-
+  const [typelength, setTypelength] = useState([]);
   const gettypefilter = () => {
     axios
       .get(`http://3.7.173.138:9000/user/filter_type/${type}`)
       .then((res) => {
         console.log(res.data.data);
         setCategry(res.data.data);
+        setTypelength(res.data.data);
       })
       .catch((err) => {
         console.log(err);
@@ -355,7 +357,7 @@ function ProductList(args) {
       .get(`http://3.7.173.138:9000/admin/listbysubcategory/${Params.id}`)
       .then((response) => {
         setCategry(response.data.data);
-        // console.log(response.data.data);
+        console.log(response.data.data);
       })
       .catch((error) => {
         console.log(error.response.data);
@@ -476,6 +478,9 @@ function ProductList(args) {
                             onClick={() => setType("Free")}
                           />
                           Free
+                          {/* {typelength?.length == 0
+                            ? null
+                            : [typelength?.length]} */}
                         </Row>
                         <Row className="mt-3  mx-2">
                           <input
@@ -1655,27 +1660,29 @@ function ProductList(args) {
                                       <Row>
                                         <Col lg="4"></Col>
                                         <Col lg="8" key={categry?._id}>
-                                          <button
-                                            key={categry?._id}
-                                            className="addbookmark  btn btn-secondary"
-                                            color="success"
-                                            onClick={() =>
-                                              removebookmark(categry?._id)
-                                            }
-                                          >
-                                            Remove bookmark
-                                          </button>
-
-                                          <button
-                                            key={categry?._id}
-                                            onClick={() =>
-                                              addbookmark(categry?._id)
-                                            }
-                                            className="addbookmark  btn btn-secondary"
-                                            color="warning "
-                                          >
-                                            Add Bookmark
-                                          </button>
+                                          {handlebookmark?.status == "true" ? (
+                                            <button
+                                              key={categry?._id}
+                                              className="addbookmark  btn btn-secondary"
+                                              color="success"
+                                              onClick={() =>
+                                                removebookmark(categry?._id)
+                                              }
+                                            >
+                                              Remove bookmark
+                                            </button>
+                                          ) : (
+                                            <button
+                                              key={categry?._id}
+                                              onClick={() =>
+                                                addbookmark(categry?._id)
+                                              }
+                                              className="addbookmark  btn btn-secondary"
+                                              color="warning "
+                                            >
+                                              Add Bookmark
+                                            </button>
+                                          )}
                                         </Col>
                                       </Row>
                                       <hr></hr>
