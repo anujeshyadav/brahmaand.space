@@ -1061,19 +1061,8 @@ function ProductList(args) {
                                                   completed={40}
                                                 />
                                               </Col>
-                                              <Col>
-                                                {/* {localStorage.getItem(
-                                                      "userId"
-                                                    ) !== "" &&
-                                                    localStorage.getItem(
-                                                      "userId"
-                                                    ) !== null &&
-                                                    localStorage.getItem(
-                                                      "userId"
-                                                    ) !== undefined ? (
-                                                      <button className="likebuttonbar">
-                                                        {activelike ==
-                                                        "true" ? ( */}
+                                              {/* <Col>
+                                                
                                                 <button
                                                   key={promotion?._id}
                                                   className="addbookmark  btn btn-secondary"
@@ -1097,10 +1086,8 @@ function ProductList(args) {
                                                 >
                                                   Add Bookmark
                                                 </button>
-                                                {/* )} */}
-                                                {/* </button> */}
-                                                {/* ) : null} */}
-                                              </Col>
+                                                
+                                              </Col> */}
                                             </Row>
                                           </div>
                                         </div>
@@ -1130,6 +1117,42 @@ function ProductList(args) {
                                               >
                                                 Send
                                               </Button>
+                                              <Row key={promotion?._id}>
+                                                <Col lg="4"></Col>
+                                                <Col
+                                                  lg="8"
+                                                  key={promotion?._id}
+                                                >
+                                                  {handlebookmark?.status ==
+                                                  "true" ? (
+                                                    <button
+                                                      key={promotion?._id}
+                                                      className="addbookmark  btn btn-secondary"
+                                                      color="success"
+                                                      onClick={() =>
+                                                        removebookmark(
+                                                          promotion?._id
+                                                        )
+                                                      }
+                                                    >
+                                                      Remove bookmark
+                                                    </button>
+                                                  ) : (
+                                                    <button
+                                                      key={promotion?._id}
+                                                      onClick={() =>
+                                                        addbookmark(
+                                                          promotion?._id
+                                                        )
+                                                      }
+                                                      className="addbookmark  btn btn-secondary"
+                                                      color="warning "
+                                                    >
+                                                      Add Bookmark
+                                                    </button>
+                                                  )}
+                                                </Col>
+                                              </Row>
                                             </form>
                                           </div>
                                         </div>
@@ -1174,9 +1197,9 @@ function ProductList(args) {
                                 </ModalBody>
                               </Modal>
                             </Link>
-                            <span class="product-discount-label">
-                              <FaHeart />
-                            </span>
+                            {/* <span class="product-discount-label"> */}
+                            {/* <FaHeart /> */}
+                            {/* </span> */}
                           </div>
 
                           <div class="product-content">
@@ -1660,7 +1683,7 @@ function ProductList(args) {
                                       <Row>
                                         <Col lg="4"></Col>
                                         <Col lg="8" key={categry?._id}>
-                                          {handlebookmark?.status == "true" ? (
+                                          {handlebookmark?.status !== "true" ? (
                                             <button
                                               key={categry?._id}
                                               className="addbookmark  btn btn-secondary"

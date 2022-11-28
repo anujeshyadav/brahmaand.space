@@ -502,9 +502,9 @@ function RecentProductList(args) {
                   </Modal>
                   <img src={business} alt="" />
                 </Link>
-                <span class="product-discount-label">
+                {/* <span class="product-discount-label">
                   <FaHeart />
-                </span>
+                </span> */}
               </div>
               <div class="product-content">
                 <ul class="rating">
