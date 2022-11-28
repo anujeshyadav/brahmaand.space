@@ -342,7 +342,7 @@ function ProductList(args) {
     if (searchrating !== "") {
       getsearchbyratingfilter();
     }
-  }, [Params, type, format, searchrating, myId, liked]);
+  }, [Params, type, format, searchrating, myId, handlebookmark]);
 
   const [typelength, setTypelength] = useState([]);
   const gettypefilter = () => {
