@@ -58,8 +58,8 @@ function ProductList(args) {
   const [modalone, setModalone] = useState(false);
   const [liked, setliked] = useState("");
   const [activelike, setActivelike] = useState("");
-  const [unlike, setUnlike] = useState("");
-  const [againlikeact, setAgainlikeact] = useState("");
+  // const [unlike, setUnlike] = useState("");
+  // const [againlikeact, setAgainlikeact] = useState("");
   const [Producdetail, setProductdetail] = useState([]);
   const [productdes, setProductdes] = useState("");
   const [text, settText] = useState("");
@@ -73,7 +73,7 @@ function ProductList(args) {
   const [format, setFormat] = useState("");
   const [source, setSource] = useState("");
   const [searchrating, setSearchrating] = useState("");
-  const [handlebookmark, setHandlebookmark] = useState();
+  const [handlebookmark, setHandlebookmark] = useState("");
   const [myId, setmyId] = useState("");
   const navigate = useNavigate();
 
@@ -87,7 +87,6 @@ function ProductList(args) {
   };
 
   const removebookmark = (id) => {
-    console.log(id);
     setliked(id);
     if (myId !== "" && myId !== null) {
       axiosConfig
@@ -97,6 +96,7 @@ function ProductList(args) {
           status: "false",
         })
         .then((response) => {
+          console.log(response.data.data.status);
           setActivelike(response.data.data.status);
           swal("you Removed your bookmark ");
           hadlestatusbookmark();
@@ -122,7 +122,7 @@ function ProductList(args) {
           status: "true",
         })
         .then((response) => {
-          // console.log(response.data.data);
+          console.log(response.data.data.status);
           setActivelike(response.data.data.status);
           swal("you bookmarked it");
           hadlestatusbookmark();
@@ -342,7 +342,7 @@ function ProductList(args) {
     if (searchrating !== "") {
       getsearchbyratingfilter();
     }
-  }, [Params, type, format, searchrating, myId, handlebookmark]);
+  }, [Params, type, format, searchrating, myId, handlebookmark, activelike]);
 
   const [typelength, setTypelength] = useState([]);
   const gettypefilter = () => {
@@ -1151,33 +1151,31 @@ function ProductList(args) {
                                                   lg="8"
                                                   key={promotion?._id}
                                                 >
-                                                  {handlebookmark == "true" ? (
-                                                    <button
-                                                      key={promotion?._id}
-                                                      className="addbookmark  btn btn-secondary"
-                                                      color="success"
-                                                      onClick={() =>
-                                                        removebookmark(
-                                                          promotion?._id
-                                                        )
-                                                      }
-                                                    >
-                                                      Remove bookmark
-                                                    </button>
-                                                  ) : (
-                                                    <button
-                                                      key={promotion?._id}
-                                                      onClick={() =>
-                                                        addbookmark(
-                                                          promotion?._id
-                                                        )
-                                                      }
-                                                      className="addbookmark  btn btn-secondary"
-                                                      color="warning "
-                                                    >
-                                                      Add Bookmark
-                                                    </button>
-                                                  )}
+                                                  <button
+                                                    key={promotion?._id}
+                                                    className="addbookmark  btn btn-secondary"
+                                                    color="success"
+                                                    onClick={() =>
+                                                      removebookmark(
+                                                        promotion?._id
+                                                      )
+                                                    }
+                                                  >
+                                                    Remove bookmark
+                                                  </button>
+
+                                                  <button
+                                                    key={promotion?._id}
+                                                    onClick={() =>
+                                                      addbookmark(
+                                                        promotion?._id
+                                                      )
+                                                    }
+                                                    className="addbookmark  btn btn-secondary"
+                                                    color="warning "
+                                                  >
+                                                    Add Bookmark
+                                                  </button>
                                                 </Col>
                                               </Row>
                                             </form>
@@ -1710,7 +1708,7 @@ function ProductList(args) {
                                       <Row>
                                         <Col lg="4"></Col>
                                         <Col lg="8" key={categry?._id}>
-                                          {handlebookmark == "true" ? (
+                                          {handlebookmark !== "false" ? (
                                             <button
                                               key={categry?._id}
                                               className="addbookmark  btn btn-secondary"
