@@ -3,6 +3,7 @@ import axios from "axios";
 import Heart from "react-heart";
 import ReactPaginate from "react-paginate";
 import StarsRating from "stars-rating";
+import { useNavigate } from "react-router-dom";
 import swal from "sweetalert";
 import "../../components/pagination.css";
 import { FiFilter } from "react-icons/fi";
@@ -63,7 +64,7 @@ function ProductList(args) {
   const [productdes, setProductdes] = useState("");
   const [text, settText] = useState("");
   const [getonecomment, setGetonecomment] = useState([]);
-  // const [like, setLike] = useState(liked);
+
   const [categry, setCategry] = useState([]);
   const [promotion, setPromotion] = useState([]);
   const [promotId, setPromotId] = useState("");
@@ -73,67 +74,92 @@ function ProductList(args) {
   const [source, setSource] = useState("");
   const [searchrating, setSearchrating] = useState("");
   const [handlebookmark, setHandlebookmark] = useState();
+  const [myId, setmyId] = useState("");
+  const navigate = useNavigate();
+
+  const getUser = async () => {
+    const user = await localStorage.getItem("userId");
+    if (user !== null && user !== "") {
+      setmyId(user);
+    } else {
+      console.log("no UserId Found");
+    }
+  };
 
   const removebookmark = (id) => {
     console.log(id);
     setliked(id);
-
-    const userId = localStorage.getItem("userId");
-
-    axiosConfig
-      .post(`/user/add_like`, {
-        submitresrcId: liked,
-        userid: userId,
-        status: "false",
-      })
-      .then((response) => {
-        // console.log(response.data.data);
-        setActivelike(response.data.data.status);
-        swal("you Removed your bookmark ");
-
-        console.log("removeindividual", response.data.data);
-      })
-      .catch((error) => {
-        console.log(error.response.data);
-      });
+    if (myId !== "" && myId !== null) {
+      axiosConfig
+        .post(`/user/add_like`, {
+          submitresrcId: liked,
+          userid: myId,
+          status: "false",
+        })
+        .then((response) => {
+          setActivelike(response.data.data.status);
+          swal("you Removed your bookmark ");
+          hadlestatusbookmark();
+        })
+        .catch((error) => {
+          console.log(error.response.data);
+        });
+    } else {
+      swal("Login first ");
+      navigate("/login");
+    }
   };
 
   const addbookmark = (id) => {
     console.log(id);
     setliked(id);
-    const userId = localStorage.getItem("userId");
+    // const myId = localStorage.getItem("userId");
+    if (myId !== "" && myId !== null) {
+      axiosConfig
+        .post(`/user/add_like`, {
+          submitresrcId: liked,
+          userid: myId,
+          status: "true",
+        })
+        .then((response) => {
+          // console.log(response.data.data);
+          setActivelike(response.data.data.status);
+          swal("you bookmarked it");
+          hadlestatusbookmark();
 
-    axiosConfig
-      .post(`/user/add_like`, {
-        submitresrcId: liked,
-        userid: userId,
-        status: "true",
-      })
-      .then((response) => {
-        // console.log(response.data.data);
-        setActivelike(response.data.data.status);
-        swal("you bookmarked it");
-
-        console.log("likeindividual", response.data.data);
-      })
-      .catch((error) => {
-        console.log(error.response.data.message);
-        if (error.response.data.message == "already exists") {
-          swal(" Your already bookmarked It");
-        }
-      });
+          // console.log("likeindividual", response.data.data);
+        })
+        .catch((error) => {
+          console.log(error.response.data.message);
+          if (error.response.data.message == "already exists") {
+            swal(" Your already bookmarked It");
+          }
+        });
+    } else {
+      swal("login first");
+      navigate("/login");
+    }
   };
 
   const hadlestatusbookmark = () => {
-    // console.log(liked);
-    const userId = localStorage.getItem("userId");
-    axios
-      .get(`http://3.7.173.138:9000/user/getone_mylikes/${userId}/${liked}`)
-      .then((res) => {
-        // console.log(res.data.data);
-        setHandlebookmark(res.data.data);
-      })
-      .catch();
+    if (
+      myId !== null &&
+      myId !== undefined &&
+      myId !== "" &&
+      liked !== "" &&
+      liked !== null &&
+      liked !== undefined
+    ) {
+      axios
+        .get(`http://3.7.173.138:9000/user/getone_mylikes/${myId}/${liked}`)
+        .then((res) => {
+          console.log(res.data.data);
+          setHandlebookmark(res.data.data.status);
+        })
+        .catch((err) => {
+          console.log(err.response.data);
+        });
+    }
   };
   const handlepromotion = (_id) => {
     var promotionId = _id;
@@ -205,8 +231,8 @@ function ProductList(args) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const userId = localStorage.getItem("userId");
-    if (userId !== null && userId !== undefined && userId !== "") {
+    console.log(myId);
+    if (myId !== null && myId !== undefined && myId !== "") {
       if (
         text !== null &&
         text !== undefined &&
@@ -216,12 +242,12 @@ function ProductList(args) {
         rating !== ""
       ) {
         const selectedId = Producdetail._id;
-        console.log(selectedId, userId, text, rating);
+        console.log(selectedId, myId, text, rating);
 
         axios
           .post(`http://3.7.173.138:9000/user/add_Comment`, {
             submitresrcId: selectedId,
-            userid: userId,
+            userid: myId,
             comment: text,
             rating: rating,
           })
@@ -301,6 +327,7 @@ function ProductList(args) {
   };
 
   useEffect(() => {
+    getUser();
     promotionadmin();
     if (type === "" && format === "" && searchrating == "") {
       allsearchproduct();
@@ -314,8 +341,10 @@ function ProductList(args) {
     if (searchrating !== "") {
       getsearchbyratingfilter();
     }
+
     hadlestatusbookmark();
-  }, [Params, type, format, searchrating]);
+  }, [Params, type, format, searchrating, myId, liked]);
+
   const [typelength, setTypelength] = useState([]);
   const gettypefilter = () => {
     axios
@@ -1123,8 +1152,7 @@ function ProductList(args) {
                                                   lg="8"
                                                   key={promotion?._id}
                                                 >
-                                                  {handlebookmark?.status ==
-                                                  "true" ? (
+                                                  {handlebookmark == "true" ? (
                                                     <button
                                                       key={promotion?._id}
                                                       className="addbookmark  btn btn-secondary"
@@ -1683,7 +1711,7 @@ function ProductList(args) {
                                       <Row>
                                         <Col lg="4"></Col>
                                         <Col lg="8" key={categry?._id}>
-                                          {handlebookmark?.status !== "true" ? (
+                                          {handlebookmark == "true" ? (
                                             <button
                                               key={categry?._id}
                                               className="addbookmark  btn btn-secondary"
