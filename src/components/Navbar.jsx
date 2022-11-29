@@ -48,7 +48,7 @@ function CustomNavbar(args) {
   const [relyear, setRelyear] = useState([]);
   const [selectedyear, setSelectedyear] = useState("");
   const [tview, setTview] = useState({});
-  const [cat_img, setCat_img] = useState({});
+  const [cat_img, setCat_img] = useState("");
   const [Opcname, setOpcname] = useState({});
   const [Opdes, setOpdes] = useState({});
   const [Opcomm, setOpcomm] = useState({});
