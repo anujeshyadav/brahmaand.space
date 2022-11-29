@@ -40,7 +40,11 @@ function AllSubCategory() {
   };
   return (
     <div>
-      <p className="category mt-5 mb-2">All Subcategories</p>
+      <p className="category mt-5 mb-2">
+        {subcatgry[0]?.category.title !== null
+          ? subcatgry[0]?.category.title
+          : null}
+      </p>
       <Container fluid className=" d-flex justify-content-center">
         <Container>
           <Row className="m-3 mb-4">

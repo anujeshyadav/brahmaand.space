@@ -20,10 +20,8 @@ import formaticon from "../../assets/icons/formaticon.png";
 import diffculty from "../../assets/icons/diffculty.png";
 import Allpromotion from "./Allpromotion";
 import languageicon from "../../assets/icons/languageicon.png";
-
 import yearicon from "../../assets/icons/yearicon.png";
 import submiticon from "../../assets/icons/submiticon.png";
-
 import {
   Row,
   Col,
@@ -36,7 +34,6 @@ import { Link, useParams } from "react-router-dom";
 import "../../styles/Filter.css";
 import AutoSearch from "./AutoSearch";
 import RangeSlider from "react-bootstrap-range-slider";
-
 import { FaHeart, FaStar, FaRegHeart } from "react-icons/fa";
 import FilterList from "./FilterList";
 import RecentProductList from "./RecentProductList";
@@ -58,13 +55,10 @@ function ProductList(args) {
   const [modalone, setModalone] = useState(false);
   const [liked, setliked] = useState("");
   const [activelike, setActivelike] = useState("");
-  // const [unlike, setUnlike] = useState("");
-  // const [againlikeact, setAgainlikeact] = useState("");
   const [Producdetail, setProductdetail] = useState([]);
   const [productdes, setProductdes] = useState("");
   const [text, settText] = useState("");
   const [getonecomment, setGetonecomment] = useState([]);
-
   const [categry, setCategry] = useState([]);
   const [promotion, setPromotion] = useState([]);
   const [promotId, setPromotId] = useState("");
@@ -77,6 +71,10 @@ function ProductList(args) {
   const [myId, setmyId] = useState("");
   const navigate = useNavigate();
   const [averageRating, setAverageRating] = useState("");
+
+  const handlesearchdescription = () => {
+    console.log("you are searching");
+  };
 
   const getUser = async () => {
     const user = await localStorage.getItem("userId");
@@ -274,6 +272,7 @@ function ProductList(args) {
 
     console.log(text);
   };
+
   const handleSelection = (_id) => {
     console.log(_id);
     var selectedId = _id;
@@ -413,7 +412,12 @@ function ProductList(args) {
             </Col>
             <Col lg="2">
               <Button className=" d-flex probtn text-center ">
-                <p className="searchproduct d-flex">SEARCH</p>
+                <p
+                  onClick={handlesearchdescription}
+                  className="searchproduct d-flex"
+                >
+                  SEARCH
+                </p>
               </Button>
             </Col>
           </Row>
@@ -1280,7 +1284,7 @@ function ProductList(args) {
                       <div className="search-st mb-4">
                         {currentItems?.map((categry) => (
                           <Row className="mb-4" key={categry?._id}>
-                            <Col md="4">
+                            <Col md="4" className="alldescriptionimagpage">
                               <div class="product-image8 st-2">
                                 <Link
                                   key={categry?._id}
@@ -1291,7 +1295,7 @@ function ProductList(args) {
                                     src={categry?.img}
                                     alt="image"
                                     width="100%"
-                                    height={220}
+                                    height={240}
                                   />
 
                                   <Modal
@@ -1332,7 +1336,7 @@ function ProductList(args) {
                                                   className="d-flex "
                                                   to="#"
                                                 >
-                                                  {val}{" "}
+                                                  {val} &nbsp;
                                                 </Link>
                                               )
                                             )}
@@ -1914,7 +1918,7 @@ function ProductList(args) {
                             <Col md="8">
                               <div class="product-content">
                                 <div className="d-flex topicsdataapi">
-                                  <Link>{categry?.topics}</Link>
+                                  <Link>{categry?.topics} </Link>
                                 </div>
 
                                 <h3>{categry?.resTitle}</h3>

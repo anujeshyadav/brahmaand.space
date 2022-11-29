@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "../../styles/ModulePage.css";
 
 import Head from "../../images/social-media-with-photo-frame-like-button-media-payer-pink-background-illustration 10.png";
@@ -7,6 +7,14 @@ import Hastag from "../../../src/components/home/Hastag";
 import { Container, Row, Col, Card, Button } from "reactstrap";
 import backimg from "../../assets/images/backimg.png";
 function Header() {
+  const [searchbytopics, setSearchbytopics] = useState("");
+  const handlesearchtopics = () => {
+    // const data = "#learning , #media , #study,  #songs, #learning ";
+    // const onedata = data.split(",");
+    // console.log(onedata);
+    console.log("you clicked it");
+  };
+
   return (
     <>
       <div
@@ -60,7 +68,9 @@ function Header() {
             />
           </div>
           <div className="text-center mt-3">
-            <Button className="btn btn-success">Search</Button>
+            <Button onClick={handlesearchtopics} className="btn btn-success">
+              Search
+            </Button>
           </div>
         </div>
       </section>
