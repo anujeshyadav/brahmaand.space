@@ -313,19 +313,6 @@ function ProductList(args) {
       .then((res) => {
         setGetonecomment(res.data.data);
         console.log(res.data.data);
-        // const totalRating = [];
-        // var sum = 0;
-        // debugger;
-        // for (let i = 0; i <= getonecomment.length; i++) {
-        //   if (getonecomment[i].rating == undefined) {
-        //   } else {
-        //     sum += getonecomment[i].rating;
-        //     totalRating.push(getonecomment[i].rating);
-        //   }
-        // }
-
-        // console.log(sumall);
-        // setTotalrateng(totalRating);
       })
       .catch((err) => {
         console.log(err);
@@ -363,12 +350,15 @@ function ProductList(args) {
         console.log(err);
       });
   };
+
+  const [formatelength, setFormatelength] = useState([]);
   const getformatfilter = () => {
     axios
       .get(`http://3.7.173.138:9000/user/filterbyFormat/${format}`)
       .then((res) => {
         console.log(res.data.data);
         setCategry(res.data.data);
+        setFormatelength(res.data.data);
       })
       .catch((err) => {
         console.log(err);
@@ -511,7 +501,10 @@ function ProductList(args) {
                             value="Free"
                             onClick={() => setType("Free")}
                           />
-                          Free
+                          Free &nbsp;
+                          {typelength[0]?.type == "Free"
+                            ? typelength.length
+                            : null}
                         </Row>
                         <Row className="mt-3  mx-2">
                           <input
@@ -522,7 +515,10 @@ function ProductList(args) {
                             value="Paid"
                             onClick={() => setType("Paid")}
                           />
-                          Paid
+                          Paid &nbsp;
+                          {typelength[0]?.type == "Paid"
+                            ? typelength.length
+                            : null}
                         </Row>
                       </div>
                     </Col>
@@ -538,7 +534,10 @@ function ProductList(args) {
                             value="Video"
                             onClick={() => setFormat("Video")}
                           />
-                          Video (74)
+                          Video &nbsp;
+                          {formatelength[0]?.format == "Video"
+                            ? formatelength.length
+                            : null}
                         </Row>
                         <Row className=" mb-3 mx-2">
                           <input
@@ -549,7 +548,10 @@ function ProductList(args) {
                             value="Text"
                             onClick={() => setFormat("Text")}
                           />
-                          Text (29)
+                          Text &nbsp;
+                          {formatelength[0]?.format == "Text"
+                            ? formatelength.length
+                            : null}
                         </Row>
                         {/* <ul>
                           <li>
