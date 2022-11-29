@@ -16,7 +16,7 @@ function VideoPosted() {
 
   const clicked = () => {
     setActive(!active);
-    console.log("you clicked it");
+    // console.log("you clicked it");
   };
 
   return (

@@ -19,7 +19,7 @@ function Recblogdescription() {
         setBlogdescription(res.data.data);
       })
       .catch((err) => {
-        console.log(err);
+        // console.log(err);
       });
   }, [Param]);
   return (

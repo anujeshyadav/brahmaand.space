@@ -30,16 +30,16 @@ function Blog() {
   const [popblog, setPop] = useState([]);
 
   const endOffset = itemOffset + 6;
-  console.log(`Loading items from ${itemOffset} to ${endOffset}`);
+  // console.log(`Loading items from ${itemOffset} to ${endOffset}`);
   const currentItems = popblog?.slice(itemOffset, endOffset);
 
   const pageCount = Math.ceil(popblog?.length / 6);
 
   const handlePageClick = (event) => {
     const newOffset = (event.selected * 6) % popblog?.length;
-    console.log(
-      `User requested page number ${event.selected}, which is offset ${newOffset}`
-    );
+    // console.log(
+    //   `User requested page number ${event.selected}, which is offset ${newOffset}`
+    // );
     setItemOffset(newOffset);
   };
   useEffect(() => {
@@ -55,7 +55,7 @@ function Blog() {
         setRecomblog(response.data.data);
       })
       .catch((error) => {
-        console.log(error.response.data.data);
+        // console.log(error.response.data.data);
       });
   };
 
@@ -67,7 +67,7 @@ function Blog() {
         setPop(response.data.data);
       })
       .catch((error) => {
-        console.log(error.response.data.data);
+        // console.log(error.response.data.data);
       });
   };
 

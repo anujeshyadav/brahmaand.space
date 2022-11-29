@@ -35,16 +35,16 @@ function AutoSearch() {
 
   const handleOnHover = (result) => {
     // the item hovered
-    console.log(result);
+    // console.log(result);
   };
 
   const handleOnSelect = (item) => {
     // the item selected
-    console.log(item);
+    // console.log(item);
   };
 
   const handleOnFocus = () => {
-    console.log("Focused");
+    // console.log("Focused");
   };
 
   const formatResult = (item) => {

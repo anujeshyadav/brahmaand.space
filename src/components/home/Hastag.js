@@ -38,7 +38,7 @@ function Hastag() {
       .get(`http://3.7.173.138:9000/admin/getallCategory`)
       .then((response) => {
         setCategry(response.data.data);
-        // console.log(response.data.data);
+        console.log(response.data.data);
       })
       .catch((error) => {
         console.log(error.response.data.data);
@@ -81,10 +81,10 @@ function Hastag() {
       .get(`/user/getVideo`)
       .then((res) => {
         setNewslettervid(res.data.data);
-        console.log(res.data.data);
+        // console.log(res.data.data);
       })
       .catch((err) => {
-        console.log(err);
+        // console.log(err);
       });
   };
   const handleChange = (event) => {
@@ -103,7 +103,7 @@ function Hastag() {
       .get(`/user/get_featured_cnt`)
       .then((res) => {
         setFeature(res.data.data);
-        console.log(res.data.data);
+        // console.log(res.data.data);
       })
       .catch((err) => {
         console.log(err);
@@ -178,7 +178,13 @@ function Hastag() {
                     >
                       {value?.title}
                     </p>
-                    {/* <Button className="btlisting">12 Listing</Button> */}
+                  </div>
+                  <div className=" d-flex content-bt">
+                    <Row className="  mt-2">
+                      <Button className="btlisting">
+                        {value?.subCount} - Listing
+                      </Button>
+                    </Row>
                   </div>
                 </Link>
               </Col>

@@ -73,7 +73,7 @@ function ProductList(args) {
   const [averageRating, setAverageRating] = useState("");
 
   const handlesearchdescription = () => {
-    console.log("you are searching");
+    // console.log("you are searching");
   };
 
   const getUser = async () => {
@@ -81,7 +81,7 @@ function ProductList(args) {
     if (user !== null && user !== "") {
       setmyId(user);
     } else {
-      console.log("no UserId Found");
+      // console.log("no UserId Found");
     }
   };
 
@@ -101,7 +101,7 @@ function ProductList(args) {
           hadlestatusbookmark();
         })
         .catch((error) => {
-          console.log(error.response.data);
+          // console.log(error.response.data);
         });
     } else {
       swal("User Need to Login first ");
@@ -110,7 +110,7 @@ function ProductList(args) {
   };
 
   const addbookmark = (id) => {
-    console.log(id);
+    // console.log(id);
     setliked(id);
 
     if (myId !== "" && myId !== null) {
@@ -364,6 +364,7 @@ function ProductList(args) {
       });
   };
   const getsearchbyratingfilter = () => {
+    console.log(searchrating);
     axios
       .get(`http://3.7.173.138:9000/user/filterByRating/${searchrating}`)
       .then((res) => {
@@ -1930,7 +1931,7 @@ function ProductList(args) {
                                   <Row>
                                     <Col lg="3">
                                       <PrettyRating
-                                        value={2.5}
+                                        value={categry?.ava_rating}
                                         icons={icons.star}
                                         colors={colors.star}
                                       />
@@ -1939,7 +1940,7 @@ function ProductList(args) {
                                       className="justify-content-left"
                                       lg="9"
                                     >
-                                      {2.5} Rating
+                                      {categry?.ava_rating}- Rating
                                     </Col>
                                   </Row>
 

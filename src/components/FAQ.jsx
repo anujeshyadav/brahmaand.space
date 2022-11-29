@@ -13,10 +13,10 @@ function FAQ() {
       .get(`http://3.7.173.138:9000/admin/faq_list`)
       .then((res) => {
         setFaq(res.data.data);
-        console.log(res.data.data);
+        // console.log(res.data.data);
       })
       .catch((err) => {
-        console.log(err);
+        // console.log(err);
       });
   };
   return (

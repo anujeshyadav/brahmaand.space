@@ -25,7 +25,7 @@ function NewSignup() {
       event.preventDefault();
       event.stopPropagation();
     } else if (username.length > 3) {
-      console.log(username, email, password);
+      // console.log(username, email, password);
       axios
         .post(`http://3.7.173.138:9000/user/signup`, {
           username: username,
@@ -33,7 +33,7 @@ function NewSignup() {
           password: password,
         })
         .then((response) => {
-          console.log(response.data.data);
+          // console.log(response.data.data);
 
           swal(
             "Account created Successfully",
@@ -53,7 +53,7 @@ function NewSignup() {
           setPassword("");
         })
         .catch((error) => {
-          console.log(error.response.data);
+          // console.log(error.response.data);
           if (error.response.data.message == "already exists") {
             swal(
               "This mail is already registered",

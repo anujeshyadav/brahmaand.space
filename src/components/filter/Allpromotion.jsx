@@ -42,19 +42,19 @@ function Allpromotion(args) {
       axios
         .get(`http://3.7.173.138:9000/admin/getone_reslist/${promotId}`)
         .then((res) => {
-          console.log(res.data.data._id);
+          // console.log(res.data.data._id);
           if (
             res.data.data._id !== "" ||
             res.data.data._id !== null ||
             res.data.data._id !== undefined
           ) {
             setPromotiondata(res.data.data);
-            console.log(res.data.data);
+            // console.log(res.data.data);
             toggleone();
           }
         })
         .catch((err) => {
-          console.log(err.data.data);
+          // console.log(err.data.data);
         });
     }
   };
@@ -63,7 +63,7 @@ function Allpromotion(args) {
     const userId = localStorage.getItem("userId");
 
     const selectedId = Producdetail._id;
-    console.log(selectedId, userId, text, rating);
+    // console.log(selectedId, userId, text, rating);
 
     if (selectedId == Producdetail._id && userId !== "") {
       axios
@@ -74,7 +74,7 @@ function Allpromotion(args) {
           rating: rating,
         })
         .then((res) => {
-          console.log(res.data);
+          // console.log(res.data);
           if (res.data.message == "success") {
             swal("your Review Submitted Successfully");
           } else {
@@ -87,7 +87,7 @@ function Allpromotion(args) {
       settText("");
       setRating("");
     }
-    console.log(text);
+    // console.log(text);
   };
   const icons = {
     star: {
@@ -116,7 +116,7 @@ function Allpromotion(args) {
         setPromotion(res.data.data);
       })
       .catch((err) => {
-        console.log(err);
+        // console.log(err);
       });
   };
 

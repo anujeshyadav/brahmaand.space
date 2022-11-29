@@ -9,7 +9,7 @@ import "moment-timezone";
 function Blogdescription() {
   const [blogdescription, setBlogdescription] = useState([]);
   const Param = useParams();
-  console.log(Param);
+  // console.log(Param);
   useEffect(() => {
     axios
 
@@ -17,10 +17,10 @@ function Blogdescription() {
 
       .then((res) => {
         setBlogdescription(res.data.data);
-        console.log(res.data.data);
+        // console.log(res.data.data);
       })
       .catch((err) => {
-        console.log(err);
+        // console.log(err);
       });
   }, [Param]);
 

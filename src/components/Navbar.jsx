@@ -12,7 +12,15 @@ import {
   AccordionHeader,
   AccordionItem,
 } from "reactstrap";
-import { Navbar, Nav, Container, Col, Row } from "react-bootstrap";
+import {
+  Navbar,
+  Nav,
+  Container,
+  Col,
+  Row,
+  Form,
+  InputGroup,
+} from "react-bootstrap";
 import "../styles/Navbar.css";
 import Logo from "../assets/logos/logo.png";
 import { useEffect, useState, useMemo } from "react";
@@ -23,6 +31,7 @@ import agreement_download from "../assets/files/Dispatch305-agreement.pdf";
 import UserPage from "./UserPage";
 
 function CustomNavbar(args) {
+  const [validated, setValidated] = useState(false);
   const [link, setLink] = useState([]);
   const [catgry, setCatgry] = useState({});
   const [subcatry, setSubcatry] = useState({});
@@ -35,7 +44,7 @@ function CustomNavbar(args) {
   // const [createdAt, setCreatedAt] = useState({});
   const [first, setfirst] = useState({});
   const [lngage, setLngage] = useState([]);
-  const [sellang, setSellang] = useState([]);
+  const [sellang, setSellang] = useState();
   const [relyear, setRelyear] = useState([]);
   const [selectedyear, setSelectedyear] = useState("");
   const [tview, setTview] = useState({});
@@ -51,6 +60,16 @@ function CustomNavbar(args) {
     setCat_img(e.target.files[0]);
   };
 
+  const handleSubmit = (event) => {
+    const form = event.currentTarget;
+    if (form.checkValidity() === false) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
+
+    setValidated(true);
+  };
+  const userid = localStorage.getItem("userId");
   const handleSubmitResource = (e) => {
     // const newTopic = topic.split(",");
     // newTopic.push(newTopic);
@@ -94,29 +113,44 @@ function CustomNavbar(args) {
       cat_img
     );
 
-    const formData = new FormData();
-    formData.append("link", link);
-    formData.append("category", catgry);
-    formData.append("sub_category", subcatry);
-    formData.append("type", type);
-    formData.append("format", formate);
-    formData.append("language", sellang);
-    // debugger;
-    formData.append("topics", topic);
-    formData.append("desc", Desc);
-    formData.append("resTitle", Optitle);
-    formData.append("creatorName", Opcname);
-    formData.append("relYear", selectedyear);
-    formData.append("res_desc", Opdes);
-    formData.append("comment", Opcomm);
-    formData.append("img", cat_img);
-    formData.append("userid", userid);
-    // formData.append("createdAt", createdAt);
+    // const formData = new FormData();
+    // formData.append("link", link);
+    // formData.append("category", catgry);
+    // formData.append("sub_category", subcatry);
+    // formData.append("type", type);
+    // formData.append("format", formate);
+    // formData.append("language", sellang);
+    // // debugger;
+    // formData.append("topics", topic);
+    // formData.append("desc", Desc);
+    // formData.append("resTitle", Optitle);
+    // formData.append("creatorName", Opcname);
+    // formData.append("relYear", selectedyear);
+    // formData.append("res_desc", Opdes);
+    // formData.append("comment", Opcomm);
+    // formData.append("img", cat_img);
+    // formData.append("userid", userid);
 
     axios
-      .post(`http://3.7.173.138:9000/user/addSub_resrc`, formData)
+      // .post(`http://3.7.173.138:9000/user/addSub_resrc`, formData)
+      .post(`http://3.7.173.138:9000/user/addSub_resrc`, {
+        link: link,
+        category: catgry,
+        sub_category: subcatry,
+        type: type,
+        format: formate,
+        language: sellang,
+        topics: topic,
+        desc: Desc,
+        resTitle: Optitle,
+        creatorName: Opcname,
+        relYear: selectedyear,
+        res_desc: Opdes,
+        comment: Opcomm,
+        img: JSON.stringify(cat_img),
+        userid: userid,
+      })
       .then((res) => {
-        // debugger;
         console.log(res.data.data);
         if (res.data.message === "success") {
           swal("Resource Submitted Successfully👍");
@@ -350,7 +384,6 @@ function CustomNavbar(args) {
                             <input
                               type="text"
                               value={link}
-                              // style={{ background: "#F1F1F1" }}
                               className="form-control"
                               placeholder="https://www. "
                               onChange={(e) => setLink(e.target.value)}
@@ -482,6 +515,26 @@ function CustomNavbar(args) {
                       </Row>
 
                       <div>
+                        {/* <Row>
+                          <Form
+                            noValidate
+                            validated={validated}
+                            onSubmit={handleSubmit}
+                          >
+                            <Form.Group as={Col} controlId="validationCustom01">
+                              <Form.Label>First name</Form.Label>
+                              <Form.Control
+                                required
+                                type="text"
+                                placeholder="First name"
+                                defaultValue="Mark"
+                              />
+                              <Form.Control.Feedback>
+                                Looks good!
+                              </Form.Control.Feedback>
+                            </Form.Group>
+                          </Form>
+                        </Row> */}
                         <Row>
                           <Label
                             className="mt-3"

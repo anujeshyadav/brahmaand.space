@@ -27,7 +27,7 @@ function Notification() {
         setPersonal(res.data.data);
       })
       .catch((err) => {
-        console.log(err);
+        // console.log(err);
       });
   };
   const notificationhandler = () => {

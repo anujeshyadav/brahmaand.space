@@ -52,7 +52,7 @@ function Bookmarks(args) {
     if (user !== null && user !== "") {
       setmyId(user);
     } else {
-      console.log("no UserId Found");
+      // console.log("no UserId Found");
     }
   };
   const ratingChanged = (newRating) => {
@@ -71,7 +71,7 @@ function Bookmarks(args) {
         rating !== ""
       ) {
         const selectedId = Producdetail._id;
-        console.log(selectedId, userId, text, rating);
+        // console.log(selectedId, userId, text, rating);
 
         axios
           .post(`http://3.7.173.138:9000/user/add_Comment`, {
@@ -81,7 +81,7 @@ function Bookmarks(args) {
             rating: rating,
           })
           .then((res) => {
-            console.log(res.data);
+            // console.log(res.data);
             if (res.data.message == "success") {
               swal("your Review Submitted Successfully");
             } else {
@@ -89,7 +89,7 @@ function Bookmarks(args) {
             }
           })
           .catch((err) => {
-            console.log(err);
+            // console.log(err);
           });
         settText("");
         setRating("");
@@ -100,14 +100,14 @@ function Bookmarks(args) {
       swal("you need to Login first");
     }
 
-    console.log(text);
+    // console.log(text);
   };
 
   const onchangehandler = (e) => {
     settText(e.target.value);
   };
   const removebookmark = (id) => {
-    console.log(id);
+    // console.log(id);
     setliked(id);
     if (myId !== "" && myId !== null) {
       axiosConfig
@@ -117,13 +117,13 @@ function Bookmarks(args) {
           status: "false",
         })
         .then((response) => {
-          console.log(response.data.data.status);
+          // console.log(response.data.data.status);
           setActivelike(response.data.data.status);
           swal("you Removed your bookmark ");
           hadlestatusbookmark();
         })
         .catch((error) => {
-          console.log(error.response.data);
+          // console.log(error.response.data);
         });
     } else {
       swal("User Need to Login first ");
@@ -132,7 +132,7 @@ function Bookmarks(args) {
   };
 
   const addbookmark = (id) => {
-    console.log(id);
+    // console.log(id);
     setliked(id);
 
     if (myId !== "" && myId !== null) {
@@ -143,7 +143,7 @@ function Bookmarks(args) {
           status: "true",
         })
         .then((response) => {
-          console.log(response.data.data.status);
+          // console.log(response.data.data.status);
           setActivelike(response.data.data.status);
           swal("you bookmarked it");
           hadlestatusbookmark();
@@ -151,7 +151,7 @@ function Bookmarks(args) {
           // console.log("likeindividual", response.data.data);
         })
         .catch((error) => {
-          console.log(error.response.data.message);
+          // console.log(error.response.data.message);
           if (error.response.data.message == "already exists") {
             swal(" Your already bookmarked It");
           }
@@ -173,16 +173,16 @@ function Bookmarks(args) {
       axios
         .get(`http://3.7.173.138:9000/user/getone_mylikes/${myId}/${liked}`)
         .then((res) => {
-          console.log(res.data.data);
+          // console.log(res.data.data);
           setHandlebookmark(res.data.data.status);
         })
         .catch((err) => {
-          console.log(err.response.data);
+          // console.log(err.response.data);
         });
     }
   };
   const handleSelection = (_id) => {
-    console.log(_id);
+    // console.log(_id);
     var selectedId = _id;
     // toggle();
 
@@ -191,19 +191,19 @@ function Bookmarks(args) {
       axios
         .get(`http://3.7.173.138:9000/admin/getone_reslist/${productdes}`)
         .then((res) => {
-          console.log(res.data.data._id);
+          // console.log(res.data.data._id);
           if (
             res.data.data._id !== "" ||
             res.data.data._id !== null ||
             res.data.data._id !== undefined
           ) {
             setProductdetail(res.data.data);
-            console.log(res.data.data);
+            // console.log(res.data.data);
             toggle();
           }
         })
         .catch((err) => {
-          console.log(err.data.data);
+          // console.log(err.data.data);
         });
     }
 
@@ -211,16 +211,16 @@ function Bookmarks(args) {
       .get(`http://3.7.173.138:9000/user/comment_list/${selectedId}`)
       .then((res) => {
         setGetonecomment(res.data.data);
-        console.log(res);
+        // console.log(res);
       })
       .catch((err) => {
-        console.log(err);
+        // console.log(err);
       });
   };
 
   const clicked = () => {
     setActive(!active);
-    console.log("you clicked it");
+    // console.log("you clicked it");
   };
   useEffect(() => {
     getUser();
@@ -238,16 +238,16 @@ function Bookmarks(args) {
     star: ["#d9ad26", "#d9ad26", "#434b4d"],
   };
   const mylikehandler = () => {
-    console.log(myId);
+    // console.log(myId);
     if (myId !== null) {
       axios
         .get(`http://3.7.173.138:9000/user/my_likes/${myId}`)
         .then((res) => {
           setMylikes(res.data.data);
-          console.log(res.data.data);
+          // console.log(res.data.data);
         })
         .catch((error) => {
-          console.log(error);
+          // console.log(error);
         });
     }
   };

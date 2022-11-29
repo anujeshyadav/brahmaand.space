@@ -58,7 +58,13 @@ function AllSubCategory() {
                     <p className="d-flex" style={{ color: "white" }}>
                       {value?.title}
                     </p>
-                    {/* <Button className="btlisting">12 Listing</Button> */}
+                  </div>
+                  <div className=" d-flex content-bt">
+                    <Row className="  mt-2">
+                      <Button className="btlisting">
+                        {value?.conent_count} - Listing
+                      </Button>
+                    </Row>
                   </div>
                 </Link>
               </Col>

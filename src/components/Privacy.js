@@ -13,11 +13,11 @@ const Privacy = () => {
     axios
       .get(`http://3.7.173.138:9000/admin/getPrivcyPolicy`)
       .then((res) => {
-        console.log(res.data.data);
+        // console.log(res.data.data);
         setfirst(res.data.data);
       })
       .catch((err) => {
-        console.log(err);
+        // console.log(err);
       });
   };
   return (

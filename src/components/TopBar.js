@@ -40,9 +40,9 @@ function TopBar() {
         createdAt: createdAt,
       })
       .then((response) => {
-        console.log("getdata", response);
-        console.log("getdata", response.data);
-        console.log("aboutGet", response.data.data.abt_us);
+        // console.log("getdata", response);
+        // console.log("getdata", response.data);
+        // console.log("aboutGet", response.data.data.abt_us);
 
         setUsername(response.data.data.username);
         seAbt_us(response.data.data.abt_us);
@@ -51,12 +51,12 @@ function TopBar() {
         setroProfileImg(response.data.data.profileImg);
       })
       .catch((error) => {
-        console.log(error.response.data.data);
+        // console.log(error.response.data.data);
       });
   }, []);
 
   const handleLoginSubmit = async () => {
-    console.log(username, display_name, abt_us, selectedFile);
+    // console.log(username, display_name, abt_us, selectedFile);
     const formData = new FormData();
     formData.append("profileImg", selectedFile);
     formData.append("username", username);

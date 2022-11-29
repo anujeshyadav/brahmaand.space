@@ -13,7 +13,7 @@ function Paginationnew() {
     const fetchPosts = async () => {
       const res = await axios.get("https://jsonplaceholder.typicode.com/posts");
       setData(res.data);
-      console.log(res.data);
+      // console.log(res.data);
       setLoading(false);
     };
     fetchPosts();
@@ -22,16 +22,16 @@ function Paginationnew() {
   const [itemOffset, setItemOffset] = useState(0);
   // fix three for three content in one time
   const endOffset = itemOffset + 3;
-  console.log(`Loading items from ${itemOffset} to ${endOffset}`);
+  // console.log(`Loading items from ${itemOffset} to ${endOffset}`);
   const currentItems = data?.slice(itemOffset, endOffset);
 
   const pageCount = Math.ceil(data?.length / 3);
 
   const handlePageClick = (event) => {
     const newOffset = (event.selected * 3) % data?.length;
-    console.log(
-      `User requested page number ${event.selected}, which is offset ${newOffset}`
-    );
+    // console.log(
+    //   `User requested page number ${event.selected}, which is offset ${newOffset}`
+    // );
     setItemOffset(newOffset);
   };
   return (

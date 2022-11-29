@@ -12,10 +12,10 @@ function Work() {
       .get(`http://3.7.173.138:9000/admin/get_howWorks`)
       .then((response) => {
         sethowworks(response.data.data);
-        console.log(response.data.data);
+        // console.log(response.data.data);
       })
       .catch((error) => {
-        console.log(error.response.data.data);
+        // console.log(error.response.data.data);
       });
   }, []);
 

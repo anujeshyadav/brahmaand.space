@@ -53,7 +53,7 @@ function DemoPaginate() {
   const paginate = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
-  console.log("currentPosts: ", currentPosts);
+  // console.log("currentPosts: ", currentPosts);
 
   return (
     <div className="container mt-5">
