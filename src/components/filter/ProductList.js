@@ -76,6 +76,7 @@ function ProductList(args) {
   const [handlebookmark, setHandlebookmark] = useState("");
   const [myId, setmyId] = useState("");
   const navigate = useNavigate();
+  const [averageRating, setAverageRating] = useState("");
 
   const getUser = async () => {
     const user = await localStorage.getItem("userId");
@@ -274,7 +275,7 @@ function ProductList(args) {
     console.log(text);
   };
   const handleSelection = (_id) => {
-    // console.log(_id);
+    console.log(_id);
     var selectedId = _id;
 
     if (selectedId === _id) {
@@ -295,16 +296,26 @@ function ProductList(args) {
         .catch((err) => {
           console.log(err.data.data);
         });
+
+      axios
+        .get(`http://3.7.173.138:9000/user/average_rating/${productdes}`)
+        .then((res) => {
+          // console.log(res.data);
+          setAverageRating(res.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     }
 
     axios
       .get(`http://3.7.173.138:9000/user/comment_list/${selectedId}`)
       .then((res) => {
         setGetonecomment(res.data.data);
-        // console.log(res.data.data);
+        console.log(res.data.data);
         // const totalRating = [];
         // var sum = 0;
-
+        // debugger;
         // for (let i = 0; i <= getonecomment.length; i++) {
         //   if (getonecomment[i].rating == undefined) {
         //   } else {
@@ -312,13 +323,8 @@ function ProductList(args) {
         //     totalRating.push(getonecomment[i].rating);
         //   }
         // }
-        // debugger;
-        // const sumall = (total, value) => {
-        //   return total + value;
-        // };
-        // console.log(sumall);
-        // setAll(sum);
 
+        // console.log(sumall);
         // setTotalrateng(totalRating);
       })
       .catch((err) => {
@@ -506,9 +512,6 @@ function ProductList(args) {
                             onClick={() => setType("Free")}
                           />
                           Free
-                          {/* {typelength?.length == 0
-                            ? null
-                            : [typelength?.length]} */}
                         </Row>
                         <Row className="mt-3  mx-2">
                           <input
@@ -1461,7 +1464,9 @@ function ProductList(args) {
                                                 </div>
                                                 <div className="mid-1-b tt-1">
                                                   <p>Ratings:</p>
-                                                  <Link to="#">(4.5)</Link>
+                                                  <Link to="#">
+                                                    [{averageRating?.data}]
+                                                  </Link>
                                                 </div>
                                               </div>
                                             </Col>
@@ -1525,12 +1530,13 @@ function ProductList(args) {
                                               <h4>Customer Rating</h4>
                                               <div className="">
                                                 <PrettyRating
-                                                  value={2.5}
+                                                  value={averageRating?.data}
                                                   icons={icons.star}
                                                   colors={colors.star}
                                                 />
                                                 <span className="starratinginno">
-                                                  2.7 of 5 Stars
+                                                  [ {averageRating?.data}] of 5
+                                                  Stars
                                                 </span>
                                                 <br></br>
                                                 <span className="mt-3">

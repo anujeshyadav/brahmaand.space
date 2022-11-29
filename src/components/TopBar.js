@@ -120,11 +120,11 @@ function TopBar() {
                           {`Display name    :    ${display_name}`}
                         </li>
                         <li style={{ color: "black" }}>
-                          {`User Since          :  `}
-                          <Moment format="lll">{`    :        ${createdAt}`}</Moment>
+                          {`User Since          :    `}
+                          <Moment format="lll">{`    :       ${createdAt}`}</Moment>
                         </li>
                         <li style={{ color: "black" }}>
-                          {`Karma                  :   ${createdAt}`}
+                          {`Karma                  :    ${createdAt}`}
                           {/* Karma: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         <b>3700</b> */}
                         </li>
