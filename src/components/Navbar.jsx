@@ -5,6 +5,7 @@ import Multiselect from "multiselect-react-dropdown";
 // import ReactMultiSelectCheckboxes from "react-multiselect-checkboxes";
 import React from "react";
 import axios from "axios";
+import imageToBase64 from "image-to-base64/browser";
 import swal from "sweetalert";
 import {
   Accordion,
@@ -55,6 +56,7 @@ function CustomNavbar(args) {
   // const [userid, setUserid] = useState({});
   const [title, settitle] = useState({});
   const [error, setError] = useState(null);
+  const [conimg, setConimg] = useState();
 
   var fileUpload = (e) => {
     setCat_img(e.target.files[0]);
@@ -69,12 +71,10 @@ function CustomNavbar(args) {
 
     setValidated(true);
   };
+
   const userid = localStorage.getItem("userId");
+
   const handleSubmitResource = (e) => {
-    // const newTopic = topic.split(",");
-    // newTopic.push(newTopic);
-    // console.log(newTopic);
-    // console.log(newTopic.length - 1);
     if (catgry === "Select Category") {
       swal("Please Select Category");
     }
@@ -94,6 +94,14 @@ function CustomNavbar(args) {
     const userid = localStorage.getItem("userId");
     e.preventDefault();
 
+    imageToBase64(cat_img) // Path to the image
+      .then((response) => {
+        setConimg(response); // "cGF0aC90by9maWxlLmpwZw=="
+      })
+      .catch((error) => {
+        console.log(error); // Logs an error if there was one
+      });
+    console.log(conimg);
     console.log(
       "all data",
       userid,
@@ -110,7 +118,7 @@ function CustomNavbar(args) {
       selectedyear,
       Opdes,
       Opcomm,
-      cat_img
+      conimg
     );
 
     // const formData = new FormData();
@@ -133,7 +141,8 @@ function CustomNavbar(args) {
 
     axios
       // .post(`http://3.7.173.138:9000/user/addSub_resrc`, formData)
-      .post(`http://3.7.173.138:9000/user/addSub_resrc`, {
+      // .post(`http://3.7.173.138:9000/user/addSub_resrc`, {
+      .post(`http://3.7.173.138:9000/user/App_Sub_resrc`, {
         link: link,
         category: catgry,
         sub_category: subcatry,
@@ -147,7 +156,7 @@ function CustomNavbar(args) {
         relYear: selectedyear,
         res_desc: Opdes,
         comment: Opcomm,
-        img: JSON.stringify(cat_img),
+        img: conimg,
         userid: userid,
       })
       .then((res) => {
@@ -291,13 +300,13 @@ function CustomNavbar(args) {
   const onSelect = (selectedList, selectedItem) => {
     console.log(selectedList);
     var selectItem1 = [];
-    // debugger;
+
     for (var i = 0; i < selectedList.length; i++) {
       selectItem1.push(selectedList[i]._id);
     }
     console.log("aaaa", selectItem1);
     setSellang(selectItem1);
-    console.log(sellang);
+    // console.log(sellang);
   };
 
   const onRemove = (selectedList, removedItem) => {
