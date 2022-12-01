@@ -4,6 +4,7 @@ import Heart from "react-heart";
 import ReactPaginate from "react-paginate";
 import StarsRating from "stars-rating";
 import { useNavigate } from "react-router-dom";
+import { ReactSearchAutocomplete } from "react-search-autocomplete";
 import swal from "sweetalert";
 import "../../components/pagination.css";
 import { FiFilter } from "react-icons/fi";
@@ -23,6 +24,7 @@ import languageicon from "../../assets/icons/languageicon.png";
 import yearicon from "../../assets/icons/yearicon.png";
 import submiticon from "../../assets/icons/submiticon.png";
 import {
+  InputGroup,
   Row,
   Col,
   Form,
@@ -34,7 +36,7 @@ import { Link, useParams } from "react-router-dom";
 import "../../styles/Filter.css";
 import AutoSearch from "./AutoSearch";
 import RangeSlider from "react-bootstrap-range-slider";
-import { FaHeart, FaStar, FaRegHeart } from "react-icons/fa";
+import { FaHeart, FaStar, FaRegHeart, FaSearch } from "react-icons/fa";
 import FilterList from "./FilterList";
 import RecentProductList from "./RecentProductList";
 import backimg from "../../assets/images/backimg.png";
@@ -71,8 +73,35 @@ function ProductList(args) {
   const [myId, setmyId] = useState("");
   const navigate = useNavigate();
   const [averageRating, setAverageRating] = useState("");
+  const [searchitem, setSearchitem] = useState("");
+  const [searchsmall, setSearchsmall] = useState("");
 
+  const handlesearchicon = () => {
+    if (searchsmall !== "" && searchsmall !== null) {
+      axios
+        .post(`http://3.7.173.138:9000/user/search_topic_title`, {
+          searchinput: searchsmall,
+        })
+        .then((res) => {
+          console.log(res.data.data);
+          setCategry(res.data.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  };
   const handlesearchdescription = () => {
+    axios
+      .post(`http://3.7.173.138:9000/user/search_topic_title`, {
+        searchinput: searchitem,
+      })
+      .then((res) => {
+        setCategry(res.data.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
     // console.log("you are searching");
   };
 
@@ -225,6 +254,8 @@ function ProductList(args) {
   const clearfilter = () => {
     setType("");
     setFormat("");
+    setSearchsmall("");
+    setSearchitem("");
     allsearchproduct();
   };
 
@@ -322,7 +353,14 @@ function ProductList(args) {
     getUser();
     hadlestatusbookmark();
     promotionadmin();
-    if (type === "" && format === "" && searchrating == "") {
+
+    if (
+      type === "" &&
+      format === "" &&
+      searchrating == "" &&
+      searchitem == "" &&
+      searchsmall == ""
+    ) {
       allsearchproduct();
     }
     if (type !== "") {
@@ -334,7 +372,23 @@ function ProductList(args) {
     if (searchrating !== "") {
       getsearchbyratingfilter();
     }
-  }, [Params, type, format, searchrating, myId, handlebookmark, activelike]);
+    if (searchitem !== "") {
+      handlesearchdescription();
+    }
+    if (searchsmall !== "") {
+      handlesearchicon();
+    }
+  }, [
+    Params,
+    type,
+    format,
+    searchrating,
+    myId,
+    handlebookmark,
+    activelike,
+    searchitem,
+    searchsmall,
+  ]);
 
   const [typelength, setTypelength] = useState([]);
   const gettypefilter = () => {
@@ -405,9 +459,13 @@ function ProductList(args) {
             <Col className="seachareapr" lg="10">
               <div className="inputareaa searchba">
                 <input
+                  value={searchitem}
                   type="text"
                   placeholder="   Searching best quality content here . . . "
                   className="searchprd inputareaa searchba "
+                  onChange={(e) => {
+                    setSearchitem(e.target.value);
+                  }}
                 />
               </div>
             </Col>
@@ -445,7 +503,29 @@ function ProductList(args) {
                   <Row>
                     <Col lg="12" className="py-3">
                       <div className="ft-serch">
-                        <AutoSearch />
+                        <Row>
+                          <Col lg="10">
+                            <InputGroup className="mb-3 ">
+                              <Form.Control
+                                className="searchofsearchlogo"
+                                placeholder="Search "
+                                aria-label="Search"
+                                aria-describedby="basic-addon2"
+                                value={searchsmall}
+                                onChange={(e) => {
+                                  setSearchsmall(e.target.value);
+                                }}
+                              />
+                            </InputGroup>
+                          </Col>
+                          <Col lg="2">
+                            <FaSearch
+                              onClick={handlesearchicon}
+                              className="searchicon"
+                              size={28}
+                            />
+                          </Col>
+                        </Row>
                       </div>
                     </Col>
                     <Col lg="12" className="py-3">

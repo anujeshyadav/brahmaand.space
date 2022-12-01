@@ -513,7 +513,7 @@ function CustomNavbar(args) {
                           </Label>
                           <Multiselect
                             style={{ borderRadius: "14px" }}
-                            placeholder="Select"
+                            placeholder="Select language"
                             className="w-100%"
                             options={lngage}
                             onSelect={onSelect}

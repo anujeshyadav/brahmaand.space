@@ -401,3 +401,16 @@ a {
   border: none;
   background: none;
 }
+
+svg.searchicon {
+  /* display: flex; */
+  margin-top: 9px;
+}
+svg.searchicon:hover {
+  color: rgb(246, 143, 17);
+  margin-top: 9px;
+}
+
+input.searchofsearchlogo.form-control {
+  border-radius: 34px;
+}
