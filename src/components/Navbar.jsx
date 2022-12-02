@@ -56,17 +56,26 @@ function CustomNavbar(args) {
   // const [userid, setUserid] = useState({});
   const [title, settitle] = useState({});
   const [error, setError] = useState(null);
-  const [conimg, setConimg] = useState();
+  const [conimg, setConimg] = useState("");
+  // const [convertimg, setConvertimg] = useState("");
 
   var fileUpload = (e) => {
-    setCat_img({
-      picturePreview: URL.createObjectURL(e.target.files[0]),
+    setCat_img(e.target.files[0]);
+    // setCat_img({
+    //   picturePreview: URL.createObjectURL(e.target.files[0]),
+    //   pictureAsFile: e.target.files[0],
 
-      pictureAsFile: e.target.files[0],
-    });
+    // });
   };
-  console.log(cat_img.picturePreview);
-
+  imageToBase64(cat_img) // Path to the image
+    .then((response) => {
+      setConimg(response); // "cGF0aC90by9maWxlLmpwZw=="
+      // setConvertimg(response);
+      // console.log(response);
+    })
+    .catch((error) => {
+      console.log(error); // Logs an error if there was one
+    });
   const handleSubmit = (event) => {
     const form = event.currentTarget;
     if (form.checkValidity() === false) {
@@ -99,14 +108,9 @@ function CustomNavbar(args) {
     const userid = localStorage.getItem("userId");
     e.preventDefault();
 
-    imageToBase64(cat_img) // Path to the image
-      .then((response) => {
-        setConimg(response); // "cGF0aC90by9maWxlLmpwZw=="
-      })
-      .catch((error) => {
-        console.log(error); // Logs an error if there was one
-      });
+    debugger;
     console.log(conimg);
+
     console.log(
       "all data",
       userid,
@@ -123,8 +127,7 @@ function CustomNavbar(args) {
       selectedyear,
       Opdes,
       Opcomm,
-      conimg,
-      cat_img.picturePreview
+      conimg
     );
 
     // const formData = new FormData();
@@ -146,9 +149,9 @@ function CustomNavbar(args) {
     // formData.append("userid", userid);
 
     axios
-      // .post(`http://3.7.173.138:9000/user/addSub_resrc`, formData)
-      // .post(`http://3.7.173.138:9000/user/App_Sub_resrc`, {
-      .post(`http://3.7.173.138:9000/user/addSub_resrc`, {
+
+      // .post(`http://3.7.173.138:9000/user/addSub_resrc`, {
+      .post(`http://3.7.173.138:9000/user/App_Sub_resrc`, {
         link: link,
         category: catgry,
         sub_category: subcatry,
@@ -162,7 +165,7 @@ function CustomNavbar(args) {
         relYear: selectedyear,
         res_desc: Opdes,
         comment: Opcomm,
-        img: cat_img.picturePreview,
+        img: conimg,
         userid: userid,
       })
       .then((res) => {
@@ -182,7 +185,8 @@ function CustomNavbar(args) {
           setSelectedyear("");
           setOpdes("");
           setOpcomm("");
-          setCat_img("");
+          setCat_img(null);
+          // setConvertimg("");
         } else {
           swal("Something went wrong, Try again");
         }
@@ -238,7 +242,7 @@ function CustomNavbar(args) {
         setSubctgry(response.data.data);
       })
       .catch((error) => {
-        console.log(error);
+        console.log(error.response.data);
       });
     // }
   }, [catgry]);
