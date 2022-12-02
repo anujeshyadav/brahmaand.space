@@ -52,7 +52,9 @@ button.viewall.btn.btn-secondary.btn-lg {
 }
 
 .input-group
-  > :not(:first-child):not(.dropdown-menu):not(.valid-tooltip):not(.valid-feedback):not(.invalid-tooltip):not(.invalid-feedback) {
+  > :not(:first-child):not(.dropdown-menu):not(.valid-tooltip):not(
+    .valid-feedback
+  ):not(.invalid-tooltip):not(.invalid-feedback) {
   margin-left: -1px;
   border-radius: 24px;
 }
@@ -287,7 +289,7 @@ p.category3 {
 .imgCol {
   width: 100%;
   /* margin-bottom: 18px; */
-  height: 286px;
+  height: 292px;
   /* opacity: 0.7; */
   border-radius: 18px;
   /* padding: 6px; */

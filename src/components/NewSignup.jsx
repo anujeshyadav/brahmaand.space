@@ -142,6 +142,7 @@ function NewSignup() {
                 </InputGroup>
               </Form.Group>
             </Row>
+            {/* changes here down */}
 
             <Row className="mb-3">
               <Form.Group as={Col} md="" controlId="validationCustomUsername">

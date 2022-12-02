@@ -263,45 +263,45 @@ function ProductList(args) {
     e.preventDefault();
     console.log(myId);
     if (myId !== null && myId !== undefined && myId !== "") {
-      if (
-        text !== null &&
-        text !== undefined &&
-        text !== "" &&
-        rating !== null &&
-        rating !== undefined &&
-        rating !== ""
-      ) {
-        const selectedId = Producdetail._id;
-        console.log(selectedId, myId, text, rating);
+      // if (
+      //   text !== null &&
+      //   text !== undefined &&
+      //   text !== "" &&
+      //   rating !== null &&
+      //   rating !== undefined &&
+      //   rating !== ""
+      // ) {
+      const selectedId = Producdetail._id;
+      console.log(selectedId, myId, text, rating);
 
-        axios
-          .post(`http://3.7.173.138:9000/user/add_Comment`, {
-            submitresrcId: selectedId,
-            userid: myId,
-            comment: text,
-            rating: rating,
-          })
-          .then((res) => {
-            console.log(res.data);
-            if (res.data.message == "success") {
-              swal("your Review Submitted Successfully");
-            } else {
-              swal("Something went wrong review again ");
-            }
-          })
-          .catch((err) => {
-            console.log(err);
-          });
-        settText("");
-        setRating("");
-      } else {
-        swal(" Please Enter review and Rating");
-      }
-    } else {
-      swal("you need to Login first");
+      axios
+        .post(`http://3.7.173.138:9000/user/add_Comment`, {
+          submitresrcId: selectedId,
+          userid: myId,
+          comment: text,
+          rating: rating,
+        })
+        .then((res) => {
+          console.log(res.data);
+          if (res.data.message == "success") {
+            swal("your Review Submitted Successfully");
+          } else {
+            swal("Something went wrong review again ");
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+      settText("");
+      setRating("");
+      // }
+      // else {
+      //   swal(" Please Enter review and Rating");
+      // }
     }
-
-    console.log(text);
+    // else {
+    //   swal("you need to Login first");
+    // }
   };
 
   const handleSelection = (_id) => {
