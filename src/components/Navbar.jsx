@@ -49,7 +49,7 @@ function CustomNavbar(args) {
   const [relyear, setRelyear] = useState([]);
   const [selectedyear, setSelectedyear] = useState("");
   const [tview, setTview] = useState({});
-  const [cat_img, setCat_img] = useState("");
+  const [cat_img, setCat_img] = useState({});
   const [Opcname, setOpcname] = useState({});
   const [Opdes, setOpdes] = useState({});
   const [Opcomm, setOpcomm] = useState({});
@@ -59,8 +59,13 @@ function CustomNavbar(args) {
   const [conimg, setConimg] = useState();
 
   var fileUpload = (e) => {
-    setCat_img(e.target.files[0]);
+    setCat_img({
+      picturePreview: URL.createObjectURL(e.target.files[0]),
+
+      pictureAsFile: e.target.files[0],
+    });
   };
+  console.log(cat_img.picturePreview);
 
   const handleSubmit = (event) => {
     const form = event.currentTarget;
@@ -118,7 +123,8 @@ function CustomNavbar(args) {
       selectedyear,
       Opdes,
       Opcomm,
-      conimg
+      conimg,
+      cat_img.picturePreview
     );
 
     // const formData = new FormData();
@@ -141,8 +147,8 @@ function CustomNavbar(args) {
 
     axios
       // .post(`http://3.7.173.138:9000/user/addSub_resrc`, formData)
-      // .post(`http://3.7.173.138:9000/user/addSub_resrc`, {
-      .post(`http://3.7.173.138:9000/user/App_Sub_resrc`, {
+      // .post(`http://3.7.173.138:9000/user/App_Sub_resrc`, {
+      .post(`http://3.7.173.138:9000/user/addSub_resrc`, {
         link: link,
         category: catgry,
         sub_category: subcatry,
@@ -156,7 +162,7 @@ function CustomNavbar(args) {
         relYear: selectedyear,
         res_desc: Opdes,
         comment: Opcomm,
-        img: conimg,
+        img: cat_img.picturePreview,
         userid: userid,
       })
       .then((res) => {
@@ -232,7 +238,7 @@ function CustomNavbar(args) {
         setSubctgry(response.data.data);
       })
       .catch((error) => {
-        console.log(error.response.data);
+        console.log(error);
       });
     // }
   }, [catgry]);
