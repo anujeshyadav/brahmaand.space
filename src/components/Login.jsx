@@ -43,7 +43,7 @@ function Login() {
   }
 
   function performValidation() {
-    return email.length > 5 && password.length > 5;
+    return email.length > 4 && password.length > 4;
   }
 
   const navigate = useNavigate();
@@ -56,7 +56,7 @@ function Login() {
     }
 
     e.preventDefault();
-    // console.log(email, password);
+    console.log(email, password);
     axios
       .post(`http://3.7.173.138:9000/user/login`, {
         username: email,
@@ -64,11 +64,11 @@ function Login() {
         password: password,
       })
       .then((response) => {
-        // console.log("data", response.data);
-        // console.log(response.data.user);
-        // console.log("you logged in");
-        // console.log(response.data.msg);
-        // console.log(response.data.status);
+        console.log("data", response.data);
+        console.log(response.data.user);
+        console.log("you logged in");
+        console.log(response.data.msg);
+        console.log(response.data.status);
 
         if (response.data.status === true) {
           swal("Good job!", "Successfully login");
