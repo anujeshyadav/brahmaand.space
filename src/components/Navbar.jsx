@@ -144,6 +144,7 @@ function CustomNavbar(args) {
           setOpdes("");
           setOpcomm("");
           setCat_img(null);
+          setModal(false);
         } else {
           swal("Something went wrong, Try again");
         }
@@ -156,8 +157,6 @@ function CustomNavbar(args) {
         } else {
         }
       });
-
-    setModal(false);
   };
 
   // all category

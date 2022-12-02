@@ -229,10 +229,10 @@ function ProductList(args) {
   const [loading, setLoading] = useState(false);
   const [itemOffset, setItemOffset] = useState(0);
 
-  const endOffset = itemOffset + 3;
+  const endOffset = itemOffset + 10;
   const currentItems = categry?.slice(itemOffset, endOffset);
 
-  const pageCount = Math.ceil(categry?.length / 3);
+  const pageCount = Math.ceil(categry?.length / 10);
   const onchangehandler = (e) => {
     settText(e.target.value);
   };
@@ -444,7 +444,7 @@ function ProductList(args) {
   };
 
   const handlePageClick = (event) => {
-    const newOffset = (event.selected * 3) % categry?.length;
+    const newOffset = (event.selected * 10) % categry?.length;
     console.log(
       `User requested page number ${event.selected}, which is offset ${newOffset}`
     );
@@ -1365,7 +1365,7 @@ function ProductList(args) {
                       <div className="search-st mb-4">
                         {currentItems?.map((categry) => (
                           <Row className="mb-4" key={categry?._id}>
-                            <Col md="4" className="alldescriptionimagpage">
+                            <Col md="3" className="alldescriptionimagpage">
                               <div class="product-image8 st-2">
                                 <Link
                                   key={categry?._id}
@@ -1376,7 +1376,7 @@ function ProductList(args) {
                                     src={categry?.img}
                                     alt="image"
                                     width="100%"
-                                    height={240}
+                                    height={160}
                                   />
 
                                   <Modal
@@ -1996,20 +1996,20 @@ function ProductList(args) {
                                 {/* </span> */}
                               </div>
                             </Col>
-                            <Col md="8">
+                            <Col md="9">
                               <div class="product-content">
                                 <div className="d-flex topicsdataapi">
-                                  <Link>{categry?.topics} </Link>
+                                  <Link>{categry?.topics.slice(0, 60)} </Link>
                                 </div>
 
                                 <h3>{categry?.resTitle}</h3>
                                 <h5>
-                                  <span>By</span> {categry?.creatorName}
+                                  <span>By -</span> {categry?.creatorName}
                                 </h5>
-                                <p>{categry?.desc}</p>
+                                <p>{categry?.desc.slice(0, 70)}</p>
                                 <div className="">
                                   <Row>
-                                    <Col lg="3">
+                                    <Col lg="7">
                                       <PrettyRating
                                         value={categry?.ava_rating}
                                         icons={icons.star}
@@ -2018,7 +2018,7 @@ function ProductList(args) {
                                     </Col>
                                     <Col
                                       className="justify-content-left"
-                                      lg="9"
+                                      lg="5"
                                     >
                                       {categry?.ava_rating}- Rating
                                     </Col>
@@ -2041,7 +2041,7 @@ function ProductList(args) {
 
                     <div className="container paginatediv d-flex">
                       <ReactPaginate
-                        itemsPerPage={3}
+                        itemsPerPage={10}
                         activeClassName="activeclassofpagination"
                         pageClassName="pageclassforpage"
                         className=" paginationsclass"
