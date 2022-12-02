@@ -501,7 +501,7 @@ function ProductList(args) {
               <Col lg="4" md="4">
                 <div className="left-side">
                   <Row>
-                    <Col lg="12" className="py-3">
+                    {/* <Col lg="12" className="py-3">
                       <div className="ft-serch">
                         <Row>
                           <Col lg="10">
@@ -527,7 +527,7 @@ function ProductList(args) {
                           </Col>
                         </Row>
                       </div>
-                    </Col>
+                    </Col> */}
                     <Col lg="12" className="py-3">
                       <div className="ft-slider">
                         <Row>
@@ -1318,11 +1318,11 @@ function ProductList(args) {
                                 ))}
                               </li>
                             </ul>
-                            <h3>{promotion?.desc}</h3>
+                            <h3>{promotion?.desc.slice(0, 25)}</h3>
                             <h5>
-                              <span>By</span> {promotion?.creatorName}
+                              <span>By -</span> {promotion?.creatorName}
                             </h5>
-                            <p>{promotion?.res_desc}</p>
+                            <p>{promotion?.res_desc.slice(0, 50)}</p>
                             <div className="mt-2 mb-2">
                               <Row>
                                 <Col lg="6">

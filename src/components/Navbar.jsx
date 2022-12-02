@@ -677,7 +677,7 @@ function CustomNavbar(args) {
                                           <input
                                             type="text"
                                             // style={{ background: "#F1F1F1" }}
-                                            className="form-control mb-3"
+                                            className=" form-control mb-3"
                                             placeholder="Title of the resource?"
                                             onChange={(e) =>
                                               setOptitle(e.target.value)
