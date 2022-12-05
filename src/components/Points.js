@@ -35,7 +35,7 @@ function Points() {
         <Col lg="6">
           <Row>
             <Col>
-              <h4>Total dollar value</h4>
+              <h5>Total dollar value</h5>
             </Col>
             <Col className="d-flex justify-content-center">$10</Col>
           </Row>
