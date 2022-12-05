@@ -34,7 +34,7 @@ import UserPage from "./UserPage";
 
 function CustomNavbar(args) {
   const [validated, setValidated] = useState(false);
-  const [link, setLink] = useState([]);
+  const [link, setLink] = useState("");
   const [catgry, setCatgry] = useState({});
   const [subcatry, setSubcatry] = useState({});
   const [type, setType] = useState({});
@@ -42,8 +42,6 @@ function CustomNavbar(args) {
   const [topic, setTopic] = useState([]);
   const [Desc, setDesc] = useState({});
   const [Optitle, setOptitle] = useState("");
-  const [updatedAt, setUpdatedAt] = useState({});
-  // const [createdAt, setCreatedAt] = useState({});
   const [first, setfirst] = useState({});
   const [lngage, setLngage] = useState([]);
   const [sellang, setSellang] = useState();
@@ -54,11 +52,10 @@ function CustomNavbar(args) {
   const [Opcname, setOpcname] = useState("");
   const [Opdes, setOpdes] = useState("");
   const [Opcomm, setOpcomm] = useState("");
-  // const [userid, setUserid] = useState({});
+
   const [title, settitle] = useState({});
   const [error, setError] = useState(null);
   const [conimg, setConimg] = useState("");
-  // const [convertimg, setConvertimg] = useState("");
 
   var fileUpload = (e) => {
     setCat_img(e.target.files[0]);
@@ -88,20 +85,26 @@ function CustomNavbar(args) {
 
   const userid = localStorage.getItem("userId");
 
+  // function urlPatternValidation(link) {
+  //   const regex = new RegExp(
+  //     "https?://(www.)?[-a-zA-Z0-9@:%._+~#=]{1,256}.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)"
+  //   );
+  //   return regex.test(link);
+  // }
   const handleSubmitResource = (e) => {
     e.preventDefault();
+    console.log(link);
     // if (catgry == "") {
     //   swal("Please Select Category");
     // }
-    function urlPatternValidation(link) {
-      const regex = new RegExp(
-        "(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\www.-]*/?"
-      );
-      return regex.test(link);
-    }
 
-    if (!urlPatternValidation(e.target.value)) {
-      setError("Please enter correct URL to Submit Content");
+    // if (!urlPatternValidation(e.target.value)) {
+    //   setError("Please enter correct URL to Submit Content");
+    // } else {
+    //   setError(null);
+    // }
+    if (link == "") {
+      setError("Enter URL");
     } else {
       setError(null);
     }
@@ -382,7 +385,9 @@ function CustomNavbar(args) {
                                 onChange={(e) => setLink(e.target.value)}
                               />
                             </h5>
-                            {error && <h6 style={{ color: "red" }}>{error}</h6>}
+                            {error !== "" ? (
+                              <h6 style={{ color: "red" }}>{error}</h6>
+                            ) : null}
                           </Row>
                         </div>
                         <div>
@@ -395,6 +400,7 @@ function CustomNavbar(args) {
                                 </b>
                               </Label>
                               <Input
+                                required
                                 type="select"
                                 name="catgry"
                                 className="form-control"
@@ -423,6 +429,7 @@ function CustomNavbar(args) {
                               </Label>
 
                               <select
+                                required
                                 type="select"
                                 name="title"
                                 className="form-control"
@@ -454,6 +461,7 @@ function CustomNavbar(args) {
                                 </b>
                               </Label>
                               <select
+                                required
                                 onChange={(e) => setType(e.target.value)}
                                 className="form-control"
                               >
@@ -473,6 +481,7 @@ function CustomNavbar(args) {
                                 </b>
                               </Label>
                               <select
+                                required
                                 onChange={(e) => setformate(e.target.value)}
                                 className="form-control"
                               >

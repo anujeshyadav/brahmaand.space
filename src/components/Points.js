@@ -29,8 +29,16 @@ function Points() {
         <Col lg="2">
           <h5 className="d-flex justify-content-left">Earned Points : </h5>
         </Col>
-        <Col>
+        <Col lg="4">
           <h5>{getyourpoint?.meteors} Points</h5>
+        </Col>
+        <Col lg="6">
+          <Row>
+            <Col>
+              <h4>Total dollar value</h4>
+            </Col>
+            <Col className="d-flex justify-content-center">$10</Col>
+          </Row>
         </Col>
       </Row>
     </>

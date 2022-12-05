@@ -20,12 +20,19 @@ function NewSignup() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    // debugger;
     const form = event.currentTarget;
     if (form.checkValidity() === false) {
       event.preventDefault();
       event.stopPropagation();
-    } else if (username.length > 3) {
-      // console.log(username, email, password);
+      // swal("Fill details");
+    } else if (
+      username.length > 2 &&
+      email !== "" &&
+      password !== "" &&
+      password !== null &&
+      password !== undefined
+    ) {
       axios
         .post(`http://3.7.173.138:9000/user/signup`, {
           username: username,
@@ -33,7 +40,7 @@ function NewSignup() {
           password: password,
         })
         .then((response) => {
-          // console.log(response.data.data);
+          console.log(response.data.data);
 
           swal(
             "Account created Successfully",
@@ -62,6 +69,7 @@ function NewSignup() {
           }
         });
     }
+    // console.log(username, email, password);
 
     setValidated(true);
   };

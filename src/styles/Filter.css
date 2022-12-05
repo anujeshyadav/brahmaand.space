@@ -414,3 +414,10 @@ svg.searchicon:hover {
 input.searchofsearchlogo.form-control {
   border-radius: 34px;
 }
+
+div.ex1 {
+  background-color: rgb(255, 255, 255);
+  width: 98%;
+  height: 200px;
+  overflow: scroll;
+}

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Container, Row, Col } from "reactstrap";
 import "../../css/LeaderBoard.css";
 import avatar1 from "../../images/avatar1.png";
@@ -25,10 +25,26 @@ import saterns from "../../images/saterns.png";
 import uranus from "../../images/uranus.png";
 import naptune from "../../images/naptune.png";
 import earth from "../../images/earth.png";
+import axios from "axios";
 
 import { FaBook, FaThumbsUp, FaInfinity, FaChartBar } from "react-icons/fa";
 
 function LeaderBoard() {
+  const [planetposition, setPlanetposition] = useState([]);
+  const getallplanetpostion = () => {
+    axios
+      .get(`http://3.7.173.138:9000/user/user_planet_position`)
+      .then((res) => {
+        setPlanetposition(res.data.data);
+      })
+      .catch((err) => {
+        console.log(err.data.data);
+      });
+  };
+  useEffect(() => {
+    getallplanetpostion();
+  }, []);
+
   return (
     <>
       <div className="leaderb  text-center">
@@ -148,7 +164,26 @@ function LeaderBoard() {
               <div className="planet-box">
                 <h3 class="Pointtext">Planet Position</h3>
                 <Row>
-                  <Col lg="4" md="4" className="mb-3">
+                  {planetposition != ""
+                    ? planetposition?.map((value) => (
+                        <Col key={value?._id} lg="4" md="4" className="mb-3">
+                          <div className="planet-1">
+                            <div className="planet-img">
+                              <img src={value?.img} alt="" />
+                            </div>
+                            <div className="planet-text">
+                              <h4>
+                                {value?.planet_name}
+                                <span>{value?.doller_rupees}</span>
+                              </h4>
+                              <p>{value?.point_range}</p>
+                            </div>
+                          </div>
+                        </Col>
+                      ))
+                    : null}
+
+                  {/* <Col lg="4" md="4" className="mb-3">
                     <div className="planet-1">
                       <div className="planet-img">
                         <img src={itthree} alt="" />
@@ -273,7 +308,7 @@ function LeaderBoard() {
                         <p>50000+</p>
                       </div>
                     </div>
-                  </Col>
+                  </Col> */}
                 </Row>
               </div>
               {/* rohit section start */}
