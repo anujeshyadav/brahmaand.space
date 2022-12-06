@@ -64,8 +64,10 @@ import { Navbar } from "reactstrap";
 import Signup from "./components/Signup";
 import Login from "./components/Login.jsx";
 import Myaccount from "./components/Myaccount";
+
 // import Searchfiltermodel from "./components/filter/Searchfiltermodel";
 import FAQ from "./components/FAQ";
+import SelectApp from "./components/SelectApp";
 
 const rootElement = document.getElementById("root");
 render(
@@ -92,8 +94,8 @@ render(
             <Route exact path="/posts" element={<Posts />} />
             <Route exact path="/paginationnew" element={<Paginationnew />} />
             <Route exact path="/allpromotion" element={<Allpromotion />} />
+            <Route exact path="/selectapp" element={<SelectApp />} />
 
-            {/* <Route exact path="/newsignup" element={<NewSignup />} /> */}
             <Route
               exact
               path="/recblogdesription/:id"

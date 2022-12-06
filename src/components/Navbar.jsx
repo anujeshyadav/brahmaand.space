@@ -105,7 +105,7 @@ function CustomNavbar(args) {
     // }
     if (link == "") {
       setError("Enter URL");
-    } else {
+    } else if (link.length > 2) {
       setError(null);
     }
 
@@ -291,7 +291,7 @@ function CustomNavbar(args) {
       <Navbar.Brand exact to="/" as={NavLink} className="navbar-brand">
         <img
           src={Logo}
-          width="100%"
+          width="150px"
           height="80"
           className="d-inline-block align-top navbar-brand-img"
           alt="React Bootstrap logo"
@@ -378,7 +378,7 @@ function CustomNavbar(args) {
                             </Label>
                             <h5>
                               <input
-                                type="text"
+                                type="url"
                                 value={link}
                                 className="form-control"
                                 placeholder="https://www. "
@@ -394,7 +394,7 @@ function CustomNavbar(args) {
                           <Row>
                             <Col>
                               <Label style={{ font: "GT Walsheim Pro" }}>
-                                <b className="mt-5">
+                                <b className="mt-4">
                                   Category{" "}
                                   <span style={{ color: "red" }}>*</span>
                                 </b>

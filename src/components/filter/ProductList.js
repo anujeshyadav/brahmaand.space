@@ -10,7 +10,7 @@ import "../../components/pagination.css";
 import { FiFilter } from "react-icons/fi";
 import Slider from "./Slider";
 import Pagination from "react-bootstrap/Pagination";
-import { Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
+import { Modal, ModalHeader, ModalBody, ModalFooter, Label } from "reactstrap";
 import "../../styles/ModulePage.css";
 import mdicon1 from "../../assets/icons/mdicon-1.png";
 import mdicon2 from "../../assets/icons/mdicon-2.png";
@@ -37,6 +37,7 @@ import "../../styles/Filter.css";
 import AutoSearch from "./AutoSearch";
 import RangeSlider from "react-bootstrap-range-slider";
 import { FaHeart, FaStar, FaRegHeart, FaSearch } from "react-icons/fa";
+import { MdCancelPresentation } from "react-icons/md";
 import FilterList from "./FilterList";
 import RecentProductList from "./RecentProductList";
 import backimg from "../../assets/images/backimg.png";
@@ -75,9 +76,25 @@ function ProductList(args) {
   const [averageRating, setAverageRating] = useState("");
   const [searchitem, setSearchitem] = useState("");
   const [lngage, setLngage] = useState([]);
-
+  const [relyear, setRelyear] = useState([]);
   const [searchbylanguage, setsearchbylanguage] = useState("");
 
+  const getYear = () => {
+    axios
+      .get(`http://3.7.173.138:9000/user/allYear`)
+      .then((response) => {
+        setRelyear(response.data.data);
+        // console.log(response.data.data);
+      })
+      .catch((error) => {
+        console.log(error.response.data);
+      });
+  };
+  const handleclosemodal = () => {
+    setModal(false);
+    setProductdetail("");
+    setProductdes("");
+  };
   const getolderyeardata = () => {
     axios
       .get(`http://3.7.173.138:9000/user/filterbyyear`)
@@ -333,6 +350,7 @@ function ProductList(args) {
   };
 
   const handleSelection = (_id) => {
+    setProductdetail("");
     console.log(_id);
     var selectedId = _id;
 
@@ -342,13 +360,15 @@ function ProductList(args) {
         .get(`http://3.7.173.138:9000/admin/getone_reslist/${productdes}`)
         .then((res) => {
           console.log(res.data.data._id);
+          console.log(res.data.data);
           if (
             res.data.data._id !== "" ||
             res.data.data._id !== null ||
             res.data.data._id !== undefined
           ) {
-            setProductdetail(res.data.data);
             toggle();
+
+            setProductdetail(res.data.data);
           }
         })
         .catch((err) => {
@@ -378,6 +398,7 @@ function ProductList(args) {
   };
 
   useEffect(() => {
+    getYear();
     getLanguage();
     getUser();
     hadlestatusbookmark();
@@ -411,19 +432,19 @@ function ProductList(args) {
     Params,
     type,
     format,
-    //searchrating,
+    Producdetail,
     myId,
     handlebookmark,
     activelike,
     searchitem,
-
     searchbylanguage,
   ]);
 
   const [typelength, setTypelength] = useState([]);
   const gettypefilter = () => {
     axios
-      .get(`http://3.7.173.138:9000/user/filter_type/${type}`)
+      .get(`http://3.7.173.138:9000/user/filter_type/${Params.id}/${type}`)
+      // .get(`http://3.7.173.138:9000/user/filter_type/${type}`)
       .then((res) => {
         console.log(res.data.data);
         setCategry(res.data.data);
@@ -693,57 +714,125 @@ function ProductList(args) {
                           Others
                         </Row>
                         <Row className=" mb-3 mx-2">
-                          <input
+                          {/* <input
                             id="older"
                             className="ft-check"
                             type="radio"
                             name="source"
                             value="older"
                             onClick={getolderyeardata}
-                            // onClick={() => {
-                            //   setSource("Older");
-                            // }}
-                          />
-                          Not Older Than a Year
+                          /> */}
+                          {/* <Label
+                            className="mt-3"
+                            style={{ font: "GT Walsheim Pro" }}
+                          >
+                            <h4>Content Year</h4>
+                          </Label>
+                          <select
+                            required
+                            // onChange={(e) => setformate(e.target.value)}
+                            className="form-control"
+                          >
+                            <option>Select Year</option>
+                            {relyear?.map((yr) => {
+                              return (
+                                <option value={yr?._id} key={yr?._id}>
+                                  {yr?.yrName}
+                                </option>
+                              );
+                            })}
+                          </select> */}
                         </Row>
-                        {/* <ul>
-                          <li>
-                            <input
-                              id="youtube"
-                              type="checkbox"
-                              className="ft-check"
-                            />
-                            <span>Youtube</span>
-                          </li>
-                          <li>
-                            <input
-                              id="others"
-                              type="checkbox"
-                              className="ft-check"
-                            />
-                            <span>Others</span>
-                          </li>
-
-                          <br></br>
-                          <li>
-                            <input
-                              id="not older than year"
-                              type="checkbox"
-                              className="ft-check"
-                            />
-                            <span>
-                              <b>Not Older Than a Year</b>
-                            </span>
-                          </li>
-                        </ul> */}
+                        <Row>
+                          <Container>
+                            <Label
+                              className="mt-3"
+                              style={{ font: "GT Walsheim Pro" }}
+                            >
+                              <b style={{ fontSize: "19px" }}>Content Year</b>
+                            </Label>
+                            <select
+                              required
+                              // onChange={(e) => setformate(e.target.value)}
+                              className="form-control"
+                            >
+                              <option>Select Year</option>
+                              {relyear?.map((yr) => {
+                                return (
+                                  <option value={yr?._id} key={yr?._id}>
+                                    {yr?.yrName}
+                                  </option>
+                                );
+                              })}
+                            </select>
+                            <Label
+                              className="mt-3"
+                              style={{ font: "GT Walsheim Pro" }}
+                            >
+                              <b style={{ fontSize: "19px" }}>
+                                Content Language
+                              </b>
+                            </Label>
+                            <select
+                              required
+                              // onChange={(e) => setformate(e.target.value)}
+                              className="form-control"
+                            >
+                              <option>Select Language</option>
+                              {lngage?.map((language) => (
+                                <option key={language?._id}>
+                                  {language?.language}
+                                </option>
+                              ))}
+                            </select>
+                          </Container>
+                          {/* <Label
+                            className="mt-3"
+                            style={{ font: "GT Walsheim Pro" }}
+                          >
+                            <b style={{ fontSize: "19px" }}>Content Year</b>
+                          </Label>
+                          <select
+                            required
+                            // onChange={(e) => setformate(e.target.value)}
+                            className="form-control"
+                          >
+                            <option>Select Year</option>
+                            {relyear?.map((yr) => {
+                              return (
+                                <option value={yr?._id} key={yr?._id}>
+                                  {yr?.yrName}
+                                </option>
+                              );
+                            })}
+                          </select>
+                          <Label
+                            className="mt-3"
+                            style={{ font: "GT Walsheim Pro" }}
+                          >
+                            <b style={{ fontSize: "19px" }}>Content Language</b>
+                          </Label>
+                          <select
+                            required
+                            // onChange={(e) => setformate(e.target.value)}
+                            className="form-control"
+                          >
+                            <option>Select Language</option>
+                            {lngage?.map((language) => (
+                              <option key={language?._id}>
+                                {language?.language}
+                              </option>
+                            ))}
+                          </select> */}
+                        </Row>
                       </div>
                     </Col>
 
-                    <Col lg="12" className="py-3">
-                      <div className="ft-type">
-                        <h5 className="mb-1"> Content Language</h5>
+                    {/* <Col lg="12" className="py-3"> */}
+                    {/* <div className="ft-type"> */}
+                    {/* <h5 className="mb-1"> Content Language</h5> */}
 
-                        <div class="ex1">
+                    {/* <div class="ex1">
                           <h6>Choose language</h6>
                           {lngage?.map((val) => (
                             <ul>
@@ -760,9 +849,9 @@ function ProductList(args) {
                               </li>
                             </ul>
                           ))}
-                        </div>
-                      </div>
-                    </Col>
+                        </div> */}
+                    {/* </div> */}
+                    {/* </Col> */}
                     <Col lg="12" className="py-3">
                       <div className="ft-type">
                         <h5>Sort By</h5>
@@ -1332,10 +1421,23 @@ function ProductList(args) {
                                         key={Producdetail?._id}
                                         className="mdlg"
                                         isOpen={modal}
-                                        toggle={toggle}
+                                        // toggle={toggle}
                                         {...args}
                                       >
                                         <ModalBody>
+                                          <Row>
+                                            <Col></Col>
+                                            <Col
+                                              lg="1"
+                                              className="d-flex justify-content-right"
+                                            >
+                                              <MdCancelPresentation
+                                                className="cancelbuttondata"
+                                                onClick={handleclosemodal}
+                                                size={30}
+                                              />
+                                            </Col>
+                                          </Row>
                                           <div className="main-content">
                                             <h2>{Producdetail?.desc}</h2>
                                             <div className="top-icon">

@@ -54,14 +54,18 @@ svg.setmodelfalseicon:hover {
 .userboard {
   color: rgb(0, 0, 0);
 }
-hr {
+/* hr {
   margin: 0rem 0;
   color: inherit;
   background-color: currentColor;
   border: 0;
   opacity: 0.25;
+} */
+.signuphr {
+  margin: 5px 0;
+  color: inherit;
+  background-color: currentColor;
 }
-
 .dropdown-menu {
   position: absolute;
   z-index: 1000;

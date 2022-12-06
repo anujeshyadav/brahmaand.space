@@ -135,10 +135,10 @@ function Login() {
               <Col lg="4" md="6" sm="12" className="head">
                 <h2>Welcome Back!</h2>
                 <FormGroup
-                  className="mb-3 mt-3 login-form-group"
+                  className="mb-1 mt-3 login-form-group"
                   controlId="formBasicLoginEmail"
                 >
-                  <Label className="from-label">Email Id</Label>
+                  <Label className="from-label">Email Id/Username</Label>
                   <Input
                     required="true"
                     for="exampleEmail"

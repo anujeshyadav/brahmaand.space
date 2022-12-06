@@ -11,8 +11,11 @@ import { faChessKing } from "@fortawesome/free-regular-svg-icons";
 import axios from "axios";
 import { Container, Label } from "reactstrap";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import swal from "sweetalert";
+import { signInWithGoogle } from "../Firebase";
 function NewSignup() {
+  const navigate = useNavigate();
   const [validated, setValidated] = useState(false);
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
@@ -40,13 +43,13 @@ function NewSignup() {
           password: password,
         })
         .then((response) => {
-          console.log(response.data.data);
-
+          console.log(response.data);
           swal(
             "Account created Successfully",
             `Your-Email -${response.data.data.email} 
             username- ${response.data.data.username}`
           );
+          navigate("/");
 
           if (
             response.data.data._id !== null &&
@@ -60,11 +63,11 @@ function NewSignup() {
           setPassword("");
         })
         .catch((error) => {
-          // console.log(error.response.data);
+          console.log(error.response.data);
           if (error.response.data.message == "already exists") {
             swal(
-              "This mail is already registered",
-              "Please login or Reset your password"
+              "This mail or username is already rRegistered",
+              "Please Reset your password or try to signup with different username/email"
             );
           }
         });
@@ -72,6 +75,9 @@ function NewSignup() {
     // console.log(username, email, password);
 
     setValidated(true);
+  };
+  const handleSignInWithgoogle = () => {
+    console.log(" clicked by google");
   };
 
   return (
@@ -111,8 +117,13 @@ function NewSignup() {
                 // marginBottom: "2.5rem",
               }}
             >
-              <h4 className="mb-3">Sign Up</h4>
+              <h4 className="mb-1">Sign Up</h4>
             </Label>
+            <hr className="signuphr" />
+            <h6>
+              Create an account to submit content in various categories and win
+              money and help our community to grow
+            </h6>
             <Row className="mt-3 mb-3">
               <Form.Group as={Col} md="" controlId="validationCustomUsername">
                 <Form.Label>Username</Form.Label>
@@ -196,7 +207,10 @@ function NewSignup() {
             <Row className="d-flex justify-content-center mt-3">OR</Row>
             <div className style={{ marginTop: "18px" }}>
               <Row className="signupwithgoogle">
-                <button className="d-flex justify-content-center signupwithgoogle">
+                <button
+                  onClick={signInWithGoogle}
+                  className="d-flex justify-content-center signupwithgoogle"
+                >
                   <img
                     style={{
                       margin: "3px",

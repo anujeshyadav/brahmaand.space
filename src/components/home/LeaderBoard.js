@@ -36,6 +36,7 @@ function LeaderBoard() {
       .get(`http://3.7.173.138:9000/user/user_planet_position`)
       .then((res) => {
         setPlanetposition(res.data.data);
+        // console.log(res.data.data);
       })
       .catch((err) => {
         console.log(err.data.data);

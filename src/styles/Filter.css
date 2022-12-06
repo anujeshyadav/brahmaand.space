@@ -4,6 +4,10 @@
   padding: 25px;
   margin-right: 20px;
 }
+
+.cancelbuttondata:hover {
+  color: orangered;
+}
 .cat-list ul {
   padding: 0px;
   margin: 0px;
