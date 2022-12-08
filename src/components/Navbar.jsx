@@ -292,7 +292,7 @@ function CustomNavbar(args) {
         <img
           src={Logo}
           width="150px"
-          height="80"
+          height="90px"
           className="d-inline-block align-top navbar-brand-img"
           alt="React Bootstrap logo"
           onClick={() => setCurrentLinkHelper("Home")}

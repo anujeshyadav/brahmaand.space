@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
+import { Row } from "reactstrap";
+import "./Selectapp.css";
+import technology from "../images/technology.png";
 
 const SelectApp = () => {
   const [text, setText] = useState();
@@ -19,7 +22,6 @@ const SelectApp = () => {
       <section>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="bg-white  mx-5 mt-20 rounded-lg ">
-            {/* header section */}
             <div className="h-28 flex justify-center items-center shadow">
               <p className="text-4xl font-bold uppercase text-center">
                 Validate Select Input
@@ -104,7 +106,6 @@ const SelectApp = () => {
                   </div>
                 </div>
 
-                {/* btn section */}
                 <div className="flex items-center justify-center mt-12">
                   <input
                     type="submit"
@@ -114,11 +115,29 @@ const SelectApp = () => {
                 </div>
               </div>
             </div>
-
-            {/* body section */}
           </div>
         </form>
       </section>
+      <Row>
+        <div
+          style={{
+            backgroundImage: `url(${technology}) `,
+            backgroundPosition: "center",
+            backgroundSize: "cover",
+            position: "relative",
+            // padding: "200px 46%",
+            backgroundRepeat: "no-repeat",
+            height: "80vh",
+          }}
+          className="hero-image"
+        >
+          <div className="hero-text">
+            <h1>I am John Doe</h1>
+            <p>And I'm a Photographer</p>
+            <button>Hire me</button>
+          </div>
+        </div>
+      </Row>
     </React.Fragment>
   );
 };

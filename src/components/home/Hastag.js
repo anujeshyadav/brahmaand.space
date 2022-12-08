@@ -168,23 +168,25 @@ function Hastag() {
             {categry?.slice(0, 8).map((value) => (
               <Col lg="3" md="6" sm="12" className="" key={value?._id}>
                 <Link to={`/subcategory/${value?._id}`}>
-                  <div className="blackimage">
-                    <img className="imgCol" src={value?.cat_img} alt="img" />
-                  </div>
-                  <div className=" d-flex content-bt">
-                    <p
-                      className="d-flex contenttextcategory"
-                      style={{ color: "white" }}
-                    >
-                      {value?.title}
-                    </p>
-                  </div>
-                  <div className=" d-flex content-bt">
-                    <Row className="  mt-2">
-                      <Button className="btlisting">
-                        {value?.subCount} - Listing
-                      </Button>
-                    </Row>
+                  <div className="bg-1">
+                    <div className="blackimage">
+                      <img className="imgCol" src={value?.cat_img} alt="img" />
+                    </div>
+                    <div className=" d-flex content-bt">
+                      <p
+                        className="d-flex contenttextcategory"
+                        style={{ color: "white" }}
+                      >
+                        {value?.title}
+                      </p>
+                    </div>
+                    <div className=" d-flex content-bt">
+                      <Row className="  mt-2">
+                        <Button className="btlisting">
+                          {value?.subCount} - Listing
+                        </Button>
+                      </Row>
+                    </div>
                   </div>
                 </Link>
               </Col>

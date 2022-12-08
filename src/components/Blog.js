@@ -78,18 +78,23 @@ function Blog() {
         className="blogimageblack"
         style={{ position: "relative" }}
       >
-        <div
-          style={{
-            backgroundImage: `url(${blog})`,
-            backgroundPosition: "center",
-            backgroundSize: "cover",
-            padding: "200px 46%",
-            backgroundRepeat: "no-repeat",
-            height: "80vh",
-            opacity: 0.8,
-          }}
-        >
-          <h1 style={{ color: "#fff" }}>Blogs</h1>
+        <div className="bg-1">
+          <div
+            style={{
+              backgroundImage: `url(${blog})`,
+              backgroundPosition: "center",
+              backgroundSize: "cover",
+              padding: "200px 46%",
+              borderRadius: "18px",
+              backgroundRepeat: "no-repeat",
+              height: "80vh",
+              opacity: 0.7,
+            }}
+          >
+            <h1 style={{ color: "#ffff", marginTop: "70px" }}>
+              <b>Blogs</b>
+            </h1>
+          </div>
         </div>
       </Container>
 

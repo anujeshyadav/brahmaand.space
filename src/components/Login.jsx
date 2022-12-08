@@ -122,7 +122,10 @@ function Login() {
                     className="d-flex justify-content-center"
                     style={{ paddingTop: "150px" }}
                   >
-                    <img src={Logo1} style={{ height: "33vh", width: "27%" }} />
+                    <img
+                      src={Logo1}
+                      style={{ height: "165px", width: "170px" }}
+                    />
                   </div>
                   <h3
                     className="d-flex justify-content-center"

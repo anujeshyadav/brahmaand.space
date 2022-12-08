@@ -78,7 +78,11 @@ function ProductList(args) {
   const [lngage, setLngage] = useState([]);
   const [relyear, setRelyear] = useState([]);
   const [searchbylanguage, setsearchbylanguage] = useState("");
+  const [contentyear, setContentyear] = useState("");
+  const [language, setLanguage] = useState("");
 
+  console.log(contentyear);
+  console.log(language);
   const getYear = () => {
     axios
       .get(`http://3.7.173.138:9000/user/allYear`)
@@ -299,7 +303,9 @@ function ProductList(args) {
   const clearfilter = () => {
     setType("");
     setFormat("");
-
+    setSearchrating("");
+    setLanguage("");
+    setContentyear("");
     setSearchitem("");
     allsearchproduct();
   };
@@ -753,7 +759,7 @@ function ProductList(args) {
                             </Label>
                             <select
                               required
-                              // onChange={(e) => setformate(e.target.value)}
+                              onChange={(e) => setContentyear(e.target.value)}
                               className="form-control"
                             >
                               <option>Select Year</option>
@@ -775,12 +781,15 @@ function ProductList(args) {
                             </Label>
                             <select
                               required
-                              // onChange={(e) => setformate(e.target.value)}
+                              onChange={(e) => setLanguage(e.target.value)}
                               className="form-control"
                             >
                               <option>Select Language</option>
                               {lngage?.map((language) => (
-                                <option key={language?._id}>
+                                <option
+                                  key={language?._id}
+                                  value={language?._id}
+                                >
                                   {language?.language}
                                 </option>
                               ))}

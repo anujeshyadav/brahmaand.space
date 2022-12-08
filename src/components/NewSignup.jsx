@@ -90,15 +90,15 @@ function NewSignup() {
               backgroundPosition: "left",
               backgroundSize: "cover",
               backgroundRepeat: "no-repeat",
-              height: "82vh",
+              height: "87vh",
               width: "100%",
             }}
           >
             <div
               className="d-flex justify-content-center"
-              style={{ paddingTop: "150px" }}
+              style={{ paddingTop: "175px" }}
             >
-              <img src={Logo1} style={{ height: "35vh", width: "28%" }} />
+              <img src={Logo1} style={{ height: "160px", width: "160px" }} />
             </div>
             <h3
               className="d-flex justify-content-center"
