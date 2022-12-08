@@ -66,8 +66,8 @@ function NewSignup() {
           console.log(error.response.data);
           if (error.response.data.message == "already exists") {
             swal(
-              "Mail or Username is already Registered",
-              "Please Reset your password or try to signup with different Username/Email"
+              "    Mail or Username is already Registered",
+              "    Reset your password or try to signup with different Username/Email"
             );
           }
         });
@@ -152,7 +152,7 @@ function NewSignup() {
                     required
                   />
                   <Form.Control.Feedback type="invalid">
-                    Please choose a email.
+                    Please choose a Email.
                   </Form.Control.Feedback>
                 </InputGroup>
               </Form.Group>
