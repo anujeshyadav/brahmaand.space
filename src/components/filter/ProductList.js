@@ -329,7 +329,7 @@ function ProductList(args) {
       //   rating !== ""
       // ) {
       const selectedId = Producdetail._id;
-      console.log(selectedId, myId, text, rating);
+      // console.log(selectedId, myId, text, rating);
 
       axios
         .post(`http://3.7.173.138:9000/user/add_Comment`, {
