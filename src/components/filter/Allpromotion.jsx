@@ -9,6 +9,8 @@ import typeicon from "../../assets/icons/typeicon.png";
 import languageicon from "../../assets/icons/languageicon.png";
 import { FaHeart, FaStar, FaRegHeart } from "react-icons/fa";
 import Moment from "react-moment";
+import axiosConfig from "../../components/axiosConfig.js";
+import { MdCancelPresentation } from "react-icons/md";
 import PrettyRating from "pretty-rating-react";
 import yearicon from "../../assets/icons/yearicon.png";
 import formaticon from "../../assets/icons/formaticon.png";
@@ -18,23 +20,94 @@ import submiticon from "../../assets/icons/submiticon.png";
 import { faStar as farStar } from "@fortawesome/free-regular-svg-icons";
 import reviewstar from "../../assets/icons/reviewstra.png";
 import StarsRating from "stars-rating";
+import { useNavigate } from "react-router-dom";
 import { faStar, faStarHalfAlt } from "@fortawesome/free-solid-svg-icons";
 import swal from "sweetalert";
 import ratingstar from "../../assets/icons/ratingstar.png";
 import createricon from "../../assets/icons/createricon.png";
 import "../../styles/ModulePage.css";
+import ProgressBar from "@ramonak/react-progress-bar";
 
 function Allpromotion(args) {
   const [promotion, setPromotion] = useState([]);
+  const [activelike, setActivelike] = useState("");
   const [promotId, setPromotId] = useState("");
   const toggleone = () => setModalone(!modalone);
+  const navigate = useNavigate();
+  const [averageRating, setAverageRating] = useState("");
+  const [productdes, setProductdes] = useState("");
   const [modalone, setModalone] = useState(false);
   const [promotiondata, setPromotiondata] = useState({});
   const [getonecomment, setGetonecomment] = useState([]);
   const [Producdetail, setProductdetail] = useState([]);
   const [text, settText] = useState("");
   const [rating, setRating] = useState("");
+  const [myId, setmyId] = useState("");
+  const [handlebookmark, setHandlebookmark] = useState("");
+  const [liked, setliked] = useState("");
 
+  const removebookmark = (id) => {
+    setliked(id);
+    if (myId !== "" && myId !== null) {
+      axiosConfig
+        .post(`/user/add_like`, {
+          submitresrcId: liked,
+          userid: myId,
+          status: "false",
+        })
+        .then((response) => {
+          console.log(response.data.data.status);
+          setActivelike(response.data.data.status);
+          swal("you Removed your bookmark ");
+          hadlestatusbookmark();
+        })
+        .catch((error) => {
+          // console.log(error.response.data);
+        });
+    } else {
+      swal("User Need to Login first ");
+      navigate("/login");
+    }
+  };
+
+  const addbookmark = (id) => {
+    // console.log(id);
+    setliked(id);
+
+    if (myId !== "" && myId !== null) {
+      axiosConfig
+        .post(`/user/add_like`, {
+          submitresrcId: liked,
+          userid: myId,
+          status: "true",
+        })
+        .then((response) => {
+          console.log(response.data.data.status);
+          setActivelike(response.data.data.status);
+          swal("you bookmarked it");
+          hadlestatusbookmark();
+
+          // console.log("likeindividual", response.data.data);
+        })
+        .catch((error) => {
+          console.log(error.response.data.message);
+          if (error.response.data.message == "already exists") {
+            swal(" Your already bookmarked It");
+          }
+        });
+    } else {
+      swal("login first");
+      navigate("/login");
+    }
+  };
+  const getUser = async () => {
+    const user = await localStorage.getItem("userId");
+    if (user !== null && user !== "") {
+      setmyId(user);
+    } else {
+      // console.log("no UserId Found");
+    }
+  };
   const handlepromotion = (_id) => {
     var promotionId = _id;
     if (promotionId === _id) {
@@ -57,6 +130,53 @@ function Allpromotion(args) {
           // console.log(err.data.data);
         });
     }
+    axios
+      .get(`http://3.7.173.138:9000/user/average_rating/${productdes}`)
+      .then((res) => {
+        // console.log(res.data);
+        setAverageRating(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    const selectedId = Producdetail._id;
+    console.log(selectedId, myId, text, rating);
+
+    axios
+      .get(`http://3.7.173.138:9000/user/comment_list/${selectedId}`)
+      .then((res) => {
+        setGetonecomment(res.data.data);
+        console.log(res.data.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const hadlestatusbookmark = () => {
+    if (
+      myId !== null &&
+      myId !== undefined &&
+      myId !== "" &&
+      liked !== "" &&
+      liked !== null &&
+      liked !== undefined
+    ) {
+      axios
+        .get(`http://3.7.173.138:9000/user/getone_mylikes/${myId}/${liked}`)
+        .then((res) => {
+          console.log(res.data.data);
+          setHandlebookmark(res.data.data.status);
+        })
+        .catch((err) => {
+          console.log(err.response.data);
+        });
+    }
+  };
+  const handleclosepromotion = () => {
+    setModalone(false);
+    setPromotId("");
+    setPromotiondata("");
   };
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -107,8 +227,9 @@ function Allpromotion(args) {
   };
 
   useEffect(() => {
+    getUser();
     promotionadmin();
-  }, []);
+  }, [handlebookmark]);
   const promotionadmin = () => {
     axios
       .get(`http://3.7.173.138:9000/user/Promotions`)
@@ -151,10 +272,23 @@ function Allpromotion(args) {
                         key={promotiondata?._id}
                         className="mdlg"
                         isOpen={modalone}
-                        toggle={toggleone}
+                        toggle={handleclosepromotion}
                         {...args}
                       >
                         <ModalBody key={promotiondata?._id}>
+                          <Row>
+                            <Col></Col>
+                            <Col
+                              lg="1"
+                              className="d-flex justify-content-right"
+                            >
+                              <MdCancelPresentation
+                                className="cancelbuttondata"
+                                onClick={handleclosepromotion}
+                                size={30}
+                              />
+                            </Col>
+                          </Row>
                           <div className="main-content">
                             <h2>{promotiondata?.desc}</h2>
                             <div className="top-icon">
@@ -345,7 +479,111 @@ function Allpromotion(args) {
                                     <small className="mt-3">
                                       {getonecomment?.length}- customers reviews
                                     </small>
-                                    <img src={ratingstar} alt="" width="100%" />
+                                    <Row>
+                                      <Col
+                                        className="d-flex justify-content-left mt-1"
+                                        style={{ color: "blue" }}
+                                        lg="4"
+                                      >
+                                        5 Stars
+                                      </Col>
+                                      <Col className="mt-1 mb-1 " lg="8">
+                                        {" "}
+                                        <ProgressBar
+                                          bgColor=" #fdb800"
+                                          height="13px"
+                                          borderRadius="12px"
+                                          className="progressbar"
+                                          barContainerClassName="containerone"
+                                          labelClassName="label"
+                                          completed={60}
+                                        />
+                                      </Col>
+                                    </Row>
+                                    <Row>
+                                      <Col
+                                        className="d-flex justify-content-left mt-1 "
+                                        style={{ color: "blue" }}
+                                        lg="4"
+                                      >
+                                        4 Stars
+                                      </Col>
+                                      <Col className="mt-1 mb-1" lg="8">
+                                        {" "}
+                                        <ProgressBar
+                                          bgColor=" #fdb800"
+                                          height="13px"
+                                          borderRadius="12px"
+                                          className="progressbar"
+                                          barContainerClassName="containerone"
+                                          labelClassName="label"
+                                          completed={40}
+                                        />
+                                      </Col>
+                                    </Row>
+                                    <Row>
+                                      <Col
+                                        className="d-flex justify-content-left mt-1 "
+                                        style={{ color: "blue" }}
+                                        lg="4"
+                                      >
+                                        3 Stars
+                                      </Col>
+                                      <Col className="mt-1 mb-1" lg="8">
+                                        {" "}
+                                        <ProgressBar
+                                          bgColor=" #fdb800"
+                                          height="13px"
+                                          borderRadius="12px"
+                                          className="progressbar"
+                                          barContainerClassName="containerone"
+                                          labelClassName="label"
+                                          completed={50}
+                                        />
+                                      </Col>
+                                    </Row>
+                                    <Row>
+                                      <Col
+                                        className="d-flex justify-content-left mt-1 "
+                                        style={{ color: "blue" }}
+                                        lg="4"
+                                      >
+                                        2 Stars
+                                      </Col>
+                                      <Col className="mt-1 mb-1" lg="8">
+                                        {" "}
+                                        <ProgressBar
+                                          bgColor=" #fdb800"
+                                          height="13px"
+                                          borderRadius="12px"
+                                          className="progressbar"
+                                          barContainerClassName="containerone"
+                                          labelClassName="label"
+                                          completed={70}
+                                        />
+                                      </Col>
+                                    </Row>
+                                    <Row>
+                                      <Col
+                                        className="d-flex justify-content-left mt-1 "
+                                        style={{ color: "blue" }}
+                                        lg="4"
+                                      >
+                                        1 Stars
+                                      </Col>
+                                      <Col className="mt-1 mb-1" lg="8">
+                                        <ProgressBar
+                                          bgColor=" #fdb800"
+                                          height="13px"
+                                          borderRadius="12px"
+                                          className="progressbar"
+                                          barContainerClassName="containerone"
+                                          labelClassName="label"
+                                          completed={40}
+                                        />
+                                      </Col>
+                                    </Row>
+                                    {/* <img src={ratingstar} alt="" width="100%" /> */}
                                   </div>
                                 </div>
                               </Col>
@@ -370,7 +608,7 @@ function Allpromotion(args) {
                                       ></textarea>
                                       <Button
                                         onClick={handleSubmit}
-                                        className="bt-st"
+                                        className="bt-st reviewbutton mb-3 btn btn-primary"
                                       >
                                         Send
                                       </Button>
@@ -380,6 +618,30 @@ function Allpromotion(args) {
                               </Col>
                             </Row>
                           </div>
+                          <Row key={promotion?._id}>
+                            <Col lg="4"></Col>
+                            <Col lg="8" key={promotion?._id}>
+                              {handlebookmark === "true" ? (
+                                <button
+                                  key={promotion?._id}
+                                  className="addbookmark  btn btn-secondary"
+                                  color="success"
+                                  onClick={() => removebookmark(promotion?._id)}
+                                >
+                                  Remove Bookmark
+                                </button>
+                              ) : (
+                                <button
+                                  key={promotion?._id}
+                                  onClick={() => addbookmark(promotion?._id)}
+                                  className="addbookmark  btn btn-secondary"
+                                  color="warning "
+                                >
+                                  Add Bookmark
+                                </button>
+                              )}
+                            </Col>
+                          </Row>
                           <hr></hr>
                           <div className="review-list">
                             <h4>Reviews:</h4>
@@ -418,9 +680,6 @@ function Allpromotion(args) {
                         </ModalBody>
                       </Modal>
                     </Link>
-                    <span class="product-discount-label">
-                      <FaHeart />
-                    </span>
                   </div>
 
                   <div class="product-content">
