@@ -7,7 +7,7 @@ import InputGroup from "react-bootstrap/InputGroup";
 import Row from "react-bootstrap/Row";
 import Logo1 from "../images/Logo1.png";
 import logo from "../images/logo.png";
-import { faChessKing } from "@fortawesome/free-regular-svg-icons";
+
 import axios from "axios";
 import { Container, Label } from "reactstrap";
 import { Link } from "react-router-dom";
@@ -23,12 +23,11 @@ function NewSignup() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    // debugger;
+
     const form = event.currentTarget;
     if (form.checkValidity() === false) {
       event.preventDefault();
       event.stopPropagation();
-      // swal("Fill details");
     } else if (
       username.length > 2 &&
       email !== "" &&
@@ -110,7 +109,6 @@ function NewSignup() {
               style={{
                 height: "25px",
                 width: "200px",
-                // marginBottom: "2.5rem",
               }}
             >
               <h4 className="mb-1">Sign Up</h4>
@@ -178,17 +176,8 @@ function NewSignup() {
               </Form.Group>
             </Row>
 
-            {/* <Form.Group className="mb-3">
-              <Form.Check
-                required
-                label="Agree to terms and conditions"
-                feedback="You must agree before submitting."
-                feedbackType="invalid"
-              />
-            </Form.Group> */}
             <div>
               <button
-                // disabled={!performValidation()}
                 style={{ padding: "13px 136px", borderRadius: "11px" }}
                 type="submit"
                 class="btn btn-primary"
@@ -214,16 +203,12 @@ function NewSignup() {
                     }}
                     src={google}
                   />
-                  <Link
-                    // style={{ color: "black" }}
-                    className=" signinwithgooglesignup"
-                  >
+                  <Link className=" signinwithgooglesignup">
                     Sign in with Google
                   </Link>
                 </button>
               </Row>
             </div>
-            {/* <Button type="submit">Submit form</Button> */}
           </Form>
         </Col>
       </Row>
@@ -231,5 +216,3 @@ function NewSignup() {
   );
 }
 export default NewSignup;
-
-// render(<FormExample />);
