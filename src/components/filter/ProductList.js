@@ -97,7 +97,7 @@ function ProductList(args) {
   };
   const getolderyeardata = () => {
     axios
-      .get(`http://3.7.173.138:9000/user/filterbyyear`)
+      .get(`http://3.7.173.138:9000/user/filterbyyear/${Params.id}/$year`)
       .then((res) => {
         setCategry(res.data.data);
       })
@@ -113,7 +113,7 @@ function ProductList(args) {
       console.log(e.target.value);
       axios
         .get(
-          `http://3.7.173.138:9000/user/filterbyLanguage/${searchbylanguage}`
+          `http://3.7.173.138:9000/user/filterbyLanguage/${Params.id}/${searchbylanguage}`
         )
         .then((res) => {
           setCategry(res.data.data);
@@ -458,7 +458,7 @@ function ProductList(args) {
   const [formatelength, setFormatelength] = useState([]);
   const getformatfilter = () => {
     axios
-      .get(`http://3.7.173.138:9000/user/filterbyFormat/${format}`)
+      .get(`http://3.7.173.138:9000/user/filterbyFormat/${Params.id}/${format}`)
       .then((res) => {
         console.log(res.data.data);
         setCategry(res.data.data);

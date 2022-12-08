@@ -32,7 +32,10 @@ function Allcategory() {
           <Row className="m-3 ">
             {categry?.map((value) => (
               <Col lg="3" md="6" sm="12" className="" key={value?._id}>
-                <Link to={`/subcategory/${value?._id}`}>
+                <Link
+                  className="imageblackoverlay"
+                  to={`/subcategory/${value?._id}`}
+                >
                   <div className="blackimage">
                     <img
                       className="imgCol allcategoryback"

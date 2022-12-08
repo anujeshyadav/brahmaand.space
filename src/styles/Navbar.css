@@ -8,6 +8,9 @@
 svg.setmodelfalseicon:hover {
   color: rgb(221, 119, 11);
 }
+b.mt-4 {
+  color: none;
+}
 .searchWrapper {
   border: 1px solid #ccc;
   border-radius: 7px;

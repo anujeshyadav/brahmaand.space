@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 
 const SelectApp = () => {
+  const [text, setText] = useState();
   // handle events
   const {
     register,
@@ -9,7 +10,7 @@ const SelectApp = () => {
     watch,
     formState: { errors },
   } = useForm();
-
+  console.log(text);
   // handle submit events
   const onSubmit = (data) => alert(JSON.stringify(data));
 
@@ -17,7 +18,7 @@ const SelectApp = () => {
     <React.Fragment>
       <section>
         <form onSubmit={handleSubmit(onSubmit)}>
-          <div className="bg-white w-auto h-96 mx-5 mt-20 rounded-lg sm:w-full md:w-4/5 md:mx-auto lg:w-2/5 lg:mx-auto">
+          <div className="bg-white  mx-5 mt-20 rounded-lg ">
             {/* header section */}
             <div className="h-28 flex justify-center items-center shadow">
               <p className="text-4xl font-bold uppercase text-center">
@@ -40,14 +41,39 @@ const SelectApp = () => {
                       <option value="fem">Fem</option>
                       <option value="ot">ot</option>
                     </select>
+                    <div>
+                      {errors.Category && (
+                        <span
+                          style={{ color: "red" }}
+                          className="text-sm text-red-500"
+                        >
+                          {errors.Category.message}
+                        </span>
+                      )}
+                    </div>
+                    <h2>text</h2>
+                    <input
+                      value={text}
+                      onChange={(e) => {
+                        setText(e.target.value);
+                      }}
+                      type="text"
+                      className={`w-96 rounded-lg text-3xl ${
+                        errors.Category &&
+                        "focus:border-red-500 focus:ring-red-500 border-red-500"
+                      }`}
+                      {...watch("Text", {
+                        required: "Text is required",
+                      })}
+                    />
                   </div>
                   <div>
-                    {errors.Category && (
+                    {errors.Text && (
                       <span
                         style={{ color: "red" }}
                         className="text-sm text-red-500"
                       >
-                        {errors.Category.message}
+                        {errors.Text.message}
                       </span>
                     )}
                   </div>

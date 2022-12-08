@@ -2,6 +2,7 @@ import { Button, Modal, ModalBody, Label, FormGroup, Input } from "reactstrap";
 import Dropdown from "react-dropdown";
 import "react-dropdown/style.css";
 import Multiselect from "multiselect-react-dropdown";
+import business from "../images/business.png";
 // import ReactMultiSelectCheckboxes from "react-multiselect-checkboxes";Im
 import { ImCancelCircle } from "react-icons/im";
 import React from "react";
@@ -35,18 +36,18 @@ import UserPage from "./UserPage";
 function CustomNavbar(args) {
   const [validated, setValidated] = useState(false);
   const [link, setLink] = useState("");
-  const [catgry, setCatgry] = useState({});
-  const [subcatry, setSubcatry] = useState({});
-  const [type, setType] = useState({});
-  const [formate, setformate] = useState({});
+  const [catgry, setCatgry] = useState("");
+  const [subcatry, setSubcatry] = useState("");
+  const [type, setType] = useState("");
+  const [formate, setformate] = useState("");
   const [topic, setTopic] = useState([]);
-  const [Desc, setDesc] = useState({});
+  const [Desc, setDesc] = useState("");
   const [Optitle, setOptitle] = useState("");
   const [first, setfirst] = useState({});
   const [lngage, setLngage] = useState([]);
   const [sellang, setSellang] = useState();
   const [relyear, setRelyear] = useState([]);
-  const [selectedyear, setSelectedyear] = useState("");
+  const [selectedyear, setSelectedyear] = useState();
   const [tview, setTview] = useState({});
   const [cat_img, setCat_img] = useState({});
   const [Opcname, setOpcname] = useState("");
@@ -91,75 +92,74 @@ function CustomNavbar(args) {
   //   );
   //   return regex.test(link);
   // }
+
   const handleSubmitResource = (e) => {
     e.preventDefault();
-    console.log(link);
-    // if (catgry == "") {
-    //   swal("Please Select Category");
-    // }
-
-    // if (!urlPatternValidation(e.target.value)) {
-    //   setError("Please enter correct URL to Submit Content");
-    // } else {
-    //   setError(null);
-    // }
-    if (link == "") {
-      setError("Enter URL");
-    } else if (link.length > 2) {
-      setError(null);
-    }
-
     const userid = localStorage.getItem("userId");
-
-    axios
-      .post(`http://3.7.173.138:9000/user/App_Sub_resrc`, {
-        link: link,
-        category: catgry,
-        sub_category: subcatry,
-        type: type,
-        format: formate,
-        language: sellang,
-        topics: topic,
-        desc: Desc,
-        resTitle: Optitle,
-        creatorName: Opcname,
-        relYear: selectedyear,
-        res_desc: Opdes,
-        comment: Opcomm,
-        img: conimg,
-        userid: userid,
-      })
-      .then((res) => {
-        console.log(res.data.data);
-        if (res.data.message === "success") {
-          swal("Resource Submitted Successfully👍");
-          setLink("");
-          setCatgry("");
-          setSubcatry("");
-          setType("");
-          setformate("");
-          setSellang("");
-          setTopic("");
-          setDesc("");
-          setOptitle("");
-          setOpcname("");
-          setSelectedyear("");
-          setOpdes("");
-          setOpcomm("");
-          setCat_img(null);
-          setModal(false);
-        } else {
-          swal("Something went wrong, Try again");
-        }
-      })
-      .catch((error) => {
-        // debugger;
-        console.log(error.response.data);
-        if (error.response.data.message === "error") {
-          swal(" Try again and Fill all details ");
-        } else {
-        }
-      });
+    if (
+      link != "" &&
+      catgry !== "" &&
+      subcatry !== "" &&
+      type !== "" &&
+      formate !== "" &&
+      sellang !== "" &&
+      topic != "" &&
+      Desc != ""
+    ) {
+      // if (cat_img == "" && cat_img == null && cat_img == undefined) {
+      //   setCat_img(business);
+      // }
+      axios
+        .post(`http://3.7.173.138:9000/user/App_Sub_resrc`, {
+          link: link,
+          category: catgry,
+          sub_category: subcatry,
+          type: type,
+          format: formate,
+          language: sellang,
+          topics: topic,
+          desc: Desc,
+          resTitle: Optitle,
+          creatorName: Opcname,
+          relYear: selectedyear,
+          res_desc: Opdes,
+          comment: Opcomm,
+          img: conimg,
+          userid: userid,
+        })
+        .then((res) => {
+          console.log(res.data.data);
+          if (res.data.message === "success") {
+            swal("Resource Submitted Successfully👍");
+            setLink("");
+            setCatgry("");
+            setSubcatry("");
+            setType("");
+            setformate("");
+            setSellang("");
+            setTopic("");
+            setDesc("");
+            setOptitle("");
+            setOpcname("");
+            setSelectedyear("");
+            setOpdes("");
+            setOpcomm("");
+            setCat_img(null);
+            setModal(false);
+          } else {
+            swal("Something went wrong, Try again");
+          }
+        })
+        .catch((error) => {
+          console.log(error.response.data);
+          if (error.response.data.message === "error") {
+            swal(" * Fields are Mandatory Please fill details ");
+          } else {
+          }
+        });
+    } else {
+      swal(" * Fields are mandatory Please fill details");
+    }
   };
 
   // all category
@@ -367,20 +367,24 @@ function CustomNavbar(args) {
                       <Form
                         noValidate
                         validated={validated}
-                        onSubmit={handleSubmit}
+                        // onSubmit={handleSubmit}
                       >
                         <div className="">
                           <Row>
                             <Label>
-                              <b>
-                                Link <span style={{ color: "red" }}>*</span>
-                              </b>
+                              {link != "" ? (
+                                <b>Link</b>
+                              ) : (
+                                <b style={{ color: "red" }}>
+                                  Link <span style={{ color: "Red" }}>*</span>
+                                </b>
+                              )}
                             </Label>
                             <h5>
                               <input
                                 type="url"
                                 value={link}
-                                className="form-control"
+                                className="form-control "
                                 placeholder="https://www. "
                                 onChange={(e) => setLink(e.target.value)}
                               />
@@ -394,10 +398,23 @@ function CustomNavbar(args) {
                           <Row>
                             <Col>
                               <Label style={{ font: "GT Walsheim Pro" }}>
-                                <b className="mt-4">
-                                  Category{" "}
+                                {catgry !== "" ? (
+                                  <b
+                                    style={{ color: "black" }}
+                                    className="mt-4"
+                                  >
+                                    Category
+                                  </b>
+                                ) : (
+                                  <b style={{ color: "red" }} className="mt-4">
+                                    Category
+                                    <span style={{ color: "red" }}>*</span>
+                                  </b>
+                                )}
+                                {/* <b className="mt-4">
+                                  Category
                                   <span style={{ color: "red" }}>*</span>
-                                </b>
+                                </b> */}
                               </Label>
                               <Input
                                 required
@@ -422,10 +439,19 @@ function CustomNavbar(args) {
 
                             <Col>
                               <Label style={{ font: "GT Walsheim Pro" }}>
-                                <b>
-                                  Sub Category
-                                  <span style={{ color: "red" }}>*</span>
-                                </b>
+                                {subcatry !== "" ? (
+                                  <b
+                                    style={{ color: "black" }}
+                                    className="mt-4"
+                                  >
+                                    Sub-Category
+                                  </b>
+                                ) : (
+                                  <b style={{ color: "red" }} className="mt-4">
+                                    Sub-Category
+                                    <span style={{ color: "red" }}>*</span>
+                                  </b>
+                                )}
                               </Label>
 
                               <select
@@ -456,16 +482,30 @@ function CustomNavbar(args) {
                                 className="mt-3"
                                 style={{ font: "GT Walsheim Pro" }}
                               >
-                                <b>
+                                {type !== "" ? (
+                                  <b
+                                    style={{ color: "black" }}
+                                    className="mt-4"
+                                  >
+                                    Type
+                                  </b>
+                                ) : (
+                                  <b style={{ color: "red" }} className="mt-4">
+                                    Type
+                                    <span style={{ color: "red" }}>*</span>
+                                  </b>
+                                )}
+
+                                {/* <b>
                                   Type <span style={{ color: "red" }}>*</span>
-                                </b>
+                                </b> */}
                               </Label>
                               <select
                                 required
                                 onChange={(e) => setType(e.target.value)}
                                 className="form-control"
                               >
-                                <option>Select type</option>
+                                <option>Select Type</option>
                                 <option>Free</option>
                                 <option>Paid</option>
                               </select>
@@ -476,9 +516,22 @@ function CustomNavbar(args) {
                                 className="mt-3"
                                 style={{ font: "GT Walsheim Pro" }}
                               >
-                                <b>
+                                {formate !== "" ? (
+                                  <b
+                                    style={{ color: "black" }}
+                                    className="mt-4"
+                                  >
+                                    Format
+                                  </b>
+                                ) : (
+                                  <b style={{ color: "red" }} className="mt-4">
+                                    Format
+                                    <span style={{ color: "red" }}>*</span>
+                                  </b>
+                                )}
+                                {/* <b>
                                   Format <span style={{ color: "red" }}>*</span>
-                                </b>
+                                </b> */}
                               </Label>
                               <select
                                 required
@@ -500,10 +553,20 @@ function CustomNavbar(args) {
                               className="mt-3"
                               style={{ font: "GT Walsheim Pro" }}
                             >
-                              <b>
+                              {sellang !== "" &&
+                              sellang !== null &&
+                              sellang !== undefined ? (
+                                <b>Language of Content</b>
+                              ) : (
+                                <b style={{ color: "red" }}>
+                                  Language of Content
+                                  <span style={{ color: "red" }}>*</span>
+                                </b>
+                              )}
+                              {/* <b>
                                 Language of Content
                                 <span style={{ color: "red" }}>*</span>
-                              </b>
+                              </b> */}
                             </Label>
                             <Multiselect
                               style={{ borderRadius: "14px" }}
@@ -543,9 +606,13 @@ function CustomNavbar(args) {
                               className="mt-3"
                               style={{ font: "GT Walsheim Pro" }}
                             >
-                              <b>
-                                Topic <span style={{ color: "red" }}>*</span>
-                              </b>
+                              {topic != "" ? (
+                                <b>Topic </b>
+                              ) : (
+                                <b style={{ color: "red" }}>
+                                  Topic <span style={{ color: "red" }}>*</span>
+                                </b>
+                              )}
                             </Label>
                             {/* <Row className="mt-3 mb-3 textarea">
                               <Form.Group controlId="validationCustomtopics">
@@ -581,7 +648,7 @@ function CustomNavbar(args) {
                                 type="text"
                                 // style={{ background: "#F1F1F1" }}
                                 className="form-control"
-                                placeholder="like- #javaScript, #react, #native"
+                                placeholder="like- javaScript, react, native"
                                 onChange={(e) => setTopic(e.target.value)}
                               />
                             </h5>
@@ -600,10 +667,23 @@ function CustomNavbar(args) {
                               className="mt-4"
                               style={{ font: "GT Walsheim Pro" }}
                             >
-                              <b>
+                              {Desc != "" &&
+                              Desc != null &&
+                              Desc != undefined ? (
+                                <b>
+                                  Descriptions
+                                  <span>*</span>
+                                </b>
+                              ) : (
+                                <b style={{ color: "red" }}>
+                                  Descriptions
+                                  <span style={{ color: "red" }}>*</span>
+                                </b>
+                              )}
+                              {/* <b>
                                 Descriptions
                                 <span style={{ color: "red" }}>*</span>
-                              </b>
+                              </b> */}
                             </Label>
                             <h5>
                               <textarea
@@ -717,7 +797,6 @@ function CustomNavbar(args) {
                                           >
                                             <b>Release year/last Updated</b>
                                           </Label>
-
                                           <Input
                                             type="select"
                                             className="form-control"
@@ -738,7 +817,6 @@ function CustomNavbar(args) {
                                               );
                                             })}
                                           </Input>
-
                                           <p className=" mb-3">
                                             What year was this resource released
                                             or last updated?
