@@ -205,7 +205,7 @@ function Hastag() {
         </Link>
       </Container>
       <Container>
-        <h2 className="category2 mt-4 mb-3">Featured content</h2>
+        <h2 className="category2 mt-4 mb-4">Featured</h2>
         <Swiper
           breakpoints={{
             // when window width is >= 640px

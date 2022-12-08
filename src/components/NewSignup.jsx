@@ -66,18 +66,14 @@ function NewSignup() {
           console.log(error.response.data);
           if (error.response.data.message == "already exists") {
             swal(
-              "This mail or username is already rRegistered",
-              "Please Reset your password or try to signup with different username/email"
+              "Mail or Username is already Registered",
+              "Please Reset your password or try to signup with different Username/Email"
             );
           }
         });
     }
-    // console.log(username, email, password);
 
     setValidated(true);
-  };
-  const handleSignInWithgoogle = () => {
-    console.log(" clicked by google");
   };
 
   return (
