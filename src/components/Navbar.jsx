@@ -373,11 +373,11 @@ function CustomNavbar(args) {
                           <Row>
                             <Label>
                               {link != "" ? (
-                                <b>Link</b>
+                                <p>Link</p>
                               ) : (
-                                <b style={{ color: "red" }}>
+                                <p style={{ color: "red" }}>
                                   Link <span style={{ color: "Red" }}>*</span>
-                                </b>
+                                </p>
                               )}
                             </Label>
                             <h5>
@@ -399,17 +399,17 @@ function CustomNavbar(args) {
                             <Col>
                               <Label style={{ font: "GT Walsheim Pro" }}>
                                 {catgry !== "" ? (
-                                  <b
+                                  <p
                                     style={{ color: "black" }}
                                     className="mt-4"
                                   >
                                     Category
-                                  </b>
+                                  </p>
                                 ) : (
-                                  <b style={{ color: "red" }} className="mt-4">
+                                  <p style={{ color: "red" }} className="mt-4">
                                     Category
                                     <span style={{ color: "red" }}>*</span>
-                                  </b>
+                                  </p>
                                 )}
                                 {/* <b className="mt-4">
                                   Category
@@ -440,17 +440,17 @@ function CustomNavbar(args) {
                             <Col>
                               <Label style={{ font: "GT Walsheim Pro" }}>
                                 {subcatry !== "" ? (
-                                  <b
+                                  <p
                                     style={{ color: "black" }}
                                     className="mt-4"
                                   >
                                     Sub-Category
-                                  </b>
+                                  </p>
                                 ) : (
-                                  <b style={{ color: "red" }} className="mt-4">
+                                  <p style={{ color: "red" }} className="mt-4">
                                     Sub-Category
                                     <span style={{ color: "red" }}>*</span>
-                                  </b>
+                                  </p>
                                 )}
                               </Label>
 
@@ -483,17 +483,17 @@ function CustomNavbar(args) {
                                 style={{ font: "GT Walsheim Pro" }}
                               >
                                 {type !== "" ? (
-                                  <b
+                                  <p
                                     style={{ color: "black" }}
                                     className="mt-4"
                                   >
                                     Type
-                                  </b>
+                                  </p>
                                 ) : (
-                                  <b style={{ color: "red" }} className="mt-4">
+                                  <p style={{ color: "red" }} className="mt-4">
                                     Type
                                     <span style={{ color: "red" }}>*</span>
-                                  </b>
+                                  </p>
                                 )}
 
                                 {/* <b>
@@ -517,17 +517,17 @@ function CustomNavbar(args) {
                                 style={{ font: "GT Walsheim Pro" }}
                               >
                                 {formate !== "" ? (
-                                  <b
+                                  <p
                                     style={{ color: "black" }}
                                     className="mt-4"
                                   >
                                     Format
-                                  </b>
+                                  </p>
                                 ) : (
-                                  <b style={{ color: "red" }} className="mt-4">
+                                  <p style={{ color: "red" }} className="mt-4">
                                     Format
                                     <span style={{ color: "red" }}>*</span>
-                                  </b>
+                                  </p>
                                 )}
                                 {/* <b>
                                   Format <span style={{ color: "red" }}>*</span>
@@ -556,12 +556,12 @@ function CustomNavbar(args) {
                               {sellang !== "" &&
                               sellang !== null &&
                               sellang !== undefined ? (
-                                <b>Language of Content</b>
+                                <p>Language of Content</p>
                               ) : (
-                                <b style={{ color: "red" }}>
+                                <p style={{ color: "red" }}>
                                   Language of Content
                                   <span style={{ color: "red" }}>*</span>
-                                </b>
+                                </p>
                               )}
                               {/* <b>
                                 Language of Content
@@ -607,11 +607,11 @@ function CustomNavbar(args) {
                               style={{ font: "GT Walsheim Pro" }}
                             >
                               {topic != "" ? (
-                                <b>Topic </b>
+                                <p>Topic </p>
                               ) : (
-                                <b style={{ color: "red" }}>
+                                <p style={{ color: "red" }}>
                                   Topic <span style={{ color: "red" }}>*</span>
-                                </b>
+                                </p>
                               )}
                             </Label>
                             {/* <Row className="mt-3 mb-3 textarea">
@@ -670,15 +670,15 @@ function CustomNavbar(args) {
                               {Desc != "" &&
                               Desc != null &&
                               Desc != undefined ? (
-                                <b>
+                                <p>
                                   Descriptions
                                   <span>*</span>
-                                </b>
+                                </p>
                               ) : (
-                                <b style={{ color: "red" }}>
+                                <p style={{ color: "red" }}>
                                   Descriptions
                                   <span style={{ color: "red" }}>*</span>
-                                </b>
+                                </p>
                               )}
                               {/* <b>
                                 Descriptions

@@ -99,6 +99,12 @@ function ProductList(args) {
     setProductdetail("");
     setProductdes("");
   };
+
+  const handleclosepromotion = () => {
+    setModalone(false);
+    setPromotId("");
+    setPromotiondata("");
+  };
   const getolderyeardata = () => {
     axios
       .get(`http://3.7.173.138:9000/user/filterbyyear/${Params.id}/$year`)
@@ -920,10 +926,23 @@ function ProductList(args) {
                                 key={promotiondata?._id}
                                 className="mdlg"
                                 isOpen={modalone}
-                                toggle={toggleone}
+                                toggle={handleclosepromotion}
                                 {...args}
                               >
                                 <ModalBody key={promotiondata?._id}>
+                                  <Row>
+                                    <Col></Col>
+                                    <Col
+                                      lg="1"
+                                      className="d-flex justify-content-right"
+                                    >
+                                      <MdCancelPresentation
+                                        className="cancelbuttondata"
+                                        onClick={handleclosepromotion}
+                                        size={30}
+                                      />
+                                    </Col>
+                                  </Row>
                                   <div className="main-content">
                                     <h2>{promotiondata?.desc}</h2>
                                     <div className="top-icon">
@@ -1291,27 +1310,29 @@ function ProductList(args) {
                                   <Row key={promotion?._id}>
                                     <Col lg="4"></Col>
                                     <Col lg="8" key={promotion?._id}>
-                                      <button
-                                        key={promotion?._id}
-                                        className="addbookmark  btn btn-secondary"
-                                        color="success"
-                                        onClick={() =>
-                                          removebookmark(promotion?._id)
-                                        }
-                                      >
-                                        Remove bookmark
-                                      </button>
-
-                                      <button
-                                        key={promotion?._id}
-                                        onClick={() =>
-                                          addbookmark(promotion?._id)
-                                        }
-                                        className="addbookmark btn btn-secondary"
-                                        color="warning "
-                                      >
-                                        Add Bookmark
-                                      </button>
+                                      {handlebookmark === "true" ? (
+                                        <button
+                                          key={promotion?._id}
+                                          className="addbookmark  btn btn-secondary"
+                                          color="success"
+                                          onClick={() =>
+                                            removebookmark(promotion?._id)
+                                          }
+                                        >
+                                          Remove Bookmark
+                                        </button>
+                                      ) : (
+                                        <button
+                                          key={promotion?._id}
+                                          onClick={() =>
+                                            addbookmark(promotion?._id)
+                                          }
+                                          className="addbookmark  btn btn-secondary"
+                                          color="warning "
+                                        >
+                                          Add Bookmark
+                                        </button>
+                                      )}
                                     </Col>
                                   </Row>
                                   <hr></hr>
@@ -1430,7 +1451,7 @@ function ProductList(args) {
                                         key={Producdetail?._id}
                                         className="mdlg"
                                         isOpen={modal}
-                                        // toggle={toggle}
+                                        toggle={handleclosemodal}
                                         {...args}
                                       >
                                         <ModalBody>

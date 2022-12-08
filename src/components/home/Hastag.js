@@ -527,7 +527,7 @@ function Hastag() {
               </Container>
             </Container>
           </div>
-          <div className="  col-lg-6 col-md-6 col-sm-12">
+          <div className=" col-lg-6 col-md-6 col-sm-12">
             {/* api integrate form here */}
             {newslettervid
               ?.map((video) => (
