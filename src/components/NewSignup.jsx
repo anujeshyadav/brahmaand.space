@@ -7,7 +7,7 @@ import InputGroup from "react-bootstrap/InputGroup";
 import Row from "react-bootstrap/Row";
 import Logo1 from "../images/Logo1.png";
 import logo from "../images/logo.png";
-
+import { faChessKing } from "@fortawesome/free-regular-svg-icons";
 import axios from "axios";
 import { Container, Label } from "reactstrap";
 import { Link } from "react-router-dom";
@@ -23,11 +23,12 @@ function NewSignup() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-
+    // debugger;
     const form = event.currentTarget;
     if (form.checkValidity() === false) {
       event.preventDefault();
       event.stopPropagation();
+      // swal("Fill details");
     } else if (
       username.length > 2 &&
       email !== "" &&
@@ -65,14 +66,18 @@ function NewSignup() {
           console.log(error.response.data);
           if (error.response.data.message == "already exists") {
             swal(
-              "    Mail or Username is already Registered",
-              "    Reset your password or try to signup with different Username/Email"
+              "This mail or username is already rRegistered",
+              "Please Reset your password or try to signup with different username/email"
             );
           }
         });
     }
+    // console.log(username, email, password);
 
     setValidated(true);
+  };
+  const handleSignInWithgoogle = () => {
+    console.log(" clicked by google");
   };
 
   return (
@@ -85,13 +90,13 @@ function NewSignup() {
               backgroundPosition: "left",
               backgroundSize: "cover",
               backgroundRepeat: "no-repeat",
-              height: "87vh",
+              height: "85vh",
               width: "100%",
             }}
           >
             <div
               className="d-flex justify-content-center"
-              style={{ paddingTop: "175px" }}
+              style={{ paddingTop: "160px" }}
             >
               <img src={Logo1} style={{ height: "160px", width: "160px" }} />
             </div>
@@ -109,6 +114,7 @@ function NewSignup() {
               style={{
                 height: "25px",
                 width: "200px",
+                // marginBottom: "2.5rem",
               }}
             >
               <h4 className="mb-1">Sign Up</h4>
@@ -150,7 +156,7 @@ function NewSignup() {
                     required
                   />
                   <Form.Control.Feedback type="invalid">
-                    Please choose a Email.
+                    Please choose a email.
                   </Form.Control.Feedback>
                 </InputGroup>
               </Form.Group>
@@ -176,8 +182,17 @@ function NewSignup() {
               </Form.Group>
             </Row>
 
+            {/* <Form.Group className="mb-3">
+              <Form.Check
+                required
+                label="Agree to terms and conditions"
+                feedback="You must agree before submitting."
+                feedbackType="invalid"
+              />
+            </Form.Group> */}
             <div>
               <button
+                // disabled={!performValidation()}
                 style={{ padding: "13px 136px", borderRadius: "11px" }}
                 type="submit"
                 class="btn btn-primary"
@@ -203,12 +218,16 @@ function NewSignup() {
                     }}
                     src={google}
                   />
-                  <Link className=" signinwithgooglesignup">
+                  <Link
+                    // style={{ color: "black" }}
+                    className=" signinwithgooglesignup"
+                  >
                     Sign in with Google
                   </Link>
                 </button>
               </Row>
             </div>
+            {/* <Button type="submit">Submit form</Button> */}
           </Form>
         </Col>
       </Row>
@@ -216,3 +235,5 @@ function NewSignup() {
   );
 }
 export default NewSignup;
+
+// render(<FormExample />);

@@ -1,10 +1,9 @@
-import { Card, Col, Row, Container, Button, Form } from "react-bootstrap";
+import { Card, Container, Button, Form } from "react-bootstrap";
 import "../styles/Login.css";
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 import { useNavigate } from "react-router-dom";
-import swal from "sweetalert";
 
 const domain = process.env.REACT_APP_API_DOMAIN_NAME;
 
