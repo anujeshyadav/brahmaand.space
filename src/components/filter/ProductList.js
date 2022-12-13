@@ -54,6 +54,7 @@ import ProgressBar from "@ramonak/react-progress-bar";
 import "swiper/css";
 import "swiper/css/pagination";
 import "../../styles/Filter.css";
+import { number } from "prop-types";
 
 function ProductList(args) {
   const [modalsuggestion, setModalsuggestion] = useState(false);
@@ -86,6 +87,7 @@ function ProductList(args) {
   const [language, setLanguage] = useState("");
 
   const navigate = useNavigate();
+  // console.log("params", Params);
   const handlesearchbylanguage = () => {
     if (language !== "" && language !== undefined) {
       axios
@@ -95,6 +97,24 @@ function ProductList(args) {
         .then((res) => {
           setCategry(res.data.data);
           console.log(res.data.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  };
+
+  const gethastagdata = () => {
+    console.log(Params);
+    if (Params.id !== "") {
+      console.log(Params.id);
+      axios
+        .get(`http://3.7.173.138:9000/user/filterbyHashTag/${Params.id}`)
+        .then((res) => {
+          console.log(res.data.data);
+          if (res.data.data !== "" && res.data.data !== null) {
+          }
+          setCategry(res.data.data);
         })
         .catch((err) => {
           console.log(err);
@@ -411,6 +431,7 @@ function ProductList(args) {
   };
 
   useEffect(() => {
+    gethastagdata();
     getYear();
     getLanguage();
     getUser();
@@ -503,7 +524,6 @@ function ProductList(args) {
       .get(`http://3.7.173.138:9000/admin/listbysubcategory/${Params.id}`)
       .then((response) => {
         setCategry(response.data.data);
-        // console.log(response.data.data);
       })
       .catch((error) => {
         console.log(error.response.data);

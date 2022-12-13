@@ -65,32 +65,33 @@ function Header() {
     );
   };
 
-  const landtoproductpage = () => {
-    console.log(homesearch);
-    navigate(`/productList/${homesearch}`);
-  };
+  // const landtoproductpage = () => {
+  //   console.log(homesearch);
+  //   navigate(`/productList/${homesearch}`);
+  // };
   const [data, setData] = useState([]);
   const handlesearchtopics = () => {
-    // console.log(searchdata);
+    console.log(searchdata);
     if (searchdata !== "") {
-      axios
-        .post(`http://3.7.173.138:9000/user/search_topic_title`, {
-          searchinput: searchdata,
-        })
-        .then((res) => {
-          setData(res.data.data);
-          console.log(res.data.data);
-          setHomesearch(res.data.data[0]?.sub_category);
+      navigate(`/productList/${searchdata}`);
+      // axios
+      //   .post(`http://3.7.173.138:9000/user/search_topic_title`, {
+      //     searchinput: searchdata,
+      //   })
+      //   .then((res) => {
+      //     setData(res.data.data);
+      //     console.log(res.data.data);
+      //     setHomesearch(res.data.data[0]?.sub_category);
 
-          if (res.data.data !== "" && res.data.data !== undefined) {
-            landtoproductpage();
-          } else {
-            return <p>No data available</p>;
-          }
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+      //     if (res.data.data !== "" && res.data.data !== undefined) {
+      //       landtoproductpage();
+      //     } else {
+      //       return <p>No data available</p>;
+      //     }
+      //   })
+      //   .catch((err) => {
+      //     console.log(err);
+      //   });
     }
 
     // const data = "#learning , #media , #study,  #songs, #learning ";

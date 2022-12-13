@@ -24,9 +24,9 @@ function ProfileRouter() {
           <Tab eventKey="bookmark" title="Bookmarks" className="mx-4">
             <Bookmarks />
           </Tab>
-          <Tab eventKey="activity" title="Activity" className="mx-4">
+          {/* <Tab eventKey="activity" title="Activity" className="mx-4">
             <Activity />
-          </Tab>
+          </Tab> */}
           <Tab eventKey="points" title="Points" className="mx-4">
             <Points />
           </Tab>

@@ -8,7 +8,7 @@ import has1 from "../../images/has1.png";
 import axiosConfig from "../axiosConfig";
 import ShowMore from "react-show-more";
 import newsletter from "../../images/newsletter.png";
-
+import { useNavigate } from "react-router-dom";
 import emoji from "../../images/emoji.png";
 import emoji2 from "../../images/emoji2.png";
 import youtubevideo from "../../images/youtubevideo.jpg";
@@ -29,6 +29,7 @@ function Hastag() {
   const [trendingsearch, setTrendingsearch] = useState([]);
   const [categry, setCategry] = useState([]);
   const [newslettervid, setNewslettervid] = useState([]);
+  const navigate = useNavigate();
 
   const gettrendingdata = () => {
     axios
@@ -131,21 +132,12 @@ function Hastag() {
   function handlehastagtopic(hastag) {
     if (hastag !== "") {
       console.log(hastag);
+      navigate(`/productList/${hastag}`, { name: { hastag } });
     }
   }
   // const handlehastagtopic = (hastag) => {
 
-  //   axios
-  //     .get(`http://3.7.173.138:9000/user/filterbyHashTag/${hastag}`)
-  //     .then((res) => {
-  //       console.log(res.data);
-  //       if (res.data.data !== "" && res.data.data !== null) {
-  //         landtoproductpage();
-  //       }
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
+  //
   // };
 
   const [isOpenone, setOpenone] = useState(false);
@@ -167,7 +159,7 @@ function Hastag() {
             <div className=" row mt-3">
               <div className="col col-lg-12 col-md-12 col-sm-12 col-xs-3">
                 {trendingsearch !== ""
-                  ? trendingsearch?.map((trendingtopics) => (
+                  ? trendingsearch?.slice(0, 18).map((trendingtopics) => (
                       <button
                         key={trendingtopics._id}
                         onClick={() =>
