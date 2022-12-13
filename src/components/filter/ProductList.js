@@ -2585,9 +2585,17 @@ function ProductList(args) {
                             </Link>
                           </div>
                           <div class="product-content">
-                            <Link to="#" className="btt">
-                              {categry?.topics?.slice(0, 20)}
-                            </Link>
+                            <div className=" d-flex topicdatas">
+                              {" "}
+                              {categry?.topics.map((topic) => (
+                                <span
+                                  className="d-flex display-inline topicsdata"
+                                  style={{ color: "blue" }}
+                                >
+                                  {topic} &nbsp;
+                                </span>
+                              ))}
+                            </div>
 
                             <h3>{categry?.resTitle}</h3>
                             <h5>
