@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-// import Heart from "react-heart";
+
 import ReactPaginate from "react-paginate";
+import { Swiper, SwiperSlide } from "swiper/react";
 import StarsRating from "stars-rating";
+import "swiper/css";
 import { useNavigate } from "react-router-dom";
 import { ReactSearchAutocomplete } from "react-search-autocomplete";
 import swal from "sweetalert";
+
 import "../../components/pagination.css";
 import { FiFilter } from "react-icons/fi";
 import Slider from "./Slider";
@@ -48,10 +51,13 @@ import { faStar, faStarHalfAlt } from "@fortawesome/free-solid-svg-icons";
 import { faStar as farStar } from "@fortawesome/free-regular-svg-icons";
 import { CloudLightning, CornerDownLeft } from "react-feather";
 import ProgressBar from "@ramonak/react-progress-bar";
+import "swiper/css";
+import "swiper/css/pagination";
+import "../../styles/Filter.css";
 
 function ProductList(args) {
-  const [active, setActive] = useState(false);
-  const [value, setValue] = useState();
+  const [modalsuggestion, setModalsuggestion] = useState(false);
+  const togglesuggestion = () => setModalsuggestion(!modalsuggestion);
   const toggle = () => setModal(!modal);
   const toggleone = () => setModalone(!modalone);
   const [modal, setModal] = useState(false);
@@ -72,17 +78,29 @@ function ProductList(args) {
   const [searchrating, setSearchrating] = useState("");
   const [handlebookmark, setHandlebookmark] = useState("");
   const [myId, setmyId] = useState("");
-  const navigate = useNavigate();
   const [averageRating, setAverageRating] = useState("");
   const [searchitem, setSearchitem] = useState("");
   const [lngage, setLngage] = useState([]);
   const [relyear, setRelyear] = useState([]);
-  const [searchbylanguage, setsearchbylanguage] = useState("");
   const [contentyear, setContentyear] = useState("");
   const [language, setLanguage] = useState("");
 
-  console.log(contentyear);
-  console.log(language);
+  const navigate = useNavigate();
+  const handlesearchbylanguage = () => {
+    if (language !== "" && language !== undefined) {
+      axios
+        .get(
+          `http://3.7.173.138:9000/user/filterbyLanguage/${Params.id}/${language}`
+        )
+        .then((res) => {
+          setCategry(res.data.data);
+          console.log(res.data.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  };
   const getYear = () => {
     axios
       .get(`http://3.7.173.138:9000/user/allYear`)
@@ -105,25 +123,17 @@ function ProductList(args) {
     setPromotId("");
     setPromotiondata("");
   };
+
   const getolderyeardata = () => {
-    axios
-      .get(`http://3.7.173.138:9000/user/filterbyyear/${Params.id}/$year`)
-      .then((res) => {
-        setCategry(res.data.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-  const handlesearchbylanguage = (e) => {
-    // debugger;
-    console.log(e.target.value);
-    setsearchbylanguage(e.target.value);
-    if (searchbylanguage != "") {
-      console.log(e.target.value);
+    console.log(contentyear);
+    if (
+      contentyear !== "" &&
+      contentyear !== null &&
+      contentyear !== undefined
+    ) {
       axios
         .get(
-          `http://3.7.173.138:9000/user/filterbyLanguage/${Params.id}/${searchbylanguage}`
+          `http://3.7.173.138:9000/user/filterbyyear/${Params.id}/${contentyear}`
         )
         .then((res) => {
           setCategry(res.data.data);
@@ -272,7 +282,7 @@ function ProductList(args) {
       .get(`http://3.7.173.138:9000/user/Promotions`)
       .then((res) => {
         setPromotion(res.data.data);
-        console.log(res.data.data);
+        // console.log(res.data.data);
       })
       .catch((err) => {
         console.log(err);
@@ -320,16 +330,7 @@ function ProductList(args) {
     e.preventDefault();
     console.log(myId);
     if (myId !== null && myId !== undefined && myId !== "") {
-      // if (
-      //   text !== null &&
-      //   text !== undefined &&
-      //   text !== "" &&
-      //   rating !== null &&
-      //   rating !== undefined &&
-      //   rating !== ""
-      // ) {
       const selectedId = Producdetail._id;
-      // console.log(selectedId, myId, text, rating);
 
       axios
         .post(`http://3.7.173.138:9000/user/add_Comment`, {
@@ -420,13 +421,17 @@ function ProductList(args) {
       type === "" &&
       format === "" &&
       searchrating === "" &&
-      searchitem === "" &&
-      searchbylanguage === ""
+      contentyear === "" &&
+      language === "" &&
+      searchitem === ""
     ) {
       allsearchproduct();
     }
     if (type !== "") {
       gettypefilter();
+    }
+    if (contentyear !== "" && contentyear !== null) {
+      getolderyeardata();
     }
     if (format !== "") {
       getformatfilter();
@@ -437,9 +442,9 @@ function ProductList(args) {
     if (searchitem !== "") {
       handlesearchdescription();
     }
-    // if (searchbylanguage != "") {
-    //   handlesearchbylanguage();
-    // }
+    if (language !== "") {
+      handlesearchbylanguage();
+    }
   }, [
     Params,
     type,
@@ -449,14 +454,14 @@ function ProductList(args) {
     handlebookmark,
     activelike,
     searchitem,
-    searchbylanguage,
+    language,
+    contentyear,
   ]);
 
   const [typelength, setTypelength] = useState([]);
   const gettypefilter = () => {
     axios
       .get(`http://3.7.173.138:9000/user/filter_type/${Params.id}/${type}`)
-      // .get(`http://3.7.173.138:9000/user/filter_type/${type}`)
       .then((res) => {
         console.log(res.data.data);
         setCategry(res.data.data);
@@ -498,7 +503,7 @@ function ProductList(args) {
       .get(`http://3.7.173.138:9000/admin/listbysubcategory/${Params.id}`)
       .then((response) => {
         setCategry(response.data.data);
-        console.log(response.data.data);
+        // console.log(response.data.data);
       })
       .catch((error) => {
         console.log(error.response.data);
@@ -696,10 +701,10 @@ function ProductList(args) {
                         </ul> */}
                       </div>
                     </Col>
-                    <Col lg="12" className="py-3">
+                    <Col lg="12" className="">
                       <div className="ft-type">
-                        <h5 className="mb-1">Source</h5>
-                        <Row className="mt-3 mb-3 mx-2">
+                        {/* <h5 className="mb-1">Source</h5> */}
+                        {/* <Row className="mt-3 mb-3 mx-2">
                           <input
                             id="Youtube"
                             className="ft-check"
@@ -711,8 +716,8 @@ function ProductList(args) {
                             }}
                           />
                           Youtube
-                        </Row>
-                        <Row className=" mb-3 mx-2">
+                        </Row> */}
+                        {/* <Row className=" mb-3 mx-2">
                           <input
                             id="Others"
                             className="ft-check"
@@ -724,7 +729,7 @@ function ProductList(args) {
                             }}
                           />
                           Others
-                        </Row>
+                        </Row> */}
                         <Row className=" mb-3 mx-2">
                           {/* <input
                             id="older"
@@ -869,9 +874,9 @@ function ProductList(args) {
                     {/* </Col> */}
                     <Col lg="12" className="py-3">
                       <div className="ft-type">
-                        <h5>Sort By</h5>
-                        <hr></hr>
-                        <ul className="clearfiltertext">
+                        {/* <h5>Sort By</h5> */}
+                        {/* <hr></hr> */}
+                        {/* <ul className="clearfiltertext">
                           <li className="clearfiltertext">
                             <Link style={{ color: "blue" }}>Relevance</Link>
                           </li>
@@ -884,7 +889,7 @@ function ProductList(args) {
                           <li className="clearfiltertext">
                             <Link style={{ color: "blue" }}>High to Low</Link>
                           </li>
-                        </ul>
+                        </ul> */}
                         <Button onClick={clearfilter} color="info">
                           Clear Filter
                         </Button>
@@ -902,7 +907,7 @@ function ProductList(args) {
                     </span>
                   </h4>
 
-                  <Row>
+                  <Row style={{ height: "60vh" }} className="">
                     {promotion?.map((promotion) => (
                       <Col lg="4" md="4" sm="6" key={promotion?._id}>
                         <div class="product-grid8">
@@ -1967,152 +1972,16 @@ function ProductList(args) {
                                         </ModalBody>
                                       </Modal>
                                     </Link>
-                                    {/* <span class="product-discount-label st-1"> */}
-                                    {/* {localStorage.getItem("userId") !== "" &&
-                                  localStorage.getItem("userId") !== null &&
-                                  localStorage.getItem("userId") !==
-                                    undefined ? (
-                                    <button
-                                      key={Producdetail?._Id}
-                                      type="button"
-                                      color={
-                                        activelike === "true" ? "red" : "blue"
-                                      }
-                                      className="likebuttonbar"
-                                      onClick={() => {
-                                        const userId =
-                                          localStorage.getItem("userId");
-                                        setliked(categry?._id);
-                                        axiosConfig
-                                          .post(`/user/add_like`, {
-                                            submitresrcId: categry?._id,
-                                            userid: userId,
-                                            status: "true",
-                                          })
-                                          .then((response) => {
-                                            setActivelike(
-                                              response.data.data.status
-                                            );
-                                            swal("you bookmarked it");
-
-                                            console.log(
-                                              "likeindividual",
-                                              response.data.data
-                                            );
-                                          })
-                                          .catch((error) => {
-                                            console.log(error.response.data);
-                                          });
-                                      }}
-                                    >
-                                      {liked ? (
-                                        <FaHeart
-                                          size={28}
-                                          color={
-                                            activelike === "false"
-                                              ? "blue"
-                                              : "red"
-                                          }
-                                          onClick={() => {
-                                            const userId =
-                                              localStorage.getItem("userId");
-                                            setUnlike(categry?._id);
-                                            axiosConfig
-                                              .post(`/user/add_like`, {
-                                                submitresrcId: categry?._id,
-                                                userid: userId,
-                                                status: "false",
-                                              })
-                                              .then((response) => {
-                                                console.log(response.data.data);
-                                                setActivelike(
-                                                  response.data.data.status
-                                                );
-                                                swal(
-                                                  "you Removed your bookmark"
-                                                );
-
-                                                console.log(
-                                                  "Unbookmark",
-                                                  response.data.data
-                                                );
-                                              })
-                                              .catch((error) => {
-                                                console.log(
-                                                  error.response.data
-                                                );
-                                              });
-                                          }}
-                                        />
-                                      ) : (
-                                        <FaRegHeart
-                                          size={25}
-                                          color={
-                                            againlikeact === "true"
-                                              ? "red"
-                                              : "blue"
-                                          }
-                                          onClick={() => {
-                                            const userId =
-                                              localStorage.getItem("userId");
-                                            setAgainlikeact(categry?._id);
-                                            console.log(liked);
-
-                                            axiosConfig
-                                              .post(`/user/add_like`, {
-                                                submitresrcId: categry?._id,
-                                                userid: userId,
-                                                status: "true",
-                                              })
-                                              .then((response) => {
-                                                console.log(response.data.data);
-                                                swal("you bookmarked it");
-                                                setAgainlikeact(
-                                                  response.data.data.status
-                                                );
-                                                console.log(
-                                                  "likeindividual",
-                                                  response.data.data
-                                                );
-                                              })
-                                              .catch((error) => {
-                                                console.log(
-                                                  error.response.data
-                                                );
-                                              });
-                                          }}
-                                        />
-                                      )}
-                                    </button>
-                                  ) : (
-                                    <Heart
-                                      size={20}
-                                      onClick={() => {
-                                        const userId =
-                                          localStorage.getItem("userId");
-                                        if (
-                                          userId === "" ||
-                                          userId === null ||
-                                          userId === undefined
-                                        ) {
-                                          swal(
-                                            "you Need to login or Signup for Like and dislike"
-                                          );
-                                        } else {
-                                        }
-                                      }}
-                                      className="heartlike faregheart"
-                                    />
-                                  )} */}
-                                    {/* </span> */}
                                   </div>
                                 </Col>
                                 <Col md="9">
                                   <div class="product-content">
                                     <div className="d-flex topicsdataapi">
-                                      <Link>
-                                        {categry?.topics?.slice(0, 60)}{" "}
-                                      </Link>
+                                      {categry?.topics.map((topic) => (
+                                        <h6 style={{ color: "blue" }}>
+                                          {topic} &nbsp;
+                                        </h6>
+                                      ))}
                                     </div>
 
                                     <h3>{categry?.resTitle}</h3>
@@ -2176,13 +2045,583 @@ function ProductList(args) {
 
           <div className="sec-bottom">
             <h4>
-              Recently Viewed
-              <span>
+              Suggested Item
+              {/* <span>
                 <Link to="/">See All</Link>
-              </span>
+              </span> */}
             </h4>
             <Row>
-              <RecentProductList />
+              <Swiper
+                breakpoints={{
+                  980: {
+                    slidesPerView: 4,
+                    direction: "horizontal",
+                    spaceBetween: 20,
+                  },
+                  820: {
+                    slidesPerView: 3,
+                    direction: "horizontal",
+                    spaceBetween: 20,
+                  },
+                  780: {
+                    slidesPerView: 3,
+                    direction: "horizontal",
+                    spaceBetween: 20,
+                  },
+
+                  768: {
+                    slidesPerView: 3,
+                    direction: "horizontal",
+                    spaceBetween: 20,
+                  },
+                  640: {
+                    slidesPerView: 3,
+                    direction: "horizontal",
+                    spaceBetween: 28,
+                  },
+                  320: {
+                    slidesPerView: 1,
+                    direction: "horizontal",
+                    spaceBetween: 25,
+                  },
+                }}
+                spaceBetween={50}
+                // slidesPerView={3}
+                centeredSlides={true}
+                loop={true}
+                onSlideChange={() => console.log("slide change")}
+                onSwiper={(swiper) => console.log(swiper)}
+                scrollbar={{ draggable: true }}
+                className="mySwiper"
+              >
+                {categry !== ""
+                  ? categry?.map((categry) => (
+                      <SwiperSlide>
+                        <div class="product-grid8" key={categry._id}>
+                          <div class="product-image8">
+                            <Link
+                              key={categry._id}
+                              onClick={() => handleSelection(categry?._id)}
+                              // onClick={togglesuggestion}
+                            >
+                              <Modal
+                                key={Producdetail?._id}
+                                className="mdlg"
+                                isOpen={modal}
+                                toggle={handleclosemodal}
+                                {...args}
+                              >
+                                <ModalBody>
+                                  <Row>
+                                    <Col></Col>
+                                    <Col
+                                      lg="1"
+                                      className="d-flex justify-content-right"
+                                    >
+                                      <MdCancelPresentation
+                                        className="cancelbuttondata"
+                                        onClick={handleclosemodal}
+                                        size={30}
+                                      />
+                                    </Col>
+                                  </Row>
+                                  <div className="main-content">
+                                    <h2>{Producdetail?.desc}</h2>
+                                    <div className="top-icon">
+                                      <Link to="#">
+                                        <img src={mdicon1} alt="" />
+                                      </Link>
+                                      <Link to="#">
+                                        <img src={mdicon2} alt="" />
+                                      </Link>
+                                    </div>
+                                    <div className="tag-list">
+                                      <div className="tag-1">
+                                        <h5>
+                                          <span>
+                                            <img
+                                              src={icons}
+                                              alt=""
+                                              width="30px"
+                                            />
+                                          </span>
+                                          Topic:
+                                        </h5>
+                                      </div>
+                                      <div className=" d-flex tag-2">
+                                        {Producdetail?.topics?.map((val) => (
+                                          <Link className="d-flex " to="#">
+                                            {val} &nbsp;
+                                          </Link>
+                                        ))}
+                                      </div>
+                                    </div>
+
+                                    <hr></hr>
+                                  </div>
+
+                                  <div className="mid">
+                                    <h5 className="mt-3">
+                                      Link :<Link>{Producdetail?.link}</Link>
+                                    </h5>
+                                    <div className="mid-content">
+                                      <Row>
+                                        <Col lg="6" md="6">
+                                          <div className="mid-1 mb-3">
+                                            <div className="mid-1-a">
+                                              <img src={createricon} alt="" />
+                                            </div>
+                                            <div className="mid-1-b">
+                                              <p>Creator:</p>
+                                              <h4>
+                                                {Producdetail?.creatorName}
+                                              </h4>
+                                            </div>
+                                          </div>
+                                        </Col>
+                                        <Col lg="6" md="6">
+                                          <div className="mid-1 mb-3 ">
+                                            <div className="mid-1-a">
+                                              <img src={usericon} alt="" />
+                                            </div>
+                                            <div className="mid-1-b">
+                                              <p>Submitted by:</p>
+                                              <h4>
+                                                {Producdetail?.creatorName}
+                                              </h4>
+                                            </div>
+                                          </div>
+                                        </Col>
+                                        <Col lg="3" md="3">
+                                          <div className="mid-1 mb-3 tt-2">
+                                            <div className="mid-1-a">
+                                              <img
+                                                src={typeicon}
+                                                alt=""
+                                                width="35px"
+                                              />
+                                            </div>
+                                            <div className="mid-1-b tt-1">
+                                              <p>Type:</p>
+                                              <Link to="#">
+                                                {Producdetail?.type}
+                                              </Link>
+                                            </div>
+                                          </div>
+                                        </Col>
+                                        <Col lg="3" md="3">
+                                          <div className="mid-1 mb-3 tt-2">
+                                            <div className="mid-1-a">
+                                              <img
+                                                src={formaticon}
+                                                alt=""
+                                                width="35px"
+                                              />
+                                            </div>
+                                            <div className="mid-1-b tt-1">
+                                              <p>Format:</p>
+                                              <Link to="#">
+                                                {Producdetail?.format}
+                                              </Link>
+                                            </div>
+                                          </div>
+                                        </Col>
+                                        <Col lg="3" md="3">
+                                          <div className="mid-1 mb-3 tt-2">
+                                            <div className="mid-1-a">
+                                              <img
+                                                src={diffculty}
+                                                alt=""
+                                                width="35px"
+                                              />
+                                            </div>
+                                            <div className="mid-1-b tt-1">
+                                              <p>Category:</p>
+                                              <Link>
+                                                {Producdetail?.category?.title}
+                                              </Link>
+                                            </div>
+                                          </div>
+                                        </Col>
+
+                                        <Col lg="3" md="3">
+                                          <div className="mid-1 mb-3 tt-2">
+                                            <div className="mid-1-a">
+                                              <img
+                                                src={yearicon}
+                                                alt=""
+                                                width="35px"
+                                              />
+                                            </div>
+                                            <div className="mid-1-b tt-1">
+                                              <p>Year:</p>
+
+                                              {Producdetail?.relYear?.map(
+                                                (year) => (
+                                                  <Link>{year?.yrName}</Link>
+                                                )
+                                              )}
+                                            </div>
+                                          </div>
+                                        </Col>
+                                        <Col lg="3" md="3">
+                                          <div className="mid-1 mb-3 tt-2">
+                                            <div className="mid-1-a">
+                                              <img
+                                                src={rating}
+                                                alt=""
+                                                width="35px"
+                                              />
+                                            </div>
+                                            <div className="mid-1-b tt-1">
+                                              <p>Ratings:</p>
+                                              <Link to="#">
+                                                [{averageRating?.data}]
+                                              </Link>
+                                            </div>
+                                          </div>
+                                        </Col>
+                                        <Col lg="4" md="4">
+                                          <div className="mid-1 mb-3 tt-2">
+                                            <div className="mid-1-a">
+                                              <img
+                                                src={submiticon}
+                                                alt=""
+                                                width="35px"
+                                              />
+                                            </div>
+                                            <div className="mid-1-b tt-1">
+                                              <p>Submitted:</p>
+                                              <Link to="#">
+                                                <Moment format="ll">
+                                                  {Producdetail?.createdAt}
+                                                </Moment>
+                                              </Link>
+                                            </div>
+                                          </div>
+                                        </Col>
+                                        <Col lg="4" md="4">
+                                          <div className="mid-1 mb-3 tt-2">
+                                            <div className="mid-1-a">
+                                              <img
+                                                src={languageicon}
+                                                alt=""
+                                                width="35px"
+                                              />
+                                            </div>
+                                            <div className="mid-1-b tt-1">
+                                              <p>Language:</p>
+                                              {Producdetail?.language?.map(
+                                                (lang) => (
+                                                  <span>{lang?.language} </span>
+                                                )
+                                              )}
+                                            </div>
+                                          </div>
+                                        </Col>
+                                      </Row>
+                                    </div>
+                                  </div>
+
+                                  <hr></hr>
+
+                                  <div className="description mt-3 mb-3">
+                                    <h4>Description:</h4>
+                                    <p>{Producdetail?.desc}</p>
+                                  </div>
+
+                                  <hr></hr>
+
+                                  <div className="rating-box">
+                                    <Row>
+                                      <Col lg="4">
+                                        <div className="rat-left mt-3">
+                                          <h4>Customer Rating</h4>
+                                          <div className="">
+                                            <PrettyRating
+                                              value={averageRating?.data}
+                                              icons={icons.star}
+                                              colors={colors.star}
+                                            />
+                                            <span className="starratinginno">
+                                              [ {averageRating?.data}] of 5
+                                              Stars
+                                            </span>
+                                            <br></br>
+                                            <span className="mt-3">
+                                              {getonecomment?.length}- Customers
+                                              Reviews
+                                            </span>
+
+                                            <Row>
+                                              <Col
+                                                className="d-flex justify-content-left mt-1"
+                                                style={{
+                                                  color: "blue",
+                                                }}
+                                                lg="4"
+                                              >
+                                                5 Stars
+                                              </Col>
+                                              <Col
+                                                className="mt-1 mb-1 "
+                                                lg="8"
+                                              >
+                                                {" "}
+                                                <ProgressBar
+                                                  bgColor=" #fdb800"
+                                                  height="13px"
+                                                  borderRadius="12px"
+                                                  className="progressbar"
+                                                  barContainerClassName="containerone"
+                                                  labelClassName="label"
+                                                  completed={60}
+                                                />
+                                              </Col>
+                                            </Row>
+                                            <Row>
+                                              <Col
+                                                className="d-flex justify-content-left mt-1 "
+                                                style={{
+                                                  color: "blue",
+                                                }}
+                                                lg="4"
+                                              >
+                                                4 Stars
+                                              </Col>
+                                              <Col className="mt-1 mb-1" lg="8">
+                                                {" "}
+                                                <ProgressBar
+                                                  bgColor=" #fdb800"
+                                                  height="13px"
+                                                  borderRadius="12px"
+                                                  className="progressbar"
+                                                  barContainerClassName="containerone"
+                                                  labelClassName="label"
+                                                  completed={40}
+                                                />
+                                              </Col>
+                                            </Row>
+                                            <Row>
+                                              <Col
+                                                className="d-flex justify-content-left mt-1 "
+                                                style={{
+                                                  color: "blue",
+                                                }}
+                                                lg="4"
+                                              >
+                                                3 Stars
+                                              </Col>
+                                              <Col className="mt-1 mb-1" lg="8">
+                                                {" "}
+                                                <ProgressBar
+                                                  bgColor=" #fdb800"
+                                                  height="13px"
+                                                  borderRadius="12px"
+                                                  className="progressbar"
+                                                  barContainerClassName="containerone"
+                                                  labelClassName="label"
+                                                  completed={50}
+                                                />
+                                              </Col>
+                                            </Row>
+                                            <Row>
+                                              <Col
+                                                className="d-flex justify-content-left mt-1 "
+                                                style={{
+                                                  color: "blue",
+                                                }}
+                                                lg="4"
+                                              >
+                                                2 Stars
+                                              </Col>
+                                              <Col className="mt-1 mb-1" lg="8">
+                                                {" "}
+                                                <ProgressBar
+                                                  bgColor=" #fdb800"
+                                                  height="13px"
+                                                  borderRadius="12px"
+                                                  className="progressbar"
+                                                  barContainerClassName="containerone"
+                                                  labelClassName="label"
+                                                  completed={70}
+                                                />
+                                              </Col>
+                                            </Row>
+                                            <Row>
+                                              <Col
+                                                className="d-flex justify-content-left mt-1 "
+                                                style={{
+                                                  color: "blue",
+                                                }}
+                                                lg="4"
+                                              >
+                                                1 Stars
+                                              </Col>
+                                              <Col className="mt-1 mb-1" lg="8">
+                                                <ProgressBar
+                                                  bgColor=" #fdb800"
+                                                  height="13px"
+                                                  borderRadius="12px"
+                                                  className="progressbar"
+                                                  barContainerClassName="containerone"
+                                                  labelClassName="label"
+                                                  completed={40}
+                                                />
+                                              </Col>
+                                            </Row>
+                                          </div>
+                                        </div>
+                                      </Col>
+                                      <Col lg="8" key={Producdetail?._id}>
+                                        <div className="rat-right">
+                                          <Row>
+                                            <Col lg="6">
+                                              <h4 className="mt-3">
+                                                Write your Review
+                                              </h4>
+                                              <StarsRating
+                                                count={5}
+                                                onChange={ratingChanged}
+                                                size={40}
+                                                color2={"#ffd700"}
+                                              />
+                                            </Col>
+                                          </Row>
+
+                                          <div className="">
+                                            <form key={Producdetail?._id}>
+                                              <textarea
+                                                key={Producdetail?._id}
+                                                value={text}
+                                                name="text"
+                                                onChange={onchangehandler}
+                                                className="form-control st-taetarea"
+                                                placeholder=" Enter your Review if you want"
+                                              ></textarea>
+                                              <Button
+                                                onClick={handleSubmit}
+                                                className="bt-st reviewbutton mb-3"
+                                              >
+                                                Submit
+                                              </Button>
+                                            </form>
+                                          </div>
+                                        </div>
+                                      </Col>
+                                    </Row>
+                                  </div>
+                                  <Row>
+                                    <Col lg="4"></Col>
+                                    <Col lg="8" key={categry?._id}>
+                                      {handlebookmark === "true" ? (
+                                        <button
+                                          key={categry?._id}
+                                          className="addbookmark  btn btn-secondary"
+                                          color="success"
+                                          onClick={() =>
+                                            removebookmark(categry?._id)
+                                          }
+                                        >
+                                          Remove Bookmark
+                                        </button>
+                                      ) : (
+                                        <button
+                                          key={categry?._id}
+                                          onClick={() =>
+                                            addbookmark(categry?._id)
+                                          }
+                                          className="addbookmark  btn btn-secondary"
+                                          color="warning "
+                                        >
+                                          Add Bookmark
+                                        </button>
+                                      )}
+                                    </Col>
+                                  </Row>
+                                  <hr></hr>
+                                  <div className="review-list mt-3  ">
+                                    <h4>Reviews:</h4>
+                                    {getonecomment?.map((value) => (
+                                      <div className="re-list">
+                                        <div className="re-listimg">
+                                          <img
+                                            src={value?.userid?.profileImg}
+                                            alt="UserImage"
+                                          />
+                                        </div>
+                                        <div className="re-listcont">
+                                          <h5>
+                                            {value?.userid?.username}
+                                            <span>
+                                              <Moment format="ll">
+                                                {value?.createdAt}
+                                              </Moment>
+                                            </span>
+                                          </h5>
+                                          <div className="star-1">
+                                            <PrettyRating
+                                              value={value?.rating}
+                                              icons={icons.star}
+                                              colors={colors.star}
+                                            />
+                                          </div>
+                                        </div>
+                                        <div className="re-btext mt-3">
+                                          <p>{value?.comment}</p>
+                                        </div>
+                                      </div>
+                                    ))}
+                                  </div>
+                                </ModalBody>
+                              </Modal>
+                              <img
+                                style={{ borderRadius: "12px" }}
+                                width="100%"
+                                height="260px"
+                                src={categry?.img}
+                                alt="image "
+                              />
+                            </Link>
+                          </div>
+                          <div class="product-content">
+                            <Link to="#" className="btt">
+                              {categry?.topics?.slice(0, 20)}
+                            </Link>
+
+                            <h3>{categry?.resTitle}</h3>
+                            <h5>
+                              <span>By</span> {categry?.creatorName}
+                            </h5>
+                            <p>{categry?.desc?.slice(0, 40)}</p>
+                            <div className="">
+                              <Row>
+                                <Col lg="7">
+                                  <PrettyRating
+                                    value={categry?.ava_rating}
+                                    icons={icons.star}
+                                    colors={colors.star}
+                                  />
+                                </Col>
+                                <Col className="justify-content-left" lg="5">
+                                  {categry?.ava_rating}- Rating
+                                </Col>
+                              </Row>
+
+                              <ul class="rating mt-2">
+                                <li>
+                                  <Link to="#" className="tag">
+                                    {categry?.relYear[0]?.yrName}
+                                  </Link>
+                                </li>
+                              </ul>
+                            </div>
+                          </div>
+                        </div>
+                      </SwiperSlide>
+                    ))
+                  : null}
+              </Swiper>
             </Row>
           </div>
         </Container>

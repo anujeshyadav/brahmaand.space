@@ -26,9 +26,24 @@ import { Card, Input, Button, CardMedia } from "reactstrap";
 import { InputGroup } from "react-bootstrap";
 
 function Hastag() {
+  const [trendingsearch, setTrendingsearch] = useState([]);
   const [categry, setCategry] = useState([]);
   const [newslettervid, setNewslettervid] = useState([]);
+
+  const gettrendingdata = () => {
+    axios
+      .get(`http://3.7.173.138:9000/admin/getTrending`)
+      .then((res) => {
+        console.log(res.data.data);
+        setTrendingsearch(res.data.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   useEffect(() => {
+    gettrendingdata();
     allcategory();
     monthlynewslettervid();
     featuredContent();
@@ -109,16 +124,29 @@ function Hastag() {
         console.log(err);
       });
   };
-  // news letter api for video
-  // const [newslettervid, setNewslettervid] = useState([]);
-  // axiosConfig
-  //   .get(`/user/getVideo`)
-  //   .then((res) => {
-  //     setNewslettervid(res.data.data);
-  //   })
-  //   .catch((err) => {
-  //     console.log(err);
-  //   });
+  const landtoproductpage = () => {
+    // console.log(homesearch);
+    // navigate(`/productList/${homesearch}`);
+  };
+  function handlehastagtopic(hastag) {
+    if (hastag !== "") {
+      console.log(hastag);
+    }
+  }
+  // const handlehastagtopic = (hastag) => {
+
+  //   axios
+  //     .get(`http://3.7.173.138:9000/user/filterbyHashTag/${hastag}`)
+  //     .then((res) => {
+  //       console.log(res.data);
+  //       if (res.data.data !== "" && res.data.data !== null) {
+  //         landtoproductpage();
+  //       }
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // };
 
   const [isOpenone, setOpenone] = useState(false);
   const [isOpen, setOpen] = useState(false);
@@ -138,21 +166,19 @@ function Hastag() {
 
             <div className=" row mt-3">
               <div className="col col-lg-12 col-md-12 col-sm-12 col-xs-3">
-                <button className="btn1">#Brahmaand</button>
-                <button className="btn1">#Brahmaand_space</button>
-                <button className="btn1">#Go_Brahmaand_space</button>
-                <button className="btn1">#follow_me_india </button>
-                <button className="btn1">#follow_me_india</button>
-                <button className="btn1">#lifestyle</button>
-                <button className="btn1">#photoshoot</button>
-                <button className="btn1">#funnymemes </button>
-                <button className="btn1">#instafashion</button>
-                <button className="btn1">#share</button>
-                <button className="btn1">#instagram</button>
-                <button className="btn1">#instagram</button>
-                <button className="btn1">#instafashion</button>
-                <button className="btn1">#trend</button>
-                <button className="btn1">#instagram</button>
+                {trendingsearch !== ""
+                  ? trendingsearch?.map((trendingtopics) => (
+                      <button
+                        key={trendingtopics._id}
+                        onClick={() =>
+                          handlehastagtopic(trendingtopics?.topics)
+                        }
+                        className="btn1"
+                      >
+                        #{trendingtopics?.topics}
+                      </button>
+                    ))
+                  : null}
               </div>
             </div>
 
@@ -492,34 +518,6 @@ function Hastag() {
                         >
                           Subscribe
                         </Button>
-                        {/* {localStorage.getItem("userId") !== "" &&
-                        localStorage.getItem("userId") !== null &&
-                        localStorage.getItem("userId") !== undefined ? (
-                          <Button
-                            lg="4"
-                            md="4"
-                            sm="3"
-                            type="submit"
-                            disabled={!performValidation()}
-                            onClick={handleSubmit}
-                            className=" d-flex justify-content-center subscribebtn col-md-4"
-                          >
-                            Subscribe
-                          </Button>
-                        ) : (
-                          <Button
-                            lg="3"
-                            md="3"
-                            sm="3"
-                            type="submit"
-                            onClick={() => {
-                              swal("Please Login to Subscribe");
-                            }}
-                            className="d-flex  justify-content-center subscribebtn col-md-4"
-                          >
-                            Subscribe
-                          </Button>
-                        )} */}
                       </InputGroup>
                     </Container>
                   </Col>

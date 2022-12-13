@@ -44,8 +44,12 @@ function Allcategory() {
                         alt="img"
                       />
                     </div>
+
                     <div className=" d-flex content-bt">
-                      <p className="d-flex " style={{ color: "white" }}>
+                      <p
+                        className="d-flex titleofcat "
+                        style={{ color: "white" }}
+                      >
                         {value?.title}
                       </p>
                     </div>

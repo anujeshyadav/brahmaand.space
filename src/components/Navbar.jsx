@@ -7,6 +7,7 @@ import business from "../images/business.png";
 import { ImCancelCircle } from "react-icons/im";
 import React from "react";
 import axios from "axios";
+import dummy from "../../src/images/dummy.png";
 import imageToBase64 from "image-to-base64/browser";
 import swal from "sweetalert";
 import {
@@ -48,12 +49,10 @@ function CustomNavbar(args) {
   const [sellang, setSellang] = useState();
   const [relyear, setRelyear] = useState([]);
   const [selectedyear, setSelectedyear] = useState();
-  const [tview, setTview] = useState({});
   const [cat_img, setCat_img] = useState({});
   const [Opcname, setOpcname] = useState("");
   const [Opdes, setOpdes] = useState("");
   const [Opcomm, setOpcomm] = useState("");
-
   const [title, settitle] = useState({});
   const [error, setError] = useState(null);
   const [conimg, setConimg] = useState("");
@@ -95,7 +94,14 @@ function CustomNavbar(args) {
 
   const handleSubmitResource = (e) => {
     e.preventDefault();
+
     const userid = localStorage.getItem("userId");
+
+    const answerarray = topic.split(",");
+    console.log(answerarray);
+    if (cat_img == "" && cat_img == null && cat_img == undefined) {
+      setCat_img(dummy);
+    }
     if (
       link != "" &&
       catgry !== "" &&
@@ -106,9 +112,6 @@ function CustomNavbar(args) {
       topic != "" &&
       Desc != ""
     ) {
-      // if (cat_img == "" && cat_img == null && cat_img == undefined) {
-      //   setCat_img(business);
-      // }
       axios
         .post(`http://3.7.173.138:9000/user/App_Sub_resrc`, {
           link: link,
@@ -117,7 +120,7 @@ function CustomNavbar(args) {
           type: type,
           format: formate,
           language: sellang,
-          topics: topic,
+          topics: answerarray,
           desc: Desc,
           resTitle: Optitle,
           creatorName: Opcname,
