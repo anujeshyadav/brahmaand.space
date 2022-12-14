@@ -339,7 +339,7 @@ function Hastag() {
           </Row>
         </Container>
       </div>
-      <div>
+      {/* <div>
         <Container>
           <Row className="mt-5">
             <Col lg="12" md="12" sm="12" className="">
@@ -359,12 +359,10 @@ function Hastag() {
                   <Link to="/signup">JOIN US !</Link>
                 </div>
               </div>
-              {/* <img className="imgCol3" src={youtubevideo} alt="img" /> */}
             </Col>
           </Row>
         </Container>
-        {/* <p> ----walk-through----</p> */}
-      </div>
+      </div> */}
 
       <div className="container">
         <p className="category3">How does Brahmaand works?</p>

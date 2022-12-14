@@ -581,23 +581,6 @@ function Bookmarks(args) {
                                           completed={40}
                                         />
                                       </Col>
-                                      {/* <Col>
-                                    <button
-                                      onClick={removebookmark}
-                                      className="addbookmark  btn btn-secondary"
-                                      color="success"
-                                    >
-                                      Remove bookmark
-                                    </button>
-
-                                    <button
-                                      onClick={addbookmark}
-                                      className="addbookmark  btn btn-secondary"
-                                      color="warning "
-                                    >
-                                      Add Bookmark
-                                    </button>
-                                  </Col> */}
                                     </Row>
                                   </div>
                                 </div>
@@ -653,15 +636,6 @@ function Bookmarks(args) {
                               >
                                 Remove bookmark
                               </button>
-
-                              {/* <button
-                            key={promotion?._id}
-                            onClick={() => addbookmark(data?._id)}
-                            className="addbookmark btn btn-secondary"
-                            color="warning "
-                          >
-                            Add Bookmark
-                          </button> */}
                             </Col>
                           </Row>
                           <hr></hr>

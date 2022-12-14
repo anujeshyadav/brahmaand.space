@@ -383,7 +383,6 @@ function ProductList(args) {
   };
 
   const handleSelection = (_id) => {
-    setProductdetail("");
     console.log(_id);
     var selectedId = _id;
 
@@ -2071,7 +2070,7 @@ function ProductList(args) {
               </span> */}
             </h4>
             <Row>
-              <Swiper
+              {/* <Swiper
                 breakpoints={{
                   980: {
                     slidesPerView: 4,
@@ -2649,7 +2648,7 @@ function ProductList(args) {
                       </SwiperSlide>
                     ))
                   : null}
-              </Swiper>
+              </Swiper> */}
             </Row>
           </div>
         </Container>

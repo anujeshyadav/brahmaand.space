@@ -31,6 +31,58 @@ import { FaBook, FaThumbsUp, FaInfinity, FaChartBar } from "react-icons/fa";
 
 function LeaderBoard() {
   const [planetposition, setPlanetposition] = useState([]);
+  const [currentmonth, setCurrentmonth] = useState([]);
+  const [alltime, setAlltime] = useState([]);
+  const planet = [
+    {
+      planet: one,
+      position: winnerone,
+    },
+    {
+      planet: two,
+      position: wintwo,
+    },
+    {
+      planet: three,
+      position: winthree,
+    },
+    {
+      planet: four,
+      position: winfour,
+    },
+    {
+      planet: five,
+      position: winfive,
+    },
+    {
+      planet: six,
+      position: winsix,
+    },
+  ];
+
+  const getcurrentmonthdata = () => {
+    axios
+      .get(`http://3.7.173.138:9000/user/karma_crrnt_month`)
+      .then((res) => {
+        console.log(res.data.data);
+        setCurrentmonth(res.data.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+  const getallmonthdata = () => {
+    axios
+      .get(`http://3.7.173.138:9000/user/all_time_karma`)
+      .then((res) => {
+        console.log(res.data.data);
+        setAlltime(res.data.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   const getallplanetpostion = () => {
     axios
       .get(`http://3.7.173.138:9000/user/user_planet_position`)
@@ -43,6 +95,8 @@ function LeaderBoard() {
       });
   };
   useEffect(() => {
+    getcurrentmonthdata();
+    getallmonthdata();
     getallplanetpostion();
   }, []);
 
@@ -165,7 +219,7 @@ function LeaderBoard() {
               <div className="planet-box">
                 <h3 class="Pointtext">Planet Position</h3>
                 <Row>
-                  {planetposition != ""
+                  {planetposition !== ""
                     ? planetposition?.map((value) => (
                         <Col key={value?._id} lg="4" md="4" className="mb-3">
                           <div className="planet-1">
@@ -315,50 +369,73 @@ function LeaderBoard() {
               {/* rohit section start */}
 
               <Row className="mt-5 mb-4 " style={{ textAlign: "left" }}>
-                <h2 ClassName="mb-3 karmacur">Karma - Current Month</h2>
+                <h2 ClassName="mb-3 karmacur">Meteors - Current Month</h2>
               </Row>
             </Container>
           </Container>
         </div>
         <Container ClassName="d-flex justify-content-center  ">
           <Row className="  d-flex justify-content-center winnerone" lg="4">
-            <Col className="maincol">
-              <Row>
-                <div className="maindiv">
-                  <img src={one} alt="img" height={70} width={70} />
-                </div>
+            {currentmonth !== ""
+              ? currentmonth?.map((currentmonth) => (
+                  <Col key={currentmonth._id} className="maincol">
+                    <Row>
+                      <div className="maindiv">
+                        {/* {planet?.map((data) => ( */}
+                        <img
+                          src={one} // planet logo
+                          alt="img"
+                          height={70}
+                          width={70}
+                        />
+                        {/* ))} */}
+                      </div>
 
-                <div className="maindiv1">
-                  <h5 className="points d-flex" style={{ color: "white" }}>
-                    1102
-                  </h5>
-                </div>
-              </Row>
+                      <div className="maindiv1">
+                        <h5
+                          className="points d-flex"
+                          style={{ color: "white" }}
+                        >
+                          {/* {currentmonth?.userid?.meteors} */}
+                          {currentmonth?.meteors}
+                        </h5>
+                      </div>
+                    </Row>
 
-              <Row className=" d-flex justify-content-center">
-                <div className="justify-content-center imagecenter">
-                  <div className="images6 d-flex justify-content-center">
-                    <img src={avatar1} alt="" className="avatar" />
-                  </div>
-                  <span>
-                    <img
-                      src={winnerone}
-                      alt="ist winner"
-                      className="first"
-                      height={90}
-                      width={90}
-                    />
-                  </span>
-                </div>
-              </Row>
+                    <Row className=" d-flex justify-content-center">
+                      <div className="justify-content-center imagecenter">
+                        <div className="images6 d-flex justify-content-center">
+                          <img
+                            style={{ borderRadius: "50%", height: "195px" }}
+                            src={currentmonth?.userid?.profileImg} // image of winner
+                            alt=""
+                            className="avatar"
+                          />
+                        </div>
+                        <span>
+                          <img
+                            src={winnerone} //winner tag need to change
+                            alt="ist winner"
+                            className="first"
+                            height={90}
+                            width={90}
+                          />
+                        </span>
+                      </div>
+                    </Row>
 
-              <Row>
-                <h3>CromSoldier</h3>
-                <h5>3752</h5>
-              </Row>
-            </Col>
+                    <Row className="mt-2">
+                      <h3>{currentmonth?.userid?.username}</h3>
+                      <h5>
+                        {/* {currentmonth?.meteors} */}
+                        {currentmonth?.userid?.meteors}
+                      </h5>
+                    </Row>
+                  </Col>
+                ))
+              : null}
 
-            <Col className="maincol">
+            {/* <Col className="maincol">
               <Row>
                 <div className="maindiv">
                   <img src={two} alt="img" height={70} width={70} />
@@ -526,17 +603,72 @@ function LeaderBoard() {
                 <h3>CromSoldier</h3>
                 <h5>3752</h5>
               </Row>
-            </Col>
+            </Col> */}
           </Row>
 
           <Container className="mx-5 d-flex">
             <Row className="mt-5" style={{ textAlign: "left" }}>
-              <h2 ClassName="mb-3  karmacur">Karma - All Time</h2>
+              <h2 ClassName="mb-3  karmacur">Meteors - All Time</h2>
             </Row>
           </Container>
 
           <Row className="  d-flex justify-content-center winnerone" lg="3">
-            <Col className="maincol">
+            {alltime !== ""
+              ? alltime?.map((value) => (
+                  <Col className="maincol">
+                    <Row>
+                      <div className="maindiv">
+                        <img
+                          src={saterns} //image of planet
+                          alt="img"
+                          height={80}
+                          width={80}
+                        />
+                      </div>
+
+                      <div className="maindiv1">
+                        <h5
+                          className="points d-flex"
+                          style={{ color: "white" }}
+                        >
+                          {/* {value} */}
+                          {value?.meteors}
+                        </h5>
+                      </div>
+                    </Row>
+
+                    <Row className=" d-flex justify-content-center">
+                      <div className="justify-content-center imagecenter">
+                        <div className="images6 d-flex justify-content-center">
+                          <img
+                            style={{ borderRadius: "50%", height: "190px" }}
+                            src={value?.userid?.profileImg} // image of winner
+                            // src={avatar1} // image of winner
+                            alt=""
+                            className="avatar"
+                          />
+                        </div>
+                        <span>
+                          <img
+                            src={winnerone} // winner one logo
+                            alt="ist winner"
+                            className="first"
+                            height={90}
+                            width={90}
+                          />
+                        </span>
+                      </div>
+                    </Row>
+
+                    <Row className="mt-2">
+                      <h3>{value?.userid?.username}</h3>
+                      <h5>{value?.userid?.meteors}</h5>
+                      {/* <h5>3752</h5> */}
+                    </Row>
+                  </Col>
+                ))
+              : null}
+            {/* <Col className="maincol">
               <Row>
                 <div className="maindiv">
                   <img src={saterns} alt="img" height={80} width={80} />
@@ -570,9 +702,9 @@ function LeaderBoard() {
                 <h3>CromSoldier</h3>
                 <h5>3752</h5>
               </Row>
-            </Col>
+            </Col> */}
 
-            <Col className="maincol">
+            {/* <Col className="maincol">
               <Row>
                 <div className="maindiv">
                   <img src={itthree} alt="img" height={80} width={80} />
@@ -604,9 +736,9 @@ function LeaderBoard() {
                 <h3>CromSoldier</h3>
                 <h5>3752</h5>
               </Row>
-            </Col>
+            </Col> */}
 
-            <Col className="maincol">
+            {/* <Col className="maincol">
               <Row>
                 <div className="maindiv">
                   <img src={uranus} alt="img" height={80} width={80} />
@@ -638,9 +770,9 @@ function LeaderBoard() {
                 <h3>CromSoldier</h3>
                 <h5>3752</h5>
               </Row>
-            </Col>
+            </Col> */}
 
-            <Col className="maincol">
+            {/* <Col className="maincol">
               <Row>
                 <div className="maindiv">
                   <img src={itone} alt="img" height={70} width={70} />
@@ -672,9 +804,9 @@ function LeaderBoard() {
                 <h3>CromSoldier</h3>
                 <h5>3752</h5>
               </Row>
-            </Col>
+            </Col> */}
 
-            <Col className="maincol">
+            {/* <Col className="maincol">
               <Row>
                 <div className="maindiv">
                   <img src={earth} alt="img" height={70} width={70} />
@@ -706,8 +838,8 @@ function LeaderBoard() {
                 <h3>CromSoldier</h3>
                 <h5>3752</h5>
               </Row>
-            </Col>
-
+            </Col> */}
+            {/* 
             <Col className="maincol">
               <Row>
                 <div className="maindiv">
@@ -740,7 +872,7 @@ function LeaderBoard() {
                 <h3>CromSoldier</h3>
                 <h5>3752</h5>
               </Row>
-            </Col>
+            </Col> */}
           </Row>
         </Container>
       </div>
