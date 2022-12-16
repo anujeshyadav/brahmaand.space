@@ -38,7 +38,7 @@ import {
 import { Link, useParams } from "react-router-dom";
 import "../../styles/Filter.css";
 import AutoSearch from "./AutoSearch";
-import RangeSlider from "react-bootstrap-range-slider";
+
 import { FaHeart, FaStar, FaRegHeart, FaSearch } from "react-icons/fa";
 import { MdCancelPresentation } from "react-icons/md";
 import FilterList from "./FilterList";
@@ -75,7 +75,6 @@ function ProductList(args) {
   const [promotiondata, setPromotiondata] = useState({});
   const [type, setType] = useState("");
   const [format, setFormat] = useState("");
-  const [source, setSource] = useState("");
   const [searchrating, setSearchrating] = useState("");
   const [handlebookmark, setHandlebookmark] = useState("");
   const [myId, setmyId] = useState("");
@@ -134,6 +133,11 @@ function ProductList(args) {
   };
   const handleclosemodal = () => {
     setModal(false);
+    setProductdetail("");
+    setProductdes("");
+  };
+  const handleclosesuggestionmodal = () => {
+    setModalsuggestion(false);
     setProductdetail("");
     setProductdes("");
   };
@@ -224,7 +228,7 @@ function ProductList(args) {
   };
 
   const addbookmark = (id) => {
-    // console.log(id);
+    console.log(id);
     setliked(id);
 
     if (myId !== "" && myId !== null) {
@@ -383,6 +387,7 @@ function ProductList(args) {
   };
 
   const handleSelection = (_id) => {
+    setProductdetail("");
     console.log(_id);
     var selectedId = _id;
 
@@ -428,8 +433,56 @@ function ProductList(args) {
         console.log(err);
       });
   };
+  const handlesuggSelection = (_id) => {
+    setProductdetail("");
+    console.log(_id);
+    var selectedId = _id;
+
+    if (selectedId === _id) {
+      setProductdes(selectedId);
+      axios
+        .get(`http://3.7.173.138:9000/admin/getone_reslist/${productdes}`)
+        .then((res) => {
+          console.log(res.data.data._id);
+          console.log(res.data.data);
+          if (
+            res.data.data._id !== "" ||
+            res.data.data._id !== null ||
+            res.data.data._id !== undefined
+          ) {
+            togglesuggestion();
+
+            setProductdetail(res.data.data);
+          }
+        })
+        .catch((err) => {
+          console.log(err.data.data);
+        });
+
+      axios
+        .get(`http://3.7.173.138:9000/user/average_rating/${productdes}`)
+        .then((res) => {
+          // console.log(res.data);
+          setAverageRating(res.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+
+    axios
+      .get(`http://3.7.173.138:9000/user/comment_list/${selectedId}`)
+      .then((res) => {
+        setGetonecomment(res.data.data);
+        console.log(res.data.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   useEffect(() => {
+    allsuggestedproduct();
     gethastagdata();
     getYear();
     getLanguage();
@@ -523,6 +576,20 @@ function ProductList(args) {
       .get(`http://3.7.173.138:9000/admin/listbysubcategory/${Params.id}`)
       .then((response) => {
         setCategry(response.data.data);
+        console.log(response.data.data);
+      })
+      .catch((error) => {
+        console.log(error.response.data);
+        setLoading(false);
+      });
+  };
+  const [suggested, setSuggested] = useState([]);
+  const allsuggestedproduct = () => {
+    axios
+      .get(`http://3.7.173.138:9000/admin/listbysubcategory/${Params.id}`)
+      .then((response) => {
+        setSuggested(response.data.data);
+        console.log(response.data.data);
       })
       .catch((error) => {
         console.log(error.response.data);
@@ -1535,7 +1602,13 @@ function ProductList(args) {
                                           <div className="mid">
                                             <h5 className="mt-3">
                                               Link :
-                                              <Link>{Producdetail?.link}</Link>
+                                              {/* <a href={Producdetail?.link}>
+                                                {Producdetail?.link}
+                                            </a> */}
+                                              <a href={Producdetail?.link}>
+                                                {" "}
+                                                {Producdetail?.link}
+                                              </a>
                                             </h5>
                                             <div className="mid-content">
                                               <Row>
@@ -2070,7 +2143,7 @@ function ProductList(args) {
               </span> */}
             </h4>
             <Row>
-              {/* <Swiper
+              <Swiper
                 breakpoints={{
                   980: {
                     slidesPerView: 4,
@@ -2107,27 +2180,27 @@ function ProductList(args) {
                 spaceBetween={50}
                 // slidesPerView={3}
                 centeredSlides={true}
-                loop={true}
+                // loop={true}
                 onSlideChange={() => console.log("slide change")}
                 onSwiper={(swiper) => console.log(swiper)}
                 scrollbar={{ draggable: true }}
                 className="mySwiper"
               >
-                {categry !== ""
-                  ? categry?.map((categry) => (
+                {suggested !== ""
+                  ? suggested?.map((categry) => (
                       <SwiperSlide>
                         <div class="product-grid8" key={categry._id}>
                           <div class="product-image8">
                             <Link
                               key={categry._id}
-                              onClick={() => handleSelection(categry?._id)}
+                              onClick={() => handlesuggSelection(categry?._id)}
                               // onClick={togglesuggestion}
                             >
                               <Modal
                                 key={Producdetail?._id}
                                 className="mdlg"
-                                isOpen={modal}
-                                toggle={handleclosemodal}
+                                isOpen={modalsuggestion}
+                                toggle={handleclosesuggestionmodal}
                                 {...args}
                               >
                                 <ModalBody>
@@ -2139,7 +2212,7 @@ function ProductList(args) {
                                     >
                                       <MdCancelPresentation
                                         className="cancelbuttondata"
-                                        onClick={handleclosemodal}
+                                        onClick={handleclosesuggestionmodal}
                                         size={30}
                                       />
                                     </Col>
@@ -2648,7 +2721,7 @@ function ProductList(args) {
                       </SwiperSlide>
                     ))
                   : null}
-              </Swiper> */}
+              </Swiper>
             </Row>
           </div>
         </Container>

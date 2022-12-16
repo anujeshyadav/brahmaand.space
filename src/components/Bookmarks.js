@@ -28,6 +28,7 @@ import PrettyRating from "pretty-rating-react";
 import { faStar, faStarHalfAlt } from "@fortawesome/free-solid-svg-icons";
 import { faStar as farStar } from "@fortawesome/free-regular-svg-icons";
 import { Modal, ModalBody } from "reactstrap";
+
 function Bookmarks(args) {
   const [modalone, setModalone] = useState(false);
   const [liked, setliked] = useState("");
@@ -184,14 +185,13 @@ function Bookmarks(args) {
   const handleSelection = (_id) => {
     // console.log(_id);
     var selectedId = _id;
-    // toggle();
 
     if (selectedId === _id) {
       setProductdes(selectedId);
       axios
         .get(`http://3.7.173.138:9000/admin/getone_reslist/${productdes}`)
         .then((res) => {
-          // console.log(res.data.data._id);
+          console.log(res.data.data);
           if (
             res.data.data._id !== "" ||
             res.data.data._id !== null ||
@@ -222,6 +222,7 @@ function Bookmarks(args) {
     setActive(!active);
     // console.log("you clicked it");
   };
+
   useEffect(() => {
     getUser();
     hadlestatusbookmark();
@@ -244,12 +245,17 @@ function Bookmarks(args) {
         .get(`http://3.7.173.138:9000/user/my_likes/${myId}`)
         .then((res) => {
           setMylikes(res.data.data);
-          // console.log(res.data.data);
+          console.log(res.data.data);
         })
         .catch((error) => {
           // console.log(error);
         });
     }
+  };
+  const handleclosemodal = () => {
+    setModal(false);
+    setProductdetail("");
+    setProductdes("");
   };
 
   return (
@@ -278,7 +284,7 @@ function Bookmarks(args) {
                         key={Producdetail?._Id}
                         className="mdlg"
                         isOpen={modal}
-                        toggle={toggle}
+                        toggle={handleclosemodal}
                         {...args}
                       >
                         <ModalBody>

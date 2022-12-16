@@ -606,7 +606,7 @@ function LeaderBoard() {
             </Col> */}
           </Row>
 
-          <Container className="mx-5 d-flex">
+          <Container className="mx-2 d-flex">
             <Row className="mt-5" style={{ textAlign: "left" }}>
               <h2 ClassName="mb-3  karmacur">Meteors - All Time</h2>
             </Row>

@@ -76,8 +76,40 @@ function NewSignup() {
 
     setValidated(true);
   };
-  const handleSignInWithgoogle = () => {
-    console.log(" clicked by google");
+  // const [gemail, setGemail] = useState("");
+  // const [genumber, setGnumber] = useState("");
+  // const [gphoto, setGphoto] = useState("");
+  // const [guid, setGuid] = useState("");
+
+  const handlegooglelogin = () => {
+    signInWithGoogle();
+
+    const uid = localStorage.getItem("uid");
+    const photoURL = localStorage.getItem("photoURL");
+    const email = localStorage.getItem("email");
+    const name = localStorage.getItem("name");
+
+    if (email !== "" && name !== "") {
+      axios
+        .post(`http://3.7.173.138:9000/user/signup`, {
+          username: name,
+          email: email,
+          password: name,
+        })
+        .then((response) => {
+          console.log(response.data);
+          navigate("/");
+        })
+        .catch((error) => {
+          console.log(error.response.data);
+          if (error.response.data.message == "already exists") {
+            swal(
+              "This mail or username is already rRegistered",
+              "Please Reset your password or try to signup with different username/email"
+            );
+          }
+        });
+    }
   };
 
   return (
@@ -208,7 +240,7 @@ function NewSignup() {
             <div className style={{ marginTop: "18px" }}>
               <Row className="signupwithgoogle">
                 <button
-                  onClick={signInWithGoogle}
+                  onClick={handlegooglelogin}
                   className="d-flex justify-content-center signupwithgoogle"
                 >
                   <img

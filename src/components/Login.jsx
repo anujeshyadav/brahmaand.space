@@ -8,7 +8,7 @@ import Logo1 from "../images/Logo1.png";
 import { useNavigate } from "react-router-dom";
 import { Col, Row, Container, Form, Button, FormGroup } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { Input, Label } from "reactstrap";
+import { Input, InputGroup, Label } from "reactstrap";
 import swal from "sweetalert";
 import axios from "axios";
 
@@ -158,29 +158,31 @@ function Login() {
                 >
                   <Label className="from-label">Password</Label>
                   <div className="justify-content-center loginpassword">
-                    <Input
-                      type={passwordType}
-                      required="required"
-                      className="login form-control passwordloginforbutton"
-                      placeholder="Password"
-                      value={passwordInput}
-                      onChange={handlePasswordChange}
-                    />
+                    <InputGroup>
+                      <Input
+                        type={passwordType}
+                        required="required"
+                        className="login form-control passwordloginforbutton"
+                        placeholder="Password"
+                        value={passwordInput}
+                        onChange={handlePasswordChange}
+                      />
 
-                    <span
-                      className="d-flex eyeiconhideshow"
-                      onClick={togglePassword}
-                    >
-                      {passwordType === "password" ? (
-                        <span>
-                          <FaRegEyeSlash size={28} />
-                        </span>
-                      ) : (
-                        <span>
-                          <AiOutlineEye size={28} />
-                        </span>
-                      )}
-                    </span>
+                      <span
+                        className="d-flex eyeiconhideshow "
+                        onClick={togglePassword}
+                      >
+                        {passwordType === "password" ? (
+                          <span className="ey-t">
+                            <FaRegEyeSlash size={28} />
+                          </span>
+                        ) : (
+                          <span className="ey-t">
+                            <AiOutlineEye size={28} />
+                          </span>
+                        )}
+                      </span>
+                    </InputGroup>
                   </div>
                 </FormGroup>
                 <Row>

@@ -40,10 +40,6 @@ function TopBar() {
         createdAt: createdAt,
       })
       .then((response) => {
-        // console.log("getdata", response);
-        // console.log("getdata", response.data);
-        // console.log("aboutGet", response.data.data.abt_us);
-
         setUsername(response.data.data.username);
         seAbt_us(response.data.data.abt_us);
         setDisplay_name(response.data.data.display_name);

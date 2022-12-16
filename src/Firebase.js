@@ -26,6 +26,15 @@ export const signInWithGoogle = () => {
   signInWithPopup(auth, provider)
     .then((result) => {
       console.log(result.user);
+      const name = result.user.displayName;
+      const email = result.user.email;
+      const photoURL = result.user.photoURL;
+      const uid = result.user.uid;
+
+      localStorage.setItem("name", name);
+      localStorage.setItem("email", email);
+      localStorage.setItem("photoURL", photoURL);
+      localStorage.setItem("uid", uid);
     })
     .catch((err) => {
       console.log(err);
