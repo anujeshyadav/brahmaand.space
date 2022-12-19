@@ -243,11 +243,7 @@ function VideoPosted(args) {
     // console.log(myId);
     if (myId !== null) {
       axios
-        // .get(`http://3.7.173.138:9000/user/posted_by_me/${myId}`)
-        .get(
-          `http://3.7.173.138:9000/user/posted_by_me/63412176f105488a6b108920`
-        )
-
+        .get(`http://3.7.173.138:9000/user/posted_by_me/${myId}`)
         .then((res) => {
           setMylikes(res.data.data);
           console.log(res.data.data);

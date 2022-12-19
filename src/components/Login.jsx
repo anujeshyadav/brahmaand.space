@@ -152,10 +152,10 @@ function Login() {
                   />
                 </FormGroup>
                 <FormGroup
-                  className=" login-form-group"
+                  className=" mt-3 login-form-group"
                   controlId="formBasicLoginEmail"
                 >
-                  <Label className="from-label">Password</Label>
+                  <Label className=" mt-2 from-label">Password</Label>
                   <div className="justify-content-center loginpassword">
                     <InputGroup>
                       <Input

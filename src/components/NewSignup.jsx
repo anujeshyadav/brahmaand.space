@@ -14,6 +14,7 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import swal from "sweetalert";
 import { signInWithGoogle } from "../Firebase";
+
 function NewSignup() {
   const navigate = useNavigate();
   const [validated, setValidated] = useState(false);
@@ -83,33 +84,30 @@ function NewSignup() {
 
   const handlegooglelogin = () => {
     signInWithGoogle();
-
     const uid = localStorage.getItem("uid");
     const photoURL = localStorage.getItem("photoURL");
     const email = localStorage.getItem("email");
     const name = localStorage.getItem("name");
 
-    if (email !== "" && name !== "") {
-      axios
-        .post(`http://3.7.173.138:9000/user/signup`, {
-          username: name,
-          email: email,
-          password: name,
-        })
-        .then((response) => {
-          console.log(response.data);
-          navigate("/");
-        })
-        .catch((error) => {
-          console.log(error.response.data);
-          if (error.response.data.message == "already exists") {
-            swal(
-              "This mail or username is already rRegistered",
-              "Please Reset your password or try to signup with different username/email"
-            );
-          }
-        });
-    }
+    axios
+      .post(`http://3.7.173.138:9000/user/signup`, {
+        username: name,
+        email: email,
+        password: name,
+      })
+      .then((response) => {
+        console.log(response.data);
+        navigate("/");
+      })
+      .catch((error) => {
+        console.log(error.response.data);
+        if (error.response.data.message == "already exists") {
+          // swal(
+          //   "This mail or username is already rRegistered",
+          //   "Please Reset your password or try to signup with different username/email"
+          // );
+        }
+      });
   };
 
   return (

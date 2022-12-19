@@ -8,7 +8,7 @@ import { Link, NavLink } from "react-router-dom";
 import Glass from "../../src/images/Glass.png";
 import axios from "axios";
 import swal from "sweetalert";
-
+import avatar1 from "../images/avatar1.png";
 import profile from "../images/1.png";
 import boy from "../images/boy.png";
 import topBar from "../css/topBar.css";
@@ -20,7 +20,7 @@ function TopBar() {
   const [username, setUsername] = useState("");
   const [display_name, setDisplay_name] = useState("");
   const [abt_us, seAbt_us] = useState("");
-  const [selectedFile, setSelectedFile] = useState([]);
+  const [selectedFile, setSelectedFile] = useState("");
   const [createdAt, setCreatedAt] = useState("");
   const [profileImg, setroProfileImg] = useState("");
 
