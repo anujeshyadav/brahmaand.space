@@ -185,6 +185,7 @@ function ProductList(args) {
           console.log(res.data.data);
           if (res.data.data !== "" && res.data.data !== null) {
             setCategry(res.data.data);
+            localStorage.removeItem("searchdata");
           }
         })
         .catch((err) => {
