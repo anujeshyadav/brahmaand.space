@@ -103,23 +103,25 @@ function ProductList(args) {
     }
   };
 
+  const hastagdata = localStorage.getItem("hastag");
   const gethastagdata = () => {
-    console.log(Params);
-    if (Params.id !== "") {
-      console.log(Params.id);
+    const hastagdata = localStorage.getItem("hastag");
+    if (hastagdata !== "" && hastagdata !== null) {
       axios
-        .get(`http://3.7.173.138:9000/user/filterbyHashTag/${Params.id}`)
+        .get(`http://3.7.173.138:9000/user/filterbyHashTag/${hastagdata}`)
         .then((res) => {
           console.log(res.data.data);
           if (res.data.data !== "" && res.data.data !== null) {
           }
           setCategry(res.data.data);
+          localStorage.removeItem("hastag");
         })
         .catch((err) => {
           console.log(err);
         });
     }
   };
+
   const getYear = () => {
     axios
       .get(`http://3.7.173.138:9000/user/allYear`)
@@ -167,6 +169,28 @@ function ProductList(args) {
           console.log(err);
         });
     }
+  };
+
+  const searchdata = localStorage.getItem("searchdata");
+
+  const handleSearchHomePage = () => {
+    const searchdata = localStorage.getItem("searchdata");
+    console.log(searchdata);
+    if (searchdata !== "" && searchdata !== null)
+      axios
+        .post(`http://3.7.173.138:9000/user/search_topic_title`, {
+          searchinput: searchdata,
+        })
+        .then((res) => {
+          console.log(res.data.data);
+          if (res.data.data !== "" && res.data.data !== null) {
+            setCategry(res.data.data);
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    // console.log("you are searching");
   };
 
   const handlesearchdescription = () => {
@@ -483,7 +507,6 @@ function ProductList(args) {
 
   useEffect(() => {
     allsuggestedproduct();
-    gethastagdata();
     getYear();
     getLanguage();
     getUser();
@@ -496,13 +519,22 @@ function ProductList(args) {
       searchrating === "" &&
       contentyear === "" &&
       language === "" &&
-      searchitem === ""
+      searchitem === "" &&
+      hastagdata === "" &&
+      searchdata === ""
     ) {
       allsearchproduct();
     }
     if (type !== "") {
       gettypefilter();
     }
+    if (hastagdata !== "") {
+      gethastagdata();
+    }
+    if (searchdata !== "" && searchdata !== null) {
+      handleSearchHomePage();
+    }
+
     if (contentyear !== "" && contentyear !== null) {
       getolderyeardata();
     }
@@ -529,6 +561,8 @@ function ProductList(args) {
     searchitem,
     language,
     contentyear,
+    hastagdata,
+    searchdata,
   ]);
 
   const [typelength, setTypelength] = useState([]);

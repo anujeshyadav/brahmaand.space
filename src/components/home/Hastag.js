@@ -130,15 +130,27 @@ function Hastag() {
     // navigate(`/productList/${homesearch}`);
   };
   function handlehastagtopic(hastag) {
+    localStorage.setItem("hastag", hastag);
     if (hastag !== "") {
       console.log(hastag);
-      navigate(`/productList/${hastag}`, { name: { hastag } });
+      axios
+        .get(`http://3.7.173.138:9000/user/filterbyHashTag/${hastag}`)
+        .then((res) => {
+          console.log(res.data?.data[0].sub_category?._id);
+          const hastagdata = res.data?.data[0].sub_category?._id;
+
+          if (hastagdata !== "" && hastagdata !== null) {
+            console.log(hastagdata);
+            navigate(`/productList/${hastagdata}`);
+          } else {
+            swal("No Data found");
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     }
   }
-  // const handlehastagtopic = (hastag) => {
-
-  //
-  // };
 
   const [isOpenone, setOpenone] = useState(false);
   const [isOpen, setOpen] = useState(false);
