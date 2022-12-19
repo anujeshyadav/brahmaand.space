@@ -94,23 +94,24 @@ function CustomNavbar(args) {
 
   const handleSubmitResource = (e) => {
     e.preventDefault();
-
     const userid = localStorage.getItem("userId");
+    // if (topic !== "") {
+    //   const answerarray = topic.split(",");
+    //   console.log(answerarray);
+    // }
 
-    const answerarray = topic.split(",");
-    console.log(answerarray);
     if (cat_img == "" && cat_img == null && cat_img == undefined) {
       setCat_img(dummy);
     }
     if (
-      link != "" &&
+      link !== "" &&
       catgry !== "" &&
       subcatry !== "" &&
       type !== "" &&
       formate !== "" &&
       sellang !== "" &&
-      topic != "" &&
-      Desc != ""
+      topic !== "" &&
+      Desc !== ""
     ) {
       axios
         .post(`http://3.7.173.138:9000/user/App_Sub_resrc`, {
@@ -120,7 +121,7 @@ function CustomNavbar(args) {
           type: type,
           format: formate,
           language: sellang,
-          topics: answerarray,
+          topics: topic,
           desc: Desc,
           resTitle: Optitle,
           creatorName: Opcname,

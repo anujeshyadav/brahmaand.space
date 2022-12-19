@@ -114,7 +114,7 @@ function ProductList(args) {
           if (res.data.data !== "" && res.data.data !== null) {
           }
           setCategry(res.data.data);
-          localStorage.removeItem("hastag");
+          // localStorage.removeItem("hastag");
         })
         .catch((err) => {
           console.log(err);
@@ -521,7 +521,7 @@ function ProductList(args) {
       contentyear === "" &&
       language === "" &&
       searchitem === "" &&
-      hastagdata === "" &&
+      hastagdata === "hastag" &&
       searchdata === ""
     ) {
       allsearchproduct();
@@ -529,7 +529,7 @@ function ProductList(args) {
     if (type !== "") {
       gettypefilter();
     }
-    if (hastagdata !== "") {
+    if (hastagdata !== "hastag") {
       gethastagdata();
     }
     if (searchdata !== "" && searchdata !== null) {

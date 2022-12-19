@@ -129,6 +129,7 @@ function Hastag() {
     // console.log(homesearch);
     // navigate(`/productList/${homesearch}`);
   };
+  localStorage.setItem("hastag", "hastag");
   function handlehastagtopic(hastag) {
     localStorage.setItem("hastag", hastag);
     if (hastag !== "") {
