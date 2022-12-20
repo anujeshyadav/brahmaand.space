@@ -44,16 +44,16 @@ function CustomNavbar(args) {
   const [topic, setTopic] = useState([]);
   const [Desc, setDesc] = useState("");
   const [Optitle, setOptitle] = useState("");
-  const [first, setfirst] = useState({});
+  // const [first, setfirst] = useState({});
   const [lngage, setLngage] = useState([]);
   const [sellang, setSellang] = useState();
   const [relyear, setRelyear] = useState([]);
-  const [selectedyear, setSelectedyear] = useState();
+  const [selectedyear, setSelectedyear] = useState([]);
   const [Opcname, setOpcname] = useState("");
   const [Opdes, setOpdes] = useState("");
   const [Opcomm, setOpcomm] = useState("");
   const [error, setError] = useState(null);
-  const [selectedFile, setSelectedFile] = useState([]);
+  const [selectedFile, setSelectedFile] = useState("");
 
   var fileUpload = (e) => {
     // setCat_img(e.target.files[0]);
@@ -100,12 +100,12 @@ function CustomNavbar(args) {
 
   const userid = localStorage.getItem("userId");
 
-  // function urlPatternValidation(link) {
-  //   const regex = new RegExp(
-  //     "https?://(www.)?[-a-zA-Z0-9@:%._+~#=]{1,256}.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)"
-  //   );
-  //   return regex.test(link);
-  // }
+  function urlPatternValidation(link) {
+    const regex = new RegExp(
+      "https?://(www.)?[-a-zA-Z0-9@:%._+~#=]{1,256}.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)"
+    );
+    return regex.test(link);
+  }
 
   const handleSubmitResource = (e) => {
     e.preventDefault();
@@ -115,12 +115,9 @@ function CustomNavbar(args) {
     //   console.log(answerarray);
     // }
 
-    if (
-      selectedFile == "" &&
-      selectedFile == null &&
-      selectedFile == undefined
-    ) {
+    if (selectedFile == "") {
       imageToBase64(dummy);
+      imageToBase64();
     }
     if (
       link !== "" &&

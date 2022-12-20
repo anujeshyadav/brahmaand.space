@@ -689,15 +689,18 @@ function ProductList(args) {
                     <Col lg="12" className="py-3">
                       <div className="ft-slider">
                         <Row>
+                          <h3>Filters</h3>
+                        </Row>
+                        {/* <Row>
                           <Col lg="9">
                             <h5>Review</h5>
                           </Col>
                           <Col className="fifilter " lg="3">
                             <FiFilter size={30} />
                           </Col>
-                        </Row>
+                        </Row> */}
 
-                        <Row>
+                        {/* <Row>
                           <input
                             min="0"
                             max="5"
@@ -718,8 +721,8 @@ function ProductList(args) {
                             <option value="4" label="4"></option>
                             <option value="5" label="5"></option>
                           </datalist>
-                        </Row>
-                        <Row>
+                        </Row> */}
+                        {/* <Row>
                           <Col lg="9">
                             <p>Range</p>
                           </Col>
@@ -729,7 +732,7 @@ function ProductList(args) {
                           <Col className="rangefil" lg="2">
                             1 - 5
                           </Col>
-                        </Row>
+                        </Row> */}
                       </div>
                     </Col>
                     <Col lg="12" className="py-3">

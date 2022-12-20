@@ -229,7 +229,7 @@ function LeaderBoard() {
                             <div className="planet-text">
                               <h4>
                                 {value?.planet_name}
-                                <span>{value?.doller_rupees}</span>
+                                <span>${value?.doller_rupees}</span>
                               </h4>
                               <p>{value?.point_range}</p>
                             </div>

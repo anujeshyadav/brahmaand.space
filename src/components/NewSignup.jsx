@@ -24,12 +24,11 @@ function NewSignup() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    // debugger;
+
     const form = event.currentTarget;
     if (form.checkValidity() === false) {
       event.preventDefault();
       event.stopPropagation();
-      // swal("Fill details");
     } else if (
       username.length > 2 &&
       email !== "" &&
@@ -66,21 +65,13 @@ function NewSignup() {
         .catch((error) => {
           console.log(error.response.data);
           if (error.response.data.message == "already exists") {
-            swal(
-              "This mail or username is already rRegistered",
-              "Please Reset your password or try to signup with different username/email"
-            );
+            swal("This mail or username is already Registered");
           }
         });
     }
-    // console.log(username, email, password);
 
     setValidated(true);
   };
-  // const [gemail, setGemail] = useState("");
-  // const [genumber, setGnumber] = useState("");
-  // const [gphoto, setGphoto] = useState("");
-  // const [guid, setGuid] = useState("");
 
   const handlegooglelogin = () => {
     signInWithGoogle();
@@ -139,7 +130,7 @@ function NewSignup() {
           </div>
         </Col>
         <Col lg="4">
-          <Form noValidate validated={validated} onSubmit={handleSubmit}>
+          <Form noValidate validated={validated}>
             <Label
               style={{
                 height: "25px",
@@ -224,7 +215,7 @@ function NewSignup() {
               <button
                 // disabled={!performValidation()}
                 style={{ padding: "13px 136px", borderRadius: "11px" }}
-                type="submit"
+                // type="submit"
                 class="btn btn-primary"
                 onClick={handleSubmit}
               >

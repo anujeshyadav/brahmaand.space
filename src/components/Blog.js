@@ -91,9 +91,9 @@ function Blog() {
               opacity: 0.7,
             }}
           >
-            <h1 style={{ color: "#ffff", marginTop: "70px" }}>
+            {/* <h1 style={{ color: "#ffff", marginTop: "70px" }}>
               <b>Blogs</b>
-            </h1>
+            </h1> */}
           </div>
         </div>
       </Container>
@@ -147,10 +147,11 @@ function Blog() {
                           <Moment format="lll">{value?.createdAt}</Moment>
                         </h6>
                         <ShowMore
-                          lines={2}
+                          lines={3}
                           more="Show more"
                           less="Show less"
                           anchorClass=""
+                          // style={{ height: "32vh" }}
                         >
                           <h6>{value?.desc}</h6>
                         </ShowMore>
