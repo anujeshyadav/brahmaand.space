@@ -8,7 +8,7 @@ import { ImCancelCircle } from "react-icons/im";
 import React from "react";
 import axios from "axios";
 import dummy from "../../src/images/dummy.png";
-import imageToBase64 from "image-to-base64/browser";
+// import imageToBase64 from "image-to-base64/browser";
 import swal from "sweetalert";
 import {
   Accordion,
@@ -49,30 +49,45 @@ function CustomNavbar(args) {
   const [sellang, setSellang] = useState();
   const [relyear, setRelyear] = useState([]);
   const [selectedyear, setSelectedyear] = useState();
-  const [cat_img, setCat_img] = useState({});
   const [Opcname, setOpcname] = useState("");
   const [Opdes, setOpdes] = useState("");
   const [Opcomm, setOpcomm] = useState("");
-  const [title, settitle] = useState({});
   const [error, setError] = useState(null);
-  const [conimg, setConimg] = useState("");
+  const [selectedFile, setSelectedFile] = useState([]);
 
   var fileUpload = (e) => {
-    setCat_img(e.target.files[0]);
-    // setCat_img({
-    //   picturePreview: URL.createObjectURL(e.target.files[0]),
-    //   pictureAsFile: e.target.files[0],
-    // });
+    // setCat_img(e.target.files[0]);
+    const files = e.target.files;
+    const file = files[0];
+    imageToBase64(file);
+    imageToBase64();
   };
-  imageToBase64(cat_img) // Path to the image
-    .then((response) => {
-      setConimg(response); // "cGF0aC90by9maWxlLmpwZw=="
-      // setConvertimg(response);
-      // console.log(response);
-    })
-    .catch((error) => {
-      console.log(error); // Logs an error if there was one
-    });
+  let base64code = "";
+  const onLoad = (fileString) => {
+    // console.log("fileString", fileString);
+    const image64 = fileString.split(",");
+    console.log(image64[1]);
+    setSelectedFile(image64[1]);
+
+    base64code = fileString;
+  };
+
+  const imageToBase64 = (file) => {
+    let reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => {
+      onLoad(reader.result);
+    };
+  };
+  // imageToBase64(cat_img) // Path to the image
+  //   .then((response) => {
+  //     setConimg(response); // "cGF0aC90by9maWxlLmpwZw=="
+  //     // setConvertimg(response);
+  //     // console.log(response);
+  //   })
+  //   .catch((error) => {
+  //     console.log(error); // Logs an error if there was one
+  //   });
   const handleSubmit = (event) => {
     const form = event.currentTarget;
     if (form.checkValidity() === false) {
@@ -100,8 +115,12 @@ function CustomNavbar(args) {
     //   console.log(answerarray);
     // }
 
-    if (cat_img == "" && cat_img == null && cat_img == undefined) {
-      setCat_img(dummy);
+    if (
+      selectedFile == "" &&
+      selectedFile == null &&
+      selectedFile == undefined
+    ) {
+      imageToBase64(dummy);
     }
     if (
       link !== "" &&
@@ -128,7 +147,7 @@ function CustomNavbar(args) {
           relYear: selectedyear,
           res_desc: Opdes,
           comment: Opcomm,
-          img: conimg,
+          img: selectedFile,
           userid: userid,
         })
         .then((res) => {
@@ -148,7 +167,7 @@ function CustomNavbar(args) {
             setSelectedyear("");
             setOpdes("");
             setOpcomm("");
-            setCat_img(null);
+            setSelectedFile(null);
             setModal(false);
           } else {
             swal("Something went wrong, Try again");

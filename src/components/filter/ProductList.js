@@ -88,6 +88,7 @@ function ProductList(args) {
   const navigate = useNavigate();
   // console.log("params", Params);
   const handlesearchbylanguage = () => {
+    // console.log(language);
     if (language !== "" && language !== undefined) {
       axios
         .get(
@@ -152,11 +153,7 @@ function ProductList(args) {
 
   const getolderyeardata = () => {
     console.log(contentyear);
-    if (
-      contentyear !== "" &&
-      contentyear !== null &&
-      contentyear !== undefined
-    ) {
+    if (contentyear !== "") {
       axios
         .get(
           `http://3.7.173.138:9000/user/filterbyyear/${Params.id}/${contentyear}`
@@ -172,7 +169,6 @@ function ProductList(args) {
   };
 
   const searchdata = localStorage.getItem("searchdata");
-
   const handleSearchHomePage = () => {
     const searchdata = localStorage.getItem("searchdata");
     console.log(searchdata);
@@ -518,7 +514,7 @@ function ProductList(args) {
       type === "" &&
       format === "" &&
       searchrating === "" &&
-      contentyear === "" &&
+      contentyear == "" &&
       language === "" &&
       searchitem === "" &&
       hastagdata === "hastag" &&
@@ -536,7 +532,7 @@ function ProductList(args) {
       handleSearchHomePage();
     }
 
-    if (contentyear !== "" && contentyear !== null) {
+    if (contentyear !== "") {
       getolderyeardata();
     }
     if (format !== "") {

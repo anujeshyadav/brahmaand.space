@@ -4,6 +4,7 @@ import { Modal, ModalBody, Label, FormGroup, Input, Alert } from "reactstrap";
 import { Navbar, Nav } from "react-bootstrap";
 import Moment from "react-moment";
 import "moment-timezone";
+import imageToBase64 from "image-to-base64/browser";
 import { Link, NavLink } from "react-router-dom";
 import Glass from "../../src/images/Glass.png";
 import axios from "axios";
@@ -20,55 +21,70 @@ function TopBar() {
   const [username, setUsername] = useState("");
   const [display_name, setDisplay_name] = useState("");
   const [abt_us, seAbt_us] = useState("");
-  const [selectedFile, setSelectedFile] = useState("");
+  const [selectedFile, setSelectedFile] = useState([]);
   const [createdAt, setCreatedAt] = useState("");
-  const [profileImg, setroProfileImg] = useState("");
+  const [profileImg, setroProfileImg] = useState([]);
 
   var fileUpload = (e) => {
-    setSelectedFile(e.target.files[0]);
+    const files = e.target.files;
+    const file = files[0];
+    imageToBase64(file);
+    imageToBase64();
+  };
+  let base64code = "";
+  const onLoad = (fileString) => {
+    // console.log("fileString", fileString);
+    const image64 = fileString.split(",");
+    console.log(image64[1]);
+    setSelectedFile(image64[1]);
+
+    base64code = fileString;
+  };
+
+  const imageToBase64 = (file) => {
+    let reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => {
+      onLoad(reader.result);
+    };
   };
   const id = localStorage.getItem("userId");
-  // console.log(id);
 
-  useEffect(() => {
+  const [userdata, setUserdata] = useState();
+  const getUserData = () => {
     axios
-      .get(`http://3.7.173.138:9000/user/getoneUser/${id}`, {
-        username: username,
-        display_name: display_name,
-        abt_us: abt_us,
-        profileImg: profileImg,
-        createdAt: createdAt,
+      .get(`http://3.7.173.138:9000/user/getoneUser/${id}`)
+      .then((res) => {
+        setUserdata(res.data.data);
+        console.log(res.data.data);
       })
-      .then((response) => {
-        setUsername(response.data.data.username);
-        seAbt_us(response.data.data.abt_us);
-        setDisplay_name(response.data.data.display_name);
-        setCreatedAt(response.data.data.createdAt.slice(0, 10));
-        setroProfileImg(response.data.data.profileImg);
-      })
-      .catch((error) => {
-        // console.log(error.response.data.data);
+      .catch((err) => {
+        console.log(err);
       });
+  };
+  useEffect(() => {
+    getUserData();
   }, []);
 
-  const handleLoginSubmit = async () => {
-    // console.log(username, display_name, abt_us, selectedFile);
+  const handleLoginSubmit = async (e) => {
+    e.preventDefault();
+    console.log(username, display_name, abt_us, id);
+
     const formData = new FormData();
     formData.append("profileImg", selectedFile);
     formData.append("username", username);
     formData.append("display_name", display_name);
     formData.append("abt_us", abt_us);
     axios
-      .post(`http://3.7.173.138:9000/user/updateProfile/${id}`, formData, {
-        header: { userId: await localStorage.getItem("userId") },
-      })
+      .post(`http://3.7.173.138:9000/user/updateProfile/${id}`, formData)
       .then((response) => {
+        // console.log(response.data.data);
         if (response.data.message === "success") {
           swal("Updated Successfully👍");
         } else {
           swal("Something went wrong try again");
         }
-        setroProfileImg(response.data.data.profileImg[0]);
+        // setroProfileImg(response.data.data.profileImg[0]);
       })
 
       .catch((error) => {
@@ -94,7 +110,7 @@ function TopBar() {
               <div className="st-1 text-center  ">
                 <div className="imagewite ">
                   <img
-                    src={profileImg}
+                    src={userdata?.profileImg}
                     className="imageone"
                     style={{
                       height: "263px",
@@ -110,17 +126,18 @@ function TopBar() {
                     <pre>
                       <ul>
                         <li style={{ color: "black" }}>
-                          {`Username            :   ${username}`}
+                          {`Username            :   ${userdata?.username}`}
                         </li>
                         <li style={{ color: "black" }}>
-                          {`Display name    :    ${display_name}`}
+                          {`Display name     :    ${userdata?.display_name}`}
                         </li>
                         <li style={{ color: "black" }}>
-                          {`User Since          :    `}
-                          <Moment format="lll">{`    :       ${createdAt}`}</Moment>
+                          {`User Since           :    `}
+                          {/* <Moment format="ll">{`    :       ${userdata?.createdAt}`}</Moment> */}
+                          {` ${userdata?.createdAt.slice(0, 10)}`}
                         </li>
                         <li style={{ color: "black" }}>
-                          {`Karma                  :    ${createdAt}`}
+                          {`Meteors                :    ${userdata?.meteors}`}
                           {/* Karma: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         <b>3700</b> */}
                         </li>
@@ -131,7 +148,7 @@ function TopBar() {
 
                 <Col lg="7">
                   <b>About Us:</b>
-                  <p>{abt_us}</p>
+                  <p>{userdata?.abt_us}</p>
                 </Col>
               </Row>
             </div>
