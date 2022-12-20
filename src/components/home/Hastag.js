@@ -143,8 +143,6 @@ function Hastag() {
           if (hastagdata !== "" && hastagdata !== null) {
             console.log(hastagdata);
             navigate(`/productList/${hastagdata}`);
-          } else {
-            swal("No Data found");
           }
         })
         .catch((err) => {
