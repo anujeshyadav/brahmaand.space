@@ -9,6 +9,7 @@ import React from "react";
 import axios from "axios";
 import dummy from "../../src/images/dummy.png";
 // import imageToBase64 from "image-to-base64/browser";
+import isURL from "validator/lib/isURL";
 import swal from "sweetalert";
 import {
   Accordion,
@@ -33,6 +34,7 @@ import { useContextMenu } from "../context/MenuContext";
 import { useAuth } from "../context/AuthContext";
 import agreement_download from "../assets/files/Dispatch305-agreement.pdf";
 import UserPage from "./UserPage";
+import { BsFillLampFill } from "react-icons/bs";
 
 function CustomNavbar(args) {
   const [validated, setValidated] = useState(false);
@@ -116,9 +118,11 @@ function CustomNavbar(args) {
     // }
 
     if (selectedFile == "") {
+      console.log("object");
       imageToBase64(dummy);
       imageToBase64();
     }
+    console.log(selectedFile);
     if (
       link !== "" &&
       catgry !== "" &&
@@ -131,7 +135,7 @@ function CustomNavbar(args) {
     ) {
       axios
         .post(`http://3.7.173.138:9000/user/App_Sub_resrc`, {
-          link: link,
+          link: url,
           category: catgry,
           sub_category: subcatry,
           type: type,
@@ -281,6 +285,17 @@ function CustomNavbar(args) {
   //   setSellang(Sellang.concat(selectedItem._id));
   //   console.log(sellang);
   // };
+  const [err, setErr] = useState("");
+  const [url, setUrl] = useState("");
+  const validate = (e) => {
+    setLink(e.target.value);
+    if (isURL(link)) {
+      setErr("This looks like Valid URL");
+      setUrl(link);
+    } else {
+      setErr("Please Enter Valid URL");
+    }
+  };
   const onSelect = (selectedList, selectedItem) => {
     console.log(selectedList);
     var selectItem1 = [];
@@ -406,12 +421,26 @@ function CustomNavbar(args) {
                                 value={link}
                                 className="form-control "
                                 placeholder="https://www. "
-                                onChange={(e) => setLink(e.target.value)}
+                                // onChange={(e) => setLink(e.target.value)}
+                                onChange={validate}
                               />
+                              <p
+                                className="mx-2 mt-3"
+                                style={{ color: "red", fontSize: "15px" }}
+                              >
+                                {err == "This looks like Valid URL" ? (
+                                  <span
+                                    style={{ color: "green", fontSize: "12px" }}
+                                  >
+                                    This look's like Valid URL
+                                  </span>
+                                ) : (
+                                  <span style={{ fontSize: "12px" }}>
+                                    Enter valid url
+                                  </span>
+                                )}
+                              </p>
                             </h5>
-                            {error !== "" ? (
-                              <h6 style={{ color: "red" }}>{error}</h6>
-                            ) : null}
                           </Row>
                         </div>
                         <div>
@@ -421,7 +450,7 @@ function CustomNavbar(args) {
                                 {catgry !== "" ? (
                                   <p
                                     style={{ color: "black" }}
-                                    className="mt-4"
+                                    className="mt-2"
                                   >
                                     Category
                                   </p>

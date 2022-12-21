@@ -41,9 +41,9 @@ function Login() {
     return /\S+@\S+\.\S+/.test(email);
   }
 
-  function performValidation() {
-    return email.length > 4 && password.length > 4;
-  }
+  // function performValidation() {
+  //   return email.length > 4 && password.length > 4;
+  // }
 
   const navigate = useNavigate();
 
@@ -214,7 +214,7 @@ function Login() {
                 </Row>
                 <div className="d-flex justify-content-center">
                   <button
-                    disabled={!performValidation()}
+                    // disabled={!performValidation()}
                     style={{ padding: "13px 162px", borderRadius: "11px" }}
                     type="button"
                     class="btn btn-primary"
