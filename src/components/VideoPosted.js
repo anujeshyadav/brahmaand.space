@@ -482,7 +482,7 @@ function VideoPosted(args) {
                                       {getonecomment?.length}- Customers Reviews
                                     </span>
 
-                                    <Row>
+                                    {/* <Row>
                                       <Col
                                         className="d-flex justify-content-left "
                                         style={{ color: "blue" }}
@@ -585,26 +585,26 @@ function VideoPosted(args) {
                                           completed={40}
                                         />
                                       </Col>
-                                    </Row>
+                                    </Row> */}
                                   </div>
                                 </div>
                               </Col>
-                              <Col lg="8" key={Producdetail?._id}>
+                              <Col lg="8">
+                                {" "}
+                                <Col lg="6">
+                                  <h4 className="mt-3">Write your Review</h4>
+                                  <StarsRating
+                                    count={5}
+                                    onChange={ratingChanged}
+                                    size={40}
+                                    color2={"#ffd700"}
+                                  />
+                                </Col>
+                              </Col>
+                            </Row>
+                            <Row>
+                              <Col lg="12" key={Producdetail?._id}>
                                 <div className="rat-right">
-                                  <Row>
-                                    <Col lg="6">
-                                      <h4 className="mt-3">
-                                        Write your Review
-                                      </h4>
-                                      <StarsRating
-                                        count={5}
-                                        onChange={ratingChanged}
-                                        size={40}
-                                        color2={"#ffd700"}
-                                      />
-                                    </Col>
-                                  </Row>
-
                                   <div className="">
                                     <form key={Producdetail?._id}>
                                       <textarea

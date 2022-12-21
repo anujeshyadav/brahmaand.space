@@ -248,9 +248,9 @@ function Allpromotion(args) {
           All Promotions
         </h3>
         <div className="container mb-3">
-          <Row className="mb-2 mt-3">
+          <Row style={{ height: "60vh" }} className=" mb-2">
             {promotion?.map((promotion) => (
-              <Col lg="3" md="6" sm="12">
+              <Col lg="3" md="4" sm="6" key={promotion?._id}>
                 <div class="product-grid8">
                   <div class="product-image8">
                     <Link
@@ -387,9 +387,9 @@ function Allpromotion(args) {
                                     </div>
                                     <div className="mid-1-b tt-1">
                                       <p>Category:</p>
-                                      <Link to="#">
+                                      <p to="#">
                                         {promotiondata?.category?.title}
-                                      </Link>
+                                      </p>
                                     </div>
                                   </div>
                                 </Col>
@@ -405,7 +405,7 @@ function Allpromotion(args) {
                                     <div className="mid-1-b tt-1">
                                       <p>Language:</p>
                                       {promotiondata?.language?.map((lang) => (
-                                        <Link to="#">{lang?.language}</Link>
+                                        <span>{lang?.language} </span>
                                       ))}
                                     </div>
                                   </div>
@@ -430,7 +430,17 @@ function Allpromotion(args) {
                                     </div>
                                     <div className="mid-1-b tt-1">
                                       <p>Ratings:</p>
-                                      <Link to="#">(4.5)</Link>
+                                      <Link to="#">
+                                        [
+                                        {promotiondata?.ava_rating !== "NaN" ? (
+                                          <span>
+                                            {promotiondata?.ava_rating}
+                                          </span>
+                                        ) : (
+                                          <span>0</span>
+                                        )}
+                                        ]
+                                      </Link>
                                     </div>
                                   </div>
                                 </Col>
@@ -465,138 +475,152 @@ function Allpromotion(args) {
                           <hr></hr>
                           <div className="rating-box">
                             <Row>
-                              <Col lg="4">
+                              <Col lg="6">
                                 <div className="rat-left">
                                   <h4>Customer Rating</h4>
                                   <div className="">
                                     <PrettyRating
                                       // value={value?.rating}
-                                      value={2}
+                                      value={averageRating?.data}
                                       icons={icons.star}
                                       colors={colors.star}
                                     />
 
                                     <small className="mt-3">
                                       {getonecomment?.length}- customers reviews
+                                      {/* {sum / totalrateng.length} */}
                                     </small>
-                                    <Row>
-                                      <Col
-                                        className="d-flex justify-content-left mt-1"
-                                        style={{ color: "blue" }}
-                                        lg="4"
-                                      >
-                                        5 Stars
-                                      </Col>
-                                      <Col className="mt-1 mb-1 " lg="8">
-                                        {" "}
-                                        <ProgressBar
-                                          bgColor=" #fdb800"
-                                          height="13px"
-                                          borderRadius="12px"
-                                          className="progressbar"
-                                          barContainerClassName="containerone"
-                                          labelClassName="label"
-                                          completed={60}
-                                        />
-                                      </Col>
-                                    </Row>
-                                    <Row>
-                                      <Col
-                                        className="d-flex justify-content-left mt-1 "
-                                        style={{ color: "blue" }}
-                                        lg="4"
-                                      >
-                                        4 Stars
-                                      </Col>
-                                      <Col className="mt-1 mb-1" lg="8">
-                                        {" "}
-                                        <ProgressBar
-                                          bgColor=" #fdb800"
-                                          height="13px"
-                                          borderRadius="12px"
-                                          className="progressbar"
-                                          barContainerClassName="containerone"
-                                          labelClassName="label"
-                                          completed={40}
-                                        />
-                                      </Col>
-                                    </Row>
-                                    <Row>
-                                      <Col
-                                        className="d-flex justify-content-left mt-1 "
-                                        style={{ color: "blue" }}
-                                        lg="4"
-                                      >
-                                        3 Stars
-                                      </Col>
-                                      <Col className="mt-1 mb-1" lg="8">
-                                        {" "}
-                                        <ProgressBar
-                                          bgColor=" #fdb800"
-                                          height="13px"
-                                          borderRadius="12px"
-                                          className="progressbar"
-                                          barContainerClassName="containerone"
-                                          labelClassName="label"
-                                          completed={50}
-                                        />
-                                      </Col>
-                                    </Row>
-                                    <Row>
-                                      <Col
-                                        className="d-flex justify-content-left mt-1 "
-                                        style={{ color: "blue" }}
-                                        lg="4"
-                                      >
-                                        2 Stars
-                                      </Col>
-                                      <Col className="mt-1 mb-1" lg="8">
-                                        {" "}
-                                        <ProgressBar
-                                          bgColor=" #fdb800"
-                                          height="13px"
-                                          borderRadius="12px"
-                                          className="progressbar"
-                                          barContainerClassName="containerone"
-                                          labelClassName="label"
-                                          completed={70}
-                                        />
-                                      </Col>
-                                    </Row>
-                                    <Row>
-                                      <Col
-                                        className="d-flex justify-content-left mt-1 "
-                                        style={{ color: "blue" }}
-                                        lg="4"
-                                      >
-                                        1 Stars
-                                      </Col>
-                                      <Col className="mt-1 mb-1" lg="8">
-                                        <ProgressBar
-                                          bgColor=" #fdb800"
-                                          height="13px"
-                                          borderRadius="12px"
-                                          className="progressbar"
-                                          barContainerClassName="containerone"
-                                          labelClassName="label"
-                                          completed={40}
-                                        />
-                                      </Col>
-                                    </Row>
-                                    {/* <img src={ratingstar} alt="" width="100%" /> */}
+
+                                    {/* <Row>
+                                              <Col
+                                                className="d-flex justify-content-left mt-1"
+                                                style={{ color: "blue" }}
+                                                lg="4"
+                                              >
+                                                5 Stars
+                                              </Col>
+                                              <Col
+                                                className="mt-1 mb-1 "
+                                                lg="8"
+                                              >
+                                                {" "}
+                                                <ProgressBar
+                                                  bgColor=" #fdb800"
+                                                  height="13px"
+                                                  borderRadius="12px"
+                                                  className="progressbar"
+                                                  barContainerClassName="containerone"
+                                                  labelClassName="label"
+                                                  completed={60}
+                                                />
+                                              </Col>
+                                            </Row>
+                                            <Row>
+                                              <Col
+                                                className="d-flex justify-content-left mt-1 "
+                                                style={{ color: "blue" }}
+                                                lg="4"
+                                              >
+                                                4 Stars
+                                              </Col>
+                                              <Col className="mt-1 mb-1" lg="8">
+                                                {" "}
+                                                <ProgressBar
+                                                  bgColor=" #fdb800"
+                                                  height="13px"
+                                                  borderRadius="12px"
+                                                  className="progressbar"
+                                                  barContainerClassName="containerone"
+                                                  labelClassName="label"
+                                                  completed={40}
+                                                />
+                                              </Col>
+                                            </Row>
+                                            <Row>
+                                              <Col
+                                                className="d-flex justify-content-left mt-1 "
+                                                style={{ color: "blue" }}
+                                                lg="4"
+                                              >
+                                                3 Stars
+                                              </Col>
+                                              <Col className="mt-1 mb-1" lg="8">
+                                                {" "}
+                                                <ProgressBar
+                                                  bgColor=" #fdb800"
+                                                  height="13px"
+                                                  borderRadius="12px"
+                                                  className="progressbar"
+                                                  barContainerClassName="containerone"
+                                                  labelClassName="label"
+                                                  completed={50}
+                                                />
+                                              </Col>
+                                            </Row>
+                                            <Row>
+                                              <Col
+                                                className="d-flex justify-content-left mt-1 "
+                                                style={{ color: "blue" }}
+                                                lg="4"
+                                              >
+                                                2 Stars
+                                              </Col>
+                                              <Col className="mt-1 mb-1" lg="8">
+                                                {" "}
+                                                <ProgressBar
+                                                  bgColor=" #fdb800"
+                                                  height="13px"
+                                                  borderRadius="12px"
+                                                  className="progressbar"
+                                                  barContainerClassName="containerone"
+                                                  labelClassName="label"
+                                                  completed={70}
+                                                />
+                                              </Col>
+                                            </Row>
+                                            <Row>
+                                              <Col
+                                                className="d-flex justify-content-left mt-1 "
+                                                style={{ color: "blue" }}
+                                                lg="4"
+                                              >
+                                                1 Stars
+                                              </Col>
+                                              <Col className="mt-1 mb-1" lg="8">
+                                                <ProgressBar
+                                                  bgColor=" #fdb800"
+                                                  height="13px"
+                                                  borderRadius="12px"
+                                                  className="progressbar"
+                                                  barContainerClassName="containerone"
+                                                  labelClassName="label"
+                                                  completed={40}
+                                                />
+                                              </Col>
+                                            </Row> */}
                                   </div>
                                 </div>
                               </Col>
-                              <Col lg="8">
+                              <Col lg="6">
+                                <h4>Write your review</h4>
+
+                                <StarsRating
+                                  count={5}
+                                  onChange={ratingChanged}
+                                  size={40}
+                                  color={"#ffd700"}
+                                />
+                              </Col>
+                              <Row lg="12">
                                 <div className="rat-right">
-                                  <h4>Write your review</h4>
+                                  {/* <h4>Write your review</h4> */}
                                   <div className="">
-                                    <StarsRating
-                                      count={5}
-                                      onChange={ratingChanged}
-                                      size={40}
-                                      color={"#ffd700"}
-                                    />
+                                    {/* <StarsRating
+                                              count={5}
+                                              onChange={ratingChanged}
+                                              size={40}
+                                              color={"#ffd700"}
+                                            /> */}
 
                                     <form>
                                       <textarea
@@ -608,14 +632,14 @@ function Allpromotion(args) {
                                       ></textarea>
                                       <Button
                                         onClick={handleSubmit}
-                                        className="bt-st reviewbutton mb-3 btn btn-primary"
+                                        className=" bt-st reviewbutton mb-3 btn btn-primary"
                                       >
                                         Send
                                       </Button>
                                     </form>
                                   </div>
                                 </div>
-                              </Col>
+                              </Row>
                             </Row>
                           </div>
                           <Row key={promotion?._id}>
@@ -690,23 +714,23 @@ function Allpromotion(args) {
                         ))}
                       </li>
                     </ul>
-                    <h3>{promotion?.desc}</h3>
+                    <h3>{promotion?.desc?.slice(0, 25)}</h3>
                     <h5>
-                      <span>By</span> {promotion?.creatorName}
+                      <span>By -</span> {promotion?.creatorName}
                     </h5>
-                    <p>{promotion?.res_desc}</p>
-                    <div className=" mb-2 mt-2">
+                    <p>{promotion?.res_desc?.slice(0, 50)}</p>
+                    <div className="mt-2 mb-2">
                       <Row>
                         <Col lg="6">
                           <PrettyRating
                             // value={value?.rating}
-                            value={2.5}
+                            value={promotion?.ava_rating}
                             icons={icons.star}
                             colors={colors.star}
                           />
                         </Col>
                         <Col className="justify-content-left" lg="6">
-                          {2.5} Rating
+                          {promotion?.ava_rating}- Rating
                         </Col>
                       </Row>
 

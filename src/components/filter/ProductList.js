@@ -327,7 +327,7 @@ function ProductList(args) {
       .get(`http://3.7.173.138:9000/user/Promotions`)
       .then((res) => {
         setPromotion(res.data.data);
-        // console.log(res.data.data);
+        console.log(res.data.data);
       })
       .catch((err) => {
         console.log(err);
@@ -436,7 +436,7 @@ function ProductList(args) {
       axios
         .get(`http://3.7.173.138:9000/user/average_rating/${productdes}`)
         .then((res) => {
-          // console.log(res.data);
+          console.log(res.data);
           setAverageRating(res.data);
         })
         .catch((err) => {
@@ -1027,7 +1027,7 @@ function ProductList(args) {
                     </span>
                   </h4>
 
-                  <Row style={{ height: "60vh" }} className="">
+                  <Row style={{ height: "60vh" }} className=" mb-2">
                     {promotion?.map((promotion) => (
                       <Col lg="4" md="4" sm="6" key={promotion?._id}>
                         <div class="product-grid8">
@@ -1180,9 +1180,9 @@ function ProductList(args) {
                                             </div>
                                             <div className="mid-1-b tt-1">
                                               <p>Category:</p>
-                                              <Link to="#">
+                                              <p to="#">
                                                 {promotiondata?.category?.title}
-                                              </Link>
+                                              </p>
                                             </div>
                                           </div>
                                         </Col>
@@ -1199,9 +1199,7 @@ function ProductList(args) {
                                               <p>Language:</p>
                                               {promotiondata?.language?.map(
                                                 (lang) => (
-                                                  <Link to="#">
-                                                    {lang?.language}
-                                                  </Link>
+                                                  <span>{lang?.language} </span>
                                                 )
                                               )}
                                             </div>
@@ -1239,7 +1237,18 @@ function ProductList(args) {
                                             </div>
                                             <div className="mid-1-b tt-1">
                                               <p>Ratings:</p>
-                                              <Link to="#">(4.5)</Link>
+                                              <Link to="#">
+                                                [
+                                                {promotiondata?.ava_rating !==
+                                                "NaN" ? (
+                                                  <span>
+                                                    {promotiondata?.ava_rating}
+                                                  </span>
+                                                ) : (
+                                                  <span>0</span>
+                                                )}
+                                                ]
+                                              </Link>
                                             </div>
                                           </div>
                                         </Col>
@@ -1274,13 +1283,13 @@ function ProductList(args) {
                                   <hr></hr>
                                   <div className="rating-box">
                                     <Row>
-                                      <Col lg="4">
+                                      <Col lg="6">
                                         <div className="rat-left">
                                           <h4>Customer Rating</h4>
                                           <div className="">
                                             <PrettyRating
                                               // value={value?.rating}
-                                              value={2}
+                                              value={averageRating?.data}
                                               icons={icons.star}
                                               colors={colors.star}
                                             />
@@ -1291,7 +1300,7 @@ function ProductList(args) {
                                               {/* {sum / totalrateng.length} */}
                                             </small>
 
-                                            <Row>
+                                            {/* <Row>
                                               <Col
                                                 className="d-flex justify-content-left mt-1"
                                                 style={{ color: "blue" }}
@@ -1397,20 +1406,30 @@ function ProductList(args) {
                                                   completed={40}
                                                 />
                                               </Col>
-                                            </Row>
+                                            </Row> */}
                                           </div>
                                         </div>
                                       </Col>
-                                      <Col lg="8">
+                                      <Col lg="6">
+                                        <h4>Write your review</h4>
+
+                                        <StarsRating
+                                          count={5}
+                                          onChange={ratingChanged}
+                                          size={40}
+                                          color={"#ffd700"}
+                                        />
+                                      </Col>
+                                      <Row lg="12">
                                         <div className="rat-right">
-                                          <h4>Write your review</h4>
+                                          {/* <h4>Write your review</h4> */}
                                           <div className="">
-                                            <StarsRating
+                                            {/* <StarsRating
                                               count={5}
                                               onChange={ratingChanged}
                                               size={40}
                                               color={"#ffd700"}
-                                            />
+                                            /> */}
 
                                             <form>
                                               <textarea
@@ -1429,7 +1448,7 @@ function ProductList(args) {
                                             </form>
                                           </div>
                                         </div>
-                                      </Col>
+                                      </Row>
                                     </Row>
                                   </div>
                                   <Row key={promotion?._id}>
@@ -1518,13 +1537,13 @@ function ProductList(args) {
                                 <Col lg="6">
                                   <PrettyRating
                                     // value={value?.rating}
-                                    value={2.5}
+                                    value={promotion?.ava_rating}
                                     icons={icons.star}
                                     colors={colors.star}
                                   />
                                 </Col>
                                 <Col className="justify-content-left" lg="6">
-                                  {2.5} Rating
+                                  {promotion?.ava_rating}- Rating
                                 </Col>
                               </Row>
 
@@ -1543,7 +1562,7 @@ function ProductList(args) {
                   </Row>
 
                   <div className="serach-product">
-                    <h4>
+                    <h4 className="mt-3 ">
                       Searching Product
                       <span>
                         <Col className="fifilters " lg="3">
@@ -1833,7 +1852,7 @@ function ProductList(args) {
 
                                           <div className="rating-box">
                                             <Row>
-                                              <Col lg="4">
+                                              <Col lg="6">
                                                 <div className="rat-left mt-3">
                                                   <h4>Customer Rating</h4>
                                                   <div className="">
@@ -1854,7 +1873,7 @@ function ProductList(args) {
                                                       Customers Reviews
                                                     </span>
 
-                                                    <Row>
+                                                    {/* <Row>
                                                       <Col
                                                         className="d-flex justify-content-left mt-1"
                                                         style={{
@@ -1982,18 +2001,32 @@ function ProductList(args) {
                                                           completed={40}
                                                         />
                                                       </Col>
-                                                    </Row>
+                                                    </Row> */}
                                                   </div>
                                                 </div>
                                               </Col>
+                                              <Col lg="6">
+                                                {" "}
+                                                <h4 className="mt-3">
+                                                  Write your Review
+                                                </h4>
+                                                <StarsRating
+                                                  count={5}
+                                                  onChange={ratingChanged}
+                                                  size={40}
+                                                  color2={"#ffd700"}
+                                                />
+                                              </Col>
+                                            </Row>
+                                            <Row>
                                               <Col
-                                                lg="8"
+                                                lg="12"
                                                 key={Producdetail?._id}
                                               >
                                                 <div className="rat-right">
                                                   <Row>
-                                                    <Col lg="6">
-                                                      <h4 className="mt-3">
+                                                    {/* <Col lg="6"> */}
+                                                    {/* <h4 className="mt-3">
                                                         Write your Review
                                                       </h4>
                                                       <StarsRating
@@ -2001,11 +2034,11 @@ function ProductList(args) {
                                                         onChange={ratingChanged}
                                                         size={40}
                                                         color2={"#ffd700"}
-                                                      />
-                                                    </Col>
+                                                      /> */}
+                                                    {/* </Col> */}
                                                   </Row>
 
-                                                  <div className="">
+                                                  <Row lg="12">
                                                     <form
                                                       key={Producdetail?._id}
                                                     >
@@ -2026,7 +2059,7 @@ function ProductList(args) {
                                                         Submit
                                                       </Button>
                                                     </form>
-                                                  </div>
+                                                  </Row>
                                                 </div>
                                               </Col>
                                             </Row>
@@ -2460,7 +2493,7 @@ function ProductList(args) {
 
                                   <div className="rating-box">
                                     <Row>
-                                      <Col lg="4">
+                                      <Col lg="6">
                                         <div className="rat-left mt-3">
                                           <h4>Customer Rating</h4>
                                           <div className="">
@@ -2479,7 +2512,7 @@ function ProductList(args) {
                                               Reviews
                                             </span>
 
-                                            <Row>
+                                            {/* <Row>
                                               <Col
                                                 className="d-flex justify-content-left mt-1"
                                                 style={{
@@ -2595,15 +2628,26 @@ function ProductList(args) {
                                                   completed={40}
                                                 />
                                               </Col>
-                                            </Row>
+                                            </Row> */}
                                           </div>
                                         </div>
                                       </Col>
-                                      <Col lg="8" key={Producdetail?._id}>
+                                      <Col lg="6">
+                                        <h4 className="mt-3">
+                                          Write your Review
+                                        </h4>
+                                        <StarsRating
+                                          count={5}
+                                          onChange={ratingChanged}
+                                          size={40}
+                                          color2={"#ffd700"}
+                                        />
+                                      </Col>
+                                      <Row lg="12" key={Producdetail?._id}>
                                         <div className="rat-right">
                                           <Row>
                                             <Col lg="6">
-                                              <h4 className="mt-3">
+                                              {/* <h4 className="mt-3">
                                                 Write your Review
                                               </h4>
                                               <StarsRating
@@ -2611,7 +2655,7 @@ function ProductList(args) {
                                                 onChange={ratingChanged}
                                                 size={40}
                                                 color2={"#ffd700"}
-                                              />
+                                              /> */}
                                             </Col>
                                           </Row>
 
@@ -2634,7 +2678,7 @@ function ProductList(args) {
                                             </form>
                                           </div>
                                         </div>
-                                      </Col>
+                                      </Row>
                                     </Row>
                                   </div>
                                   <Row>

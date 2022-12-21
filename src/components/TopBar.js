@@ -21,24 +21,25 @@ function TopBar() {
   const [username, setUsername] = useState("");
   const [display_name, setDisplay_name] = useState("");
   const [abt_us, seAbt_us] = useState("");
-  const [selectedFile, setSelectedFile] = useState([]);
-  const [createdAt, setCreatedAt] = useState("");
-  const [profileImg, setroProfileImg] = useState([]);
+  const [selectedFile, setSelectedFile] = useState("");
 
   var fileUpload = (e) => {
     const files = e.target.files;
     const file = files[0];
-    imageToBase64(file);
-    imageToBase64();
+    if (file !== "") {
+      imageToBase64(file);
+      imageToBase64();
+    }
   };
   let base64code = "";
   const onLoad = (fileString) => {
     // console.log("fileString", fileString);
-    const image64 = fileString.split(",");
-    console.log(image64[1]);
-    setSelectedFile(image64[1]);
-
-    base64code = fileString;
+    if (fileString != "") {
+      const image64 = fileString.split(",");
+      console.log(image64[1]);
+      setSelectedFile(image64[1]);
+      base64code = fileString;
+    }
   };
 
   const imageToBase64 = (file) => {
@@ -50,7 +51,7 @@ function TopBar() {
   };
   const id = localStorage.getItem("userId");
 
-  const [userdata, setUserdata] = useState();
+  const [userdata, setUserdata] = useState({});
   const getUserData = () => {
     axios
       .get(`http://3.7.173.138:9000/user/getoneUser/${id}`)
@@ -78,13 +79,12 @@ function TopBar() {
     axios
       .post(`http://3.7.173.138:9000/user/updateProfile/${id}`, formData)
       .then((response) => {
-        // console.log(response.data.data);
+        console.log(response.data.data);
         if (response.data.message === "success") {
           swal("Updated Successfully👍");
         } else {
           swal("Something went wrong try again");
         }
-        // setroProfileImg(response.data.data.profileImg[0]);
       })
 
       .catch((error) => {
@@ -134,7 +134,7 @@ function TopBar() {
                         <li style={{ color: "black" }}>
                           {`User Since           :    `}
                           {/* <Moment format="ll">{`    :       ${userdata?.createdAt}`}</Moment> */}
-                          {` ${userdata?.createdAt.slice(0, 10)}`}
+                          {` ${userdata?.createdAt?.slice(0, 10)}`}
                         </li>
                         <li style={{ color: "black" }}>
                           {`Meteors                :    ${userdata?.meteors}`}

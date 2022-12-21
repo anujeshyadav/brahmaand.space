@@ -450,7 +450,7 @@ function CustomNavbar(args) {
                                 {catgry !== "" ? (
                                   <p
                                     style={{ color: "black" }}
-                                    className="mt-2"
+                                    className="mt-4"
                                   >
                                     Category
                                   </p>

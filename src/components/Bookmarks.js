@@ -34,6 +34,7 @@ function Bookmarks(args) {
   const [liked, setliked] = useState("");
   const [activelike, setActivelike] = useState("");
   const [text, settText] = useState("");
+  const [averageRating, setAverageRating] = useState("");
   const [categry, setCategry] = useState([]);
   const [modal, setModal] = useState(false);
   const toggle = () => setModal(!modal);
@@ -204,6 +205,15 @@ function Bookmarks(args) {
         })
         .catch((err) => {
           // console.log(err.data.data);
+        });
+      axios
+        .get(`http://3.7.173.138:9000/user/average_rating/${productdes}`)
+        .then((res) => {
+          console.log(res.data);
+          setAverageRating(res.data);
+        })
+        .catch((err) => {
+          console.log(err);
         });
     }
 
@@ -412,7 +422,9 @@ function Bookmarks(args) {
                                     </div>
                                     <div className="mid-1-b tt-1">
                                       <p>Ratings:</p>
-                                      <Link to="#">(4.5)</Link>
+                                      <Link to="#">
+                                        [{averageRating?.data}]
+                                      </Link>
                                     </div>
                                   </div>
                                 </Col>
@@ -467,12 +479,12 @@ function Bookmarks(args) {
 
                           <div className="rating-box">
                             <Row>
-                              <Col lg="4">
+                              <Col lg="6">
                                 <div className="rat-left mt-3">
                                   <h4>Customer Rating</h4>
                                   <div className="">
                                     <PrettyRating
-                                      value={2.5}
+                                      value={averageRating?.data}
                                       icons={icons.star}
                                       colors={colors.star}
                                     />
@@ -484,7 +496,7 @@ function Bookmarks(args) {
                                       {getonecomment?.length}- Customers Reviews
                                     </span>
 
-                                    <Row>
+                                    {/* <Row>
                                       <Col
                                         className="d-flex justify-content-left "
                                         style={{ color: "blue" }}
@@ -587,46 +599,45 @@ function Bookmarks(args) {
                                           completed={40}
                                         />
                                       </Col>
-                                    </Row>
+                                    </Row> */}
                                   </div>
                                 </div>
                               </Col>
-                              <Col lg="8" key={Producdetail?._id}>
-                                <div className="rat-right">
-                                  <Row>
-                                    <Col lg="6">
-                                      <h4 className="mt-3">
-                                        Write your Review
-                                      </h4>
-                                      <StarsRating
-                                        count={5}
-                                        onChange={ratingChanged}
-                                        size={40}
-                                        color2={"#ffd700"}
-                                      />
-                                    </Col>
-                                  </Row>
+                              <Col lg="6">
+                                <h4 className="mt-3">Write your Review</h4>
+                                <StarsRating
+                                  count={5}
+                                  onChange={ratingChanged}
+                                  size={40}
+                                  color2={"#ffd700"}
+                                />
+                              </Col>
+                            </Row>
+                            <Row lg="12" key={Producdetail?._id}>
+                              <div className="rat-right">
+                                {/* <Row>
+                                  <Col lg="6"></Col>
+                                </Row> */}
 
-                                  <div className="">
-                                    <form key={Producdetail?._id}>
-                                      <textarea
-                                        key={Producdetail?._id}
-                                        value={text}
-                                        name="text"
-                                        onChange={onchangehandler}
-                                        className="form-control st-taetarea"
-                                        placeholder=" Enter your Review if you want"
-                                      ></textarea>
-                                      <Button
-                                        onClick={handleSubmit}
-                                        className="bt-st reviewbutton mb-3"
-                                      >
-                                        Submit
-                                      </Button>
-                                    </form>
-                                  </div>
+                                <div className="">
+                                  <form key={Producdetail?._id}>
+                                    <textarea
+                                      key={Producdetail?._id}
+                                      value={text}
+                                      name="text"
+                                      onChange={onchangehandler}
+                                      className="form-control st-taetarea"
+                                      placeholder=" Enter your Review if you want"
+                                    ></textarea>
+                                    <Button
+                                      onClick={handleSubmit}
+                                      className="bt-st reviewbutton mb-3"
+                                    >
+                                      Submit
+                                    </Button>
+                                  </form>
                                 </div>
-                              </Col>
+                              </div>
                             </Row>
                           </div>
                           <Row key={data?.submitresrcId?._id}>
@@ -702,26 +713,26 @@ function Bookmarks(args) {
                       <Row className="review mb-3">
                         <Col lg="4">
                           <PrettyRating
-                            value={2.5}
+                            value={data?.submitresrcId?.ava_rating}
                             icons={icons.star}
                             colors={colors.star}
                           />
                         </Col>
                         <Col className="justify-content-left" lg="4">
-                          {2.5} Rating
+                          {data?.submitresrcId?.ava_rating}- Rating
                         </Col>
 
-                        <Col lg="2">
+                        {/* <Col lg="2">
                           <b>
                             <span style={{ color: "#5F56C6" }}>
                               {data?.submitresrcId?.__v} Reviews
                             </span>
                           </b>
-                        </Col>
+                        </Col> */}
                       </Row>
                       <Row>
                         <Col lg="2">
-                          {data?.submitresrcId?.relYear[0].yrName}
+                          {data?.submitresrcId?.relYear[0]?.yrName}
                         </Col>
                       </Row>
                     </div>
