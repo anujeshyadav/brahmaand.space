@@ -326,7 +326,7 @@ function ProductList(args) {
     axios
       .get(`http://3.7.173.138:9000/user/Promotions`)
       .then((res) => {
-        setPromotion(res.data.data);
+        setPromotion(res.data.data.slice(0, 3));
         console.log(res.data.data);
       })
       .catch((err) => {
@@ -1028,537 +1028,485 @@ function ProductList(args) {
                   </h4>
 
                   <Row className=" mb-2">
-                    {promotion?.map((promotion) => (
-                      <Col lg="4" md="4" sm="6" key={promotion?._id}>
-                        <div class="product-grid8">
-                          <div class="product-image8">
-                            <Link
-                              key={promotion?._id}
-                              onClick={() => handlepromotion(promotion?._id)}
-                            >
-                              <img
-                                style={{
-                                  height: "200px",
-                                  borderRadius: "10px",
-                                }}
-                                key={promotion?._id}
-                                // height={220}
-                                className="promotionimageclass"
-                                src={promotion?.img}
-                                alt="image"
-                              />
-                              <Modal
-                                key={promotiondata?._id}
-                                className="mdlg"
-                                isOpen={modalone}
-                                toggle={handleclosepromotion}
-                                {...args}
-                              >
-                                <ModalBody key={promotiondata?._id}>
-                                  <Row>
-                                    <Col></Col>
-                                    <Col
-                                      lg="1"
-                                      className="d-flex justify-content-right"
-                                    >
-                                      <MdCancelPresentation
-                                        className="cancelbuttondata"
-                                        onClick={handleclosepromotion}
-                                        size={30}
-                                      />
-                                    </Col>
-                                  </Row>
-                                  <div className="main-content">
-                                    <h2>{promotiondata?.desc}</h2>
-                                    <div className="top-icon">
-                                      <Link to="#">
-                                        <img src={mdicon1} alt="" />
-                                      </Link>
-                                      <Link to="#">
-                                        <img src={mdicon2} alt="" />
-                                      </Link>
-                                    </div>
-                                    <div className="tag-list">
-                                      <div className="tag-1">
-                                        <h5>
-                                          <span>
-                                            <img
-                                              src={icons}
-                                              alt=""
-                                              width="30px"
-                                            />
-                                          </span>
-                                          Topic:
-                                        </h5>
-                                      </div>
-                                      <div className=" d-flex tag-2">
-                                        {promotiondata?.topics?.map((val) => (
-                                          <Link className="d-flex " to="#">
-                                            {val}{" "}
-                                          </Link>
-                                        ))}
-                                      </div>
-                                    </div>
+                    <Swiper
+                      breakpoints={{
+                        980: {
+                          slidesPerView: 3,
+                          direction: "horizontal",
+                          spaceBetween: 20,
+                        },
+                        820: {
+                          slidesPerView: 3,
+                          direction: "horizontal",
+                          spaceBetween: 20,
+                        },
+                        780: {
+                          slidesPerView: 3,
+                          direction: "horizontal",
+                          spaceBetween: 20,
+                        },
 
-                                    <hr></hr>
-                                  </div>
-
-                                  <div className="mid">
-                                    <h5>
-                                      Link :<span>{promotiondata?.link}</span>
-                                    </h5>
-                                    <div className="mid-content">
+                        768: {
+                          slidesPerView: 3,
+                          direction: "horizontal",
+                          spaceBetween: 20,
+                        },
+                        640: {
+                          slidesPerView: 2,
+                          direction: "horizontal",
+                          spaceBetween: 28,
+                        },
+                        320: {
+                          slidesPerView: 1,
+                          direction: "horizontal",
+                          spaceBetween: 25,
+                        },
+                      }}
+                      spaceBetween={50}
+                      // slidesPerView={3}
+                      centeredSlides={true}
+                      loop={true}
+                      onSlideChange={() => console.log("slide change")}
+                      onSwiper={(swiper) => console.log(swiper)}
+                      scrollbar={{ draggable: true }}
+                      className="mySwiper"
+                    >
+                      {promotion?.map((promotion) => (
+                        <SwiperSlide>
+                          <Col key={promotion?._id}>
+                            <div class="product-grid8">
+                              <div class="product-image8">
+                                <Link
+                                  key={promotion?._id}
+                                  onClick={() =>
+                                    handlepromotion(promotion?._id)
+                                  }
+                                >
+                                  <img
+                                    style={{
+                                      height: "200px",
+                                      borderRadius: "10px",
+                                    }}
+                                    key={promotion?._id}
+                                    className="promotionimageclass"
+                                    src={promotion?.img}
+                                    alt="image"
+                                  />
+                                  <Modal
+                                    key={promotiondata?._id}
+                                    className="mdlg"
+                                    isOpen={modalone}
+                                    toggle={handleclosepromotion}
+                                    {...args}
+                                  >
+                                    <ModalBody key={promotiondata?._id}>
                                       <Row>
-                                        <Col lg="6" md="6">
-                                          <div className="mid-1 mb-3">
-                                            <div className="mid-1-a">
-                                              <img src={createricon} alt="" />
-                                            </div>
-                                            <div className="mid-1-b">
-                                              <p>Creator:</p>
-                                              <h4>
-                                                {promotiondata?.creatorName}
-                                              </h4>
-                                            </div>
-                                          </div>
-                                        </Col>
-                                        <Col lg="6" md="6">
-                                          <div className="mid-1 mb-3 ">
-                                            <div className="mid-1-a">
-                                              <img src={usericon} alt="" />
-                                            </div>
-                                            <div className="mid-1-b">
-                                              <p>Submitted by:</p>
-                                              <h4>
-                                                {promotiondata?.creatorName}
-                                              </h4>
-                                            </div>
-                                          </div>
-                                        </Col>
-                                        <Col lg="3" md="3">
-                                          <div className="mid-1 mb-3 tt-2">
-                                            <div className="mid-1-a">
-                                              <img
-                                                src={typeicon}
-                                                alt=""
-                                                width="35px"
-                                              />
-                                            </div>
-                                            <div className="mid-1-b tt-1">
-                                              <p>Type:</p>
-                                              <Link to="#">
-                                                {promotiondata?.type}
-                                              </Link>
-                                            </div>
-                                          </div>
-                                        </Col>
-                                        <Col lg="3" md="3">
-                                          <div className="mid-1 mb-3 tt-2">
-                                            <div className="mid-1-a">
-                                              <img
-                                                src={formaticon}
-                                                alt=""
-                                                width="35px"
-                                              />
-                                            </div>
-                                            <div className="mid-1-b tt-1">
-                                              <p>Format:</p>
-                                              <Link to="#">
-                                                {promotiondata?.format}
-                                              </Link>
-                                            </div>
-                                          </div>
-                                        </Col>
-                                        <Col lg="3" md="3">
-                                          <div className="mid-1 mb-3 tt-2">
-                                            <div className="mid-1-a">
-                                              <img
-                                                src={diffculty}
-                                                alt=""
-                                                width="35px"
-                                              />
-                                            </div>
-                                            <div className="mid-1-b tt-1">
-                                              <p>Category:</p>
-                                              <p to="#">
-                                                {promotiondata?.category?.title}
-                                              </p>
-                                            </div>
-                                          </div>
-                                        </Col>
-                                        <Col lg="3" md="3">
-                                          <div className="mid-1 mb-3 tt-2">
-                                            <div className="mid-1-a">
-                                              <img
-                                                src={languageicon}
-                                                alt=""
-                                                width="35px"
-                                              />
-                                            </div>
-                                            <div className="mid-1-b tt-1">
-                                              <p>Language:</p>
-                                              {promotiondata?.language?.map(
-                                                (lang) => (
-                                                  <span>{lang?.language} </span>
-                                                )
-                                              )}
-                                            </div>
-                                          </div>
-                                        </Col>
-                                        <Col lg="3" md="3">
-                                          <div className="mid-1 mb-3 tt-2">
-                                            <div className="mid-1-a">
-                                              <img
-                                                src={yearicon}
-                                                alt=""
-                                                width="35px"
-                                              />
-                                            </div>
-                                            <div className="mid-1-b tt-1">
-                                              <p>Year:</p>
-                                              {promotiondata?.relYear?.map(
-                                                (year) => (
-                                                  <Link to="#">
-                                                    {year?.yrName}
-                                                  </Link>
-                                                )
-                                              )}
-                                            </div>
-                                          </div>
-                                        </Col>
-                                        <Col lg="3" md="3">
-                                          <div className="mid-1 mb-3 tt-2">
-                                            <div className="mid-1-a">
-                                              <img
-                                                src={rating}
-                                                alt=""
-                                                width="35px"
-                                              />
-                                            </div>
-                                            <div className="mid-1-b tt-1">
-                                              <p>Ratings:</p>
-                                              <Link to="#">
-                                                [
-                                                {promotiondata?.ava_rating !==
-                                                "NaN" ? (
-                                                  <span>
-                                                    {promotiondata?.ava_rating}
-                                                  </span>
-                                                ) : (
-                                                  <span>0</span>
-                                                )}
-                                                ]
-                                              </Link>
-                                            </div>
-                                          </div>
-                                        </Col>
-                                        <Col lg="4" md="4">
-                                          <div className="mid-1 mb-3 tt-2">
-                                            <div className="mid-1-a">
-                                              <img
-                                                src={submiticon}
-                                                alt=""
-                                                width="35px"
-                                              />
-                                            </div>
-                                            <div className="mid-1-b tt-1">
-                                              <p>Submitted:</p>
-                                              <Moment format="ll">
-                                                {Producdetail?.createdAt}
-                                              </Moment>
-                                            </div>
-                                          </div>
+                                        <Col></Col>
+                                        <Col
+                                          lg="1"
+                                          className="d-flex justify-content-right"
+                                        >
+                                          <MdCancelPresentation
+                                            className="cancelbuttondata"
+                                            onClick={handleclosepromotion}
+                                            size={30}
+                                          />
                                         </Col>
                                       </Row>
-                                    </div>
-                                  </div>
-
-                                  <hr></hr>
-
-                                  <div className="description mt-3">
-                                    <h4>Description:</h4>
-                                    <p>{promotiondata?.desc}</p>
-                                  </div>
-
-                                  <hr></hr>
-                                  <div className="rating-box">
-                                    <Row>
-                                      <Col lg="6">
-                                        <div className="rat-left">
-                                          <h4>Customer Rating</h4>
-                                          <div className="">
-                                            <PrettyRating
-                                              // value={value?.rating}
-                                              value={averageRating?.data}
-                                              icons={icons.star}
-                                              colors={colors.star}
-                                            />
-
-                                            <small className="mt-3">
-                                              {getonecomment?.length}- customers
-                                              reviews
-                                              {/* {sum / totalrateng.length} */}
-                                            </small>
-
-                                            {/* <Row>
-                                              <Col
-                                                className="d-flex justify-content-left mt-1"
-                                                style={{ color: "blue" }}
-                                                lg="4"
-                                              >
-                                                5 Stars
-                                              </Col>
-                                              <Col
-                                                className="mt-1 mb-1 "
-                                                lg="8"
-                                              >
-                                                {" "}
-                                                <ProgressBar
-                                                  bgColor=" #fdb800"
-                                                  height="13px"
-                                                  borderRadius="12px"
-                                                  className="progressbar"
-                                                  barContainerClassName="containerone"
-                                                  labelClassName="label"
-                                                  completed={60}
+                                      <div className="main-content">
+                                        <h2>{promotiondata?.desc}</h2>
+                                        <div className="top-icon">
+                                          <Link to="#">
+                                            <img src={mdicon1} alt="" />
+                                          </Link>
+                                          <Link to="#">
+                                            <img src={mdicon2} alt="" />
+                                          </Link>
+                                        </div>
+                                        <div className="tag-list">
+                                          <div className="tag-1">
+                                            <h5>
+                                              <span>
+                                                <img
+                                                  src={icons}
+                                                  alt=""
+                                                  width="30px"
                                                 />
-                                              </Col>
-                                            </Row>
-                                            <Row>
-                                              <Col
-                                                className="d-flex justify-content-left mt-1 "
-                                                style={{ color: "blue" }}
-                                                lg="4"
-                                              >
-                                                4 Stars
-                                              </Col>
-                                              <Col className="mt-1 mb-1" lg="8">
-                                                {" "}
-                                                <ProgressBar
-                                                  bgColor=" #fdb800"
-                                                  height="13px"
-                                                  borderRadius="12px"
-                                                  className="progressbar"
-                                                  barContainerClassName="containerone"
-                                                  labelClassName="label"
-                                                  completed={40}
-                                                />
-                                              </Col>
-                                            </Row>
-                                            <Row>
-                                              <Col
-                                                className="d-flex justify-content-left mt-1 "
-                                                style={{ color: "blue" }}
-                                                lg="4"
-                                              >
-                                                3 Stars
-                                              </Col>
-                                              <Col className="mt-1 mb-1" lg="8">
-                                                {" "}
-                                                <ProgressBar
-                                                  bgColor=" #fdb800"
-                                                  height="13px"
-                                                  borderRadius="12px"
-                                                  className="progressbar"
-                                                  barContainerClassName="containerone"
-                                                  labelClassName="label"
-                                                  completed={50}
-                                                />
-                                              </Col>
-                                            </Row>
-                                            <Row>
-                                              <Col
-                                                className="d-flex justify-content-left mt-1 "
-                                                style={{ color: "blue" }}
-                                                lg="4"
-                                              >
-                                                2 Stars
-                                              </Col>
-                                              <Col className="mt-1 mb-1" lg="8">
-                                                {" "}
-                                                <ProgressBar
-                                                  bgColor=" #fdb800"
-                                                  height="13px"
-                                                  borderRadius="12px"
-                                                  className="progressbar"
-                                                  barContainerClassName="containerone"
-                                                  labelClassName="label"
-                                                  completed={70}
-                                                />
-                                              </Col>
-                                            </Row>
-                                            <Row>
-                                              <Col
-                                                className="d-flex justify-content-left mt-1 "
-                                                style={{ color: "blue" }}
-                                                lg="4"
-                                              >
-                                                1 Stars
-                                              </Col>
-                                              <Col className="mt-1 mb-1" lg="8">
-                                                <ProgressBar
-                                                  bgColor=" #fdb800"
-                                                  height="13px"
-                                                  borderRadius="12px"
-                                                  className="progressbar"
-                                                  barContainerClassName="containerone"
-                                                  labelClassName="label"
-                                                  completed={40}
-                                                />
-                                              </Col>
-                                            </Row> */}
+                                              </span>
+                                              Topic:
+                                            </h5>
+                                          </div>
+                                          <div className=" d-flex tag-2">
+                                            {promotiondata?.topics?.map(
+                                              (val) => (
+                                                <Link
+                                                  className="d-flex "
+                                                  to="#"
+                                                >
+                                                  {val}{" "}
+                                                </Link>
+                                              )
+                                            )}
                                           </div>
                                         </div>
-                                      </Col>
-                                      <Col lg="6">
-                                        <h4>Write your review</h4>
 
-                                        <StarsRating
-                                          count={5}
-                                          onChange={ratingChanged}
-                                          size={40}
-                                          color={"#ffd700"}
-                                        />
-                                      </Col>
-                                      <Row lg="12">
-                                        <div className="rat-right">
-                                          {/* <h4>Write your review</h4> */}
-                                          <div className="">
-                                            {/* <StarsRating
+                                        <hr></hr>
+                                      </div>
+
+                                      <div className="mid">
+                                        <h5>
+                                          Link :
+                                          <span>{promotiondata?.link}</span>
+                                        </h5>
+                                        <div className="mid-content">
+                                          <Row>
+                                            <Col lg="6" md="6">
+                                              <div className="mid-1 mb-3">
+                                                <div className="mid-1-a">
+                                                  <img
+                                                    src={createricon}
+                                                    alt=""
+                                                  />
+                                                </div>
+                                                <div className="mid-1-b">
+                                                  <p>Creator:</p>
+                                                  <h4>
+                                                    {promotiondata?.creatorName}
+                                                  </h4>
+                                                </div>
+                                              </div>
+                                            </Col>
+                                            <Col lg="6" md="6">
+                                              <div className="mid-1 mb-3 ">
+                                                <div className="mid-1-a">
+                                                  <img src={usericon} alt="" />
+                                                </div>
+                                                <div className="mid-1-b">
+                                                  <p>Submitted by:</p>
+                                                  <h4>
+                                                    {promotiondata?.creatorName}
+                                                  </h4>
+                                                </div>
+                                              </div>
+                                            </Col>
+                                            <Col lg="3" md="3">
+                                              <div className="mid-1 mb-3 tt-2">
+                                                <div className="mid-1-a">
+                                                  <img
+                                                    src={typeicon}
+                                                    alt=""
+                                                    width="35px"
+                                                  />
+                                                </div>
+                                                <div className="mid-1-b tt-1">
+                                                  <p>Type:</p>
+                                                  <Link to="#">
+                                                    {promotiondata?.type}
+                                                  </Link>
+                                                </div>
+                                              </div>
+                                            </Col>
+                                            <Col lg="3" md="3">
+                                              <div className="mid-1 mb-3 tt-2">
+                                                <div className="mid-1-a">
+                                                  <img
+                                                    src={formaticon}
+                                                    alt=""
+                                                    width="35px"
+                                                  />
+                                                </div>
+                                                <div className="mid-1-b tt-1">
+                                                  <p>Format:</p>
+                                                  <Link to="#">
+                                                    {promotiondata?.format}
+                                                  </Link>
+                                                </div>
+                                              </div>
+                                            </Col>
+                                            <Col lg="3" md="3">
+                                              <div className="mid-1 mb-3 tt-2">
+                                                <div className="mid-1-a">
+                                                  <img
+                                                    src={diffculty}
+                                                    alt=""
+                                                    width="35px"
+                                                  />
+                                                </div>
+                                                <div className="mid-1-b tt-1">
+                                                  <p>Category:</p>
+                                                  <p to="#">
+                                                    {
+                                                      promotiondata?.category
+                                                        ?.title
+                                                    }
+                                                  </p>
+                                                </div>
+                                              </div>
+                                            </Col>
+                                            <Col lg="3" md="3">
+                                              <div className="mid-1 mb-3 tt-2">
+                                                <div className="mid-1-a">
+                                                  <img
+                                                    src={languageicon}
+                                                    alt=""
+                                                    width="35px"
+                                                  />
+                                                </div>
+                                                <div className="mid-1-b tt-1">
+                                                  <p>Language:</p>
+                                                  {promotiondata?.language?.map(
+                                                    (lang) => (
+                                                      <span>
+                                                        {lang?.language}{" "}
+                                                      </span>
+                                                    )
+                                                  )}
+                                                </div>
+                                              </div>
+                                            </Col>
+                                            <Col lg="3" md="3">
+                                              <div className="mid-1 mb-3 tt-2">
+                                                <div className="mid-1-a">
+                                                  <img
+                                                    src={yearicon}
+                                                    alt=""
+                                                    width="35px"
+                                                  />
+                                                </div>
+                                                <div className="mid-1-b tt-1">
+                                                  <p>Year:</p>
+                                                  {promotiondata?.relYear?.map(
+                                                    (year) => (
+                                                      <Link to="#">
+                                                        {year?.yrName}
+                                                      </Link>
+                                                    )
+                                                  )}
+                                                </div>
+                                              </div>
+                                            </Col>
+                                            <Col lg="3" md="3">
+                                              <div className="mid-1 mb-3 tt-2">
+                                                <div className="mid-1-a">
+                                                  <img
+                                                    src={rating}
+                                                    alt=""
+                                                    width="35px"
+                                                  />
+                                                </div>
+                                                <div className="mid-1-b tt-1">
+                                                  <p>Ratings:</p>
+                                                  <Link to="#">
+                                                    [
+                                                    {promotiondata?.ava_rating !==
+                                                    "NaN" ? (
+                                                      <span>
+                                                        {
+                                                          promotiondata?.ava_rating
+                                                        }
+                                                      </span>
+                                                    ) : (
+                                                      <span>0</span>
+                                                    )}
+                                                    ]
+                                                  </Link>
+                                                </div>
+                                              </div>
+                                            </Col>
+                                            <Col lg="4" md="4">
+                                              <div className="mid-1 mb-3 tt-2">
+                                                <div className="mid-1-a">
+                                                  <img
+                                                    src={submiticon}
+                                                    alt=""
+                                                    width="35px"
+                                                  />
+                                                </div>
+                                                <div className="mid-1-b tt-1">
+                                                  <p>Submitted:</p>
+                                                  <Moment format="ll">
+                                                    {Producdetail?.createdAt}
+                                                  </Moment>
+                                                </div>
+                                              </div>
+                                            </Col>
+                                          </Row>
+                                        </div>
+                                      </div>
+
+                                      <hr></hr>
+
+                                      <div className="description mt-3">
+                                        <h4>Description:</h4>
+                                        <p>{promotiondata?.desc}</p>
+                                      </div>
+
+                                      <hr></hr>
+                                      <div className="rating-box">
+                                        <Row>
+                                          <Col lg="6">
+                                            <div className="rat-left">
+                                              <h4>Customer Rating</h4>
+                                              <div className="">
+                                                <PrettyRating
+                                                  value={averageRating?.data}
+                                                  icons={icons.star}
+                                                  colors={colors.star}
+                                                />
+
+                                                <small className="mt-3">
+                                                  {getonecomment?.length}-
+                                                  customers reviews
+                                                </small>
+                                              </div>
+                                            </div>
+                                          </Col>
+                                          <Col lg="6">
+                                            <h4>Write your review</h4>
+
+                                            <StarsRating
                                               count={5}
                                               onChange={ratingChanged}
                                               size={40}
                                               color={"#ffd700"}
-                                            /> */}
-
-                                            <form>
-                                              <textarea
-                                                value={text}
-                                                name="text"
-                                                onChange={onchangehandler}
-                                                className="form-control st-taetarea"
-                                                placeholder=""
-                                              ></textarea>
-                                              <Button
-                                                onClick={handleSubmit}
-                                                className=" bt-st reviewbutton mb-3 btn btn-primary"
-                                              >
-                                                Send
-                                              </Button>
-                                            </form>
-                                          </div>
-                                        </div>
+                                            />
+                                          </Col>
+                                          <Row lg="12">
+                                            <div className="rat-right">
+                                              <div className="">
+                                                <form>
+                                                  <textarea
+                                                    value={text}
+                                                    name="text"
+                                                    onChange={onchangehandler}
+                                                    className="form-control st-taetarea"
+                                                    placeholder=""
+                                                  ></textarea>
+                                                  <Button
+                                                    onClick={handleSubmit}
+                                                    className=" bt-st reviewbutton mb-3 btn btn-primary"
+                                                  >
+                                                    Send
+                                                  </Button>
+                                                </form>
+                                              </div>
+                                            </div>
+                                          </Row>
+                                        </Row>
+                                      </div>
+                                      <Row key={promotion?._id}>
+                                        <Col lg="4"></Col>
+                                        <Col lg="8" key={promotion?._id}>
+                                          {handlebookmark === "true" ? (
+                                            <button
+                                              key={promotion?._id}
+                                              className="addbookmark  btn btn-secondary"
+                                              color="success"
+                                              onClick={() =>
+                                                removebookmark(promotion?._id)
+                                              }
+                                            >
+                                              Remove Bookmark
+                                            </button>
+                                          ) : (
+                                            <button
+                                              key={promotion?._id}
+                                              onClick={() =>
+                                                addbookmark(promotion?._id)
+                                              }
+                                              className="addbookmark  btn btn-secondary"
+                                              color="warning "
+                                            >
+                                              Add Bookmark
+                                            </button>
+                                          )}
+                                        </Col>
                                       </Row>
-                                    </Row>
-                                  </div>
-                                  <Row key={promotion?._id}>
-                                    <Col lg="4"></Col>
-                                    <Col lg="8" key={promotion?._id}>
-                                      {handlebookmark === "true" ? (
-                                        <button
-                                          key={promotion?._id}
-                                          className="addbookmark  btn btn-secondary"
-                                          color="success"
-                                          onClick={() =>
-                                            removebookmark(promotion?._id)
-                                          }
-                                        >
-                                          Remove Bookmark
-                                        </button>
-                                      ) : (
-                                        <button
-                                          key={promotion?._id}
-                                          onClick={() =>
-                                            addbookmark(promotion?._id)
-                                          }
-                                          className="addbookmark  btn btn-secondary"
-                                          color="warning "
-                                        >
-                                          Add Bookmark
-                                        </button>
-                                      )}
+                                      <hr></hr>
+                                      <div className="review-list">
+                                        <h4>Reviews:</h4>
+
+                                        {getonecomment?.map((value) => (
+                                          <div className="re-list">
+                                            <div className="re-listimg">
+                                              <img
+                                                src={value?.userid?.profileImg}
+                                                alt="UserImage"
+                                              />
+                                            </div>
+                                            <div className="re-listcont">
+                                              <h5>
+                                                {value?.userid?.username}
+                                                <span>
+                                                  <Moment format="ll">
+                                                    {value?.createdAt}
+                                                  </Moment>
+                                                </span>
+                                              </h5>
+                                              <div className="star-1">
+                                                <PrettyRating
+                                                  value={value?.rating}
+                                                  icons={icons.star}
+                                                  colors={colors.star}
+                                                />
+                                              </div>
+                                            </div>
+                                            <div className="re-btext mt-3">
+                                              <p>{value?.comment}</p>
+                                            </div>
+                                          </div>
+                                        ))}
+                                      </div>
+                                    </ModalBody>
+                                  </Modal>
+                                </Link>
+                              </div>
+
+                              <div class="product-content">
+                                <ul class="rating">
+                                  <li>
+                                    {promotion?.topics?.map((topic) => (
+                                      <Link className="btt">{topic}</Link>
+                                    ))}
+                                  </li>
+                                </ul>
+                                <h3>{promotion?.desc?.slice(0, 25)}</h3>
+                                <h5>
+                                  <span>By -</span> {promotion?.creatorName}
+                                </h5>
+                                <p>{promotion?.res_desc?.slice(0, 50)}</p>
+                                <div className="mt-2 mb-2">
+                                  <Row>
+                                    <Col lg="6">
+                                      <PrettyRating
+                                        // value={value?.rating}
+                                        value={promotion?.ava_rating}
+                                        icons={icons.star}
+                                        colors={colors.star}
+                                      />
+                                    </Col>
+                                    <Col
+                                      className="justify-content-left"
+                                      lg="6"
+                                    >
+                                      {promotion?.ava_rating}- Rating
                                     </Col>
                                   </Row>
-                                  <hr></hr>
-                                  <div className="review-list">
-                                    <h4>Reviews:</h4>
 
-                                    {getonecomment?.map((value) => (
-                                      <div className="re-list">
-                                        <div className="re-listimg">
-                                          <img
-                                            src={value?.userid?.profileImg}
-                                            alt="UserImage"
-                                          />
-                                        </div>
-                                        <div className="re-listcont">
-                                          <h5>
-                                            {value?.userid?.username}
-                                            <span>
-                                              <Moment format="ll">
-                                                {value?.createdAt}
-                                              </Moment>
-                                            </span>
-                                          </h5>
-                                          <div className="star-1">
-                                            <PrettyRating
-                                              value={value?.rating}
-                                              icons={icons.star}
-                                              colors={colors.star}
-                                            />
-                                          </div>
-                                        </div>
-                                        <div className="re-btext mt-3">
-                                          <p>{value?.comment}</p>
-                                        </div>
-                                      </div>
-                                    ))}
-                                  </div>
-                                </ModalBody>
-                              </Modal>
-                            </Link>
-                          </div>
-
-                          <div class="product-content">
-                            <ul class="rating">
-                              <li>
-                                {promotion?.topics?.map((topic) => (
-                                  <Link className="btt">{topic}</Link>
-                                ))}
-                              </li>
-                            </ul>
-                            <h3>{promotion?.desc?.slice(0, 25)}</h3>
-                            <h5>
-                              <span>By -</span> {promotion?.creatorName}
-                            </h5>
-                            <p>{promotion?.res_desc?.slice(0, 50)}</p>
-                            <div className="mt-2 mb-2">
-                              <Row>
-                                <Col lg="6">
-                                  <PrettyRating
-                                    // value={value?.rating}
-                                    value={promotion?.ava_rating}
-                                    icons={icons.star}
-                                    colors={colors.star}
-                                  />
-                                </Col>
-                                <Col className="justify-content-left" lg="6">
-                                  {promotion?.ava_rating}- Rating
-                                </Col>
-                              </Row>
-
-                              <ul class="rating">
-                                <li>
-                                  <Link to="#" className="tag">
-                                    {promotion?.relYear[0]?.yrName}
-                                  </Link>
-                                </li>
-                              </ul>
+                                  <ul class="rating">
+                                    <li>
+                                      <Link to="#" className="tag">
+                                        {promotion?.relYear[0]?.yrName}
+                                      </Link>
+                                    </li>
+                                  </ul>
+                                </div>
+                              </div>
                             </div>
-                          </div>
-                        </div>
-                      </Col>
-                    ))}
+                          </Col>
+                        </SwiperSlide>
+                      ))}
+                    </Swiper>
                   </Row>
 
                   <div className="serach-product">

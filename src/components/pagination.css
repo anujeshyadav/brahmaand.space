@@ -4,6 +4,11 @@ ul.paginationsclass {
   list-style-type: none;
 }
 
+.swiper-wrapper {
+  transition-duration: 0ms;
+  /* /* transform: none */
+}
+
 li.previous {
   padding: 7px 9px;
   font-size: 20px;

@@ -96,39 +96,32 @@ function NewSignup() {
     setValidated(true);
   };
 
-  const handlegooglelogin = () => {
+  const handlegooglelogin = async () => {
     signInWithGoogle();
-    const Fireuid = localStorage.getItem("Fireuid");
-    const FirephotoURL = localStorage.getItem("FirephotoURL");
-    const Fireemail = localStorage.getItem("Fireemail");
-    const Firename = localStorage.getItem("Firename");
+    const Fireuid = await localStorage.getItem("Fireuid");
+    // const FirephotoURL = localStorage.getItem("FirephotoURL");
+    const Fireemail = await localStorage.getItem("Fireemail");
+    const Firename = await localStorage.getItem("Firename");
 
-    console.log(Fireuid, FirephotoURL, Fireemail, Firename);
-    setTimeout(async () => {
-      const Fireemail = await localStorage.getItem("Fireemail");
-      const Firename = await localStorage.getItem("Firename");
-      if (Fireemail !== null) {
-        if (Fireemail !== "" && Firename !== "") {
-          axios
-            .post(`http://3.7.173.138:9000/user/signup`, {
-              username: Firename,
-              email: Fireemail,
-              password: Firename,
-            })
-            .then((response) => {
-              console.log(response.data);
+    if (Fireemail !== "" && Firename !== "") {
+      axios
+        .post(`http://3.7.173.138:9000/user/signup`, {
+          username: Firename,
+          email: Fireemail,
+          password: Fireuid,
+        })
+        .then((response) => {
+          console.log(response.data);
 
-              navigate("/");
-            })
-            .catch((error) => {
-              console.log(error.response.data);
-              if (error.response.data.message == "already exists") {
-                swal("This mail or username is already Registered");
-              }
-            });
-        }
-      }
-    }, 7000);
+          navigate("/");
+        })
+        .catch((error) => {
+          console.log(error.response.data);
+          if (error.response.data.message == "already exists") {
+            swal("This mail or username is already Registered");
+          }
+        });
+    }
   };
 
   return (
