@@ -3,7 +3,7 @@ import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import google from "../images/g1.png";
-
+import Modal from "react-bootstrap/Modal";
 import InputGroup from "react-bootstrap/InputGroup";
 import Row from "react-bootstrap/Row";
 import Logo1 from "../images/Logo1.png";
@@ -26,6 +26,30 @@ function NewSignup() {
   const handleSubmit = (event) => {
     event.preventDefault();
 
+    // function StaticExample() {
+    //   return (
+    //     <div
+    //       className="modal show"
+    //       style={{ display: "block", position: "initial" }}
+    //     >
+    //       <Modal.Dialog>
+    //         <Modal.Header closeButton>
+    //           <Modal.Title>Modal title</Modal.Title>
+    //         </Modal.Header>
+
+    //         <Modal.Body>
+    //           <p>Modal body text goes here.</p>
+    //         </Modal.Body>
+
+    //         <Modal.Footer>
+    //           <Button variant="secondary">Close</Button>
+    //           <Button variant="primary">Save changes</Button>
+    //         </Modal.Footer>
+    //       </Modal.Dialog>
+    //     </div>
+    //   );
+    // }
+
     const form = event.currentTarget;
     if (form.checkValidity() === false) {
       event.preventDefault();
@@ -46,20 +70,17 @@ function NewSignup() {
         })
         .then((response) => {
           console.log(response.data);
+          // if (response.data.message == "success") {
+          //   StaticExample();
+
+          // }
           swal(
             "Account created Successfully",
-            `Your-Email -${response.data.data.email} 
+            `Your-Email -${response.data.data.email}
             username- ${response.data.data.username}`
           );
           navigate("/");
 
-          if (
-            response.data.data._id !== null &&
-            response.data.data._id !== "" &&
-            response.data.data._id !== undefined
-          ) {
-            localStorage.setItem("userId", response.data.data._id);
-          }
           setUsername("");
           setEmail("");
           setPassword("");
@@ -77,30 +98,39 @@ function NewSignup() {
 
   const handlegooglelogin = () => {
     signInWithGoogle();
-    const uid = localStorage.getItem("uid");
-    const photoURL = localStorage.getItem("photoURL");
-    const email = localStorage.getItem("email");
-    const name = localStorage.getItem("name");
+    const Fireuid = localStorage.getItem("Fireuid");
+    const FirephotoURL = localStorage.getItem("FirephotoURL");
+    const Fireemail = localStorage.getItem("Fireemail");
+    const Firename = localStorage.getItem("Firename");
 
-    axios
-      .post(`http://3.7.173.138:9000/user/signup`, {
-        username: name,
-        email: email,
-        password: name,
-      })
-      .then((response) => {
-        console.log(response.data);
-        navigate("/");
-      })
-      .catch((error) => {
-        console.log(error.response.data);
-        if (error.response.data.message == "already exists") {
-          // swal(
-          //   "This mail or username is already rRegistered",
-          //   "Please Reset your password or try to signup with different username/email"
-          // );
-        }
-      });
+    console.log(Fireuid, FirephotoURL, Fireemail, Firename);
+    setTimeout(async () => {
+      const Fireemail = await localStorage.getItem("Fireemail");
+      const Firename = await localStorage.getItem("Firename");
+      if (Fireemail !== null) {
+      } else {
+        // received();
+      }
+    }, 5000);
+    if (Fireemail !== "" && Firename !== "") {
+      axios
+        .post(`http://3.7.173.138:9000/user/signup`, {
+          username: Firename,
+          email: Fireemail,
+          password: Firename,
+        })
+        .then((response) => {
+          console.log(response.data);
+
+          navigate("/");
+        })
+        .catch((error) => {
+          console.log(error.response.data);
+          if (error.response.data.message == "already exists") {
+            swal("This mail or username is already Registered");
+          }
+        });
+    }
   };
 
   return (
@@ -161,7 +191,7 @@ function NewSignup() {
                     required
                   />
                   <Form.Control.Feedback type="invalid">
-                    Please choose a username.
+                    Please choose a Username.
                   </Form.Control.Feedback>
                 </InputGroup>
               </Form.Group>
@@ -179,7 +209,7 @@ function NewSignup() {
                     required
                   />
                   <Form.Control.Feedback type="invalid">
-                    Please choose a email.
+                    Please choose a Correct Email.
                   </Form.Control.Feedback>
                 </InputGroup>
               </Form.Group>
@@ -199,7 +229,7 @@ function NewSignup() {
                     required
                   />
                   <Form.Control.Feedback type="invalid">
-                    Please choose a Password.
+                    Please choose a Password
                   </Form.Control.Feedback>
                 </InputGroup>
               </Form.Group>
@@ -228,30 +258,31 @@ function NewSignup() {
               Already have an account ?<Link to="/login">Log In</Link>
             </div>
             <Row className="d-flex justify-content-center mt-3">OR</Row>
-            <div className style={{ marginTop: "18px" }}>
-              <Row className="signupwithgoogle">
-                <button
-                  onClick={handlegooglelogin}
-                  className="d-flex justify-content-center signupwithgoogle"
-                >
-                  <img
-                    style={{
-                      margin: "3px",
-                      height: "20px",
-                    }}
-                    src={google}
-                  />
-                  <Link
-                    // style={{ color: "black" }}
-                    className=" signinwithgooglesignup"
-                  >
-                    Sign in with Google
-                  </Link>
-                </button>
-              </Row>
-            </div>
+
             {/* <Button type="submit">Submit form</Button> */}
           </Form>
+          <div className style={{ marginTop: "18px" }}>
+            <Row className="signupwithgoogle">
+              <button
+                onClick={handlegooglelogin}
+                className="d-flex justify-content-center signupwithgoogle"
+              >
+                <img
+                  style={{
+                    margin: "3px",
+                    height: "20px",
+                  }}
+                  src={google}
+                />
+                <Link
+                  // style={{ color: "black" }}
+                  className=" signinwithgooglesignup"
+                >
+                  Sign in with Google
+                </Link>
+              </button>
+            </Row>
+          </div>
         </Col>
       </Row>
     </Container>

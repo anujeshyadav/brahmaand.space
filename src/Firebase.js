@@ -26,15 +26,15 @@ export const signInWithGoogle = () => {
   signInWithPopup(auth, provider)
     .then((result) => {
       console.log(result);
-      const name = result.user.displayName;
-      const email = result.user.email;
-      const photoURL = result.user.photoURL;
-      const uid = result.user.uid;
+      const Firename = result.user.displayName;
+      const Fireemail = result.user.email;
+      const FirephotoURL = result.user.photoURL;
+      const Fireuid = result.user.uid;
 
-      localStorage.setItem("name", name);
-      localStorage.setItem("email", email);
-      localStorage.setItem("photoURL", photoURL);
-      localStorage.setItem("uid", uid);
+      localStorage.setItem("Firename", Firename);
+      localStorage.setItem("Fireemail", Fireemail);
+      localStorage.setItem("FirephotoURL", FirephotoURL);
+      localStorage.setItem("Fireuid", Fireuid);
     })
     .catch((err) => {
       console.log(err);
