@@ -108,29 +108,27 @@ function NewSignup() {
       const Fireemail = await localStorage.getItem("Fireemail");
       const Firename = await localStorage.getItem("Firename");
       if (Fireemail !== null) {
-      } else {
-        // received();
-      }
-    }, 5000);
-    if (Fireemail !== "" && Firename !== "") {
-      axios
-        .post(`http://3.7.173.138:9000/user/signup`, {
-          username: Firename,
-          email: Fireemail,
-          password: Firename,
-        })
-        .then((response) => {
-          console.log(response.data);
+        if (Fireemail !== "" && Firename !== "") {
+          axios
+            .post(`http://3.7.173.138:9000/user/signup`, {
+              username: Firename,
+              email: Fireemail,
+              password: Firename,
+            })
+            .then((response) => {
+              console.log(response.data);
 
-          navigate("/");
-        })
-        .catch((error) => {
-          console.log(error.response.data);
-          if (error.response.data.message == "already exists") {
-            swal("This mail or username is already Registered");
-          }
-        });
-    }
+              navigate("/");
+            })
+            .catch((error) => {
+              console.log(error.response.data);
+              if (error.response.data.message == "already exists") {
+                swal("This mail or username is already Registered");
+              }
+            });
+        }
+      }
+    }, 7000);
   };
 
   return (

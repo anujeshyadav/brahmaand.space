@@ -1027,7 +1027,7 @@ function ProductList(args) {
                     </span>
                   </h4>
 
-                  <Row style={{ height: "60vh" }} className=" mb-2">
+                  <Row className=" mb-2">
                     {promotion?.map((promotion) => (
                       <Col lg="4" md="4" sm="6" key={promotion?._id}>
                         <div class="product-grid8">
