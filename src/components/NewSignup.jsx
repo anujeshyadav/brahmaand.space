@@ -95,7 +95,7 @@ function NewSignup() {
         .catch((error) => {
           console.log(error.response.data);
           if (error.response.data.message == "already exists") {
-            swal("This mail or username is already Registered");
+            swal("This Mail/Username is already Registered");
           }
         });
     }
