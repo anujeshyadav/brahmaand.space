@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
@@ -6,6 +6,7 @@ import google from "../images/g1.png";
 import Modal from "react-bootstrap/Modal";
 import InputGroup from "react-bootstrap/InputGroup";
 import Row from "react-bootstrap/Row";
+import logonew from "../images/logonew.png";
 import Logo1 from "../images/Logo1.png";
 import logo from "../images/logo.png";
 import { faChessKing } from "@fortawesome/free-regular-svg-icons";
@@ -48,6 +49,12 @@ function NewSignup() {
     //       </Modal.Dialog>
     //     </div>
     //   );
+    // }
+
+    // if (!isValidEmail(event.target.value)) {
+    //   swal("Email is invalid");
+    // } else {
+    //   // setError(null);
     // }
 
     const form = event.currentTarget;
@@ -95,39 +102,82 @@ function NewSignup() {
 
     setValidated(true);
   };
+  const [err, setErr] = useState("");
+  const [emailcheck, setEmailcheck] = useState("");
+  const handleEmail = (e) => {
+    setEmailcheck(e.target.value);
+    var expression =
+      /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    var regex = new RegExp(expression);
+
+    var res = "";
+    if (emailcheck.match(regex)) {
+      setErr("This looks like Valid Email");
+      res = "Valid Email Id";
+      console.log(res);
+      setEmail(emailcheck);
+    } else {
+      // res = "Please Enter correct Email ";
+      setErr("Please Enter Valid Email");
+    }
+  };
+  const [usernameset, setUsernameset] = useState("");
+  const [errone, setErrone] = useState("");
+  const handleUserName = (e) => {
+    setUsernameset(e.target.value);
+    var expression = /^[A-Za-z]\w{7,14}$/;
+
+    var regex = new RegExp(expression);
+
+    var res = "";
+    if (usernameset.match(regex) && usernameset.length >= 6) {
+      setErrone("This looks like Valid Username");
+      res = "Valid userId";
+
+      setUsername(usernameset);
+    } else {
+      // res = "Please Enter correct Email ";
+      setErrone("Please Enter Alphanumerical Username");
+    }
+  };
 
   const handlegooglelogin = async () => {
-    signInWithGoogle();
+    const gmailCre = await signInWithGoogle().then((res) => {
+      debugger;
+    });
+    console.log(gmailCre);
     const Fireuid = await localStorage.getItem("Fireuid");
     // const FirephotoURL = localStorage.getItem("FirephotoURL");
     const Fireemail = await localStorage.getItem("Fireemail");
     const Firename = await localStorage.getItem("Firename");
 
-    if (Fireemail !== "" && Firename !== "") {
-      axios
-        .post(`http://3.7.173.138:9000/user/signup`, {
-          username: Firename,
-          email: Fireemail,
-          password: Fireuid,
-        })
-        .then((response) => {
-          console.log(response.data);
+    // if (Fireemail !== "" && Firename !== "") {
+    //   axios
+    //     .post(`http://3.7.173.138:9000/user/signup`, {
+    //       username: Firename,
+    //       email: Fireemail,
+    //       password: Fireuid,
+    //     })
+    //     .then((response) => {
+    //       console.log(response.data);
 
-          navigate("/");
-        })
-        .catch((error) => {
-          console.log(error.response.data);
-          if (error.response.data.message == "already exists") {
-            swal("This mail or username is already Registered");
-          }
-        });
-    }
+    //       navigate("/");
+    //     })
+    //     .catch((error) => {
+    //       console.log(error.response.data);
+    //       if (error.response.data.message == "already exists") {
+    //         swal("This mail or username is already Registered");
+    //       }
+    //     });
+    // }
   };
+
+  useEffect(() => {}, [emailcheck, usernameset]);
 
   return (
     <Container className="mt-4">
       <Row>
-        <Col lg="8">
+        <Col lg="8" md="8" sm="6" className="mb-3">
           <div
             style={{
               backgroundImage: `url(${logo})`,
@@ -138,21 +188,18 @@ function NewSignup() {
               width: "100%",
             }}
           >
-            <div
-              className="d-flex justify-content-center"
-              style={{ paddingTop: "160px" }}
-            >
-              <img src={Logo1} style={{ height: "160px", width: "160px" }} />
+            <div className="d-flex justify-content-left">
+              <img src={logonew} style={{ height: "95px", width: "175px" }} />
             </div>
-            <h3
+            {/* <h3
               className="d-flex justify-content-center"
               style={{ color: "white", textalign: "center" }}
             >
               <b>Brahmaand.Space</b>
-            </h3>
+            </h3> */}
           </div>
         </Col>
-        <Col lg="4">
+        <Col lg="4" md="4" sm="6">
           <Form noValidate validated={validated}>
             <Label
               style={{
@@ -161,49 +208,70 @@ function NewSignup() {
                 // marginBottom: "2.5rem",
               }}
             >
-              <h4 className="mb-1">Sign Up</h4>
+              <h4 className="mb-1 py-2">Sign Up</h4>
             </Label>
             <hr className="signuphr" />
             <h6>
-              Create an account to submit content in various categories and win
-              money and help our community to grow
+              Create an account to rate, comment, submit content and win lots of
+              Prizes.
             </h6>
-            <Row className="mt-3 mb-3">
-              <Form.Group as={Col} md="" controlId="validationCustomUsername">
+            <Row className="mt-3 mb-1">
+              <Form.Group>
                 <Form.Label>Username</Form.Label>
-                <InputGroup hasValidation>
-                  <Form.Control
-                    type="text"
-                    className="form-control"
-                    placeholder="Username"
-                    value={username}
-                    onChange={(e) => setUsername(e.target.value)}
-                    aria-describedby="inputGroupPrepend"
-                    required
-                  />
-                  <Form.Control.Feedback type="invalid">
-                    Please choose a Username.
-                  </Form.Control.Feedback>
-                </InputGroup>
+                <input
+                  type="text"
+                  className="form-control"
+                  placeholder="Username"
+                  value={usernameset}
+                  onChange={handleUserName}
+                  // onChange={(e) => setUsername(e.target.value)}
+                  aria-describedby="inputGroupPrepend"
+                  required
+                />
+                {errone == "This looks like Valid Username" ? (
+                  <span
+                    className="mx-2 mt-2"
+                    style={{ color: "green", fontSize: "13px" }}
+                  >
+                    {errone}
+                  </span>
+                ) : (
+                  <span
+                    className="mx-2 mt-2"
+                    style={{ color: "red", fontSize: "13px" }}
+                  >
+                    {errone}
+                  </span>
+                )}
               </Form.Group>
             </Row>
-            <Row className="mb-3">
-              <Form.Group as={Col} md="" controlId="validationCustomUsername">
-                <Form.Label>Email</Form.Label>
-                <InputGroup hasValidation>
-                  <Form.Control
-                    type="email"
-                    placeholder="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    aria-describedby="inputGroupPrepend"
-                    required
-                  />
-                  <Form.Control.Feedback type="invalid">
-                    Please choose a Correct Email.
-                  </Form.Control.Feedback>
-                </InputGroup>
-              </Form.Group>
+            <Row className=" mb-3 emailmargin">
+              <Label>Email</Label>
+              <input
+                type="email"
+                className="form-control mx-3"
+                placeholder="email"
+                value={emailcheck}
+                onChange={handleEmail}
+                // onChange={(e) => setEmail(e.target.value)}
+                aria-describedby="inputGroupPrepend"
+                required
+              />
+              {err == "This looks like Valid Email" ? (
+                <span
+                  className="mx-2 mt-1"
+                  style={{ color: "green", fontSize: "13px" }}
+                >
+                  {err}
+                </span>
+              ) : (
+                <span
+                  className="mx-2 mt-1"
+                  style={{ color: "red", fontSize: "13px" }}
+                >
+                  {err}
+                </span>
+              )}
             </Row>
             {/* changes here down */}
 
@@ -234,7 +302,7 @@ function NewSignup() {
                 feedbackType="invalid"
               />
             </Form.Group> */}
-            <div>
+            <div style={{ width: "100%" }}>
               <button
                 // disabled={!performValidation()}
                 style={{ padding: "13px 136px", borderRadius: "11px" }}

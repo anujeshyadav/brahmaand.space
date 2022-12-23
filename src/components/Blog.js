@@ -127,14 +127,16 @@ function Blog() {
                   <Col lg="12">
                     <Row>
                       <Col lg="6">
-                        <img
-                          src={value?.blogImg}
-                          style={{
-                            borderRadius: "12px",
-                            width: "280px",
-                            height: "280px",
-                          }}
-                        />
+                        <div className="rec_img ">
+                          <img
+                            src={value?.blogImg}
+                            style={{
+                              borderRadius: "12px",
+                              // width: "280px",
+                              height: "280px",
+                            }}
+                          />
+                        </div>
                       </Col>
                       <Col lg="6">
                         <Row className="mt-3">
@@ -188,15 +190,15 @@ function Blog() {
             <Col lg="4" sm="6" xs="12">
               <Card key={value?._id}>
                 <Link key={value?._id} to={`/blogdescription/${value?._id}`}>
-                  <CardImg
-                    style={{
-                      width: "380px",
-                      height: "250px",
-                    }}
-                    src={value?.blogImg}
-                    className="photo"
-                    // onClick={blogdescription}
-                  />
+                  <div className="popularimg">
+                    <CardImg
+                      style={{
+                        height: "250px",
+                      }}
+                      src={value?.blogImg}
+                      className="photo"
+                    />
+                  </div>
                   <CardBody>
                     <CardTitle>
                       <b style={{ color: "black" }}>{value?.blog_title}</b>

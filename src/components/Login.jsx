@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import "../styles/Login.css";
 import { Check } from "react-feather";
 import google from "../images/g1.png";
+import logonew from "../images/logonew.png";
 import newlogin from "../images/newlogin.png";
 import Logo1 from "../images/Logo1.png";
 import { useNavigate } from "react-router-dom";
@@ -70,7 +71,7 @@ function Login() {
         console.log(response.data.status);
 
         if (response.data.status === true) {
-          swal("Good job!", "Successfully login");
+          // swal("Successfully login");
         } else if (response.data.status === false) {
           console.log(response.data.status);
           swal("Failed to login try again ");
@@ -106,7 +107,7 @@ function Login() {
         <div className="login">
           <Form onSubmit={handleLoginSubmit} className="login-form">
             <Row>
-              <Col lg="8" md="6" sm="12">
+              <Col lg="8" md="6" sm="12" className="mb-3">
                 <div
                   style={{
                     backgroundImage: `url(${newlogin})`,
@@ -117,30 +118,29 @@ function Login() {
                     width: "100%",
                   }}
                 >
-                  <div
-                    className="d-flex justify-content-center"
-                    style={{ paddingTop: "150px" }}
-                  >
+                  <div className="d-flex justify-content-left">
                     <img
-                      src={Logo1}
-                      style={{ height: "165px", width: "170px" }}
+                      src={logonew}
+                      style={{ height: "95px", width: "173px" }}
                     />
                   </div>
-                  <h3
+                  {/* <h3
                     className="d-flex justify-content-center"
                     style={{ color: "white", textalign: "center" }}
                   >
                     <b className="logologintext">Brahmaand.Space</b>
-                  </h3>
+                  </h3> */}
                 </div>
               </Col>
-              <Col lg="4" md="6" sm="12" className="head">
+              <Col lg="4" md="6" sm="12" className=" head">
                 <h2>Welcome Back!</h2>
                 <FormGroup
                   className="mb-1 mt-3 login-form-group"
                   controlId="formBasicLoginEmail"
                 >
-                  <Label className="from-label">Email Id/Username</Label>
+                  <div className="d-flex">
+                    <Label className=" d-flex">Email Id/Username</Label>
+                  </div>
                   <Input
                     required="true"
                     for="exampleEmail"
@@ -196,20 +196,24 @@ function Login() {
                   </Col>
                 </Row>
                 {/* <div className="login-signup-res-pass-div text-align-left"></div> */}
-                <Row className="d-flex ">
-                  <Col lg="2">
-                    <Input
-                      className="check"
-                      type="checkbox"
-                      color="primary"
-                      icon={<Check className="vx-icon" size={10} />}
-                      label="Remember me"
-                      defaultChecked={false}
-                      required
-                    />
+                <Row className="d-flex">
+                  <Col className="d-flex" lg="2" md="6" sm="6">
+                    <div style={{ width: "100%" }}>
+                      <Input
+                        className="check"
+                        type="checkbox"
+                        color="primary"
+                        icon={<Check className="vx-icon" size={10} />}
+                        label="Remember me"
+                        defaultChecked={false}
+                        required
+                      />
+                    </div>
                   </Col>
-                  <Col>
-                    <Label className="label-button  d-flex">Remember me</Label>
+                  <Col className="d-flex " lg="10" md="6" sm="6">
+                    <Label className="label-button  mx-2 d-flex">
+                      Remember me
+                    </Label>
                   </Col>
                 </Row>
                 <div className="d-flex justify-content-center">

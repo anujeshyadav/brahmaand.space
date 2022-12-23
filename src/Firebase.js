@@ -22,7 +22,7 @@ export const auth = getAuth(app);
 
 const provider = new GoogleAuthProvider();
 
-export const signInWithGoogle = () => {
+export const signInWithGoogle = async () => {
   signInWithPopup(auth, provider)
     .then((result) => {
       console.log(result);
@@ -30,7 +30,13 @@ export const signInWithGoogle = () => {
       const Fireemail = result.user.email;
       const FirephotoURL = result.user.photoURL;
       const Fireuid = result.user.uid;
-
+      const myPromise = new Promise((resolve, reject) => {
+        resolve(result);
+      });
+      myPromise.then((res) => {
+        debugger;
+        return res;
+      });
       localStorage.setItem("Firename", Firename);
       localStorage.setItem("Fireemail", Fireemail);
       localStorage.setItem("FirephotoURL", FirephotoURL);

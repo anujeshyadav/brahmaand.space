@@ -178,7 +178,7 @@ function Hastag() {
                         }
                         className="btn1"
                       >
-                        #{trendingtopics?.topics}
+                        {trendingtopics?.topics}
                       </button>
                     ))
                   : null}
@@ -340,9 +340,9 @@ function Hastag() {
               <div className="content-emoji1">
                 <p>
                   <Container>
-                    Brahmaand.Space brings you the community and expert rated
-                    tutorials, courses, articles, blogs, vlogs, tv, movies etc.
-                    in all niche
+                    Brahmaand.Space features a selection of top-rated, community
+                    and expert-approved content links in all categories
+                    including tutorials, courses, articles, blogs, and vlogs.
                   </Container>
                 </p>
               </div>
@@ -382,10 +382,7 @@ function Hastag() {
             <Card>
               <Container>
                 <img height="140" className="imgCard" src={edu} alt="img" />
-                <p>
-                  Users submit resources they find relevant in respective
-                  category
-                </p>
+                <p>Search for the top content on any subject ... (e.g. Java)</p>
 
                 <ShowMore
                   className="showmore"
@@ -395,10 +392,9 @@ function Hastag() {
                   less="learn less"
                   anchorClass=""
                 >
-                  Lorem Ipsum is simply dummy text of the printing and
-                  typesetting industry..Users submit resources they find
-                  relevant in respective category.Lorem Ipsum is simply dummy
-                  text of the printing and typesetting industry.
+                  Our team of experts at Brahmaand.Space thoroughly evaluates
+                  and curates submitted content from across the globe, which are
+                  links to YouTube videos, courses, articles, and blogs.
                 </ShowMore>
               </Container>
             </Card>
@@ -409,8 +405,8 @@ function Hastag() {
               <Container>
                 <img height="140" className="imgCard" src={rate} alt="img" />
                 <p>
-                  Community and experts will rate the resources and give their
-                  reviews.
+                  User community and category experts will give their
+                  assessments and feedback for the submitted content.
                 </p>
                 <ShowMore
                   className="showmore"
@@ -420,10 +416,9 @@ function Hastag() {
                   less="learn less"
                   anchorClass=""
                 >
-                  Lorem Ipsum is simply dummy text of the printing and
-                  typesetting industry..Users submit resources they find
-                  relevant in respective category.Lorem Ipsum is simply dummy
-                  text of the printing and typesetting industry.
+                  Again, our expert team manually evaluates all ratings and
+                  reviews to verify their sources and ensure they provide
+                  helpful information.
                 </ShowMore>
               </Container>
             </Card>
@@ -439,8 +434,8 @@ function Hastag() {
                   alt="img"
                 />
                 <p>
-                  Community and experts will rate the resources and give their
-                  reviews.
+                  Brahmaand.Space showcases the best content that rises to the
+                  top for your learning and enjoyment.
                 </p>
                 <ShowMore
                   className="showmore"
@@ -450,10 +445,9 @@ function Hastag() {
                   less="learn less"
                   anchorClass=""
                 >
-                  Lorem Ipsum is simply dummy text of the printing and
-                  typesetting industry..Users submit resources they find
-                  relevant in respective category.Lorem Ipsum is simply dummy
-                  text of the printing and typesetting industry.
+                  Our platform rewards users who submitted content in the first
+                  step with prizes based on the ratings and reviews from
+                  Brahmaand.Space users community.
                 </ShowMore>
               </Container>
             </Card>
@@ -482,13 +476,12 @@ function Hastag() {
                 <Container>
                   <Col className="  Card-Form ">
                     <Container>
-                      <p className="d-flex  ">Get Our Monthly Newsletter</p>
+                      <p className="d-flex  ">Get the Latest Updates.</p>
                     </Container>
                     <Container>
                       <span className="d-flex  mt-3 newslettertext">
-                        Select a category that best suits your interest. Use
-                        filters to customize your search and to find exactly
-                        what you want.
+                        Sign up for Brahmaand.Space's newsletter to receive
+                        updates on new and relevant content.
                       </span>
                     </Container>
                     {/* news letter */}

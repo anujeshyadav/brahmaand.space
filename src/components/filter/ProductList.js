@@ -51,8 +51,8 @@ import { faStar, faStarHalfAlt } from "@fortawesome/free-solid-svg-icons";
 import { faStar as farStar } from "@fortawesome/free-regular-svg-icons";
 import { CloudLightning, CornerDownLeft } from "react-feather";
 import ProgressBar from "@ramonak/react-progress-bar";
-import "swiper/css";
-import "swiper/css/pagination";
+// import "swiper/css";
+// import "swiper/css/pagination";
 import "../../styles/Filter.css";
 import { number } from "prop-types";
 
@@ -646,7 +646,7 @@ function ProductList(args) {
                 <input
                   value={searchitem}
                   type="text"
-                  placeholder="   Searching best quality content here . . . "
+                  placeholder=" Search for the top resources on any subject ... (e.g. Java) "
                   className="searchprd inputareaa searchba "
                   onChange={(e) => {
                     setSearchitem(e.target.value);
@@ -1069,7 +1069,7 @@ function ProductList(args) {
                       onSlideChange={() => console.log("slide change")}
                       onSwiper={(swiper) => console.log(swiper)}
                       scrollbar={{ draggable: true }}
-                      className="mySwiper"
+                      className=""
                     >
                       {promotion?.map((promotion) => (
                         <SwiperSlide>
@@ -2195,11 +2195,11 @@ function ProductList(args) {
                 spaceBetween={50}
                 // slidesPerView={3}
                 centeredSlides={true}
-                // loop={true}
+                loop={true}
                 onSlideChange={() => console.log("slide change")}
                 onSwiper={(swiper) => console.log(swiper)}
                 scrollbar={{ draggable: true }}
-                className="mySwiper"
+                className="mySwipersuggestion"
               >
                 {suggested !== ""
                   ? suggested?.map((categry) => (

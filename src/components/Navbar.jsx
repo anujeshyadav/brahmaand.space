@@ -46,7 +46,6 @@ function CustomNavbar(args) {
   const [topic, setTopic] = useState([]);
   const [Desc, setDesc] = useState("");
   const [Optitle, setOptitle] = useState("");
-  // const [first, setfirst] = useState({});
   const [lngage, setLngage] = useState([]);
   const [sellang, setSellang] = useState();
   const [relyear, setRelyear] = useState([]);
@@ -66,7 +65,6 @@ function CustomNavbar(args) {
   };
   let base64code = "";
   const onLoad = (fileString) => {
-    // console.log("fileString", fileString);
     const image64 = fileString.split(",");
     console.log(image64[1]);
     setSelectedFile(image64[1]);
@@ -81,24 +79,6 @@ function CustomNavbar(args) {
       onLoad(reader.result);
     };
   };
-  // imageToBase64(cat_img) // Path to the image
-  //   .then((response) => {
-  //     setConimg(response); // "cGF0aC90by9maWxlLmpwZw=="
-  //     // setConvertimg(response);
-  //     // console.log(response);
-  //   })
-  //   .catch((error) => {
-  //     console.log(error); // Logs an error if there was one
-  //   });
-  const handleSubmit = (event) => {
-    const form = event.currentTarget;
-    if (form.checkValidity() === false) {
-      event.preventDefault();
-      event.stopPropagation();
-    }
-
-    setValidated(true);
-  };
 
   const userid = localStorage.getItem("userId");
 
@@ -112,9 +92,16 @@ function CustomNavbar(args) {
   const handleSubmitResource = (e) => {
     e.preventDefault();
     const userid = localStorage.getItem("userId");
-    // if (topic !== "") {
-    //   const answerarray = topic.split(",");
-    //   console.log(answerarray);
+    // var expression =
+    //   /[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&//=]*)?/;
+    // var regex = new RegExp(expression);
+
+    // var res = "";
+    // if (link.match(regex)) {
+    //   setErr("This looks like Valid URL");
+    //   setUrl(link);
+    // } else {
+    //   setErr("This is invalid URL");
     // }
 
     if (selectedFile == "") {
@@ -122,7 +109,7 @@ function CustomNavbar(args) {
       imageToBase64(dummy);
       imageToBase64();
     }
-    console.log(selectedFile);
+
     if (
       link !== "" &&
       catgry !== "" &&
@@ -256,7 +243,7 @@ function CustomNavbar(args) {
     allcategory();
 
     getLanguage();
-  }, []);
+  }, [link]);
 
   const [open, setOpen] = useState("1");
   const toggler = (id) => {
@@ -289,11 +276,16 @@ function CustomNavbar(args) {
   const [url, setUrl] = useState("");
   const validate = (e) => {
     setLink(e.target.value);
-    if (isURL(link)) {
+    var expression =
+      /[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&//=]*)?/;
+    var regex = new RegExp(expression);
+
+    var res = "";
+    if (link.match(regex)) {
       setErr("This looks like Valid URL");
       setUrl(link);
     } else {
-      setErr("Please Enter Valid URL");
+      setErr("This is invalid URL");
     }
   };
   const onSelect = (selectedList, selectedItem) => {
@@ -432,11 +424,11 @@ function CustomNavbar(args) {
                                   <span
                                     style={{ color: "green", fontSize: "12px" }}
                                   >
-                                    This look's like Valid URL
+                                    {err}
                                   </span>
                                 ) : (
                                   <span style={{ fontSize: "12px" }}>
-                                    Enter valid url
+                                    {err}
                                   </span>
                                 )}
                               </p>
@@ -955,12 +947,16 @@ function CustomNavbar(args) {
               <Link to={`/signup`}>
                 <button
                   className="btn rbutton mobile"
-                  onClick={() =>
-                    swal(
-                      "For Submit a content",
-                      "Need To Signup for Submit a Content"
-                    )
-                  }
+                  onClick={() => {
+                    return (
+                      <p
+                        className="d-flex justify-content-center"
+                        style={{ color: "black" }}
+                      >
+                        {swal("Join our Brahmaand community to submit content")}
+                      </p>
+                    );
+                  }}
                 >
                   <h4 className="rText">+ Submit a Content</h4>
                 </button>
