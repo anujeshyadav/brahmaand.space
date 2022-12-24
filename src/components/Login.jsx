@@ -1,6 +1,7 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import "../styles/Login.css";
+import { signInWithGoogle } from "../Firebase";
 import { Check } from "react-feather";
 import google from "../images/g1.png";
 import logonew from "../images/logonew.png";
@@ -90,22 +91,96 @@ function Login() {
         } else navigate("/login");
       })
       .catch((error) => {
-        console.log(error.response.data);
+        // console.log(error.response.data);
         if (error.response.data.msg === "User Doesnot Exist") {
-          swal("User Does Not exists");
+          swal("User Does Not Exist");
         } else if (error.response.data.msg === "Incorrect Password") {
-          swal("you Entered Incorrect password ", "try again");
+          swal("You Entered Incorrect Password ", "Try Again");
         }
       });
     setEmail("");
     setPassword("");
   };
 
+  const handlegooglelogin = async () => {
+    await signInWithGoogle();
+
+    const Fireuid = localStorage.getItem("Fireuid");
+    const FirephotoURL = localStorage.getItem("FirephotoURL");
+    const Fireemail = localStorage.getItem("Fireemail");
+    const Firename = localStorage.getItem("Firename");
+
+    if (Fireemail !== "" && Firename !== "" && Fireuid !== "") {
+      axios
+        .post(`http://3.7.173.138:9000/user/signup`, {
+          username: Firename,
+          email: Fireemail,
+          password: Fireuid,
+        })
+        .then((response) => {
+          console.log(response.data.message);
+          if (response.data.message === "success") {
+            handleLoginGoogleSubmit();
+          } else swal(" Try again! something went wrong");
+        })
+        .catch((error) => {
+          console.log(error.response.data);
+          if (error.response.data.message == "already exists") {
+            swal("Already Registered", " Reset your password Password");
+          }
+        });
+    }
+  };
+  const handleLoginGoogleSubmit = () => {
+    const Fireuid = localStorage.getItem("Fireuid");
+    const FirephotoURL = localStorage.getItem("FirephotoURL");
+    const Fireemail = localStorage.getItem("Fireemail");
+    const Firename = localStorage.getItem("Firename");
+    axios
+      .post(`http://3.7.173.138:9000/user/login`, {
+        username: Firename,
+        email: Fireemail,
+        password: Fireuid,
+      })
+      .then((response) => {
+        if (response.data.status === true) {
+          localStorage.removeItem("Fireuid");
+          localStorage.removeItem("FirephotoURL");
+          localStorage.removeItem("Fireemail");
+          localStorage.removeItem("Firename");
+        } else if (response.data.status === false) {
+          console.log(response.data.status);
+          swal("Failed to login try again ");
+        }
+
+        if (
+          response.data.user._id !== null &&
+          response.data.user._id !== "" &&
+          response.data.user._id !== undefined
+        ) {
+          localStorage.setItem("userId", response.data.user._id);
+        }
+
+        if (localStorage.getItem("userId")) {
+          navigate("/topbar");
+        } else navigate("/login");
+      })
+      .catch((error) => {
+        console.log(error.response.data);
+        if (error.response.data.msg === "User Doesnot Exist") {
+          swal("User Does Not exists");
+        }
+        // else if (error.response.data.msg === "Incorrect Password") {
+        //   swal("you Entered Incorrect password ", "try again");
+        // }
+      });
+  };
+
   return (
     <>
       <Container className="login-container">
         <div className="login">
-          <Form onSubmit={handleLoginSubmit} className="login-form">
+          <Form className="login-form">
             <Row>
               <Col lg="8" md="6" sm="12" className="mb-3">
                 <div
@@ -235,7 +310,10 @@ function Login() {
                 <Row className="d-flex justify-content-center mt-3">OR</Row>
                 <div className="mt-4">
                   <Row className="signupwithgoogle">
-                    <button className="d-flex justify-content-center signupwithgoogle">
+                    <button
+                      onClick={handlegooglelogin}
+                      className="d-flex justify-content-center signupwithgoogle"
+                    >
                       <img
                         style={{
                           margin: "3px",
@@ -251,27 +329,7 @@ function Login() {
                       </Link>
                     </button>
                   </Row>
-                  {/* <Row className="mt-3">
-                    <button className="signupwithgoogle">
-                      <Col
-                        lg="12"
-                        className="d-flex justify-content-center mt-2"
-                      >
-                        <img
-                          style={{
-                            margin: "3px",
-                            height: "20px",
-                          }}
-                          src={google}
-                        />
-                        <Link className="signinwithgooglesignup">
-                          Sign in with Google
-                        </Link>
-                      </Col>
-                    </button>
-                  </Row> */}
                 </div>
-                {/* <Row className=" d-flex justify-content-center mt-3">OR</Row> */}
               </Col>
             </Row>
           </Form>

@@ -132,18 +132,39 @@ function Hastag() {
   localStorage.setItem("hastag", "hastag");
   function handlehastagtopic(hastag) {
     localStorage.setItem("hastag", hastag);
-    if (hastag !== "") {
-      console.log(hastag);
-      axios
-        .get(`http://3.7.173.138:9000/user/filterbyHashTag/${hastag}`)
-        .then((res) => {
-          console.log(res.data?.data[0].sub_category?._id);
-          const hastagdata = res.data?.data[0].sub_category?._id;
+    // if (hastag !== "") {
+    //   console.log(hastag);
+    //   axios
+    //     .get(`http://3.7.173.138:9000/user/filterbyHashTag/${hastag}`)
+    //     .then((res) => {
+    //       console.log(res.data?.data[0].sub_category?._id);
+    //       const hastagdata = res.data?.data[0].sub_category?._id;
 
-          if (hastagdata !== "" && hastagdata !== null) {
-            console.log(hastagdata);
-            navigate(`/productList/${hastagdata}`);
+    //       if (hastagdata !== "" && hastagdata !== null) {
+    //         console.log(hastagdata);
+    //         navigate(`/productList/${hastagdata}`);
+    //       }
+    //     })
+    //     .catch((err) => {
+    //       console.log(err);
+    //     });
+    // }
+    console.log(hastag);
+    if (hastag !== "") {
+      axios
+        .post(`http://3.7.173.138:9000/user/search_topic_title`, {
+          searchinput: hastag,
+        })
+        .then((res) => {
+          console.log(res.data.data[0]?.sub_category);
+          const search = res.data.data[0]?.sub_category;
+
+          if (search !== "" && search !== undefined) {
+            navigate(`/productList/${search}`);
           }
+          // else {
+          //   return <p>No data available</p>;
+          // }
         })
         .catch((err) => {
           console.log(err);
@@ -192,7 +213,7 @@ function Hastag() {
       </Container>
       <Container>
         <p className="category">Top Categories</p>
-        <Container fluid className=" d-flex justify-content-center">
+        <Container className=" ">
           <Row className="m-3 mb-4">
             {categry?.slice(0, 8).map((value) => (
               <Col lg="3" md="6" sm="12" className="" key={value?._id}>

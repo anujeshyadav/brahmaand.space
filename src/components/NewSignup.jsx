@@ -3,6 +3,7 @@ import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import google from "../images/g1.png";
+import Swal from "sweetalert2";
 import Modal from "react-bootstrap/Modal";
 import InputGroup from "react-bootstrap/InputGroup";
 import Row from "react-bootstrap/Row";
@@ -27,43 +28,13 @@ function NewSignup() {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    // function StaticExample() {
-    //   return (
-    //     <div
-    //       className="modal show"
-    //       style={{ display: "block", position: "initial" }}
-    //     >
-    //       <Modal.Dialog>
-    //         <Modal.Header closeButton>
-    //           <Modal.Title>Modal title</Modal.Title>
-    //         </Modal.Header>
-
-    //         <Modal.Body>
-    //           <p>Modal body text goes here.</p>
-    //         </Modal.Body>
-
-    //         <Modal.Footer>
-    //           <Button variant="secondary">Close</Button>
-    //           <Button variant="primary">Save changes</Button>
-    //         </Modal.Footer>
-    //       </Modal.Dialog>
-    //     </div>
-    //   );
-    // }
-
-    // if (!isValidEmail(event.target.value)) {
-    //   swal("Email is invalid");
-    // } else {
-    //   // setError(null);
-    // }
-
     const form = event.currentTarget;
     if (form.checkValidity() === false) {
       event.preventDefault();
       event.stopPropagation();
     } else if (
-      username.length > 2 &&
-      password.length > 4 &&
+      username.length > 6 &&
+      password.length > 5 &&
       email !== "" &&
       password !== "" &&
       password !== null &&
@@ -76,18 +47,29 @@ function NewSignup() {
           password: password,
         })
         .then((response) => {
-          console.log(response.data);
-          // if (response.data.message == "success") {
-          //   StaticExample();
+          console.log(response.data.message);
+          if (response.data.message === "success") {
+            Swal.fire({
+              // header: '<a href="">Please verify your email</a>',
+              // header: ' <a href="">Please verify your email</a>',
 
-          // }
-          swal(
-            "Account created Successfully",
-            `Your-Email -${response.data.data.email}
-            username- ${response.data.data.username}`
-          );
-          navigate("/");
+              title: "<span>Please verify your email</span>",
+              // footer: '<a href="">Why do I have this issue?</a>',
+              // icon: "info",
+              html: " <hr /><p>A verification email has been sent to your email inbox. Please click the link in the email to activate your account . If you can't find the email, please check your spam folder or request another one</p><hr />",
 
+              showCloseButton: true,
+              // showCancelButton: true,
+              // focusConfirm: false,
+              // confirmButtonText: '<i class="fa fa-thumbs-up"></i> Great!',
+              // confirmButtonAriaLabel: "Thumbs up, great!",
+              // cancelButtonText: '<i class="fa fa-thumbs-down"></i>',
+              // cancelButtonAriaLabel: "Thumbs down",
+              // footer: '<a href="">Why do I have this issue?</a>',
+            });
+          }
+
+          // navigate("/");
           setUsername("");
           setEmail("");
           setPassword("");
@@ -95,7 +77,7 @@ function NewSignup() {
         .catch((error) => {
           console.log(error.response.data);
           if (error.response.data.message == "already exists") {
-            swal("This Mail/Username is already Registered");
+            swal("This Mail/UserName is already Registered");
           }
         });
     }
@@ -103,6 +85,7 @@ function NewSignup() {
     setValidated(true);
   };
   const [err, setErr] = useState("");
+  const [selectedFile, setSelectedFile] = useState("");
   const [emailcheck, setEmailcheck] = useState("");
   const handleEmail = (e) => {
     setEmailcheck(e.target.value);
@@ -141,35 +124,81 @@ function NewSignup() {
     }
   };
 
+  const id = localStorage.getItem("userId");
+
+  const handleLoginSubmit = () => {
+    const Fireuid = localStorage.getItem("Fireuid");
+    const FirephotoURL = localStorage.getItem("FirephotoURL");
+    const Fireemail = localStorage.getItem("Fireemail");
+    const Firename = localStorage.getItem("Firename");
+    axios
+      .post(`http://3.7.173.138:9000/user/login`, {
+        username: Firename,
+        email: Fireemail,
+        password: Fireuid,
+      })
+      .then((response) => {
+        if (response.data.status === true) {
+          localStorage.removeItem("Fireuid");
+          localStorage.removeItem("FirephotoURL");
+          localStorage.removeItem("Fireemail");
+          localStorage.removeItem("Firename");
+        } else if (response.data.status === false) {
+          console.log(response.data.status);
+          swal("Failed to login try again ");
+        }
+
+        if (
+          response.data.user._id !== null &&
+          response.data.user._id !== "" &&
+          response.data.user._id !== undefined
+        ) {
+          localStorage.setItem("userId", response.data.user._id);
+        }
+
+        if (localStorage.getItem("userId")) {
+          navigate("/topbar");
+        } else navigate("/login");
+      })
+      .catch((error) => {
+        console.log(error.response.data);
+        if (error.response.data.msg === "User Doesnot Exist") {
+          swal("User Does Not exists");
+        }
+        // else if (error.response.data.msg === "Incorrect Password") {
+        //   swal("you Entered Incorrect password ", "try again");
+        // }
+      });
+  };
+
   const handlegooglelogin = async () => {
-    const gmailCre = await signInWithGoogle().then((res) => {
-      debugger;
-    });
-    console.log(gmailCre);
-    const Fireuid = await localStorage.getItem("Fireuid");
-    // const FirephotoURL = localStorage.getItem("FirephotoURL");
-    const Fireemail = await localStorage.getItem("Fireemail");
-    const Firename = await localStorage.getItem("Firename");
+    await signInWithGoogle();
 
-    // if (Fireemail !== "" && Firename !== "") {
-    //   axios
-    //     .post(`http://3.7.173.138:9000/user/signup`, {
-    //       username: Firename,
-    //       email: Fireemail,
-    //       password: Fireuid,
-    //     })
-    //     .then((response) => {
-    //       console.log(response.data);
+    const Fireuid = localStorage.getItem("Fireuid");
+    const FirephotoURL = localStorage.getItem("FirephotoURL");
+    const Fireemail = localStorage.getItem("Fireemail");
+    const Firename = localStorage.getItem("Firename");
 
-    //       navigate("/");
-    //     })
-    //     .catch((error) => {
-    //       console.log(error.response.data);
-    //       if (error.response.data.message == "already exists") {
-    //         swal("This mail or username is already Registered");
-    //       }
-    //     });
-    // }
+    if (Fireemail !== "" && Firename !== "" && Fireuid !== "") {
+      axios
+        .post(`http://3.7.173.138:9000/user/signup`, {
+          username: Firename,
+          email: Fireemail,
+          password: Fireuid,
+        })
+        .then((response) => {
+          console.log(response.data.message);
+          if (response.data.message === "success") {
+            handleLoginSubmit();
+          } else swal(" Try again! something went wrong");
+        })
+        .catch((error) => {
+          console.log(error.response.data);
+          if (error.response.data.message == "already exists") {
+            swal("Already Registered", " Reset your password Password");
+          }
+        });
+    }
   };
 
   useEffect(() => {}, [emailcheck, usernameset]);

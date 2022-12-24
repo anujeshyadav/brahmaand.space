@@ -51,8 +51,8 @@ import { faStar, faStarHalfAlt } from "@fortawesome/free-solid-svg-icons";
 import { faStar as farStar } from "@fortawesome/free-regular-svg-icons";
 import { CloudLightning, CornerDownLeft } from "react-feather";
 import ProgressBar from "@ramonak/react-progress-bar";
-// import "swiper/css";
-// import "swiper/css/pagination";
+import "swiper/css";
+import "swiper/css/pagination";
 import "../../styles/Filter.css";
 import { number } from "prop-types";
 
@@ -97,6 +97,7 @@ function ProductList(args) {
         .then((res) => {
           setCategry(res.data.data);
           console.log(res.data.data);
+          setLanguage("");
         })
         .catch((err) => {
           console.log(err);
@@ -107,20 +108,36 @@ function ProductList(args) {
   const hastagdata = localStorage.getItem("hastag");
   const gethastagdata = () => {
     const hastagdata = localStorage.getItem("hastag");
-    if (hastagdata !== "" && hastagdata !== null) {
+    // if (hastagdata !== "" && hastagdata !== null) {
+    //   axios
+    //     .get(`http://3.7.173.138:9000/user/filterbyHashTag/${hastagdata}`)
+    //     .then((res) => {
+    //       console.log(res.data.data);
+    //       if (res.data.data !== "" && res.data.data !== null) {
+    //       }
+    //       setCategry(res.data.data);
+    //       // localStorage.removeItem("hastag");
+    //     })
+    //     .catch((err) => {
+    //       console.log(err);
+    //     });
+    // }
+    if (hastagdata !== "hastag")
       axios
-        .get(`http://3.7.173.138:9000/user/filterbyHashTag/${hastagdata}`)
+        .post(`http://3.7.173.138:9000/user/search_topic_title`, {
+          searchinput: hastagdata,
+        })
         .then((res) => {
           console.log(res.data.data);
           if (res.data.data !== "" && res.data.data !== null) {
+            setCategry(res.data.data);
+            // localStorage.removeItem("searchdata");
+            localStorage.setItem("hastag", "hastag");
           }
-          setCategry(res.data.data);
-          // localStorage.removeItem("hastag");
         })
         .catch((err) => {
           console.log(err);
         });
-    }
   };
 
   const getYear = () => {
@@ -161,6 +178,7 @@ function ProductList(args) {
         .then((res) => {
           setCategry(res.data.data);
           console.log(res.data.data);
+          // setContentyear("");
         })
         .catch((err) => {
           console.log(err);
@@ -570,6 +588,7 @@ function ProductList(args) {
         console.log(res.data.data);
         setCategry(res.data.data);
         setTypelength(res.data.data);
+        setType("");
       })
       .catch((err) => {
         console.log(err);
@@ -1069,7 +1088,7 @@ function ProductList(args) {
                       onSlideChange={() => console.log("slide change")}
                       onSwiper={(swiper) => console.log(swiper)}
                       scrollbar={{ draggable: true }}
-                      className=""
+                      className="mx-3"
                     >
                       {promotion?.map((promotion) => (
                         <SwiperSlide>
