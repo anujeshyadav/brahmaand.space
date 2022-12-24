@@ -33,8 +33,8 @@ function NewSignup() {
       event.preventDefault();
       event.stopPropagation();
     } else if (
-      username.length > 6 &&
-      password.length > 5 &&
+      username.length > 4 &&
+      password.length > 8 &&
       email !== "" &&
       password !== "" &&
       password !== null &&
@@ -49,30 +49,21 @@ function NewSignup() {
         .then((response) => {
           console.log(response.data.message);
           if (response.data.message === "success") {
+            setUsername("");
+            setEmail("");
+            setPassword("");
             Swal.fire({
-              // header: '<a href="">Please verify your email</a>',
-              // header: ' <a href="">Please verify your email</a>',
-
+              title: "<span>Account Created Successfully</span>",
               title: "<span>Please verify your email</span>",
-              // footer: '<a href="">Why do I have this issue?</a>',
-              // icon: "info",
+
               html: " <hr /><p>A verification email has been sent to your email inbox. Please click the link in the email to activate your account . If you can't find the email, please check your spam folder or request another one</p><hr />",
 
               showCloseButton: true,
-              // showCancelButton: true,
-              // focusConfirm: false,
-              // confirmButtonText: '<i class="fa fa-thumbs-up"></i> Great!',
-              // confirmButtonAriaLabel: "Thumbs up, great!",
-              // cancelButtonText: '<i class="fa fa-thumbs-down"></i>',
-              // cancelButtonAriaLabel: "Thumbs down",
-              // footer: '<a href="">Why do I have this issue?</a>',
             });
           }
 
-          // navigate("/");
-          setUsername("");
-          setEmail("");
-          setPassword("");
+          navigate("/");
+          swal("Accout Created Successfully");
         })
         .catch((error) => {
           console.log(error.response.data);
@@ -97,7 +88,6 @@ function NewSignup() {
     if (emailcheck.match(regex)) {
       setErr("This looks like Valid Email");
       res = "Valid Email Id";
-      console.log(res);
       setEmail(emailcheck);
     } else {
       // res = "Please Enter correct Email ";
@@ -139,10 +129,10 @@ function NewSignup() {
       })
       .then((response) => {
         if (response.data.status === true) {
-          localStorage.removeItem("Fireuid");
-          localStorage.removeItem("FirephotoURL");
-          localStorage.removeItem("Fireemail");
-          localStorage.removeItem("Firename");
+          // localStorage.removeItem("Fireuid");
+          // localStorage.removeItem("FirephotoURL");
+          // localStorage.removeItem("Fireemail");
+          // localStorage.removeItem("Firename");
         } else if (response.data.status === false) {
           console.log(response.data.status);
           swal("Failed to login try again ");
@@ -201,7 +191,7 @@ function NewSignup() {
     }
   };
 
-  useEffect(() => {}, [emailcheck, usernameset]);
+  useEffect(() => {}, [emailcheck, usernameset, err, errone]);
 
   return (
     <Container className="mt-4">

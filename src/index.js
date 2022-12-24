@@ -13,7 +13,13 @@ import reportWebVitals from "./reportWebVitals";
 import { render } from "react-dom";
 
 // Routing
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Redirect,
+  HashRouter,
+} from "react-router-dom";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -71,7 +77,8 @@ import SelectApp from "./components/SelectApp";
 
 const rootElement = document.getElementById("root");
 render(
-  <Router>
+  // <Router>
+  <HashRouter>
     <AuthProvider>
       <MenuProvider>
         <Layout>
@@ -135,7 +142,8 @@ render(
         </Layout>
       </MenuProvider>
     </AuthProvider>
-  </Router>,
+  </HashRouter>,
+  // </Router>,
   rootElement
 );
 
