@@ -229,7 +229,7 @@ function NewSignup() {
           </div>
         </Col>
         <Col lg="4" md="4" sm="6">
-          <Form noValidate validated={validated}>
+          <Form>
             <Label
               style={{
                 height: "25px",
@@ -306,7 +306,12 @@ function NewSignup() {
 
             <Row className="mb-3">
               <Form.Group as={Col} md="" controlId="validationCustomUsername">
-                <Form.Label>Password</Form.Label>
+                <Form.Label>
+                  Password
+                  {/* <span style={{ fontSize: "10px" }}>
+                    (must Containe five charactor)
+                  </span> */}
+                </Form.Label>
                 <InputGroup hasValidation>
                   <Form.Control
                     type="password"
