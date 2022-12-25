@@ -24,22 +24,22 @@ function NewSignup() {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
+  console.log(username);
+  console.log(email);
+  console.log(password);
   const handleSubmit = (event) => {
     event.preventDefault();
 
     const form = event.currentTarget;
-    if (form.checkValidity() === false) {
-      event.preventDefault();
-      event.stopPropagation();
-    } else if (
+    if (
       username.length > 4 &&
-      password.length > 8 &&
+      password.length > 4 &&
       email !== "" &&
       password !== "" &&
       password !== null &&
       password !== undefined
     ) {
+      console.log("first");
       axios
         .post(`http://3.7.173.138:9000/user/signup`, {
           username: username,
@@ -85,12 +85,11 @@ function NewSignup() {
     var regex = new RegExp(expression);
 
     var res = "";
-    if (emailcheck.match(regex)) {
+    if (e.target.value.match(regex)) {
       setErr("This looks like Valid Email");
       res = "Valid Email Id";
-      setEmail(emailcheck);
+      setEmail(e.target.value);
     } else {
-      // res = "Please Enter correct Email ";
       setErr("Please Enter Valid Email");
     }
   };
@@ -98,19 +97,37 @@ function NewSignup() {
   const [errone, setErrone] = useState("");
   const handleUserName = (e) => {
     setUsernameset(e.target.value);
-    var expression = /^[A-Za-z]\w{7,14}$/;
+
+    var expression = /^[A-Za-z]\w{7,18}$/;
 
     var regex = new RegExp(expression);
 
     var res = "";
-    if (usernameset.match(regex) && usernameset.length >= 6) {
+    if (e.target.value.match(regex) && usernameset.length >= 6) {
       setErrone("This looks like Valid Username");
-      res = "Valid userId";
-
-      setUsername(usernameset);
+      setUsername(e.target.value);
     } else {
       // res = "Please Enter correct Email ";
       setErrone("Please Enter Alphanumerical Username");
+    }
+  };
+  const [errtwo, setErrtwo] = useState("");
+  const [passwordset, setPasswordset] = useState("");
+  const handlepassword = (e) => {
+    setPasswordset(e.target.value);
+
+    var expression =
+      /^(?=.*([A-Z]){1,})(?=.*[!@#$&*]{1,})(?=.*[0-9]{1,})(?=.*[a-z]{1,}).{8,100}$/;
+
+    var regex = new RegExp(expression);
+
+    var res = "";
+    if (e.target.value.match(regex) && passwordset.length >= 8) {
+      setErrtwo("This is Strong password");
+      setPassword(e.target.value);
+    } else {
+      // res = "Please Enter correct Email ";
+      setErrtwo("Password must contain alphanumeric and special Charactor");
     }
   };
 
@@ -191,12 +208,19 @@ function NewSignup() {
     }
   };
 
-  useEffect(() => {}, [emailcheck, usernameset, err, errone]);
+  useEffect(() => {}, [
+    emailcheck,
+    usernameset,
+    passwordset,
+    err,
+    errone,
+    errtwo,
+  ]);
 
   return (
     <Container className="mt-4">
       <Row>
-        <Col lg="8" md="8" sm="6" className="mb-3">
+        <Col className="imagesignupalign mb-3" lg="8" md="8" sm="6">
           <div
             style={{
               backgroundImage: `url(${logo})`,
@@ -207,15 +231,9 @@ function NewSignup() {
               width: "100%",
             }}
           >
-            <div className="d-flex justify-content-left">
+            <div className="d-flex justify-content-center ">
               <img src={logonew} style={{ height: "95px", width: "175px" }} />
             </div>
-            {/* <h3
-              className="d-flex justify-content-center"
-              style={{ color: "white", textalign: "center" }}
-            >
-              <b>Brahmaand.Space</b>
-            </h3> */}
           </div>
         </Col>
         <Col lg="4" md="4" sm="6">
@@ -295,37 +313,39 @@ function NewSignup() {
             {/* changes here down */}
 
             <Row className="mb-3">
-              <Form.Group as={Col} md="" controlId="validationCustomUsername">
-                <Form.Label>
-                  Password
-                  {/* <span style={{ fontSize: "10px" }}>
+              <Label>
+                Password
+                {/* <span style={{ fontSize: "10px" }}>
                     (must Containe five charactor)
                   </span> */}
-                </Form.Label>
-                <InputGroup hasValidation>
-                  <Form.Control
-                    type="password"
-                    placeholder="Password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    aria-describedby="inputGroupPrepend"
-                    required
-                  />
-                  <Form.Control.Feedback type="invalid">
-                    Please choose a Password
-                  </Form.Control.Feedback>
-                </InputGroup>
-              </Form.Group>
+              </Label>
+              <input
+                type="password"
+                placeholder="Password"
+                className="form-control mx-3"
+                value={passwordset}
+                // onChange={(e) => setPassword(e.target.value)}
+                onChange={handlepassword}
+                aria-describedby="inputGroupPrepend"
+                required
+              />
+              {errtwo == "This is Strong password" ? (
+                <span
+                  className="mx-2 mt-2"
+                  style={{ color: "green", fontSize: "13px" }}
+                >
+                  {errtwo}
+                </span>
+              ) : (
+                <span
+                  className="mx-2 mt-2"
+                  style={{ color: "red", fontSize: "13px" }}
+                >
+                  {errtwo}
+                </span>
+              )}
             </Row>
 
-            {/* <Form.Group className="mb-3">
-              <Form.Check
-                required
-                label="Agree to terms and conditions"
-                feedback="You must agree before submitting."
-                feedbackType="invalid"
-              />
-            </Form.Group> */}
             <div style={{ width: "100%" }}>
               <button
                 // disabled={!performValidation()}

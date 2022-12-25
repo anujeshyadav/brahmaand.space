@@ -5,3 +5,14 @@ input.form-control.mx-3 {
   width: 94%;
   background-color: none;
 }
+
+.imagesignupalign {
+  position: relative;
+  /* text-align: center; */
+  justify-content: center;
+  color: white;
+}
+
+.centered {
+  transform: translate(0%, 0%);
+}
