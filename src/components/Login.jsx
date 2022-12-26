@@ -193,7 +193,7 @@ function Login() {
                     width: "100%",
                   }}
                 >
-                  <div className="d-flex justify-content-left">
+                  <div className="d-flex justify-content-left rtt-2">
                     <img
                       src={logonew}
                       style={{ height: "95px", width: "173px" }}

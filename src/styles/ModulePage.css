@@ -925,9 +925,10 @@ svg.bsplaybutton {
 
 .swiper-button-next,
 .swiper-button-prev {
+  margin-top: 12px !important;
   background: none;
-  position: absolute;
-  top: 48%;
+  width: 55px !important;
+  top: 5%;
 
   width: calc(var(--swiper-navigation-size) / 44 * 27);
   height: var(--swiper-navigation-size);
@@ -960,6 +961,16 @@ svg.bsplaybutton {
 .swiper-container-rtl .swiper-button-next {
   left: 15px;
   right: auto;
+  /* margin-top: 10px; */
+  width: 52px;
+  float: left;
+  font-weight: bolder;
+  font-size: 35px;
+  color: rgb(250, 250, 250);
+  /* margin-left: 64px;  */
+  background-color: #00000063;
+  padding: 8px 16px;
+  border-radius: 8px;
 }
 .swiper-button-prev:after,
 .swiper-container-rtl .swiper-button-next:after {
@@ -971,16 +982,25 @@ svg.bsplaybutton {
 }
 .swiper-button-next,
 .swiper-container-rtl .swiper-button-prev {
-  right: 15px;
+  right: auto;
   font-size: 31px;
-  left: auto;
+  left: auto !important;
 }
 .swiper-button-next:after,
 .swiper-container-rtl .swiper-button-prev:after {
+  /* content: "next";
+  font-weight: bolder;
+  font-size: 35px;
+  color: rgb(250, 250, 250); */
+
   content: "next";
   font-weight: bolder;
   font-size: 35px;
   color: rgb(250, 250, 250);
+  margin-left: 64px;
+  background-color: #00000063;
+  padding: 8px 17px;
+  border-radius: 8px;
 }
 .swiper-button-next.swiper-button-white,
 .swiper-button-prev.swiper-button-white {

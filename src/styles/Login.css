@@ -226,3 +226,11 @@ button.signupwithgoogle {
   margin-top: 25px;
   margin-left: 0px;
 }
+
+/* position: absolute; */
+
+.d-flex.justify-content-left.rtt-2 {
+  width: 150px;
+  margin: 0 auto;
+  padding-top: 400px;
+}

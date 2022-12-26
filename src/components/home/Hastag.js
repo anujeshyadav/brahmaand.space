@@ -268,13 +268,18 @@ function Hastag() {
         <Swiper
           breakpoints={{
             // when window width is >= 640px
-            980: {
+            1084: {
               slidesPerView: 3,
               direction: "horizontal",
               spaceBetween: 20,
             },
+            980: {
+              slidesPerView: 2,
+              direction: "horizontal",
+              spaceBetween: 20,
+            },
             820: {
-              slidesPerView: 3,
+              slidesPerView: 2,
               direction: "horizontal",
               spaceBetween: 20,
             },

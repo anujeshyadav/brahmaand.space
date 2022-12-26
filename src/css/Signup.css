@@ -16,3 +16,11 @@ input.form-control.mx-3 {
 .centered {
   transform: translate(0%, 0%);
 }
+
+/*new */
+
+.d-flex.justify-content-center.rtt-1 {
+  width: 150px;
+  margin: 0 auto;
+  padding-top: 400px;
+}

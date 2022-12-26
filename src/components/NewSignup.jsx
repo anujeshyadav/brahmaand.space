@@ -47,7 +47,13 @@ function NewSignup() {
           password: password,
         })
         .then((response) => {
-          console.log(response.data.message);
+          console.log(response.data.data);
+          if (response.data.data._id !== "") {
+            localStorage.setItem("userId", response.data.data._id);
+          }
+          if (localStorage.getItem("userId")) {
+            navigate("/topbar");
+          } else navigate("/login");
           if (response.data.message === "success") {
             setUsername("");
             setEmail("");
@@ -231,7 +237,7 @@ function NewSignup() {
               width: "100%",
             }}
           >
-            <div className="d-flex justify-content-center ">
+            <div className="d-flex justify-content-center rtt-1">
               <img src={logonew} style={{ height: "95px", width: "175px" }} />
             </div>
           </div>

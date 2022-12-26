@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-
+import ReactHtmlParser from "react-html-parser";
 import ReactPaginate from "react-paginate";
 import { Swiper, SwiperSlide } from "swiper/react";
 import StarsRating from "stars-rating";
@@ -1493,11 +1493,21 @@ function ProductList(args) {
                                     ))}
                                   </li>
                                 </ul>
-                                <h3>{promotion?.desc?.slice(0, 25)}</h3>
+                                <h3>
+                                  {ReactHtmlParser(
+                                    promotion?.desc?.slice(0, 25)
+                                  )}
+                                </h3>
+                                blogdescription
                                 <h5>
                                   <span>By -</span> {promotion?.creatorName}
                                 </h5>
-                                <p>{promotion?.res_desc?.slice(0, 50)}</p>
+                                {/* <p>{promotion?.res_desc?.slice(0, 50)}</p> */}
+                                <h3>
+                                  {ReactHtmlParser(
+                                    promotion?.res_desc?.slice(0, 50)
+                                  )}
+                                </h3>
                                 <div className="mt-2 mb-2">
                                   <Row>
                                     <Col lg="6">
