@@ -63,7 +63,7 @@ function NewSignup() {
           }
 
           navigate("/");
-          swal("Accout Created Successfully");
+          // swal("Accout Created Successfully");
         })
         .catch((error) => {
           console.log(error.response.data);
