@@ -92,17 +92,6 @@ function CustomNavbar(args) {
   const handleSubmitResource = (e) => {
     e.preventDefault();
     const userid = localStorage.getItem("userId");
-    // var expression =
-    //   /[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&//=]*)?/;
-    // var regex = new RegExp(expression);
-
-    // var res = "";
-    // if (link.match(regex)) {
-    //   setErr("This looks like Valid URL");
-    //   setUrl(link);
-    // } else {
-    //   setErr("This is invalid URL");
-    // }
 
     if (selectedFile == "") {
       console.log("object");
@@ -198,7 +187,6 @@ function CustomNavbar(args) {
   useEffect(() => {
     const params = catgry;
 
-    // function allsubcategory() {
     axios
 
       .get(`http://3.7.173.138:9000/admin/listbycategory/${params}`)
@@ -209,7 +197,6 @@ function CustomNavbar(args) {
       .catch((error) => {
         console.log(error.response.data);
       });
-    // }
   }, [catgry]);
 
   // all year selection api
@@ -264,14 +251,6 @@ function CustomNavbar(args) {
   const [selectedList, setSelectedList] = useState([]);
   const [selectedItem, setSelectedItem] = useState([]);
 
-  // useEffect(() => {
-  //   // console.log(current_link);
-  // }, [current_link]);
-
-  // const onSelect = (selectedList, selectedItem) => {
-  //   setSellang(Sellang.concat(selectedItem._id));
-  //   console.log(sellang);
-  // };
   const [err, setErr] = useState("");
   const [url, setUrl] = useState("");
   const validate = (e) => {

@@ -627,6 +627,10 @@ function ProductList(args) {
       .then((response) => {
         setCategry(response.data.data);
         console.log(response.data.data);
+        const data = response.data.data;
+        const datanew = data.filter((data) => {
+          return data.format == "Text" && data.type == "Paid";
+        });
       })
       .catch((error) => {
         console.log(error.response.data);

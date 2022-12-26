@@ -11,6 +11,8 @@ import newsletter from "../../images/newsletter.png";
 import { useNavigate } from "react-router-dom";
 import emoji from "../../images/emoji.png";
 import emoji2 from "../../images/emoji2.png";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import youtubevideo from "../../images/youtubevideo.jpg";
 import edu from "../../images/edu.jpg";
 import rate from "../../images/rate.jpg";
@@ -157,6 +159,13 @@ function Hastag() {
         })
         .then((res) => {
           console.log(res.data.data[0]?.sub_category);
+
+          if (
+            res.data.data[0]?.sub_category === "" ||
+            res.data.data[0]?.sub_category == undefined
+          ) {
+            swal("No data Found!");
+          }
           const search = res.data.data[0]?.sub_category;
 
           if (search !== "" && search !== undefined) {
@@ -313,6 +322,7 @@ function Hastag() {
                   <Nav.Link as={NavLink} className="navbar-link">
                     <div className="ty-4">
                       <BsPlay
+                        key={features?._id}
                         className="bsplaybutton"
                         size={75}
                         style={{ backgroundColor: "white" }}
@@ -321,6 +331,7 @@ function Hastag() {
                       />
                     </div>
                     <ModalVideo
+                      key={features?._id}
                       style={{ borderRadius: "12px" }}
                       channel="youtube"
                       autoplay
