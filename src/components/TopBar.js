@@ -65,7 +65,7 @@ function TopBar() {
   };
   useEffect(() => {
     getUserData();
-  }, []);
+  }, [display_name]);
 
   const handleLoginSubmit = async (e) => {
     e.preventDefault();
