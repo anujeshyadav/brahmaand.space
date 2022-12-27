@@ -3,6 +3,14 @@
   margin-right: auto;
 }
 
+.otpinputconstainer {
+  display: flex;
+  justify-content: center;
+}
+.resetpasswordotp {
+  display: flex;
+  justify-content: center;
+}
 .form-control:focus {
   color: rgb(23, 6, 6);
   background-color: #fff;
@@ -233,4 +241,18 @@ button.signupwithgoogle {
   width: 150px;
   margin: 0 auto;
   padding-top: 400px;
+}
+.inputdataone {
+  width: 32px !important;
+  text-align: center;
+  height: 36px !important;
+}
+
+.otpinputtype.mb-2 {
+  width: 50px;
+}
+
+span.dashitem {
+  width: 20px;
+  /* font-weight: 500; */
 }

@@ -1,8 +1,10 @@
 import { Card, Container, Button, Form } from "react-bootstrap";
 import "../styles/Login.css";
 import axios from "axios";
-import { useState } from "react";
-
+import { Col, Row } from "react-bootstrap";
+import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import { Label } from "reactstrap";
 import { useNavigate } from "react-router-dom";
 
 const domain = process.env.REACT_APP_API_DOMAIN_NAME;
@@ -10,10 +12,26 @@ const domain = process.env.REACT_APP_API_DOMAIN_NAME;
 const SendRequestResetPasswordComponent = () => {
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
+  const [emailcheck, setEmailcheck] = useState("");
+  const [err, setErr] = useState("");
+  // const [email, setEmail] = useState("");
 
-  function performValidation() {
-    return email.length > 12;
-  }
+  const handleEmail = (e) => {
+    setEmailcheck(e.target.value);
+    var expression =
+      /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    var regex = new RegExp(expression);
+
+    var res = "";
+    if (e.target.value.match(regex)) {
+      setErr("This looks like Valid Email");
+      res = "Valid Email Id";
+      setEmail(e.target.value);
+    } else {
+      setErr("Please Enter Valid Email");
+    }
+  };
+  useEffect(() => {}, [emailcheck]);
 
   const navigate = useNavigate();
 
@@ -24,7 +42,7 @@ const SendRequestResetPasswordComponent = () => {
   };
 
   return (
-    <Container className="login-container mt-5 mx-15">
+    <Container className="login-container mt-4 mx-15 resetpasswordotp">
       <Card className="login-card">
         <Card.Header className="login-card-header">
           <h2 className="login-card-header-h2">Reset Password</h2>
@@ -36,10 +54,10 @@ const SendRequestResetPasswordComponent = () => {
             onSubmit={(e) => sendRequestResetPasswordHandler(e)}
           >
             <p className="mb-2">
-              Enter your Username or email address below and we'll send you a
-              link to reset your Password.
+              Enter your mail address and we will send you OTP, to Reset your
+              Password.
             </p>
-            <Form.Group
+            {/* <Form.Group
               className="mb-3 login-form-group"
               controlId="formBasicLoginEmail"
             >
@@ -50,12 +68,40 @@ const SendRequestResetPasswordComponent = () => {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
-            </Form.Group>
+            </Form.Group> */}
+            <Row className=" mb-3 emailmargin">
+              <Label>Email</Label>
+              <input
+                type="email"
+                className="form-control mx-3"
+                placeholder="email"
+                value={emailcheck}
+                onChange={handleEmail}
+                // onChange={(e) => setEmail(e.target.value)}
+                aria-describedby="inputGroupPrepend"
+                required
+              />
+              {err == "This looks like Valid Email" ? (
+                <span
+                  className=" mt-2 mx-1 d-flex justify-content-left"
+                  style={{ color: "green", fontSize: "13px" }}
+                >
+                  {err}
+                </span>
+              ) : (
+                <span
+                  className="mx-2 mt-1"
+                  style={{ color: "red", fontSize: "13px" }}
+                >
+                  {err}
+                </span>
+              )}
+            </Row>
 
             <div className="login-button-div">
               <Button
                 variant="primary"
-                disabled={!performValidation()}
+                // disabled={!performValidation()}
                 className="login-button"
                 type="submit"
               >

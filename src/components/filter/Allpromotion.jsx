@@ -7,6 +7,7 @@ import mdicon1 from "../../assets/icons/mdicon-1.png";
 import usericon from "../../assets/icons/usericon.png";
 import typeicon from "../../assets/icons/typeicon.png";
 import languageicon from "../../assets/icons/languageicon.png";
+import ReactHtmlParser from "react-html-parser";
 import { FaHeart, FaStar, FaRegHeart } from "react-icons/fa";
 import Moment from "react-moment";
 import axiosConfig from "../../components/axiosConfig.js";
@@ -290,7 +291,7 @@ function Allpromotion(args) {
                             </Col>
                           </Row>
                           <div className="main-content">
-                            <h2>{promotiondata?.desc}</h2>
+                            <h2>{ReactHtmlParser(promotiondata?.desc)}</h2>
                             <div className="top-icon">
                               <Link to="#">
                                 <img src={mdicon1} alt="" />
@@ -322,7 +323,10 @@ function Allpromotion(args) {
 
                           <div className="mid">
                             <h5>
-                              Link :<span>{promotiondata?.link}</span>
+                              Link :
+                              <a href={promotiondata?.link}>
+                                {promotiondata?.link}
+                              </a>
                             </h5>
                             <div className="mid-content">
                               <Row>
@@ -469,7 +473,7 @@ function Allpromotion(args) {
 
                           <div className="description mt-3">
                             <h4>Description:</h4>
-                            <p>{promotiondata?.desc}</p>
+                            <p>{ReactHtmlParser(promotiondata?.desc)}</p>
                           </div>
 
                           <hr></hr>
@@ -714,7 +718,7 @@ function Allpromotion(args) {
                         ))}
                       </li>
                     </ul>
-                    <h3>{promotion?.desc?.slice(0, 25)}</h3>
+                    <h3>{ReactHtmlParser(promotion?.desc?.slice(0, 25))}</h3>
                     <h5>
                       <span>By -</span> {promotion?.creatorName}
                     </h5>

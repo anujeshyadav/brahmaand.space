@@ -121,7 +121,7 @@ function Hastag() {
       .get(`/user/get_featured_cnt`)
       .then((res) => {
         setFeature(res.data.data);
-        // console.log(res.data.data);
+        console.log(res.data.data);
       })
       .catch((err) => {
         console.log(err);
@@ -267,45 +267,43 @@ function Hastag() {
         <h2 className="category2 mt-4 mb-4">Featured</h2>
         <Swiper
           breakpoints={{
-            // when window width is >= 640px
             1084: {
-              slidesPerView: 3,
+              slidesPerView: 4,
               direction: "horizontal",
-              spaceBetween: 20,
+              spaceBetween: 10,
             },
             980: {
-              slidesPerView: 2,
+              slidesPerView: 4,
               direction: "horizontal",
-              spaceBetween: 20,
+              spaceBetween: 10,
             },
             820: {
-              slidesPerView: 2,
+              slidesPerView: 3,
               direction: "horizontal",
-              spaceBetween: 20,
+              spaceBetween: 10,
             },
             780: {
-              slidesPerView: 2,
+              slidesPerView: 3,
               direction: "horizontal",
-              spaceBetween: 20,
+              spaceBetween: 10,
             },
 
             768: {
-              slidesPerView: 2,
+              slidesPerView: 3,
               direction: "horizontal",
-              spaceBetween: 20,
+              spaceBetween: 10,
             },
             640: {
               slidesPerView: 1,
               direction: "horizontal",
-              spaceBetween: 28,
+              spaceBetween: 10,
             },
             320: {
               slidesPerView: 1,
               direction: "horizontal",
-              spaceBetween: 25,
+              spaceBetween: 10,
             },
           }}
-          // install Swiper modules
           modules={[Navigation, Pagination, Scrollbar, A11y]}
           spaceBetween={70}
           slidesPerView={3}
@@ -315,10 +313,9 @@ function Hastag() {
           onSwiper={(swiper) => console.log(swiper)}
           onSlideChange={() => console.log("slide change")}
         >
-          {/* map from here to swiper slider */}
           {feature?.map((features) => (
             <SwiperSlide key={features?._id}>
-              <div
+              {/* <div
                 key={features?._id}
                 style={{ backgroundImage: `url(${features?.thumbnail_img})` }}
                 className="ty-6"
@@ -347,6 +344,15 @@ function Hastag() {
                     />
                   </Nav.Link>
                 </div>
+              </div> */}
+              <div className="ifram">
+                <iframe
+                  className="iframesetdata"
+                  // width="auto"
+                  // height="300px"
+                  style={{ borderRadius: "12px" }}
+                  src={`https://www.youtube.com/embed/${features?.video_link}`}
+                ></iframe>
               </div>
             </SwiperSlide>
           ))}

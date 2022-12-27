@@ -63,6 +63,7 @@ import LeaderBoard from "./components/home/LeaderBoard";
 import NewSignup from "./components/NewSignup";
 import Passwordhide from "./components/Passwordhide";
 import Formvalidation from "./components/Formvalidation";
+import OtpInputpage from "./pages/OtpInputpage";
 // Import Context
 import { MenuProvider } from "./context/MenuContext";
 import { AuthProvider } from "./context/AuthContext";
@@ -102,6 +103,7 @@ render(
             <Route exact path="/paginationnew" element={<Paginationnew />} />
             <Route exact path="/allpromotion" element={<Allpromotion />} />
             <Route exact path="/selectapp" element={<SelectApp />} />
+            <Route exact path="/otpinputpage" element={<OtpInputpage />} />
 
             <Route
               exact

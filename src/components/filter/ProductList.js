@@ -391,7 +391,11 @@ function ProductList(args) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(myId);
+    console.log(myId == "");
+    if (myId == "") {
+      swal("Login First");
+      navigate("/login");
+    }
     if (myId !== null && myId !== undefined && myId !== "") {
       const selectedId = Producdetail._id;
 
@@ -543,9 +547,9 @@ function ProductList(args) {
     if (type !== "") {
       gettypefilter();
     }
-    if (hastagdata !== "hastag") {
-      gethastagdata();
-    }
+    // if (hastagdata !== "hastag") {
+    //   gethastagdata();
+    // }
     if (searchdata !== "" && searchdata !== null) {
       handleSearchHomePage();
     }
@@ -588,7 +592,6 @@ function ProductList(args) {
         console.log(res.data.data);
         setCategry(res.data.data);
         setTypelength(res.data.data);
-        setType("");
       })
       .catch((err) => {
         console.log(err);
@@ -1137,7 +1140,9 @@ function ProductList(args) {
                                         </Col>
                                       </Row>
                                       <div className="main-content">
-                                        <h2>{promotiondata?.desc}</h2>
+                                        <h2>
+                                          {ReactHtmlParser(promotiondata?.desc)}
+                                        </h2>
                                         <div className="top-icon">
                                           <Link to="#">
                                             <img src={mdicon1} alt="" />
@@ -1179,7 +1184,9 @@ function ProductList(args) {
                                       <div className="mid">
                                         <h5>
                                           Link :
-                                          <span>{promotiondata?.link}</span>
+                                          <a href={promotiondata?.link}>
+                                            {promotiondata?.link}
+                                          </a>
                                         </h5>
                                         <div className="mid-content">
                                           <Row>
@@ -1361,7 +1368,9 @@ function ProductList(args) {
 
                                       <div className="description mt-3">
                                         <h4>Description:</h4>
-                                        <p>{promotiondata?.desc}</p>
+                                        <h2>
+                                          {ReactHtmlParser(promotiondata?.desc)}
+                                        </h2>
                                       </div>
 
                                       <hr></hr>
@@ -1564,6 +1573,31 @@ function ProductList(args) {
                                         handleSelection(categry?._id)
                                       }
                                     >
+                                      {/* {categry?.link.match(
+                                        /(?:youtu\.be\/|youtube\.com(?:\/embed\/|\/v\/|\/watch\?v=|\/user\/\S+|\/ytscreeningroom\?v=|\/sandalsResorts#\w\/\w\/.*\/))([^\/&]{10,12})/
+                                      ) ? (
+                                        <>
+                                          {
+                                            (categry[1] = categry?.link.split(
+                                              "="
+                                            ) ? (
+                                              <>
+                                                <h2 style={{ color: "green" }}>
+                                                  {categry[1]}
+                                                </h2>
+                                                <iframe
+                                                  width="200"
+                                                  height="200"
+                                                  style={{
+                                                    borderRadius: "12px",
+                                                  }}
+                                                  src={`https://www.youtube.com/embed/${categry[1]}`}
+                                                ></iframe>
+                                              </>
+                                            ) : null)
+                                          }
+                                        </>
+                                      ) : null} */}
                                       <img
                                         style={{ borderRadius: "10px" }}
                                         src={categry?.img}
@@ -2266,7 +2300,9 @@ function ProductList(args) {
                                     </Col>
                                   </Row>
                                   <div className="main-content">
-                                    <h2>{Producdetail?.desc}</h2>
+                                    <h2>
+                                      {ReactHtmlParser(Producdetail?.desc)}
+                                    </h2>
                                     <div className="top-icon">
                                       <Link to="#">
                                         <img src={mdicon1} alt="" />
@@ -2302,7 +2338,12 @@ function ProductList(args) {
 
                                   <div className="mid">
                                     <h5 className="mt-3">
-                                      Link :<Link>{Producdetail?.link}</Link>
+                                      Link :
+                                      {/* <Link>{Producdetail?.link}</Link> */}
+                                      <a href={Producdetail?.link}>
+                                        {" "}
+                                        {Producdetail?.link}
+                                      </a>
                                     </h5>
                                     <div className="mid-content">
                                       <Row>
