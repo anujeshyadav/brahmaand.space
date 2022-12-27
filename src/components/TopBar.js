@@ -79,11 +79,12 @@ function TopBar() {
     axios
       .post(`http://3.7.173.138:9000/user/updateProfile/${id}`, formData)
       .then((response) => {
-        console.log(response.data.data);
+        console.log(response.data);
+        if (response.data.message === "Username Already Exist") {
+          swal("UserName is Already Exist please Try with different Username");
+        }
         if (response.data.message === "success") {
           swal("Updated Successfully👍");
-        } else {
-          swal("Something went wrong try again");
         }
       })
 
@@ -160,11 +161,7 @@ function TopBar() {
               <h4 className="rText">Edit your Profile</h4>
             </button>
             <Container>
-              <Modal
-                className="mdlg"
-                isOpen={modal}
-                // onSubmit={handleLoginSubmit}
-              >
+              <Modal className="mdlg" isOpen={modal}>
                 <div className="p-3 w-100">
                   {/* <h6 toggle={toggle}> */}
                   <h2 style={{ font: "GT Walsheim Pro", fontSize: "25px" }}>
