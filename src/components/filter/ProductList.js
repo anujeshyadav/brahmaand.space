@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import ReactHtmlParser from "react-html-parser";
 import ReactPaginate from "react-paginate";
+import ReactStars from "react-rating-stars-component";
 import { Swiper, SwiperSlide } from "swiper/react";
 import StarsRating from "stars-rating";
 import "swiper/css";
@@ -84,6 +85,22 @@ function ProductList(args) {
   const [relyear, setRelyear] = useState([]);
   const [contentyear, setContentyear] = useState("");
   const [language, setLanguage] = useState("");
+  const secondExample = {
+    size: 50,
+    count: 5,
+    color: "#434b4d47",
+    activeColor: "#d9ad26",
+    value: 7.5,
+    a11y: true,
+    isHalf: true,
+    emptyIcon: <i className="far fa-star" />,
+    halfIcon: <i className="fa fa-star-half-alt" />,
+    // filledIcon: <i className="fa fa-star" />,
+    onChange: (newValue) => {
+      // console.log(`Example 2: new value is ${newValue}`);
+      setRating(newValue);
+    },
+  };
 
   const navigate = useNavigate();
   // console.log("params", Params);
@@ -391,7 +408,7 @@ function ProductList(args) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(myId == "");
+    console.log(myId);
     if (myId == "") {
       swal("Login First");
       navigate("/login");
@@ -409,13 +426,16 @@ function ProductList(args) {
         .then((res) => {
           console.log(res.data);
           if (res.data.message == "success") {
-            swal("your Review Submitted Successfully");
-          } else {
-            swal("Something went wrong review again ");
+            swal("Your Review Submitted Successfully!");
+          } else if (res.data.msg == "not able to comment") {
+            swal("User can't Review own Resource");
           }
         })
         .catch((err) => {
-          console.log(err);
+          console.log(err.response.data.message == "already exists");
+          if (err.response.data.message == "already exists") {
+            swal("You already Commented On It");
+          }
         });
       settText("");
       setRating("");
@@ -547,9 +567,9 @@ function ProductList(args) {
     if (type !== "") {
       gettypefilter();
     }
-    // if (hastagdata !== "hastag") {
-    //   gethastagdata();
-    // }
+    if (hastagdata !== "hastag") {
+      gethastagdata();
+    }
     if (searchdata !== "" && searchdata !== null) {
       handleSearchHomePage();
     }
@@ -1396,12 +1416,13 @@ function ProductList(args) {
                                           <Col lg="6">
                                             <h4>Write your review</h4>
 
-                                            <StarsRating
+                                            {/* <StarsRating
                                               count={5}
                                               onChange={ratingChanged}
                                               size={40}
                                               color={"#ffd700"}
-                                            />
+                                            /> */}
+                                            <ReactStars {...secondExample} />
                                           </Col>
                                           <Row lg="12">
                                             <div className="rat-right">
@@ -1577,27 +1598,34 @@ function ProductList(args) {
                                         /(?:youtu\.be\/|youtube\.com(?:\/embed\/|\/v\/|\/watch\?v=|\/user\/\S+|\/ytscreeningroom\?v=|\/sandalsResorts#\w\/\w\/.*\/))([^\/&]{10,12})/
                                       ) ? (
                                         <>
-                                          {
-                                            (categry[1] = categry?.link.split(
-                                              "="
-                                            ) ? (
-                                              <>
-                                                <h2 style={{ color: "green" }}>
-                                                  {categry[1]}
-                                                </h2>
-                                                <iframe
-                                                  width="200"
-                                                  height="200"
-                                                  style={{
-                                                    borderRadius: "12px",
-                                                  }}
-                                                  src={`https://www.youtube.com/embed/${categry[1]}`}
-                                                ></iframe>
-                                              </>
-                                            ) : null)
-                                          }
+                                          {categry?.link ? (
+                                            <>
+                                              <h2 style={{ color: "green" }}>
+                                                {categry[1]}
+                                              </h2>
+                                              <iframe
+                                                allowfullscreen="true"
+                                                width="100%"
+                                                height="auto"
+                                                style={{
+                                                  borderRadius: "12px",
+                                                }}
+                                                src={`https://www.youtube.com/embed/${
+                                                  categry?.link?.split("=")[1]
+                                                }`}
+                                              ></iframe>
+                                            </>
+                                          ) : null}
                                         </>
-                                      ) : null} */}
+                                      ) : (
+                                        <img
+                                          style={{ borderRadius: "10px" }}
+                                          src={categry?.img}
+                                          alt="image"
+                                          width="100%"
+                                          height={160}
+                                        />
+                                      )} */}
                                       <img
                                         style={{ borderRadius: "10px" }}
                                         src={categry?.img}
@@ -2025,11 +2053,15 @@ function ProductList(args) {
                                                 <h4 className="mt-3">
                                                   Write your Review
                                                 </h4>
-                                                <StarsRating
+                                                {/* <StarsRating
                                                   count={5}
                                                   onChange={ratingChanged}
                                                   size={40}
                                                   color2={"#ffd700"}
+                                                  activeColor="#ffd700"
+                                                /> */}
+                                                <ReactStars
+                                                  {...secondExample}
                                                 />
                                               </Col>
                                             </Row>
@@ -2148,7 +2180,11 @@ function ProductList(args) {
                                     </Link>
                                   </div>
                                 </Col>
-                                <Col md="9">
+                                <Col
+                                  md="9"
+                                  key={categry?._id}
+                                  onClick={() => handleSelection(categry?._id)}
+                                >
                                   <div class="product-content">
                                     <div className="d-flex topicsdataapi">
                                       {categry?.topics.map((topic) => (
@@ -2658,12 +2694,13 @@ function ProductList(args) {
                                         <h4 className="mt-3">
                                           Write your Review
                                         </h4>
-                                        <StarsRating
+                                        {/* <StarsRating
                                           count={5}
                                           onChange={ratingChanged}
                                           size={40}
                                           color2={"#ffd700"}
-                                        />
+                                        /> */}
+                                        <ReactStars {...secondExample} />
                                       </Col>
                                       <Row lg="12" key={Producdetail?._id}>
                                         <div className="rat-right">

@@ -256,9 +256,9 @@ function CustomNavbar(args) {
     var regex = new RegExp(expression);
 
     var res = "";
-    if (link.match(regex)) {
+    if (e.target.value.match(regex)) {
       setErr("This looks like Valid URL");
-      setUrl(link);
+      setUrl(e.target.value);
     } else {
       setErr("This is invalid URL");
     }

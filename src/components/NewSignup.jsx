@@ -61,10 +61,8 @@ function NewSignup() {
             Swal.fire({
               title: "<span>Account Created Successfully</span>",
               title: "<span>Please verify your email</span>",
-
-              html: " <hr /><p>A verification email has been sent to your email inbox. Please click the link in the email to activate your account . If you can't find the email, please check your spam folder or request another one</p><hr />",
-
-              showCloseButton: true,
+              html: " <hr /><p>A verification email has been sent to your email inbox. Please click the link in the email to activate your account . If you can't find the email, please check your spam folder or request another one</p>",
+              // showCloseButton: true,
             });
           }
 

@@ -1,6 +1,7 @@
 import { Row, Col, Form, Button, Container } from "react-bootstrap";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import ReactStars from "react-rating-stars-component";
 import { Link, useParams } from "react-router-dom";
 import { Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 import mdicon1 from "../../assets/icons/mdicon-1.png";
@@ -46,6 +47,23 @@ function Allpromotion(args) {
   const [myId, setmyId] = useState("");
   const [handlebookmark, setHandlebookmark] = useState("");
   const [liked, setliked] = useState("");
+
+  const secondExample = {
+    size: 50,
+    count: 5,
+    color: "#434b4d47",
+    activeColor: "#d9ad26",
+    value: 7.5,
+    a11y: true,
+    isHalf: true,
+    emptyIcon: <i className="far fa-star" />,
+    halfIcon: <i className="fa fa-star-half-alt" />,
+    // filledIcon: <i className="fa fa-star" />,
+    onChange: (newValue) => {
+      // console.log(`Example 2: new value is ${newValue}`);
+      setRating(newValue);
+    },
+  };
 
   const removebookmark = (id) => {
     setliked(id);
@@ -608,12 +626,13 @@ function Allpromotion(args) {
                               <Col lg="6">
                                 <h4>Write your review</h4>
 
-                                <StarsRating
+                                {/* <StarsRating
                                   count={5}
                                   onChange={ratingChanged}
                                   size={40}
                                   color={"#ffd700"}
-                                />
+                                /> */}
+                                <ReactStars {...secondExample} />
                               </Col>
                               <Row lg="12">
                                 <div className="rat-right">

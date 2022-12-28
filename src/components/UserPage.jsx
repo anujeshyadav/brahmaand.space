@@ -65,6 +65,17 @@ function UserPage({ direction, ...args }) {
             </Link>
           </Row>
           <Row>
+            <Link className="userboard" to="/resetpassword">
+              <FaEdit
+                size={25}
+                style={{ fontFamily: "GT Walsheim Pro" }}
+                color="black"
+                className="mx-3"
+              />
+              Reset Password
+            </Link>
+          </Row>
+          <Row>
             <Link className="userboard" to="/notification">
               <FaBell
                 size={25}

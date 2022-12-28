@@ -347,6 +347,7 @@ function Hastag() {
               </div> */}
               <div className="ifram">
                 <iframe
+                  allowfullscreen="true"
                   className="iframesetdata"
                   // width="auto"
                   // height="300px"

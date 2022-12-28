@@ -11,7 +11,7 @@ import "./assets/fonts/MyriadPro/MyriadPro-Regular.otf";
 import "./index.css";
 import reportWebVitals from "./reportWebVitals";
 import { render } from "react-dom";
-
+import ResetPassword from "./components/ResetPassword";
 // Routing
 import {
   BrowserRouter as Router,
@@ -104,6 +104,7 @@ render(
             <Route exact path="/allpromotion" element={<Allpromotion />} />
             <Route exact path="/selectapp" element={<SelectApp />} />
             <Route exact path="/otpinputpage" element={<OtpInputpage />} />
+            <Route exact path="/resetpassword" element={<ResetPassword />} />
 
             <Route
               exact
