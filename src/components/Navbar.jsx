@@ -131,7 +131,7 @@ function CustomNavbar(args) {
           userid: userid,
         })
         .then((res) => {
-          console.log(res.data.data);
+          // console.log(res.data.data);
           if (res.data.message === "success") {
             swal("Resource Submitted Successfully👍");
             setLink("");
@@ -187,7 +187,7 @@ function CustomNavbar(args) {
 
       .get(`http://3.7.173.138:9000/admin/listbycategory/${params}`)
       .then((response) => {
-        console.log(response.data.data);
+        // console.log(response.data.data);
         setSubctgry(response.data.data);
       })
       .catch((error) => {
@@ -204,7 +204,7 @@ function CustomNavbar(args) {
         // console.log(response.data.data);
       })
       .catch((error) => {
-        console.log(error.response.data);
+        // console.log(error.response.data);
       });
   };
 
@@ -216,7 +216,7 @@ function CustomNavbar(args) {
         // console.log(response.data.data);
       })
       .catch((error) => {
-        console.log(error.response.data);
+        // console.log(error.response.data);
       });
   };
 
@@ -264,19 +264,19 @@ function CustomNavbar(args) {
     }
   };
   const onSelect = (selectedList, selectedItem) => {
-    console.log(selectedList);
+    // console.log(selectedList);
     var selectItem1 = [];
 
     for (var i = 0; i < selectedList.length; i++) {
       selectItem1.push(selectedList[i]._id);
     }
-    console.log("aaaa", selectItem1);
+    // console.log("aaaa", selectItem1);
     setSellang(selectItem1);
     // console.log(sellang);
   };
 
   const onRemove = (selectedList, removedItem) => {
-    console.log(selectedList);
+    // console.log(selectedList);
   };
 
   const onSelesubcat = (selectedsubcat, selectedItem) => {

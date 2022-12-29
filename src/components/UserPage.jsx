@@ -3,6 +3,7 @@ import Row from "react-bootstrap/Row";
 import {
   FaEdit,
   FaBell,
+  FaKey,
   FaRegHandPointRight,
   FaInfinity,
   FaChartBar,
@@ -66,7 +67,7 @@ function UserPage({ direction, ...args }) {
           </Row>
           <Row>
             <Link className="userboard" to="/resetpassword">
-              <FaEdit
+              <FaKey
                 size={25}
                 style={{ fontFamily: "GT Walsheim Pro" }}
                 color="black"

@@ -25,7 +25,7 @@ const provider = new GoogleAuthProvider();
 export const signInWithGoogle = async () => {
   await signInWithPopup(auth, provider)
     .then((result) => {
-      console.log(result);
+      // console.log(result);
       const Firename = result.user.displayName;
       const Fireemail = result.user.email;
       const FirephotoURL = result.user.photoURL;
@@ -43,6 +43,6 @@ export const signInWithGoogle = async () => {
       });
     })
     .catch((err) => {
-      console.log(err);
+      // console.log(err);
     });
 };

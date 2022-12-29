@@ -29,7 +29,7 @@ function ContactUs() {
 
   const contactsubmit = (e) => {
     e.preventDefault();
-    console.log(name, mobile, email, mesg);
+
     const userid = localStorage.getItem("userId");
 
     if (
@@ -53,7 +53,6 @@ function ContactUs() {
           userid: userid,
         })
         .then((response) => {
-          console.log("data", response.data);
           if (response.data.message === "success");
           {
             swal("Your Details are Submitted Successfully");
@@ -64,7 +63,7 @@ function ContactUs() {
           setMobile("");
         })
         .catch((error) => {
-          console.log(error.response.data);
+          
         });
     }
   };

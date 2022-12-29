@@ -3,6 +3,7 @@ import { Container, Row, Col, Button } from "reactstrap";
 import { Modal, ModalBody, Label, FormGroup, Input, Alert } from "reactstrap";
 import axios from "axios";
 import "moment-timezone";
+import swal from "sweetalert";
 
 function ResetPassword() {
   const [oldpass, setOldpass] = useState("");
@@ -24,6 +25,12 @@ function ResetPassword() {
       document.getElementById("passdata").innerHTML =
         "**Fill the password please!";
       return false;
+    }
+    if (newpass == oldpass) {
+      swal("New Password Must be different from Existing");
+    }
+    if (oldpass !== "") {
+      document.getElementById("passdata").innerHTML = " ";
     }
 
     //minimum password length validation
@@ -49,8 +56,8 @@ function ResetPassword() {
         "**Password Does not Match";
     } else if (newpass == confirmpass) {
       const userId = localStorage.getItem("userId");
-      if (oldpass !== "" && newpass == confirmpass) {
-        console.log("password matched  so api is goint to hit");
+      if (oldpass !== "" && newpass == confirmpass && newpass !== oldpass) {
+        // console.log("password matched  so api is goint to hit");
         axios
           .post(`http://3.7.173.138:9000/user/resetPassword/${userId}`, {
             oldpassword: oldpass,
@@ -58,10 +65,20 @@ function ResetPassword() {
             cnfrmPassword: confirmpass,
           })
           .then((res) => {
-            console.log(res);
+            // console.log(res.data);
+            debugger;
+            if (res.data.msg == "success") {
+              swal("Password Changed Successfully");
+              setOldpass("");
+              setNewpass("");
+              setconfirmpass("");
+            }
           })
           .catch((err) => {
-            console.log(err);
+            // console.log(err.response.data);
+            if (err.response.data.msg == "Old Password not matched") {
+              swal("Enter Existing Password Correctly");
+            }
           });
       }
     } else {
@@ -81,17 +98,17 @@ function ResetPassword() {
             >
               <h2>Reset Your Password</h2>
             </div>
-            <hr></hr>
+            <hr className="mx-3"></hr>
             <div className="p-3 w-100">
               <div className="">
-                <Row>
-                  <Label>
+                <Row className="mx-3">
+                  <Label className="mb-3">
                     <b> Existing Password</b>
                   </Label>
                   <h5>
                     <input
                       id="password"
-                      type="password"
+                      type="text"
                       style={{ background: "#F1F1F1" }}
                       className="form-control"
                       placeholder="Enter Your User Name here "
@@ -110,14 +127,14 @@ function ResetPassword() {
                 </Row>
               </div>
               <div>
-                <Row className="mt-2">
+                <Row className="mt-2 mx-3">
                   <Col>
                     <Label style={{ font: "GT Walsheim Pro" }}>
                       <b> Password </b>
                     </Label>
                     <input
                       id="setpass"
-                      type="password"
+                      type="text"
                       style={{ background: "#F1F1F1" }}
                       className="form-control"
                       placeholder="Enter Your Display Name "
@@ -145,14 +162,14 @@ function ResetPassword() {
               </div>
 
               <div>
-                <Row className="mt-3 mb-2">
+                <Row className="mt-3 mb-3 mx-3">
                   <Label style={{ font: "GT Walsheim Pro" }}>
                     <b>Confirm Password</b>
                   </Label>
                   <h5>
                     <input
                       id="setconpass"
-                      type="password"
+                      type="text"
                       style={{ background: "#F1F1F1" }}
                       className="form-control"
                       placeholder="write something about you"
@@ -196,7 +213,7 @@ function ResetPassword() {
               <div></div>
               <div>
                 <Row>
-                  <Col className="d-flex justify-content-center">
+                  <Col className="d-flex justify-content-center mt-2">
                     {/* <Button
                       onClick={() => setModal(false)}
                       color="danger"

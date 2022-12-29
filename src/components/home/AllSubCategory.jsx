@@ -20,7 +20,7 @@ function AllSubCategory() {
   const [subcatgry, setsubCatgry] = useState([]);
 
   useEffect(() => {
-    console.log("Params", Params);
+    // console.log("Params", Params);
     allsubcategory();
   }, [Params]);
   const allsubcategory = () => {
@@ -30,12 +30,12 @@ function AllSubCategory() {
 
       .then((response) => {
         setsubCatgry(response.data.data);
-        console.log(response.data.data);
+        // console.log(response.data.data);
 
-        console.log("subcategory", response.data.data);
+        // console.log("subcategory", response.data.data);
       })
       .catch((error) => {
-        console.log(error.response.data);
+        // console.log(error.response.data);
       });
   };
   return (

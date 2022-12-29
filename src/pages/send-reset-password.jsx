@@ -134,7 +134,6 @@ const send_request_reset_password = async (email, setMessage, navigate) => {
       navigate("/", { replace: true });
     })
     .catch((error) => {
-      console.log(error);
       setMessage("Error User with that email do not exists");
     });
 };

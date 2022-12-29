@@ -113,7 +113,7 @@ function ProductList(args) {
         )
         .then((res) => {
           setCategry(res.data.data);
-          console.log(res.data.data);
+          // console.log(res.data.data);
           setLanguage("");
         })
         .catch((err) => {
@@ -145,7 +145,7 @@ function ProductList(args) {
           searchinput: hastagdata,
         })
         .then((res) => {
-          console.log(res.data.data);
+          // console.log(res.data.data);
           if (res.data.data !== "" && res.data.data !== null) {
             setCategry(res.data.data);
             // localStorage.removeItem("searchdata");
@@ -153,7 +153,7 @@ function ProductList(args) {
           }
         })
         .catch((err) => {
-          console.log(err);
+          // console.log(err);
         });
   };
 
@@ -165,7 +165,7 @@ function ProductList(args) {
         // console.log(response.data.data);
       })
       .catch((error) => {
-        console.log(error.response.data);
+        // console.log(error.response.data);
       });
   };
   const handleclosemodal = () => {
@@ -186,7 +186,7 @@ function ProductList(args) {
   };
 
   const getolderyeardata = () => {
-    console.log(contentyear);
+    // console.log(contentyear);
     if (contentyear !== "") {
       axios
         .get(
@@ -194,11 +194,11 @@ function ProductList(args) {
         )
         .then((res) => {
           setCategry(res.data.data);
-          console.log(res.data.data);
+          // console.log(res.data.data);
           // setContentyear("");
         })
         .catch((err) => {
-          console.log(err);
+          // console.log(err);
         });
     }
   };
@@ -206,21 +206,21 @@ function ProductList(args) {
   const searchdata = localStorage.getItem("searchdata");
   const handleSearchHomePage = () => {
     const searchdata = localStorage.getItem("searchdata");
-    console.log(searchdata);
+    // console.log(searchdata);
     if (searchdata !== "" && searchdata !== null)
       axios
         .post(`http://3.7.173.138:9000/user/search_topic_title`, {
           searchinput: searchdata,
         })
         .then((res) => {
-          console.log(res.data.data);
+          // console.log(res.data.data);
           if (res.data.data !== "" && res.data.data !== null) {
             setCategry(res.data.data);
             localStorage.removeItem("searchdata");
           }
         })
         .catch((err) => {
-          console.log(err);
+          // console.log(err);
         });
     // console.log("you are searching");
   };
@@ -247,7 +247,7 @@ function ProductList(args) {
         // console.log(response.data.data);
       })
       .catch((error) => {
-        console.log(error.response.data);
+        // console.log(error.response.data);
       });
   };
   const getUser = async () => {
@@ -269,7 +269,7 @@ function ProductList(args) {
           status: "false",
         })
         .then((response) => {
-          console.log(response.data.data.status);
+          // console.log(response.data.data.status);
           setActivelike(response.data.data.status);
           swal("you Removed your bookmark ");
           hadlestatusbookmark();
@@ -295,15 +295,14 @@ function ProductList(args) {
           status: "true",
         })
         .then((response) => {
-          console.log(response.data.data.status);
+          console.log(response.data.data);
           setActivelike(response.data.data.status);
-          swal("you bookmarked it");
+          swal("You Bookmark it");
           hadlestatusbookmark();
-
           // console.log("likeindividual", response.data.data);
         })
         .catch((error) => {
-          console.log(error.response.data.message);
+          // console.log(error.response.data.message);
           if (error.response.data.message == "already exists") {
             swal(" Your already bookmarked It");
           }
@@ -330,7 +329,7 @@ function ProductList(args) {
           setHandlebookmark(res.data.data.status);
         })
         .catch((err) => {
-          console.log(err.response.data);
+          // console.log(err.response.data);
         });
     }
   };
@@ -341,19 +340,19 @@ function ProductList(args) {
       axios
         .get(`http://3.7.173.138:9000/admin/getone_reslist/${promotId}`)
         .then((res) => {
-          console.log(res.data.data._id);
+          // console.log(res.data.data._id);
           if (
             res.data.data._id !== "" ||
             res.data.data._id !== null ||
             res.data.data._id !== undefined
           ) {
             setPromotiondata(res.data.data);
-            console.log(res.data.data);
+            // console.log(res.data.data);
             toggleone();
           }
         })
         .catch((err) => {
-          console.log(err.data.data);
+          // console.log(err.data.data);
         });
     }
   };
@@ -362,10 +361,10 @@ function ProductList(args) {
       .get(`http://3.7.173.138:9000/user/Promotions`)
       .then((res) => {
         setPromotion(res.data.data.slice(0, 3));
-        console.log(res.data.data);
+        // console.log(res.data.data);
       })
       .catch((err) => {
-        console.log(err);
+        // console.log(err);
       });
   };
 
@@ -408,7 +407,7 @@ function ProductList(args) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(myId);
+    // console.log(myId);
     if (myId == "") {
       swal("Login First");
       navigate("/login");
@@ -424,7 +423,7 @@ function ProductList(args) {
           rating: rating,
         })
         .then((res) => {
-          console.log(res.data);
+          // console.log(res.data);
           if (res.data.message == "success") {
             swal("Your Review Submitted Successfully!");
           } else if (res.data.msg == "not able to comment") {
@@ -432,7 +431,7 @@ function ProductList(args) {
           }
         })
         .catch((err) => {
-          console.log(err.response.data.message == "already exists");
+          // console.log(err.response.data.message == "already exists");
           if (err.response.data.message == "already exists") {
             swal("You already Commented On It");
           }
@@ -451,7 +450,7 @@ function ProductList(args) {
 
   const handleSelection = (_id) => {
     setProductdetail("");
-    console.log(_id);
+    // console.log(_id);
     var selectedId = _id;
 
     if (selectedId === _id) {
@@ -459,8 +458,8 @@ function ProductList(args) {
       axios
         .get(`http://3.7.173.138:9000/admin/getone_reslist/${productdes}`)
         .then((res) => {
-          console.log(res.data.data._id);
-          console.log(res.data.data);
+          // console.log(res.data.data._id);
+          // console.log(res.data.data);
           if (
             res.data.data._id !== "" ||
             res.data.data._id !== null ||
@@ -472,17 +471,17 @@ function ProductList(args) {
           }
         })
         .catch((err) => {
-          console.log(err.data.data);
+          // console.log(err.data.data);
         });
 
       axios
         .get(`http://3.7.173.138:9000/user/average_rating/${productdes}`)
         .then((res) => {
-          console.log(res.data);
+          // console.log(res.data);
           setAverageRating(res.data);
         })
         .catch((err) => {
-          console.log(err);
+          // console.log(err);
         });
     }
 
@@ -490,15 +489,15 @@ function ProductList(args) {
       .get(`http://3.7.173.138:9000/user/comment_list/${selectedId}`)
       .then((res) => {
         setGetonecomment(res.data.data);
-        console.log(res.data.data);
+        // console.log(res.data.data);
       })
       .catch((err) => {
-        console.log(err);
+        // console.log(err);
       });
   };
   const handlesuggSelection = (_id) => {
     setProductdetail("");
-    console.log(_id);
+    // console.log(_id);
     var selectedId = _id;
 
     if (selectedId === _id) {
@@ -506,8 +505,8 @@ function ProductList(args) {
       axios
         .get(`http://3.7.173.138:9000/admin/getone_reslist/${productdes}`)
         .then((res) => {
-          console.log(res.data.data._id);
-          console.log(res.data.data);
+          // console.log(res.data.data._id);
+          // console.log(res.data.data);
           if (
             res.data.data._id !== "" ||
             res.data.data._id !== null ||
@@ -519,7 +518,7 @@ function ProductList(args) {
           }
         })
         .catch((err) => {
-          console.log(err.data.data);
+          // console.log(err.data.data);
         });
 
       axios
@@ -529,7 +528,7 @@ function ProductList(args) {
           setAverageRating(res.data);
         })
         .catch((err) => {
-          console.log(err);
+          // console.log(err);
         });
     }
 
@@ -537,10 +536,10 @@ function ProductList(args) {
       .get(`http://3.7.173.138:9000/user/comment_list/${selectedId}`)
       .then((res) => {
         setGetonecomment(res.data.data);
-        console.log(res.data.data);
+        // console.log(res.data.data);
       })
       .catch((err) => {
-        console.log(err);
+        // console.log(err);
       });
   };
 
@@ -609,12 +608,12 @@ function ProductList(args) {
     axios
       .get(`http://3.7.173.138:9000/user/filter_type/${Params.id}/${type}`)
       .then((res) => {
-        console.log(res.data.data);
+        // console.log(res.data.data);
         setCategry(res.data.data);
         setTypelength(res.data.data);
       })
       .catch((err) => {
-        console.log(err);
+        // console.log(err);
       });
   };
 
@@ -623,24 +622,24 @@ function ProductList(args) {
     axios
       .get(`http://3.7.173.138:9000/user/filterbyFormat/${Params.id}/${format}`)
       .then((res) => {
-        console.log(res.data.data);
+        // console.log(res.data.data);
         setCategry(res.data.data);
         setFormatelength(res.data.data);
       })
       .catch((err) => {
-        console.log(err);
+        // console.log(err);
       });
   };
   const getsearchbyratingfilter = () => {
-    console.log(searchrating);
+    // console.log(searchrating);
     axios
       .get(`http://3.7.173.138:9000/user/filterByRating/${searchrating}`)
       .then((res) => {
-        console.log(res.data.data);
+        // console.log(res.data.data);
         // setCategry(res.data.data);
       })
       .catch((err) => {
-        console.log(err);
+        // console.log(err);
       });
   };
 
@@ -649,14 +648,14 @@ function ProductList(args) {
       .get(`http://3.7.173.138:9000/admin/listbysubcategory/${Params.id}`)
       .then((response) => {
         setCategry(response.data.data);
-        console.log(response.data.data);
+        // console.log(response.data.data);
         const data = response.data.data;
         const datanew = data.filter((data) => {
           return data.format == "Text" && data.type == "Paid";
         });
       })
       .catch((error) => {
-        console.log(error.response.data);
+        // console.log(error.response.data);
         setLoading(false);
       });
   };
@@ -666,19 +665,19 @@ function ProductList(args) {
       .get(`http://3.7.173.138:9000/admin/listbysubcategory/${Params.id}`)
       .then((response) => {
         setSuggested(response.data.data);
-        console.log(response.data.data);
+        // console.log(response.data.data);
       })
       .catch((error) => {
-        console.log(error.response.data);
+        // console.log(error.response.data);
         setLoading(false);
       });
   };
 
   const handlePageClick = (event) => {
     const newOffset = (event.selected * 10) % categry?.length;
-    console.log(
-      `User requested page number ${event.selected}, which is offset ${newOffset}`
-    );
+    // console.log(
+    //   `User requested page number ${event.selected}, which is offset ${newOffset}`
+    // );
     setItemOffset(newOffset);
   };
 
@@ -1142,7 +1141,7 @@ function ProductList(args) {
                                     key={promotiondata?._id}
                                     className="mdlg"
                                     isOpen={modalone}
-                                    toggle={handleclosepromotion}
+                                    // toggle={handleclosepromotion}
                                     {...args}
                                   >
                                     <ModalBody key={promotiondata?._id}>
@@ -1638,7 +1637,7 @@ function ProductList(args) {
                                         key={Producdetail?._id}
                                         className="mdlg"
                                         isOpen={modal}
-                                        toggle={handleclosemodal}
+                                        // toggle={handleclosemodal}
                                         {...args}
                                       >
                                         <ModalBody>
@@ -2318,7 +2317,7 @@ function ProductList(args) {
                                 key={Producdetail?._id}
                                 className="mdlg"
                                 isOpen={modalsuggestion}
-                                toggle={handleclosesuggestionmodal}
+                                // toggle={handleclosesuggestionmodal}
                                 {...args}
                               >
                                 <ModalBody>

@@ -32,7 +32,22 @@ function Searchfiltermodel(...args) {
 
   const [productdes, setProductdes] = useState({});
   const [text, settText] = useState("");
-
+  const secondExample = {
+    size: 50,
+    count: 5,
+    color: "#434b4d47",
+    activeColor: "#d9ad26",
+    value: 7.5,
+    a11y: true,
+    isHalf: true,
+    emptyIcon: <i className="far fa-star" />,
+    halfIcon: <i className="fa fa-star-half-alt" />,
+    // filledIcon: <i className="fa fa-star" />,
+    onChange: (newValue) => {
+      // console.log(`Example 2: new value is ${newValue}`);
+      setRating(newValue);
+    },
+  };
   const onchangehandler = (e) => {
     settText(e.target.value);
   };
@@ -40,7 +55,7 @@ function Searchfiltermodel(...args) {
   const [rating, setRating] = useState("");
   const ratingChanged = (newRating) => {
     setRating(newRating);
-    console.log(newRating);
+    // console.log(newRating);
   };
 
   const handleSubmit = (e) => {
@@ -48,7 +63,7 @@ function Searchfiltermodel(...args) {
     const userId = localStorage.getItem("userId");
 
     const selectedId = Producdetail._id;
-    console.log(selectedId, userId, text, rating);
+    // console.log(selectedId, userId, text, rating);
 
     if (selectedId == Producdetail._id && userId !== "") {
       axios
@@ -59,7 +74,7 @@ function Searchfiltermodel(...args) {
           rating: rating,
         })
         .then((res) => {
-          console.log(res.data);
+          // console.log(res.data);
           if (res.data.message == "success") {
             swal("your Review Submitted Successfully");
           } else {
@@ -67,10 +82,10 @@ function Searchfiltermodel(...args) {
           }
         })
         .catch((err) => {
-          console.log(err);
+          // console.log(err);
         });
     }
-    console.log(text);
+    // console.log(text);
   };
   let Params = useParams();
 
@@ -83,10 +98,10 @@ function Searchfiltermodel(...args) {
       .get(`http://3.7.173.138:9000/admin/getone_reslist/${Params.id}`)
       .then((res) => {
         setProductdetail(res.data.data);
-        console.log(res.data.data);
+        // console.log(res.data.data);
       })
       .catch((err) => {
-        console.log(err);
+        // console.log(err);
       });
   };
 
@@ -269,12 +284,13 @@ function Searchfiltermodel(...args) {
                   <div className="rat-right">
                     <h4 className="mt-3">Write your Review</h4>
                     <div className="">
-                      <StarsRating
+                      {/* <StarsRating
                         count={5}
                         onChange={ratingChanged}
                         size={40}
                         color2={"#ffd700"}
-                      />
+                      /> */}
+                      <ReactStars {...secondExample} />
 
                       <form key={Producdetail?._id}>
                         <textarea

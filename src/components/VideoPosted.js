@@ -192,7 +192,7 @@ function VideoPosted(args) {
       axios
         .get(`http://3.7.173.138:9000/admin/getone_reslist/${productdes}`)
         .then((res) => {
-          console.log(res.data.data);
+          // console.log(res.data.data);
           if (
             res.data.data._id !== "" ||
             res.data.data._id !== null ||
@@ -246,7 +246,7 @@ function VideoPosted(args) {
         .get(`http://3.7.173.138:9000/user/posted_by_me/${myId}`)
         .then((res) => {
           setMylikes(res.data.data);
-          console.log(res.data.data);
+          // console.log(res.data.data);
         })
         .catch((error) => {
           // console.log(error);

@@ -23,6 +23,7 @@ import axiosConfig from "../components/axiosConfig";
 import Moment from "react-moment";
 import StarsRating from "stars-rating";
 import swal from "sweetalert";
+import ReactStars from "react-rating-stars-component";
 import { Link } from "react-router-dom";
 import PrettyRating from "pretty-rating-react";
 import { faStar, faStarHalfAlt } from "@fortawesome/free-solid-svg-icons";
@@ -48,6 +49,23 @@ function Bookmarks(args) {
   const [rating, setRating] = useState("");
   const [myId, setmyId] = useState("");
   const [handlebookmark, setHandlebookmark] = useState("");
+  const secondExample = {
+    size: 50,
+    count: 5,
+    color: "#434b4d47",
+    activeColor: "#d9ad26",
+    value: 7.5,
+    a11y: true,
+    isHalf: true,
+    emptyIcon: <i className="far fa-star" />,
+    halfIcon: <i className="fa fa-star-half-alt" />,
+    // filledIcon: <i className="fa fa-star" />,
+    onChange: (newValue) => {
+      // console.log(`Example 2: new value is ${newValue}`);
+      setRating(newValue);
+    },
+  };
+
   const navigate = useNavigate();
   const getUser = async () => {
     const user = await localStorage.getItem("userId");
@@ -85,13 +103,16 @@ function Bookmarks(args) {
           .then((res) => {
             // console.log(res.data);
             if (res.data.message == "success") {
-              swal("your Review Submitted Successfully");
-            } else {
-              swal("Something went wrong review again ");
+              swal("Your Review Submitted Successfully!");
+            } else if (res.data.msg == "not able to comment") {
+              swal("User can't Review own Resource");
             }
           })
           .catch((err) => {
             // console.log(err);
+            if (err.response.data.message == "already exists") {
+              swal("You already Commented On It");
+            }
           });
         settText("");
         setRating("");
@@ -489,7 +510,7 @@ function Bookmarks(args) {
                                       colors={colors.star}
                                     />
                                     <span className="starratinginno">
-                                      2.7 of 5 Stars
+                                      {averageRating?.data} of 5 Stars
                                     </span>
                                     <br></br>
                                     <span className="mt-3">
@@ -605,12 +626,13 @@ function Bookmarks(args) {
                               </Col>
                               <Col lg="6">
                                 <h4 className="mt-3">Write your Review</h4>
-                                <StarsRating
+                                {/* <StarsRating
                                   count={5}
                                   onChange={ratingChanged}
                                   size={40}
                                   color2={"#ffd700"}
-                                />
+                                /> */}
+                                <ReactStars {...secondExample} />
                               </Col>
                             </Row>
                             <Row lg="12" key={Producdetail?._id}>

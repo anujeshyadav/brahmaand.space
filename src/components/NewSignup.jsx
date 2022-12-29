@@ -24,9 +24,7 @@ function NewSignup() {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  console.log(username);
-  console.log(email);
-  console.log(password);
+
   const handleSubmit = (event) => {
     event.preventDefault();
 
@@ -47,30 +45,30 @@ function NewSignup() {
           password: password,
         })
         .then((response) => {
-          console.log(response.data.data);
-          if (response.data.data._id !== "") {
-            localStorage.setItem("userId", response.data.data._id);
-          }
-          if (localStorage.getItem("userId")) {
-            navigate("/topbar");
-          } else navigate("/login");
-          if (response.data.message === "success") {
+          console.log(response);
+
+          // if (localStorage.getItem("userId")) {
+          // navigate("/topbar");
+          // } else navigate("/login");
+          if (response.data.msg === "otp send successfully") {
+            localStorage.setItem("email", response.data.email);
             setUsername("");
             setEmail("");
             setPassword("");
             Swal.fire({
               title: "<span>Account Created Successfully</span>",
               title: "<span>Please verify your email</span>",
-              html: " <hr /><p>A verification email has been sent to your email inbox. Please click the link in the email to activate your account . If you can't find the email, please check your spam folder or request another one</p>",
+              html: " <hr /><p>A verification email has been sent to your email inbox. Please Check OTP in  email to activate your account.If you can't find the email, please check your spam folder or request another one</p>",
               // showCloseButton: true,
             });
+            navigate("/otpinputpage");
           }
 
-          navigate("/");
+          // navigate("/");
           // swal("Accout Created Successfully");
         })
         .catch((error) => {
-          console.log(error.response.data);
+          // console.log(error.response.data);
           if (error.response.data.message == "already exists") {
             swal("This Mail/UserName is already Registered");
           }
@@ -155,7 +153,7 @@ function NewSignup() {
           // localStorage.removeItem("Fireemail");
           // localStorage.removeItem("Firename");
         } else if (response.data.status === false) {
-          console.log(response.data.status);
+          // console.log(response.data.status);
           swal("Failed to login try again ");
         }
 
@@ -172,7 +170,7 @@ function NewSignup() {
         } else navigate("/login");
       })
       .catch((error) => {
-        console.log(error.response.data);
+        // console.log(error.response.data);
         if (error.response.data.msg === "User Doesnot Exist") {
           swal("User Does Not exists");
         }
@@ -198,13 +196,13 @@ function NewSignup() {
           password: Fireuid,
         })
         .then((response) => {
-          console.log(response.data.message);
+          // console.log(response.data.message);
           if (response.data.message === "success") {
             handleLoginSubmit();
           } else swal(" Try again! something went wrong");
         })
         .catch((error) => {
-          console.log(error.response.data);
+          // console.log(error.response.data);
           if (error.response.data.message == "already exists") {
             swal("Already Registered", " Reset your password Password");
           }

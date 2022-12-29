@@ -13,7 +13,7 @@ const SelectApp = () => {
     watch,
     formState: { errors },
   } = useForm();
-  console.log(text);
+  // console.log(text);
   // handle submit events
   const onSubmit = (data) => alert(JSON.stringify(data));
 

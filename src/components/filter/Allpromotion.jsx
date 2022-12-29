@@ -75,7 +75,7 @@ function Allpromotion(args) {
           status: "false",
         })
         .then((response) => {
-          console.log(response.data.data.status);
+          // console.log(response.data.data.status);
           setActivelike(response.data.data.status);
           swal("you Removed your bookmark ");
           hadlestatusbookmark();
@@ -101,7 +101,7 @@ function Allpromotion(args) {
           status: "true",
         })
         .then((response) => {
-          console.log(response.data.data.status);
+          // console.log(response.data.data.status);
           setActivelike(response.data.data.status);
           swal("you bookmarked it");
           hadlestatusbookmark();
@@ -156,19 +156,19 @@ function Allpromotion(args) {
         setAverageRating(res.data);
       })
       .catch((err) => {
-        console.log(err);
+        // console.log(err);
       });
-    const selectedId = Producdetail._id;
-    console.log(selectedId, myId, text, rating);
+    const selectedId = promotiondata._id;
+    // console.log(selectedId, myId, text, rating);
 
     axios
       .get(`http://3.7.173.138:9000/user/comment_list/${selectedId}`)
       .then((res) => {
         setGetonecomment(res.data.data);
-        console.log(res.data.data);
+        // console.log(res.data.data);
       })
       .catch((err) => {
-        console.log(err);
+        // console.log(err);
       });
   };
 
@@ -184,11 +184,11 @@ function Allpromotion(args) {
       axios
         .get(`http://3.7.173.138:9000/user/getone_mylikes/${myId}/${liked}`)
         .then((res) => {
-          console.log(res.data.data);
+          // console.log(res.data.data);
           setHandlebookmark(res.data.data.status);
         })
         .catch((err) => {
-          console.log(err.response.data);
+          // console.log(err.response.data);
         });
     }
   };
@@ -201,10 +201,10 @@ function Allpromotion(args) {
     e.preventDefault();
     const userId = localStorage.getItem("userId");
 
-    const selectedId = Producdetail._id;
+    const selectedId = promotiondata._id;
     // console.log(selectedId, userId, text, rating);
 
-    if (selectedId == Producdetail._id && userId !== "") {
+    if (selectedId == promotiondata._id && userId !== "") {
       axios
         .post(`http://3.7.173.138:9000/user/add_Comment`, {
           submitresrcId: selectedId,
@@ -213,15 +213,18 @@ function Allpromotion(args) {
           rating: rating,
         })
         .then((res) => {
-          // console.log(res.data);
+          console.log(res.data);
           if (res.data.message == "success") {
-            swal("your Review Submitted Successfully");
-          } else {
-            swal("Something went wrong review again ");
+            swal("Your Review Submitted Successfully!");
+          } else if (res.data.msg == "not able to comment") {
+            swal("User can't Review own Resource");
           }
         })
         .catch((err) => {
-          console.log(err);
+          // console.log(err);
+          if (err.response.data.message == "already exists") {
+            swal("You already Commented On It");
+          }
         });
       settText("");
       setRating("");

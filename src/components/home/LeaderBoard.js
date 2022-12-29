@@ -64,7 +64,7 @@ function LeaderBoard() {
     axios
       .get(`http://3.7.173.138:9000/user/karma_crrnt_month`)
       .then((res) => {
-        console.log(res.data.data);
+        // console.log(res.data.data);
         setCurrentmonth(res.data.data);
       })
       .catch((err) => {
@@ -75,7 +75,7 @@ function LeaderBoard() {
     axios
       .get(`http://3.7.173.138:9000/user/all_time_karma`)
       .then((res) => {
-        console.log(res.data.data);
+        // console.log(res.data.data);
         setAlltime(res.data.data);
       })
       .catch((err) => {

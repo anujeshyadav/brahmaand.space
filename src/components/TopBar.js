@@ -36,7 +36,7 @@ function TopBar() {
     // console.log("fileString", fileString);
     if (fileString != "") {
       const image64 = fileString.split(",");
-      console.log(image64[1]);
+      // console.log(image64[1]);
       setSelectedFile(image64[1]);
       base64code = fileString;
     }
@@ -57,10 +57,10 @@ function TopBar() {
       .get(`http://3.7.173.138:9000/user/getoneUser/${id}`)
       .then((res) => {
         setUserdata(res.data.data);
-        console.log(res.data.data);
+        // console.log(res.data.data);
       })
       .catch((err) => {
-        console.log(err);
+        // console.log(err);
       });
   };
   useEffect(() => {
@@ -69,7 +69,7 @@ function TopBar() {
 
   const handleLoginSubmit = async (e) => {
     e.preventDefault();
-    console.log(username, display_name, abt_us, id);
+    // console.log(username, display_name, abt_us, id);
 
     const formData = new FormData();
     formData.append("profileImg", selectedFile);
@@ -79,7 +79,7 @@ function TopBar() {
     axios
       .post(`http://3.7.173.138:9000/user/updateProfile/${id}`, formData)
       .then((response) => {
-        console.log(response.data);
+        // console.log(response.data);
         if (response.data.message === "Username Already Exist") {
           swal("UserName is Already Exist please Try with different Username");
         }
@@ -89,7 +89,7 @@ function TopBar() {
       })
 
       .catch((error) => {
-        console.log(error);
+        // console.log(error);
       });
     setModal(false);
   };

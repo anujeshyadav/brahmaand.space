@@ -58,15 +58,23 @@ function Header() {
   };
 
   const formatResult = (item) => {
+    console.log(newitem);
     return (
       <>
-        <span style={{ display: "block", textAlign: "left" }}>{item.name}</span>
+        <>
+          {/* <span style={{ display: "block", textAlign: "left" }}>
+            id: {item.id}
+          </span> */}
+          <span style={{ display: "block", textAlign: "left" }}>
+            {item?.name}
+          </span>
+        </>
       </>
     );
   };
 
   const handlesearchtopics = () => {
-    console.log(searchdata);
+    // console.log(searchdata);
     localStorage.setItem("searchdata", searchdata);
     if (searchdata !== "") {
       axios
@@ -92,8 +100,19 @@ function Header() {
     // const data = "#learning , #media , #study,  #songs, #learning ";
     // const onedata = data.split(",");
   };
+
+  const [newitem, setNewitem] = useState([]);
   useEffect(() => {
     handlesearchtopics();
+    axios
+      .get(`http://43.205.82.226:9000/admin/getallCategory`)
+      .then((res) => {
+        // console.log(res.data.data);
+        setNewitem(res.data.data);
+      })
+      .then((err) => {
+        // console.log(err);
+      });
   }, []);
 
   return (
@@ -132,24 +151,24 @@ function Header() {
       <section>
         <div className="searchbar">
           <div className="inputarea">
-            <Row
+            {/* <Row
               className=" align-item-center justify-content-center"
               style={{ width: "100%" }}
             >
               <Col lg="1"></Col>
               <Col className="mt-3 mb-2" lg="10">
-                {/* <ReactSearchAutocomplete
-                  items={data?.topics}
+                <ReactSearchAutocomplete
+                  items={items}
                   onSearch={handleOnSearch}
                   onHover={handleOnHover}
                   onSelect={handleOnSelect}
                   onFocus={handleOnFocus}
                   autoFocus
                   formatResult={formatResult}
-                /> */}
+                />
               </Col>
               <Col lg="1"></Col>
-            </Row>
+            </Row> */}
 
             <input
               type="text"

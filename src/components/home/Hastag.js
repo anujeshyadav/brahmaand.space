@@ -37,12 +37,10 @@ function Hastag() {
     axios
       .get(`http://3.7.173.138:9000/admin/getTrending`)
       .then((res) => {
-        console.log(res.data.data);
+        // console.log(res.data.data);
         setTrendingsearch(res.data.data);
       })
-      .catch((err) => {
-        console.log(err);
-      });
+      .catch((err) => {});
   };
 
   useEffect(() => {
@@ -56,11 +54,9 @@ function Hastag() {
       .get(`http://3.7.173.138:9000/admin/getallCategory`)
       .then((response) => {
         setCategry(response.data.data);
-        console.log(response.data.data);
+        // console.log(response.data.data);
       })
-      .catch((error) => {
-        console.log(error.response.data.data);
-      });
+      .catch((error) => {});
   };
 
   const [email, setEmail] = useState("");
@@ -79,13 +75,10 @@ function Hastag() {
         userid: userid,
       })
       .then((response) => {
-        console.log(response.data);
         setEmail("");
         swal("Subscribed Successfully");
       })
-      .catch((error) => {
-        console.log(error.response.data);
-      });
+      .catch((error) => {});
   };
   function isValidEmail(email) {
     const expression =
@@ -121,7 +114,7 @@ function Hastag() {
       .get(`/user/get_featured_cnt`)
       .then((res) => {
         setFeature(res.data.data);
-        console.log(res.data.data);
+        // console.log(res.data.data);
       })
       .catch((err) => {
         console.log(err);
@@ -151,15 +144,13 @@ function Hastag() {
     //       console.log(err);
     //     });
     // }
-    console.log(hastag);
+
     if (hastag !== "") {
       axios
         .post(`http://3.7.173.138:9000/user/search_topic_title`, {
           searchinput: hastag,
         })
         .then((res) => {
-          console.log(res.data.data[0]?.sub_category);
-
           if (
             res.data.data[0]?.sub_category === "" ||
             res.data.data[0]?.sub_category == undefined
@@ -175,9 +166,7 @@ function Hastag() {
           //   return <p>No data available</p>;
           // }
         })
-        .catch((err) => {
-          console.log(err);
-        });
+        .catch((err) => {});
     }
   }
 
@@ -268,7 +257,7 @@ function Hastag() {
         <Swiper
           breakpoints={{
             1084: {
-              slidesPerView: 4,
+              slidesPerView: 3,
               direction: "horizontal",
               spaceBetween: 10,
             },
@@ -278,7 +267,7 @@ function Hastag() {
               spaceBetween: 10,
             },
             820: {
-              slidesPerView: 3,
+              slidesPerView: 2,
               direction: "horizontal",
               spaceBetween: 10,
             },
@@ -299,6 +288,11 @@ function Hastag() {
               spaceBetween: 10,
             },
             320: {
+              slidesPerView: 1,
+              direction: "horizontal",
+              spaceBetween: 10,
+            },
+            240: {
               slidesPerView: 1,
               direction: "horizontal",
               spaceBetween: 10,
