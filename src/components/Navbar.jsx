@@ -191,7 +191,7 @@ function CustomNavbar(args) {
         setSubctgry(response.data.data);
       })
       .catch((error) => {
-        console.log(error.response.data);
+        // console.log(error.response.data);
       });
   }, [catgry]);
 
