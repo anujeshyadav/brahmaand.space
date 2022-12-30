@@ -38,14 +38,14 @@ function OtpInputpage() {
         })
         .then((res) => {
           console.log(res.data);
-          if ((res.data.msg = "Incorrect Otp")) {
+          if (res.data.msg == "Incorrect Otp") {
             swal("Wrong OTP Entered !");
           }
-          if ((res.data.msg = "verification successful")) {
+          if (res.data.msg === "verification successful") {
             swal("Your Email id Verified !");
             localStorage.setItem("userId", res.data._id);
             setOtp(" ");
-            // navigate("/topbar");
+            navigate("/");
           }
         })
         .then((err) => {

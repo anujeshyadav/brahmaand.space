@@ -18,7 +18,7 @@ import ProfileRouter from "./ProfileRouter";
 function TopBar() {
   const [modal, setModal] = useState(false);
   const toggle = () => setModal(!modal);
-  const [username, setUsername] = useState("");
+  const [username, setUsernamenew] = useState("");
   const [display_name, setDisplay_name] = useState("");
   const [abt_us, seAbt_us] = useState("");
   const [selectedFile, setSelectedFile] = useState("");
@@ -57,29 +57,35 @@ function TopBar() {
       .get(`http://3.7.173.138:9000/user/getoneUser/${id}`)
       .then((res) => {
         setUserdata(res.data.data);
-        // console.log(res.data.data);
+        // setUsernamenew(res.data.data.username);
+        console.log(res.data.data);
+        setDisplay_name(res.data.data.display_name);
+        seAbt_us(res.data.data.abt_us);
       })
       .catch((err) => {
-        // console.log(err);
+        console.log(err);
       });
   };
   useEffect(() => {
     getUserData();
-  }, [display_name]);
+  }, []);
 
-  const handleLoginSubmit = async (e) => {
+  const handleLoginSubmit = (e) => {
     e.preventDefault();
-    // console.log(username, display_name, abt_us, id);
+    console.log(username, display_name, abt_us, id);
 
     const formData = new FormData();
+    if (username == !"") {
+      formData.append("username", username);
+    }
     formData.append("profileImg", selectedFile);
-    formData.append("username", username);
+
     formData.append("display_name", display_name);
     formData.append("abt_us", abt_us);
     axios
       .post(`http://3.7.173.138:9000/user/updateProfile/${id}`, formData)
       .then((response) => {
-        // console.log(response.data);
+        console.log(response.data);
         if (response.data.message === "Username Already Exist") {
           swal("UserName is Already Exist please Try with different Username");
         }
@@ -182,7 +188,7 @@ function TopBar() {
                             className="form-control"
                             placeholder="Enter Your User Name here "
                             value={username}
-                            onChange={(e) => setUsername(e.target.value)}
+                            onChange={(e) => setUsernamenew(e.target.value)}
                           />
                         </h5>
                       </Row>

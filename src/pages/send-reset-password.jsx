@@ -45,7 +45,7 @@ const SendRequestResetPasswordComponent = () => {
     <Container className="login-container mt-4 mx-15 resetpasswordotp">
       <Card className="login-card">
         <Card.Header className="login-card-header">
-          <h2 className="login-card-header-h2">Reset Password</h2>
+          <h2 className="login-card-header-h2">Forget Password</h2>
         </Card.Header>
 
         <Card.Body className="login-card-body">
@@ -70,7 +70,9 @@ const SendRequestResetPasswordComponent = () => {
               />
             </Form.Group> */}
             <Row className=" mb-3 emailmargin">
-              <Label>Email</Label>
+              <Label className="mx-1" style={{ color: "red" }}>
+                Enter Email :
+              </Label>
               <input
                 type="email"
                 className="form-control mx-3"

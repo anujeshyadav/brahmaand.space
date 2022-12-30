@@ -67,8 +67,8 @@ function Bookmarks(args) {
   };
 
   const navigate = useNavigate();
-  const getUser = async () => {
-    const user = await localStorage.getItem("userId");
+  const getUser = () => {
+    const user = localStorage.getItem("userId");
     if (user !== null && user !== "") {
       setmyId(user);
     } else {
@@ -144,6 +144,7 @@ function Bookmarks(args) {
           setActivelike(response.data.data.status);
           swal("you Removed your bookmark ");
           hadlestatusbookmark();
+          setModal(false);
         })
         .catch((error) => {
           // console.log(error.response.data);

@@ -260,6 +260,7 @@ function ProductList(args) {
   };
 
   const removebookmark = (id) => {
+    console.log(id);
     setliked(id);
     if (myId !== "" && myId !== null) {
       axiosConfig
@@ -269,14 +270,12 @@ function ProductList(args) {
           status: "false",
         })
         .then((response) => {
-          // console.log(response.data.data.status);
+          console.log(response.data.data);
           setActivelike(response.data.data.status);
           swal("you Removed your bookmark ");
           hadlestatusbookmark();
         })
-        .catch((error) => {
-          // console.log(error.response.data);
-        });
+        .catch((error) => {});
     } else {
       swal("User Need to Login first ");
       navigate("/login");
@@ -302,7 +301,6 @@ function ProductList(args) {
           // console.log("likeindividual", response.data.data);
         })
         .catch((error) => {
-          // console.log(error.response.data.message);
           if (error.response.data.message == "already exists") {
             swal(" Your already bookmarked It");
           }
@@ -314,6 +312,15 @@ function ProductList(args) {
   };
 
   const hadlestatusbookmark = () => {
+    axios
+      .get(`http://3.7.173.138:9000/user/getone_mylikes/${myId}/${liked}`)
+      .then((res) => {
+        console.log(res.data.data);
+        setHandlebookmark(res.data.data.status);
+      })
+      .catch((err) => {
+        // console.log(err.response.data);
+      });
     if (
       myId !== null &&
       myId !== undefined &&
@@ -322,15 +329,6 @@ function ProductList(args) {
       liked !== null &&
       liked !== undefined
     ) {
-      axios
-        .get(`http://3.7.173.138:9000/user/getone_mylikes/${myId}/${liked}`)
-        .then((res) => {
-          console.log(res.data.data);
-          setHandlebookmark(res.data.data.status);
-        })
-        .catch((err) => {
-          // console.log(err.response.data);
-        });
     }
   };
   const handlepromotion = (_id) => {
@@ -451,22 +449,23 @@ function ProductList(args) {
   const handleSelection = (_id) => {
     setProductdetail("");
     // console.log(_id);
+    setliked(_id);
     var selectedId = _id;
 
     if (selectedId === _id) {
       setProductdes(selectedId);
       axios
-        .get(`http://3.7.173.138:9000/admin/getone_reslist/${productdes}`)
+        // .get(`http://3.7.173.138:9000/admin/getone_reslist/${productdes}`)
+        .get(`http://3.7.173.138:9000/admin/getone_reslist/${selectedId}`)
         .then((res) => {
           // console.log(res.data.data._id);
-          // console.log(res.data.data);
+          // console.log(res);
           if (
             res.data.data._id !== "" ||
             res.data.data._id !== null ||
             res.data.data._id !== undefined
           ) {
             toggle();
-
             setProductdetail(res.data.data);
           }
         })
@@ -648,11 +647,11 @@ function ProductList(args) {
       .get(`http://3.7.173.138:9000/admin/listbysubcategory/${Params.id}`)
       .then((response) => {
         setCategry(response.data.data);
-        // console.log(response.data.data);
-        const data = response.data.data;
-        const datanew = data.filter((data) => {
-          return data.format == "Text" && data.type == "Paid";
-        });
+        console.log(response.data.data);
+        // const data = response.data.data;
+        // const datanew = data.filter((data) => {
+        //   return data.format == "Text" && data.type == "Paid";
+        // });
       })
       .catch((error) => {
         // console.log(error.response.data);
@@ -1446,25 +1445,27 @@ function ProductList(args) {
                                           </Row>
                                         </Row>
                                       </div>
-                                      <Row key={promotion?._id}>
+                                      <Row key={Producdetail?._id}>
                                         <Col lg="4"></Col>
-                                        <Col lg="8" key={promotion?._id}>
-                                          {handlebookmark === "true" ? (
+                                        <Col lg="8" key={Producdetail?._id}>
+                                          {handlebookmark?.status == "true" ? (
                                             <button
-                                              key={promotion?._id}
+                                              key={Producdetail?._id}
                                               className="addbookmark  btn btn-secondary"
                                               color="success"
                                               onClick={() =>
-                                                removebookmark(promotion?._id)
+                                                removebookmark(
+                                                  Producdetail?._id
+                                                )
                                               }
                                             >
                                               Remove Bookmark
                                             </button>
                                           ) : (
                                             <button
-                                              key={promotion?._id}
+                                              key={Producdetail?._id}
                                               onClick={() =>
-                                                addbookmark(promotion?._id)
+                                                addbookmark(Producdetail?._id)
                                               }
                                               className="addbookmark  btn btn-secondary"
                                               color="warning "
@@ -2110,25 +2111,29 @@ function ProductList(args) {
                                               </Col>
                                             </Row>
                                           </div>
-                                          <Row>
+                                          <Row key={Producdetail?._id}>
                                             <Col lg="4"></Col>
-                                            <Col lg="8" key={categry?._id}>
+                                            <Col lg="8" key={Producdetail?._id}>
                                               {handlebookmark === "true" ? (
                                                 <button
-                                                  key={categry?._id}
+                                                  key={Producdetail?._id}
                                                   className="addbookmark  btn btn-secondary"
                                                   color="success"
                                                   onClick={() =>
-                                                    removebookmark(categry?._id)
+                                                    removebookmark(
+                                                      Producdetail?._id
+                                                    )
                                                   }
                                                 >
                                                   Remove Bookmark
                                                 </button>
                                               ) : (
                                                 <button
-                                                  key={categry?._id}
+                                                  key={Producdetail?._id}
                                                   onClick={() =>
-                                                    addbookmark(categry?._id)
+                                                    addbookmark(
+                                                      Producdetail?._id
+                                                    )
                                                   }
                                                   className="addbookmark  btn btn-secondary"
                                                   color="warning "
