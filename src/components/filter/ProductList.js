@@ -332,6 +332,7 @@ function ProductList(args) {
     }
   };
   const handlepromotion = (_id) => {
+    setliked(_id);
     var promotionId = _id;
     if (promotionId === _id) {
       setPromotId(promotionId);
@@ -495,6 +496,7 @@ function ProductList(args) {
       });
   };
   const handlesuggSelection = (_id) => {
+    setliked(_id);
     setProductdetail("");
     // console.log(_id);
     var selectedId = _id;
@@ -1126,7 +1128,39 @@ function ProductList(args) {
                                     handlepromotion(promotion?._id)
                                   }
                                 >
-                                  <img
+                                  {promotion?.link.match(
+                                    /(?:youtu\.be\/|youtube\.com(?:\/embed\/|\/v\/|\/watch\?v=|\/user\/\S+|\/ytscreeningroom\?v=|\/sandalsResorts#\w\/\w\/.*\/))([^\/&]{10,12})/
+                                  ) ? (
+                                    <>
+                                      {promotion?.link ? (
+                                        <>
+                                          <h2 style={{ color: "green" }}>
+                                            {promotion[1]}
+                                          </h2>
+                                          <iframe
+                                            allowfullscreen="true"
+                                            width="100%"
+                                            height="auto"
+                                            style={{
+                                              borderRadius: "12px",
+                                            }}
+                                            src={`https://www.youtube.com/embed/${
+                                              promotion?.link?.split("=")[1]
+                                            }`}
+                                          ></iframe>
+                                        </>
+                                      ) : null}
+                                    </>
+                                  ) : (
+                                    <img
+                                      style={{ borderRadius: "10px" }}
+                                      src={promotion?.img}
+                                      alt="image"
+                                      width="100%"
+                                      height={160}
+                                    />
+                                  )}
+                                  {/* <img
                                     style={{
                                       height: "200px",
                                       borderRadius: "10px",
@@ -1135,7 +1169,7 @@ function ProductList(args) {
                                     className="promotionimageclass"
                                     src={promotion?.img}
                                     alt="image"
-                                  />
+                                  /> */}
                                   <Modal
                                     key={promotiondata?._id}
                                     className="mdlg"
@@ -1373,7 +1407,7 @@ function ProductList(args) {
                                                 <div className="mid-1-b tt-1">
                                                   <p>Submitted:</p>
                                                   <Moment format="ll">
-                                                    {Producdetail?.createdAt}
+                                                    {promotiondata?.createdAt}
                                                   </Moment>
                                                 </div>
                                               </div>
@@ -1423,10 +1457,14 @@ function ProductList(args) {
                                             <ReactStars {...secondExample} />
                                           </Col>
                                           <Row lg="12">
-                                            <div className="rat-right">
+                                            <div
+                                              key={promotiondata?._id}
+                                              className="rat-right"
+                                            >
                                               <div className="">
                                                 <form>
                                                   <textarea
+                                                    key={promotiondata?._id}
                                                     value={text}
                                                     name="text"
                                                     onChange={onchangehandler}
@@ -1445,17 +1483,17 @@ function ProductList(args) {
                                           </Row>
                                         </Row>
                                       </div>
-                                      <Row key={Producdetail?._id}>
+                                      <Row key={promotiondata?._id}>
                                         <Col lg="4"></Col>
-                                        <Col lg="8" key={Producdetail?._id}>
-                                          {handlebookmark?.status == "true" ? (
+                                        <Col lg="8" key={promotiondata?._id}>
+                                          {handlebookmark === "true" ? (
                                             <button
-                                              key={Producdetail?._id}
+                                              key={promotiondata?._id}
                                               className="addbookmark  btn btn-secondary"
                                               color="success"
                                               onClick={() =>
                                                 removebookmark(
-                                                  Producdetail?._id
+                                                  promotiondata?._id
                                                 )
                                               }
                                             >
@@ -1463,9 +1501,9 @@ function ProductList(args) {
                                             </button>
                                           ) : (
                                             <button
-                                              key={Producdetail?._id}
+                                              key={promotiondata?._id}
                                               onClick={() =>
-                                                addbookmark(Producdetail?._id)
+                                                addbookmark(promotiondata?._id)
                                               }
                                               className="addbookmark  btn btn-secondary"
                                               color="warning "
@@ -1515,7 +1553,11 @@ function ProductList(args) {
                                 </Link>
                               </div>
 
-                              <div class="product-content">
+                              <div
+                                key={promotion?._id}
+                                onClick={() => handlepromotion(promotion?._id)}
+                                class="product-content"
+                              >
                                 <ul class="rating">
                                   <li>
                                     {promotion?.topics?.map((topic) => (
@@ -1594,7 +1636,7 @@ function ProductList(args) {
                                         handleSelection(categry?._id)
                                       }
                                     >
-                                      {/* {categry?.link.match(
+                                      {categry?.link.match(
                                         /(?:youtu\.be\/|youtube\.com(?:\/embed\/|\/v\/|\/watch\?v=|\/user\/\S+|\/ytscreeningroom\?v=|\/sandalsResorts#\w\/\w\/.*\/))([^\/&]{10,12})/
                                       ) ? (
                                         <>
@@ -1625,14 +1667,14 @@ function ProductList(args) {
                                           width="100%"
                                           height={160}
                                         />
-                                      )} */}
-                                      <img
+                                      )}
+                                      {/* <img
                                         style={{ borderRadius: "10px" }}
                                         src={categry?.img}
                                         alt="image"
                                         width="100%"
                                         height={160}
-                                      />
+                                      /> */}
 
                                       <Modal
                                         key={Producdetail?._id}
@@ -2746,23 +2788,23 @@ function ProductList(args) {
                                   </div>
                                   <Row>
                                     <Col lg="4"></Col>
-                                    <Col lg="8" key={categry?._id}>
+                                    <Col lg="8" key={Producdetail?._id}>
                                       {handlebookmark === "true" ? (
                                         <button
-                                          key={categry?._id}
+                                          key={Producdetail?._id}
                                           className="addbookmark  btn btn-secondary"
                                           color="success"
                                           onClick={() =>
-                                            removebookmark(categry?._id)
+                                            removebookmark(Producdetail?._id)
                                           }
                                         >
                                           Remove Bookmark
                                         </button>
                                       ) : (
                                         <button
-                                          key={categry?._id}
+                                          key={Producdetail?._id}
                                           onClick={() =>
-                                            addbookmark(categry?._id)
+                                            addbookmark(Producdetail?._id)
                                           }
                                           className="addbookmark  btn btn-secondary"
                                           color="warning "
@@ -2808,16 +2850,52 @@ function ProductList(args) {
                                   </div>
                                 </ModalBody>
                               </Modal>
-                              <img
+                              {categry?.link.match(
+                                /(?:youtu\.be\/|youtube\.com(?:\/embed\/|\/v\/|\/watch\?v=|\/user\/\S+|\/ytscreeningroom\?v=|\/sandalsResorts#\w\/\w\/.*\/))([^\/&]{10,12})/
+                              ) ? (
+                                <>
+                                  {categry?.link ? (
+                                    <>
+                                      <h2 style={{ color: "green" }}>
+                                        {categry[1]}
+                                      </h2>
+                                      <iframe
+                                        allowfullscreen="true"
+                                        width="100%"
+                                        height="auto"
+                                        style={{
+                                          borderRadius: "12px",
+                                        }}
+                                        src={`https://www.youtube.com/embed/${
+                                          categry?.link?.split("=")[1]
+                                        }`}
+                                      ></iframe>
+                                    </>
+                                  ) : null}
+                                </>
+                              ) : (
+                                <img
+                                  style={{ borderRadius: "10px" }}
+                                  src={categry?.img}
+                                  alt="image"
+                                  width="100%"
+                                  height={160}
+                                />
+                              )}
+                              {/* <img
                                 style={{ borderRadius: "12px" }}
                                 width="100%"
                                 height="260px"
                                 src={categry?.img}
                                 alt="image "
-                              />
+                              /> */}
                             </Link>
                           </div>
-                          <div class="product-content">
+                          <div
+                            key={categry._id}
+                            onClick={() => handlesuggSelection(categry?._id)}
+                            class="product-content"
+                          >
                             <div className=" d-flex topicdatas">
                               {" "}
                               {categry?.topics.map((topic) => (

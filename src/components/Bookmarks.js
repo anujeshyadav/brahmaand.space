@@ -206,7 +206,7 @@ function Bookmarks(args) {
     }
   };
   const handleSelection = (_id) => {
-    // console.log(_id);
+    setliked(_id);
     var selectedId = _id;
 
     if (selectedId === _id) {
@@ -718,7 +718,11 @@ function Bookmarks(args) {
                     <span className="product-discount-label st-1"></span>
                   </div>
                 </Col>
-                <Col md="8">
+                <Col
+                  key={data?.submitresrcId?._id}
+                  onClick={() => handleSelection(data?.submitresrcId?._id)}
+                  md="8"
+                >
                   <div className="product-content">
                     <ul className="rating mb-3 topicslike">
                       {data?.submitresrcId?.topics?.map((val) => (

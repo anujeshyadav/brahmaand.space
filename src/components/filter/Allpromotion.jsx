@@ -128,6 +128,7 @@ function Allpromotion(args) {
     }
   };
   const handlepromotion = (_id) => {
+    setliked(_id);
     var promotionId = _id;
     if (promotionId === _id) {
       setPromotId(promotionId);
@@ -173,6 +174,15 @@ function Allpromotion(args) {
   };
 
   const hadlestatusbookmark = () => {
+    axios
+      .get(`http://3.7.173.138:9000/user/getone_mylikes/${myId}/${liked}`)
+      .then((res) => {
+        // console.log(res.data.data);
+        setHandlebookmark(res.data.data.status);
+      })
+      .catch((err) => {
+        // console.log(err.response.data);
+      });
     if (
       myId !== null &&
       myId !== undefined &&
@@ -181,15 +191,6 @@ function Allpromotion(args) {
       liked !== null &&
       liked !== undefined
     ) {
-      axios
-        .get(`http://3.7.173.138:9000/user/getone_mylikes/${myId}/${liked}`)
-        .then((res) => {
-          // console.log(res.data.data);
-          setHandlebookmark(res.data.data.status);
-        })
-        .catch((err) => {
-          // console.log(err.response.data);
-        });
     }
   };
   const handleclosepromotion = () => {
@@ -249,9 +250,10 @@ function Allpromotion(args) {
   };
 
   useEffect(() => {
+    hadlestatusbookmark();
     getUser();
     promotionadmin();
-  }, [handlebookmark]);
+  }, [handlebookmark, activelike, Producdetail]);
   const promotionadmin = () => {
     axios
       .get(`http://3.7.173.138:9000/user/Promotions`)
@@ -505,7 +507,6 @@ function Allpromotion(args) {
                                   <h4>Customer Rating</h4>
                                   <div className="">
                                     <PrettyRating
-                                      // value={value?.rating}
                                       value={averageRating?.data}
                                       icons={icons.star}
                                       colors={colors.star}
@@ -650,6 +651,7 @@ function Allpromotion(args) {
 
                                     <form>
                                       <textarea
+                                        key={promotiondata?._id}
                                         value={text}
                                         name="text"
                                         onChange={onchangehandler}
@@ -668,22 +670,26 @@ function Allpromotion(args) {
                               </Row>
                             </Row>
                           </div>
-                          <Row key={promotion?._id}>
+                          <Row key={promotiondata?._id}>
                             <Col lg="4"></Col>
-                            <Col lg="8" key={promotion?._id}>
+                            <Col lg="8" key={promotiondata?._id}>
                               {handlebookmark === "true" ? (
                                 <button
-                                  key={promotion?._id}
+                                  key={promotiondata?._id}
                                   className="addbookmark  btn btn-secondary"
                                   color="success"
-                                  onClick={() => removebookmark(promotion?._id)}
+                                  onClick={() =>
+                                    removebookmark(promotiondata?._id)
+                                  }
                                 >
                                   Remove Bookmark
                                 </button>
                               ) : (
                                 <button
-                                  key={promotion?._id}
-                                  onClick={() => addbookmark(promotion?._id)}
+                                  key={promotiondata?._id}
+                                  onClick={() =>
+                                    addbookmark(promotiondata?._id)
+                                  }
                                   className="addbookmark  btn btn-secondary"
                                   color="warning "
                                 >

@@ -246,7 +246,7 @@ function VideoPosted(args) {
         .get(`http://3.7.173.138:9000/user/posted_by_me/${myId}`)
         .then((res) => {
           setMylikes(res.data.data);
-          // console.log(res.data.data);
+          console.log(res.data.data);
         })
         .catch((error) => {
           // console.log(error);
@@ -680,7 +680,11 @@ function VideoPosted(args) {
                     <span className="product-discount-label st-1"></span>
                   </div>
                 </Col>
-                <Col md="8">
+                <Col
+                  key={data?._id}
+                  onClick={() => handleSelection(data?._id)}
+                  md="8"
+                >
                   <div className="product-content">
                     <ul className="rating mb-3 topicslike">
                       {data?.topics?.map((val) => (
