@@ -321,23 +321,24 @@ function ProductList(args) {
       .catch((err) => {
         // console.log(err.response.data);
       });
-    if (
-      myId !== null &&
-      myId !== undefined &&
-      myId !== "" &&
-      liked !== "" &&
-      liked !== null &&
-      liked !== undefined
-    ) {
-    }
+    // if (
+    //   myId !== null &&
+    //   myId !== undefined &&
+    //   myId !== "" &&
+    //   liked !== "" &&
+    //   liked !== null &&
+    //   liked !== undefined
+    // ) {
+    // }
   };
   const handlepromotion = (_id) => {
+    setPromotiondata("");
     setliked(_id);
     var promotionId = _id;
     if (promotionId === _id) {
       setPromotId(promotionId);
       axios
-        .get(`http://3.7.173.138:9000/admin/getone_reslist/${promotId}`)
+        .get(`http://3.7.173.138:9000/admin/getone_reslist/${promotionId}`)
         .then((res) => {
           // console.log(res.data.data._id);
           if (
@@ -353,13 +354,22 @@ function ProductList(args) {
         .catch((err) => {
           // console.log(err.data.data);
         });
+      axios
+        .get(`http://3.7.173.138:9000/user/average_rating/${promotionId}`)
+        .then((res) => {
+          // console.log(res.data);
+          setAverageRating(res.data);
+        })
+        .catch((err) => {
+          // console.log(err);
+        });
     }
   };
   const promotionadmin = () => {
     axios
       .get(`http://3.7.173.138:9000/user/Promotions`)
       .then((res) => {
-        setPromotion(res.data.data.slice(0, 3));
+        setPromotion(res.data.data);
         // console.log(res.data.data);
       })
       .catch((err) => {
@@ -449,7 +459,7 @@ function ProductList(args) {
 
   const handleSelection = (_id) => {
     setProductdetail("");
-    // console.log(_id);
+
     setliked(_id);
     var selectedId = _id;
 
@@ -466,8 +476,8 @@ function ProductList(args) {
             res.data.data._id !== null ||
             res.data.data._id !== undefined
           ) {
-            toggle();
             setProductdetail(res.data.data);
+            toggle();
           }
         })
         .catch((err) => {
@@ -498,7 +508,7 @@ function ProductList(args) {
   const handlesuggSelection = (_id) => {
     setliked(_id);
     setProductdetail("");
-    // console.log(_id);
+
     var selectedId = _id;
 
     if (selectedId === _id) {
@@ -595,6 +605,7 @@ function ProductList(args) {
     format,
     Producdetail,
     myId,
+    promotiondata,
     handlebookmark,
     activelike,
     searchitem,
