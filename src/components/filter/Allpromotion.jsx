@@ -253,7 +253,7 @@ function Allpromotion(args) {
     hadlestatusbookmark();
     getUser();
     promotionadmin();
-  }, [handlebookmark, activelike, Producdetail]);
+  }, [handlebookmark, activelike, Producdetail, promotiondata]);
   const promotionadmin = () => {
     axios
       .get(`http://3.7.173.138:9000/user/Promotions`)
@@ -281,7 +281,37 @@ function Allpromotion(args) {
                       key={promotion?._id}
                       onClick={() => handlepromotion(promotion?._id)}
                     >
-                      <img
+                      {promotion?.link.match(
+                        /(?:youtu\.be\/|youtube\.com(?:\/embed\/|\/v\/|\/watch\?v=|\/user\/\S+|\/ytscreeningroom\?v=|\/sandalsResorts#\w\/\w\/.*\/))([^\/&]{10,12})/
+                      ) ? (
+                        <>
+                          {promotion?.link ? (
+                            <>
+                              <h2 style={{ color: "green" }}>{promotion[1]}</h2>
+                              <iframe
+                                allowfullscreen="true"
+                                width="100%"
+                                height="auto"
+                                style={{
+                                  borderRadius: "12px",
+                                }}
+                                src={`https://www.youtube.com/embed/${
+                                  promotion?.link?.split("=")[1]
+                                }`}
+                              ></iframe>
+                            </>
+                          ) : null}
+                        </>
+                      ) : (
+                        <img
+                          style={{ borderRadius: "10px" }}
+                          src={promotion?.img}
+                          alt="image"
+                          width="100%"
+                          height={160}
+                        />
+                      )}
+                      {/* <img
                         style={{
                           height: "200px",
                           borderRadius: "10px",
@@ -291,7 +321,7 @@ function Allpromotion(args) {
                         className="promotionimageclass"
                         src={promotion?.img}
                         alt="image"
-                      />
+                      /> */}
                       <Modal
                         key={promotiondata?._id}
                         className="mdlg"
