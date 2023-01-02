@@ -112,7 +112,8 @@ function Login() {
 
     if (Fireemail !== "" && Firename !== "" && Fireuid !== "") {
       axios
-        .post(`http://3.7.173.138:9000/user/signup`, {
+        // .post(`http://3.7.173.138:9000/user/signup`, {
+        .post(`http://3.7.173.138:9000/user/signinwithgoogle`, {
           username: Firename,
           email: Fireemail,
           password: Fireuid,
@@ -263,6 +264,7 @@ function Login() {
                   <Col lg="7"></Col>
                   <Col lg="5" className="mt-3">
                     <Link
+                      // style={{ color: "Blue" }}
                       to="/send-reset-password-request"
                       className="login-new-account-link"
                     >

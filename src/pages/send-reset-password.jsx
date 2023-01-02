@@ -1,6 +1,7 @@
 import { Card, Container, Button, Form } from "react-bootstrap";
 import "../styles/Login.css";
 import axios from "axios";
+import swal from "sweetalert";
 import { Col, Row } from "react-bootstrap";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
@@ -35,9 +36,29 @@ const SendRequestResetPasswordComponent = () => {
 
   const navigate = useNavigate();
 
-  const sendRequestResetPasswordHandler = async (e) => {
+  const sendRequestResetPasswordHandler = (e) => {
     e.preventDefault();
-    await send_request_reset_password(email, setMessage, navigate);
+
+    axios
+      .post(`http://3.7.173.138:9000/user/sendotp`, {
+        email: email,
+      })
+      .then((res) => {
+        console.log(res.data);
+        if (res.data.msg === "otp send successfully") {
+          localStorage.setItem("forgetpassmail", email);
+          swal("OTP Sent Successfully");
+          navigate("/forgetpassword");
+        }
+      })
+      .catch((err) => {
+        // console.log(err.response.data.msg === "user does't exist");
+        if (err.response.data.msg === "user does't exist") {
+          swal("User doesn't Exist");
+        }
+      });
+    // navigate("/forgetpassword");
+    // await send_request_reset_password(email, setMessage, navigate);
     // swal("Password sent to your mail, please check your mail ");
   };
 
