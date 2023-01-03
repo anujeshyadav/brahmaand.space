@@ -58,7 +58,7 @@ function TopBar() {
       .then((res) => {
         setUserdata(res.data.data);
         // setUsernamenew(res.data.data.username);
-        console.log(res.data.data);
+        // console.log(res.data.data);
         setDisplay_name(res.data.data.display_name);
         seAbt_us(res.data.data.abt_us);
       })

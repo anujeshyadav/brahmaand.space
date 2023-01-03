@@ -574,7 +574,7 @@ function Hastag() {
                             size={75}
                             style={{ backgroundColor: "white" }}
                             type="submit"
-                            onClick={() => setOpenone(true)}
+                            // onClick={() => setOpenone(true)}
                           />
                         </div>
                         <div className="modalvideo">

@@ -214,7 +214,7 @@ function Bookmarks(args) {
       axios
         .get(`http://3.7.173.138:9000/admin/getone_reslist/${productdes}`)
         .then((res) => {
-          console.log(res.data.data);
+          // console.log(res.data.data);
           if (
             res.data.data._id !== "" ||
             res.data.data._id !== null ||
@@ -305,13 +305,43 @@ function Bookmarks(args) {
                       key={data?.submitresrcId?._id}
                       onClick={() => handleSelection(data?.submitresrcId?._id)}
                     >
-                      <img
+                      {" "}
+                      {data?.submitresrcId?.link.match(
+                        /(?:youtu\.be\/|youtube\.com(?:\/embed\/|\/v\/|\/watch\?v=|\/user\/\S+|\/ytscreeningroom\?v=|\/sandalsResorts#\w\/\w\/.*\/))([^\/&]{10,12})/
+                      ) ? (
+                        <>
+                          {data?.submitresrcId?.link ? (
+                            <>
+                              <iframe
+                                allowfullscreen="true"
+                                width="100%"
+                                height="280px"
+                                style={{
+                                  borderRadius: "12px",
+                                }}
+                                src={`https://www.youtube.com/embed/${
+                                  data?.submitresrcId?.link?.split("=")[1]
+                                }`}
+                              ></iframe>
+                            </>
+                          ) : null}
+                        </>
+                      ) : (
+                        <img
+                          style={{ borderRadius: "10px" }}
+                          src={data?.submitresrcId?.img}
+                          alt="image"
+                          width="100%"
+                          height={280}
+                        />
+                      )}
+                      {/* <img
                         height={280}
                         src={data?.submitresrcId?.img}
                         alt="image"
                         style={{ borderRadius: "10px" }}
                         width="90%"
-                      />
+                      /> */}
                       <Modal
                         key={Producdetail?._Id}
                         className="mdlg"
@@ -715,7 +745,7 @@ function Bookmarks(args) {
                         </ModalBody>
                       </Modal>
                     </Link>
-                    <span className="product-discount-label st-1"></span>
+                    {/* <span className="product-discount-label st-1"></span> */}
                   </div>
                 </Col>
                 <Col

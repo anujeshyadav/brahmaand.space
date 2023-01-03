@@ -41,6 +41,7 @@
     "react-hook-form": "^7.40.0",
     "react-html-parser": "^2.0.2",
     "react-icons": "^4.4.0",
+    "react-loader-spinner": "^5.3.4",
     "react-modal-video": "^1.2.10",
     "react-moment": "^1.1.2",
     "react-multi-select-component": "^4.3.4",

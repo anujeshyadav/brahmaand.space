@@ -269,13 +269,44 @@ function VideoPosted(args) {
                       key={data?._id}
                       onClick={() => handleSelection(data?._id)}
                     >
-                      <img
+                      {" "}
+                      {data?.link.match(
+                        /(?:youtu\.be\/|youtube\.com(?:\/embed\/|\/v\/|\/watch\?v=|\/user\/\S+|\/ytscreeningroom\?v=|\/sandalsResorts#\w\/\w\/.*\/))([^\/&]{10,12})/
+                      ) ? (
+                        <>
+                          {data?.link ? (
+                            <>
+                              {/* <h2 style={{ color: "green" }}>{promotion[1]}</h2> */}
+                              <iframe
+                                allowfullscreen="true"
+                                width="100%"
+                                height="280px"
+                                style={{
+                                  borderRadius: "12px",
+                                }}
+                                src={`https://www.youtube.com/embed/${
+                                  data?.link?.split("=")[1]
+                                }`}
+                              ></iframe>
+                            </>
+                          ) : null}
+                        </>
+                      ) : (
+                        <img
+                          style={{ borderRadius: "10px" }}
+                          src={data?.img}
+                          alt="image"
+                          width="100%"
+                          height="260px"
+                        />
+                      )}
+                      {/* <img
                         height={280}
-                        src={data?.userid?.profileImg}
+                        src={data?.img}
                         alt="image"
                         style={{ borderRadius: "10px" }}
                         width="90%"
-                      />
+                      /> */}
                       <Modal
                         key={Producdetail?._Id}
                         className="mdlg"
@@ -677,7 +708,7 @@ function VideoPosted(args) {
                         </ModalBody>
                       </Modal>
                     </Link>
-                    <span className="product-discount-label st-1"></span>
+                    {/* <span className="product-discount-label st-1"></span> */}
                   </div>
                 </Col>
                 <Col

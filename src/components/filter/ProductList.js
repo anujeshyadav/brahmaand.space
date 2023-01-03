@@ -315,7 +315,7 @@ function ProductList(args) {
     axios
       .get(`http://3.7.173.138:9000/user/getone_mylikes/${myId}/${liked}`)
       .then((res) => {
-        console.log(res.data.data);
+        // console.log(res.data.data);
         setHandlebookmark(res.data.data.status);
       })
       .catch((err) => {

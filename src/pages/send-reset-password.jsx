@@ -7,6 +7,7 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Label } from "reactstrap";
 import { useNavigate } from "react-router-dom";
+import "./spinner.css";
 
 const domain = process.env.REACT_APP_API_DOMAIN_NAME;
 
@@ -15,6 +16,7 @@ const SendRequestResetPasswordComponent = () => {
   const [message, setMessage] = useState("");
   const [emailcheck, setEmailcheck] = useState("");
   const [err, setErr] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   // const [email, setEmail] = useState("");
 
   const handleEmail = (e) => {
@@ -38,13 +40,14 @@ const SendRequestResetPasswordComponent = () => {
 
   const sendRequestResetPasswordHandler = (e) => {
     e.preventDefault();
-
+    setIsLoading(true);
     axios
       .post(`http://3.7.173.138:9000/user/sendotp`, {
         email: email,
       })
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
+        setIsLoading(false);
         if (res.data.msg === "otp send successfully") {
           localStorage.setItem("forgetpassmail", email);
           swal("OTP Sent Successfully");
@@ -122,14 +125,24 @@ const SendRequestResetPasswordComponent = () => {
             </Row>
 
             <div className="login-button-div">
-              <Button
-                variant="primary"
-                // disabled={!performValidation()}
-                className="login-button"
-                type="submit"
-              >
-                Send
-              </Button>
+              {!isLoading ? (
+                <>
+                  <Button
+                    variant="primary"
+                    // disabled={!performValidation()}
+                    className="login-button"
+                    type="submit"
+                  >
+                    Send
+                  </Button>
+                </>
+              ) : (
+                <>
+                  <div className="spinner-container d-flex justify-content-center">
+                    <div className="loading-spinner"></div>
+                  </div>
+                </>
+              )}
             </div>
           </Form>
         </Card.Body>
