@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.4f999df9.css",
-    "main.js": "/static/js/main.97d890ab.js",
+    "main.css": "/static/css/main.059f16a2.css",
+    "main.js": "/static/js/main.82a17a3e.js",
     "static/js/787.2d6ec2d3.chunk.js": "/static/js/787.2d6ec2d3.chunk.js",
     "static/media/dummy.png": "/static/media/dummy.ee2c95b333a006a294b7.png",
     "static/media/technology.png": "/static/media/technology.f9c43a613b0cc9ac4204.png",
@@ -33,6 +33,7 @@
     "static/media/banner2.jpg": "/static/media/banner2.a86c66f1bb0a14872818.jpg",
     "static/media/socialnetwork.jpg": "/static/media/socialnetwork.3fa7380cc60bce4c74ba.jpg",
     "static/media/banner5.jpeg": "/static/media/banner5.f08d3a9ab81729066e23.jpeg",
+    "static/media/facts.jpg": "/static/media/facts.3f52527c44e7ab7e84c3.jpg",
     "static/media/1.png": "/static/media/1.53e15931ce7a7ff35ce0.png",
     "static/media/youtubevideo.jpg": "/static/media/youtubevideo.7228e891af7f909b9ec5.jpg",
     "static/media/MyriadPro-Regular.otf": "/static/media/MyriadPro-Regular.31fe6e69dd2c18a7c626.otf",
@@ -58,12 +59,12 @@
     "static/media/one.png": "/static/media/one.a582172fc910ccfd79dc.png",
     "static/media/six.png": "/static/media/six.070a8aec339442205e77.png",
     "index.html": "/index.html",
-    "main.4f999df9.css.map": "/static/css/main.4f999df9.css.map",
-    "main.97d890ab.js.map": "/static/js/main.97d890ab.js.map",
+    "main.059f16a2.css.map": "/static/css/main.059f16a2.css.map",
+    "main.82a17a3e.js.map": "/static/js/main.82a17a3e.js.map",
     "787.2d6ec2d3.chunk.js.map": "/static/js/787.2d6ec2d3.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.4f999df9.css",
-    "static/js/main.97d890ab.js"
+    "static/css/main.059f16a2.css",
+    "static/js/main.82a17a3e.js"
   ]
 }
