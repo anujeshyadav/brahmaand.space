@@ -33,32 +33,6 @@ function LeaderBoard() {
   const [planetposition, setPlanetposition] = useState([]);
   const [currentmonth, setCurrentmonth] = useState([]);
   const [alltime, setAlltime] = useState([]);
-  const planet = [
-    {
-      planet: one,
-      position: winnerone,
-    },
-    {
-      planet: two,
-      position: wintwo,
-    },
-    {
-      planet: three,
-      position: winthree,
-    },
-    {
-      planet: four,
-      position: winfour,
-    },
-    {
-      planet: five,
-      position: winfive,
-    },
-    {
-      planet: six,
-      position: winsix,
-    },
-  ];
 
   const getcurrentmonthdata = () => {
     axios
@@ -75,7 +49,7 @@ function LeaderBoard() {
     axios
       .get(`http://3.7.173.138:9000/user/all_time_karma`)
       .then((res) => {
-        // console.log(res.data.data);
+        console.log(res.data.data);
         setAlltime(res.data.data);
       })
       .catch((err) => {
@@ -619,7 +593,7 @@ function LeaderBoard() {
                     <Row>
                       <div className="maindiv">
                         <img
-                          src={saterns} //image of planet
+                          src={value?.planetImg} //image of planet
                           alt="img"
                           height={80}
                           width={80}
@@ -642,7 +616,7 @@ function LeaderBoard() {
                         <div className="images6 d-flex justify-content-center">
                           <img
                             style={{ borderRadius: "50%", height: "190px" }}
-                            src={value?.userid?.profileImg} // image of winner
+                            src={value?.profileImg} // image of winner
                             // src={avatar1} // image of winner
                             alt=""
                             className="avatar"
@@ -650,7 +624,7 @@ function LeaderBoard() {
                         </div>
                         <span>
                           <img
-                            src={winnerone} // winner one logo
+                            src={value?.winnerImg} // winner one logo
                             alt="ist winner"
                             className="first"
                             height={90}
@@ -661,8 +635,8 @@ function LeaderBoard() {
                     </Row>
 
                     <Row className="mt-2">
-                      <h3>{value?.userid?.username}</h3>
-                      <h5>{value?.userid?.meteors}</h5>
+                      <h3>{value?.username}</h3>
+                      <h5>{value?.meteors}</h5>
                       {/* <h5>3752</h5> */}
                     </Row>
                   </Col>

@@ -103,9 +103,8 @@ function ProductList(args) {
   };
 
   const navigate = useNavigate();
-  // console.log("params", Params);
+
   const handlesearchbylanguage = () => {
-    // console.log(language);
     if (language !== "" && language !== undefined) {
       axios
         .get(
@@ -113,8 +112,6 @@ function ProductList(args) {
         )
         .then((res) => {
           setCategry(res.data.data);
-          // console.log(res.data.data);
-          // setLanguage("");
         })
         .catch((err) => {
           console.log(err);
@@ -125,36 +122,18 @@ function ProductList(args) {
   const hastagdata = localStorage.getItem("hastag");
   const gethastagdata = () => {
     const hastagdata = localStorage.getItem("hastag");
-    // if (hastagdata !== "" && hastagdata !== null) {
-    //   axios
-    //     .get(`http://3.7.173.138:9000/user/filterbyHashTag/${hastagdata}`)
-    //     .then((res) => {
-    //       console.log(res.data.data);
-    //       if (res.data.data !== "" && res.data.data !== null) {
-    //       }
-    //       setCategry(res.data.data);
-    //       // localStorage.removeItem("hastag");
-    //     })
-    //     .catch((err) => {
-    //       console.log(err);
-    //     });
-    // }
     if (hastagdata !== "hastag")
       axios
         .post(`http://3.7.173.138:9000/user/search_topic_title`, {
           searchinput: hastagdata,
         })
         .then((res) => {
-          // console.log(res.data.data);
           if (res.data.data !== "" && res.data.data !== null) {
             setCategry(res.data.data);
-            // localStorage.removeItem("searchdata");
             localStorage.setItem("hastag", "hastag");
           }
         })
-        .catch((err) => {
-          // console.log(err);
-        });
+        .catch((err) => {});
   };
 
   const getYear = () => {
@@ -203,35 +182,41 @@ function ProductList(args) {
     }
   };
 
-  const searchdata = localStorage.getItem("searchdata");
   const handleSearchHomePage = () => {
-    const searchdata = localStorage.getItem("searchdata");
-    // console.log(searchdata);
-    if (searchdata !== "" && searchdata !== null)
-      axios
-        .post(`http://3.7.173.138:9000/user/search_topic_title`, {
-          searchinput: searchdata,
-        })
-        .then((res) => {
-          // console.log(res.data.data);
-          if (res.data.data !== "" && res.data.data !== null) {
-            setCategry(res.data.data);
-            localStorage.removeItem("searchdata");
-          }
-        })
-        .catch((err) => {
-          // console.log(err);
-        });
+    // if (searchdata !== "" && searchdata !== null)
+    //   axios
+    //     .post(`http://3.7.173.138:9000/user/search_topic_title`, {
+    //       searchinput: searchdata,
+    //     })
+    //     .then((res) => {
+    //       const search = res.data.data[0]?.sub_category;
+    //       if (search !== "" && search !== undefined) {
+    //         navigate(`/productsearch/${search}`);
+    //       }
+    // console.log(res.data.data);
+    // if (res.data.data !== "" && res.data.data !== null) {
+    //   setCategry(res.data.data);
+    //   localStorage.removeItem("searchdata");
+    // }
+    // })
+    // .catch((err) => {
+    // console.log(err);
+    // });
     // console.log("you are searching");
   };
 
   const handlesearchdescription = () => {
+    localStorage.setItem("searchdata", searchitem);
     axios
       .post(`http://3.7.173.138:9000/user/search_topic_title`, {
         searchinput: searchitem,
       })
       .then((res) => {
-        setCategry(res.data.data);
+        const search = res.data.data[0]?.sub_category;
+        if (search !== "" && search !== undefined) {
+          navigate(`/productsearch/${search}`);
+        }
+        // setCategry(res.data.data);
       })
       .catch((err) => {
         console.log(err);
@@ -558,14 +543,7 @@ function ProductList(args) {
   useEffect(() => {
     hadlestatusbookmark();
     getUser();
-  }, [
-    liked,
-    Producdetail,
-    myId,
-    promotiondata,
-    // handlebookmark,
-    activelike,
-  ]);
+  }, [liked, Producdetail, myId, promotiondata, handlebookmark, activelike]);
 
   useEffect(() => {
     allsuggestedproduct();
@@ -582,20 +560,20 @@ function ProductList(args) {
       contentyear == "" &&
       language === "" &&
       searchitem === "" &&
-      hastagdata === "hastag" &&
-      searchdata === ""
+      hastagdata === "hastag"
+      // searchdata === ""
     ) {
       allsearchproduct();
     }
     if (type !== "") {
       gettypefilter();
     }
-    if (hastagdata !== "hastag") {
-      gethastagdata();
-    }
-    if (searchdata !== "" && searchdata !== null) {
-      handleSearchHomePage();
-    }
+    // if (hastagdata !== "hastag") {
+    //   gethastagdata();
+    // }
+    // if (searchdata !== "" && searchdata !== null) {
+    //   handleSearchHomePage();
+    // }
 
     if (contentyear !== "") {
       getolderyeardata();
@@ -621,11 +599,11 @@ function ProductList(args) {
     // promotiondata,
     // handlebookmark,
     // activelike,
-    searchitem,
+    // searchitem,
     language,
     contentyear,
     hastagdata,
-    searchdata,
+    // searchdata,
   ]);
 
   const [typelength, setTypelength] = useState([]);
@@ -724,7 +702,7 @@ function ProductList(args) {
                 />
               </div>
             </Col>
-            <Col lg="2">
+            <Col onClick={handlesearchdescription} lg="2">
               <Button className=" d-flex probtn text-center ">
                 <p
                   onClick={handlesearchdescription}

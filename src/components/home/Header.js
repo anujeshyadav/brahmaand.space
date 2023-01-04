@@ -84,13 +84,12 @@ function Header() {
         .then((res) => {
           // console.log(res.data.data[0]?.sub_category);
           const search = res.data.data[0]?.sub_category;
-
-          // if (search !== "" && search !== undefined) {
-          //   navigate(`/productList/${search}`);
-          // }
           if (search !== "" && search !== undefined) {
             navigate(`/productsearch/${search}`);
           }
+          // if (search !== "" && search !== undefined) {
+          //   navigate(`/productList/${search}`);
+          // }
         })
         .catch((err) => {
           console.log(err);

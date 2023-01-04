@@ -97,15 +97,13 @@ function Productsearch(args) {
     halfIcon: <i className="fa fa-star-half-alt" />,
     // filledIcon: <i className="fa fa-star" />,
     onChange: (newValue) => {
-      // console.log(`Example 2: new value is ${newValue}`);
       setRating(newValue);
     },
   };
 
   const navigate = useNavigate();
-  // console.log("params", Params);
+
   const handlesearchbylanguage = () => {
-    // console.log(language);
     if (language !== "" && language !== undefined) {
       axios
         .get(
@@ -113,8 +111,6 @@ function Productsearch(args) {
         )
         .then((res) => {
           setCategry(res.data.data);
-          // console.log(res.data.data);
-          //   setLanguage("");
         })
         .catch((err) => {
           console.log(err);
@@ -162,11 +158,8 @@ function Productsearch(args) {
       .get(`http://3.7.173.138:9000/user/allYear`)
       .then((response) => {
         setRelyear(response.data.data);
-        // console.log(response.data.data);
       })
-      .catch((error) => {
-        // console.log(error.response.data);
-      });
+      .catch((error) => {});
   };
   const handleclosemodal = () => {
     setModal(false);
@@ -206,17 +199,21 @@ function Productsearch(args) {
   const searchdata = localStorage.getItem("searchdata");
   const handleSearchHomePage = () => {
     const searchdata = localStorage.getItem("searchdata");
-    // console.log(searchdata);
+
     if (searchdata !== "" && searchdata !== null)
       axios
         .post(`http://3.7.173.138:9000/user/search_topic_title`, {
           searchinput: searchdata,
         })
         .then((res) => {
-          // console.log(res.data.data);
+          //   const search = res.data.data[0]?.sub_category;
+          //   if (search !== "" && search !== undefined) {
+          //     navigate(`/productsearch/${search}`);
+          //   }
+          console.log(res.data.data);
           if (res.data.data !== "" && res.data.data !== null) {
             setCategry(res.data.data);
-            localStorage.removeItem("searchdata");
+            // localStorage.removeItem("searchdata");
           }
         })
         .catch((err) => {
@@ -244,11 +241,8 @@ function Productsearch(args) {
       .get(`http://3.7.173.138:9000/user/allLang`)
       .then((response) => {
         setLngage(response.data.data);
-        // console.log(response.data.data);
       })
-      .catch((error) => {
-        // console.log(error.response.data);
-      });
+      .catch((error) => {});
   };
   const getUser = async () => {
     const user = await localStorage.getItem("userId");
@@ -298,7 +292,6 @@ function Productsearch(args) {
           setActivelike(response.data.data.status);
           swal("You Bookmark it");
           hadlestatusbookmark();
-          // console.log("likeindividual", response.data.data);
         })
         .catch((error) => {
           if (error.response.data.message == "already exists") {

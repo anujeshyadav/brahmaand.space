@@ -149,7 +149,7 @@ function ProductHastag(args) {
           if (res.data.data !== "" && res.data.data !== null) {
             setCategry(res.data.data);
             // localStorage.removeItem("searchdata");
-            localStorage.setItem("hastag", "hastag");
+            // localStorage.setItem("hastag", "hastag");
           }
         })
         .catch((err) => {
@@ -215,8 +215,7 @@ function ProductHastag(args) {
         .then((res) => {
           // console.log(res.data.data);
           if (res.data.data !== "" && res.data.data !== null) {
-            setCategry(res.data.data);
-            localStorage.removeItem("searchdata");
+            // setCategry(res.data.data);
           }
         })
         .catch((err) => {
@@ -226,12 +225,18 @@ function ProductHastag(args) {
   };
 
   const handlesearchdescription = () => {
+    localStorage.setItem("searchdata", searchitem);
     axios
       .post(`http://3.7.173.138:9000/user/search_topic_title`, {
         searchinput: searchitem,
       })
       .then((res) => {
-        setCategry(res.data.data);
+        console.log(res.data.data);
+        const search = res.data.data[0]?.sub_category;
+        if (search !== "" && search !== undefined) {
+          navigate(`/productsearch/${search}`);
+        }
+        // setCategry(res.data.data);
       })
       .catch((err) => {
         console.log(err);
@@ -621,7 +626,7 @@ function ProductHastag(args) {
     // promotiondata,
     // handlebookmark,
     // activelike,
-    searchitem,
+    // searchitem,
     language,
     contentyear,
     hastagdata,
@@ -672,8 +677,8 @@ function ProductHastag(args) {
     axios
       .get(`http://3.7.173.138:9000/admin/listbysubcategory/${Params.id}`)
       .then((response) => {
-        setCategry(response.data.data);
-        console.log(response.data.data);
+        // setCategry(response.data.data);
+        // console.log(response.data.data);
         // const data = response.data.data;
         // const datanew = data.filter((data) => {
         //   return data.format == "Text" && data.type == "Paid";
@@ -724,7 +729,7 @@ function ProductHastag(args) {
                 />
               </div>
             </Col>
-            <Col lg="2">
+            <Col onClick={handlesearchdescription} lg="2">
               <Button className=" d-flex probtn text-center ">
                 <p
                   onClick={handlesearchdescription}
