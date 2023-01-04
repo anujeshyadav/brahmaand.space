@@ -77,6 +77,8 @@ import FAQ from "./components/FAQ";
 import SelectApp from "./components/SelectApp";
 import Forgetpass from "./pages/Forgetpass";
 import ResetForget from "./components/ResetForget";
+import Productsearch from "./components/filter/Productsearch";
+import ProductHastag from "./components/filter/ProductHastag";
 
 const rootElement = document.getElementById("root");
 render(
@@ -109,6 +111,16 @@ render(
             <Route exact path="/resetpassword" element={<ResetPassword />} />
             <Route exact path="/forgetpassword" element={<Forgetpass />} />
             <Route exact path="/resetforget" element={<ResetForget />} />
+            <Route
+              exact
+              path="/productsearch/:id"
+              element={<Productsearch />}
+            />
+            <Route
+              exact
+              path="/producthastag/:id"
+              element={<ProductHastag />}
+            />
 
             <Route
               exact

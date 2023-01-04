@@ -159,14 +159,16 @@ function Hastag() {
           }
           const search = res.data.data[0]?.sub_category;
 
-          if (search !== "" && search !== undefined) {
-            navigate(`/productList/${search}`);
-          }
-          // else {
-          //   return <p>No data available</p>;
+          // if (search !== "" && search !== undefined) {
+          //   navigate(`/productList/${search}`);
           // }
+          if (search !== "" && search !== undefined) {
+            navigate(`/producthastag/${search}`);
+          }
         })
-        .catch((err) => {});
+        .catch((err) => {
+          console.log(err);
+        });
     }
   }
 

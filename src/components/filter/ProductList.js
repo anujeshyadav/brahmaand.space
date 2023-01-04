@@ -114,7 +114,7 @@ function ProductList(args) {
         .then((res) => {
           setCategry(res.data.data);
           // console.log(res.data.data);
-          setLanguage("");
+          // setLanguage("");
         })
         .catch((err) => {
           console.log(err);
@@ -412,6 +412,8 @@ function ProductList(args) {
     setContentyear("");
     setSearchitem("");
     allsearchproduct();
+    setTypelength("");
+    setFormatelength("");
   };
 
   const handleSubmit = (e) => {
@@ -553,13 +555,24 @@ function ProductList(args) {
         // console.log(err);
       });
   };
+  useEffect(() => {
+    hadlestatusbookmark();
+    getUser();
+  }, [
+    liked,
+    Producdetail,
+    myId,
+    promotiondata,
+    // handlebookmark,
+    activelike,
+  ]);
 
   useEffect(() => {
     allsuggestedproduct();
     getYear();
     getLanguage();
     getUser();
-    hadlestatusbookmark();
+    // hadlestatusbookmark();
     promotionadmin();
 
     if (
@@ -603,11 +616,11 @@ function ProductList(args) {
     Params,
     type,
     format,
-    Producdetail,
-    myId,
-    promotiondata,
-    handlebookmark,
-    activelike,
+    // Producdetail,
+    // myId,
+    // promotiondata,
+    // handlebookmark,
+    // activelike,
     searchitem,
     language,
     contentyear,
@@ -796,9 +809,17 @@ function ProductList(args) {
                       <div className="ft-type">
                         <h5 className="mb-3">Type</h5>
                         <Row className="mt-3 mx-2">
+                          {/* <input
+                            type="checkbox"
+                            name="type"
+                            value="Free"
+                            checked={"Free" === type}
+                            onClick={() => setType("Free")}
+                          /> */}
                           <input
                             id="Free"
                             className="ft-check"
+                            checked={"Free" === type}
                             type="radio"
                             name="type"
                             value="Free"
@@ -812,6 +833,7 @@ function ProductList(args) {
                         <Row className="mt-3  mx-2">
                           <input
                             id="Paid"
+                            checked={"Paid" === type}
                             className="ft-check"
                             type="radio"
                             name="type"
@@ -832,6 +854,7 @@ function ProductList(args) {
                           <input
                             id="Video"
                             className="ft-check"
+                            checked={"Video" === format}
                             type="radio"
                             name="format"
                             value="Video"
@@ -845,6 +868,7 @@ function ProductList(args) {
                         <Row className=" mb-3 mx-2">
                           <input
                             id="Text"
+                            checked={"Text" === format}
                             className="ft-check"
                             type="radio"
                             name="format"
@@ -946,7 +970,9 @@ function ProductList(args) {
                               <b style={{ fontSize: "19px" }}>Content Year</b>
                             </Label>
                             <select
-                              required
+                              defaultValue="Select Year"
+                              value={contentyear}
+                              // checked={"Select Year" === contentyear}
                               onChange={(e) => setContentyear(e.target.value)}
                               className="form-control"
                             >
@@ -968,19 +994,22 @@ function ProductList(args) {
                               </b>
                             </Label>
                             <select
-                              required
+                              defaultValue="Select Language"
+                              value={language}
                               onChange={(e) => setLanguage(e.target.value)}
                               className="form-control"
                             >
                               <option>Select Language</option>
-                              {lngage?.map((language) => (
-                                <option
-                                  key={language?._id}
-                                  value={language?._id}
-                                >
-                                  {language?.language}
-                                </option>
-                              ))}
+                              {lngage?.map((language) => {
+                                return (
+                                  <option
+                                    key={language?._id}
+                                    value={language?._id}
+                                  >
+                                    {language?.language}
+                                  </option>
+                                );
+                              })}
                             </select>
                           </Container>
                           {/* <Label
@@ -2275,9 +2304,13 @@ function ProductList(args) {
 
                                       <ul class="rating mt-2">
                                         <li>
-                                          <Link to="#" className="tag">
-                                            {categry?.relYear[0]?.yrName}
-                                          </Link>
+                                          {categry?.relYear[0] !== ""
+                                            ? categry?.relYear?.map((data) => (
+                                                <Link to="#" className="tag">
+                                                  {data.yrName}
+                                                </Link>
+                                              ))
+                                            : null}
                                         </li>
                                       </ul>
                                     </div>
