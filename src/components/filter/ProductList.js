@@ -235,8 +235,8 @@ function ProductList(args) {
         // console.log(error.response.data);
       });
   };
-  const getUser = async () => {
-    const user = await localStorage.getItem("userId");
+  const getUser = () => {
+    const user = localStorage.getItem("userId");
     if (user !== null && user !== "") {
       setmyId(user);
     } else {
@@ -245,7 +245,6 @@ function ProductList(args) {
   };
 
   const removebookmark = (id) => {
-    console.log(id);
     setliked(id);
     if (myId !== "" && myId !== null) {
       axiosConfig
@@ -268,7 +267,6 @@ function ProductList(args) {
   };
 
   const addbookmark = (id) => {
-    console.log(id);
     setliked(id);
 
     if (myId !== "" && myId !== null) {
@@ -300,7 +298,7 @@ function ProductList(args) {
     axios
       .get(`http://3.7.173.138:9000/user/getone_mylikes/${myId}/${liked}`)
       .then((res) => {
-        // console.log(res.data.data);
+        console.log(res.data.data);
         setHandlebookmark(res.data.data.status);
       })
       .catch((err) => {
@@ -445,8 +443,6 @@ function ProductList(args) {
   };
 
   const handleSelection = (_id) => {
-    setProductdetail("");
-
     setliked(_id);
     var selectedId = _id;
 
@@ -540,17 +536,17 @@ function ProductList(args) {
         // console.log(err);
       });
   };
-  useEffect(() => {
-    hadlestatusbookmark();
-    getUser();
-  }, [liked, Producdetail, myId, promotiondata, handlebookmark, activelike]);
+  // useEffect(() => {
+  //   hadlestatusbookmark();
+  //   getUser();
+  // }, [liked, Producdetail, myId, promotiondata, activelike, handlebookmark]);
 
   useEffect(() => {
     allsuggestedproduct();
     getYear();
     getLanguage();
     getUser();
-    // hadlestatusbookmark();
+    hadlestatusbookmark();
     promotionadmin();
 
     if (
@@ -594,12 +590,13 @@ function ProductList(args) {
     Params,
     type,
     format,
-    // Producdetail,
-    // myId,
-    // promotiondata,
-    // handlebookmark,
-    // activelike,
-    // searchitem,
+    liked,
+    Producdetail,
+    myId,
+    promotiondata,
+    handlebookmark,
+    activelike,
+    searchitem,
     language,
     contentyear,
     hastagdata,
@@ -651,7 +648,7 @@ function ProductList(args) {
       .get(`http://3.7.173.138:9000/admin/listbysubcategory/${Params.id}`)
       .then((response) => {
         setCategry(response.data.data);
-        console.log(response.data.data);
+        // console.log(response.data.data);
         // const data = response.data.data;
         // const datanew = data.filter((data) => {
         //   return data.format == "Text" && data.type == "Paid";
