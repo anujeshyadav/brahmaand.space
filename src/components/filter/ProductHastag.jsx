@@ -97,15 +97,13 @@ function ProductHastag(args) {
     halfIcon: <i className="fa fa-star-half-alt" />,
     // filledIcon: <i className="fa fa-star" />,
     onChange: (newValue) => {
-      // console.log(`Example 2: new value is ${newValue}`);
       setRating(newValue);
     },
   };
 
   const navigate = useNavigate();
-  // console.log("params", Params);
+
   const handlesearchbylanguage = () => {
-    // console.log(language);
     if (language !== "" && language !== undefined) {
       axios
         .get(
@@ -113,8 +111,6 @@ function ProductHastag(args) {
         )
         .then((res) => {
           setCategry(res.data.data);
-          // console.log(res.data.data);
-          //   setLanguage("");
         })
         .catch((err) => {
           console.log(err);
@@ -125,20 +121,7 @@ function ProductHastag(args) {
   const hastagdata = localStorage.getItem("hastag");
   const gethastagdata = () => {
     const hastagdata = localStorage.getItem("hastag");
-    // if (hastagdata !== "" && hastagdata !== null) {
-    //   axios
-    //     .get(`http://3.7.173.138:9000/user/filterbyHashTag/${hastagdata}`)
-    //     .then((res) => {
-    //       console.log(res.data.data);
-    //       if (res.data.data !== "" && res.data.data !== null) {
-    //       }
-    //       setCategry(res.data.data);
-    //       // localStorage.removeItem("hastag");
-    //     })
-    //     .catch((err) => {
-    //       console.log(err);
-    //     });
-    // }
+
     if (hastagdata !== "hastag")
       axios
         .post(`http://3.7.173.138:9000/user/search_topic_title`, {
@@ -186,7 +169,6 @@ function ProductHastag(args) {
   };
 
   const getolderyeardata = () => {
-    // console.log(contentyear);
     if (contentyear !== "") {
       axios
         .get(
@@ -255,8 +237,8 @@ function ProductHastag(args) {
         // console.log(error.response.data);
       });
   };
-  const getUser = async () => {
-    const user = await localStorage.getItem("userId");
+  const getUser = () => {
+    const user = localStorage.getItem("userId");
     if (user !== null && user !== "") {
       setmyId(user);
     } else {
