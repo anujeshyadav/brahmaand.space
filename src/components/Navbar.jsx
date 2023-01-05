@@ -560,7 +560,7 @@ function CustomNavbar(args) {
                                 <option>Select Formate</option>
                                 <option>Video</option>
                                 <option>Text</option>
-                                <option>Video & Text</option>
+                                {/* <option>Video & Text</option> */}
                               </select>
                             </Col>
                           </Row>
