@@ -46,7 +46,7 @@ const SendRequestResetPasswordComponent = () => {
         email: email,
       })
       .then((res) => {
-        // console.log(res.data);
+        console.log(res.data);
         setIsLoading(false);
         if (res.data.msg === "otp send successfully") {
           localStorage.setItem("forgetpassmail", email);
@@ -55,6 +55,8 @@ const SendRequestResetPasswordComponent = () => {
         }
       })
       .catch((err) => {
+        setIsLoading(false);
+        console.log(err.response);
         // console.log(err.response.data.msg === "user does't exist");
         if (err.response.data.msg === "user does't exist") {
           swal("User doesn't Exist");

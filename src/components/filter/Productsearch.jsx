@@ -327,6 +327,7 @@ function Productsearch(args) {
   const handlepromotion = (_id) => {
     setPromotiondata("");
     setliked(_id);
+    hadlestatusbookmark();
     var promotionId = _id;
     if (promotionId === _id) {
       setPromotId(promotionId);
@@ -456,6 +457,7 @@ function Productsearch(args) {
     setProductdetail("");
 
     setliked(_id);
+    hadlestatusbookmark();
     var selectedId = _id;
 
     if (selectedId === _id) {
@@ -502,6 +504,7 @@ function Productsearch(args) {
   };
   const handlesuggSelection = (_id) => {
     setliked(_id);
+    hadlestatusbookmark();
     setProductdetail("");
 
     var selectedId = _id;
@@ -548,17 +551,17 @@ function Productsearch(args) {
         // console.log(err);
       });
   };
-  useEffect(() => {
-    hadlestatusbookmark();
-    getUser();
-  }, [
-    liked,
-    Producdetail,
-    myId,
-    promotiondata,
-    // handlebookmark,
-    activelike,
-  ]);
+  // useEffect(() => {
+  //   hadlestatusbookmark();
+  //   getUser();
+  // }, [
+  //   liked,
+  //   Producdetail,
+  //   myId,
+  //   promotiondata,
+  //   // handlebookmark,
+  //   activelike,
+  // ]);
 
   useEffect(() => {
     allsuggestedproduct();
@@ -609,11 +612,12 @@ function Productsearch(args) {
     Params,
     type,
     format,
-    // Producdetail,
-    // myId,
-    // promotiondata,
-    // handlebookmark,
-    // activelike,
+    liked,
+    Producdetail,
+    myId,
+    promotiondata,
+    handlebookmark,
+    activelike,
     searchitem,
     language,
     contentyear,

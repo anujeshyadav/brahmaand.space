@@ -279,8 +279,9 @@ function ProductList(args) {
         .then((response) => {
           console.log(response.data.data);
           setActivelike(response.data.data.status);
+
           swal("You Bookmark it");
-          hadlestatusbookmark();
+
           // console.log("likeindividual", response.data.data);
         })
         .catch((error) => {
@@ -317,6 +318,7 @@ function ProductList(args) {
   const handlepromotion = (_id) => {
     setPromotiondata("");
     setliked(_id);
+    hadlestatusbookmark();
     var promotionId = _id;
     if (promotionId === _id) {
       setPromotId(promotionId);
@@ -444,6 +446,7 @@ function ProductList(args) {
 
   const handleSelection = (_id) => {
     setliked(_id);
+    hadlestatusbookmark();
     var selectedId = _id;
 
     if (selectedId === _id) {
@@ -490,6 +493,7 @@ function ProductList(args) {
   };
   const handlesuggSelection = (_id) => {
     setliked(_id);
+    hadlestatusbookmark();
     setProductdetail("");
 
     var selectedId = _id;

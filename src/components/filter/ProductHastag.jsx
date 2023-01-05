@@ -321,6 +321,7 @@ function ProductHastag(args) {
   const handlepromotion = (_id) => {
     setPromotiondata("");
     setliked(_id);
+    hadlestatusbookmark();
     var promotionId = _id;
     if (promotionId === _id) {
       setPromotId(promotionId);
@@ -450,6 +451,7 @@ function ProductHastag(args) {
     setProductdetail("");
 
     setliked(_id);
+    hadlestatusbookmark();
     var selectedId = _id;
 
     if (selectedId === _id) {
@@ -496,6 +498,7 @@ function ProductHastag(args) {
   };
   const handlesuggSelection = (_id) => {
     setliked(_id);
+    hadlestatusbookmark();
     setProductdetail("");
 
     var selectedId = _id;
