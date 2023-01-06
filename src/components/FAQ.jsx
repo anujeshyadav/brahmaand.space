@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Container } from "reactstrap";
 import axios from "axios";
+import Accordion from "react-bootstrap/Accordion";
 
 function FAQ() {
   const [faq, setFaq] = useState([]);
@@ -37,14 +38,30 @@ function FAQ() {
             </h3>
             <hr></hr>
             <br />
-            <br />
-            {faq?.map((qes) => (
+
+            <Accordion>
+              {faq?.map((qes, index) => (
+                <Accordion.Item
+                  className="mt-2 mb-2"
+                  eventKey={index}
+                  Key={qes?._id}
+                >
+                  <Accordion.Header className="mt-2 mb-2">
+                    Question : {qes.title}.?
+                  </Accordion.Header>
+                  <Accordion.Body className="mt-2 mb-2">
+                    Answers : {qes.desc}
+                  </Accordion.Body>
+                </Accordion.Item>
+              ))}
+            </Accordion>
+            {/* {faq?.map((qes) => (
               <p>
                 <h4>Question : {qes.title}.?</h4>
                 <h4>Answers : {qes.desc}</h4>
                 <br />
               </p>
-            ))}
+            ))} */}
           </Container>
         </div>
       </div>
