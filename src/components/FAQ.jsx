@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Container } from "reactstrap";
+import { Container, Row, Col } from "reactstrap";
 import axios from "axios";
 import Accordion from "react-bootstrap/Accordion";
 
@@ -38,8 +38,27 @@ function FAQ() {
             </h3>
             <hr></hr>
             <br />
-
-            <Accordion>
+            <Row className="d-flex">
+              <Accordion className="d-flex ">
+                {faq?.map((qes, index) => (
+                  <Col className="mx-2" lg="6" md="4" sm="12">
+                    <Accordion.Item
+                      className="mt-2 mb-2 "
+                      eventKey={index}
+                      Key={qes?._id}
+                    >
+                      <Accordion.Header className="mt-2 mb-2">
+                        Question : {qes.title}.?
+                      </Accordion.Header>
+                      <Accordion.Body className="mt-2 mb-2">
+                        Answers : {qes.desc}
+                      </Accordion.Body>
+                    </Accordion.Item>
+                  </Col>
+                ))}
+              </Accordion>
+            </Row>
+            {/* <Accordion>
               {faq?.map((qes, index) => (
                 <Accordion.Item
                   className="mt-2 mb-2"
@@ -54,7 +73,7 @@ function FAQ() {
                   </Accordion.Body>
                 </Accordion.Item>
               ))}
-            </Accordion>
+            </Accordion> */}
             {/* {faq?.map((qes) => (
               <p>
                 <h4>Question : {qes.title}.?</h4>

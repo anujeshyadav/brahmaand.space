@@ -594,7 +594,7 @@ function LeaderBoard() {
                       <div className="maindiv">
                         <img
                           src={value?.planetImg} //image of planet
-                          alt="img"
+                          alt=" planetimg"
                           height={80}
                           width={80}
                         />
@@ -618,7 +618,7 @@ function LeaderBoard() {
                             style={{ borderRadius: "50%", height: "190px" }}
                             src={value?.profileImg} // image of winner
                             // src={avatar1} // image of winner
-                            alt=""
+                            alt="User Image "
                             className="avatar"
                           />
                         </div>
@@ -626,6 +626,7 @@ function LeaderBoard() {
                           <img
                             src={value?.winnerImg} // winner one logo
                             alt="ist winner"
+                            style={{ borderRadius: "50%" }}
                             className="first"
                             height={90}
                             width={90}
