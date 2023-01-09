@@ -336,28 +336,28 @@ function NewSignup() {
                 required
               />
               {errtwo == "This is Strong password" ? (
-                <span
+                <div
                   className="mx-2 mt-2"
-                  style={{ color: "green", fontSize: "13px" }}
+                  style={{ color: "green", fontSize: "13px", width: "100%" }}
                 >
                   {errtwo}
-                </span>
+                </div>
               ) : (
-                <span
+                <div
                   className="mx-2 mt-2"
-                  style={{ color: "red", fontSize: "13px" }}
+                  style={{ color: "red", fontSize: "13px", width: "100%" }}
                 >
                   {errtwo}
-                </span>
+                </div>
               )}
             </Row>
 
             <div style={{ width: "100%" }}>
               <button
                 // disabled={!performValidation()}
-                style={{ padding: "13px 133px", borderRadius: "11px" }}
+                style={{ padding: "13px", borderRadius: "11px" }}
                 // type="submit"
-                class="btn btn-primary"
+                class="btn btn-primary createaccount"
                 onClick={handleSubmit}
               >
                 <b>CREATE ACCOUNT</b>

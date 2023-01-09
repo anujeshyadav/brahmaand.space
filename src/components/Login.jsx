@@ -220,8 +220,8 @@ function Login() {
                   
                 </div> */}
               </Col>
-              <Col lg="4" md="6" sm="12" className=" head  ipad">
-                <h4 className="mb-1 py-2 mx-3">Welcome Back!</h4>
+              <Col lg="4" md="6" sm="12" className=" head ipadspace  ipad">
+                <h4 className="mb-1 py-2 ">Welcome Back!</h4>
                 <FormGroup
                   className="mb-1 mt-3 login-form-group"
                   controlId="formBasicLoginEmail"

@@ -89,7 +89,7 @@ b.mt-4 {
 .navbar-nav {
   padding-left: 90px;
   padding-right: 78px;
-  z-index: 999999 !important;
+  /* z-index: 999999 !important; */
   position: relative;
   background: #011d2b;
 }

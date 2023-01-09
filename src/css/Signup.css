@@ -45,6 +45,9 @@ img.signupimage {
     margin-top: 59px;
   }
 }
+button.btn.btn-primary.createaccount {
+  width: 100%;
+}
 /* @media screen and (min-width: 820px) and (max-width: 860px) {
   .rtt-1 {
     padding-top: 558px !important;

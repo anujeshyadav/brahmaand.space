@@ -235,7 +235,8 @@ button.signupwithgoogle {
   margin-left: 0px;
 }
 button.btn.btn-primary.loginbuttonsize {
-  padding: 13px 162px !important;
+  padding: 13px !important;
+  width: 90%;
 }
 
 /* position: absolute; */
