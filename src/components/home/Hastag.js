@@ -264,7 +264,12 @@ function Hastag() {
               spaceBetween: 10,
             },
             980: {
-              slidesPerView: 4,
+              slidesPerView: 3,
+              direction: "horizontal",
+              spaceBetween: 10,
+            },
+            910: {
+              slidesPerView: 2,
               direction: "horizontal",
               spaceBetween: 10,
             },
@@ -273,14 +278,19 @@ function Hastag() {
               direction: "horizontal",
               spaceBetween: 10,
             },
-            780: {
+            820: {
               slidesPerView: 3,
+              direction: "horizontal",
+              spaceBetween: 10,
+            },
+            780: {
+              slidesPerView: 2,
               direction: "horizontal",
               spaceBetween: 10,
             },
 
             768: {
-              slidesPerView: 3,
+              slidesPerView: 2,
               direction: "horizontal",
               spaceBetween: 10,
             },

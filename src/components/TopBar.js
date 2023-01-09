@@ -90,7 +90,8 @@ function TopBar() {
           swal("UserName is Already Exist please Try with different Username");
         }
         if (response.data.message === "success") {
-          swal("Updated Successfully👍");
+          // getUserData();
+          swal("Updated Successfully");
         }
       })
 
