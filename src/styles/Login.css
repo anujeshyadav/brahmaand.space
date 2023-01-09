@@ -234,6 +234,9 @@ button.signupwithgoogle {
   margin-top: 25px;
   margin-left: 0px;
 }
+button.btn.btn-primary.loginbuttonsize {
+  padding: 13px 162px !important;
+}
 
 /* position: absolute; */
 
@@ -241,6 +244,24 @@ button.signupwithgoogle {
   width: 150px;
   margin: 0 auto;
   padding-top: 400px;
+}
+@media screen and (min-width: 768px) and (max-width: 840px) {
+  .rtt-2 {
+    padding-top: 615px !important;
+  }
+}
+@media screen and (min-width: 860px) and (max-width: 1024px) {
+  .rtt-2 {
+    padding-top: 620px !important;
+  }
+}
+@media screen and (min-width: 1084px) and (max-width: 1384px) {
+  button.btn.btn-primary.loginbuttonsize {
+    padding: 13px 110px;
+  }
+  .rtt-2 {
+    padding-top: 710px !important;
+  }
 }
 .inputdataone {
   width: 32px !important;

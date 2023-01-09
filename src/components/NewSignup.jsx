@@ -231,12 +231,12 @@ function NewSignup() {
               backgroundPosition: "left",
               backgroundSize: "cover",
               backgroundRepeat: "no-repeat",
-              height: "85vh",
+              height: "100%",
               width: "100%",
             }}
           >
             <div className="d-flex justify-content-center rtt-1">
-              <img src={logonew} style={{ height: "95px", width: "175px" }} />
+              <img src={logonew} style={{ height: "auto", width: "175px" }} />
             </div>
           </div>
         </Col>

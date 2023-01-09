@@ -190,7 +190,7 @@ function Login() {
                     backgroundPosition: "left",
                     backgroundSize: "cover",
                     backgroundRepeat: "no-repeat",
-                    height: "78vh",
+                    height: "100%",
                     width: "100%",
                   }}
                 >
@@ -293,12 +293,12 @@ function Login() {
                     </Label>
                   </Col>
                 </Row>
-                <div className="d-flex justify-content-center">
+                <div className="d-flex justify-content-center loginbuttonsize">
                   <button
                     // disabled={!performValidation()}
-                    style={{ padding: "13px 162px", borderRadius: "11px" }}
+                    style={{ borderRadius: "11px" }}
                     type="button"
-                    class="btn btn-primary"
+                    class="btn btn-primary loginbuttonsize"
                     onClick={handleLoginSubmit}
                   >
                     <b>LOGIN</b>
@@ -306,9 +306,9 @@ function Login() {
                 </div>
 
                 <div className="last"></div>
-                <span className="mx-4">
+                <div className="mx-4">
                   Don't have an account yet ?<Link to="/signup">Sign Up</Link>
-                </span>
+                </div>
                 <Row className="d-flex justify-content-center mt-3">OR</Row>
                 <div className="mt-4">
                   <Row className="signupwithgoogle">

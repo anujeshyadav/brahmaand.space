@@ -22,5 +22,25 @@ input.form-control.mx-3 {
 .d-flex.justify-content-center.rtt-1 {
   width: 150px;
   margin: 0 auto;
-  padding-top: 400px;
+  padding-top: 500px !important;
+}
+@media screen and (min-width: 768px) and (max-width: 820px) {
+  .rtt-1 {
+    padding-top: 615px !important;
+  }
+}
+@media screen and (min-width: 820px) and (max-width: 860px) {
+  .rtt-1 {
+    padding-top: 558px !important;
+  }
+}
+@media screen and (min-width: 860px) and (max-width: 1024px) {
+  .rtt-1 {
+    padding-top: 620px !important;
+  }
+}
+@media screen and (min-width: 1084px) and (max-width: 1384px) {
+  .rtt-1 {
+    padding-top: 710px !important;
+  }
 }

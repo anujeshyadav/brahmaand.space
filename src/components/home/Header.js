@@ -84,7 +84,7 @@ function Header() {
         })
         .then((res) => {
           if (res.data.data.length == "0") {
-            swal("No Content found for this search");
+            swal("No product found");
           } else {
             const search = res.data.data[0]?.sub_category;
             if (search !== "" && search !== undefined) {
