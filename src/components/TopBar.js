@@ -75,7 +75,7 @@ function TopBar() {
     console.log(username, display_name, abt_us, id);
 
     const formData = new FormData();
-    if (username == !"") {
+    if (username !== "") {
       formData.append("username", username);
     }
     formData.append("profileImg", selectedFile);

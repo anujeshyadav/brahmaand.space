@@ -7,6 +7,7 @@ import Hastag from "../../../src/components/home/Hastag";
 import { Container, Row, Col, Card, Button } from "reactstrap";
 import backimg from "../../assets/images/backimg.png";
 import { ReactSearchAutocomplete } from "react-search-autocomplete";
+import swal from "sweetalert";
 
 function Header() {
   const [searchbytopics, setSearchbytopics] = useState("");
@@ -82,14 +83,14 @@ function Header() {
           searchinput: searchdata,
         })
         .then((res) => {
-          // console.log(res.data.data[0]?.sub_category);
-          const search = res.data.data[0]?.sub_category;
-          if (search !== "" && search !== undefined) {
-            navigate(`/productsearch/${search}`);
+          if (res.data.data.length == "0") {
+            swal("No Content found for this search");
+          } else {
+            const search = res.data.data[0]?.sub_category;
+            if (search !== "" && search !== undefined) {
+              navigate(`/productsearch/${search}`);
+            }
           }
-          // if (search !== "" && search !== undefined) {
-          //   navigate(`/productList/${search}`);
-          // }
         })
         .catch((err) => {
           console.log(err);

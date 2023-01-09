@@ -300,7 +300,8 @@ function Hastag() {
               spaceBetween: 10,
             },
           }}
-          modules={[Navigation, Pagination, Scrollbar, A11y]}
+          className="sld-1"
+          modules={[Navigation, Pagination, Scrollbar]}
           spaceBetween={70}
           slidesPerView={3}
           navigation

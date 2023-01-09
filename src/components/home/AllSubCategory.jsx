@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-
+import { useNavigate } from "react-router-dom";
 import "../../styles/ModulePage.css";
 import {
   Container,
@@ -13,9 +13,11 @@ import {
 } from "reactstrap";
 import { InputGroup } from "react-bootstrap";
 import { Link, useParams } from "react-router-dom";
+import swal from "sweetalert";
 
 function AllSubCategory() {
   let Params = useParams();
+  const navigate = useNavigate();
 
   const [subcatgry, setsubCatgry] = useState([]);
 
@@ -29,7 +31,12 @@ function AllSubCategory() {
       .get(`http://3.7.173.138:9000/admin/listbycategory/${Params.id}`)
 
       .then((response) => {
-        setsubCatgry(response.data.data);
+        if (response.data.data.length == "0") {
+          swal("No Product found for this Category");
+          navigate("/allcategory");
+        } else {
+          setsubCatgry(response.data.data);
+        }
         // console.log(response.data.data);
 
         // console.log("subcategory", response.data.data);

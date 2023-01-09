@@ -129,7 +129,9 @@ function NewSignup() {
       setPassword(e.target.value);
     } else {
       // res = "Please Enter correct Email ";
-      setErrtwo("Password must contain alphanumeric and special Charactor");
+      setErrtwo(
+        "Password must contain alphanumeric/Upper case letter & special Charactor"
+      );
     }
   };
 

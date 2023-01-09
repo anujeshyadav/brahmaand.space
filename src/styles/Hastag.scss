@@ -3,25 +3,29 @@
 // rohit css
 
 .rs-1 {
-    text-align: center;
-    border-radius: 20px;
+  text-align: center;
+  border-radius: 20px;
 }
 .rs-bg {
-    background: #0000008f;
-    padding: 80px 30px;
-    border-radius: 20px;
+  background: #0000008f;
+  padding: 80px 30px;
+  border-radius: 20px;
 }
 .rs-bg h3 {
-    color: #fff;
-    font-size: 35px;
+  color: #fff;
+  font-size: 35px;
 }
 .rs-bg a {
-    font-size: 16px !important;
-    background: #5f56c6;
-    color: #fff;
-    padding: 9px 40px;
-    display: inline-block;
-    text-decoration: none;
-    border-radius: 13px;
-    margin-top: 20px;
+  font-size: 16px !important;
+  background: #5f56c6;
+  color: #fff;
+  padding: 9px 40px;
+  display: inline-block;
+  text-decoration: none;
+  border-radius: 13px;
+  margin-top: 20px;
+}
+
+.swiper-wrapper {
+  justify-content: unset !important;
 }
