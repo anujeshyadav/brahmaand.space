@@ -355,7 +355,7 @@ function NewSignup() {
             <div style={{ width: "100%" }}>
               <button
                 // disabled={!performValidation()}
-                style={{ padding: "13px 136px", borderRadius: "11px" }}
+                style={{ padding: "13px 133px", borderRadius: "11px" }}
                 // type="submit"
                 class="btn btn-primary"
                 onClick={handleSubmit}
