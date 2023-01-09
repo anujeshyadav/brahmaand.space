@@ -18,6 +18,7 @@ import { AiOutlineEye } from "react-icons/ai";
 import { useForm } from "react-hook-form";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
+import "../../src/css/Signup.css";
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -183,8 +184,24 @@ function Login() {
         <div className="login">
           <Form className="login-form">
             <Row>
-              <Col lg="8" md="6" sm="12" className="mb-3">
+              <Col lg="8" md="6" sm="12" className="mb-3  ipad">
                 <div
+
+                // style={{
+                //   backgroundImage: `url(${logo})`,
+                //   backgroundPosition: "left",
+                //   backgroundSize: "cover",
+                //   backgroundRepeat: "no-repeat",
+                //   height: "100%",
+                //   width: "100%",
+                // }}
+                >
+                  <img src={newlogin} className="signupimage" alt="img" />
+                  <div className="d-flex justify-content-center rtt-1">
+                    <img src={logonew} style={{ width: "150px" }} />
+                  </div>
+                </div>
+                {/* <div
                   style={{
                     backgroundImage: `url(${newlogin})`,
                     backgroundPosition: "left",
@@ -200,16 +217,11 @@ function Login() {
                       style={{ height: "95px", width: "173px" }}
                     />
                   </div>
-                  {/* <h3
-                    className="d-flex justify-content-center"
-                    style={{ color: "white", textalign: "center" }}
-                  >
-                    <b className="logologintext">Brahmaand.Space</b>
-                  </h3> */}
-                </div>
+                  
+                </div> */}
               </Col>
-              <Col lg="4" md="6" sm="12" className=" head">
-                <h2>Welcome Back!</h2>
+              <Col lg="4" md="6" sm="12" className=" head  ipad">
+                <h4 className="mb-1 py-2 mx-3">Welcome Back!</h4>
                 <FormGroup
                   className="mb-1 mt-3 login-form-group"
                   controlId="formBasicLoginEmail"
@@ -261,12 +273,11 @@ function Login() {
                   </div>
                 </FormGroup>
                 <Row>
-                  <Col lg="7"></Col>
-                  <Col lg="5" className="mt-3">
+                  <Col className="mt-3 ">
                     <Link
-                      // style={{ color: "Blue" }}
+                      style={{ float: "right", paddingRight: "25px" }}
                       to="/send-reset-password-request"
-                      className="login-new-account-link"
+                      className="login-new-account-link "
                     >
                       Forgot Password ?
                     </Link>
@@ -274,7 +285,7 @@ function Login() {
                 </Row>
                 {/* <div className="login-signup-res-pass-div text-align-left"></div> */}
                 <Row className="d-flex">
-                  <Col className="d-flex" lg="2" md="6" sm="6">
+                  <Col className="d-flex" lg="2" md="2" sm="2">
                     <div style={{ width: "100%" }}>
                       <Input
                         className="check"
@@ -287,7 +298,7 @@ function Login() {
                       />
                     </div>
                   </Col>
-                  <Col className="d-flex " lg="10" md="6" sm="6">
+                  <Col className="d-flex " lg="10" md="10" sm="10">
                     <Label className="label-button  mx-2 d-flex">
                       Remember me
                     </Label>

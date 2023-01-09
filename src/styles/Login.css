@@ -277,3 +277,7 @@ span.dashitem {
   width: 20px;
   /* font-weight: 500; */
 }
+
+img.signupimage {
+  width: 100%;
+}

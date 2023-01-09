@@ -89,6 +89,9 @@ b.mt-4 {
 .navbar-nav {
   padding-left: 90px;
   padding-right: 78px;
+  z-index: 999999 !important;
+  position: relative;
+  background: #011d2b;
 }
 
 .navbar-link {
@@ -394,4 +397,10 @@ button:not(:disabled) {
 
 .dropdown-content:hover .dropbtn {
   background-color: rgb(187, 108, 11);
+}
+
+/* nav css  */
+a.navbar-brand.navbar-brand img {
+  width: 135px !important;
+  height: auto !important;
 }

@@ -224,23 +224,25 @@ function NewSignup() {
   return (
     <Container className="mt-4">
       <Row>
-        <Col className="imagesignupalign mb-3" lg="8" md="8" sm="6">
+        <Col className="imagesignupalign mb-3 ipad" lg="8" md="8" sm="6">
           <div
-            style={{
-              backgroundImage: `url(${logo})`,
-              backgroundPosition: "left",
-              backgroundSize: "cover",
-              backgroundRepeat: "no-repeat",
-              height: "100%",
-              width: "100%",
-            }}
+
+          // style={{
+          //   backgroundImage: `url(${logo})`,
+          //   backgroundPosition: "left",
+          //   backgroundSize: "cover",
+          //   backgroundRepeat: "no-repeat",
+          //   height: "100%",
+          //   width: "100%",
+          // }}
           >
+            <img src={logo} className="signupimage" alt="img" />
             <div className="d-flex justify-content-center rtt-1">
-              <img src={logonew} style={{ height: "auto", width: "175px" }} />
+              <img src={logonew} style={{ width: "150px" }} />
             </div>
           </div>
         </Col>
-        <Col lg="4" md="4" sm="6">
+        <Col lg="4" md="4" sm="6" className="ipad">
           <Form>
             <Label
               style={{
