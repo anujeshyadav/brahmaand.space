@@ -107,9 +107,11 @@ function ProductList(args) {
   const handlesearchbylanguage = () => {
     if (language !== "" && language !== undefined) {
       axios
-        .get(
-          `http://3.7.173.138:9000/user/filterbyLanguage/${Params.id}/${language}`
-        )
+        .post(
+          `http://3.7.173.138:9000/user/advancefilter?sub_category=${Params.id}&type=${type}&format=${format}&language=${language}&relYear=${contentyear}`
+        ) // .get(
+        //   `http://3.7.173.138:9000/user/filterbyLanguage/${Params.id}/${language}`
+        // )
         .then((res) => {
           setCategry(res.data.data);
         })
@@ -167,13 +169,17 @@ function ProductList(args) {
   const getolderyeardata = () => {
     // console.log(contentyear);
     if (contentyear !== "") {
+      console.log(contentyear);
       axios
-        .get(
-          `http://3.7.173.138:9000/user/filterbyyear/${Params.id}/${contentyear}`
+        .post(
+          `http://3.7.173.138:9000/user/advancefilter?sub_category=${Params.id}&type=${type}&format=${format}&language=${language}&relYear=${contentyear}`
         )
+        // .get(
+        //   `http://3.7.173.138:9000/user/filterbyyear/${Params.id}/${contentyear}`
+        // )
         .then((res) => {
           setCategry(res.data.data);
-          // console.log(res.data.data);
+          console.log(res.data.data);
           // setContentyear("");
         })
         .catch((err) => {
@@ -610,7 +616,11 @@ function ProductList(args) {
   const [typelength, setTypelength] = useState([]);
   const gettypefilter = () => {
     axios
-      .get(`http://3.7.173.138:9000/user/filter_type/${Params.id}/${type}`)
+      .post(
+        `http://3.7.173.138:9000/user/advancefilter?sub_category=${Params.id}&type=${type}&format=${format}&language=${language}&relYear=${contentyear}`
+      )
+      // .get(`http://3.7.173.138:9000/user/filter_type/${Params.id}/${type}`)
+
       .then((res) => {
         // console.log(res.data.data);
         setCategry(res.data.data);
@@ -624,7 +634,11 @@ function ProductList(args) {
   const [formatelength, setFormatelength] = useState([]);
   const getformatfilter = () => {
     axios
-      .get(`http://3.7.173.138:9000/user/filterbyFormat/${Params.id}/${format}`)
+      .post(
+        `http://3.7.173.138:9000/user/advancefilter?sub_category=${Params.id}&type=${type}&format=${format}&language=${language}&relYear=${contentyear}`
+      )
+
+      // .get(`http://3.7.173.138:9000/user/filterbyFormat/${Params.id}/${format}`)
       .then((res) => {
         // console.log(res.data.data);
         setCategry(res.data.data);
@@ -2286,7 +2300,7 @@ function ProductList(args) {
                                           {categry?.relYear[0] !== ""
                                             ? categry?.relYear?.map((data) => (
                                                 <Link to="#" className="tag">
-                                                  {data.yrName}
+                                                  {data?.yrName}
                                                 </Link>
                                               ))
                                             : null}
@@ -2952,9 +2966,18 @@ function ProductList(args) {
 
                               <ul class="rating mt-2">
                                 <li>
-                                  <Link to="#" className="tag">
+                                  {/* <Link to="#" className="tag">
                                     {categry?.relYear[0]?.yrName}
-                                  </Link>
+                                  </Link> */}
+                                  {categry?.relYear[0] !== "" ||
+                                  categry?.relYear[0] !== null
+                                    ? categry?.relYear?.map((data) => (
+                                        <Link to="#" className="tag">
+                                          {" "}
+                                          {data?.yrName}{" "}
+                                        </Link>
+                                      ))
+                                    : null}
                                 </li>
                               </ul>
                             </div>
