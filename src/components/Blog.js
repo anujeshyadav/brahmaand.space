@@ -2,11 +2,15 @@ import React from "react";
 import { useEffect, useState, useMemo } from "react";
 import Moment from "react-moment";
 import "moment-timezone";
+import ReactHtmlParser from "react-html-parser";
+
 import "../components/blog.css";
 import ReactPaginate from "react-paginate";
 import blog from "../images/2.png";
 import axios from "axios";
 import swal from "sweetalert";
+import { Navigation, Pagination, Scrollbar, A11y } from "swiper";
+
 import ShowMore from "react-show-more";
 import { Container, Row, Col } from "reactstrap";
 
@@ -21,6 +25,7 @@ import {
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import { Link, useParams } from "react-router-dom";
+import HtmlParser from "react-html-parser";
 
 function Blog() {
   const [recomblog, setRecomblog] = useState([]);
@@ -110,11 +115,12 @@ function Blog() {
 
         <Swiper
           spaceBetween={50}
+          className="sld-1"
+          modules={[Navigation, Pagination, Scrollbar]}
+          navigation
           slidesPerView={2}
           onSlideChange={() => console.log("slide change")}
-          onSwiper={(swiper) =>
-            console.log(swiper)
-          }
+          onSwiper={(swiper) => console.log(swiper)}
         >
           <Row>
             {recomblog?.map((value) => (
@@ -143,7 +149,7 @@ function Blog() {
                       <Col lg="6">
                         <Row className="mt-3">
                           <b>
-                            <h3>{value?.blog_title}</h3>
+                            <h4>{value?.blog_title.slice(0, 40)}</h4>
                           </b>
                         </Row>
 
@@ -157,7 +163,7 @@ function Blog() {
                           anchorClass=""
                           // style={{ height: "32vh" }}
                         >
-                          <h6>{value?.desc}</h6>
+                          <h6>{ReactHtmlParser(value?.desc.slice(0, 120))}</h6>
                         </ShowMore>
 
                         <h6>
@@ -185,7 +191,7 @@ function Blog() {
       <br></br>
       <Container className=" mt-4 ">
         <Row className="mb-4">
-          <h1 style={{ font: "GT Walsheim Pro" }}>Popular Blogs</h1>
+          <h1 style={{ font: "GT Walsheim Pro" }}>Blogs</h1>
         </Row>
         <Row>
           {currentItems?.map((value) => (
@@ -203,7 +209,9 @@ function Blog() {
                   </div>
                   <CardBody>
                     <CardTitle>
-                      <b style={{ color: "black" }}>{value?.blog_title}</b>
+                      <b style={{ color: "black" }}>
+                        {HtmlParser(value?.blog_title.slice(0, 40))}
+                      </b>
                     </CardTitle>
                     <CardSubtitle>
                       <b style={{ color: "#5F56C6" }}>
@@ -220,7 +228,7 @@ function Blog() {
                         less="Show less"
                         anchorClass=""
                       >
-                        {value.desc}
+                        {HtmlParser(value?.desc)}
                       </ShowMore>
                     </CardText>
                     <CardText style={{ color: "black" }}>

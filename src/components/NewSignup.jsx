@@ -100,7 +100,7 @@ function NewSignup() {
   const handleUserName = (e) => {
     setUsernameset(e.target.value);
 
-    var expression = /^[A-Za-z]\w{7,18}$/;
+    var expression = /^[A-Za-z0-9_]+$/;
 
     var regex = new RegExp(expression);
 

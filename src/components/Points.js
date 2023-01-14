@@ -7,10 +7,18 @@ function Points() {
   useEffect(() => {
     earnpoints();
   }, []);
-
+  const [Userdata, setUserdata] = useState({});
   const earnpoints = () => {
     const userId = localStorage.getItem("userId");
-
+    axios
+      .get(`http://3.7.173.138:9000/user/getoneUser/${userId}`)
+      .then((res) => {
+        setUserdata(res.data.data);
+        console.log(res.data.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
     axios
       .get(`http://3.7.173.138:9000/user/my_content_meteros/${userId}`)
       .then((res) => {
@@ -31,13 +39,16 @@ function Points() {
         </Col>
         <Col lg="4">
           <h5>{getyourpoint?.meteors} Points</h5>
+          {/* <h5>{getyourpoint?.creaditedAmt} Points</h5> */}
         </Col>
         <Col lg="6">
           <Row>
             <Col>
               <h5>Total dollar value</h5>
             </Col>
-            <Col className="d-flex justify-content-center">$10</Col>
+            <Col className="d-flex justify-content-center">
+              {Userdata?.creaditedAmt}$
+            </Col>
           </Row>
         </Col>
       </Row>

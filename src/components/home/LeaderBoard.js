@@ -587,7 +587,7 @@ function LeaderBoard() {
           </Container>
 
           <Row className="  d-flex justify-content-center winnerone" lg="3">
-            {alltime !== ""
+            {alltime !== "" && alltime !== null
               ? alltime?.map((value) => (
                   <Col className="maincol">
                     <Row>

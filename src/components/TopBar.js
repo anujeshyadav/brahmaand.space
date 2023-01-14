@@ -58,7 +58,7 @@ function TopBar() {
       .then((res) => {
         setUserdata(res.data.data);
         // setUsernamenew(res.data.data.username);
-        // console.log(res.data.data);
+        console.log(res.data.data);
         setDisplay_name(res.data.data.display_name);
         seAbt_us(res.data.data.abt_us);
       })
@@ -137,7 +137,12 @@ function TopBar() {
                           {`Username            :   ${userdata?.username}`}
                         </li>
                         <li style={{ color: "black" }}>
-                          {`Display name     :    ${userdata?.display_name}`}
+                          Display name&nbsp;&nbsp;&nbsp;&nbsp; : &nbsp;&nbsp;
+                          {userdata?.display_name === undefined ? (
+                            <></>
+                          ) : (
+                            <>{userdata?.display_name}</>
+                          )}
                         </li>
                         <li style={{ color: "black" }}>
                           {`User Since           :    `}
@@ -156,7 +161,15 @@ function TopBar() {
 
                 <Col lg="7">
                   <b>About Us:</b>
-                  <p>{userdata?.abt_us}</p>
+                  <p>
+                    {/* {userdata?.abt_us} */}
+                    &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
+                    {userdata?.abt_us == "undefined" ? (
+                      <></>
+                    ) : (
+                      <>{userdata?.abt_us}</>
+                    )}
+                  </p>
                 </Col>
               </Row>
             </div>

@@ -1,5 +1,5 @@
 import { Row, Col, Container } from "react-bootstrap";
-
+import logobottom from "../images/logobottom.png";
 import "../styles/Footer.css";
 import facebookIcon from "../assets/icons/facbook-icon.png";
 import instagramIcon from "../assets/icons/instagram-icon.png";
@@ -31,22 +31,22 @@ function Footer() {
           <Col lg="3" md="3" sm="6">
             <div className="foot-1">
               <Link to="/">
-                <img src={brahmaaandpremium} alt="" width="150px" />
+                <img src={logobottom} alt="" width="150px" />
               </Link>
               <ul>
-                <li>
+                {/* <li>
                   <Link to="#">
                     Phone: <span>55555565656565</span>
                   </Link>
-                </li>
+                </li> */}
                 <li>
                   <Link to="#">
-                    Email: <span>Info@gmail.com</span>
+                    Email: <span>contactus@brahmaand.space</span>
                   </Link>
                 </li>
                 <li>
                   <Link to="#">
-                    Address: <span>lorem ipsum 303</span>
+                    Address: <span>Bengaluru, India</span>
                   </Link>
                 </li>
               </ul>
@@ -116,7 +116,7 @@ function Footer() {
           <div className="footer-bootom">
             <Row>
               <Col md="6">
-                <p>© Brahmaand.space 2022. All rights reserved</p>
+                <p>© brahmaand.space 2022 -2023. All rights reserved</p>
               </Col>
               <Col md="6">
                 <div className="icon">

@@ -33,7 +33,7 @@ function UserPage({ direction, ...args }) {
     axios
       .get(`http://3.7.173.138:9000/user/getoneUser/${id}`)
       .then((response) => {
-        // console.log("getdata", response.data.data);
+        console.log("getdata", response.data.data);
         setUserData(response.data.data);
       })
       .catch((error) => {
@@ -51,7 +51,12 @@ function UserPage({ direction, ...args }) {
           style={{ width: "50px", height: "42px", borderRadius: "50%" }}
         />
         <span style={{ color: "white" }}>
-          Welcome, {userdata?.display_name}
+          Welcome,
+          {userdata.display_name === undefined ? (
+            <>{userdata?.username}</>
+          ) : (
+            <>{userdata?.display_name}</>
+          )}{" "}
         </span>
         <div className="dropdown-content">
           <Row>
