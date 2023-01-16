@@ -100,9 +100,9 @@ function NewSignup() {
   const handleUserName = (e) => {
     setUsernameset(e.target.value);
 
-    // var expression = /^[a-z0-9]+$/i*&^%1234567890;
-    // var expression = /r'[!@#<>?":_`~;[\]\\|=+)(*&^%\s-]/;
-    var expression = /^[A-Za-z0-9_]+$/;
+    var expression =
+      /^(?=.*?[A-Za-z][A-Za-z][A-Za-z])(?=.*?[0-9][0-9][0-9]).{6,}$/;
+    // var expression = /^[A-Za-z0-9_]+$/;
 
     var regex = new RegExp(expression);
 
