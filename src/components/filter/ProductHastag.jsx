@@ -131,6 +131,7 @@ function ProductHastag(args) {
           // console.log(res.data.data);
           if (res.data.data !== "" && res.data.data !== null) {
             setCategry(res.data.data);
+            console.log(res.data.data);
             // localStorage.removeItem("searchdata");
             // localStorage.setItem("hastag", "hastag");
           }
@@ -1403,15 +1404,13 @@ function ProductHastag(args) {
                                                   <p>Ratings:</p>
                                                   <Link to="#">
                                                     [
-                                                    {promotiondata?.ava_rating !==
-                                                    "NaN" ? (
+                                                    {promotiondata?.ava_rating ==
+                                                    0 ? null : (
                                                       <span>
                                                         {
                                                           promotiondata?.ava_rating
                                                         }
                                                       </span>
-                                                    ) : (
-                                                      <span>0</span>
                                                     )}
                                                     ]
                                                   </Link>
@@ -1617,7 +1616,9 @@ function ProductHastag(args) {
                                       className="justify-content-left"
                                       lg="6"
                                     >
-                                      {promotion?.ava_rating}- Rating
+                                      {promotion?.ava_rating == 0 ? null : (
+                                        <> {promotion?.ava_rating}- Rating</>
+                                      )}
                                     </Col>
                                   </Row>
 
@@ -2281,7 +2282,9 @@ function ProductHastag(args) {
                                           className="justify-content-left"
                                           lg="5"
                                         >
-                                          {categry?.ava_rating}- Rating
+                                          {categry?.ava_rating == 0 ? null : (
+                                            <>{categry?.ava_rating}- Rating</>
+                                          )}
                                         </Col>
                                       </Row>
 
@@ -2950,7 +2953,9 @@ function ProductHastag(args) {
                                   />
                                 </Col>
                                 <Col className="justify-content-left" lg="5">
-                                  {categry?.ava_rating}- Rating
+                                  {categry?.ava_rating == 0 ? null : (
+                                    <> {categry?.ava_rating}- Rating</>
+                                  )}
                                 </Col>
                               </Row>
 

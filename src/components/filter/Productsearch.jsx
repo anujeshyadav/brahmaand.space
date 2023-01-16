@@ -1409,18 +1409,16 @@ function Productsearch(args) {
                                                 <div className="mid-1-b tt-1">
                                                   <p>Ratings:</p>
                                                   <Link to="#">
-                                                    [
-                                                    {promotiondata?.ava_rating !==
-                                                    "NaN" ? (
-                                                      <span>
+                                                    {promotiondata?.ava_rating ==
+                                                    0 ? null : (
+                                                      <>
+                                                        [
                                                         {
                                                           promotiondata?.ava_rating
                                                         }
-                                                      </span>
-                                                    ) : (
-                                                      <span>0</span>
+                                                        ]
+                                                      </>
                                                     )}
-                                                    ]
                                                   </Link>
                                                 </div>
                                               </div>
@@ -1624,7 +1622,9 @@ function Productsearch(args) {
                                       className="justify-content-left"
                                       lg="6"
                                     >
-                                      {promotion?.ava_rating}- Rating
+                                      {promotion?.ava_rating == 0 ? null : (
+                                        <> {promotion?.ava_rating}- Rating</>
+                                      )}
                                     </Col>
                                   </Row>
 
@@ -2288,7 +2288,9 @@ function Productsearch(args) {
                                           className="justify-content-left"
                                           lg="5"
                                         >
-                                          {categry?.ava_rating}- Rating
+                                          {categry?.ava_rating == 0 ? null : (
+                                            <> {categry?.ava_rating}- Rating</>
+                                          )}
                                         </Col>
                                       </Row>
 
@@ -2957,7 +2959,9 @@ function Productsearch(args) {
                                   />
                                 </Col>
                                 <Col className="justify-content-left" lg="5">
-                                  {categry?.ava_rating}- Rating
+                                  {categry?.ava_rating == 0 ? null : (
+                                    <>{categry?.ava_rating}- Rating</>
+                                  )}
                                 </Col>
                               </Row>
 
