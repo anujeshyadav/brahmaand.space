@@ -43,6 +43,13 @@ function Allcategory() {
                         src={value?.cat_img}
                         alt="img"
                       />
+                      <div className=" d-flex content-bt newcontent">
+                        <Row className="  mt-2">
+                          <Button className="btlisting">
+                            {value?.subCount} - Listing
+                          </Button>
+                        </Row>
+                      </div>
                     </div>
 
                     <div className=" d-flex content-bt">
@@ -53,13 +60,13 @@ function Allcategory() {
                         {value?.title}
                       </p>
                     </div>
-                    <div className=" d-flex content-bt">
+                    {/* <div className=" d-flex content-bt">
                       <Row className=" allcategorymarginbutton mt-2">
                         <Button className="btlisting">
                           {value?.subCount} - Listing
                         </Button>
                       </Row>
-                    </div>
+                    </div> */}
                   </div>
                 </Link>
               </Col>

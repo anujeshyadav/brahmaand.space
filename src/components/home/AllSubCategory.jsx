@@ -65,19 +65,26 @@ function AllSubCategory() {
                         src={value?.Subcat_img}
                         alt="img"
                       />
+                      <div className=" d-flex content-bt newcontent">
+                        <Row className="  mt-2">
+                          <Button className="btlisting">
+                            {value?.conent_count} - Listing
+                          </Button>
+                        </Row>
+                      </div>
                     </div>
                     <div className="d-flex content-bt">
                       <p className="d-flex" style={{ color: "white" }}>
                         {value?.title}
                       </p>
                     </div>
-                    <div className=" d-flex content-bt">
+                    {/* <div className=" d-flex content-bt">
                       <Row className="  mt-2">
                         <Button className="btlisting">
                           {value?.conent_count} - Listing
                         </Button>
                       </Row>
-                    </div>
+                    </div> */}
                   </div>
                 </Link>
               </Col>

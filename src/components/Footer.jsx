@@ -39,15 +39,11 @@ function Footer() {
                     Phone: <span>55555565656565</span>
                   </Link>
                 </li> */}
-                <li>
-                  <Link to="#">
-                    Email: <span>contactus@brahmaand.space</span>
-                  </Link>
+                <li className="justify-content-left">
+                  <Link to="#">Email : contactus@brahmaand.space</Link>
                 </li>
-                <li>
-                  <Link to="#">
-                    Address: <span>Bengaluru, India</span>
-                  </Link>
+                <li className="justify-content-left">
+                  <Link to="#">Address : Bengaluru, India</Link>
                 </li>
               </ul>
             </div>

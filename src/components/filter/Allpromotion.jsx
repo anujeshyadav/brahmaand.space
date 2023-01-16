@@ -259,6 +259,7 @@ function Allpromotion(args) {
       .get(`http://3.7.173.138:9000/user/Promotions`)
       .then((res) => {
         setPromotion(res.data.data);
+        console.log(res.data.data);
       })
       .catch((err) => {
         // console.log(err);
@@ -344,7 +345,11 @@ function Allpromotion(args) {
                             </Col>
                           </Row>
                           <div className="main-content">
-                            <h2>{ReactHtmlParser(promotiondata?.desc)}</h2>
+                            <h2>
+                              {ReactHtmlParser(
+                                promotiondata?.resTitle?.slice(0, 80)
+                              )}
+                            </h2>
                             <div className="top-icon">
                               <Link to="#">
                                 <img src={mdicon1} alt="" />
@@ -768,7 +773,10 @@ function Allpromotion(args) {
                     </Link>
                   </div>
 
-                  <div class="product-content">
+                  <div
+                    onClick={() => handlepromotion(promotion?._id)}
+                    class="product-content"
+                  >
                     <ul class="rating">
                       <li>
                         {promotion?.topics?.map((topic) => (
@@ -792,7 +800,9 @@ function Allpromotion(args) {
                           />
                         </Col>
                         <Col className="justify-content-left" lg="6">
-                          {promotion?.ava_rating}- Rating
+                          {promotion?.ava_rating == 0 ? null : (
+                            <>{promotion?.ava_rating}- Rating</>
+                          )}
                         </Col>
                       </Row>
 

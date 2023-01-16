@@ -23,6 +23,7 @@ function Points() {
       .get(`http://3.7.173.138:9000/user/my_content_meteros/${userId}`)
       .then((res) => {
         setGetyourpoint(res.data);
+        console.log(res.data);
       })
       .catch((err) => {
         console.log(err.data);

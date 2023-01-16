@@ -114,11 +114,44 @@ function Blog() {
         {/* api down here */}
 
         <Swiper
+          breakpoints={{
+            980: {
+              slidesPerView: 2,
+              direction: "horizontal",
+              spaceBetween: 20,
+            },
+            820: {
+              slidesPerView: 2,
+              direction: "horizontal",
+              spaceBetween: 20,
+            },
+            780: {
+              slidesPerView: 2,
+              direction: "horizontal",
+              spaceBetween: 20,
+            },
+
+            768: {
+              slidesPerView: 1,
+              direction: "horizontal",
+              spaceBetween: 20,
+            },
+            640: {
+              slidesPerView: 1,
+              direction: "horizontal",
+              spaceBetween: 25,
+            },
+            320: {
+              slidesPerView: 1,
+              direction: "horizontal",
+              spaceBetween: 25,
+            },
+          }}
           spaceBetween={50}
-          className="sld-1"
+          className="sld-1 justify-content-center"
           modules={[Navigation, Pagination, Scrollbar]}
           navigation
-          slidesPerView={2}
+          // slidesPerView={2}
           onSlideChange={() => console.log("slide change")}
           onSwiper={(swiper) => console.log(swiper)}
         >

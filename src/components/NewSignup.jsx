@@ -30,8 +30,8 @@ function NewSignup() {
 
     const form = event.currentTarget;
     if (
-      username.length > 4 &&
-      password.length > 4 &&
+      username.length > 6 &&
+      password.length > 6 &&
       email !== "" &&
       password !== "" &&
       password !== null &&
@@ -100,12 +100,14 @@ function NewSignup() {
   const handleUserName = (e) => {
     setUsernameset(e.target.value);
 
+    // var expression = /^[a-z0-9]+$/i*&^%1234567890;
+    // var expression = /r'[!@#<>?":_`~;[\]\\|=+)(*&^%\s-]/;
     var expression = /^[A-Za-z0-9_]+$/;
 
     var regex = new RegExp(expression);
 
     var res = "";
-    if (e.target.value.match(regex) && usernameset.length >= 6) {
+    if (e.target.value.match(regex) && e.target.value.length >= 6) {
       setErrone("This looks like Valid Username");
       setUsername(e.target.value);
     } else {

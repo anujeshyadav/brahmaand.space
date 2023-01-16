@@ -12,6 +12,19 @@ function ResetPassword() {
 
   useEffect(() => {}, [newpass, confirmpass, oldpass]);
 
+  const [passwordset, setPasswordset] = useState("");
+  const handlepassword = (e) => {
+    setPasswordset(e.target.value);
+    var expression =
+      /^(?=.*([A-Z]){1,})(?=.*[!@#$&*]{1,})(?=.*[0-9]{1,})(?=.*[a-z]{1,}).{8,100}$/;
+
+    var regex = new RegExp(expression);
+    var res = "";
+    if (e.target.value.match(regex) && passwordset.length >= 8) {
+      console.log("object");
+    }
+  };
+
   const handleLoginSubmit = () => {
     const pw = document.getElementById("password").value;
     var pwold = document.getElementById("setpass").value;
@@ -32,6 +45,10 @@ function ResetPassword() {
     if (oldpass !== "") {
       document.getElementById("passdata").innerHTML = " ";
     }
+    if (oldpass == "") {
+      document.getElementById("passdata").innerHTML =
+        "**Fill the password please!";
+    }
 
     //minimum password length validation
     if (newpass.length < 8 && confirmpass.length < 8) {
@@ -43,11 +60,13 @@ function ResetPassword() {
     }
 
     //maximum length of password validation
-    if (newpass.length > 15 && confirmpass.length > 15) {
+    if (newpass.length >= 15 && confirmpass.length >= 15) {
       document.getElementById("message").innerHTML =
         "**Password length must not exceed 15 characters";
       document.getElementById("messages").innerHTML =
         "**Password length must not exceed 15 characters";
+      document.getElementById("messagea").innerHTML = " ";
+      document.getElementById("messagesa").innerHTML = " ";
       return false;
     } else if (newpass !== confirmpass) {
       document.getElementById("message").innerHTML =
@@ -55,31 +74,85 @@ function ResetPassword() {
       document.getElementById("messages").innerHTML =
         "**Password Does not Match";
     } else if (newpass == confirmpass) {
-      const userId = localStorage.getItem("userId");
-      if (oldpass !== "" && newpass == confirmpass && newpass !== oldpass) {
-        // console.log("password matched  so api is goint to hit");
-        axios
-          .post(`http://3.7.173.138:9000/user/resetPassword/${userId}`, {
-            oldpassword: oldpass,
-            password: newpass,
-            cnfrmPassword: confirmpass,
-          })
-          .then((res) => {
-            // console.log(res.data);
-            debugger;
-            if (res.data.msg == "success") {
-              swal("Password Changed Successfully");
-              setOldpass("");
-              setNewpass("");
-              setconfirmpass("");
-            }
-          })
-          .catch((err) => {
-            // console.log(err.response.data);
-            if (err.response.data.msg == "Old Password not matched") {
-              swal("Enter Existing Password Correctly");
-            }
-          });
+      document.getElementById("message").innerHTML = "";
+      document.getElementById("messages").innerHTML = "";
+      document.getElementById("messagea").innerHTML = "**Strong Password** ";
+      document.getElementById("messagesa").innerHTML = "**Strong Password** ";
+      if (oldpass == "") {
+        document.getElementById("passdata").innerHTML =
+          "**Fill the password please!";
+      } else if (
+        oldpass !== "" &&
+        newpass == confirmpass &&
+        newpass !== oldpass
+      ) {
+        const userId = localStorage.getItem("userId");
+
+        var expression =
+          /^(?=.*([A-Z]){1,})(?=.*[!@#$&*]{1,})(?=.*[0-9]{1,})(?=.*[a-z]{1,}).{8,100}$/;
+
+        var regex = new RegExp(expression);
+
+        var res = "";
+        if (
+          newpass.match(regex) &&
+          newpass.length >= 8 &&
+          newpass.length < 15 &&
+          confirmpass.length < 15
+        ) {
+          document.getElementById("message").innerHTML = " ";
+          document.getElementById("messages").innerHTML = " ";
+          document.getElementById("messagea").innerHTML =
+            "**Strong Password** ";
+          document.getElementById("messagesa").innerHTML =
+            "**Strong Password** ";
+
+          axios
+            .post(`http://3.7.173.138:9000/user/resetPassword/${userId}`, {
+              oldpassword: oldpass,
+              password: newpass,
+              cnfrmPassword: confirmpass,
+            })
+            .then((res) => {
+              // console.log(res.data);
+              debugger;
+              if (res.data.msg == "success") {
+                swal("Password Changed Successfully");
+                setOldpass("");
+                setNewpass("");
+                setconfirmpass("");
+              }
+            })
+            .catch((err) => {
+              // console.log(err.response.data);
+              if (err.response.data.msg == "Old Password not matched") {
+                swal("Enter Existing Password Correctly");
+              }
+            });
+        }
+
+        // axios
+        //   .post(`http://3.7.173.138:9000/user/resetPassword/${userId}`, {
+        //     oldpassword: oldpass,
+        //     password: newpass,
+        //     cnfrmPassword: confirmpass,
+        //   })
+        //   .then((res) => {
+        //     // console.log(res.data);
+        //     debugger;
+        //     if (res.data.msg == "success") {
+        //       swal("Password Changed Successfully");
+        //       setOldpass("");
+        //       setNewpass("");
+        //       setconfirmpass("");
+        //     }
+        //   })
+        //   .catch((err) => {
+        //     // console.log(err.response.data);
+        //     if (err.response.data.msg == "Old Password not matched") {
+        //       swal("Enter Existing Password Correctly");
+        //     }
+        //   });
       }
     } else {
       document.getElementById("messagea").innerHTML = "**Password Matched";
@@ -139,7 +212,9 @@ function ResetPassword() {
                       className="form-control"
                       placeholder="Enter Your Display Name "
                       value={newpass}
+                      // value={passwordset}
                       onChange={(e) => setNewpass(e.target.value)}
+                      // onChange={handlepassword}
                     />
                     <span
                       id="message"

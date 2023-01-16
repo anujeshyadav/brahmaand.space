@@ -2,6 +2,15 @@ import React, { useState, useEffect } from "react";
 import { Navbar, Nav, Container, Col, Row } from "react-bootstrap";
 import axios from "axios";
 import swal from "sweetalert";
+import HtmlParser from "react-html-parser";
+import {
+  Card,
+  CardText,
+  CardTitle,
+  CardSubtitle,
+  CardBody,
+  CardImg,
+} from "reactstrap";
 import { Link, NavLink } from "react-router-dom";
 import { BsPlay } from "react-icons/bs";
 import has1 from "../../images/has1.png";
@@ -20,11 +29,12 @@ import socialnetwork from "../../images/socialnetwork.jpg";
 import { Navigation, Pagination, Scrollbar, A11y } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import ModalVideo from "react-modal-video";
+import Moment from "react-moment";
 import "swiper/css";
 import "../../styles/ModulePage.css";
 import "../../styles/Hastag.scss";
 
-import { Card, Input, Button, CardMedia } from "reactstrap";
+import { Input, Button, CardMedia } from "reactstrap";
 import { InputGroup } from "react-bootstrap";
 
 function Hastag() {
@@ -42,8 +52,21 @@ function Hastag() {
       })
       .catch((err) => {});
   };
+  const [popblog, setPop] = useState([]);
+  const popularblog = () => {
+    axios
+      .get(`http://3.7.173.138:9000/user/popularBlog`)
+
+      .then((response) => {
+        setPop(response.data.data.slice(0, 3));
+      })
+      .catch((error) => {
+        // console.log(error.response.data.data);
+      });
+  };
 
   useEffect(() => {
+    popularblog();
     gettrendingdata();
     allcategory();
     monthlynewslettervid();
@@ -221,7 +244,15 @@ function Hastag() {
                   <div className="bg-1">
                     <div className="blackimage">
                       <img className="imgCol" src={value?.cat_img} alt="img" />
+                      <div className=" d-flex content-bt newcontent">
+                        <Row className="  mt-2">
+                          <Button className="btlisting">
+                            {value?.subCount} - Listing
+                          </Button>
+                        </Row>
+                      </div>
                     </div>
+
                     <div className=" d-flex content-bt">
                       <p
                         className="d-flex contenttextcategory"
@@ -230,13 +261,13 @@ function Hastag() {
                         {value?.title}
                       </p>
                     </div>
-                    <div className=" d-flex content-bt">
+                    {/* <div className=" d-flex content-bt newcontent">
                       <Row className="  mt-2">
                         <Button className="btlisting">
                           {value?.subCount} - Listing
                         </Button>
                       </Row>
-                    </div>
+                    </div> */}
                   </div>
                 </Link>
               </Col>
@@ -613,7 +644,62 @@ function Hastag() {
       <div className="container">
         <p className="category3">Latest Blogs</p>
         <Row>
-          <Col lg="4" md="6" sm="12" className="Card-Blog">
+          {popblog?.map((value) => (
+            <Col lg="4" sm="6" xs="12">
+              <Card key={value?._id}>
+                <Link key={value?._id} to={`/blogdescription/${value?._id}`}>
+                  <div className="popularimg">
+                    <CardImg
+                      style={{
+                        height: "250px",
+                      }}
+                      src={value?.blogImg}
+                      className="photo"
+                    />
+                  </div>
+                  <CardBody>
+                    <CardTitle>
+                      <b style={{ color: "black" }}>
+                        {HtmlParser(value?.blog_title.slice(0, 40))}
+                      </b>
+                    </CardTitle>
+                    <CardSubtitle>
+                      <b style={{ color: "#5F56C6" }}>
+                        <Moment format="lll">{value?.createdAt}</Moment>
+                      </b>
+                    </CardSubtitle>
+                    <br></br>
+                    <CardText style={{ color: "black" }}>
+                      <ShowMore
+                        className="showmore"
+                        style={{ color: "black" }}
+                        lines={3}
+                        more="Show more"
+                        less="Show less"
+                        anchorClass=""
+                      >
+                        {HtmlParser(value?.desc)}
+                      </ShowMore>
+                    </CardText>
+                    <CardText style={{ color: "black" }}>
+                      posted by
+                      <img
+                        className="mx-3"
+                        src={value?.posted_by_img}
+                        style={{
+                          width: "70px",
+                          height: "65px",
+                          borderRadius: "50%",
+                        }}
+                      />
+                      <b>{value?.posted_by}</b>
+                    </CardText>
+                  </CardBody>
+                </Link>
+              </Card>
+            </Col>
+          ))}
+          {/* <Col lg="4" md="6" sm="12" className="Card-Blog">
             <Card>
               <Container className="imageslastblog ">
                 <Link to={`/blog`}>
@@ -693,7 +779,7 @@ function Hastag() {
                 </p>
               </Container>
             </Card>
-          </Col>
+          </Col> */}
         </Row>
       </div>
     </>

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+// import { Navigation, Paginations, Scrollbar, A11y } from "swiper";
 import ReactHtmlParser from "react-html-parser";
 import ReactPaginate from "react-paginate";
 import ReactStars from "react-rating-stars-component";
@@ -40,7 +41,15 @@ import { Link, useParams } from "react-router-dom";
 import "../../styles/Filter.css";
 import AutoSearch from "./AutoSearch";
 
-import { FaHeart, FaStar, FaRegHeart, FaSearch } from "react-icons/fa";
+import {
+  FaHeart,
+  FaStar,
+  FaRegHeart,
+  FaSearch,
+  BsFillBookmarkHeartFill,
+  BsBookmarkPlus,
+  BsBookmarkCheck,
+} from "react-icons/fa";
 import { MdCancelPresentation } from "react-icons/md";
 import FilterList from "./FilterList";
 import RecentProductList from "./RecentProductList";
@@ -338,7 +347,7 @@ function ProductList(args) {
             res.data.data._id !== undefined
           ) {
             setPromotiondata(res.data.data);
-            // console.log(res.data.data);
+            console.log(res.data.data);
             toggleone();
           }
         })
@@ -469,6 +478,7 @@ function ProductList(args) {
             res.data.data._id !== undefined
           ) {
             setProductdetail(res.data.data);
+            console.log(res.data.data);
             toggle();
           }
         })
@@ -519,6 +529,7 @@ function ProductList(args) {
             togglesuggestion();
 
             setProductdetail(res.data.data);
+            console.log(res.data.data);
           }
         })
         .catch((err) => {
@@ -666,7 +677,7 @@ function ProductList(args) {
       .get(`http://3.7.173.138:9000/admin/listbysubcategory/${Params.id}`)
       .then((response) => {
         setCategry(response.data.data);
-        // console.log(response.data.data);
+        console.log(response.data.data);
         // const data = response.data.data;
         // const datanew = data.filter((data) => {
         //   return data.format == "Text" && data.type == "Paid";
@@ -1226,7 +1237,12 @@ function ProductList(args) {
                                       </Row>
                                       <div className="main-content">
                                         <h2>
-                                          {ReactHtmlParser(promotiondata?.desc)}
+                                          {ReactHtmlParser(
+                                            promotiondata?.resTitle?.slice(
+                                              0,
+                                              80
+                                            )
+                                          )}
                                         </h2>
                                         <div className="top-icon">
                                           <Link to="#">
@@ -1454,7 +1470,9 @@ function ProductList(args) {
                                       <div className="description mt-3">
                                         <h4>Description:</h4>
                                         <h2>
-                                          {ReactHtmlParser(promotiondata?.desc)}
+                                          {ReactHtmlParser(
+                                            promotiondata?.desc?.slice(0, 80)
+                                          )}
                                         </h2>
                                       </div>
 
@@ -1627,7 +1645,9 @@ function ProductList(args) {
                                       className="justify-content-left"
                                       lg="6"
                                     >
-                                      {promotion?.ava_rating}- Rating
+                                      {promotion?.ava_rating == 0 ? null : (
+                                        <> {promotion?.ava_rating}- Rating</>
+                                      )}
                                     </Col>
                                   </Row>
 
@@ -1731,7 +1751,13 @@ function ProductList(args) {
                                             </Col>
                                           </Row>
                                           <div className="main-content">
-                                            <h2>{Producdetail?.desc}</h2>
+                                            <h2>
+                                              {Producdetail?.resTitle?.slice(
+                                                0,
+                                                80
+                                              )}
+                                              {/* {Producdetail?.desc?.slice(0, 80)} */}
+                                            </h2>
                                             <div className="top-icon">
                                               <Link to="#">
                                                 <img src={mdicon1} alt="" />
@@ -1813,7 +1839,8 @@ function ProductList(args) {
                                                       <p>Submitted by:</p>
                                                       <h4>
                                                         {
-                                                          Producdetail?.creatorName
+                                                          Producdetail?.userid
+                                                            ?.display_name
                                                         }
                                                       </h4>
                                                     </div>
@@ -1963,7 +1990,9 @@ function ProductList(args) {
 
                                           <div className="description mt-3 mb-3">
                                             <h4>Description:</h4>
-                                            <p>{Producdetail?.desc}</p>
+                                            <p>
+                                              {Producdetail?.desc?.slice(0, 80)}
+                                            </p>
                                           </div>
 
                                           <hr></hr>
@@ -2291,7 +2320,9 @@ function ProductList(args) {
                                           className="justify-content-left"
                                           lg="5"
                                         >
-                                          {categry?.ava_rating}- Rating
+                                          {categry?.ava_rating == 0 ? null : (
+                                            <>{categry?.ava_rating}- Rating</>
+                                          )}
                                         </Col>
                                       </Row>
 
@@ -2382,6 +2413,8 @@ function ProductList(args) {
                 // slidesPerView={3}
                 centeredSlides={true}
                 loop={true}
+                // modules={[Navigation, Scrollbar]}
+                // navigation
                 onSlideChange={() => console.log("slide change")}
                 onSwiper={(swiper) => console.log(swiper)}
                 scrollbar={{ draggable: true }}
@@ -2420,7 +2453,9 @@ function ProductList(args) {
                                   </Row>
                                   <div className="main-content">
                                     <h2>
-                                      {ReactHtmlParser(Producdetail?.desc)}
+                                      {ReactHtmlParser(
+                                        Producdetail?.desc?.slice(0, 80)
+                                      )}
                                     </h2>
                                     <div className="top-icon">
                                       <Link to="#">
@@ -2487,7 +2522,10 @@ function ProductList(args) {
                                             <div className="mid-1-b">
                                               <p>Submitted by:</p>
                                               <h4>
-                                                {Producdetail?.creatorName}
+                                                {
+                                                  Producdetail?.userid
+                                                    ?.display_name
+                                                }
                                               </h4>
                                             </div>
                                           </div>
@@ -2945,11 +2983,11 @@ function ProductList(args) {
                               ))}
                             </div>
 
-                            <h3>{categry?.resTitle}</h3>
+                            <h3>{categry?.resTitle.slice(0, 80)}</h3>
                             <h5>
                               <span>By</span> {categry?.creatorName}
                             </h5>
-                            <p>{categry?.desc?.slice(0, 40)}</p>
+                            <p>{categry?.desc?.slice(0, 45)}</p>
                             <div className="">
                               <Row>
                                 <Col lg="7">
@@ -2960,7 +2998,9 @@ function ProductList(args) {
                                   />
                                 </Col>
                                 <Col className="justify-content-left" lg="5">
-                                  {categry?.ava_rating}- Rating
+                                  {categry?.ava_rating == 0 ? null : (
+                                    <>{categry?.ava_rating}- Rating</>
+                                  )}
                                 </Col>
                               </Row>
 
