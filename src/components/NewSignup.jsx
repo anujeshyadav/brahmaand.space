@@ -132,7 +132,7 @@ function NewSignup() {
     } else {
       // res = "Please Enter correct Email ";
       setErrtwo(
-        "Password must contain alphanumeric/Upper case letter & special Charactor"
+        "Password must contain alphanumeric/Upper case letter & special Character"
       );
     }
   };
