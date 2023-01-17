@@ -214,7 +214,7 @@ function Hastag() {
             <div className=" row mt-3">
               <div className="col col-lg-12 col-md-12 col-sm-12 col-xs-3">
                 {trendingsearch !== ""
-                  ? trendingsearch?.slice(0, 18).map((trendingtopics) => (
+                  ? trendingsearch?.slice(0, 30).map((trendingtopics) => (
                       <button
                         key={trendingtopics._id}
                         onClick={() =>
