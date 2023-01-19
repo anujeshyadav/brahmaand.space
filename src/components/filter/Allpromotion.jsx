@@ -2,6 +2,7 @@ import { Row, Col, Form, Button, Container } from "react-bootstrap";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import ReactStars from "react-rating-stars-component";
+import { BsFillBookmarkCheckFill, BsBookmark } from "react-icons/bs";
 import { Link, useParams } from "react-router-dom";
 import { Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 import mdicon1 from "../../assets/icons/mdicon-1.png";
@@ -350,14 +351,44 @@ function Allpromotion(args) {
                                 promotiondata?.resTitle?.slice(0, 80)
                               )}
                             </h2>
-                            <div className="top-icon">
-                              <Link to="#">
-                                <img src={mdicon1} alt="" />
-                              </Link>
-                              <Link to="#">
-                                <img src={mdicon2} alt="" />
-                              </Link>
-                            </div>
+                            <Row className="top-icon">
+                              <Col lg="10">
+                                {" "}
+                                <Link to="#">
+                                  <img src={mdicon1} alt="" />
+                                </Link>
+                                <Link to="#">
+                                  <img src={mdicon2} alt="" />
+                                </Link>
+                              </Col>
+                              <Col
+                                style={{ textAlign: "right" }}
+                                lg="2"
+                                key={promotiondata?._id}
+                              >
+                                {handlebookmark === "true" ? (
+                                  <BsFillBookmarkCheckFill
+                                    size={35}
+                                    key={promotiondata?._id}
+                                    className="addbookmark  "
+                                    color="#5f56c6"
+                                    onClick={() =>
+                                      removebookmark(promotiondata?._id)
+                                    }
+                                  />
+                                ) : (
+                                  <BsBookmark
+                                    size={35}
+                                    key={promotiondata?._id}
+                                    onClick={() =>
+                                      addbookmark(promotiondata?._id)
+                                    }
+                                    className="addbookmark "
+                                    color="warning "
+                                  />
+                                )}
+                              </Col>
+                            </Row>
                             <div className="tag-list">
                               <div className="tag-1">
                                 <h5>
@@ -707,7 +738,7 @@ function Allpromotion(args) {
                           </div>
                           <Row key={promotiondata?._id}>
                             <Col lg="4"></Col>
-                            <Col lg="8" key={promotiondata?._id}>
+                            {/* <Col lg="8" key={promotiondata?._id}>
                               {handlebookmark === "true" ? (
                                 <button
                                   key={promotiondata?._id}
@@ -731,7 +762,7 @@ function Allpromotion(args) {
                                   Add Bookmark
                                 </button>
                               )}
-                            </Col>
+                            </Col> */}
                           </Row>
                           <hr></hr>
                           <div className="review-list">

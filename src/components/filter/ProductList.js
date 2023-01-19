@@ -13,6 +13,8 @@ import swal from "sweetalert";
 
 import "../../components/pagination.css";
 import { FiFilter } from "react-icons/fi";
+import { AiFillEdit } from "react-icons/ai";
+import { BsFillBookmarkCheckFill, BsBookmark } from "react-icons/bs";
 import Slider from "./Slider";
 import Pagination from "react-bootstrap/Pagination";
 import { Modal, ModalHeader, ModalBody, ModalFooter, Label } from "reactstrap";
@@ -41,15 +43,7 @@ import { Link, useParams } from "react-router-dom";
 import "../../styles/Filter.css";
 import AutoSearch from "./AutoSearch";
 
-import {
-  FaHeart,
-  FaStar,
-  FaRegHeart,
-  FaSearch,
-  BsFillBookmarkHeartFill,
-  BsBookmarkPlus,
-  BsBookmarkCheck,
-} from "react-icons/fa";
+import { FaHeart, FaStar, FaRegHeart, FaSearch } from "react-icons/fa";
 import { MdCancelPresentation } from "react-icons/md";
 import FilterList from "./FilterList";
 import RecentProductList from "./RecentProductList";
@@ -65,6 +59,7 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "../../styles/Filter.css";
 import { number } from "prop-types";
+import HtmlParser from "react-html-parser";
 
 function ProductList(args) {
   const [modalsuggestion, setModalsuggestion] = useState(false);
@@ -94,6 +89,11 @@ function ProductList(args) {
   const [relyear, setRelyear] = useState([]);
   const [contentyear, setContentyear] = useState("");
   const [language, setLanguage] = useState("");
+  const [editmodal, setEditmodal] = useState(false);
+  const toggleedit = () => {
+    setEditmodal(!editmodal);
+  };
+
   const secondExample = {
     size: 50,
     count: 5,
@@ -112,7 +112,45 @@ function ProductList(args) {
   };
 
   const navigate = useNavigate();
+  const [upcom, setUpcom] = useState("");
+  const editcomment = (id) => {
+    console.log(id);
 
+    const user = localStorage.getItem("userId");
+
+    axios
+      .post(`http://3.7.173.138:9000/user/editCommentbyUser/${id}`, {
+        submitresrcId: id,
+        userid: user,
+        comment: upcom,
+        rating: rating,
+      })
+      .then((res) => {
+        console.log(res.data.data);
+        swal("Submitted Successfully");
+        toggleedit();
+        // setEditpost(false);
+      })
+      .catch((err) => {
+        console.log(err.response.data);
+      });
+  };
+
+  const [editnew, seteditnew] = useState({});
+
+  const handleeditcomment = (id) => {
+    axios
+      .get(`http://3.7.173.138:9000/admin/getone_coment_list/${id}`)
+      .then((res) => {
+        console.log(res.data.data);
+        setUpcom(res.data.data?.comment);
+        toggleedit();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    const user = localStorage.getItem("userId");
+  };
   const handlesearchbylanguage = () => {
     if (language !== "" && language !== undefined) {
       axios
@@ -252,6 +290,7 @@ function ProductList(args) {
   };
   const getUser = () => {
     const user = localStorage.getItem("userId");
+    // console.log(user);
     if (user !== null && user !== "") {
       setmyId(user);
     } else {
@@ -331,6 +370,7 @@ function ProductList(args) {
     // }
   };
   const handlepromotion = (_id) => {
+    // console.log(_id);
     setPromotiondata("");
     setliked(_id);
     hadlestatusbookmark();
@@ -340,7 +380,7 @@ function ProductList(args) {
       axios
         .get(`http://3.7.173.138:9000/admin/getone_reslist/${promotionId}`)
         .then((res) => {
-          // console.log(res.data.data._id);
+          console.log(res.data.data);
           if (
             res.data.data._id !== "" ||
             res.data.data._id !== null ||
@@ -357,11 +397,11 @@ function ProductList(args) {
       axios
         .get(`http://3.7.173.138:9000/user/average_rating/${promotionId}`)
         .then((res) => {
-          // console.log(res.data);
+          console.log(res.data);
           setAverageRating(res.data);
         })
         .catch((err) => {
-          // console.log(err);
+          console.log(err);
         });
     }
   };
@@ -434,11 +474,15 @@ function ProductList(args) {
           rating: rating,
         })
         .then((res) => {
-          // console.log(res.data);
+          console.log(res.data);
           if (res.data.message == "success") {
             swal("Your Review Submitted Successfully!");
           } else if (res.data.msg == "not able to comment") {
             swal("User can't Review own Resource");
+          }
+
+          if (res.data.msg == "waiting for admin approvel") {
+            swal("Already commented On it wait for aprroval");
           }
         })
         .catch((err) => {
@@ -461,6 +505,7 @@ function ProductList(args) {
 
   const handleSelection = (_id) => {
     setliked(_id);
+    console.log(_id);
     hadlestatusbookmark();
     var selectedId = _id;
 
@@ -471,7 +516,7 @@ function ProductList(args) {
         .get(`http://3.7.173.138:9000/admin/getone_reslist/${selectedId}`)
         .then((res) => {
           // console.log(res.data.data._id);
-          // console.log(res);
+          console.log(res);
           if (
             res.data.data._id !== "" ||
             res.data.data._id !== null ||
@@ -487,9 +532,9 @@ function ProductList(args) {
         });
 
       axios
-        .get(`http://3.7.173.138:9000/user/average_rating/${productdes}`)
+        .get(`http://3.7.173.138:9000/user/average_rating/${selectedId}`)
         .then((res) => {
-          // console.log(res.data);
+          console.log(res.data);
           setAverageRating(res.data);
         })
         .catch((err) => {
@@ -501,7 +546,7 @@ function ProductList(args) {
       .get(`http://3.7.173.138:9000/user/comment_list/${selectedId}`)
       .then((res) => {
         setGetonecomment(res.data.data);
-        // console.log(res.data.data);
+        console.log(res.data.data);
       })
       .catch((err) => {
         // console.log(err);
@@ -539,7 +584,7 @@ function ProductList(args) {
       axios
         .get(`http://3.7.173.138:9000/user/average_rating/${productdes}`)
         .then((res) => {
-          // console.log(res.data);
+          console.log(res.data);
           setAverageRating(res.data);
         })
         .catch((err) => {
@@ -1244,14 +1289,56 @@ function ProductList(args) {
                                             )
                                           )}
                                         </h2>
-                                        <div className="top-icon">
+                                        {/* <div className="top-icon">
                                           <Link to="#">
                                             <img src={mdicon1} alt="" />
                                           </Link>
                                           <Link to="#">
                                             <img src={mdicon2} alt="" />
                                           </Link>
-                                        </div>
+                                        </div> */}
+                                        <Row className="top-icon">
+                                          <Col lg="10">
+                                            {" "}
+                                            <Link to="#">
+                                              <img src={mdicon1} alt="" />
+                                            </Link>
+                                            <Link to="#">
+                                              <img src={mdicon2} alt="" />
+                                            </Link>
+                                          </Col>
+                                          <Col
+                                            style={{ textAlign: "right" }}
+                                            lg="2"
+                                            key={promotiondata?._id}
+                                          >
+                                            {handlebookmark === "true" ? (
+                                              <BsFillBookmarkCheckFill
+                                                size={35}
+                                                key={promotiondata?._id}
+                                                className="addbookmark  "
+                                                color="#5f56c6"
+                                                onClick={() =>
+                                                  removebookmark(
+                                                    promotiondata?._id
+                                                  )
+                                                }
+                                              />
+                                            ) : (
+                                              <BsBookmark
+                                                size={35}
+                                                key={promotiondata?._id}
+                                                onClick={() =>
+                                                  addbookmark(
+                                                    promotiondata?._id
+                                                  )
+                                                }
+                                                className="addbookmark "
+                                                color="warning "
+                                              />
+                                            )}
+                                          </Col>
+                                        </Row>
                                         <div className="tag-list">
                                           <div className="tag-1">
                                             <h5>
@@ -1420,7 +1507,9 @@ function ProductList(args) {
                                               <div className="mid-1 mb-3 tt-2">
                                                 <div className="mid-1-a">
                                                   <img
-                                                    src={rating}
+                                                    src={
+                                                      promotiondata?.ava_rating
+                                                    }
                                                     alt=""
                                                     width="35px"
                                                   />
@@ -1428,17 +1517,7 @@ function ProductList(args) {
                                                 <div className="mid-1-b tt-1">
                                                   <p>Ratings:</p>
                                                   <Link to="#">
-                                                    [
-                                                    {promotiondata?.ava_rating !==
-                                                    "NaN" ? (
-                                                      <span>
-                                                        {
-                                                          promotiondata?.ava_rating
-                                                        }
-                                                      </span>
-                                                    ) : (
-                                                      <span>0</span>
-                                                    )}
+                                                    [{promotiondata?.ava_rating}
                                                     ]
                                                   </Link>
                                                 </div>
@@ -1484,7 +1563,9 @@ function ProductList(args) {
                                               <h4>Customer Rating</h4>
                                               <div className="">
                                                 <PrettyRating
-                                                  value={averageRating?.data}
+                                                  value={
+                                                    promotiondata?.ava_rating
+                                                  }
                                                   icons={icons.star}
                                                   colors={colors.star}
                                                 />
@@ -1534,7 +1615,7 @@ function ProductList(args) {
                                           </Row>
                                         </Row>
                                       </div>
-                                      <Row key={promotiondata?._id}>
+                                      {/* <Row key={promotiondata?._id}>
                                         <Col lg="4"></Col>
                                         <Col lg="8" key={promotiondata?._id}>
                                           {handlebookmark === "true" ? (
@@ -1563,7 +1644,7 @@ function ProductList(args) {
                                             </button>
                                           )}
                                         </Col>
-                                      </Row>
+                                      </Row> */}
                                       <hr></hr>
                                       <div className="review-list">
                                         <h4>Reviews:</h4>
@@ -1758,14 +1839,48 @@ function ProductList(args) {
                                               )}
                                               {/* {Producdetail?.desc?.slice(0, 80)} */}
                                             </h2>
-                                            <div className="top-icon">
-                                              <Link to="#">
-                                                <img src={mdicon1} alt="" />
-                                              </Link>
-                                              <Link to="#">
-                                                <img src={mdicon2} alt="" />
-                                              </Link>
-                                            </div>
+                                            <Row className="top-icon">
+                                              <Col lg="10">
+                                                {" "}
+                                                <Link to="#">
+                                                  <img src={mdicon1} alt="" />
+                                                </Link>
+                                                <Link to="#">
+                                                  <img src={mdicon2} alt="" />
+                                                </Link>
+                                              </Col>
+                                              <Col
+                                                style={{ textAlign: "right" }}
+                                                lg="2"
+                                                key={Producdetail?._id}
+                                              >
+                                                {handlebookmark === "true" ? (
+                                                  <BsFillBookmarkCheckFill
+                                                    size={35}
+                                                    key={Producdetail?._id}
+                                                    className="addbookmark  "
+                                                    color="#5f56c6"
+                                                    onClick={() =>
+                                                      removebookmark(
+                                                        Producdetail?._id
+                                                      )
+                                                    }
+                                                  />
+                                                ) : (
+                                                  <BsBookmark
+                                                    size={35}
+                                                    key={Producdetail?._id}
+                                                    onClick={() =>
+                                                      addbookmark(
+                                                        Producdetail?._id
+                                                      )
+                                                    }
+                                                    className="addbookmark "
+                                                    color="warning "
+                                                  />
+                                                )}
+                                              </Col>
+                                            </Row>
                                             <div className="tag-list">
                                               <div className="tag-1">
                                                 <h5>
@@ -1935,7 +2050,11 @@ function ProductList(args) {
                                                     <div className="mid-1-b tt-1">
                                                       <p>Ratings:</p>
                                                       <Link to="#">
-                                                        [{averageRating?.data}]
+                                                        [
+                                                        {
+                                                          Producdetail?.ava_rating
+                                                        }
+                                                        ]
                                                       </Link>
                                                     </div>
                                                   </div>
@@ -2005,14 +2124,15 @@ function ProductList(args) {
                                                   <div className="">
                                                     <PrettyRating
                                                       value={
-                                                        averageRating?.data
+                                                        Producdetail?.ava_rating
                                                       }
                                                       icons={icons.star}
                                                       colors={colors.star}
                                                     />
                                                     <span className="starratinginno">
-                                                      [ {averageRating?.data}]
-                                                      of 5 Stars
+                                                      [{" "}
+                                                      {Producdetail?.ava_rating}
+                                                      ] of 5 Stars
                                                     </span>
                                                     <br></br>
                                                     <span className="mt-3">
@@ -2217,41 +2337,59 @@ function ProductList(args) {
                                           </div>
                                           <Row key={Producdetail?._id}>
                                             <Col lg="4"></Col>
-                                            <Col lg="8" key={Producdetail?._id}>
+                                            {/* <Col lg="2" key={Producdetail?._id}>
                                               {handlebookmark === "true" ? (
-                                                <button
+                                                <BsFillBookmarkCheckFill
+                                                  size={50}
                                                   key={Producdetail?._id}
-                                                  className="addbookmark  btn btn-secondary"
-                                                  color="success"
+                                                  className="addbookmark  "
+                                                  color="#5f56c6"
                                                   onClick={() =>
                                                     removebookmark(
                                                       Producdetail?._id
                                                     )
                                                   }
-                                                >
-                                                  Remove Bookmark
-                                                </button>
+                                                />
                                               ) : (
-                                                <button
+                                                <BsBookmark
+                                                  size={50}
                                                   key={Producdetail?._id}
                                                   onClick={() =>
                                                     addbookmark(
                                                       Producdetail?._id
                                                     )
                                                   }
-                                                  className="addbookmark  btn btn-secondary"
+                                                  className="addbookmark "
                                                   color="warning "
-                                                >
-                                                  Add Bookmark
-                                                </button>
+                                                />
                                               )}
-                                            </Col>
+                                            </Col> */}
                                           </Row>
                                           <hr></hr>
                                           <div className="review-list mt-3  ">
                                             <h4>Reviews:</h4>
                                             {getonecomment?.map((value) => (
-                                              <div className="re-list">
+                                              <div
+                                                className="re-list"
+                                                key={value._id}
+                                              >
+                                                <div className="d-flex justify-content-right">
+                                                  {/* {value?.userid?._id ==
+                                                  localStorage.getItem(
+                                                    "userId"
+                                                  ) ? (
+                                                    <>
+                                                      <h6>
+                                                        <AiFillEdit
+                                                          onClick={
+                                                            handleeditcomment
+                                                          }
+                                                          size="25px"
+                                                        />
+                                                      </h6>
+                                                    </>
+                                                  ) : null} */}
+                                                </div>
                                                 <div className="re-listimg">
                                                   <img
                                                     src={
@@ -2278,7 +2416,176 @@ function ProductList(args) {
                                                   </div>
                                                 </div>
                                                 <div className="re-btext mt-3">
-                                                  <p>{value?.comment}</p>
+                                                  <Row>
+                                                    <Col lg="10">
+                                                      {" "}
+                                                      {value?.comment}
+                                                    </Col>
+                                                    <Col lg="2">
+                                                      {value?.userid?._id ==
+                                                      localStorage.getItem(
+                                                        "userId"
+                                                      ) ? (
+                                                        <>
+                                                          <h6>
+                                                            <AiFillEdit
+                                                              onClick={() =>
+                                                                handleeditcomment(
+                                                                  value?._id
+                                                                )
+                                                              }
+                                                              // onClick={
+                                                              //
+                                                              // }
+                                                              size="25px"
+                                                            />
+                                                          </h6>
+                                                          <Modal
+                                                            isOpen={editmodal}
+                                                            toggle={toggleedit}
+                                                            {...args}
+                                                          >
+                                                            <ModalHeader
+                                                              toggle={
+                                                                toggleedit
+                                                              }
+                                                            >
+                                                              Edit Your Comment
+                                                            </ModalHeader>
+                                                            <ModalBody>
+                                                              <Row>
+                                                                <Col>
+                                                                  <Label>
+                                                                    Edit Review
+                                                                  </Label>
+                                                                  <input
+                                                                    type="text"
+                                                                    className="form-control"
+                                                                    placeholder={
+                                                                      value?.comment
+                                                                    }
+                                                                    value={
+                                                                      upcom
+                                                                    }
+                                                                    onChange={(
+                                                                      e
+                                                                    ) =>
+                                                                      setUpcom(
+                                                                        e.target
+                                                                          .value
+                                                                      )
+                                                                    }
+                                                                    aria-describedby="inputGroupPrepend"
+                                                                    required
+                                                                  />
+                                                                </Col>
+                                                                <Col>
+                                                                  <ReactStars
+                                                                    style={{
+                                                                      size: "25px",
+                                                                    }}
+                                                                    {...secondExample}
+                                                                  />
+                                                                </Col>
+                                                              </Row>
+
+                                                              <Col className="d-flex justify-content-center">
+                                                                <button
+                                                                  style={{
+                                                                    color:
+                                                                      "white",
+                                                                  }}
+                                                                  onClick={() => {
+                                                                    editcomment(
+                                                                      value?._id
+                                                                    );
+                                                                  }}
+                                                                  class="btn success"
+                                                                >
+                                                                  Edit your
+                                                                  comment
+                                                                </button>
+                                                              </Col>
+                                                            </ModalBody>
+                                                            {/* <ModalFooter>
+                                                              <Button
+                                                                color="primary"
+                                                                onClick={
+                                                                  toggleedit
+                                                                }
+                                                              >
+                                                                Do Something
+                                                              </Button>{" "}
+                                                              <Button
+                                                                color="secondary"
+                                                                onClick={
+                                                                  toggleedit
+                                                                }
+                                                              >
+                                                                Cancel
+                                                              </Button>
+                                                            </ModalFooter> */}
+                                                          </Modal>
+                                                        </>
+                                                      ) : null}
+                                                    </Col>
+                                                  </Row>
+                                                  <Row>
+                                                    <div>
+                                                      {/* {editpost == true ? (
+                                                        <>
+                                                          <Row>
+                                                            <Col>
+                                                              <Label>
+                                                                Edit Review
+                                                              </Label>
+                                                              <input
+                                                                type="text"
+                                                                className="form-control"
+                                                                placeholder={
+                                                                  value?.comment
+                                                                }
+                                                                value={upcom}
+                                                                onChange={(e) =>
+                                                                  setUpcom(
+                                                                    e.target
+                                                                      .value
+                                                                  )
+                                                                }
+                                                                aria-describedby="inputGroupPrepend"
+                                                                required
+                                                              />
+                                                            </Col>
+                                                            <Col>
+                                                              <ReactStars
+                                                                style={{
+                                                                  size: "25px",
+                                                                }}
+                                                                {...secondExample}
+                                                              />
+                                                            </Col>
+                                                            <Col className="d-flex justify-content-center">
+                                                              <button
+                                                                style={{
+                                                                  color:
+                                                                    "white",
+                                                                }}
+                                                                onClick={() => {
+                                                                  editcomment(
+                                                                    value?._id
+                                                                  );
+                                                                }}
+                                                                class="btn success"
+                                                              >
+                                                                Edit your
+                                                                comment
+                                                              </button>
+                                                            </Col>
+                                                          </Row>
+                                                        </>
+                                                      ) : null} */}
+                                                    </div>
+                                                  </Row>
                                                 </div>
                                               </div>
                                             ))}
@@ -2306,7 +2613,9 @@ function ProductList(args) {
                                     <h5>
                                       <span>By -</span> {categry?.creatorName}
                                     </h5>
-                                    <p>{categry?.desc?.slice(0, 70)}</p>
+                                    <p>
+                                      {HtmlParser(categry?.desc?.slice(0, 70))}
+                                    </p>
                                     <div className="">
                                       <Row>
                                         <Col lg="7">
@@ -2457,14 +2766,44 @@ function ProductList(args) {
                                         Producdetail?.desc?.slice(0, 80)
                                       )}
                                     </h2>
-                                    <div className="top-icon">
-                                      <Link to="#">
-                                        <img src={mdicon1} alt="" />
-                                      </Link>
-                                      <Link to="#">
-                                        <img src={mdicon2} alt="" />
-                                      </Link>
-                                    </div>
+                                    <Row className="top-icon">
+                                      <Col lg="10">
+                                        {" "}
+                                        <Link to="#">
+                                          <img src={mdicon1} alt="" />
+                                        </Link>
+                                        <Link to="#">
+                                          <img src={mdicon2} alt="" />
+                                        </Link>
+                                      </Col>
+                                      <Col
+                                        style={{ textAlign: "right" }}
+                                        lg="2"
+                                        key={Producdetail?._id}
+                                      >
+                                        {handlebookmark === "true" ? (
+                                          <BsFillBookmarkCheckFill
+                                            size={35}
+                                            key={Producdetail?._id}
+                                            className="addbookmark  "
+                                            color="#5f56c6"
+                                            onClick={() =>
+                                              removebookmark(Producdetail?._id)
+                                            }
+                                          />
+                                        ) : (
+                                          <BsBookmark
+                                            size={35}
+                                            key={Producdetail?._id}
+                                            onClick={() =>
+                                              addbookmark(Producdetail?._id)
+                                            }
+                                            className="addbookmark "
+                                            color="warning "
+                                          />
+                                        )}
+                                      </Col>
+                                    </Row>
                                     <div className="tag-list">
                                       <div className="tag-1">
                                         <h5>
@@ -2614,7 +2953,7 @@ function ProductList(args) {
                                             <div className="mid-1-b tt-1">
                                               <p>Ratings:</p>
                                               <Link to="#">
-                                                [{averageRating?.data}]
+                                                [{Producdetail?.ava_rating}]
                                               </Link>
                                             </div>
                                           </div>
@@ -2677,12 +3016,12 @@ function ProductList(args) {
                                           <h4>Customer Rating</h4>
                                           <div className="">
                                             <PrettyRating
-                                              value={averageRating?.data}
+                                              value={Producdetail?.ava_rating}
                                               icons={icons.star}
                                               colors={colors.star}
                                             />
                                             <span className="starratinginno">
-                                              [ {averageRating?.data}] of 5
+                                              [ {Producdetail?.ava_rating}] of 5
                                               Stars
                                             </span>
                                             <br></br>
@@ -2863,7 +3202,7 @@ function ProductList(args) {
                                   </div>
                                   <Row>
                                     <Col lg="4"></Col>
-                                    <Col lg="8" key={Producdetail?._id}>
+                                    {/* <Col lg="8" key={Producdetail?._id}>
                                       {handlebookmark === "true" ? (
                                         <button
                                           key={Producdetail?._id}
@@ -2887,7 +3226,7 @@ function ProductList(args) {
                                           Add Bookmark
                                         </button>
                                       )}
-                                    </Col>
+                                    </Col> */}
                                   </Row>
                                   <hr></hr>
                                   <div className="review-list mt-3  ">
