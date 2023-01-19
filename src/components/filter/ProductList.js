@@ -118,9 +118,11 @@ function ProductList(args) {
 
     const user = localStorage.getItem("userId");
 
+    const selectedId = Producdetail._id;
+
     axios
       .post(`http://3.7.173.138:9000/user/editCommentbyUser/${id}`, {
-        submitresrcId: id,
+        submitresrcId: selectedId,
         userid: user,
         comment: upcom,
         rating: rating,
@@ -129,7 +131,6 @@ function ProductList(args) {
         console.log(res.data.data);
         swal("Submitted Successfully");
         toggleedit();
-        // setEditpost(false);
       })
       .catch((err) => {
         console.log(err.response.data);
