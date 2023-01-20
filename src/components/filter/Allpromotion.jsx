@@ -134,7 +134,7 @@ function Allpromotion(args) {
     if (promotionId === _id) {
       setPromotId(promotionId);
       axios
-        .get(`http://3.7.173.138:9000/admin/getone_reslist/${promotId}`)
+        .get(`http://3.7.173.138:9000/admin/getone_reslist/${promotionId}`)
         .then((res) => {
           // console.log(res.data.data._id);
           if (
@@ -152,7 +152,7 @@ function Allpromotion(args) {
         });
     }
     axios
-      .get(`http://3.7.173.138:9000/user/average_rating/${productdes}`)
+      .get(`http://3.7.173.138:9000/user/average_rating/${promotionId}`)
       .then((res) => {
         // console.log(res.data);
         setAverageRating(res.data);
@@ -160,11 +160,11 @@ function Allpromotion(args) {
       .catch((err) => {
         // console.log(err);
       });
-    const selectedId = promotiondata._id;
+    // const selectedId = promotiondata._id;
     // console.log(selectedId, myId, text, rating);
 
     axios
-      .get(`http://3.7.173.138:9000/user/comment_list/${selectedId}`)
+      .get(`http://3.7.173.138:9000/user/comment_list/${promotionId}`)
       .then((res) => {
         setGetonecomment(res.data.data);
         // console.log(res.data.data);
@@ -199,18 +199,20 @@ function Allpromotion(args) {
     setPromotId("");
     setPromotiondata("");
   };
-  const handleSubmit = (e) => {
+  const handleSubmit = (e, id) => {
     e.preventDefault();
-    const userId = localStorage.getItem("userId");
 
-    const selectedId = promotiondata._id;
-    // console.log(selectedId, userId, text, rating);
+    if (myId == "") {
+      swal("Login First");
+      navigate("/login");
+    }
+    if (myId !== null && myId !== undefined && myId !== "") {
+      const selectedId = Producdetail._id;
 
-    if (selectedId == promotiondata._id && userId !== "") {
       axios
         .post(`http://3.7.173.138:9000/user/add_Comment`, {
-          submitresrcId: selectedId,
-          userid: userId,
+          submitresrcId: id,
+          userid: myId,
           comment: text,
           rating: rating,
         })
@@ -221,17 +223,27 @@ function Allpromotion(args) {
           } else if (res.data.msg == "not able to comment") {
             swal("User can't Review own Resource");
           }
+
+          if (res.data.msg == "waiting for admin approvel") {
+            swal("Already commented On it wait for aprroval");
+          }
         })
         .catch((err) => {
-          // console.log(err);
+          // console.log(err.response.data.message == "already exists");
           if (err.response.data.message == "already exists") {
             swal("You already Commented On It");
           }
         });
       settText("");
       setRating("");
+      // }
+      // else {
+      //   swal(" Please Enter review and Rating");
+      // }
     }
-    // console.log(text);
+    // else {
+    //   swal("you need to Login first");
+    // }
   };
   const icons = {
     star: {
@@ -725,7 +737,10 @@ function Allpromotion(args) {
                                         placeholder=""
                                       ></textarea>
                                       <Button
-                                        onClick={handleSubmit}
+                                        onClick={(e) =>
+                                          handleSubmit(e, promotiondata._id)
+                                        }
+                                        // onClick={handleSubmit}
                                         className=" bt-st reviewbutton mb-3 btn btn-primary"
                                       >
                                         Send

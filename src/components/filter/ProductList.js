@@ -113,16 +113,16 @@ function ProductList(args) {
 
   const navigate = useNavigate();
   const [upcom, setUpcom] = useState("");
-  const editcomment = (id) => {
+
+  const editcomment = (id, dataid) => {
     console.log(id);
+    console.log(dataid);
 
     const user = localStorage.getItem("userId");
 
-    const selectedId = Producdetail._id;
-
     axios
       .post(`http://3.7.173.138:9000/user/editCommentbyUser/${id}`, {
-        submitresrcId: selectedId,
+        submitresrcId: dataid,
         userid: user,
         comment: upcom,
         rating: rating,
@@ -404,6 +404,15 @@ function ProductList(args) {
         .catch((err) => {
           console.log(err);
         });
+      axios
+        .get(`http://3.7.173.138:9000/user/comment_list/${promotionId}`)
+        .then((res) => {
+          setGetonecomment(res.data.data);
+          console.log(res.data.data);
+        })
+        .catch((err) => {
+          // console.log(err);
+        });
     }
   };
   const promotionadmin = () => {
@@ -411,7 +420,7 @@ function ProductList(args) {
       .get(`http://3.7.173.138:9000/user/Promotions`)
       .then((res) => {
         setPromotion(res.data.data);
-        // console.log(res.data.data);
+        console.log(res.data.data);
       })
       .catch((err) => {
         // console.log(err);
@@ -457,9 +466,9 @@ function ProductList(args) {
     setFormatelength("");
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e, id) => {
     e.preventDefault();
-    // console.log(myId);
+
     if (myId == "") {
       swal("Login First");
       navigate("/login");
@@ -469,7 +478,7 @@ function ProductList(args) {
 
       axios
         .post(`http://3.7.173.138:9000/user/add_Comment`, {
-          submitresrcId: selectedId,
+          submitresrcId: id,
           userid: myId,
           comment: text,
           rating: rating,
@@ -1198,14 +1207,14 @@ function ProductList(args) {
                           spaceBetween: 25,
                         },
                       }}
-                      spaceBetween={50}
+                      spaceBetween={20}
                       // slidesPerView={3}
-                      centeredSlides={true}
+                      // centeredSlides={true}
                       loop={true}
                       onSlideChange={() => console.log("slide change")}
                       onSwiper={(swiper) => console.log(swiper)}
-                      scrollbar={{ draggable: true }}
-                      className="mx-3"
+                      // scrollbar={{ draggable: true }}
+                      className=" "
                     >
                       {promotion?.map((promotion) => (
                         <SwiperSlide>
@@ -1549,11 +1558,11 @@ function ProductList(args) {
 
                                       <div className="description mt-3">
                                         <h4>Description:</h4>
-                                        <h2>
+                                        <h5>
                                           {ReactHtmlParser(
                                             promotiondata?.desc?.slice(0, 80)
                                           )}
-                                        </h2>
+                                        </h5>
                                       </div>
 
                                       <hr></hr>
@@ -1605,7 +1614,13 @@ function ProductList(args) {
                                                     placeholder=""
                                                   ></textarea>
                                                   <Button
-                                                    onClick={handleSubmit}
+                                                    // onClick={handleSubmit}
+                                                    onClick={(e) =>
+                                                      handleSubmit(
+                                                        e,
+                                                        promotiondata._id
+                                                      )
+                                                    }
                                                     className=" bt-st reviewbutton mb-3 btn btn-primary"
                                                   >
                                                     Send
@@ -1676,7 +1691,114 @@ function ProductList(args) {
                                               </div>
                                             </div>
                                             <div className="re-btext mt-3">
-                                              <p>{value?.comment}</p>
+                                              <Row>
+                                                <Col lg="10">
+                                                  {" "}
+                                                  {value?.comment}
+                                                </Col>
+                                                <Col lg="2">
+                                                  {value?.userid?._id ==
+                                                  localStorage.getItem(
+                                                    "userId"
+                                                  ) ? (
+                                                    <>
+                                                      <h6>
+                                                        <AiFillEdit
+                                                          onClick={() =>
+                                                            handleeditcomment(
+                                                              value?._id
+                                                            )
+                                                          }
+                                                          // onClick={
+                                                          //
+                                                          // }
+                                                          size="25px"
+                                                        />
+                                                      </h6>
+                                                      <Modal
+                                                        isOpen={editmodal}
+                                                        toggle={toggleedit}
+                                                        {...args}
+                                                      >
+                                                        <ModalHeader
+                                                          toggle={toggleedit}
+                                                        >
+                                                          Edit Your Comment
+                                                        </ModalHeader>
+                                                        <ModalBody>
+                                                          <Row>
+                                                            <Col>
+                                                              <Label>
+                                                                Edit Review
+                                                              </Label>
+                                                              <input
+                                                                type="text"
+                                                                className="form-control"
+                                                                placeholder={
+                                                                  value?.comment
+                                                                }
+                                                                value={upcom}
+                                                                onChange={(e) =>
+                                                                  setUpcom(
+                                                                    e.target
+                                                                      .value
+                                                                  )
+                                                                }
+                                                                aria-describedby="inputGroupPrepend"
+                                                                required
+                                                              />
+                                                            </Col>
+                                                            <Col>
+                                                              <ReactStars
+                                                                style={{
+                                                                  size: "25px",
+                                                                }}
+                                                                {...secondExample}
+                                                              />
+                                                            </Col>
+                                                          </Row>
+
+                                                          <Col className="d-flex justify-content-center">
+                                                            <button
+                                                              style={{
+                                                                color: "white",
+                                                              }}
+                                                              onClick={() => {
+                                                                editcomment(
+                                                                  value?._id,
+                                                                  promotiondata?._id
+                                                                );
+                                                              }}
+                                                              class="btn success"
+                                                            >
+                                                              Edit your comment
+                                                            </button>
+                                                          </Col>
+                                                        </ModalBody>
+                                                        {/* <ModalFooter>
+                                                              <Button
+                                                                color="primary"
+                                                                onClick={
+                                                                  toggleedit
+                                                                }
+                                                              >
+                                                                Do Something
+                                                              </Button>{" "}
+                                                              <Button
+                                                                color="secondary"
+                                                                onClick={
+                                                                  toggleedit
+                                                                }
+                                                              >
+                                                                Cancel
+                                                              </Button>
+                                                            </ModalFooter> */}
+                                                      </Modal>
+                                                    </>
+                                                  ) : null}
+                                                </Col>
+                                              </Row>
+                                              {/* <p>{value?.comment}</p> */}
                                             </div>
                                           </div>
                                         ))}
@@ -2325,7 +2447,13 @@ function ProductList(args) {
                                                         placeholder=" Enter your Review if you want"
                                                       ></textarea>
                                                       <Button
-                                                        onClick={handleSubmit}
+                                                        // onClick={handleSubmit}
+                                                        onClick={(e) =>
+                                                          handleSubmit(
+                                                            e,
+                                                            Producdetail?._id
+                                                          )
+                                                        }
                                                         className="bt-st reviewbutton mb-3"
                                                       >
                                                         Submit
@@ -2498,7 +2626,8 @@ function ProductList(args) {
                                                                   }}
                                                                   onClick={() => {
                                                                     editcomment(
-                                                                      value?._id
+                                                                      value?._id,
+                                                                      Producdetail?._id
                                                                     );
                                                                   }}
                                                                   class="btn success"
@@ -3190,7 +3319,13 @@ function ProductList(args) {
                                                 placeholder=" Enter your Review if you want"
                                               ></textarea>
                                               <Button
-                                                onClick={handleSubmit}
+                                                onClick={(e) =>
+                                                  handleSubmit(
+                                                    e,
+                                                    Producdetail?._id
+                                                  )
+                                                }
+                                                // onClick={handleSubmit}
                                                 className="bt-st reviewbutton mb-3"
                                               >
                                                 Submit
@@ -3258,7 +3393,108 @@ function ProductList(args) {
                                           </div>
                                         </div>
                                         <div className="re-btext mt-3">
-                                          <p>{value?.comment}</p>
+                                          {/* <p>{value?.comment}</p> */}
+                                          <Row>
+                                            <Col lg="10"> {value?.comment}</Col>
+                                            <Col lg="2">
+                                              {value?.userid?._id ==
+                                              localStorage.getItem("userId") ? (
+                                                <>
+                                                  <h6>
+                                                    <AiFillEdit
+                                                      onClick={() =>
+                                                        handleeditcomment(
+                                                          value?._id
+                                                        )
+                                                      }
+                                                      // onClick={
+                                                      //
+                                                      // }
+                                                      size="25px"
+                                                    />
+                                                  </h6>
+                                                  <Modal
+                                                    isOpen={editmodal}
+                                                    toggle={toggleedit}
+                                                    {...args}
+                                                  >
+                                                    <ModalHeader
+                                                      toggle={toggleedit}
+                                                    >
+                                                      Edit Your Comment
+                                                    </ModalHeader>
+                                                    <ModalBody>
+                                                      <Row>
+                                                        <Col>
+                                                          <Label>
+                                                            Edit Review
+                                                          </Label>
+                                                          <input
+                                                            type="text"
+                                                            className="form-control"
+                                                            placeholder={
+                                                              value?.comment
+                                                            }
+                                                            value={upcom}
+                                                            onChange={(e) =>
+                                                              setUpcom(
+                                                                e.target.value
+                                                              )
+                                                            }
+                                                            aria-describedby="inputGroupPrepend"
+                                                            required
+                                                          />
+                                                        </Col>
+                                                        <Col>
+                                                          <ReactStars
+                                                            style={{
+                                                              size: "25px",
+                                                            }}
+                                                            {...secondExample}
+                                                          />
+                                                        </Col>
+                                                      </Row>
+
+                                                      <Col className="d-flex justify-content-center">
+                                                        <button
+                                                          style={{
+                                                            color: "white",
+                                                          }}
+                                                          onClick={() => {
+                                                            editcomment(
+                                                              value?._id,
+                                                              Producdetail?._id
+                                                            );
+                                                          }}
+                                                          class="btn success"
+                                                        >
+                                                          Edit your comment
+                                                        </button>
+                                                      </Col>
+                                                    </ModalBody>
+                                                    {/* <ModalFooter>
+                                                              <Button
+                                                                color="primary"
+                                                                onClick={
+                                                                  toggleedit
+                                                                }
+                                                              >
+                                                                Do Something
+                                                              </Button>{" "}
+                                                              <Button
+                                                                color="secondary"
+                                                                onClick={
+                                                                  toggleedit
+                                                                }
+                                                              >
+                                                                Cancel
+                                                              </Button>
+                                                            </ModalFooter> */}
+                                                  </Modal>
+                                                </>
+                                              ) : null}
+                                            </Col>
+                                          </Row>
                                         </div>
                                       </div>
                                     ))}

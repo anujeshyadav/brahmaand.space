@@ -3,8 +3,12 @@ import { Container, Row, Col, Button } from "reactstrap";
 import axios from "axios";
 import ProgressBar from "@ramonak/react-progress-bar";
 import { FaStar } from "react-icons/fa";
+import { AiFillEdit } from "react-icons/ai";
+import { BsFillBookmarkCheckFill, BsBookmark } from "react-icons/bs";
 import mdicon1 from "../assets/icons/mdicon-1.png";
 import mdicon2 from "../assets/icons/mdicon-2.png";
+import ReactStars from "react-rating-stars-component";
+import ReactHtmlParser from "react-html-parser";
 import createricon from "../assets/icons/createricon.png";
 import usericon from "../assets/icons/usericon.png";
 import typeicon from "../assets/icons/typeicon.png";
@@ -27,7 +31,7 @@ import { Link } from "react-router-dom";
 import PrettyRating from "pretty-rating-react";
 import { faStar, faStarHalfAlt } from "@fortawesome/free-solid-svg-icons";
 import { faStar as farStar } from "@fortawesome/free-regular-svg-icons";
-import { Modal, ModalBody } from "reactstrap";
+import { Modal, ModalBody, ModalHeader, Label } from "reactstrap";
 
 function VideoPosted(args) {
   const [modalone, setModalone] = useState(false);
@@ -48,6 +52,52 @@ function VideoPosted(args) {
   const [myId, setmyId] = useState("");
   const [handlebookmark, setHandlebookmark] = useState("");
   const navigate = useNavigate();
+  const [editmodal, setEditmodal] = useState(false);
+  const toggleedit = () => {
+    setEditmodal(!editmodal);
+  };
+
+  const [upcom, setUpcom] = useState("");
+
+  const editcomment = (id, dataid) => {
+    console.log(id);
+    console.log(dataid);
+
+    const user = localStorage.getItem("userId");
+
+    axios
+      .post(`http://3.7.173.138:9000/user/editCommentbyUser/${id}`, {
+        submitresrcId: dataid,
+        userid: user,
+        comment: upcom,
+        rating: rating,
+      })
+      .then((res) => {
+        console.log(res.data.data);
+        swal("Submitted Successfully");
+        toggleedit();
+      })
+      .catch((err) => {
+        console.log(err.response.data);
+      });
+  };
+
+  const [editnew, seteditnew] = useState({});
+
+  const handleeditcomment = (id) => {
+    axios
+      .get(`http://3.7.173.138:9000/admin/getone_coment_list/${id}`)
+      .then((res) => {
+        console.log(res.data.data);
+        setUpcom(res.data.data?.comment);
+        toggleedit();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    const user = localStorage.getItem("userId");
+  };
+
   const getUser = async () => {
     const user = await localStorage.getItem("userId");
     if (user !== null && user !== "") {
@@ -55,6 +105,23 @@ function VideoPosted(args) {
     } else {
       // console.log("no UserId Found");
     }
+  };
+
+  const secondExample = {
+    size: 50,
+    count: 5,
+    color: "#434b4d47",
+    activeColor: "#d9ad26",
+    value: 7.5,
+    a11y: true,
+    isHalf: true,
+    emptyIcon: <i className="far fa-star" />,
+    halfIcon: <i className="fa fa-star-half-alt" />,
+    // filledIcon: <i className="fa fa-star" />,
+    onChange: (newValue) => {
+      // console.log(`Example 2: new value is ${newValue}`);
+      setRating(newValue);
+    },
   };
   const ratingChanged = (newRating) => {
     setRating(newRating);
@@ -86,7 +153,7 @@ function VideoPosted(args) {
             if (res.data.message == "success") {
               swal("your Review Submitted Successfully");
             } else {
-              swal("Something went wrong review again ");
+              swal("User Cannot comment on own Resource ");
             }
           })
           .catch((err) => {
@@ -94,12 +161,14 @@ function VideoPosted(args) {
           });
         settText("");
         setRating("");
-      } else {
-        swal(" Please Enter review and Rating");
       }
-    } else {
-      swal("you need to Login first");
+      // else {
+      //   swal(" Please Enter review and Rating");
+      // }
     }
+    // else {
+    //   swal("you need to Login first");
+    // }
 
     // console.log(text);
   };
@@ -316,7 +385,11 @@ function VideoPosted(args) {
                       >
                         <ModalBody>
                           <div className="main-content">
-                            <h2>{Producdetail?.desc}</h2>
+                            <h2>
+                              {ReactHtmlParser(
+                                Producdetail?.resTitle?.slice(0, 150)
+                              )}
+                            </h2>
                             <div className="top-icon">
                               <Link to="#">
                                 <img src={mdicon1} alt="" />
@@ -348,7 +421,10 @@ function VideoPosted(args) {
 
                           <div className="mid">
                             <h5 className="mt-3">
-                              Link :<Link>{Producdetail?.link}</Link>
+                              Link :
+                              <a href={Producdetail?.link}>
+                                {Producdetail?.link}
+                              </a>
                             </h5>
                             <div className="mid-content">
                               <Row>
@@ -370,7 +446,9 @@ function VideoPosted(args) {
                                     </div>
                                     <div className="mid-1-b">
                                       <p>Submitted by:</p>
-                                      <h4>{Producdetail?.creatorName}</h4>
+                                      <h4>
+                                        {Producdetail?.userid?.display_name}
+                                      </h4>
                                     </div>
                                   </div>
                                 </Col>
@@ -489,7 +567,11 @@ function VideoPosted(args) {
 
                           <div className="description mt-3 mb-3">
                             <h4>Description:</h4>
-                            <p>{Producdetail?.desc}</p>
+                            <p>
+                              {ReactHtmlParser(
+                                Producdetail?.desc?.slice(0, 80)
+                              )}
+                            </p>
                           </div>
 
                           <hr></hr>
@@ -624,12 +706,13 @@ function VideoPosted(args) {
                                 {" "}
                                 <Col lg="6">
                                   <h4 className="mt-3">Write your Review</h4>
-                                  <StarsRating
+                                  <ReactStars {...secondExample} />
+                                  {/* <StarsRating
                                     count={5}
                                     onChange={ratingChanged}
                                     size={40}
                                     color2={"#ffd700"}
-                                  />
+                                  /> */}
                                 </Col>
                               </Col>
                             </Row>
@@ -647,7 +730,10 @@ function VideoPosted(args) {
                                         placeholder=" Enter your Review if you want"
                                       ></textarea>
                                       <Button
-                                        onClick={handleSubmit}
+                                        onClick={(e) =>
+                                          handleSubmit(e, Producdetail?._id)
+                                        }
+                                        // onClick={handleSubmit}
                                         className="bt-st reviewbutton mb-3"
                                       >
                                         Submit
@@ -660,7 +746,7 @@ function VideoPosted(args) {
                           </div>
                           <Row key={data?._id}>
                             <Col lg="4"></Col>
-                            <Col lg="8" key={data?._id}>
+                            {/* <Col lg="8" key={data?._id}>
                               <button
                                 key={data?.submitresrcId?._id}
                                 className="addbookmark  btn btn-secondary"
@@ -669,7 +755,7 @@ function VideoPosted(args) {
                               >
                                 Remove bookmark
                               </button>
-                            </Col>
+                            </Col> */}
                           </Row>
                           <hr></hr>
                           <div className="review-list mt-3  ">
@@ -700,7 +786,99 @@ function VideoPosted(args) {
                                   </div>
                                 </div>
                                 <div className="re-btext mt-3">
-                                  <p>{value?.comment}</p>
+                                  <Row>
+                                    <Col lg="10"> {value?.comment}</Col>
+                                    <Col lg="2">
+                                      {value?.userid?._id ==
+                                      localStorage.getItem("userId") ? (
+                                        <>
+                                          <h6>
+                                            <AiFillEdit
+                                              onClick={() =>
+                                                handleeditcomment(value?._id)
+                                              }
+                                              // onClick={
+                                              //
+                                              // }
+                                              size="25px"
+                                            />
+                                          </h6>
+                                          <Modal
+                                            isOpen={editmodal}
+                                            toggle={toggleedit}
+                                            {...args}
+                                          >
+                                            <ModalHeader toggle={toggleedit}>
+                                              Edit Your Comment
+                                            </ModalHeader>
+                                            <ModalBody>
+                                              <Row>
+                                                <Col>
+                                                  <Label>Edit Review</Label>
+                                                  <input
+                                                    type="text"
+                                                    className="form-control"
+                                                    placeholder={value?.comment}
+                                                    value={upcom}
+                                                    onChange={(e) =>
+                                                      setUpcom(e.target.value)
+                                                    }
+                                                    aria-describedby="inputGroupPrepend"
+                                                    required
+                                                  />
+                                                </Col>
+                                                <Col>
+                                                  <ReactStars
+                                                    style={{
+                                                      size: "25px",
+                                                    }}
+                                                    {...secondExample}
+                                                  />
+                                                </Col>
+                                              </Row>
+
+                                              <Col className="d-flex justify-content-center">
+                                                <button
+                                                  style={{
+                                                    color: "white",
+                                                  }}
+                                                  onClick={() => {
+                                                    editcomment(
+                                                      value?._id,
+                                                      Producdetail?._id
+                                                    );
+                                                  }}
+                                                  class="btn success"
+                                                >
+                                                  Edit your comment
+                                                </button>
+                                              </Col>
+                                            </ModalBody>
+                                            {/* <ModalFooter>
+                                                              <Button
+                                                                color="primary"
+                                                                onClick={
+                                                                  toggleedit
+                                                                }
+                                                              >
+                                                                Do Something
+                                                              </Button>{" "}
+                                                              <Button
+                                                                color="secondary"
+                                                                onClick={
+                                                                  toggleedit
+                                                                }
+                                                              >
+                                                                Cancel
+                                                              </Button>
+                                                            </ModalFooter> */}
+                                          </Modal>
+                                        </>
+                                      ) : null}
+                                    </Col>
+                                  </Row>
+
+                                  {/* <p>{value?.comment}</p> */}
                                 </div>
                               </div>
                             ))}

@@ -2,6 +2,7 @@ import { Container, Row, Col, Button } from "reactstrap";
 
 import axios from "axios";
 import ProgressBar from "@ramonak/react-progress-bar";
+import ReactHtmlParser from "react-html-parser";
 import { FaStar } from "react-icons/fa";
 import mdicon1 from "../assets/icons/mdicon-1.png";
 import mdicon2 from "../assets/icons/mdicon-2.png";
@@ -21,6 +22,8 @@ import React, { useState, useEffect } from "react";
 import Heart from "react-heart";
 import axiosConfig from "../components/axiosConfig";
 import Moment from "react-moment";
+import { AiFillEdit } from "react-icons/ai";
+import { BsFillBookmarkCheckFill, BsBookmark } from "react-icons/bs";
 import StarsRating from "stars-rating";
 import swal from "sweetalert";
 import ReactStars from "react-rating-stars-component";
@@ -28,7 +31,8 @@ import { Link } from "react-router-dom";
 import PrettyRating from "pretty-rating-react";
 import { faStar, faStarHalfAlt } from "@fortawesome/free-solid-svg-icons";
 import { faStar as farStar } from "@fortawesome/free-regular-svg-icons";
-import { Modal, ModalBody } from "reactstrap";
+import { Modal, ModalBody, ModalHeader, Label } from "reactstrap";
+import HtmlParser from "react-html-parser";
 
 function Bookmarks(args) {
   const [modalone, setModalone] = useState(false);
@@ -48,6 +52,11 @@ function Bookmarks(args) {
   const [all, setAll] = useState("");
   const [rating, setRating] = useState("");
   const [myId, setmyId] = useState("");
+
+  const [editmodal, setEditmodal] = useState(false);
+  const toggleedit = () => {
+    setEditmodal(!editmodal);
+  };
   const [handlebookmark, setHandlebookmark] = useState("");
   const secondExample = {
     size: 50,
@@ -66,6 +75,47 @@ function Bookmarks(args) {
     },
   };
 
+  const [upcom, setUpcom] = useState("");
+
+  const editcomment = (id, dataid) => {
+    console.log(id);
+    console.log(dataid);
+
+    const user = localStorage.getItem("userId");
+
+    axios
+      .post(`http://3.7.173.138:9000/user/editCommentbyUser/${id}`, {
+        submitresrcId: dataid,
+        userid: user,
+        comment: upcom,
+        rating: rating,
+      })
+      .then((res) => {
+        console.log(res.data.data);
+        swal("Submitted Successfully");
+        toggleedit();
+      })
+      .catch((err) => {
+        console.log(err.response.data);
+      });
+  };
+
+  const [editnew, seteditnew] = useState({});
+
+  const handleeditcomment = (id) => {
+    axios
+      .get(`http://3.7.173.138:9000/admin/getone_coment_list/${id}`)
+      .then((res) => {
+        console.log(res.data.data);
+        setUpcom(res.data.data?.comment);
+        toggleedit();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    const user = localStorage.getItem("userId");
+  };
+
   const navigate = useNavigate();
   const getUser = () => {
     const user = localStorage.getItem("userId");
@@ -78,50 +128,55 @@ function Bookmarks(args) {
   const ratingChanged = (newRating) => {
     setRating(newRating);
   };
-  const handleSubmit = (e) => {
+  const handleSubmit = (e, id) => {
     e.preventDefault();
     const userId = localStorage.getItem("userId");
     if (userId !== null && userId !== undefined && userId !== "") {
-      if (
-        text !== null &&
-        text !== undefined &&
-        text !== "" &&
-        rating !== null &&
-        rating !== undefined &&
-        rating !== ""
-      ) {
-        const selectedId = Producdetail._id;
-        // console.log(selectedId, userId, text, rating);
+      // if (
+      //   text !== null &&
+      //   text !== undefined &&
+      //   text !== "" &&
+      //   rating !== null &&
+      //   rating !== undefined &&
+      //   rating !== ""
+      // ) {
+      const selectedId = Producdetail._id;
+      // console.log(selectedId, userId, text, rating);
 
-        axios
-          .post(`http://3.7.173.138:9000/user/add_Comment`, {
-            submitresrcId: selectedId,
-            userid: userId,
-            comment: text,
-            rating: rating,
-          })
-          .then((res) => {
-            // console.log(res.data);
-            if (res.data.message == "success") {
-              swal("Your Review Submitted Successfully!");
-            } else if (res.data.msg == "not able to comment") {
-              swal("User can't Review own Resource");
-            }
-          })
-          .catch((err) => {
-            // console.log(err);
-            if (err.response.data.message == "already exists") {
-              swal("You already Commented On It");
-            }
-          });
-        settText("");
-        setRating("");
-      } else {
-        swal(" Please Enter review and Rating");
-      }
-    } else {
-      swal("you need to Login first");
+      axios
+        .post(`http://3.7.173.138:9000/user/add_Comment`, {
+          submitresrcId: id,
+          userid: userId,
+          comment: text,
+          rating: rating,
+        })
+        .then((res) => {
+          console.log(res.data);
+          if (res.data.message == "success") {
+            swal("Your Review Submitted Successfully!");
+          } else if (res.data.msg == "not able to comment") {
+            swal("User can't Review own Resource");
+          }
+
+          if (res.data.msg == "waiting for admin approvel") {
+            swal("Already commented On it wait for aprroval");
+          }
+        })
+        .catch((err) => {
+          // console.log(err);
+          if (err.response.data.message == "already exists") {
+            swal("You already Commented On It");
+          }
+        });
+      settText("");
+      setRating("");
+      // } else {
+      //   swal(" Please Enter review and Rating");
+      // }
     }
+    // else {
+    //   swal("you need to Login first");
+    // }
 
     // console.log(text);
   };
@@ -296,7 +351,7 @@ function Bookmarks(args) {
         Your Bookmark's here
       </h3>
       <div className="search-st mt-4 mb-4">
-        {mylikes !== ""
+        {mylikes !== "" && mylikes?.submitresrcId !== null
           ? mylikes?.map((data) => (
               <Row className="videopostedall mb-4" key={data?._id}>
                 <Col md="4">
@@ -351,7 +406,12 @@ function Bookmarks(args) {
                       >
                         <ModalBody>
                           <div className="main-content">
-                            <h2>{Producdetail?.desc}</h2>
+                            <h2>
+                              {" "}
+                              {ReactHtmlParser(
+                                Producdetail?.resTitle?.slice(0, 80)
+                              )}
+                            </h2>
                             <div className="top-icon">
                               <Link to="#">
                                 <img src={mdicon1} alt="" />
@@ -383,7 +443,10 @@ function Bookmarks(args) {
 
                           <div className="mid">
                             <h5 className="mt-3">
-                              Link :<Link>{Producdetail?.link}</Link>
+                              Link :
+                              <a href={Producdetail?.link}>
+                                {Producdetail?.link}
+                              </a>
                             </h5>
                             <div className="mid-content">
                               <Row>
@@ -683,7 +746,10 @@ function Bookmarks(args) {
                                       placeholder=" Enter your Review if you want"
                                     ></textarea>
                                     <Button
-                                      onClick={handleSubmit}
+                                      // onClick={handleSubmit}
+                                      onClick={(e) =>
+                                        handleSubmit(e, Producdetail?._id)
+                                      }
                                       className="bt-st reviewbutton mb-3"
                                     >
                                       Submit
@@ -737,7 +803,99 @@ function Bookmarks(args) {
                                   </div>
                                 </div>
                                 <div className="re-btext mt-3">
-                                  <p>{value?.comment}</p>
+                                  {/* <p>{value?.comment}</p>
+                                   */}
+                                  <Row>
+                                    <Col lg="10"> {value?.comment}</Col>
+                                    <Col lg="2">
+                                      {value?.userid?._id ==
+                                      localStorage.getItem("userId") ? (
+                                        <>
+                                          <h6>
+                                            <AiFillEdit
+                                              onClick={() =>
+                                                handleeditcomment(value?._id)
+                                              }
+                                              // onClick={
+                                              //
+                                              // }
+                                              size="25px"
+                                            />
+                                          </h6>
+                                          <Modal
+                                            isOpen={editmodal}
+                                            toggle={toggleedit}
+                                            {...args}
+                                          >
+                                            <ModalHeader toggle={toggleedit}>
+                                              Edit Your Comment
+                                            </ModalHeader>
+                                            <ModalBody>
+                                              <Row>
+                                                <Col>
+                                                  <Label>Edit Review</Label>
+                                                  <input
+                                                    type="text"
+                                                    className="form-control"
+                                                    placeholder={value?.comment}
+                                                    value={upcom}
+                                                    onChange={(e) =>
+                                                      setUpcom(e.target.value)
+                                                    }
+                                                    aria-describedby="inputGroupPrepend"
+                                                    required
+                                                  />
+                                                </Col>
+                                                <Col>
+                                                  <ReactStars
+                                                    style={{
+                                                      size: "25px",
+                                                    }}
+                                                    {...secondExample}
+                                                  />
+                                                </Col>
+                                              </Row>
+
+                                              <Col className="d-flex justify-content-center">
+                                                <button
+                                                  style={{
+                                                    color: "white",
+                                                  }}
+                                                  onClick={() => {
+                                                    editcomment(
+                                                      value?._id,
+                                                      Producdetail?._id
+                                                    );
+                                                  }}
+                                                  class="btn success"
+                                                >
+                                                  Edit your comment
+                                                </button>
+                                              </Col>
+                                            </ModalBody>
+                                            {/* <ModalFooter>
+                                                              <Button
+                                                                color="primary"
+                                                                onClick={
+                                                                  toggleedit
+                                                                }
+                                                              >
+                                                                Do Something
+                                                              </Button>{" "}
+                                                              <Button
+                                                                color="secondary"
+                                                                onClick={
+                                                                  toggleedit
+                                                                }
+                                                              >
+                                                                Cancel
+                                                              </Button>
+                                                            </ModalFooter> */}
+                                          </Modal>
+                                        </>
+                                      ) : null}
+                                    </Col>
+                                  </Row>
                                 </div>
                               </div>
                             ))}
@@ -765,7 +923,9 @@ function Bookmarks(args) {
                     <h5 className="mb-3">
                       <span>By </span> {data?.submitresrcId?.creatorName}
                     </h5>
-                    <h6 className="mb-3">{data?.submitresrcId?.desc}</h6>
+                    <h6 className="mb-3">
+                      {HtmlParser(data?.submitresrcId?.desc?.slice(0, 150))}
+                    </h6>
                     <div className="">
                       <Row className="review mb-3">
                         <Col lg="4">
@@ -788,9 +948,16 @@ function Bookmarks(args) {
                         </Col> */}
                       </Row>
                       <Row>
-                        <Col lg="2">
-                          {data?.submitresrcId?.relYear[0]?.yrName}
-                        </Col>
+                        <ul class="rating">
+                          <li>
+                            <Link to="#" className="tag">
+                              {data?.submitresrcId?.relYear[0]?.yrName}
+                            </Link>
+                          </li>
+                        </ul>
+                        {/* <Col lg="2">
+                          <Link className="tag"></Link>
+                        </Col> */}
                       </Row>
                     </div>
                   </div>

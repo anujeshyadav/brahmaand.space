@@ -7,7 +7,6 @@ import swal from "sweetalert";
 import { useNavigate } from "react-router-dom";
 
 function ResetForget() {
-  const [oldpass, setOldpass] = useState("");
   const [newpass, setNewpass] = useState("");
   const [confirmpass, setconfirmpass] = useState("");
   const navigate = useNavigate();
@@ -22,14 +21,7 @@ function ResetForget() {
 
       return false;
     }
-    // if (newpass == oldpass) {
-    //   swal("New Password Must be different from Existing");
-    // }
-    // if (oldpass !== "") {
-    //   document.getElementById("passdata").innerHTML = " ";
-    // }
 
-    //minimum password length validation
     if (newpass.length < 8 && confirmpass.length < 8) {
       document.getElementById("message").innerHTML =
         "**Password length must be atleast 8 characters";
@@ -52,9 +44,15 @@ function ResetForget() {
         "**Password Does not Match";
     } else if (newpass == confirmpass) {
       const userId = localStorage.getItem("userId");
-      if (newpass == confirmpass) {
+      if (
+        newpass == confirmpass &&
+        newpass.length > 8 &&
+        confirmpass.length > 8 &&
+        newpass.length < 15 &&
+        confirmpass.length < 15
+      ) {
         const forgetuserid = localStorage.getItem("forgetpassuserId");
-        console.log(forgetuserid);
+        // console.log(forgetuserid);
         // console.log("password matched  so api is goint to hit");
         axios
           .post(`http://3.7.173.138:9000/user/forgetpassword/${forgetuserid}`, {
