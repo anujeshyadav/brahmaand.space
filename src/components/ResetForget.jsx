@@ -51,6 +51,8 @@ function ResetForget() {
         newpass.length < 15 &&
         confirmpass.length < 15
       ) {
+        document.getElementById("messagea").innerHTML = "**Password Matched";
+        document.getElementById("messagesa").innerHTML = "**Password Matched";
         const forgetuserid = localStorage.getItem("forgetpassuserId");
         // console.log(forgetuserid);
         // console.log("password matched  so api is goint to hit");
@@ -75,8 +77,10 @@ function ResetForget() {
           });
       }
     } else {
-      document.getElementById("messagea").innerHTML = "**Password Matched";
-      document.getElementById("messagesa").innerHTML = "**Password Matched";
+      document.getElementById("messagea").innerHTML =
+        "**Enter correct Password**";
+      document.getElementById("messagesa").innerHTML =
+        "**Enter correct Password**";
     }
   };
   return (
