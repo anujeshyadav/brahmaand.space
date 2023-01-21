@@ -456,7 +456,7 @@ div.ex1 {
   height: 100%;
   z-index: 1;
   display: flex;
-  /* justify-content: center; */
+
   transition-property: transform;
   box-sizing: content-box;
   /* justify-content: center; */

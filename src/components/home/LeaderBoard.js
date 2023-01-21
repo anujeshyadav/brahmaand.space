@@ -38,7 +38,7 @@ function LeaderBoard() {
     axios
       .get(`http://3.7.173.138:9000/user/karma_crrnt_month`)
       .then((res) => {
-        // console.log(res.data.data);
+        console.log(res.data.data);
         setCurrentmonth(res.data.data);
       })
       .catch((err) => {
@@ -357,7 +357,7 @@ function LeaderBoard() {
                       <div className="maindiv">
                         {/* {planet?.map((data) => ( */}
                         <img
-                          src={one} // planet logo
+                          src={currentmonth?.crntmnth_planetImg} // planet logo
                           alt="img"
                           height={70}
                           width={70}
@@ -371,7 +371,7 @@ function LeaderBoard() {
                           style={{ color: "white" }}
                         >
                           {/* {currentmonth?.userid?.meteors} */}
-                          {currentmonth?.meteors}
+                          {currentmonth?.crrntMonth}
                         </h5>
                       </div>
                     </Row>
@@ -388,7 +388,7 @@ function LeaderBoard() {
                         </div>
                         <span>
                           <img
-                            src={winnerone} //winner tag need to change
+                            src={currentmonth?.crntmnth_winnerImg} //winner tag need to change
                             alt="ist winner"
                             className="first"
                             height={90}
