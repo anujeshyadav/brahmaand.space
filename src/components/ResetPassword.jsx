@@ -70,14 +70,14 @@ function ResetPassword() {
       return false;
     } else if (newpass !== confirmpass) {
       document.getElementById("message").innerHTML =
-        "**Password Does not Match";
+        "**Password Does not Match**";
       document.getElementById("messages").innerHTML =
-        "**Password Does not Match";
+        "**Password Does not Match**";
     } else if (newpass == confirmpass) {
       document.getElementById("message").innerHTML = "";
       document.getElementById("messages").innerHTML = "";
-      document.getElementById("messagea").innerHTML = "**Strong Password** ";
-      document.getElementById("messagesa").innerHTML = "**Strong Password** ";
+      // document.getElementById("messagea").innerHTML = "**Strong Password** ";
+      // document.getElementById("messagesa").innerHTML = "**Strong Password** ";
       if (oldpass == "") {
         document.getElementById("passdata").innerHTML =
           "**Fill the password please!";

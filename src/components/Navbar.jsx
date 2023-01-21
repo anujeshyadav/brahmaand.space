@@ -557,7 +557,7 @@ function CustomNavbar(args) {
                                 onChange={(e) => setformate(e.target.value)}
                                 className="form-control"
                               >
-                                <option>Select Formate</option>
+                                <option>Select Format</option>
                                 <option>Video</option>
                                 <option>Text</option>
                                 <option>Video & Text</option>
