@@ -132,7 +132,7 @@ function CustomNavbar(args) {
         })
         .then((res) => {
           console.log(res.data.data);
-          setIsLoading(false);
+          // setIsLoading(false);
           if (res.data.message === "success") {
             swal("Resource Submitted Successfully👍");
             setLink("");

@@ -57,8 +57,8 @@ function TopBar() {
       .get(`http://3.7.173.138:9000/user/getoneUser/${id}`)
       .then((res) => {
         setUserdata(res.data.data);
-        // setUsernamenew(res.data.data.username);
-        console.log(res.data.data);
+        // console.log(res.data.data);
+        // console.log(res.data.data);
         setDisplay_name(res.data.data.display_name);
         seAbt_us(res.data.data.abt_us);
       })
@@ -139,7 +139,7 @@ function TopBar() {
                         <li style={{ color: "black" }}>
                           Display name&nbsp;&nbsp;&nbsp;&nbsp; : &nbsp;&nbsp;
                           {userdata?.display_name === undefined ? (
-                            <></>
+                            <>{userdata?.username}</>
                           ) : (
                             <>{userdata?.display_name}</>
                           )}

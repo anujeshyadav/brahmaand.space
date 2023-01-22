@@ -25,15 +25,17 @@ function AllSubCategory() {
     // console.log("Params", Params);
     allsubcategory();
   }, [Params]);
+
   const allsubcategory = () => {
     axios
 
       .get(`http://3.7.173.138:9000/admin/listbycategory/${Params.id}`)
-
       .then((response) => {
-        if (response.data.data.length == "0") {
+        // console.log(response.data.data);
+        if (response.data.data.length === 0) {
           swal("No Product found for this Category");
-          navigate("/allcategory");
+          // navigate("/allcategory");
+          navigate(-1);
         } else {
           setsubCatgry(response.data.data);
         }

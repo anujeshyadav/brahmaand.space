@@ -2,9 +2,11 @@ import { Row, Col, Form, Button, Container } from "react-bootstrap";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import ReactStars from "react-rating-stars-component";
+import { AiFillEdit } from "react-icons/ai";
+
 import { BsFillBookmarkCheckFill, BsBookmark } from "react-icons/bs";
 import { Link, useParams } from "react-router-dom";
-import { Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
+import { Modal, ModalHeader, ModalBody, ModalFooter, Label } from "reactstrap";
 import mdicon1 from "../../assets/icons/mdicon-1.png";
 import usericon from "../../assets/icons/usericon.png";
 import typeicon from "../../assets/icons/typeicon.png";
@@ -48,6 +50,10 @@ function Allpromotion(args) {
   const [myId, setmyId] = useState("");
   const [handlebookmark, setHandlebookmark] = useState("");
   const [liked, setliked] = useState("");
+  const [editmodal, setEditmodal] = useState(false);
+  const toggleedit = () => {
+    setEditmodal(!editmodal);
+  };
 
   const secondExample = {
     size: 50,
@@ -64,6 +70,50 @@ function Allpromotion(args) {
       // console.log(`Example 2: new value is ${newValue}`);
       setRating(newValue);
     },
+  };
+
+  const [upcom, setUpcom] = useState("");
+
+  const editcomment = (id, dataid, oldrating) => {
+    console.log(oldrating);
+    if (rating == "") {
+      setRating(oldrating);
+    }
+    console.log(rating);
+    const user = localStorage.getItem("userId");
+    if (rating !== "" && upcom !== "") {
+      axios
+        .post(`http://3.7.173.138:9000/user/editCommentbyUser/${id}`, {
+          submitresrcId: dataid,
+          userid: user,
+          comment: upcom,
+          rating: rating,
+        })
+        .then((res) => {
+          console.log(res.data.data);
+          swal("Submitted Successfully");
+          toggleedit();
+        })
+        .catch((err) => {
+          console.log(err.response.data);
+        });
+    }
+  };
+
+  const [editnew, seteditnew] = useState({});
+
+  const handleeditcomment = (id) => {
+    axios
+      .get(`http://3.7.173.138:9000/admin/getone_coment_list/${id}`)
+      .then((res) => {
+        console.log(res.data.data);
+        setUpcom(res.data.data?.comment);
+        toggleedit();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    const user = localStorage.getItem("userId");
   };
 
   const removebookmark = (id) => {
@@ -809,7 +859,98 @@ function Allpromotion(args) {
                                   </div>
                                 </div>
                                 <div className="re-btext mt-3">
-                                  <p>{value?.comment}</p>
+                                  <Row>
+                                    <Col lg="10"> {value?.comment}</Col>
+                                    <Col lg="2">
+                                      {value?.userid?._id ==
+                                      localStorage.getItem("userId") ? (
+                                        <>
+                                          <h6>
+                                            <AiFillEdit
+                                              onClick={() =>
+                                                handleeditcomment(value?._id)
+                                              }
+                                              // onClick={
+                                              //
+                                              // }
+                                              size="25px"
+                                            />
+                                          </h6>
+                                          <Modal
+                                            isOpen={editmodal}
+                                            toggle={toggleedit}
+                                            {...args}
+                                          >
+                                            <ModalHeader toggle={toggleedit}>
+                                              Edit Your Comment
+                                            </ModalHeader>
+                                            <ModalBody>
+                                              <Row>
+                                                <Col>
+                                                  <Label>Edit Review</Label>
+                                                  <input
+                                                    type="text"
+                                                    className="form-control"
+                                                    placeholder={value?.comment}
+                                                    value={upcom}
+                                                    onChange={(e) =>
+                                                      setUpcom(e.target.value)
+                                                    }
+                                                    aria-describedby="inputGroupPrepend"
+                                                    required
+                                                  />
+                                                </Col>
+                                                <Col>
+                                                  <ReactStars
+                                                    style={{
+                                                      size: "25px",
+                                                    }}
+                                                    {...secondExample}
+                                                  />
+                                                </Col>
+                                              </Row>
+
+                                              <Col className="d-flex justify-content-center">
+                                                <button
+                                                  style={{
+                                                    color: "white",
+                                                  }}
+                                                  onClick={() => {
+                                                    editcomment(
+                                                      value?._id,
+                                                      promotiondata?._id,
+                                                      value?.rating
+                                                    );
+                                                  }}
+                                                  class="btn success"
+                                                >
+                                                  Edit your comment
+                                                </button>
+                                              </Col>
+                                            </ModalBody>
+                                            {/* <ModalFooter>
+                                                              <Button
+                                                                color="primary"
+                                                                onClick={
+                                                                  toggleedit
+                                                                }
+                                                              >
+                                                                Do Something
+                                                              </Button>{" "}
+                                                              <Button
+                                                                color="secondary"
+                                                                onClick={
+                                                                  toggleedit
+                                                                }
+                                                              >
+                                                                Cancel
+                                                              </Button>
+                                                            </ModalFooter> */}
+                                          </Modal>
+                                        </>
+                                      ) : null}
+                                    </Col>
+                                  </Row>
                                 </div>
                               </div>
                             ))}

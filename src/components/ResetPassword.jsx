@@ -39,7 +39,7 @@ function ResetPassword() {
         "**Fill the password please!";
       return false;
     }
-    if (newpass == oldpass) {
+    if (newpass == oldpass || oldpass == confirmpass) {
       swal("New Password Must be different from Existing");
     }
     if (oldpass !== "") {
@@ -68,14 +68,28 @@ function ResetPassword() {
       document.getElementById("messagea").innerHTML = " ";
       document.getElementById("messagesa").innerHTML = " ";
       return false;
-    } else if (newpass !== confirmpass) {
+    }
+    if (newpass !== confirmpass) {
       document.getElementById("message").innerHTML =
         "**Password Does not Match**";
       document.getElementById("messages").innerHTML =
         "**Password Does not Match**";
-    } else if (newpass == confirmpass) {
-      document.getElementById("message").innerHTML = "";
-      document.getElementById("messages").innerHTML = "";
+    }
+    if (newpass == confirmpass) {
+      var expression =
+        /^(?=.*([A-Z]){1,})(?=.*[!@#$&*]{1,})(?=.*[0-9]{1,})(?=.*[a-z]{1,}).{8,100}$/;
+
+      var regex = new RegExp(expression);
+      if (
+        newpass.match(regex) &&
+        newpass.length >= 8 &&
+        newpass.length < 15 &&
+        confirmpass.length < 15
+      ) {
+        document.getElementById("message").innerHTML = "";
+        document.getElementById("messages").innerHTML = "";
+      }
+
       // document.getElementById("messagea").innerHTML = "**Strong Password** ";
       // document.getElementById("messagesa").innerHTML = "**Strong Password** ";
       if (oldpass == "") {
@@ -96,6 +110,7 @@ function ResetPassword() {
         var res = "";
         if (
           newpass.match(regex) &&
+          confirmpass.match(regex) &&
           newpass.length >= 8 &&
           newpass.length < 15 &&
           confirmpass.length < 15
@@ -155,8 +170,8 @@ function ResetPassword() {
         //   });
       }
     } else {
-      document.getElementById("messagea").innerHTML = "**Password Matched";
-      document.getElementById("messagesa").innerHTML = "**Password Matched";
+      // document.getElementById("messagea").innerHTML = "**Password Matched";
+      // document.getElementById("messagesa").innerHTML = "**Password Matched";
     }
   };
   return (

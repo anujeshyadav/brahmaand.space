@@ -77,10 +77,10 @@ function Bookmarks(args) {
 
   const [upcom, setUpcom] = useState("");
 
-  const editcomment = (id, dataid) => {
-    console.log(id);
-    console.log(dataid);
-
+  const editcomment = (id, dataid, oldrating) => {
+    if (rating == "") {
+      setRating(oldrating);
+    }
     const user = localStorage.getItem("userId");
 
     axios
@@ -864,7 +864,8 @@ function Bookmarks(args) {
                                                   onClick={() => {
                                                     editcomment(
                                                       value?._id,
-                                                      Producdetail?._id
+                                                      Producdetail?._id,
+                                                      value?.rating
                                                     );
                                                   }}
                                                   class="btn success"

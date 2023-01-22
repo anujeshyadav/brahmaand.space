@@ -114,27 +114,30 @@ function ProductHastag(args) {
 
   const [upcom, setUpcom] = useState("");
 
-  const editcomment = (id, dataid) => {
-    console.log(id);
-    console.log(dataid);
-
+  const editcomment = (id, dataid, oldrating) => {
+    console.log(oldrating);
+    if (rating == "") {
+      setRating(oldrating);
+    }
+    console.log(rating);
     const user = localStorage.getItem("userId");
-
-    axios
-      .post(`http://3.7.173.138:9000/user/editCommentbyUser/${id}`, {
-        submitresrcId: dataid,
-        userid: user,
-        comment: upcom,
-        rating: rating,
-      })
-      .then((res) => {
-        console.log(res.data.data);
-        swal("Submitted Successfully");
-        toggleedit();
-      })
-      .catch((err) => {
-        console.log(err.response.data);
-      });
+    if (rating !== "" && upcom !== "") {
+      axios
+        .post(`http://3.7.173.138:9000/user/editCommentbyUser/${id}`, {
+          submitresrcId: dataid,
+          userid: user,
+          comment: upcom,
+          rating: rating,
+        })
+        .then((res) => {
+          console.log(res.data.data);
+          swal("Submitted Successfully");
+          toggleedit();
+        })
+        .catch((err) => {
+          console.log(err.response.data);
+        });
+    }
   };
 
   const handleeditcomment = (id) => {
@@ -1752,7 +1755,8 @@ function ProductHastag(args) {
                                                               onClick={() => {
                                                                 editcomment(
                                                                   value?._id,
-                                                                  promotiondata?._id
+                                                                  promotiondata?._id,
+                                                                  value?.rating
                                                                 );
                                                               }}
                                                               class="btn success"
@@ -2613,7 +2617,8 @@ function ProductHastag(args) {
                                                                   onClick={() => {
                                                                     editcomment(
                                                                       value?._id,
-                                                                      Producdetail?._id
+                                                                      Producdetail?._id,
+                                                                      value?.rating
                                                                     );
                                                                   }}
                                                                   class="btn success"
@@ -3449,7 +3454,8 @@ function ProductHastag(args) {
                                                           onClick={() => {
                                                             editcomment(
                                                               value?._id,
-                                                              Producdetail?._id
+                                                              Producdetail?._id,
+                                                              value?.rating
                                                             );
                                                           }}
                                                           class="btn success"
