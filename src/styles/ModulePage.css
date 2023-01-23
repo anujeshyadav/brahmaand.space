@@ -565,13 +565,19 @@ button.btn.btn-success.btn.btn-secondary {
   color: white;
 }
 .newcontent {
-  display: flex;
+  display: flex !important;
+  float: right;
+  width: auto;
+  margin-top: -271px;
+  position: absolute;
+  color: white;
+  align-content: stretch;
+  /* display: flex;
   width: 246px;
   margin-top: -271px;
   position: absolute;
   /* margin-left: 150px; */
-  justify-content: right;
-  color: white;
+  /* justify-content: right !important; */
 }
 
 button.btlisting.btn.btn-secondary {
