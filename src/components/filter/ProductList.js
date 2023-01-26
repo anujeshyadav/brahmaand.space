@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-// import { Navigation, Paginations, Scrollbar, A11y } from "swiper";
+import { Navigation, Scrollbar, A11y } from "swiper";
 import ReactHtmlParser from "react-html-parser";
 import ReactPaginate from "react-paginate";
 import ReactStars from "react-rating-stars-component";
 import { Swiper, SwiperSlide } from "swiper/react";
 import StarsRating from "stars-rating";
 import "swiper/css";
-import { Navigation, Scrollbar, A11y } from "swiper";
+
 import { useNavigate } from "react-router-dom";
 import { ReactSearchAutocomplete } from "react-search-autocomplete";
 import swal from "sweetalert";
@@ -17,7 +17,7 @@ import { FiFilter } from "react-icons/fi";
 import { AiFillEdit } from "react-icons/ai";
 import { BsFillBookmarkCheckFill, BsBookmark } from "react-icons/bs";
 import Slider from "./Slider";
-import Pagination from "react-bootstrap/Pagination";
+// import Pagination from "react-bootstrap/Pagination";
 import { Modal, ModalHeader, ModalBody, ModalFooter, Label } from "reactstrap";
 import "../../styles/ModulePage.css";
 import mdicon1 from "../../assets/icons/mdicon-1.png";
@@ -732,6 +732,7 @@ function ProductList(args) {
           navigate(-1);
         } else {
           setCategry(response.data.data);
+          console.log(response.data.data);
         }
         // const data = response.data.data;
         // const datanew = data.filter((data) => {
@@ -1211,14 +1212,16 @@ function ProductList(args) {
                       // slidesPerView={3}
                       // centeredSlides={true}
                       // loop={true}
-                      className="sld-1 justify-content-center"
-                      modules={[Navigation, Scrollbar]}
+                      className="sld-1 justify-content-center swiper-button-show"
+                      modules={[Navigation, Scrollbar, A11y]}
                       navigation
                       onSlideChange={() => console.log("slide change")}
                       onSwiper={(swiper) => console.log(swiper)}
                       // scrollbar={{ draggable: true }}
                       // className=" "
                     >
+                      <div class="swiper-button-prev"></div>
+                      <div class="swiper-button-next"></div>
                       {promotion?.map((promotion) => (
                         <SwiperSlide>
                           <Col key={promotion?._id}>
@@ -1905,6 +1908,9 @@ function ProductList(args) {
                                         handleSelection(categry?._id)
                                       }
                                     >
+                                      {/* <span class="product-discount-label">
+                                        <FaHeart color="red" />
+                                      </span> */}
                                       {categry?.link.match(
                                         /(?:youtu\.be\/|youtube\.com(?:\/embed\/|\/v\/|\/watch\?v=|\/user\/\S+|\/ytscreeningroom\?v=|\/sandalsResorts#\w\/\w\/.*\/))([^\/&]{10,12})/
                                       ) ? (
@@ -1929,15 +1935,16 @@ function ProductList(args) {
                                           ) : null}
                                         </>
                                       ) : (
-                                        <img
-                                          style={{ borderRadius: "10px" }}
-                                          src={categry?.img}
-                                          alt="image"
-                                          width="100%"
-                                          height={160}
-                                        />
+                                        <>
+                                          <img
+                                            style={{ borderRadius: "10px" }}
+                                            src={categry?.img}
+                                            alt="image"
+                                            width="100%"
+                                            height={160}
+                                          />
+                                        </>
                                       )}
-
                                       {/* <img
                                         style={{ borderRadius: "10px" }}
                                         src={categry?.img}
@@ -1945,7 +1952,6 @@ function ProductList(args) {
                                         width="100%"
                                         height={160}
                                       /> */}
-
                                       <Modal
                                         key={Producdetail?._id}
                                         className="mdlg"
@@ -2873,7 +2879,7 @@ function ProductList(args) {
                 // slidesPerView={3}
                 centeredSlides={true}
                 loop={true}
-                // modules={[Navigation, Scrollbar]}
+                // modules={[Navigation, Scrollbar,A11y]}
                 // navigation
                 onSlideChange={() => console.log("slide change")}
                 onSwiper={(swiper) => console.log(swiper)}
