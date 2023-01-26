@@ -7,6 +7,7 @@ import ReactStars from "react-rating-stars-component";
 import { Swiper, SwiperSlide } from "swiper/react";
 import StarsRating from "stars-rating";
 import "swiper/css";
+import { Navigation, Scrollbar, A11y } from "swiper";
 import { useNavigate } from "react-router-dom";
 import { ReactSearchAutocomplete } from "react-search-autocomplete";
 import swal from "sweetalert";
@@ -363,15 +364,6 @@ function ProductList(args) {
       .catch((err) => {
         // console.log(err.response.data);
       });
-    // if (
-    //   myId !== null &&
-    //   myId !== undefined &&
-    //   myId !== "" &&
-    //   liked !== "" &&
-    //   liked !== null &&
-    //   liked !== undefined
-    // ) {
-    // }
   };
   const handlepromotion = (_id) => {
     // console.log(_id);
@@ -518,7 +510,7 @@ function ProductList(args) {
 
   const handleSelection = (_id) => {
     setliked(_id);
-    console.log(_id);
+    // console.log(_id);
     hadlestatusbookmark();
     var selectedId = _id;
 
@@ -626,6 +618,7 @@ function ProductList(args) {
     getLanguage();
     getUser();
     hadlestatusbookmark();
+
     promotionadmin();
 
     if (
@@ -1217,11 +1210,14 @@ function ProductList(args) {
                       spaceBetween={20}
                       // slidesPerView={3}
                       // centeredSlides={true}
-                      loop={true}
+                      // loop={true}
+                      className="sld-1 justify-content-center"
+                      modules={[Navigation, Scrollbar]}
+                      navigation
                       onSlideChange={() => console.log("slide change")}
                       onSwiper={(swiper) => console.log(swiper)}
-                      scrollbar={{ draggable: true }}
-                      className=" "
+                      // scrollbar={{ draggable: true }}
+                      // className=" "
                     >
                       {promotion?.map((promotion) => (
                         <SwiperSlide>
@@ -1585,12 +1581,20 @@ function ProductList(args) {
                                                   }
                                                   icons={icons.star}
                                                   colors={colors.star}
-                                                />
-
-                                                <small className="mt-3">
-                                                  {getonecomment?.length}-
-                                                  customers reviews
-                                                </small>
+                                                />{" "}
+                                              </div>
+                                              <div className="starratinginno">
+                                                {promotiondata?.ava_rating !=
+                                                0 ? (
+                                                  <>
+                                                    [{promotiondata?.ava_rating}
+                                                    ] of 5 Stars
+                                                  </>
+                                                ) : null}
+                                              </div>
+                                              <div className="mt-3">
+                                                {getonecomment?.length}-
+                                                customers reviews
                                               </div>
                                             </div>
                                           </Col>
@@ -1933,6 +1937,7 @@ function ProductList(args) {
                                           height={160}
                                         />
                                       )}
+
                                       {/* <img
                                         style={{ borderRadius: "10px" }}
                                         src={categry?.img}
@@ -2261,9 +2266,16 @@ function ProductList(args) {
                                                       colors={colors.star}
                                                     />
                                                     <span className="starratinginno">
-                                                      [{" "}
-                                                      {Producdetail?.ava_rating}
-                                                      ] of 5 Stars
+                                                      {Producdetail?.ava_rating !=
+                                                      0 ? (
+                                                        <>
+                                                          [
+                                                          {
+                                                            Producdetail?.ava_rating
+                                                          }
+                                                          ] of 5 Stars
+                                                        </>
+                                                      ) : null}
                                                     </span>
                                                     <br></br>
                                                     <span className="mt-3">
@@ -3160,8 +3172,12 @@ function ProductList(args) {
                                               colors={colors.star}
                                             />
                                             <span className="starratinginno">
-                                              [ {Producdetail?.ava_rating}] of 5
-                                              Stars
+                                              {Producdetail?.ava_rating != 0 ? (
+                                                <>
+                                                  [{Producdetail?.ava_rating}]
+                                                  of 5 Stars
+                                                </>
+                                              ) : null}
                                             </span>
                                             <br></br>
                                             <span className="mt-3">

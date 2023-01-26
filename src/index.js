@@ -71,6 +71,7 @@ import { Navbar } from "reactstrap";
 import Signup from "./components/Signup";
 import Login from "./components/Login.jsx";
 import Myaccount from "./components/Myaccount";
+import Geolocation from "./components/filter/Golocation";
 
 // import Searchfiltermodel from "./components/filter/Searchfiltermodel";
 import FAQ from "./components/FAQ";
@@ -153,6 +154,7 @@ render(
               path="reset-password/:uid/:token"
               element={<ResetPasswordComponent />}
             />
+            <Route path="geolocation" element={<Geolocation />} />
             <Route
               path="send-reset-password-request"
               element={<SendRequestResetPasswordComponent />}

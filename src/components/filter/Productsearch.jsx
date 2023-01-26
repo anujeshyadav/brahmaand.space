@@ -1571,12 +1571,20 @@ function Productsearch(args) {
                                                   }
                                                   icons={icons.star}
                                                   colors={colors.star}
-                                                />
-
-                                                <small className="mt-3">
-                                                  {getonecomment?.length}-
-                                                  customers reviews
-                                                </small>
+                                                />{" "}
+                                              </div>
+                                              <div className="starratinginno">
+                                                {promotiondata?.ava_rating !=
+                                                0 ? (
+                                                  <>
+                                                    [{promotiondata?.ava_rating}
+                                                    ] of 5 Stars
+                                                  </>
+                                                ) : null}
+                                              </div>
+                                              <div className="mt-3">
+                                                {getonecomment?.length}-
+                                                customers reviews
                                               </div>
                                             </div>
                                           </Col>
@@ -2247,9 +2255,16 @@ function Productsearch(args) {
                                                       colors={colors.star}
                                                     />
                                                     <span className="starratinginno">
-                                                      [{" "}
-                                                      {Producdetail?.ava_rating}
-                                                      ] of 5 Stars
+                                                      {Producdetail?.ava_rating !=
+                                                      0 ? (
+                                                        <>
+                                                          [
+                                                          {
+                                                            Producdetail?.ava_rating
+                                                          }
+                                                          ] of 5 Stars
+                                                        </>
+                                                      ) : null}
                                                     </span>
                                                     <br></br>
                                                     <span className="mt-3">
@@ -3146,8 +3161,12 @@ function Productsearch(args) {
                                               colors={colors.star}
                                             />
                                             <span className="starratinginno">
-                                              [ {Producdetail?.ava_rating}] of 5
-                                              Stars
+                                              {Producdetail?.ava_rating != 0 ? (
+                                                <>
+                                                  [{Producdetail?.ava_rating}]
+                                                  of 5 Stars
+                                                </>
+                                              ) : null}
                                             </span>
                                             <br></br>
                                             <span className="mt-3">
