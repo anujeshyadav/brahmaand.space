@@ -1211,7 +1211,7 @@ function ProductList(args) {
                       spaceBetween={20}
                       // slidesPerView={3}
                       // centeredSlides={true}
-                      loop={true}
+                      // loop={true}
                       className="sld-1 justify-content-center swiper-button-show"
                       modules={[Navigation, Scrollbar, A11y]}
                       navigation
@@ -2877,7 +2877,7 @@ function ProductList(args) {
                 spaceBetween={50}
                 // slidesPerView={3}
                 // centeredSlides={true}
-                loop={true}
+                // loop={true}
                 modules={[Navigation, Scrollbar, A11y]}
                 navigation
                 onSlideChange={() => console.log("slide change")}

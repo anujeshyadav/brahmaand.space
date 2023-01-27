@@ -2,7 +2,7 @@
   color: #000 !important;
   position: relative;
   z-index: 9999999;
-  top: -9px !important;
+  top: 0px !important;
 }
 
 .swiper-button-prev:hover {
@@ -15,14 +15,14 @@
   color: #000 !important;
   position: relative;
   z-index: 9999999;
-  top: -9px !important;
+  top: 0px !important;
 }
 
 /* rs css  */
 .swiper.swiper-button-show.swiper-initialized.swiper-horizontal.swiper-pointer-events.sld-1.justify-content-center.swiper-backface-hidden {
-  padding-bottom: 59px;
+  padding-bottom: 65px;
 }
 
 .swiper.swiper-button-show.swiper-initialized.swiper-horizontal.swiper-pointer-events.sld-1.justify-content-center {
-  padding-bottom: 46px;
+  padding-bottom: 85px;
 }
