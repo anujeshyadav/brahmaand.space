@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import HtmlParser from "react-html-parser";
+import { Navigation, Scrollbar, A11y } from "swiper";
 import ReactHtmlParser from "react-html-parser";
 import ReactPaginate from "react-paginate";
 import ReactStars from "react-rating-stars-component";
 import { Swiper, SwiperSlide } from "swiper/react";
 import StarsRating from "stars-rating";
 import "swiper/css";
+import "../../css/arrow.css";
+import "../../css/arrow.css";
 import { useNavigate } from "react-router-dom";
 import { ReactSearchAutocomplete } from "react-search-autocomplete";
 import swal from "sweetalert";
@@ -1204,10 +1207,12 @@ function Productsearch(args) {
                       // slidesPerView={3}
                       // centeredSlides={true}
                       loop={true}
+                      className="sld-1 justify-content-center swiper-button-show"
+                      modules={[Navigation, Scrollbar, A11y]}
+                      navigation
                       onSlideChange={() => console.log("slide change")}
                       onSwiper={(swiper) => console.log(swiper)}
-                      // scrollbar={{ draggable: true }}
-                      className=" "
+                      scrollbar={{ draggable: true }}
                     >
                       {promotion?.map((promotion) => (
                         <SwiperSlide>
@@ -2860,14 +2865,15 @@ function Productsearch(args) {
                 }}
                 spaceBetween={50}
                 // slidesPerView={3}
-                centeredSlides={true}
+                // centeredSlides={true}
                 loop={true}
-                // modules={[Navigation, Scrollbar]}
-                // navigation
+                modules={[Navigation, Scrollbar, A11y]}
+                navigation
                 onSlideChange={() => console.log("slide change")}
                 onSwiper={(swiper) => console.log(swiper)}
                 scrollbar={{ draggable: true }}
-                className="mySwipersuggestion"
+                className=" sld-1 justify-content-center swiper-button-show"
+                // className=" sld-1 swiper-button-show"
               >
                 {suggested !== ""
                   ? suggested?.map((categry) => (

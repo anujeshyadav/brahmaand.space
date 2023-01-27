@@ -1,0 +1,28 @@
+.swiper-button-prev {
+  color: #000 !important;
+  position: relative;
+  z-index: 9999999;
+  top: -9px !important;
+}
+
+.swiper-button-prev:hover {
+  color: burlywood !important;
+}
+.swiper-button-next:hover {
+  color: blanchedalmond !important;
+}
+.swiper-button-next {
+  color: #000 !important;
+  position: relative;
+  z-index: 9999999;
+  top: -9px !important;
+}
+
+/* rs css  */
+.swiper.swiper-button-show.swiper-initialized.swiper-horizontal.swiper-pointer-events.sld-1.justify-content-center.swiper-backface-hidden {
+  padding-bottom: 59px;
+}
+
+.swiper.swiper-button-show.swiper-initialized.swiper-horizontal.swiper-pointer-events.sld-1.justify-content-center {
+  padding-bottom: 46px;
+}

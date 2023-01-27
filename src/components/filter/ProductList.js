@@ -11,7 +11,7 @@ import "swiper/css";
 import { useNavigate } from "react-router-dom";
 import { ReactSearchAutocomplete } from "react-search-autocomplete";
 import swal from "sweetalert";
-
+import "../../css/arrow.css";
 import "../../components/pagination.css";
 import { FiFilter } from "react-icons/fi";
 import { AiFillEdit } from "react-icons/ai";
@@ -1211,17 +1211,16 @@ function ProductList(args) {
                       spaceBetween={20}
                       // slidesPerView={3}
                       // centeredSlides={true}
-                      // loop={true}
+                      loop={true}
                       className="sld-1 justify-content-center swiper-button-show"
                       modules={[Navigation, Scrollbar, A11y]}
                       navigation
                       onSlideChange={() => console.log("slide change")}
                       onSwiper={(swiper) => console.log(swiper)}
-                      // scrollbar={{ draggable: true }}
-                      // className=" "
+                      scrollbar={{ draggable: true }}
                     >
-                      <div class="swiper-button-prev"></div>
-                      <div class="swiper-button-next"></div>
+                      {/* <div class="swiper-button-prev"></div>
+                      <div class="swiper-button-next"></div> */}
                       {promotion?.map((promotion) => (
                         <SwiperSlide>
                           <Col key={promotion?._id}>
@@ -1886,8 +1885,8 @@ function ProductList(args) {
                     </Swiper>
                   </Row>
 
-                  <div className="serach-product">
-                    <h4 className="mt-3 ">
+                  <div className="serach-product py-3">
+                    <h4 className=" ">
                       Searching Product
                       <span>
                         <Col className="fifilters " lg="3">
@@ -2877,15 +2876,19 @@ function ProductList(args) {
                 }}
                 spaceBetween={50}
                 // slidesPerView={3}
-                centeredSlides={true}
+                // centeredSlides={true}
                 loop={true}
-                // modules={[Navigation, Scrollbar,A11y]}
-                // navigation
+                modules={[Navigation, Scrollbar, A11y]}
+                navigation
                 onSlideChange={() => console.log("slide change")}
                 onSwiper={(swiper) => console.log(swiper)}
                 scrollbar={{ draggable: true }}
-                className="mySwipersuggestion"
+                className=" sld-1 justify-content-center swiper-button-show"
+                // className=" sld-1 swiper-button-show"
               >
+                {/* <div class="swiper-button-prev"></div>
+                <div class="swiper-button-next"></div> */}
+
                 {suggested !== ""
                   ? suggested?.map((categry) => (
                       <SwiperSlide>

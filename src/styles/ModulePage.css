@@ -940,13 +940,13 @@ svg.bsplaybutton {
 
 .swiper-button-next,
 .swiper-button-prev {
-  margin-top: 12px !important;
+  /* margin-top: 30px !important; */
   background: none;
   width: 55px !important;
-  top: 5%;
+  top: 25% !important;
 
   width: calc(var(--swiper-navigation-size) / 44 * 27);
-  height: var(--swiper-navigation-size);
+  /* height: var(--swiper-navigation-size); */
   margin-top: calc(0px - (var(--swiper-navigation-size) / 2));
   z-index: 10;
   cursor: pointer;

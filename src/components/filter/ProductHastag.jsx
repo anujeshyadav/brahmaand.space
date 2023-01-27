@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { Navigation, Scrollbar, A11y } from "swiper";
 import ReactHtmlParser from "react-html-parser";
 import ReactPaginate from "react-paginate";
 import ReactStars from "react-rating-stars-component";
@@ -1200,10 +1201,12 @@ function ProductHastag(args) {
                       // slidesPerView={3}
                       // centeredSlides={true}
                       loop={true}
+                      className="sld-1 justify-content-center swiper-button-show"
+                      modules={[Navigation, Scrollbar, A11y]}
+                      navigation
                       onSlideChange={() => console.log("slide change")}
                       onSwiper={(swiper) => console.log(swiper)}
-                      // scrollbar={{ draggable: true }}
-                      className=" "
+                      scrollbar={{ draggable: true }}
                     >
                       {promotion?.map((promotion) => (
                         <SwiperSlide>
@@ -2856,14 +2859,15 @@ function ProductHastag(args) {
                 }}
                 spaceBetween={50}
                 // slidesPerView={3}
-                centeredSlides={true}
+                // centeredSlides={true}
                 loop={true}
-                // modules={[Navigation, Scrollbar]}
-                // navigation
+                modules={[Navigation, Scrollbar, A11y]}
+                navigation
                 onSlideChange={() => console.log("slide change")}
                 onSwiper={(swiper) => console.log(swiper)}
                 scrollbar={{ draggable: true }}
-                className="mySwipersuggestion"
+                className=" sld-1 justify-content-center swiper-button-show"
+                // className=" sld-1 swiper-button-show"
               >
                 {suggested !== ""
                   ? suggested?.map((categry) => (

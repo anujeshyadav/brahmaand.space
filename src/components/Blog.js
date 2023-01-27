@@ -148,13 +148,15 @@ function Blog() {
             },
           }}
           spaceBetween={50}
-          className="sld-1 justify-content-center"
+          className="sld-1  justify-content-center"
           modules={[Navigation, Pagination, Scrollbar]}
           navigation
           // slidesPerView={2}
           onSlideChange={() => console.log("slide change")}
           onSwiper={(swiper) => console.log(swiper)}
         >
+          {/* <div class="swiper-button-prev sld-2 "></div>
+          <div class="swiper-button-next sld-2"></div> */}
           <Row>
             {recomblog?.map((value) => (
               <SwiperSlide
