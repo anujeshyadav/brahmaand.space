@@ -170,6 +170,7 @@ function ProductHastag(args) {
   };
 
   const hastagdata = localStorage.getItem("hastag");
+
   const gethastagdata = () => {
     const hastagdata = localStorage.getItem("hastag");
 
@@ -179,17 +180,24 @@ function ProductHastag(args) {
           searchinput: hastagdata,
         })
         .then((res) => {
-          // console.log(res.data.data);
           if (res.data.data !== "" && res.data.data !== null) {
             setCategry(res.data.data);
             console.log(res.data.data);
-            // localStorage.removeItem("searchdata");
-            // localStorage.setItem("hastag", "hastag");
           }
         })
-        .catch((err) => {
-          // console.log(err);
-        });
+        .catch((err) => {});
+    axios
+      .post(`http://3.7.173.138:9000/user/search_promotion`, {
+        searchinput: hastagdata,
+      })
+      .then((res) => {
+        console.log(res.data.data);
+        if (res.data.data !== "" && res.data.data !== null) {
+          setPromotion(res.data.data);
+          console.log(res.data.data);
+        }
+      })
+      .catch((err) => {});
   };
 
   const getYear = () => {
@@ -415,17 +423,17 @@ function ProductHastag(args) {
         });
     }
   };
-  const promotionadmin = () => {
-    axios
-      .get(`http://3.7.173.138:9000/user/Promotions`)
-      .then((res) => {
-        setPromotion(res.data.data);
-        // console.log(res.data.data);
-      })
-      .catch((err) => {
-        // console.log(err);
-      });
-  };
+  // const promotionadmin = () => {
+  //   axios
+  //     .get(`http://3.7.173.138:9000/user/Promotions`)
+  //     .then((res) => {
+  //       setPromotion(res.data.data);
+  //       // console.log(res.data.data);
+  //     })
+  //     .catch((err) => {
+  //       // console.log(err);
+  //     });
+  // };
 
   let Params = useParams();
 
@@ -523,11 +531,9 @@ function ProductHastag(args) {
     if (selectedId === _id) {
       setProductdes(selectedId);
       axios
-        // .get(`http://3.7.173.138:9000/admin/getone_reslist/${productdes}`)
+
         .get(`http://3.7.173.138:9000/admin/getone_reslist/${selectedId}`)
         .then((res) => {
-          // console.log(res.data.data._id);
-          // console.log(res);
           if (
             res.data.data._id !== "" ||
             res.data.data._id !== null ||
@@ -629,7 +635,6 @@ function ProductHastag(args) {
     getLanguage();
     getUser();
     // hadlestatusbookmark();
-    promotionadmin();
 
     if (
       type === "" &&
@@ -651,6 +656,7 @@ function ProductHastag(args) {
     }
     if (searchdata !== "" && searchdata !== null) {
       handleSearchHomePage();
+      // promotionadmin();
     }
 
     if (contentyear !== "") {
@@ -1208,430 +1214,430 @@ function ProductHastag(args) {
                       onSwiper={(swiper) => console.log(swiper)}
                       scrollbar={{ draggable: true }}
                     >
-                      {promotion?.map((promotion) => (
-                        <SwiperSlide>
-                          <Col key={promotion?._id}>
-                            <div class="product-grid8">
-                              <div class="product-image8">
-                                <Link
-                                  key={promotion?._id}
-                                  onClick={() =>
-                                    handlepromotion(promotion?._id)
-                                  }
-                                >
-                                  {promotion?.link.match(
-                                    /(?:youtu\.be\/|youtube\.com(?:\/embed\/|\/v\/|\/watch\?v=|\/user\/\S+|\/ytscreeningroom\?v=|\/sandalsResorts#\w\/\w\/.*\/))([^\/&]{10,12})/
-                                  ) ? (
-                                    <>
-                                      {promotion?.link ? (
+                      {promotion?.length > 0 ? (
+                        <>
+                          {promotion?.map((promotion) => (
+                            <SwiperSlide>
+                              <Col key={promotion?._id}>
+                                <div class="product-grid8">
+                                  <div class="product-image8">
+                                    <Link
+                                      key={promotion?._id}
+                                      onClick={() =>
+                                        handlepromotion(promotion?._id)
+                                      }
+                                    >
+                                      {promotion?.link.match(
+                                        /(?:youtu\.be\/|youtube\.com(?:\/embed\/|\/v\/|\/watch\?v=|\/user\/\S+|\/ytscreeningroom\?v=|\/sandalsResorts#\w\/\w\/.*\/))([^\/&]{10,12})/
+                                      ) ? (
                                         <>
-                                          <h2 style={{ color: "green" }}>
-                                            {promotion[1]}
-                                          </h2>
-                                          <iframe
-                                            allowfullscreen="true"
-                                            width="100%"
-                                            height="auto"
-                                            style={{
-                                              borderRadius: "12px",
-                                            }}
-                                            src={`https://www.youtube.com/embed/${
-                                              promotion?.link?.split("=")[1]
-                                            }`}
-                                          ></iframe>
+                                          {promotion?.link ? (
+                                            <>
+                                              <h2 style={{ color: "green" }}>
+                                                {promotion[1]}
+                                              </h2>
+                                              <iframe
+                                                allowfullscreen="true"
+                                                width="100%"
+                                                height="auto"
+                                                style={{
+                                                  borderRadius: "12px",
+                                                }}
+                                                src={`https://www.youtube.com/embed/${
+                                                  promotion?.link?.split("=")[1]
+                                                }`}
+                                              ></iframe>
+                                            </>
+                                          ) : null}
                                         </>
-                                      ) : null}
-                                    </>
-                                  ) : (
-                                    <img
-                                      style={{ borderRadius: "10px" }}
-                                      src={promotion?.img}
-                                      alt="image"
-                                      width="100%"
-                                      height={160}
-                                    />
-                                  )}
-                                  {/* <img
-                                    style={{
-                                      height: "200px",
-                                      borderRadius: "10px",
-                                    }}
-                                    key={promotion?._id}
-                                    className="promotionimageclass"
-                                    src={promotion?.img}
-                                    alt="image"
-                                  /> */}
-                                  <Modal
-                                    key={promotiondata?._id}
-                                    className="mdlg"
-                                    isOpen={modalone}
-                                    // toggle={handleclosepromotion}
-                                    {...args}
-                                  >
-                                    <ModalBody key={promotiondata?._id}>
-                                      <Row>
-                                        <Col></Col>
-                                        <Col
-                                          lg="1"
-                                          className="d-flex justify-content-right"
-                                        >
-                                          <MdCancelPresentation
-                                            className="cancelbuttondata"
-                                            onClick={handleclosepromotion}
-                                            size={30}
-                                          />
-                                        </Col>
-                                      </Row>
-                                      <div className="main-content">
-                                        <h2>
-                                          {ReactHtmlParser(
-                                            promotiondata?.resTitle?.slice(
-                                              0,
-                                              80
-                                            )
-                                          )}
-                                        </h2>
-                                        {/* <div className="top-icon">
-                                          <Link to="#">
-                                            <img src={mdicon1} alt="" />
-                                          </Link>
-                                          <Link to="#">
-                                            <img src={mdicon2} alt="" />
-                                          </Link>
-                                        </div> */}
-                                        <Row className="top-icon">
-                                          <Col lg="10">
-                                            {" "}
-                                            <Link to="#">
-                                              <img src={mdicon1} alt="" />
-                                            </Link>
-                                            <Link to="#">
-                                              <img src={mdicon2} alt="" />
-                                            </Link>
-                                          </Col>
-                                          <Col
-                                            style={{ textAlign: "right" }}
-                                            lg="2"
-                                            key={promotiondata?._id}
-                                          >
-                                            {handlebookmark === "true" ? (
-                                              <BsFillBookmarkCheckFill
-                                                size={35}
-                                                key={promotiondata?._id}
-                                                className="addbookmark  "
-                                                color="#5f56c6"
-                                                onClick={() =>
-                                                  removebookmark(
-                                                    promotiondata?._id
-                                                  )
-                                                }
-                                              />
-                                            ) : (
-                                              <BsBookmark
-                                                size={35}
-                                                key={promotiondata?._id}
-                                                onClick={() =>
-                                                  addbookmark(
-                                                    promotiondata?._id
-                                                  )
-                                                }
-                                                className="addbookmark "
-                                                color="warning "
-                                              />
-                                            )}
-                                          </Col>
-                                        </Row>
-                                        <div className="tag-list">
-                                          <div className="tag-1">
-                                            <h5>
-                                              <span>
-                                                <img
-                                                  src={icons}
-                                                  alt=""
-                                                  width="30px"
-                                                />
-                                              </span>
-                                              Topic:
-                                            </h5>
-                                          </div>
-                                          <div className=" d-flex tag-2">
-                                            {promotiondata?.topics?.map(
-                                              (val) => (
-                                                <Link
-                                                  className="d-flex "
-                                                  to="#"
-                                                >
-                                                  {val}{" "}
-                                                </Link>
-                                              )
-                                            )}
-                                          </div>
-                                        </div>
+                                      ) : (
+                                        <img
+                                          style={{ borderRadius: "10px" }}
+                                          src={promotion?.img}
+                                          alt="image"
+                                          width="100%"
+                                          height={160}
+                                        />
+                                      )}
 
-                                        <hr></hr>
-                                      </div>
-
-                                      <div className="mid">
-                                        <h5>
-                                          Link :
-                                          <a href={promotiondata?.link}>
-                                            {promotiondata?.link}
-                                          </a>
-                                        </h5>
-                                        <div className="mid-content">
+                                      <Modal
+                                        key={promotiondata?._id}
+                                        className="mdlg"
+                                        isOpen={modalone}
+                                        {...args}
+                                      >
+                                        <ModalBody key={promotiondata?._id}>
                                           <Row>
-                                            <Col lg="6" md="6">
-                                              <div className="mid-1 mb-3">
-                                                <div className="mid-1-a">
-                                                  <img
-                                                    src={createricon}
-                                                    alt=""
-                                                  />
-                                                </div>
-                                                <div className="mid-1-b">
-                                                  <p>Creator:</p>
-                                                  <h4>
-                                                    {promotiondata?.creatorName}
-                                                  </h4>
-                                                </div>
-                                              </div>
-                                            </Col>
-                                            <Col lg="6" md="6">
-                                              <div className="mid-1 mb-3 ">
-                                                <div className="mid-1-a">
-                                                  <img src={usericon} alt="" />
-                                                </div>
-                                                <div className="mid-1-b">
-                                                  <p>Submitted by:</p>
-                                                  <h4>
-                                                    {promotiondata?.creatorName}
-                                                  </h4>
-                                                </div>
-                                              </div>
-                                            </Col>
-                                            <Col lg="3" md="3">
-                                              <div className="mid-1 mb-3 tt-2">
-                                                <div className="mid-1-a">
-                                                  <img
-                                                    src={typeicon}
-                                                    alt=""
-                                                    width="35px"
-                                                  />
-                                                </div>
-                                                <div className="mid-1-b tt-1">
-                                                  <p>Type:</p>
-                                                  <Link to="#">
-                                                    {promotiondata?.type}
-                                                  </Link>
-                                                </div>
-                                              </div>
-                                            </Col>
-                                            <Col lg="3" md="3">
-                                              <div className="mid-1 mb-3 tt-2">
-                                                <div className="mid-1-a">
-                                                  <img
-                                                    src={formaticon}
-                                                    alt=""
-                                                    width="35px"
-                                                  />
-                                                </div>
-                                                <div className="mid-1-b tt-1">
-                                                  <p>Format:</p>
-                                                  <Link to="#">
-                                                    {promotiondata?.format}
-                                                  </Link>
-                                                </div>
-                                              </div>
-                                            </Col>
-                                            <Col lg="3" md="3">
-                                              <div className="mid-1 mb-3 tt-2">
-                                                <div className="mid-1-a">
-                                                  <img
-                                                    src={diffculty}
-                                                    alt=""
-                                                    width="35px"
-                                                  />
-                                                </div>
-                                                <div className="mid-1-b tt-1">
-                                                  <p>Category:</p>
-                                                  <p to="#">
-                                                    {
-                                                      promotiondata?.category
-                                                        ?.title
-                                                    }
-                                                  </p>
-                                                </div>
-                                              </div>
-                                            </Col>
-                                            <Col lg="3" md="3">
-                                              <div className="mid-1 mb-3 tt-2">
-                                                <div className="mid-1-a">
-                                                  <img
-                                                    src={languageicon}
-                                                    alt=""
-                                                    width="35px"
-                                                  />
-                                                </div>
-                                                <div className="mid-1-b tt-1">
-                                                  <p>Language:</p>
-                                                  {promotiondata?.language?.map(
-                                                    (lang) => (
-                                                      <span>
-                                                        {lang?.language}{" "}
-                                                      </span>
-                                                    )
-                                                  )}
-                                                </div>
-                                              </div>
-                                            </Col>
-                                            <Col lg="3" md="3">
-                                              <div className="mid-1 mb-3 tt-2">
-                                                <div className="mid-1-a">
-                                                  <img
-                                                    src={yearicon}
-                                                    alt=""
-                                                    width="35px"
-                                                  />
-                                                </div>
-                                                <div className="mid-1-b tt-1">
-                                                  <p>Year:</p>
-                                                  {promotiondata?.relYear?.map(
-                                                    (year) => (
-                                                      <Link to="#">
-                                                        {year?.yrName}
-                                                      </Link>
-                                                    )
-                                                  )}
-                                                </div>
-                                              </div>
-                                            </Col>
-                                            <Col lg="3" md="3">
-                                              <div className="mid-1 mb-3 tt-2">
-                                                <div className="mid-1-a">
-                                                  <img
-                                                    src={
-                                                      promotiondata?.ava_rating
-                                                    }
-                                                    alt=""
-                                                    width="35px"
-                                                  />
-                                                </div>
-                                                <div className="mid-1-b tt-1">
-                                                  <p>Ratings:</p>
-                                                  <Link to="#">
-                                                    [{promotiondata?.ava_rating}
-                                                    ]
-                                                  </Link>
-                                                </div>
-                                              </div>
-                                            </Col>
-                                            <Col lg="4" md="4">
-                                              <div className="mid-1 mb-3 tt-2">
-                                                <div className="mid-1-a">
-                                                  <img
-                                                    src={submiticon}
-                                                    alt=""
-                                                    width="35px"
-                                                  />
-                                                </div>
-                                                <div className="mid-1-b tt-1">
-                                                  <p>Submitted:</p>
-                                                  <Moment format="ll">
-                                                    {promotiondata?.createdAt}
-                                                  </Moment>
-                                                </div>
-                                              </div>
+                                            <Col></Col>
+                                            <Col
+                                              lg="1"
+                                              className="d-flex justify-content-right"
+                                            >
+                                              <MdCancelPresentation
+                                                className="cancelbuttondata"
+                                                onClick={handleclosepromotion}
+                                                size={30}
+                                              />
                                             </Col>
                                           </Row>
-                                        </div>
-                                      </div>
+                                          <div className="main-content">
+                                            <h2>
+                                              {ReactHtmlParser(
+                                                promotiondata?.resTitle?.slice(
+                                                  0,
+                                                  80
+                                                )
+                                              )}
+                                            </h2>
 
-                                      <hr></hr>
-
-                                      <div className="description mt-3">
-                                        <h4>Description:</h4>
-                                        <h5>
-                                          {ReactHtmlParser(
-                                            promotiondata?.desc?.slice(0, 80)
-                                          )}
-                                        </h5>
-                                      </div>
-
-                                      <hr></hr>
-                                      <div className="rating-box">
-                                        <Row>
-                                          <Col lg="6">
-                                            <div className="rat-left">
-                                              <h4>Customer Rating</h4>
-                                              <div className="">
-                                                <PrettyRating
-                                                  value={
-                                                    promotiondata?.ava_rating
-                                                  }
-                                                  icons={icons.star}
-                                                  colors={colors.star}
-                                                />{" "}
-                                              </div>
-                                              <div className="starratinginno">
-                                                {promotiondata?.ava_rating !=
-                                                0 ? (
-                                                  <>
-                                                    [{promotiondata?.ava_rating}
-                                                    ] of 5 Stars
-                                                  </>
-                                                ) : null}
-                                              </div>
-                                              <div className="mt-3">
-                                                {getonecomment?.length}-
-                                                customers reviews
-                                              </div>
-                                            </div>
-                                          </Col>
-                                          <Col lg="6">
-                                            <h4>Write your review</h4>
-
-                                            {/* <StarsRating
-                                              count={5}
-                                              onChange={ratingChanged}
-                                              size={40}
-                                              color={"#ffd700"}
-                                            /> */}
-                                            <ReactStars {...secondExample} />
-                                          </Col>
-                                          <Row lg="12">
-                                            <div
-                                              key={promotiondata?._id}
-                                              className="rat-right"
-                                            >
-                                              <div className="">
-                                                <form>
-                                                  <textarea
+                                            <Row className="top-icon">
+                                              <Col lg="10">
+                                                {" "}
+                                                <Link to="#">
+                                                  <img src={mdicon1} alt="" />
+                                                </Link>
+                                                <Link to="#">
+                                                  <img src={mdicon2} alt="" />
+                                                </Link>
+                                              </Col>
+                                              <Col
+                                                style={{ textAlign: "right" }}
+                                                lg="2"
+                                                key={promotiondata?._id}
+                                              >
+                                                {handlebookmark === "true" ? (
+                                                  <BsFillBookmarkCheckFill
+                                                    size={35}
                                                     key={promotiondata?._id}
-                                                    value={text}
-                                                    name="text"
-                                                    onChange={onchangehandler}
-                                                    className="form-control st-taetarea"
-                                                    placeholder=""
-                                                  ></textarea>
-                                                  <Button
-                                                    // onClick={handleSubmit}
-                                                    onClick={(e) =>
-                                                      handleSubmit(
-                                                        e,
-                                                        promotiondata._id
+                                                    className="addbookmark  "
+                                                    color="#5f56c6"
+                                                    onClick={() =>
+                                                      removebookmark(
+                                                        promotiondata?._id
                                                       )
                                                     }
-                                                    className=" bt-st reviewbutton mb-3 btn btn-primary"
-                                                  >
-                                                    Send
-                                                  </Button>
-                                                </form>
+                                                  />
+                                                ) : (
+                                                  <BsBookmark
+                                                    size={35}
+                                                    key={promotiondata?._id}
+                                                    onClick={() =>
+                                                      addbookmark(
+                                                        promotiondata?._id
+                                                      )
+                                                    }
+                                                    className="addbookmark "
+                                                    color="warning "
+                                                  />
+                                                )}
+                                              </Col>
+                                            </Row>
+                                            <div className="tag-list">
+                                              <div className="tag-1">
+                                                <h5>
+                                                  <span>
+                                                    <img
+                                                      src={icons}
+                                                      alt=""
+                                                      width="30px"
+                                                    />
+                                                  </span>
+                                                  Topic:
+                                                </h5>
+                                              </div>
+                                              <div className=" d-flex tag-2">
+                                                {promotiondata?.topics?.map(
+                                                  (val) => (
+                                                    <Link
+                                                      className="d-flex "
+                                                      to="#"
+                                                    >
+                                                      {val}{" "}
+                                                    </Link>
+                                                  )
+                                                )}
                                               </div>
                                             </div>
-                                          </Row>
-                                        </Row>
-                                      </div>
-                                      {/* <Row key={promotiondata?._id}>
+
+                                            <hr></hr>
+                                          </div>
+
+                                          <div className="mid">
+                                            <h5>
+                                              Link :
+                                              <a href={promotiondata?.link}>
+                                                {promotiondata?.link}
+                                              </a>
+                                            </h5>
+                                            <div className="mid-content">
+                                              <Row>
+                                                <Col lg="6" md="6">
+                                                  <div className="mid-1 mb-3">
+                                                    <div className="mid-1-a">
+                                                      <img
+                                                        src={createricon}
+                                                        alt=""
+                                                      />
+                                                    </div>
+                                                    <div className="mid-1-b">
+                                                      <p>Creator:</p>
+                                                      <h4>
+                                                        {
+                                                          promotiondata?.creatorName
+                                                        }
+                                                      </h4>
+                                                    </div>
+                                                  </div>
+                                                </Col>
+                                                <Col lg="6" md="6">
+                                                  <div className="mid-1 mb-3 ">
+                                                    <div className="mid-1-a">
+                                                      <img
+                                                        src={usericon}
+                                                        alt=""
+                                                      />
+                                                    </div>
+                                                    <div className="mid-1-b">
+                                                      <p>Submitted by:</p>
+                                                      <h4>
+                                                        {
+                                                          promotiondata?.creatorName
+                                                        }
+                                                      </h4>
+                                                    </div>
+                                                  </div>
+                                                </Col>
+                                                <Col lg="3" md="3">
+                                                  <div className="mid-1 mb-3 tt-2">
+                                                    <div className="mid-1-a">
+                                                      <img
+                                                        src={typeicon}
+                                                        alt=""
+                                                        width="35px"
+                                                      />
+                                                    </div>
+                                                    <div className="mid-1-b tt-1">
+                                                      <p>Type:</p>
+                                                      <Link to="#">
+                                                        {promotiondata?.type}
+                                                      </Link>
+                                                    </div>
+                                                  </div>
+                                                </Col>
+                                                <Col lg="3" md="3">
+                                                  <div className="mid-1 mb-3 tt-2">
+                                                    <div className="mid-1-a">
+                                                      <img
+                                                        src={formaticon}
+                                                        alt=""
+                                                        width="35px"
+                                                      />
+                                                    </div>
+                                                    <div className="mid-1-b tt-1">
+                                                      <p>Format:</p>
+                                                      <Link to="#">
+                                                        {promotiondata?.format}
+                                                      </Link>
+                                                    </div>
+                                                  </div>
+                                                </Col>
+                                                <Col lg="3" md="3">
+                                                  <div className="mid-1 mb-3 tt-2">
+                                                    <div className="mid-1-a">
+                                                      <img
+                                                        src={diffculty}
+                                                        alt=""
+                                                        width="35px"
+                                                      />
+                                                    </div>
+                                                    <div className="mid-1-b tt-1">
+                                                      <p>Category:</p>
+                                                      <p to="#">
+                                                        {
+                                                          promotiondata
+                                                            ?.category?.title
+                                                        }
+                                                      </p>
+                                                    </div>
+                                                  </div>
+                                                </Col>
+                                                <Col lg="3" md="3">
+                                                  <div className="mid-1 mb-3 tt-2">
+                                                    <div className="mid-1-a">
+                                                      <img
+                                                        src={languageicon}
+                                                        alt=""
+                                                        width="35px"
+                                                      />
+                                                    </div>
+                                                    <div className="mid-1-b tt-1">
+                                                      <p>Language:</p>
+                                                      {promotiondata?.language?.map(
+                                                        (lang) => (
+                                                          <span>
+                                                            {lang?.language}{" "}
+                                                          </span>
+                                                        )
+                                                      )}
+                                                    </div>
+                                                  </div>
+                                                </Col>
+                                                <Col lg="3" md="3">
+                                                  <div className="mid-1 mb-3 tt-2">
+                                                    <div className="mid-1-a">
+                                                      <img
+                                                        src={yearicon}
+                                                        alt=""
+                                                        width="35px"
+                                                      />
+                                                    </div>
+                                                    <div className="mid-1-b tt-1">
+                                                      <p>Year:</p>
+                                                      {promotiondata?.relYear?.map(
+                                                        (year) => (
+                                                          <Link to="#">
+                                                            {year?.yrName}
+                                                          </Link>
+                                                        )
+                                                      )}
+                                                    </div>
+                                                  </div>
+                                                </Col>
+                                                <Col lg="3" md="3">
+                                                  <div className="mid-1 mb-3 tt-2">
+                                                    <div className="mid-1-a">
+                                                      <img
+                                                        src={
+                                                          promotiondata?.ava_rating
+                                                        }
+                                                        alt=""
+                                                        width="35px"
+                                                      />
+                                                    </div>
+                                                    <div className="mid-1-b tt-1">
+                                                      <p>Ratings:</p>
+                                                      <Link to="#">
+                                                        [
+                                                        {
+                                                          promotiondata?.ava_rating
+                                                        }
+                                                        ]
+                                                      </Link>
+                                                    </div>
+                                                  </div>
+                                                </Col>
+                                                <Col lg="4" md="4">
+                                                  <div className="mid-1 mb-3 tt-2">
+                                                    <div className="mid-1-a">
+                                                      <img
+                                                        src={submiticon}
+                                                        alt=""
+                                                        width="35px"
+                                                      />
+                                                    </div>
+                                                    <div className="mid-1-b tt-1">
+                                                      <p>Submitted:</p>
+                                                      <Moment format="ll">
+                                                        {
+                                                          promotiondata?.createdAt
+                                                        }
+                                                      </Moment>
+                                                    </div>
+                                                  </div>
+                                                </Col>
+                                              </Row>
+                                            </div>
+                                          </div>
+
+                                          <hr></hr>
+
+                                          <div className="description mt-3">
+                                            <h4>Description:</h4>
+                                            <h5>
+                                              {ReactHtmlParser(
+                                                promotiondata?.desc?.slice(
+                                                  0,
+                                                  80
+                                                )
+                                              )}
+                                            </h5>
+                                          </div>
+
+                                          <hr></hr>
+                                          <div className="rating-box">
+                                            <Row>
+                                              <Col lg="6">
+                                                <div className="rat-left">
+                                                  <h4>Customer Rating</h4>
+                                                  <div className="">
+                                                    <PrettyRating
+                                                      value={
+                                                        promotiondata?.ava_rating
+                                                      }
+                                                      icons={icons.star}
+                                                      colors={colors.star}
+                                                    />{" "}
+                                                  </div>
+                                                  <div className="starratinginno">
+                                                    {promotiondata?.ava_rating !=
+                                                    0 ? (
+                                                      <>
+                                                        [
+                                                        {
+                                                          promotiondata?.ava_rating
+                                                        }
+                                                        ] of 5 Stars
+                                                      </>
+                                                    ) : null}
+                                                  </div>
+                                                  <div className="mt-3">
+                                                    {getonecomment?.length}-
+                                                    customers reviews
+                                                  </div>
+                                                </div>
+                                              </Col>
+                                              <Col lg="6">
+                                                <h4>Write your review</h4>
+
+                                                <ReactStars
+                                                  {...secondExample}
+                                                />
+                                              </Col>
+                                              <Row lg="12">
+                                                <div
+                                                  key={promotiondata?._id}
+                                                  className="rat-right"
+                                                >
+                                                  <div className="">
+                                                    <form>
+                                                      <textarea
+                                                        key={promotiondata?._id}
+                                                        value={text}
+                                                        name="text"
+                                                        onChange={
+                                                          onchangehandler
+                                                        }
+                                                        className="form-control st-taetarea"
+                                                        placeholder=""
+                                                      ></textarea>
+                                                      <Button
+                                                        onClick={(e) =>
+                                                          handleSubmit(
+                                                            e,
+                                                            promotiondata._id
+                                                          )
+                                                        }
+                                                        className=" bt-st reviewbutton mb-3 btn btn-primary"
+                                                      >
+                                                        Send
+                                                      </Button>
+                                                    </form>
+                                                  </div>
+                                                </div>
+                                              </Row>
+                                            </Row>
+                                          </div>
+                                          {/* <Row key={promotiondata?._id}>
                                         <Col lg="4"></Col>
                                         <Col lg="8" key={promotiondata?._id}>
                                           {handlebookmark === "true" ? (
@@ -1661,122 +1667,132 @@ function ProductHastag(args) {
                                           )}
                                         </Col>
                                       </Row> */}
-                                      <hr></hr>
-                                      <div className="review-list">
-                                        <h4>Reviews:</h4>
+                                          <hr></hr>
+                                          <div className="review-list">
+                                            <h4>Reviews:</h4>
 
-                                        {getonecomment?.map((value) => (
-                                          <div className="re-list">
-                                            <div className="re-listimg">
-                                              <img
-                                                src={value?.userid?.profileImg}
-                                                alt="UserImage"
-                                              />
-                                            </div>
-                                            <div className="re-listcont">
-                                              <h5>
-                                                {value?.userid?.username}
-                                                <span>
-                                                  <Moment format="ll">
-                                                    {value?.createdAt}
-                                                  </Moment>
-                                                </span>
-                                              </h5>
-                                              <div className="star-1">
-                                                <PrettyRating
-                                                  value={value?.rating}
-                                                  icons={icons.star}
-                                                  colors={colors.star}
-                                                />
-                                              </div>
-                                            </div>
-                                            <div className="re-btext mt-3">
-                                              <Row>
-                                                <Col lg="10">
-                                                  {" "}
-                                                  {value?.comment}
-                                                </Col>
-                                                <Col lg="2">
-                                                  {value?.userid?._id ==
-                                                  localStorage.getItem(
-                                                    "userId"
-                                                  ) ? (
-                                                    <>
-                                                      <h6>
-                                                        <AiFillEdit
-                                                          onClick={() =>
-                                                            handleeditcomment(
-                                                              value?._id
-                                                            )
-                                                          }
-                                                          // onClick={
-                                                          //
-                                                          // }
-                                                          size="25px"
-                                                        />
-                                                      </h6>
-                                                      <Modal
-                                                        isOpen={editmodal}
-                                                        toggle={toggleedit}
-                                                        {...args}
-                                                      >
-                                                        <ModalHeader
-                                                          toggle={toggleedit}
-                                                        >
-                                                          Edit Your Comment
-                                                        </ModalHeader>
-                                                        <ModalBody>
-                                                          <Row>
-                                                            <Col>
-                                                              <Label>
-                                                                Edit Review
-                                                              </Label>
-                                                              <input
-                                                                type="text"
-                                                                className="form-control"
-                                                                placeholder={
-                                                                  value?.comment
-                                                                }
-                                                                value={upcom}
-                                                                onChange={(e) =>
-                                                                  setUpcom(
-                                                                    e.target
-                                                                      .value
-                                                                  )
-                                                                }
-                                                                aria-describedby="inputGroupPrepend"
-                                                                required
-                                                              />
-                                                            </Col>
-                                                            <Col>
-                                                              <ReactStars
-                                                                style={{
-                                                                  size: "25px",
-                                                                }}
-                                                                {...secondExample}
-                                                              />
-                                                            </Col>
-                                                          </Row>
-
-                                                          <Col className="d-flex justify-content-center">
-                                                            <button
-                                                              style={{
-                                                                color: "white",
-                                                              }}
-                                                              onClick={() => {
-                                                                editcomment(
-                                                                  value?._id,
-                                                                  promotiondata?._id,
-                                                                  value?.rating
-                                                                );
-                                                              }}
-                                                              class="btn success"
+                                            {getonecomment?.map((value) => (
+                                              <div className="re-list">
+                                                <div className="re-listimg">
+                                                  <img
+                                                    src={
+                                                      value?.userid?.profileImg
+                                                    }
+                                                    alt="UserImage"
+                                                  />
+                                                </div>
+                                                <div className="re-listcont">
+                                                  <h5>
+                                                    {value?.userid?.username}
+                                                    <span>
+                                                      <Moment format="ll">
+                                                        {value?.createdAt}
+                                                      </Moment>
+                                                    </span>
+                                                  </h5>
+                                                  <div className="star-1">
+                                                    <PrettyRating
+                                                      value={value?.rating}
+                                                      icons={icons.star}
+                                                      colors={colors.star}
+                                                    />
+                                                  </div>
+                                                </div>
+                                                <div className="re-btext mt-3">
+                                                  <Row>
+                                                    <Col lg="10">
+                                                      {" "}
+                                                      {value?.comment}
+                                                    </Col>
+                                                    <Col lg="2">
+                                                      {value?.userid?._id ==
+                                                      localStorage.getItem(
+                                                        "userId"
+                                                      ) ? (
+                                                        <>
+                                                          <h6>
+                                                            <AiFillEdit
+                                                              onClick={() =>
+                                                                handleeditcomment(
+                                                                  value?._id
+                                                                )
+                                                              }
+                                                              // onClick={
+                                                              //
+                                                              // }
+                                                              size="25px"
+                                                            />
+                                                          </h6>
+                                                          <Modal
+                                                            isOpen={editmodal}
+                                                            toggle={toggleedit}
+                                                            {...args}
+                                                          >
+                                                            <ModalHeader
+                                                              toggle={
+                                                                toggleedit
+                                                              }
                                                             >
-                                                              Edit your comment
-                                                            </button>
-                                                          </Col>
-                                                        </ModalBody>
-                                                        {/* <ModalFooter>
+                                                              Edit Your Comment
+                                                            </ModalHeader>
+                                                            <ModalBody>
+                                                              <Row>
+                                                                <Col>
+                                                                  <Label>
+                                                                    Edit Review
+                                                                  </Label>
+                                                                  <input
+                                                                    type="text"
+                                                                    className="form-control"
+                                                                    placeholder={
+                                                                      value?.comment
+                                                                    }
+                                                                    value={
+                                                                      upcom
+                                                                    }
+                                                                    onChange={(
+                                                                      e
+                                                                    ) =>
+                                                                      setUpcom(
+                                                                        e.target
+                                                                          .value
+                                                                      )
+                                                                    }
+                                                                    aria-describedby="inputGroupPrepend"
+                                                                    required
+                                                                  />
+                                                                </Col>
+                                                                <Col>
+                                                                  <ReactStars
+                                                                    style={{
+                                                                      size: "25px",
+                                                                    }}
+                                                                    {...secondExample}
+                                                                  />
+                                                                </Col>
+                                                              </Row>
+
+                                                              <Col className="d-flex justify-content-center">
+                                                                <button
+                                                                  style={{
+                                                                    color:
+                                                                      "white",
+                                                                  }}
+                                                                  onClick={() => {
+                                                                    editcomment(
+                                                                      value?._id,
+                                                                      promotiondata?._id,
+                                                                      value?.rating
+                                                                    );
+                                                                  }}
+                                                                  class="btn success"
+                                                                >
+                                                                  Edit your
+                                                                  comment
+                                                                </button>
+                                                              </Col>
+                                                            </ModalBody>
+                                                            {/* <ModalFooter>
                                                               <Button
                                                                 color="primary"
                                                                 onClick={
@@ -1794,81 +1810,93 @@ function ProductHastag(args) {
                                                                 Cancel
                                                               </Button>
                                                             </ModalFooter> */}
-                                                      </Modal>
-                                                    </>
-                                                  ) : null}
-                                                </Col>
-                                              </Row>
-                                              {/* <p>{value?.comment}</p> */}
-                                            </div>
+                                                          </Modal>
+                                                        </>
+                                                      ) : null}
+                                                    </Col>
+                                                  </Row>
+                                                </div>
+                                              </div>
+                                            ))}
                                           </div>
+                                        </ModalBody>
+                                      </Modal>
+                                    </Link>
+                                  </div>
+
+                                  <div
+                                    key={promotion?._id}
+                                    onClick={() =>
+                                      handlepromotion(promotion?._id)
+                                    }
+                                    class="product-content"
+                                  >
+                                    <ul class="rating">
+                                      <li>
+                                        {promotion?.topics?.map((topic) => (
+                                          <Link className="btt">{topic}</Link>
                                         ))}
-                                      </div>
-                                    </ModalBody>
-                                  </Modal>
-                                </Link>
-                              </div>
-
-                              <div
-                                key={promotion?._id}
-                                onClick={() => handlepromotion(promotion?._id)}
-                                class="product-content"
-                              >
-                                <ul class="rating">
-                                  <li>
-                                    {promotion?.topics?.map((topic) => (
-                                      <Link className="btt">{topic}</Link>
-                                    ))}
-                                  </li>
-                                </ul>
-                                <h3>
-                                  {ReactHtmlParser(
-                                    promotion?.desc?.slice(0, 25)
-                                  )}
-                                </h3>
-                                blogdescription
-                                <h5>
-                                  <span>By -</span> {promotion?.creatorName}
-                                </h5>
-                                {/* <p>{promotion?.res_desc?.slice(0, 50)}</p> */}
-                                <h3>
-                                  {ReactHtmlParser(
-                                    promotion?.res_desc?.slice(0, 50)
-                                  )}
-                                </h3>
-                                <div className="mt-2 mb-2">
-                                  <Row>
-                                    <Col lg="6">
-                                      <PrettyRating
-                                        // value={value?.rating}
-                                        value={promotion?.ava_rating}
-                                        icons={icons.star}
-                                        colors={colors.star}
-                                      />
-                                    </Col>
-                                    <Col
-                                      className="justify-content-left"
-                                      lg="6"
-                                    >
-                                      {promotion?.ava_rating == 0 ? null : (
-                                        <> {promotion?.ava_rating}- Rating</>
+                                      </li>
+                                    </ul>
+                                    <h3>
+                                      {ReactHtmlParser(
+                                        promotion?.desc?.slice(0, 25)
                                       )}
-                                    </Col>
-                                  </Row>
+                                    </h3>
+                                    blogdescription
+                                    <h5>
+                                      <span>By -</span> {promotion?.creatorName}
+                                    </h5>
+                                    {/* <p>{promotion?.res_desc?.slice(0, 50)}</p> */}
+                                    <h3>
+                                      {ReactHtmlParser(
+                                        promotion?.res_desc?.slice(0, 50)
+                                      )}
+                                    </h3>
+                                    <div className="mt-2 mb-2">
+                                      <Row>
+                                        <Col lg="6">
+                                          <PrettyRating
+                                            // value={value?.rating}
+                                            value={promotion?.ava_rating}
+                                            icons={icons.star}
+                                            colors={colors.star}
+                                          />
+                                        </Col>
+                                        <Col
+                                          className="justify-content-left"
+                                          lg="6"
+                                        >
+                                          {promotion?.ava_rating == 0 ? null : (
+                                            <>
+                                              {" "}
+                                              {promotion?.ava_rating}- Rating
+                                            </>
+                                          )}
+                                        </Col>
+                                      </Row>
 
-                                  <ul class="rating">
-                                    <li>
-                                      <Link to="#" className="tag">
-                                        {promotion?.relYear[0]?.yrName}
-                                      </Link>
-                                    </li>
-                                  </ul>
+                                      <ul class="rating">
+                                        <li>
+                                          <Link to="#" className="tag">
+                                            {promotion?.relYear[0]?.yrName}
+                                          </Link>
+                                        </li>
+                                      </ul>
+                                    </div>
+                                  </div>
                                 </div>
-                              </div>
-                            </div>
-                          </Col>
-                        </SwiperSlide>
-                      ))}
+                              </Col>
+                            </SwiperSlide>
+                          ))}
+                        </>
+                      ) : (
+                        <>
+                          <div className="d-flex justify-content-center mb-2">
+                            <h2>No Product found</h2>
+                          </div>
+                        </>
+                      )}
                     </Swiper>
                   </Row>
 

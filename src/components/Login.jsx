@@ -120,10 +120,11 @@ function Login() {
           password: Fireuid,
         })
         .then((response) => {
-          console.log(response.data.message);
-          if (response.data.message === "success") {
+          console.log(response.data);
+          if (response.data.message === "Successfully Login") {
             handleLoginGoogleSubmit();
-          } else swal(" Try again! something went wrong");
+          }
+          // else swal(" Try again! something went wrong");
         })
         .catch((error) => {
           console.log(error.response.data);
@@ -169,8 +170,8 @@ function Login() {
       })
       .catch((error) => {
         console.log(error.response.data);
-        if (error.response.data.msg === "User Doesnot Exist") {
-          swal("User Does Not exists");
+        if (error.response.data.msg === "Incorrect Password") {
+          swal("User already Exists With this Mail");
         }
         // else if (error.response.data.msg === "Incorrect Password") {
         //   swal("you Entered Incorrect password ", "try again");

@@ -200,13 +200,13 @@ function NewSignup() {
           password: Fireuid,
         })
         .then((response) => {
-          // console.log(response.data.message);
-          if (response.data.message === "success") {
+          console.log(response.data);
+          if (response.data.message == "Successfully Login") {
             handleLoginSubmit();
-          } else swal(" Try again! something went wrong");
+          }
         })
         .catch((error) => {
-          // console.log(error.response.data);
+          console.log(error.response);
           if (error.response.data.message == "already exists") {
             swal("Already Registered", " Reset your password Password");
           }

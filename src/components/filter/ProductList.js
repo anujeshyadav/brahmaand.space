@@ -161,11 +161,20 @@ function ProductList(args) {
       axios
         .post(
           `http://3.7.173.138:9000/user/advancefilter?sub_category=${Params.id}&type=${type}&format=${format}&language=${language}&relYear=${contentyear}`
-        ) // .get(
-        //   `http://3.7.173.138:9000/user/filterbyLanguage/${Params.id}/${language}`
-        // )
+        )
         .then((res) => {
           setCategry(res.data.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+      axios
+        .post(
+          `http://3.7.173.138:9000/user/promotion_filter?sub_category=${Params.id}&type=${type}&format=${format}&language=${language}&relYear=${contentyear}`
+        )
+        .then((res) => {
+          console.log(res.data.data);
+          setPromotion(res.data.data);
         })
         .catch((err) => {
           console.log(err);
@@ -226,16 +235,24 @@ function ProductList(args) {
         .post(
           `http://3.7.173.138:9000/user/advancefilter?sub_category=${Params.id}&type=${type}&format=${format}&language=${language}&relYear=${contentyear}`
         )
-        // .get(
-        //   `http://3.7.173.138:9000/user/filterbyyear/${Params.id}/${contentyear}`
-        // )
+
         .then((res) => {
           setCategry(res.data.data);
           console.log(res.data.data);
-          // setContentyear("");
         })
         .catch((err) => {
           // console.log(err);
+        });
+
+      axios
+        .post(
+          `http://3.7.173.138:9000/user/promotion_filter?sub_category=${Params.id}&type=${type}&format=${format}&language=${language}&relYear=${contentyear}`
+        )
+        .then((res) => {
+          setPromotion(res.data.data);
+        })
+        .catch((err) => {
+          console.log(err);
         });
     }
   };
@@ -457,6 +474,7 @@ function ProductList(args) {
     setContentyear("");
     setSearchitem("");
     allsearchproduct();
+    promotionadmin();
     setTypelength("");
     setFormatelength("");
   };
@@ -607,10 +625,6 @@ function ProductList(args) {
         // console.log(err);
       });
   };
-  // useEffect(() => {
-  //   hadlestatusbookmark();
-  //   getUser();
-  // }, [liked, Producdetail, myId, promotiondata, activelike, handlebookmark]);
 
   useEffect(() => {
     allsuggestedproduct();
@@ -618,8 +632,6 @@ function ProductList(args) {
     getLanguage();
     getUser();
     hadlestatusbookmark();
-
-    promotionadmin();
 
     if (
       type === "" &&
@@ -631,6 +643,7 @@ function ProductList(args) {
       hastagdata === "hastag"
       // searchdata === ""
     ) {
+      promotionadmin();
       allsearchproduct();
     }
     if (type !== "") {
@@ -681,8 +694,6 @@ function ProductList(args) {
       .post(
         `http://3.7.173.138:9000/user/advancefilter?sub_category=${Params.id}&type=${type}&format=${format}&language=${language}&relYear=${contentyear}`
       )
-      // .get(`http://3.7.173.138:9000/user/filter_type/${Params.id}/${type}`)
-
       .then((res) => {
         // console.log(res.data.data);
         setCategry(res.data.data);
@@ -690,6 +701,18 @@ function ProductList(args) {
       })
       .catch((err) => {
         // console.log(err);
+      });
+
+    axios
+      .post(
+        `http://3.7.173.138:9000/user/promotion_filter?sub_category=${Params.id}&type=${type}&format=${format}&language=${language}&relYear=${contentyear}`
+      )
+      .then((res) => {
+        console.log(res.data.data);
+        setPromotion(res.data.data);
+      })
+      .catch((err) => {
+        console.log(err);
       });
   };
 
@@ -699,8 +722,6 @@ function ProductList(args) {
       .post(
         `http://3.7.173.138:9000/user/advancefilter?sub_category=${Params.id}&type=${type}&format=${format}&language=${language}&relYear=${contentyear}`
       )
-
-      // .get(`http://3.7.173.138:9000/user/filterbyFormat/${Params.id}/${format}`)
       .then((res) => {
         // console.log(res.data.data);
         setCategry(res.data.data);
@@ -708,6 +729,16 @@ function ProductList(args) {
       })
       .catch((err) => {
         // console.log(err);
+      });
+    axios
+      .post(
+        `http://3.7.173.138:9000/user/promotion_filter?sub_category=${Params.id}&type=${type}&format=${format}&language=${language}&relYear=${contentyear}`
+      )
+      .then((res) => {
+        setPromotion(res.data.data);
+      })
+      .catch((err) => {
+        console.log(err);
       });
   };
   const getsearchbyratingfilter = () => {
@@ -734,10 +765,6 @@ function ProductList(args) {
           setCategry(response.data.data);
           console.log(response.data.data);
         }
-        // const data = response.data.data;
-        // const datanew = data.filter((data) => {
-        //   return data.format == "Text" && data.type == "Paid";
-        // });
       })
       .catch((error) => {
         // console.log(error.response.data);
