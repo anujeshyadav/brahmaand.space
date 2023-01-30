@@ -163,11 +163,13 @@ function ProductList(args) {
           `http://3.7.173.138:9000/user/advancefilter?sub_category=${Params.id}&type=${type}&format=${format}&language=${language}&relYear=${contentyear}`
         )
         .then((res) => {
+          console.log(res.data.data);
           setCategry(res.data.data);
         })
         .catch((err) => {
           console.log(err);
         });
+
       axios
         .post(
           `http://3.7.173.138:9000/user/promotion_filter?sub_category=${Params.id}&type=${type}&format=${format}&language=${language}&relYear=${contentyear}`
@@ -193,6 +195,7 @@ function ProductList(args) {
         .then((res) => {
           if (res.data.data !== "" && res.data.data !== null) {
             setCategry(res.data.data);
+            console.log(res.data.data);
             localStorage.setItem("hastag", "hastag");
           }
         })
@@ -230,7 +233,7 @@ function ProductList(args) {
   const getolderyeardata = () => {
     // console.log(contentyear);
     if (contentyear !== "") {
-      console.log(contentyear);
+      // console.log(contentyear);
       axios
         .post(
           `http://3.7.173.138:9000/user/advancefilter?sub_category=${Params.id}&type=${type}&format=${format}&language=${language}&relYear=${contentyear}`
@@ -695,7 +698,7 @@ function ProductList(args) {
         `http://3.7.173.138:9000/user/advancefilter?sub_category=${Params.id}&type=${type}&format=${format}&language=${language}&relYear=${contentyear}`
       )
       .then((res) => {
-        // console.log(res.data.data);
+        console.log(res.data.data);
         setCategry(res.data.data);
         setTypelength(res.data.data);
       })
@@ -723,13 +726,14 @@ function ProductList(args) {
         `http://3.7.173.138:9000/user/advancefilter?sub_category=${Params.id}&type=${type}&format=${format}&language=${language}&relYear=${contentyear}`
       )
       .then((res) => {
-        // console.log(res.data.data);
+        console.log(res.data.data);
         setCategry(res.data.data);
         setFormatelength(res.data.data);
       })
       .catch((err) => {
         // console.log(err);
       });
+
     axios
       .post(
         `http://3.7.173.138:9000/user/promotion_filter?sub_category=${Params.id}&type=${type}&format=${format}&language=${language}&relYear=${contentyear}`
