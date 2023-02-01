@@ -5,6 +5,7 @@ import Card from "react-bootstrap/Card";
 import Moment from "react-moment";
 import "moment-timezone";
 import Notifications from "../css/Notifications.css";
+import { ImCancelCircle } from "react-icons/im";
 
 import axios from "axios";
 
@@ -14,27 +15,38 @@ function Notification() {
 
   useEffect(() => {
     notificationhandler();
-    personalnotification();
+    // personalnotification();
   }, []);
-  const personalnotification = () => {
-    const userId = localStorage.getItem("userId");
+  // const personalnotification = () => {
+  //   const userId = localStorage.getItem("userId");
 
+  //   axios
+  //     .get(
+  //       `http://3.7.173.138:9000/admin/getone_notification/636df1996358e0e8419332df`
+  //     )
+  //     .then((res) => {
+  //       setPersonal(res.data.data);
+  //     })
+  //     .catch((err) => {
+  //       // console.log(err);
+  //     });
+  // };
+
+  const deletenotification = (id) => {
+    console.log(id);
     axios
-      .get(
-        `http://3.7.173.138:9000/admin/getone_notification/636df1996358e0e8419332df`
-      )
+      .post(`http://3.7.173.138:9000/admin/dlt_notification/${id}`)
       .then((res) => {
-        setPersonal(res.data.data);
+        console.log(res.response.data);
       })
-      .catch((err) => {
-        // console.log(err);
-      });
+      .catch((err) => console.log(err.response));
   };
   const notificationhandler = () => {
     axios
       .get(`http://3.7.173.138:9000/admin/get_notification`)
       .then((res) => {
         setNotification(res.data.data);
+        console.log(res.data.data);
       })
       .catch((err) => console.log(err));
   };
@@ -46,19 +58,31 @@ function Notification() {
         </h3>
         <div className="container notificationcard mt-3 mb-4">
           <Row>
-            <Col lg="6" sm="12" md="6">
-              {/* <h2 className="d-flex justify-content-center ">
+            {/* <h2 className="d-flex justify-content-center ">
                 Your Notifications here
               </h2> */}
-              <div className="container mt-3 notificationsdistance">
-                {notification?.map((data) => (
+            <div className="container mt-3 notificationsdistance">
+              {notification?.map((data) => (
+                <Col lg="8" sm="12" md="6" key={data?._id}>
                   <Card className="d-flex justify-content-center mb-3 mt-3">
                     <Card.Header
                       className="notificationheader"
                       style={{ backgroundColor: "#ffa73ec9" }}
                     >
-                      Your Notification
+                      <Row
+                        key={data?._id}
+                        className="d-flex justify-content-right"
+                      >
+                        <Col lg="11"> Your Notification</Col>
+                        {/* <Col lg="1" className="d-flex justify-content-right">
+                          <ImCancelCircle
+                            onClick={() => deletenotification(data?._id)}
+                            size={25}
+                          />
+                        </Col> */}
+                      </Row>
                     </Card.Header>
+
                     <Card.Body>
                       <Card.Title>{data?.title}</Card.Title>
                       <Card.Text>{data?.desc}</Card.Text>
@@ -69,15 +93,15 @@ function Notification() {
                       <Moment format="lll">{data?.createdAt}</Moment>
                     </p>
                   </Card>
-                ))}
-              </div>
-            </Col>
+                </Col>
+              ))}
+            </div>
 
-            <Col lg="6" sm="12" md="6">
-              {/* <h2 className="d-flex justify-content-center ">
+            {/* <Col lg="6" sm="12" md="6"> */}
+            {/* <h2 className="d-flex justify-content-center ">
                 Your Personal Notifications here
               </h2> */}
-              <div className="container mt-3 notificationcard notificationsdistance">
+            {/* <div className="container mt-3 notificationcard notificationsdistance">
                 <Card className="d-flex justify-content-center mb-3 mt-3">
                   <Card.Header
                     className="notificationheader"
@@ -94,8 +118,8 @@ function Notification() {
                     </p>
                   </Card.Body>
                 </Card>
-              </div>
-            </Col>
+              </div> */}
+            {/* </Col> */}
           </Row>
 
           <hr />

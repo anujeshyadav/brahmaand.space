@@ -80,6 +80,7 @@ import Forgetpass from "./pages/Forgetpass";
 import ResetForget from "./components/ResetForget";
 import Productsearch from "./components/filter/Productsearch";
 import ProductHastag from "./components/filter/ProductHastag";
+import Loginplan from "./planable.io/Loginplan";
 
 const rootElement = document.getElementById("root");
 render(
@@ -159,6 +160,7 @@ render(
               path="send-reset-password-request"
               element={<SendRequestResetPasswordComponent />}
             />
+            <Route path="/loginplan" element={<Loginplan />} />
           </Routes>
         </Layout>
       </MenuProvider>

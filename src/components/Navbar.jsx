@@ -111,7 +111,6 @@ function CustomNavbar(args) {
       topic !== "" &&
       Desc !== ""
     ) {
-      // setIsLoading(true);
       axios
         .post(`http://3.7.173.138:9000/user/App_Sub_resrc`, {
           link: url,
@@ -132,7 +131,7 @@ function CustomNavbar(args) {
         })
         .then((res) => {
           console.log(res.data.data);
-          // setIsLoading(false);
+
           if (res.data.message === "success") {
             swal("Resource Submitted Successfully👍");
             setLink("");

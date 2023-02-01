@@ -1,0 +1,157 @@
+.loginleftbar {
+  background: linear-gradient(180deg, #ff527b, rgba(254, 44, 85, 0.94));
+}
+.loginleftbar.col-lg-4 {
+  justify-content: center;
+}
+
+.loginRightbar.col-lg-8 {
+  display: flex;
+  justify-content: center;
+}
+.loginlefttext.row {
+  padding: 12%;
+  color: white;
+}
+img.imagelogo {
+  margin: 38px 24px;
+}
+.learnmore.row {
+  display: flex;
+
+  justify-content: center;
+}
+h6.learnmoretext {
+  color: white;
+  margin-top: -21px;
+  margin-bottom: 68px;
+}
+h2.sidebar-title {
+  margin-top: 98px;
+  color: #edededb8;
+  font-size: 30px;
+  font-weight: 800;
+  margin-bottom: 82px;
+}
+/* .loginRightbar.col-lg-8 {
+  background: linear-gradient(180deg, #f5f5f5, rgba(245, 245, 245, 1));
+} */
+
+/* .login-component .sidebar-title,
+.recover-password .sidebar-title,
+.register-component .sidebar-title,
+.register-guest .sidebar-title,
+.reset-password .sidebar-title {
+  display: grid;
+  grid-row: 2;
+  max-width: 85%;
+  opacity: 0.5;
+  font-size: 40px;
+  font-weight: 700;
+  line-height: 56px;
+  margin-bottom: 0;
+} */
+
+.imageleft {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+img.sr-1 {
+  width: 180px !important;
+  padding-top: 66px;
+}
+p.p-5.text-color-white {
+  color: #fff;
+  font-style: italic;
+  text-align: left;
+  font-size: 17px;
+}
+.main-box {
+  background: #f5f5f5;
+  padding: 53px 100px;
+}
+.text-right {
+  text-align: right;
+}
+
+.bottom-line {
+  display: flex;
+  margin: 16px 0;
+  color: rgba(0, 0, 0, 0.85);
+  font-weight: 500;
+  font-size: 14px;
+  white-space: nowrap;
+  text-align: center;
+  border-top: 0;
+  border-top-color: rgba(0, 0, 0, 0.06);
+  width: 401px;
+}
+
+h6.mt-3 {
+  color: white;
+}
+.bottom-line:before {
+  position: relative;
+  top: 50%;
+  width: 50%;
+  border-top: 1px solid transparent;
+  border-top-color: inherit;
+  border-bottom: 0;
+  transform: translateY(50%);
+  content: "";
+}
+
+.bottom-line:after,
+.bottom-line:before {
+  position: relative;
+  top: 50%;
+  width: 50%;
+  border-top: 1px solid transparent;
+  border-top-color: inherit;
+  border-bottom: 0;
+  transform: translateY(50%);
+  content: "";
+}
+
+.signinplanable {
+  line-height: 28px;
+  font-weight: 800;
+}
+label.label.form-label {
+  margin-top: 16px;
+  font-size: 12px;
+}
+button.btn.btn-primary {
+  color: black;
+  background: white;
+  margin: 4px;
+  /* padding: 8px 7px; */
+  width: 195px;
+  margin-top: 33px;
+}
+
+button.btn.btn-primary.facebookbtn {
+  font-size: 12px;
+  /* margin-top: 2px; */
+  padding: 10px 12px;
+}
+button.btn.btn-light {
+  font-size: 11px;
+
+  color: #6bb4f8;
+  background: white;
+  display: inline;
+}
+h6.donothave {
+  font-size: 12px;
+}
+.form-box {
+  margin-top: 71px;
+}
+button.btn.btn-light {
+  margin-top: 0px;
+  margin-left: 13px;
+}
