@@ -22,7 +22,7 @@ function Notification() {
 
   //   axios
   //     .get(
-  //       `http://3.7.173.138:9000/admin/getone_notification/636df1996358e0e8419332df`
+  //       `http://15.207.117.200:9000/admin/getone_notification/636df1996358e0e8419332df`
   //     )
   //     .then((res) => {
   //       setPersonal(res.data.data);
@@ -35,7 +35,7 @@ function Notification() {
   const deletenotification = (id) => {
     console.log(id);
     axios
-      .post(`http://3.7.173.138:9000/admin/dlt_notification/${id}`)
+      .post(`http://15.207.117.200:9000/admin/dlt_notification/${id}`)
       .then((res) => {
         console.log(res.response.data);
       })
@@ -43,7 +43,7 @@ function Notification() {
   };
   const notificationhandler = () => {
     axios
-      .get(`http://3.7.173.138:9000/admin/get_notification`)
+      .get(`http://15.207.117.200:9000/admin/get_notification`)
       .then((res) => {
         setNotification(res.data.data);
         console.log(res.data.data);

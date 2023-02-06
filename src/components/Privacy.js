@@ -11,7 +11,7 @@ const Privacy = () => {
 
   const privacypolicy = () => {
     axios
-      .get(`http://3.7.173.138:9000/admin/getPrivcyPolicy`)
+      .get(`http://15.207.117.200:9000/admin/getPrivcyPolicy`)
       .then((res) => {
         // console.log(res.data.data);
         setfirst(res.data.data);

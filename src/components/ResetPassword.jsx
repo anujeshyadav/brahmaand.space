@@ -123,7 +123,7 @@ function ResetPassword() {
             "**Strong Password** ";
 
           axios
-            .post(`http://3.7.173.138:9000/user/resetPassword/${userId}`, {
+            .post(`http://15.207.117.200:9000/user/resetPassword/${userId}`, {
               oldpassword: oldpass,
               password: newpass,
               cnfrmPassword: confirmpass,
@@ -147,7 +147,7 @@ function ResetPassword() {
         }
 
         // axios
-        //   .post(`http://3.7.173.138:9000/user/resetPassword/${userId}`, {
+        //   .post(`http://15.207.117.200:9000/user/resetPassword/${userId}`, {
         //     oldpassword: oldpass,
         //     password: newpass,
         //     cnfrmPassword: confirmpass,

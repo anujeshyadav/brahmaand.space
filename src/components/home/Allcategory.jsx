@@ -14,7 +14,7 @@ function Allcategory() {
 
   const allcategory = () => {
     axios
-      .get(`http://3.7.173.138:9000/admin/getallCategory`)
+      .get(`http://15.207.117.200:9000/admin/getallCategory`)
       .then((response) => {
         setCategry(response.data.data);
         // console.log(response.data.data);

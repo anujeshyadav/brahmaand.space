@@ -36,7 +36,7 @@ function LeaderBoard() {
 
   const getcurrentmonthdata = () => {
     axios
-      .get(`http://3.7.173.138:9000/user/karma_crrnt_month`)
+      .get(`http://15.207.117.200:9000/user/karma_crrnt_month`)
       .then((res) => {
         console.log(res.data.data);
         setCurrentmonth(res.data.data);
@@ -47,7 +47,7 @@ function LeaderBoard() {
   };
   const getallmonthdata = () => {
     axios
-      .get(`http://3.7.173.138:9000/user/all_time_karma`)
+      .get(`http://15.207.117.200:9000/user/all_time_karma`)
       .then((res) => {
         console.log(res.data.data);
         setAlltime(res.data.data);
@@ -59,7 +59,7 @@ function LeaderBoard() {
 
   const getallplanetpostion = () => {
     axios
-      .get(`http://3.7.173.138:9000/user/user_planet_position`)
+      .get(`http://15.207.117.200:9000/user/user_planet_position`)
       .then((res) => {
         setPlanetposition(res.data.data);
         // console.log(res.data.data);
@@ -350,9 +350,9 @@ function LeaderBoard() {
         </div>
         <Container ClassName="d-flex justify-content-center  ">
           <Row className="  d-flex justify-content-center winnerone" lg="4">
-            {currentmonth !== ""
+            {currentmonth != null
               ? currentmonth?.map((currentmonth) => (
-                  <Col key={currentmonth._id} className="maincol">
+                  <Col key={currentmonth?._id} className="maincol">
                     <Row>
                       <div className="maindiv">
                         {/* {planet?.map((data) => ( */}
@@ -625,7 +625,7 @@ function LeaderBoard() {
                         <span>
                           <img
                             src={value?.winnerImg} // winner one logo
-                            alt="ist winner"
+                            alt="winner"
                             style={{ borderRadius: "50%" }}
                             className="first"
                             height={90}

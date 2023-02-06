@@ -124,7 +124,7 @@ function ProductList(args) {
     const user = localStorage.getItem("userId");
     if (rating !== "" && upcom !== "") {
       axios
-        .post(`http://3.7.173.138:9000/user/editCommentbyUser/${id}`, {
+        .post(`http://15.207.117.200:9000/user/editCommentbyUser/${id}`, {
           submitresrcId: dataid,
           userid: user,
           comment: upcom,
@@ -145,7 +145,7 @@ function ProductList(args) {
 
   const handleeditcomment = (id) => {
     axios
-      .get(`http://3.7.173.138:9000/admin/getone_coment_list/${id}`)
+      .get(`http://15.207.117.200:9000/admin/getone_coment_list/${id}`)
       .then((res) => {
         console.log(res.data.data);
         setUpcom(res.data.data?.comment);
@@ -160,7 +160,7 @@ function ProductList(args) {
     if (language !== "" && language !== undefined) {
       axios
         .post(
-          `http://3.7.173.138:9000/user/advancefilter?sub_category=${Params.id}&type=${type}&format=${format}&language=${language}&relYear=${contentyear}`
+          `http://15.207.117.200:9000/user/advancefilter?sub_category=${Params.id}&type=${type}&format=${format}&language=${language}&relYear=${contentyear}`
         )
         .then((res) => {
           console.log(res.data.data);
@@ -172,7 +172,7 @@ function ProductList(args) {
 
       axios
         .post(
-          `http://3.7.173.138:9000/user/promotion_filter?sub_category=${Params.id}&type=${type}&format=${format}&language=${language}&relYear=${contentyear}`
+          `http://15.207.117.200:9000/user/promotion_filter?sub_category=${Params.id}&type=${type}&format=${format}&language=${language}&relYear=${contentyear}`
         )
         .then((res) => {
           console.log(res.data.data);
@@ -189,7 +189,7 @@ function ProductList(args) {
     const hastagdata = localStorage.getItem("hastag");
     if (hastagdata !== "hastag")
       axios
-        .post(`http://3.7.173.138:9000/user/search_topic_title`, {
+        .post(`http://15.207.117.200:9000/user/search_topic_title`, {
           searchinput: hastagdata,
         })
         .then((res) => {
@@ -204,7 +204,7 @@ function ProductList(args) {
 
   const getYear = () => {
     axios
-      .get(`http://3.7.173.138:9000/user/allYear`)
+      .get(`http://15.207.117.200:9000/user/allYear`)
       .then((response) => {
         setRelyear(response.data.data);
         // console.log(response.data.data);
@@ -236,7 +236,7 @@ function ProductList(args) {
       // console.log(contentyear);
       axios
         .post(
-          `http://3.7.173.138:9000/user/advancefilter?sub_category=${Params.id}&type=${type}&format=${format}&language=${language}&relYear=${contentyear}`
+          `http://15.207.117.200:9000/user/advancefilter?sub_category=${Params.id}&type=${type}&format=${format}&language=${language}&relYear=${contentyear}`
         )
 
         .then((res) => {
@@ -249,7 +249,7 @@ function ProductList(args) {
 
       axios
         .post(
-          `http://3.7.173.138:9000/user/promotion_filter?sub_category=${Params.id}&type=${type}&format=${format}&language=${language}&relYear=${contentyear}`
+          `http://15.207.117.200:9000/user/promotion_filter?sub_category=${Params.id}&type=${type}&format=${format}&language=${language}&relYear=${contentyear}`
         )
         .then((res) => {
           setPromotion(res.data.data);
@@ -263,7 +263,7 @@ function ProductList(args) {
   const handleSearchHomePage = () => {
     // if (searchdata !== "" && searchdata !== null)
     //   axios
-    //     .post(`http://3.7.173.138:9000/user/search_topic_title`, {
+    //     .post(`http://15.207.117.200:9000/user/search_topic_title`, {
     //       searchinput: searchdata,
     //     })
     //     .then((res) => {
@@ -286,7 +286,7 @@ function ProductList(args) {
   const handlesearchdescription = () => {
     localStorage.setItem("searchdata", searchitem);
     axios
-      .post(`http://3.7.173.138:9000/user/search_topic_title`, {
+      .post(`http://15.207.117.200:9000/user/search_topic_title`, {
         searchinput: searchitem,
       })
       .then((res) => {
@@ -304,7 +304,7 @@ function ProductList(args) {
 
   const getLanguage = () => {
     axios
-      .get(`http://3.7.173.138:9000/user/allLang`)
+      .get(`http://15.207.117.200:9000/user/allLang`)
       .then((response) => {
         setLngage(response.data.data);
         // console.log(response.data.data);
@@ -376,7 +376,7 @@ function ProductList(args) {
 
   const hadlestatusbookmark = () => {
     axios
-      .get(`http://3.7.173.138:9000/user/getone_mylikes/${myId}/${liked}`)
+      .get(`http://15.207.117.200:9000/user/getone_mylikes/${myId}/${liked}`)
       .then((res) => {
         console.log(res.data.data);
         setHandlebookmark(res.data.data.status);
@@ -394,7 +394,7 @@ function ProductList(args) {
     if (promotionId === _id) {
       setPromotId(promotionId);
       axios
-        .get(`http://3.7.173.138:9000/admin/getone_reslist/${promotionId}`)
+        .get(`http://15.207.117.200:9000/admin/getone_reslist/${promotionId}`)
         .then((res) => {
           console.log(res.data.data);
           if (
@@ -411,7 +411,7 @@ function ProductList(args) {
           // console.log(err.data.data);
         });
       axios
-        .get(`http://3.7.173.138:9000/user/average_rating/${promotionId}`)
+        .get(`http://15.207.117.200:9000/user/average_rating/${promotionId}`)
         .then((res) => {
           console.log(res.data);
           setAverageRating(res.data);
@@ -420,7 +420,7 @@ function ProductList(args) {
           console.log(err);
         });
       axios
-        .get(`http://3.7.173.138:9000/user/comment_list/${promotionId}`)
+        .get(`http://15.207.117.200:9000/user/comment_list/${promotionId}`)
         .then((res) => {
           setGetonecomment(res.data.data);
           console.log(res.data.data);
@@ -432,7 +432,7 @@ function ProductList(args) {
   };
   const promotionadmin = () => {
     axios
-      .get(`http://3.7.173.138:9000/user/Promotions`)
+      .get(`http://15.207.117.200:9000/user/Promotions`)
       .then((res) => {
         setPromotion(res.data.data);
         console.log(res.data.data);
@@ -493,7 +493,7 @@ function ProductList(args) {
       const selectedId = Producdetail._id;
 
       axios
-        .post(`http://3.7.173.138:9000/user/add_Comment`, {
+        .post(`http://15.207.117.200:9000/user/add_Comment`, {
           submitresrcId: id,
           userid: myId,
           comment: text,
@@ -538,8 +538,8 @@ function ProductList(args) {
     if (selectedId === _id) {
       setProductdes(selectedId);
       axios
-        // .get(`http://3.7.173.138:9000/admin/getone_reslist/${productdes}`)
-        .get(`http://3.7.173.138:9000/admin/getone_reslist/${selectedId}`)
+        // .get(`http://15.207.117.200:9000/admin/getone_reslist/${productdes}`)
+        .get(`http://15.207.117.200:9000/admin/getone_reslist/${selectedId}`)
         .then((res) => {
           // console.log(res.data.data._id);
           console.log(res);
@@ -558,7 +558,7 @@ function ProductList(args) {
         });
 
       axios
-        .get(`http://3.7.173.138:9000/user/average_rating/${selectedId}`)
+        .get(`http://15.207.117.200:9000/user/average_rating/${selectedId}`)
         .then((res) => {
           console.log(res.data);
           setAverageRating(res.data);
@@ -569,7 +569,7 @@ function ProductList(args) {
     }
 
     axios
-      .get(`http://3.7.173.138:9000/user/comment_list/${selectedId}`)
+      .get(`http://15.207.117.200:9000/user/comment_list/${selectedId}`)
       .then((res) => {
         setGetonecomment(res.data.data);
         console.log(res.data.data);
@@ -588,7 +588,7 @@ function ProductList(args) {
     if (selectedId === _id) {
       setProductdes(selectedId);
       axios
-        .get(`http://3.7.173.138:9000/admin/getone_reslist/${productdes}`)
+        .get(`http://15.207.117.200:9000/admin/getone_reslist/${productdes}`)
         .then((res) => {
           // console.log(res.data.data._id);
           // console.log(res.data.data);
@@ -608,7 +608,7 @@ function ProductList(args) {
         });
 
       axios
-        .get(`http://3.7.173.138:9000/user/average_rating/${productdes}`)
+        .get(`http://15.207.117.200:9000/user/average_rating/${productdes}`)
         .then((res) => {
           console.log(res.data);
           setAverageRating(res.data);
@@ -619,7 +619,7 @@ function ProductList(args) {
     }
 
     axios
-      .get(`http://3.7.173.138:9000/user/comment_list/${selectedId}`)
+      .get(`http://15.207.117.200:9000/user/comment_list/${selectedId}`)
       .then((res) => {
         setGetonecomment(res.data.data);
         // console.log(res.data.data);
@@ -695,7 +695,7 @@ function ProductList(args) {
   const gettypefilter = () => {
     axios
       .post(
-        `http://3.7.173.138:9000/user/advancefilter?sub_category=${Params.id}&type=${type}&format=${format}&language=${language}&relYear=${contentyear}`
+        `http://15.207.117.200:9000/user/advancefilter?sub_category=${Params.id}&type=${type}&format=${format}&language=${language}&relYear=${contentyear}`
       )
       .then((res) => {
         console.log(res.data.data);
@@ -708,7 +708,7 @@ function ProductList(args) {
 
     axios
       .post(
-        `http://3.7.173.138:9000/user/promotion_filter?sub_category=${Params.id}&type=${type}&format=${format}&language=${language}&relYear=${contentyear}`
+        `http://15.207.117.200:9000/user/promotion_filter?sub_category=${Params.id}&type=${type}&format=${format}&language=${language}&relYear=${contentyear}`
       )
       .then((res) => {
         console.log(res.data.data);
@@ -723,7 +723,7 @@ function ProductList(args) {
   const getformatfilter = () => {
     axios
       .post(
-        `http://3.7.173.138:9000/user/advancefilter?sub_category=${Params.id}&type=${type}&format=${format}&language=${language}&relYear=${contentyear}`
+        `http://15.207.117.200:9000/user/advancefilter?sub_category=${Params.id}&type=${type}&format=${format}&language=${language}&relYear=${contentyear}`
       )
       .then((res) => {
         console.log(res.data.data);
@@ -736,7 +736,7 @@ function ProductList(args) {
 
     axios
       .post(
-        `http://3.7.173.138:9000/user/promotion_filter?sub_category=${Params.id}&type=${type}&format=${format}&language=${language}&relYear=${contentyear}`
+        `http://15.207.117.200:9000/user/promotion_filter?sub_category=${Params.id}&type=${type}&format=${format}&language=${language}&relYear=${contentyear}`
       )
       .then((res) => {
         setPromotion(res.data.data);
@@ -748,7 +748,7 @@ function ProductList(args) {
   const getsearchbyratingfilter = () => {
     // console.log(searchrating);
     axios
-      .get(`http://3.7.173.138:9000/user/filterByRating/${searchrating}`)
+      .get(`http://15.207.117.200:9000/user/filterByRating/${searchrating}`)
       .then((res) => {
         // console.log(res.data.data);
         // setCategry(res.data.data);
@@ -760,7 +760,7 @@ function ProductList(args) {
 
   const allsearchproduct = () => {
     axios
-      .get(`http://3.7.173.138:9000/admin/listbysubcategory/${Params.id}`)
+      .get(`http://15.207.117.200:9000/admin/listbysubcategory/${Params.id}`)
       .then((response) => {
         if (response.data.data.length === 0) {
           swal("No Product found for this Sub-Category");
@@ -778,7 +778,7 @@ function ProductList(args) {
   const [suggested, setSuggested] = useState([]);
   const allsuggestedproduct = () => {
     axios
-      .get(`http://3.7.173.138:9000/admin/listbysubcategory/${Params.id}`)
+      .get(`http://15.207.117.200:9000/admin/listbysubcategory/${Params.id}`)
       .then((response) => {
         setSuggested(response.data.data);
         // console.log(response.data.data);
