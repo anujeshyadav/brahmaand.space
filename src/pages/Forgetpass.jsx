@@ -32,7 +32,7 @@ function Forgetpass() {
     const email = localStorage.getItem("forgetpassmail");
     if (email !== "" && otp !== "") {
       axios
-        .post(`http://15.207.117.200:9000/user/verifyotp`, {
+        .post(`https://15.207.117.200:9000/user/verifyotp`, {
           email: email,
           otp: otp,
         })

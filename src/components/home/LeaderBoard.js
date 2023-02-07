@@ -36,7 +36,7 @@ function LeaderBoard() {
 
   const getcurrentmonthdata = () => {
     axios
-      .get(`http://15.207.117.200:9000/user/karma_crrnt_month`)
+      .get(`https://15.207.117.200:9000/user/karma_crrnt_month`)
       .then((res) => {
         console.log(res.data.data);
         setCurrentmonth(res.data.data);
@@ -47,7 +47,7 @@ function LeaderBoard() {
   };
   const getallmonthdata = () => {
     axios
-      .get(`http://15.207.117.200:9000/user/all_time_karma`)
+      .get(`https://15.207.117.200:9000/user/all_time_karma`)
       .then((res) => {
         console.log(res.data.data);
         setAlltime(res.data.data);
@@ -59,7 +59,7 @@ function LeaderBoard() {
 
   const getallplanetpostion = () => {
     axios
-      .get(`http://15.207.117.200:9000/user/user_planet_position`)
+      .get(`https://15.207.117.200:9000/user/user_planet_position`)
       .then((res) => {
         setPlanetposition(res.data.data);
         // console.log(res.data.data);

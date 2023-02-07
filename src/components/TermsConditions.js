@@ -11,7 +11,7 @@ function TermsConditions() {
 
   const privacypolicy = () => {
     axios
-      .get(`http://15.207.117.200:9000/admin/get_term_cond`)
+      .get(`https://15.207.117.200:9000/admin/get_term_cond`)
       .then((res) => {
         // console.log(res.data.data);
         setfirst(res.data.data);

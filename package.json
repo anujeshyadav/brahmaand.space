@@ -71,7 +71,7 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": " set HTTPS=true&&react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -94,7 +94,7 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://localhost:5000/",
+  "proxy": "https://localhost:5000/",
   "devDependencies": {
     "@babel/node": "^7.16.8",
     "@babel/plugin-transform-react-jsx": "^7.17.3",

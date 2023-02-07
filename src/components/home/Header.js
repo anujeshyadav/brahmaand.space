@@ -79,7 +79,7 @@ function Header() {
     localStorage.setItem("searchdata", searchdata);
     if (searchdata !== "") {
       axios
-        .post(`http://15.207.117.200:9000/user/search_topic_title`, {
+        .post(`https://15.207.117.200:9000/user/search_topic_title`, {
           searchinput: searchdata,
         })
         .then((res) => {
@@ -105,7 +105,7 @@ function Header() {
   useEffect(() => {
     handlesearchtopics();
     axios
-      .get(`http://43.205.82.226:9000/admin/getallCategory`)
+      .get(`https://43.205.82.226:9000/admin/getallCategory`)
       .then((res) => {
         // console.log(res.data.data);
         setNewitem(res.data.data);

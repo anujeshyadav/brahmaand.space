@@ -107,7 +107,7 @@ function Account({
 
             <Row className="account-info-edit-row">
               <Col
-               xs={12}
+                xs={12}
                 sm={12}
                 md={2}
                 lg={2}
@@ -149,7 +149,7 @@ function Account({
               </Col>
 
               <Col
-               xs={12}
+                xs={12}
                 sm={12}
                 md={10}
                 lg={10}
@@ -165,7 +165,7 @@ function Account({
 
             <Row className="account-info-edit-row">
               <Col
-               xs={12}
+                xs={12}
                 sm={12}
                 md={2}
                 lg={2}
@@ -197,8 +197,8 @@ function Account({
               return (
                 <Row key={index} className="account-info-edit-row">
                   <Col
-                   xs={12}
-                sm={12}
+                    xs={12}
+                    sm={12}
                     md={10}
                     lg={10}
                     className="account-info-edit-col"
@@ -207,7 +207,7 @@ function Account({
                       <div className="account-info-box-div">
                         <p className="account-info-box-p">
                           <a
-                            href={`http://localhost:5000/UserAccountInfo/pdf-viewer/${user_info.email}/${doc_info.filename}`}
+                            href={`https://localhost:5000/UserAccountInfo/pdf-viewer/${user_info.email}/${doc_info.filename}`}
                             target="_blank"
                             className="account-info-box-a"
                           >
@@ -219,8 +219,8 @@ function Account({
                   </Col>
 
                   <Col
-                   xs={12}
-                sm={12}
+                    xs={12}
+                    sm={12}
                     md={2}
                     lg={2}
                     className="account-info-edit-col"

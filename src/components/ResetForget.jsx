@@ -58,7 +58,7 @@ function ResetForget() {
         // console.log("password matched  so api is goint to hit");
         axios
           .post(
-            `http://15.207.117.200:9000/user/forgetpassword/${forgetuserid}`,
+            `https://15.207.117.200:9000/user/forgetpassword/${forgetuserid}`,
             {
               password: newpass,
             }

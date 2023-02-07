@@ -84,7 +84,7 @@ function Bookmarks(args) {
     const user = localStorage.getItem("userId");
 
     axios
-      .post(`http://15.207.117.200:9000/user/editCommentbyUser/${id}`, {
+      .post(`https://15.207.117.200:9000/user/editCommentbyUser/${id}`, {
         submitresrcId: dataid,
         userid: user,
         comment: upcom,
@@ -104,7 +104,7 @@ function Bookmarks(args) {
 
   const handleeditcomment = (id) => {
     axios
-      .get(`http://15.207.117.200:9000/admin/getone_coment_list/${id}`)
+      .get(`https://15.207.117.200:9000/admin/getone_coment_list/${id}`)
       .then((res) => {
         console.log(res.data.data);
         setUpcom(res.data.data?.comment);
@@ -144,7 +144,7 @@ function Bookmarks(args) {
       // console.log(selectedId, userId, text, rating);
 
       axios
-        .post(`http://15.207.117.200:9000/user/add_Comment`, {
+        .post(`https://15.207.117.200:9000/user/add_Comment`, {
           submitresrcId: id,
           userid: userId,
           comment: text,
@@ -250,7 +250,7 @@ function Bookmarks(args) {
       liked !== undefined
     ) {
       axios
-        .get(`http://15.207.117.200:9000/user/getone_mylikes/${myId}/${liked}`)
+        .get(`https://15.207.117.200:9000/user/getone_mylikes/${myId}/${liked}`)
         .then((res) => {
           // console.log(res.data.data);
           setHandlebookmark(res.data.data.status);
@@ -267,7 +267,7 @@ function Bookmarks(args) {
     if (selectedId === _id) {
       setProductdes(selectedId);
       axios
-        .get(`http://15.207.117.200:9000/admin/getone_reslist/${productdes}`)
+        .get(`https://15.207.117.200:9000/admin/getone_reslist/${productdes}`)
         .then((res) => {
           // console.log(res.data.data);
           if (
@@ -284,7 +284,7 @@ function Bookmarks(args) {
           // console.log(err.data.data);
         });
       axios
-        .get(`http://15.207.117.200:9000/user/average_rating/${productdes}`)
+        .get(`https://15.207.117.200:9000/user/average_rating/${productdes}`)
         .then((res) => {
           console.log(res.data);
           setAverageRating(res.data);
@@ -295,7 +295,7 @@ function Bookmarks(args) {
     }
 
     axios
-      .get(`http://15.207.117.200:9000/user/comment_list/${selectedId}`)
+      .get(`https://15.207.117.200:9000/user/comment_list/${selectedId}`)
       .then((res) => {
         setGetonecomment(res.data.data);
         // console.log(res);
@@ -329,7 +329,7 @@ function Bookmarks(args) {
     // console.log(myId);
     if (myId !== null) {
       axios
-        .get(`http://15.207.117.200:9000/user/my_likes/${myId}`)
+        .get(`https://15.207.117.200:9000/user/my_likes/${myId}`)
         .then((res) => {
           setMylikes(res.data.data);
           console.log(res.data.data);
