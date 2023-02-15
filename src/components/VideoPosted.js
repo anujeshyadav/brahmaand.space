@@ -66,7 +66,7 @@ function VideoPosted(args) {
     const user = localStorage.getItem("userId");
 
     axios
-      .post(`https://15.207.117.200:9000/user/editCommentbyUser/${id}`, {
+      .post(`http://15.207.117.200:9000/user/editCommentbyUser/${id}`, {
         submitresrcId: dataid,
         userid: user,
         comment: upcom,
@@ -86,7 +86,7 @@ function VideoPosted(args) {
 
   const handleeditcomment = (id) => {
     axios
-      .get(`https://15.207.117.200:9000/admin/getone_coment_list/${id}`)
+      .get(`http://15.207.117.200:9000/admin/getone_coment_list/${id}`)
       .then((res) => {
         console.log(res.data.data);
         setUpcom(res.data.data?.comment);
@@ -142,7 +142,7 @@ function VideoPosted(args) {
         // console.log(selectedId, userId, text, rating);
 
         axios
-          .post(`https://15.207.117.200:9000/user/add_Comment`, {
+          .post(`http://15.207.117.200:9000/user/add_Comment`, {
             submitresrcId: selectedId,
             userid: userId,
             comment: text,
@@ -241,7 +241,7 @@ function VideoPosted(args) {
       liked !== undefined
     ) {
       axios
-        .get(`https://15.207.117.200:9000/user/getone_mylikes/${myId}/${liked}`)
+        .get(`http://15.207.117.200:9000/user/getone_mylikes/${myId}/${liked}`)
         .then((res) => {
           // console.log(res.data.data);
           setHandlebookmark(res.data.data.status);
@@ -259,7 +259,7 @@ function VideoPosted(args) {
     if (selectedId === _id) {
       setProductdes(selectedId);
       axios
-        .get(`https://15.207.117.200:9000/admin/getone_reslist/${productdes}`)
+        .get(`http://15.207.117.200:9000/admin/getone_reslist/${productdes}`)
         .then((res) => {
           // console.log(res.data.data);
           if (
@@ -278,7 +278,7 @@ function VideoPosted(args) {
     }
 
     axios
-      .get(`https://15.207.117.200:9000/user/comment_list/${selectedId}`)
+      .get(`http://15.207.117.200:9000/user/comment_list/${selectedId}`)
       .then((res) => {
         setGetonecomment(res.data.data);
         // console.log(res);
@@ -312,7 +312,7 @@ function VideoPosted(args) {
     // console.log(myId);
     if (myId !== null) {
       axios
-        .get(`https://15.207.117.200:9000/user/posted_by_me/${myId}`)
+        .get(`http://15.207.117.200:9000/user/posted_by_me/${myId}`)
         .then((res) => {
           setMylikes(res.data.data);
           console.log(res.data.data);

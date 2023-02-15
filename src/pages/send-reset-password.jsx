@@ -42,7 +42,7 @@ const SendRequestResetPasswordComponent = () => {
     e.preventDefault();
     setIsLoading(true);
     axios
-      .post(`https://15.207.117.200:9000/user/sendotp`, {
+      .post(`http://15.207.117.200:9000/user/sendotp`, {
         email: email,
       })
       .then((res) => {

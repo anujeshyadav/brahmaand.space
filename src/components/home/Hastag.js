@@ -45,7 +45,7 @@ function Hastag() {
 
   const gettrendingdata = () => {
     axios
-      .get(`https://15.207.117.200:9000/admin/getTrending`)
+      .get(`http://15.207.117.200:9000/admin/getTrending`)
       .then((res) => {
         // console.log(res.data.data);
         setTrendingsearch(res.data.data);
@@ -55,7 +55,7 @@ function Hastag() {
   const [popblog, setPop] = useState([]);
   const popularblog = () => {
     axios
-      .get(`https://15.207.117.200:9000/user/popularBlog`)
+      .get(`http://15.207.117.200:9000/user/popularBlog`)
 
       .then((response) => {
         setPop(response.data.data.slice(0, 3));
@@ -74,7 +74,7 @@ function Hastag() {
   }, []);
   const allcategory = () => {
     axios
-      .get(`https://15.207.117.200:9000/admin/getallCategory`)
+      .get(`http://15.207.117.200:9000/admin/getallCategory`)
       .then((response) => {
         setCategry(response.data.data);
         // console.log(response.data.data);
@@ -93,7 +93,7 @@ function Hastag() {
     const userid = localStorage.getItem("userid");
 
     axios
-      .post(`https://15.207.117.200:9000/user/add_news_ltr`, {
+      .post(`http://15.207.117.200:9000/user/add_news_ltr`, {
         email: email,
         userid: userid,
       })
@@ -153,7 +153,7 @@ function Hastag() {
     // if (hastag !== "") {
     //   console.log(hastag);
     //   axios
-    //     .get(`https://15.207.117.200:9000/user/filterbyHashTag/${hastag}`)
+    //     .get(`http://15.207.117.200:9000/user/filterbyHashTag/${hastag}`)
     //     .then((res) => {
     //       console.log(res.data?.data[0].sub_category?._id);
     //       const hastagdata = res.data?.data[0].sub_category?._id;
@@ -170,7 +170,7 @@ function Hastag() {
 
     if (hastag !== "") {
       axios
-        .post(`https://15.207.117.200:9000/user/search_topic_title`, {
+        .post(`http://15.207.117.200:9000/user/search_topic_title`, {
           searchinput: hastag,
         })
         .then((res) => {

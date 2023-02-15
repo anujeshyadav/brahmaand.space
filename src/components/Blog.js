@@ -54,7 +54,7 @@ function Blog() {
 
   const reconmendedblog = () => {
     axios
-      .get(`https://15.207.117.200:9000/user/recomanded_Blog`)
+      .get(`http://15.207.117.200:9000/user/recomanded_Blog`)
 
       .then((response) => {
         setRecomblog(response.data.data);
@@ -66,7 +66,7 @@ function Blog() {
 
   const popularblog = () => {
     axios
-      .get(`https://15.207.117.200:9000/user/popularBlog`)
+      .get(`http://15.207.117.200:9000/user/popularBlog`)
 
       .then((response) => {
         setPop(response.data.data);

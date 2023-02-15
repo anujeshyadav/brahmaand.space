@@ -32,7 +32,7 @@ function OtpInputpage() {
     const email = localStorage.getItem("email");
     if (email !== "" && otp !== "") {
       axios
-        .post(`https://15.207.117.200:9000/user/verifyotp`, {
+        .post(`http://15.207.117.200:9000/user/verifyotp`, {
           email: email,
           otp: otp,
         })

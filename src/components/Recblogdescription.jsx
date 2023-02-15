@@ -14,7 +14,7 @@ function Recblogdescription() {
   useEffect(() => {
     axios
 
-      .get(`https://15.207.117.200:9000/admin/viewoneBlog/${Param.id}`)
+      .get(`http://15.207.117.200:9000/admin/viewoneBlog/${Param.id}`)
 
       .then((res) => {
         setBlogdescription(res.data.data);
