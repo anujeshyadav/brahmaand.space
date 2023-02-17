@@ -79,7 +79,7 @@ function Header() {
     localStorage.setItem("searchdata", searchdata);
     if (searchdata !== "") {
       axios
-        .post(`http://15.207.117.200:9000/user/search_topic_title`, {
+        .post(`http://13.233.99.196:9000/user/search_topic_title`, {
           searchinput: searchdata,
         })
         .then((res) => {

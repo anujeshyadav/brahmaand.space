@@ -11,7 +11,7 @@ function Points() {
   const earnpoints = () => {
     const userId = localStorage.getItem("userId");
     axios
-      .get(`http://15.207.117.200:9000/user/getoneUser/${userId}`)
+      .get(`http://13.233.99.196:9000/user/getoneUser/${userId}`)
       .then((res) => {
         setUserdata(res.data.data);
         console.log(res.data.data);
@@ -20,7 +20,7 @@ function Points() {
         console.log(err);
       });
     axios
-      .get(`http://15.207.117.200:9000/user/my_content_meteros/${userId}`)
+      .get(`http://13.233.99.196:9000/user/my_content_meteros/${userId}`)
       .then((res) => {
         setGetyourpoint(res.data);
         console.log(res.data);

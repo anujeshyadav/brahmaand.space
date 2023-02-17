@@ -11,7 +11,7 @@ function FAQ() {
 
   const freques = () => {
     axios
-      .get(`http://15.207.117.200:9000/admin/faq_list`)
+      .get(`http://13.233.99.196:9000/admin/faq_list`)
       .then((res) => {
         setFaq(res.data.data);
         // console.log(res.data.data);

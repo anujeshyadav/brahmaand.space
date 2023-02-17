@@ -39,7 +39,7 @@ function NewSignup() {
     ) {
       console.log("first");
       axios
-        .post(`http://15.207.117.200:9000/user/signup`, {
+        .post(`http://13.233.99.196:9000/user/signup`, {
           username: username,
           email: email,
           password: password,
@@ -145,7 +145,7 @@ function NewSignup() {
     const Fireemail = localStorage.getItem("Fireemail");
     const Firename = localStorage.getItem("Firename");
     axios
-      .post(`http://15.207.117.200:9000/user/login`, {
+      .post(`http://13.233.99.196:9000/user/login`, {
         username: Firename,
         email: Fireemail,
         password: Fireuid,
@@ -194,7 +194,7 @@ function NewSignup() {
 
     if (Fireemail !== "" && Firename !== "" && Fireuid !== "") {
       axios
-        .post(`http://15.207.117.200:9000/user/signinwithgoogle`, {
+        .post(`http://13.233.99.196:9000/user/signinwithgoogle`, {
           username: Firename,
           email: Fireemail,
           password: Fireuid,

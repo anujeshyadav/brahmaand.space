@@ -9,7 +9,7 @@ function Work() {
   const [howworks, sethowworks] = useState([]);
   useEffect(() => {
     axios
-      .get(`http://15.207.117.200:9000/admin/get_howWorks`)
+      .get(`http://13.233.99.196:9000/admin/get_howWorks`)
       .then((response) => {
         sethowworks(response.data.data);
         // console.log(response.data.data);

@@ -29,7 +29,7 @@ function AllSubCategory() {
   const allsubcategory = () => {
     axios
 
-      .get(`http://15.207.117.200:9000/admin/listbycategory/${Params.id}`)
+      .get(`http://13.233.99.196:9000/admin/listbycategory/${Params.id}`)
       .then((response) => {
         // console.log(response.data.data);
         if (response.data.data.length === 0) {

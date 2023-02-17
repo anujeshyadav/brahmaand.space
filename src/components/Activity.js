@@ -9,7 +9,7 @@ function Activity() {
 
   useEffect(() => {
     axios
-      .get(`http://15.207.117.200:9000/user/getoneUser/${id}`)
+      .get(`http://13.233.99.196:9000/user/getoneUser/${id}`)
       .then((response) => {
         // console.log("getdata", response.data.data);
         setUserData(response.data.data);
