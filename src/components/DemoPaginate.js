@@ -21,7 +21,7 @@ function DemoPaginate() {
   // }, [Params]);
   const allsearchproduct = () => {
     // axios;
-    // .get(`http://13.233.99.196:9000/admin/listbysubcategory/${Params.id}`)
+    // .get(`http://65.1.135.77:9000/admin/listbysubcategory/${Params.id}`)
     // .then((response) => {
     //   setCategry(response.data.data);
     // })

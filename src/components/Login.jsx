@@ -60,7 +60,7 @@ function Login() {
     e.preventDefault();
     console.log(email, password);
     axios
-      .post(`http://13.233.99.196:9000/user/login`, {
+      .post(`http://65.1.135.77:9000/user/login`, {
         username: email,
         email: email,
         password: password,
@@ -113,8 +113,8 @@ function Login() {
 
     if (Fireemail !== "" && Firename !== "" && Fireuid !== "") {
       axios
-        // .post(`http://13.233.99.196:9000/user/signup`, {
-        .post(`http://13.233.99.196:9000/user/signinwithgoogle`, {
+        // .post(`http://65.1.135.77:9000/user/signup`, {
+        .post(`http://65.1.135.77:9000/user/signinwithgoogle`, {
           username: Firename,
           email: Fireemail,
           password: Fireuid,
@@ -140,7 +140,7 @@ function Login() {
     const Fireemail = localStorage.getItem("Fireemail");
     const Firename = localStorage.getItem("Firename");
     axios
-      .post(`http://13.233.99.196:9000/user/login`, {
+      .post(`http://65.1.135.77:9000/user/login`, {
         username: Firename,
         email: Fireemail,
         password: Fireuid,

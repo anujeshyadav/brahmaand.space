@@ -67,7 +67,7 @@ function Searchfiltermodel(...args) {
 
     if (selectedId == Producdetail._id && userId !== "") {
       axios
-        .post(`http://13.233.99.196:9000/user/add_blog_Comment`, {
+        .post(`http://65.1.135.77:9000/user/add_blog_Comment`, {
           blogid: selectedId,
           userid: userId,
           desc: text,
@@ -95,7 +95,7 @@ function Searchfiltermodel(...args) {
 
   const individualdata = () => {
     axios
-      .get(`http://13.233.99.196:9000/admin/getone_reslist/${Params.id}`)
+      .get(`http://65.1.135.77:9000/admin/getone_reslist/${Params.id}`)
       .then((res) => {
         setProductdetail(res.data.data);
         // console.log(res.data.data);
