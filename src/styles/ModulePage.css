@@ -158,6 +158,7 @@ input.searchprd.inputareaa.searchba {
 
 button.probtn.text-center.btn.btn-primary {
   margin: 3px;
+  justify-content: center;
 }
 
 .inputarea {
