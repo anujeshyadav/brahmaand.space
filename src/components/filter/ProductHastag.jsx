@@ -274,10 +274,11 @@ function ProductHastag(args) {
       })
       .then((res) => {
         console.log(res.data.data);
+
         const search = res.data.data[0]?.sub_category;
         if (search !== "" && search !== undefined) {
           navigate(`/productsearch/${search}`);
-        }
+        } else swal("No Data found");
         // setCategry(res.data.data);
       })
       .catch((err) => {
@@ -788,12 +789,7 @@ function ProductHastag(args) {
             </Col>
             <Col onClick={handlesearchdescription} lg="2">
               <Button className=" d-flex probtn text-center ">
-                <p
-                  onClick={handlesearchdescription}
-                  className="searchproduct d-flex"
-                >
-                  SEARCH
-                </p>
+                <p className="searchproduct d-flex">SEARCH</p>
               </Button>
             </Col>
           </Row>
