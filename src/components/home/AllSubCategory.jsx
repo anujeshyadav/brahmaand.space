@@ -22,13 +22,11 @@ function AllSubCategory() {
   const [subcatgry, setsubCatgry] = useState([]);
 
   useEffect(() => {
-    // console.log("Params", Params);
     allsubcategory();
   }, [Params]);
 
   const allsubcategory = () => {
     axios
-
       .get(`https://backend.brahmaand.space/admin/listbycategory/${Params.id}`)
       .then((response) => {
         // console.log(response.data.data);
