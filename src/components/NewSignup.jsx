@@ -207,9 +207,9 @@ function NewSignup() {
         })
         .catch((error) => {
           // console.log(error.response);
-          if (error.response.data.message == "already exists") {
-            swal("Already Registered", " Reset your password Password");
-          }
+          // if (error.response.data.message == "already exists") {
+          //   swal("Already Registered", " Reset your password Password");
+          // }
         });
     }
   };
