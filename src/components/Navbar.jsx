@@ -186,7 +186,7 @@ function CustomNavbar(args) {
     const params = catgry;
     axios
 
-      .get(`https://backend.brahmaand.space/admin/listbycategory/${params}`)
+      .get(`https://backend.brahmaand.space/admin/listbycategory/${catgry}`)
       .then((response) => {
         // console.log(response.data.data);
         setSubctgry(response.data.data);

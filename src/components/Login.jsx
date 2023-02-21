@@ -106,9 +106,9 @@ function Login() {
   const handlegooglelogin = async () => {
     await signInWithGoogle();
 
-    const Fireuid = localStorage.getItem("Fireuid");
-    const FirephotoURL = localStorage.getItem("FirephotoURL");
-    const Fireemail = localStorage.getItem("Fireemail");
+    const Fireuid = await localStorage.getItem("Fireuid");
+    const FirephotoURL = await localStorage.getItem("FirephotoURL");
+    const Fireemail = await localStorage.getItem("Fireemail");
     const Firename = localStorage.getItem("Firename");
 
     if (Fireemail !== "" && Firename !== "" && Fireuid !== "") {
@@ -324,7 +324,7 @@ function Login() {
                 <div className="mt-4">
                   <Row className="signupwithgoogle">
                     <button
-                      onClick={handlegooglelogin}
+                      onClick={() => handlegooglelogin()}
                       className="d-flex justify-content-center signupwithgoogle"
                     >
                       <img
