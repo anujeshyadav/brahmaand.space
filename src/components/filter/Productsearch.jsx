@@ -123,7 +123,7 @@ function Productsearch(args) {
     const user = localStorage.getItem("userId");
     if (rating !== "" && upcom !== "") {
       axios
-        .post(`http://65.1.135.77:9000/user/editCommentbyUser/${id}`, {
+        .post(`https://backend.brahmaand.space/user/editCommentbyUser/${id}`, {
           submitresrcId: dataid,
           userid: user,
           comment: upcom,
@@ -144,7 +144,7 @@ function Productsearch(args) {
   const [editnew, seteditnew] = useState({});
   const handleeditcomment = (id) => {
     axios
-      .get(`http://65.1.135.77:9000/admin/getone_coment_list/${id}`)
+      .get(`https://backend.brahmaand.space/admin/getone_coment_list/${id}`)
       .then((res) => {
         console.log(res.data.data);
         setUpcom(res.data.data?.comment);
@@ -159,7 +159,7 @@ function Productsearch(args) {
     if (language !== "" && language !== undefined) {
       axios
         .get(
-          `http://65.1.135.77:9000/user/filterbyLanguage/${Params.id}/${language}`
+          `https://backend.brahmaand.space/user/filterbyLanguage/${Params.id}/${language}`
         )
         .then((res) => {
           setCategry(res.data.data);
@@ -175,7 +175,7 @@ function Productsearch(args) {
     const hastagdata = localStorage.getItem("hastag");
     // if (hastagdata !== "" && hastagdata !== null) {
     //   axios
-    //     .get(`http://65.1.135.77:9000/user/filterbyHashTag/${hastagdata}`)
+    //     .get(`https://backend.brahmaand.space/user/filterbyHashTag/${hastagdata}`)
     //     .then((res) => {
     //       console.log(res.data.data);
     //       if (res.data.data !== "" && res.data.data !== null) {
@@ -189,7 +189,7 @@ function Productsearch(args) {
     // }
     // if (hastagdata !== "hastag")
     //   axios
-    //     .post(`http://65.1.135.77:9000/user/search_topic_title`, {
+    //     .post(`https://backend.brahmaand.space/user/search_topic_title`, {
     //       searchinput: hastagdata,
     //     })
     //     .then((res) => {
@@ -206,7 +206,7 @@ function Productsearch(args) {
 
   const getYear = () => {
     axios
-      .get(`http://65.1.135.77:9000/user/allYear`)
+      .get(`https://backend.brahmaand.space/user/allYear`)
       .then((response) => {
         setRelyear(response.data.data);
       })
@@ -233,7 +233,7 @@ function Productsearch(args) {
     if (contentyear !== "") {
       axios
         .get(
-          `http://65.1.135.77:9000/user/filterbyyear/${Params.id}/${contentyear}`
+          `https://backend.brahmaand.space/user/filterbyyear/${Params.id}/${contentyear}`
         )
         .then((res) => {
           setCategry(res.data.data);
@@ -252,7 +252,7 @@ function Productsearch(args) {
 
     if (searchdata !== "" && searchdata !== null)
       axios
-        .post(`http://65.1.135.77:9000/user/search_topic_title`, {
+        .post(`https://backend.brahmaand.space/user/search_topic_title`, {
           searchinput: searchdata,
         })
         .then((res) => {
@@ -271,7 +271,7 @@ function Productsearch(args) {
           // console.log(err);
         });
     axios
-      .post(`http://65.1.135.77:9000/user/search_promotion`, {
+      .post(`https://backend.brahmaand.space/user/search_promotion`, {
         searchinput: searchdata,
       })
       .then((res) => {
@@ -287,7 +287,7 @@ function Productsearch(args) {
 
   const handlesearchdescription = () => {
     axios
-      .post(`http://65.1.135.77:9000/user/search_topic_title`, {
+      .post(`https://backend.brahmaand.space/user/search_topic_title`, {
         searchinput: searchitem,
       })
       .then((res) => {
@@ -298,7 +298,7 @@ function Productsearch(args) {
       });
 
     axios
-      .post(`http://65.1.135.77:9000/user/search_promotion`, {
+      .post(`https://backend.brahmaand.space/user/search_promotion`, {
         searchinput: searchitem,
       })
       .then((res) => {
@@ -313,7 +313,7 @@ function Productsearch(args) {
 
   const getLanguage = () => {
     axios
-      .get(`http://65.1.135.77:9000/user/allLang`)
+      .get(`https://backend.brahmaand.space/user/allLang`)
       .then((response) => {
         setLngage(response.data.data);
       })
@@ -381,7 +381,9 @@ function Productsearch(args) {
 
   const hadlestatusbookmark = () => {
     axios
-      .get(`http://65.1.135.77:9000/user/getone_mylikes/${myId}/${liked}`)
+      .get(
+        `https://backend.brahmaand.space/user/getone_mylikes/${myId}/${liked}`
+      )
       .then((res) => {
         // console.log(res.data.data);
         setHandlebookmark(res.data.data.status);
@@ -407,7 +409,9 @@ function Productsearch(args) {
     if (promotionId === _id) {
       setPromotId(promotionId);
       axios
-        .get(`http://65.1.135.77:9000/admin/getone_reslist/${promotionId}`)
+        .get(
+          `https://backend.brahmaand.space/admin/getone_reslist/${promotionId}`
+        )
         .then((res) => {
           // console.log(res.data.data._id);
           if (
@@ -424,7 +428,9 @@ function Productsearch(args) {
           // console.log(err.data.data);
         });
       axios
-        .get(`http://65.1.135.77:9000/user/average_rating/${promotionId}`)
+        .get(
+          `https://backend.brahmaand.space/user/average_rating/${promotionId}`
+        )
         .then((res) => {
           // console.log(res.data);
           setAverageRating(res.data);
@@ -433,7 +439,7 @@ function Productsearch(args) {
           // console.log(err);
         });
       axios
-        .get(`http://65.1.135.77:9000/user/comment_list/${promotionId}`)
+        .get(`https://backend.brahmaand.space/user/comment_list/${promotionId}`)
         .then((res) => {
           setGetonecomment(res.data.data);
           console.log(res.data.data);
@@ -445,7 +451,7 @@ function Productsearch(args) {
   };
   // const promotionadmin = () => {
   //   axios
-  //     .get(`http://65.1.135.77:9000/user/Promotions`)
+  //     .get(`https://backend.brahmaand.space/user/Promotions`)
   //     .then((res) => {
   //       setPromotion(res.data.data);
 
@@ -497,7 +503,7 @@ function Productsearch(args) {
   };
   const promotionadmin = () => {
     axios
-      .get(`http://65.1.135.77:9000/user/Promotions`)
+      .get(`https://backend.brahmaand.space/user/Promotions`)
       .then((res) => {
         setPromotion(res.data.data);
         // console.log(res.data.data);
@@ -518,7 +524,7 @@ function Productsearch(args) {
       const selectedId = Producdetail._id;
 
       axios
-        .post(`http://65.1.135.77:9000/user/add_Comment`, {
+        .post(`https://backend.brahmaand.space/user/add_Comment`, {
           submitresrcId: id,
           userid: myId,
           comment: text,
@@ -564,8 +570,10 @@ function Productsearch(args) {
     if (selectedId === _id) {
       setProductdes(selectedId);
       axios
-        // .get(`http://65.1.135.77:9000/admin/getone_reslist/${productdes}`)
-        .get(`http://65.1.135.77:9000/admin/getone_reslist/${selectedId}`)
+        // .get(`https://backend.brahmaand.space/admin/getone_reslist/${productdes}`)
+        .get(
+          `https://backend.brahmaand.space/admin/getone_reslist/${selectedId}`
+        )
         .then((res) => {
           // console.log(res.data.data._id);
           // console.log(res);
@@ -583,7 +591,9 @@ function Productsearch(args) {
         });
 
       axios
-        .get(`http://65.1.135.77:9000/user/average_rating/${productdes}`)
+        .get(
+          `https://backend.brahmaand.space/user/average_rating/${productdes}`
+        )
         .then((res) => {
           // console.log(res.data);
           setAverageRating(res.data);
@@ -594,7 +604,7 @@ function Productsearch(args) {
     }
 
     axios
-      .get(`http://65.1.135.77:9000/user/comment_list/${selectedId}`)
+      .get(`https://backend.brahmaand.space/user/comment_list/${selectedId}`)
       .then((res) => {
         setGetonecomment(res.data.data);
         // console.log(res.data.data);
@@ -613,7 +623,9 @@ function Productsearch(args) {
     if (selectedId === _id) {
       setProductdes(selectedId);
       axios
-        .get(`http://65.1.135.77:9000/admin/getone_reslist/${productdes}`)
+        .get(
+          `https://backend.brahmaand.space/admin/getone_reslist/${productdes}`
+        )
         .then((res) => {
           // console.log(res.data.data._id);
           // console.log(res.data.data);
@@ -632,7 +644,9 @@ function Productsearch(args) {
         });
 
       axios
-        .get(`http://65.1.135.77:9000/user/average_rating/${productdes}`)
+        .get(
+          `https://backend.brahmaand.space/user/average_rating/${productdes}`
+        )
         .then((res) => {
           // console.log(res.data);
           setAverageRating(res.data);
@@ -643,7 +657,7 @@ function Productsearch(args) {
     }
 
     axios
-      .get(`http://65.1.135.77:9000/user/comment_list/${selectedId}`)
+      .get(`https://backend.brahmaand.space/user/comment_list/${selectedId}`)
       .then((res) => {
         setGetonecomment(res.data.data);
         // console.log(res.data.data);
@@ -729,7 +743,9 @@ function Productsearch(args) {
   const [typelength, setTypelength] = useState([]);
   const gettypefilter = () => {
     axios
-      .get(`http://65.1.135.77:9000/user/filter_type/${Params.id}/${type}`)
+      .get(
+        `https://backend.brahmaand.space/user/filter_type/${Params.id}/${type}`
+      )
       .then((res) => {
         // console.log(res.data.data);
         setCategry(res.data.data);
@@ -743,7 +759,9 @@ function Productsearch(args) {
   const [formatelength, setFormatelength] = useState([]);
   const getformatfilter = () => {
     axios
-      .get(`http://65.1.135.77:9000/user/filterbyFormat/${Params.id}/${format}`)
+      .get(
+        `https://backend.brahmaand.space/user/filterbyFormat/${Params.id}/${format}`
+      )
       .then((res) => {
         // console.log(res.data.data);
         setCategry(res.data.data);
@@ -756,7 +774,9 @@ function Productsearch(args) {
   const getsearchbyratingfilter = () => {
     // console.log(searchrating);
     axios
-      .get(`http://65.1.135.77:9000/user/filterByRating/${searchrating}`)
+      .get(
+        `https://backend.brahmaand.space/user/filterByRating/${searchrating}`
+      )
       .then((res) => {
         // console.log(res.data.data);
         // setCategry(res.data.data);
@@ -768,7 +788,9 @@ function Productsearch(args) {
 
   const allsearchproduct = () => {
     axios
-      .get(`http://65.1.135.77:9000/admin/listbysubcategory/${Params.id}`)
+      .get(
+        `https://backend.brahmaand.space/admin/listbysubcategory/${Params.id}`
+      )
       .then((response) => {
         setCategry(response.data.data);
         console.log(response.data.data);
@@ -785,7 +807,9 @@ function Productsearch(args) {
   const [suggested, setSuggested] = useState([]);
   const allsuggestedproduct = () => {
     axios
-      .get(`http://65.1.135.77:9000/admin/listbysubcategory/${Params.id}`)
+      .get(
+        `https://backend.brahmaand.space/admin/listbysubcategory/${Params.id}`
+      )
       .then((response) => {
         setSuggested(response.data.data);
         // console.log(response.data.data);

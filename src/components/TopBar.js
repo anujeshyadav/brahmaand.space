@@ -54,7 +54,7 @@ function TopBar() {
   const [userdata, setUserdata] = useState({});
   const getUserData = () => {
     axios
-      .get(`http://65.1.135.77:9000/user/getoneUser/${id}`)
+      .get(`https://backend.brahmaand.space/user/getoneUser/${id}`)
       .then((res) => {
         setUserdata(res.data.data);
         // console.log(res.data.data);
@@ -83,7 +83,10 @@ function TopBar() {
     formData.append("display_name", display_name);
     formData.append("abt_us", abt_us);
     axios
-      .post(`http://65.1.135.77:9000/user/updateProfile/${id}`, formData)
+      .post(
+        `https://backend.brahmaand.space/user/updateProfile/${id}`,
+        formData
+      )
       .then((response) => {
         console.log(response.data);
         if (response.data.message === "Username Already Exist") {

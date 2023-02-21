@@ -45,7 +45,7 @@ function ContactUs() {
       swal("Please Enter details Correctly");
     } else {
       axios
-        .post(`http://65.1.135.77:9000/user/add_contactus`, {
+        .post(`https://backend.brahmaand.space/user/add_contactus`, {
           name: name,
           mobile: mobile,
           email: email,

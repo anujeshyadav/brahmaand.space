@@ -15,7 +15,7 @@ function Blogdescription() {
   useEffect(() => {
     axios
 
-      .get(`http://65.1.135.77:9000/admin/viewoneBlog/${Param.id}`)
+      .get(`https://backend.brahmaand.space/admin/viewoneBlog/${Param.id}`)
 
       .then((res) => {
         setBlogdescription(res.data.data);

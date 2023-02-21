@@ -11,7 +11,7 @@ const Privacy = () => {
 
   const privacypolicy = () => {
     axios
-      .get(`http://65.1.135.77:9000/admin/getPrivcyPolicy`)
+      .get(`https://backend.brahmaand.space/admin/getPrivcyPolicy`)
       .then((res) => {
         // console.log(res.data.data);
         setfirst(res.data.data);

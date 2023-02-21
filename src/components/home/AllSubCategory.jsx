@@ -29,7 +29,7 @@ function AllSubCategory() {
   const allsubcategory = () => {
     axios
 
-      .get(`http://65.1.135.77:9000/admin/listbycategory/${Params.id}`)
+      .get(`https://backend.brahmaand.space/admin/listbycategory/${Params.id}`)
       .then((response) => {
         // console.log(response.data.data);
         if (response.data.data.length === 0) {

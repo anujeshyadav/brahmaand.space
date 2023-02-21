@@ -123,11 +123,14 @@ function ResetPassword() {
             "**Strong Password** ";
 
           axios
-            .post(`http://65.1.135.77:9000/user/resetPassword/${userId}`, {
-              oldpassword: oldpass,
-              password: newpass,
-              cnfrmPassword: confirmpass,
-            })
+            .post(
+              `https://backend.brahmaand.space/user/resetPassword/${userId}`,
+              {
+                oldpassword: oldpass,
+                password: newpass,
+                cnfrmPassword: confirmpass,
+              }
+            )
             .then((res) => {
               // console.log(res.data);
               debugger;
@@ -147,7 +150,7 @@ function ResetPassword() {
         }
 
         // axios
-        //   .post(`http://65.1.135.77:9000/user/resetPassword/${userId}`, {
+        //   .post(`https://backend.brahmaand.space/user/resetPassword/${userId}`, {
         //     oldpassword: oldpass,
         //     password: newpass,
         //     cnfrmPassword: confirmpass,

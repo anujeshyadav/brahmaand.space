@@ -83,7 +83,7 @@ function Allpromotion(args) {
     const user = localStorage.getItem("userId");
     if (rating !== "" && upcom !== "") {
       axios
-        .post(`http://65.1.135.77:9000/user/editCommentbyUser/${id}`, {
+        .post(`https://backend.brahmaand.space/user/editCommentbyUser/${id}`, {
           submitresrcId: dataid,
           userid: user,
           comment: upcom,
@@ -104,7 +104,7 @@ function Allpromotion(args) {
 
   const handleeditcomment = (id) => {
     axios
-      .get(`http://65.1.135.77:9000/admin/getone_coment_list/${id}`)
+      .get(`https://backend.brahmaand.space/admin/getone_coment_list/${id}`)
       .then((res) => {
         console.log(res.data.data);
         setUpcom(res.data.data?.comment);
@@ -184,7 +184,9 @@ function Allpromotion(args) {
     if (promotionId === _id) {
       setPromotId(promotionId);
       axios
-        .get(`http://65.1.135.77:9000/admin/getone_reslist/${promotionId}`)
+        .get(
+          `https://backend.brahmaand.space/admin/getone_reslist/${promotionId}`
+        )
         .then((res) => {
           // console.log(res.data.data._id);
           if (
@@ -202,7 +204,7 @@ function Allpromotion(args) {
         });
     }
     axios
-      .get(`http://65.1.135.77:9000/user/average_rating/${promotionId}`)
+      .get(`https://backend.brahmaand.space/user/average_rating/${promotionId}`)
       .then((res) => {
         // console.log(res.data);
         setAverageRating(res.data);
@@ -214,7 +216,7 @@ function Allpromotion(args) {
     // console.log(selectedId, myId, text, rating);
 
     axios
-      .get(`http://65.1.135.77:9000/user/comment_list/${promotionId}`)
+      .get(`https://backend.brahmaand.space/user/comment_list/${promotionId}`)
       .then((res) => {
         setGetonecomment(res.data.data);
         // console.log(res.data.data);
@@ -226,7 +228,9 @@ function Allpromotion(args) {
 
   const hadlestatusbookmark = () => {
     axios
-      .get(`http://65.1.135.77:9000/user/getone_mylikes/${myId}/${liked}`)
+      .get(
+        `https://backend.brahmaand.space/user/getone_mylikes/${myId}/${liked}`
+      )
       .then((res) => {
         // console.log(res.data.data);
         setHandlebookmark(res.data.data.status);
@@ -260,7 +264,7 @@ function Allpromotion(args) {
       const selectedId = Producdetail._id;
 
       axios
-        .post(`http://65.1.135.77:9000/user/add_Comment`, {
+        .post(`https://backend.brahmaand.space/user/add_Comment`, {
           submitresrcId: id,
           userid: myId,
           comment: text,
@@ -319,7 +323,7 @@ function Allpromotion(args) {
   }, [handlebookmark, activelike, Producdetail, promotiondata]);
   const promotionadmin = () => {
     axios
-      .get(`http://65.1.135.77:9000/user/Promotions`)
+      .get(`https://backend.brahmaand.space/user/Promotions`)
       .then((res) => {
         setPromotion(res.data.data);
         console.log(res.data.data);

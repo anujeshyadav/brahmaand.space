@@ -9,7 +9,7 @@ function Work() {
   const [howworks, sethowworks] = useState([]);
   useEffect(() => {
     axios
-      .get(`http://65.1.135.77:9000/admin/get_howWorks`)
+      .get(`https://backend.brahmaand.space/admin/get_howWorks`)
       .then((response) => {
         sethowworks(response.data.data);
         // console.log(response.data.data);

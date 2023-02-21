@@ -11,7 +11,7 @@ function FAQ() {
 
   const freques = () => {
     axios
-      .get(`http://65.1.135.77:9000/admin/faq_list`)
+      .get(`https://backend.brahmaand.space/admin/faq_list`)
       .then((res) => {
         setFaq(res.data.data);
         // console.log(res.data.data);

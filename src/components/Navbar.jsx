@@ -112,7 +112,7 @@ function CustomNavbar(args) {
       Desc !== ""
     ) {
       axios
-        .post(`http://65.1.135.77:9000/user/App_Sub_resrc`, {
+        .post(`https://backend.brahmaand.space/user/App_Sub_resrc`, {
           link: url,
           category: catgry,
           sub_category: subcatry,
@@ -170,7 +170,7 @@ function CustomNavbar(args) {
   const [allcatego, setAllcatego] = useState([]);
   const allcategory = () => {
     axios
-      .get(`http://65.1.135.77:9000/admin/getallCategory`)
+      .get(`https://backend.brahmaand.space/admin/getallCategory`)
 
       .then((response) => {
         setAllcatego(response.data.data);
@@ -186,7 +186,7 @@ function CustomNavbar(args) {
     const params = catgry;
     axios
 
-      .get(`http://65.1.135.77:9000/admin/listbycategory/${params}`)
+      .get(`https://backend.brahmaand.space/admin/listbycategory/${params}`)
       .then((response) => {
         // console.log(response.data.data);
         setSubctgry(response.data.data);
@@ -199,7 +199,7 @@ function CustomNavbar(args) {
   // all year selection api
   const getYear = () => {
     axios
-      .get(`http://65.1.135.77:9000/user/allYear`)
+      .get(`https://backend.brahmaand.space/user/allYear`)
       .then((response) => {
         setRelyear(response.data.data);
         // console.log(response.data.data);
@@ -211,7 +211,7 @@ function CustomNavbar(args) {
 
   const getLanguage = () => {
     axios
-      .get(`http://65.1.135.77:9000/user/allLang`)
+      .get(`https://backend.brahmaand.space/user/allLang`)
       .then((response) => {
         setLngage(response.data.data);
         // console.log(response.data.data);

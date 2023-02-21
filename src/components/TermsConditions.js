@@ -11,7 +11,7 @@ function TermsConditions() {
 
   const privacypolicy = () => {
     axios
-      .get(`http://65.1.135.77:9000/admin/get_term_cond`)
+      .get(`https://backend.brahmaand.space/admin/get_term_cond`)
       .then((res) => {
         // console.log(res.data.data);
         setfirst(res.data.data);
