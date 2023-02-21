@@ -105,7 +105,7 @@ function Header() {
   useEffect(() => {
     handlesearchtopics();
     axios
-      .get(`https://43.205.82.226:9000/admin/getallCategory`)
+      .get(`https://backend.brahmaand.space/admin/getallCategory`)
       .then((res) => {
         // console.log(res.data.data);
         setNewitem(res.data.data);
