@@ -113,7 +113,7 @@ function Login() {
 
     if (Fireemail !== "" && Firename !== "" && Fireuid !== "") {
       axios
-        // .post(`https://backend.brahmaand.space/user/signup`, {
+
         .post(`https://backend.brahmaand.space/user/signinwithgoogle`, {
           username: Firename,
           email: Fireemail,
@@ -124,7 +124,6 @@ function Login() {
           if (response.data.message === "Successfully Login") {
             handleLoginGoogleSubmit();
           }
-          // else swal(" Try again! something went wrong");
         })
         .catch((error) => {
           console.log(error.response.data);
