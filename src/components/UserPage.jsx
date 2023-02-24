@@ -17,7 +17,7 @@ import {
   DropdownMenu,
   DropdownItem,
 } from "reactstrap";
-import { BiLogOut } from "react-icons/bi";
+import { BiLogOut, BiWindowClose } from "react-icons/bi";
 import avatar2 from "../images/avatar2.png";
 import { Link } from "react-router-dom";
 
@@ -33,7 +33,7 @@ function UserPage({ direction, ...args }) {
     axios
       .get(`https://backend.brahmaand.space/user/getoneUser/${id}`)
       .then((response) => {
-        console.log("getdata", response.data.data);
+        // console.log("getdata", response.data.data);
         setUserData(response.data.data);
       })
       .catch((error) => {

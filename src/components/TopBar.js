@@ -56,7 +56,6 @@ function TopBar() {
     axios
       .get(`https://backend.brahmaand.space/user/getoneUser/${id}`)
       .then((res) => {
-        console.log(res);
         setUserdata(res.data.data);
 
         setDisplay_name(res.data.data.display_name);
@@ -89,6 +88,8 @@ function TopBar() {
       )
       .then((response) => {
         console.log(response.data);
+        window.location.reload();
+
         if (response.data.message === "Username Already Exist") {
           swal("UserName is Already Exist please Try with different Username");
         }
