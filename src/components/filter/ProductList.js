@@ -1123,90 +1123,12 @@ function ProductList(args) {
                               })}
                             </select>
                           </Container>
-                          {/* <Label
-                            className="mt-3"
-                            style={{ font: "GT Walsheim Pro" }}
-                          >
-                            <b style={{ fontSize: "19px" }}>Content Year</b>
-                          </Label>
-                          <select
-                            required
-                            // onChange={(e) => setformate(e.target.value)}
-                            className="form-control"
-                          >
-                            <option>Select Year</option>
-                            {relyear?.map((yr) => {
-                              return (
-                                <option value={yr?._id} key={yr?._id}>
-                                  {yr?.yrName}
-                                </option>
-                              );
-                            })}
-                          </select>
-                          <Label
-                            className="mt-3"
-                            style={{ font: "GT Walsheim Pro" }}
-                          >
-                            <b style={{ fontSize: "19px" }}>Content Language</b>
-                          </Label>
-                          <select
-                            required
-                            // onChange={(e) => setformate(e.target.value)}
-                            className="form-control"
-                          >
-                            <option>Select Language</option>
-                            {lngage?.map((language) => (
-                              <option key={language?._id}>
-                                {language?.language}
-                              </option>
-                            ))}
-                          </select> */}
                         </Row>
                       </div>
                     </Col>
 
-                    {/* <Col lg="12" className="py-3"> */}
-                    {/* <div className="ft-type"> */}
-                    {/* <h5 className="mb-1"> Content Language</h5> */}
-
-                    {/* <div class="ex1">
-                          <h6>Choose language</h6>
-                          {lngage?.map((val) => (
-                            <ul>
-                              <li key={val?._id}>
-                                <input
-                                  onClick={handlesearchbylanguage}
-                                  id="Arabic"
-                                  type="radio"
-                                  name="language"
-                                  className="ft-check"
-                                  value={val?._id}
-                                />
-                                {val?.language}
-                              </li>
-                            </ul>
-                          ))}
-                        </div> */}
-                    {/* </div> */}
-                    {/* </Col> */}
                     <Col lg="12" className="py-3">
                       <div className="ft-type">
-                        {/* <h5>Sort By</h5> */}
-                        {/* <hr></hr> */}
-                        {/* <ul className="clearfiltertext">
-                          <li className="clearfiltertext">
-                            <Link style={{ color: "blue" }}>Relevance</Link>
-                          </li>
-                          <li className="clearfiltertext">
-                            <Link style={{ color: "blue" }}>Rating</Link>
-                          </li>
-                          <li>
-                            <Link style={{ color: "blue" }}>Low to High</Link>
-                          </li>
-                          <li className="clearfiltertext">
-                            <Link style={{ color: "blue" }}>High to Low</Link>
-                          </li>
-                        </ul> */}
                         <Button onClick={clearfilter} color="info">
                           Clear Filter
                         </Button>
@@ -1355,14 +1277,7 @@ function ProductList(args) {
                                             )
                                           )}
                                         </h2>
-                                        {/* <div className="top-icon">
-                                          <Link to="#">
-                                            <img src={mdicon1} alt="" />
-                                          </Link>
-                                          <Link to="#">
-                                            <img src={mdicon2} alt="" />
-                                          </Link>
-                                        </div> */}
+
                                         <Row className="top-icon">
                                           <Col lg="10">
                                             {" "}
@@ -1438,7 +1353,10 @@ function ProductList(args) {
                                       <div className="mid">
                                         <h5>
                                           Link :
-                                          <a href={promotiondata?.link}>
+                                          <a
+                                            target="_blank"
+                                            href={promotiondata?.link}
+                                          >
                                             {promotiondata?.link}
                                           </a>
                                         </h5>
@@ -2109,7 +2027,10 @@ function ProductList(args) {
                                               {/* <a href={Producdetail?.link}>
                                                 {Producdetail?.link}
                                             </a> */}
-                                              <a href={Producdetail?.link}>
+                                              <a
+                                                target="_blank"
+                                                href={Producdetail?.link}
+                                              >
                                                 {" "}
                                                 {Producdetail?.link}
                                               </a>
@@ -3044,7 +2965,10 @@ function ProductList(args) {
                                     <h5 className="mt-3">
                                       Link :
                                       {/* <Link>{Producdetail?.link}</Link> */}
-                                      <a href={Producdetail?.link}>
+                                      <a
+                                        target="_blank"
+                                        href={Producdetail?.link}
+                                      >
                                         {" "}
                                         {Producdetail?.link}
                                       </a>

@@ -1385,7 +1385,10 @@ function ProductHastag(args) {
                                           <div className="mid">
                                             <h5>
                                               Link :
-                                              <a href={promotiondata?.link}>
+                                              <a
+                                                target="_blank"
+                                                href={promotiondata?.link}
+                                              >
                                                 {promotiondata?.link}
                                               </a>
                                             </h5>
@@ -2086,10 +2089,14 @@ function ProductHastag(args) {
                                           <div className="mid">
                                             <h5 className="mt-3">
                                               Link :
-                                              {/* <a href={Producdetail?.link}>
+                                              {/* <a 
+                                              target="_blank" href={Producdetail?.link}>
                                                 {Producdetail?.link}
                                             </a> */}
-                                              <a href={Producdetail?.link}>
+                                              <a
+                                                target="_blank"
+                                                href={Producdetail?.link}
+                                              >
                                                 {" "}
                                                 {Producdetail?.link}
                                               </a>
@@ -3021,7 +3028,10 @@ function ProductHastag(args) {
                                     <h5 className="mt-3">
                                       Link :
                                       {/* <Link>{Producdetail?.link}</Link> */}
-                                      <a href={Producdetail?.link}>
+                                      <a
+                                        target="_blank"
+                                        href={Producdetail?.link}
+                                      >
                                         {" "}
                                         {Producdetail?.link}
                                       </a>
