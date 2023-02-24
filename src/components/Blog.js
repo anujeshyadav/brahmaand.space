@@ -57,6 +57,7 @@ function Blog() {
       .get(`https://backend.brahmaand.space/user/recomanded_Blog`)
 
       .then((response) => {
+        console.log(response);
         setRecomblog(response.data.data);
       })
       .catch((error) => {
@@ -69,6 +70,7 @@ function Blog() {
       .get(`https://backend.brahmaand.space/user/popularBlog`)
 
       .then((response) => {
+        console.log(response);
         setPop(response.data.data);
       })
       .catch((error) => {

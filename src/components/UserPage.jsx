@@ -39,7 +39,7 @@ function UserPage({ direction, ...args }) {
       .catch((error) => {
         // console.log(error.response.data.data);
       });
-  }, [userdata]);
+  }, []);
 
   return (
     <div>
