@@ -56,9 +56,9 @@ function TopBar() {
     axios
       .get(`https://backend.brahmaand.space/user/getoneUser/${id}`)
       .then((res) => {
+        console.log(res);
         setUserdata(res.data.data);
-        // console.log(res.data.data);
-        // console.log(res.data.data);
+
         setDisplay_name(res.data.data.display_name);
         seAbt_us(res.data.data.abt_us);
       })
@@ -93,7 +93,7 @@ function TopBar() {
           swal("UserName is Already Exist please Try with different Username");
         }
         if (response.data.message === "success") {
-          // getUserData();
+          getUserData();
           swal("Updated Successfully");
         }
       })
