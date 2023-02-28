@@ -62,6 +62,7 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "../../styles/Filter.css";
 import { number } from "prop-types";
+import { useFormState } from "react-hook-form";
 
 function Productsearch(args) {
   const [modalsuggestion, setModalsuggestion] = useState(false);
@@ -111,6 +112,18 @@ function Productsearch(args) {
     },
   };
 
+  const handlefilter = (filtertype) => {
+    console.log(filtertype);
+    // axiosConfig
+    //   .post(``)
+    //   .then((res) => {
+    //     console.log(res.data.data);
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
+  };
+
   const navigate = useNavigate();
   const [upcom, setUpcom] = useState("");
 
@@ -140,8 +153,6 @@ function Productsearch(args) {
     }
   };
 
-  const [editpost, setEditpost] = useState();
-  const [editnew, seteditnew] = useState({});
   const handleeditcomment = (id) => {
     axios
       .get(`https://backend.brahmaand.space/admin/getone_coment_list/${id}`)
@@ -155,20 +166,20 @@ function Productsearch(args) {
       });
     const user = localStorage.getItem("userId");
   };
-  const handlesearchbylanguage = () => {
-    if (language !== "" && language !== undefined) {
-      axios
-        .get(
-          `https://backend.brahmaand.space/user/filterbyLanguage/${Params.id}/${language}`
-        )
-        .then((res) => {
-          setCategry(res.data.data);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    }
-  };
+  // const handlesearchbylanguage = () => {
+  //   if (language !== "" && language !== undefined) {
+  //     axios
+  //       .get(
+  //         `https://backend.brahmaand.space/user/filterbyLanguage/${Params.id}/${language}`
+  //       )
+  //       .then((res) => {
+  //         setCategry(res.data.data);
+  //       })
+  //       .catch((err) => {
+  //         console.log(err);
+  //       });
+  //   }
+  // };
 
   const hastagdata = localStorage.getItem("hastag");
   const gethastagdata = () => {
@@ -229,41 +240,38 @@ function Productsearch(args) {
     setPromotiondata("");
   };
 
-  const getolderyeardata = () => {
-    if (contentyear !== "") {
-      axios
-        .get(
-          `https://backend.brahmaand.space/user/filterbyyear/${Params.id}/${contentyear}`
-        )
-        .then((res) => {
-          setCategry(res.data.data);
-          // console.log(res.data.data);
-          // setContentyear("");
-        })
-        .catch((err) => {
-          // console.log(err);
-        });
-    }
-  };
+  // const getolderyeardata = () => {
+  //   if (contentyear !== "") {
+  //     axios
+  //       .get(
+  //         `https://backend.brahmaand.space/user/filterbyyear/${Params.id}/${contentyear}`
+  //       )
+  //       .then((res) => {
+  //         setCategry(res.data.data);
+  //         // console.log(res.data.data);
+  //         // setContentyear("");
+  //       })
+  //       .catch((err) => {
+  //         // console.log(err);
+  //       });
+  //   }
+  // };
 
   const searchdata = localStorage.getItem("searchdata");
+
   const handleSearchHomePage = () => {
     const searchdata = localStorage.getItem("searchdata");
-
+    setSearchitem(searchdata);
     if (searchdata !== "" && searchdata !== null)
       axios
         .post(`https://backend.brahmaand.space/user/search_topic_title`, {
           searchinput: searchdata,
         })
         .then((res) => {
-          //   const search = res.data.data[0]?.sub_category;
-          //   if (search !== "" && search !== undefined) {
-          //     navigate(`/productsearch/${search}`);
-          //   }
           console.log(res.data.data);
           if (res.data.data !== "" && res.data.data !== null) {
             setCategry(res.data.data);
-            localStorage.removeItem("searchdata");
+            // localStorage.removeItem("searchdata");
             // localStorage.removeItem("searchdata");
           }
         })
@@ -278,7 +286,7 @@ function Productsearch(args) {
         console.log(res.data.data);
         if (res.data.data !== "" && res.data.data !== null) {
           setPromotion(res.data.data);
-          localStorage.removeItem("searchdata");
+          // localStorage.removeItem("searchdata");
         }
       })
       .catch((err) => {});
@@ -302,10 +310,9 @@ function Productsearch(args) {
         searchinput: searchitem,
       })
       .then((res) => {
-        console.log(res.data.data);
+        // console.log(res.data.data);
         if (res.data.data !== "" && res.data.data !== null) {
           setPromotion(res.data.data);
-          console.log(res.data.data);
         }
       })
       .catch((err) => {});
@@ -391,15 +398,6 @@ function Productsearch(args) {
       .catch((err) => {
         // console.log(err.response.data);
       });
-    // if (
-    //   myId !== null &&
-    //   myId !== undefined &&
-    //   myId !== "" &&
-    //   liked !== "" &&
-    //   liked !== null &&
-    //   liked !== undefined
-    // ) {
-    // }
   };
   const handlepromotion = (_id) => {
     setPromotiondata("");
@@ -449,17 +447,6 @@ function Productsearch(args) {
         });
     }
   };
-  // const promotionadmin = () => {
-  //   axios
-  //     .get(`https://backend.brahmaand.space/user/Promotions`)
-  //     .then((res) => {
-  //       setPromotion(res.data.data);
-
-  //     })
-  //     .catch((err) => {
-
-  //     });
-  // };
 
   let Params = useParams();
 
@@ -550,14 +537,7 @@ function Productsearch(args) {
         });
       settText("");
       setRating("");
-      // }
-      // else {
-      //   swal(" Please Enter review and Rating");
-      // }
     }
-    // else {
-    //   swal("you need to Login first");
-    // }
   };
 
   const handleSelection = (_id) => {
@@ -666,17 +646,6 @@ function Productsearch(args) {
         // console.log(err);
       });
   };
-  // useEffect(() => {
-  //   hadlestatusbookmark();
-  //   getUser();
-  // }, [
-  //   liked,
-  //   Producdetail,
-  //   myId,
-  //   promotiondata,
-  //   // handlebookmark,
-  //   activelike,
-  // ]);
 
   useEffect(() => {
     allsuggestedproduct();
@@ -698,9 +667,9 @@ function Productsearch(args) {
     ) {
       allsearchproduct();
     }
-    if (type !== "") {
-      gettypefilter();
-    }
+    // if (type !== "") {
+    //   gettypefilter();
+    // }
     if (hastagdata !== "hastag") {
       gethastagdata();
     }
@@ -708,21 +677,21 @@ function Productsearch(args) {
       handleSearchHomePage();
     }
 
-    if (contentyear !== "") {
-      getolderyeardata();
-    }
-    if (format !== "") {
-      getformatfilter();
-    }
+    // if (contentyear !== "") {
+    //   getolderyeardata();
+    // }
+    // if (format !== "") {
+    //   getformatfilter();
+    // }
     if (searchrating !== "") {
       getsearchbyratingfilter();
     }
     if (searchitem !== "") {
       handlesearchdescription();
     }
-    if (language !== "") {
-      handlesearchbylanguage();
-    }
+    // if (language !== "") {
+    //   handlesearchbylanguage();
+    // }
   }, [
     Params,
     type,
@@ -733,44 +702,44 @@ function Productsearch(args) {
     promotiondata,
     handlebookmark,
     activelike,
-    searchitem,
+    // searchitem,
     language,
-    contentyear,
+    // contentyear,
     hastagdata,
-    searchdata,
+    // searchdata,
   ]);
 
   const [typelength, setTypelength] = useState([]);
-  const gettypefilter = () => {
-    axios
-      .get(
-        `https://backend.brahmaand.space/user/filter_type/${Params.id}/${type}`
-      )
-      .then((res) => {
-        // console.log(res.data.data);
-        setCategry(res.data.data);
-        setTypelength(res.data.data);
-      })
-      .catch((err) => {
-        // console.log(err);
-      });
-  };
+  // const gettypefilter = () => {
+  //   axios
+  //     .get(
+  //       `https://backend.brahmaand.space/user/filter_type/${Params.id}/${type}`
+  //     )
+  //     .then((res) => {
+  //       // console.log(res.data.data);
+  //       setCategry(res.data.data);
+  //       setTypelength(res.data.data);
+  //     })
+  //     .catch((err) => {
+  //       // console.log(err);
+  //     });
+  // };
 
   const [formatelength, setFormatelength] = useState([]);
-  const getformatfilter = () => {
-    axios
-      .get(
-        `https://backend.brahmaand.space/user/filterbyFormat/${Params.id}/${format}`
-      )
-      .then((res) => {
-        // console.log(res.data.data);
-        setCategry(res.data.data);
-        setFormatelength(res.data.data);
-      })
-      .catch((err) => {
-        // console.log(err);
-      });
-  };
+  // const getformatfilter = () => {
+  //   axios
+  //     .get(
+  //       `https://backend.brahmaand.space/user/filterbyFormat/${Params.id}/${format}`
+  //     )
+  //     .then((res) => {
+  //       // console.log(res.data.data);
+  //       setCategry(res.data.data);
+  //       setFormatelength(res.data.data);
+  //     })
+  //     .catch((err) => {
+  //       // console.log(err);
+  //     });
+  // };
   const getsearchbyratingfilter = () => {
     // console.log(searchrating);
     axios
@@ -787,22 +756,50 @@ function Productsearch(args) {
   };
 
   const allsearchproduct = () => {
+    const searchdata = localStorage.getItem("searchdata");
+    setSearchitem(searchdata);
+    if (searchdata !== "" && searchdata !== null)
+      axios
+        .post(`https://backend.brahmaand.space/user/search_topic_title`, {
+          searchinput: searchdata,
+        })
+        .then((res) => {
+          console.log(res.data.data);
+          if (res.data.data !== "" && res.data.data !== null) {
+            setCategry(res.data.data);
+            // localStorage.removeItem("searchdata");
+            // localStorage.removeItem("searchdata");
+          }
+        })
+        .catch((err) => {
+          // console.log(err);
+        });
     axios
-      .get(
-        `https://backend.brahmaand.space/admin/listbysubcategory/${Params.id}`
-      )
-      .then((response) => {
-        setCategry(response.data.data);
-        console.log(response.data.data);
-        // const data = response.data.data;
-        // const datanew = data.filter((data) => {
-        //   return data.format == "Text" && data.type == "Paid";
-        // });
+      .post(`https://backend.brahmaand.space/user/search_promotion`, {
+        searchinput: searchdata,
       })
-      .catch((error) => {
-        // console.log(error.response.data);
-        setLoading(false);
-      });
+      .then((res) => {
+        console.log(res.data.data);
+        if (res.data.data !== "" && res.data.data !== null) {
+          setPromotion(res.data.data);
+          // localStorage.removeItem("searchdata");
+        }
+      })
+      .catch((err) => {});
+    // console.log("you are searching");
+    // axios
+    //   .get(
+    //     `https://backend.brahmaand.space/admin/listbysubcategory/${Params.id}`
+    //   )
+    //   .then((response) => {
+    //     setCategry(response.data.data);
+    //     console.log(response.data.data);
+
+    //   })
+    //   .catch((error) => {
+    //     // console.log(error.response.data);
+    //     setLoading(false);
+    //   });
   };
   const [suggested, setSuggested] = useState([]);
   const allsuggestedproduct = () => {
@@ -938,7 +935,10 @@ function Productsearch(args) {
                             checked={"Free" === type}
                             name="type"
                             value="Free"
-                            onClick={() => setType("Free")}
+                            onClick={() => {
+                              setType("Free");
+                              handlefilter("Free");
+                            }}
                           />
                           Free &nbsp;
                           {typelength[0]?.type == "Free"
@@ -953,7 +953,10 @@ function Productsearch(args) {
                             type="radio"
                             name="type"
                             value="Paid"
-                            onClick={() => setType("Paid")}
+                            onClick={() => {
+                              setType("Paid");
+                              handlefilter("Paid");
+                            }}
                           />
                           Paid &nbsp;
                           {typelength[0]?.type == "Paid"
@@ -973,7 +976,10 @@ function Productsearch(args) {
                             checked={"Video" === format}
                             name="format"
                             value="Video"
-                            onClick={() => setFormat("Video")}
+                            onClick={() => {
+                              setFormat("Video");
+                              handlefilter("Video");
+                            }}
                           />
                           Video &nbsp;
                           {formatelength[0]?.format == "Video"
@@ -988,94 +994,21 @@ function Productsearch(args) {
                             name="format"
                             checked={"Text" === format}
                             value="Text"
-                            onClick={() => setFormat("Text")}
+                            onClick={() => {
+                              setFormat("Text");
+                              handlefilter("Text");
+                            }}
                           />
                           Text &nbsp;
                           {formatelength[0]?.format == "Text"
                             ? formatelength.length
                             : null}
                         </Row>
-                        {/* <ul>
-                          <li>
-                            <input
-                              id="video"
-                              type="checkbox"
-                              className="ft-check"
-                              onClick={typeChecking}
-                            />
-                            <span>Video (74)</span>
-                          </li>
-                          <li>
-                            <input
-                              id="Text"
-                              type="checkbox"
-                              className="ft-check"
-                              onClick={typeChecking}
-                            />
-                            <span>Text (29)</span>
-                          </li>
-                        </ul> */}
                       </div>
                     </Col>
                     <Col lg="12" className="">
                       <div className="ft-type">
-                        {/* <h5 className="mb-1">Source</h5> */}
-                        {/* <Row className="mt-3 mb-3 mx-2">
-                          <input
-                            id="Youtube"
-                            className="ft-check"
-                            type="radio"
-                            name="source"
-                            value="Youtube"
-                            onClick={() => {
-                              setSource("Youtube");
-                            }}
-                          />
-                          Youtube
-                        </Row> */}
-                        {/* <Row className=" mb-3 mx-2">
-                          <input
-                            id="Others"
-                            className="ft-check"
-                            type="radio"
-                            name="source"
-                            value="Others"
-                            onClick={() => {
-                              setSource("Others");
-                            }}
-                          />
-                          Others
-                        </Row> */}
-                        <Row className=" mb-3 mx-2">
-                          {/* <input
-                            id="older"
-                            className="ft-check"
-                            type="radio"
-                            name="source"
-                            value="older"
-                            onClick={getolderyeardata}
-                          /> */}
-                          {/* <Label
-                            className="mt-3"
-                            style={{ font: "GT Walsheim Pro" }}
-                          >
-                            <h4>Content Year</h4>
-                          </Label>
-                          <select
-                            required
-                            // onChange={(e) => setformate(e.target.value)}
-                            className="form-control"
-                          >
-                            <option>Select Year</option>
-                            {relyear?.map((yr) => {
-                              return (
-                                <option value={yr?._id} key={yr?._id}>
-                                  {yr?.yrName}
-                                </option>
-                              );
-                            })}
-                          </select> */}
-                        </Row>
+                        <Row className=" mb-3 mx-2"></Row>
                         <Row>
                           <Container>
                             <Label
@@ -1088,7 +1021,10 @@ function Productsearch(args) {
                               defaultValue="Select Year"
                               value={contentyear}
                               // checked={"Select Year" === contentyear}
-                              onChange={(e) => setContentyear(e.target.value)}
+                              onChange={(e) => {
+                                setContentyear(e.target.value);
+                                handlefilter(e.target.value);
+                              }}
                               className="form-control"
                             >
                               <option>Select Year</option>
@@ -1111,7 +1047,10 @@ function Productsearch(args) {
                             <select
                               defaultValue="Select Language"
                               value={language}
-                              onChange={(e) => setLanguage(e.target.value)}
+                              onChange={(e) => {
+                                setLanguage(e.target.value);
+                                handlefilter(e.target.value);
+                              }}
                               className="form-control"
                             >
                               <option>Select Language</option>
@@ -1127,90 +1066,12 @@ function Productsearch(args) {
                               })}
                             </select>
                           </Container>
-                          {/* <Label
-                            className="mt-3"
-                            style={{ font: "GT Walsheim Pro" }}
-                          >
-                            <b style={{ fontSize: "19px" }}>Content Year</b>
-                          </Label>
-                          <select
-                            required
-                            // onChange={(e) => setformate(e.target.value)}
-                            className="form-control"
-                          >
-                            <option>Select Year</option>
-                            {relyear?.map((yr) => {
-                              return (
-                                <option value={yr?._id} key={yr?._id}>
-                                  {yr?.yrName}
-                                </option>
-                              );
-                            })}
-                          </select>
-                          <Label
-                            className="mt-3"
-                            style={{ font: "GT Walsheim Pro" }}
-                          >
-                            <b style={{ fontSize: "19px" }}>Content Language</b>
-                          </Label>
-                          <select
-                            required
-                            // onChange={(e) => setformate(e.target.value)}
-                            className="form-control"
-                          >
-                            <option>Select Language</option>
-                            {lngage?.map((language) => (
-                              <option key={language?._id}>
-                                {language?.language}
-                              </option>
-                            ))}
-                          </select> */}
                         </Row>
                       </div>
                     </Col>
 
-                    {/* <Col lg="12" className="py-3"> */}
-                    {/* <div className="ft-type"> */}
-                    {/* <h5 className="mb-1"> Content Language</h5> */}
-
-                    {/* <div class="ex1">
-                          <h6>Choose language</h6>
-                          {lngage?.map((val) => (
-                            <ul>
-                              <li key={val?._id}>
-                                <input
-                                  onClick={handlesearchbylanguage}
-                                  id="Arabic"
-                                  type="radio"
-                                  name="language"
-                                  className="ft-check"
-                                  value={val?._id}
-                                />
-                                {val?.language}
-                              </li>
-                            </ul>
-                          ))}
-                        </div> */}
-                    {/* </div> */}
-                    {/* </Col> */}
                     <Col lg="12" className="py-3">
                       <div className="ft-type">
-                        {/* <h5>Sort By</h5> */}
-                        {/* <hr></hr> */}
-                        {/* <ul className="clearfiltertext">
-                          <li className="clearfiltertext">
-                            <Link style={{ color: "blue" }}>Relevance</Link>
-                          </li>
-                          <li className="clearfiltertext">
-                            <Link style={{ color: "blue" }}>Rating</Link>
-                          </li>
-                          <li>
-                            <Link style={{ color: "blue" }}>Low to High</Link>
-                          </li>
-                          <li className="clearfiltertext">
-                            <Link style={{ color: "blue" }}>High to Low</Link>
-                          </li>
-                        </ul> */}
                         <Button onClick={clearfilter} color="info">
                           Clear Filter
                         </Button>

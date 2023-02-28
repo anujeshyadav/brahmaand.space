@@ -49,9 +49,9 @@ function Blogdescription() {
               alt="blogimg"
             />
             <Row>
-              <h4 className=" descriptionofblog  justify-content-center mt-3 mb-3">
+              <div className=" descriptionofblog   mt-3 mb-3">
                 {HtmlParser(blogdescription?.desc)}
-              </h4>
+              </div>
             </Row>
           </Row>
           {/* <Row className="mt-4 ">

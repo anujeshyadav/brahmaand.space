@@ -38,12 +38,12 @@ function FAQ() {
             </h3>
             <hr></hr>
             <br />
-            <Row className="d-flex">
-              <Accordion className="d-flex ">
+            <Row className="">
+              <Accordion className=" ">
                 {faq?.map((qes, index) => (
-                  <Col className="mx-2" lg="6" md="4" sm="12">
+                  <Col className="mx-2" lg="12" md="4" sm="12">
                     <Accordion.Item
-                      className="mt-2 mb-2 "
+                      className="mt-3 mb-3 "
                       eventKey={index}
                       Key={qes?._id}
                     >

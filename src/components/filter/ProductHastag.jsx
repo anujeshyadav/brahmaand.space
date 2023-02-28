@@ -109,9 +109,18 @@ function ProductHastag(args) {
     },
   };
 
+  const handlefilter = (filtertype) => {
+    console.log(filtertype);
+    axiosConfig
+      .post(``)
+      .then((res) => {
+        console.log(res.data.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
   const navigate = useNavigate();
-  const [editpost, setEditpost] = useState();
-  const [editnew, seteditnew] = useState({});
 
   const [upcom, setUpcom] = useState("");
 
@@ -154,20 +163,20 @@ function ProductHastag(args) {
       });
     const user = localStorage.getItem("userId");
   };
-  const handlesearchbylanguage = () => {
-    if (language !== "" && language !== undefined) {
-      axios
-        .get(
-          `https://backend.brahmaand.space/user/filterbyLanguage/${Params.id}/${language}`
-        )
-        .then((res) => {
-          setCategry(res.data.data);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    }
-  };
+  // const handlesearchbylanguage = () => {
+  //   if (language !== "" && language !== undefined) {
+  //     axios
+  //       .get(
+  //         `https://backend.brahmaand.space/user/filterbyLanguage/${Params.id}/${language}`
+  //       )
+  //       .then((res) => {
+  //         setCategry(res.data.data);
+  //       })
+  //       .catch((err) => {
+  //         console.log(err);
+  //       });
+  //   }
+  // };
 
   const hastagdata = localStorage.getItem("hastag");
 
@@ -228,22 +237,22 @@ function ProductHastag(args) {
     setPromotiondata("");
   };
 
-  const getolderyeardata = () => {
-    if (contentyear !== "") {
-      axios
-        .get(
-          `https://backend.brahmaand.space/user/filterbyyear/${Params.id}/${contentyear}`
-        )
-        .then((res) => {
-          setCategry(res.data.data);
-          // console.log(res.data.data);
-          // setContentyear("");
-        })
-        .catch((err) => {
-          // console.log(err);
-        });
-    }
-  };
+  // const getolderyeardata = () => {
+  //   if (contentyear !== "") {
+  //     axios
+  //       .get(
+  //         `https://backend.brahmaand.space/user/filterbyyear/${Params.id}/${contentyear}`
+  //       )
+  //       .then((res) => {
+  //         setCategry(res.data.data);
+  //         // console.log(res.data.data);
+  //         // setContentyear("");
+  //       })
+  //       .catch((err) => {
+  //         // console.log(err);
+  //       });
+  //   }
+  // };
 
   const searchdata = localStorage.getItem("searchdata");
   const handleSearchHomePage = () => {
@@ -663,9 +672,9 @@ function ProductHastag(args) {
     ) {
       allsearchproduct();
     }
-    if (type !== "") {
-      gettypefilter();
-    }
+    // if (type !== "") {
+    //   gettypefilter();
+    // }
     if (hastagdata !== "hastag") {
       gethastagdata();
     }
@@ -674,21 +683,21 @@ function ProductHastag(args) {
       // promotionadmin();
     }
 
-    if (contentyear !== "") {
-      getolderyeardata();
-    }
-    if (format !== "") {
-      getformatfilter();
-    }
+    // if (contentyear !== "") {
+    //   getolderyeardata();
+    // }
+    // if (format !== "") {
+    //   getformatfilter();
+    // }
     if (searchrating !== "") {
       getsearchbyratingfilter();
     }
     if (searchitem !== "") {
       handlesearchdescription();
     }
-    if (language !== "") {
-      handlesearchbylanguage();
-    }
+    // if (language !== "") {
+    //   handlesearchbylanguage();
+    // }
   }, [
     Params,
     type,
@@ -701,8 +710,8 @@ function ProductHastag(args) {
     // searchitem,
     language,
     contentyear,
-    hastagdata,
-    searchdata,
+    // hastagdata,
+    // searchdata,
   ]);
 
   const [typelength, setTypelength] = useState([]);
@@ -898,7 +907,10 @@ function ProductHastag(args) {
                             checked={"Free" === type}
                             name="type"
                             value="Free"
-                            onClick={() => setType("Free")}
+                            onClick={() => {
+                              setType("Free");
+                              handlefilter("Free");
+                            }}
                           />
                           Free &nbsp;
                           {typelength[0]?.type == "Free"
@@ -913,7 +925,10 @@ function ProductHastag(args) {
                             checked={"Paid" === type}
                             name="type"
                             value="Paid"
-                            onClick={() => setType("Paid")}
+                            onClick={() => {
+                              setType("Paid");
+                              handlefilter("Paid");
+                            }}
                           />
                           Paid &nbsp;
                           {typelength[0]?.type == "Paid"
@@ -933,7 +948,10 @@ function ProductHastag(args) {
                             type="radio"
                             name="format"
                             value="Video"
-                            onClick={() => setFormat("Video")}
+                            onClick={() => {
+                              setFormat("Video");
+                              handlefilter("Video");
+                            }}
                           />
                           Video &nbsp;
                           {formatelength[0]?.format == "Video"
@@ -948,7 +966,10 @@ function ProductHastag(args) {
                             type="radio"
                             name="format"
                             value="Text"
-                            onClick={() => setFormat("Text")}
+                            onClick={() => {
+                              setFormat("Text");
+                              handlefilter("Text");
+                            }}
                           />
                           Text &nbsp;
                           {formatelength[0]?.format == "Text"
@@ -1048,7 +1069,10 @@ function ProductHastag(args) {
                               defaultValue="Select Year"
                               value={contentyear}
                               // checked={"Select Year" === contentyear}
-                              onChange={(e) => setContentyear(e.target.value)}
+                              onChange={(e) => {
+                                setContentyear(e.target.value);
+                                handlefilter(e.target.value);
+                              }}
                               className="form-control"
                             >
                               <option>Select Year</option>
@@ -1071,7 +1095,10 @@ function ProductHastag(args) {
                             <select
                               defaultValue="Select Language"
                               value={language}
-                              onChange={(e) => setLanguage(e.target.value)}
+                              onChange={(e) => {
+                                setLanguage(e.target.value);
+                                handlefilter(e.target.value);
+                              }}
                               className="form-control"
                             >
                               <option>Select Language</option>
