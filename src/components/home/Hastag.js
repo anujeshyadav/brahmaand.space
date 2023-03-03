@@ -149,24 +149,8 @@ function Hastag() {
   };
   localStorage.setItem("hastag", "hastag");
   function handlehastagtopic(hastag) {
+    
     localStorage.setItem("hastag", hastag);
-    // if (hastag !== "") {
-    //   console.log(hastag);
-    //   axios
-    //     .get(`https://backend.brahmaand.space/user/filterbyHashTag/${hastag}`)
-    //     .then((res) => {
-    //       console.log(res.data?.data[0].sub_category?._id);
-    //       const hastagdata = res.data?.data[0].sub_category?._id;
-
-    //       if (hastagdata !== "" && hastagdata !== null) {
-    //         console.log(hastagdata);
-    //         navigate(`/productList/${hastagdata}`);
-    //       }
-    //     })
-    //     .catch((err) => {
-    //       console.log(err);
-    //     });
-    // }
 
     if (hastag !== "") {
       axios
@@ -174,6 +158,7 @@ function Hastag() {
           searchinput: hastag,
         })
         .then((res) => {
+          console.log(res.data);
           if (
             res.data.data[0]?.sub_category === "" ||
             res.data.data[0]?.sub_category == undefined
@@ -214,7 +199,7 @@ function Hastag() {
             <div className=" row mt-3">
               <div className="col col-lg-12 col-md-12 col-sm-12 col-xs-3">
                 {trendingsearch !== ""
-                  ? trendingsearch?.slice(0, 31).map((trendingtopics) => (
+                  ? trendingsearch?.slice(0, 32).map((trendingtopics) => (
                       <button
                         key={trendingtopics._id}
                         onClick={() =>

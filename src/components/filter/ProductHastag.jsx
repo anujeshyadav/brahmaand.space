@@ -108,17 +108,46 @@ function ProductHastag(args) {
       setRating(newValue);
     },
   };
+  const [Filtertype, setFiltertype] = useState("");
 
   const handlefilter = (filtertype) => {
-    console.log(filtertype);
-    axiosConfig
-      .post(``)
+    console.log("contentyear Id<<<<<<<<<?????", contentyear);
+
+    setFiltertype(filtertype);
+
+    axios
+      .post(`https://backend.brahmaand.space/user/keyword_search_filter`, {
+        searchinput: hastagdata,
+        language: language,
+        relYear: contentyear,
+        type: type,
+        format: format,
+      })
       .then((res) => {
         console.log(res.data.data);
+        setCategry(res.data.data);
       })
       .catch((err) => {
         console.log(err);
       });
+    // }
+
+    axios
+      .post(`https://backend.brahmaand.space/user/promotion_search_filter`, {
+        searchinput: hastagdata,
+        language: language,
+        relYear: contentyear,
+        type: type,
+        format: format,
+      })
+      .then((res) => {
+        // console.log(res.data.data);
+        if (res.data.data !== "" && res.data.data !== null) {
+          setPromotion(res.data.data);
+          // localStorage.removeItem("searchdata");
+        }
+      })
+      .catch((err) => {});
   };
   const navigate = useNavigate();
 
@@ -191,7 +220,7 @@ function ProductHastag(args) {
         .then((res) => {
           if (res.data.data !== "" && res.data.data !== null) {
             setCategry(res.data.data);
-            console.log(res.data.data);
+            // console.log(res.data.data);
           }
         })
         .catch((err) => {});
@@ -200,10 +229,10 @@ function ProductHastag(args) {
         searchinput: hastagdata,
       })
       .then((res) => {
-        console.log(res.data.data);
+        // console.log(res.data.data);
         if (res.data.data !== "" && res.data.data !== null) {
           setPromotion(res.data.data);
-          console.log(res.data.data);
+          // console.log(res.data.data);
         }
       })
       .catch((err) => {});
@@ -663,26 +692,27 @@ function ProductHastag(args) {
     if (
       type === "" &&
       format === "" &&
-      searchrating === "" &&
       contentyear == "" &&
       language === "" &&
       searchitem === "" &&
       hastagdata === "hastag" &&
-      searchdata === ""
+      searchdata === "" &&
+      Filtertype === ""
     ) {
       allsearchproduct();
     }
     // if (type !== "") {
     //   gettypefilter();
     // }
-    if (hastagdata !== "hastag") {
-      gethastagdata();
-    }
+    // if (hastagdata !== "hastag") {
+    //   gethastagdata();
+    // }
     if (searchdata !== "" && searchdata !== null) {
-      handleSearchHomePage();
-      // promotionadmin();
+      // handleSearchHomePage();
     }
-
+    if (Filtertype !== "" || hastagdata !== "hastag") {
+      handlefilter();
+    }
     // if (contentyear !== "") {
     //   getolderyeardata();
     // }
@@ -692,9 +722,9 @@ function ProductHastag(args) {
     if (searchrating !== "") {
       getsearchbyratingfilter();
     }
-    if (searchitem !== "") {
-      handlesearchdescription();
-    }
+    // if (searchitem !== "") {
+    //   handlesearchdescription();
+    // }
     // if (language !== "") {
     //   handlesearchbylanguage();
     // }
@@ -761,22 +791,48 @@ function ProductHastag(args) {
   };
 
   const allsearchproduct = () => {
+    const hastagdata = localStorage.getItem("hastagdata");
+    setSearchitem(hastagdata);
+    if (hastagdata !== "" && hastagdata !== null)
+      axios
+        .post(`https://backend.brahmaand.space/user/search_topic_title`, {
+          searchinput: hastagdata,
+        })
+        .then((res) => {
+          console.log(res.data.data);
+          if (res.data.data !== "" && res.data.data !== null) {
+            setCategry(res.data.data);
+          }
+        })
+        .catch((err) => {
+          // console.log(err);
+        });
     axios
-      .get(
-        `https://backend.brahmaand.space/admin/listbysubcategory/${Params.id}`
-      )
-      .then((response) => {
-        // setCategry(response.data.data);
-        // console.log(response.data.data);
-        // const data = response.data.data;
-        // const datanew = data.filter((data) => {
-        //   return data.format == "Text" && data.type == "Paid";
-        // });
+      .post(`https://backend.brahmaand.space/user/search_promotion`, {
+        searchinput: hastagdata,
       })
-      .catch((error) => {
-        // console.log(error.response.data);
-        setLoading(false);
-      });
+      .then((res) => {
+        // console.log(res.data.data);
+        if (res.data.data !== "" && res.data.data !== null) {
+          setPromotion(res.data.data);
+          // localStorage.removeItem("searchdata");
+        }
+      })
+      .catch((err) => {});
+    // console.log("you are searching");
+    // axios
+    //   .get(
+    //     `https://backend.brahmaand.space/admin/listbysubcategory/${Params.id}`
+    //   )
+    //   .then((response) => {
+    //     setCategry(response.data.data);
+    //     console.log(response.data.data);
+
+    //   })
+    //   .catch((error) => {
+    //     // console.log(error.response.data);
+    //     setLoading(false);
+    //   });
   };
   const [suggested, setSuggested] = useState([]);
   const allsuggestedproduct = () => {

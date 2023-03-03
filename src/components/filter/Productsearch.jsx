@@ -83,7 +83,7 @@ function Productsearch(args) {
   const [promotiondata, setPromotiondata] = useState({});
   const [type, setType] = useState("");
   const [format, setFormat] = useState("");
-  const [searchrating, setSearchrating] = useState("");
+  // const [searchrating, setSearchrating] = useState("");
   const [handlebookmark, setHandlebookmark] = useState("");
   const [myId, setmyId] = useState("");
   const [averageRating, setAverageRating] = useState("");
@@ -93,6 +93,7 @@ function Productsearch(args) {
   const [contentyear, setContentyear] = useState("");
   const [language, setLanguage] = useState("");
   const [editmodal, setEditmodal] = useState(false);
+
   const toggleedit = () => {
     setEditmodal(!editmodal);
   };
@@ -111,17 +112,47 @@ function Productsearch(args) {
       setRating(newValue);
     },
   };
+  const [Filtertype, setFiltertype] = useState("");
 
   const handlefilter = (filtertype) => {
-    console.log(filtertype);
-    // axiosConfig
-    //   .post(``)
-    //   .then((res) => {
-    //     console.log(res.data.data);
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
+   
+    console.log("contentyear Id<<<<<<<<<?????", filtertype);
+   
+  
+    setFiltertype(filtertype);
+
+    axios
+      .post(`https://backend.brahmaand.space/user/keyword_search_filter`, {
+        searchinput: searchdata,
+        language: language,
+        relYear: filtertype,
+        type: type,
+        format: format,
+      })
+      .then((res) => {
+        console.log(res.data.data);
+        setCategry(res.data.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
+    axios
+      .post(`https://backend.brahmaand.space/user/promotion_search_filter`, {
+        searchinput: searchdata,
+        language: language,
+        relYear: filtertype,
+        type: type,
+        format: format,
+      })
+      .then((res) => {
+        // console.log(res.data.data);
+        if (res.data.data !== "" && res.data.data !== null) {
+          setPromotion(res.data.data);
+          // localStorage.removeItem("searchdata");
+        }
+      })
+      .catch((err) => {});
   };
 
   const navigate = useNavigate();
@@ -478,7 +509,7 @@ function Productsearch(args) {
   const clearfilter = () => {
     setType("");
     setFormat("");
-    setSearchrating("");
+    // setSearchrating("");
     setLanguage("");
     setContentyear("");
     setSearchitem("");
@@ -652,45 +683,33 @@ function Productsearch(args) {
     getYear();
     getLanguage();
     getUser();
-    // hadlestatusbookmark();
-    // promotionadmin();
 
     if (
-      type === "" &&
-      format === "" &&
-      searchrating === "" &&
-      contentyear == "" &&
-      language === "" &&
-      searchitem === "" &&
-      hastagdata === "hastag" &&
-      searchdata === ""
+      (type === "" &&
+        format === "" &&
+        contentyear == "" &&
+        language === "" &&
+        searchitem === "" &&
+        hastagdata === "hastag" &&
+        searchdata === "",
+      Filtertype === "")
     ) {
       allsearchproduct();
     }
-    // if (type !== "") {
-    //   gettypefilter();
-    // }
+
     if (hastagdata !== "hastag") {
       gethastagdata();
     }
     if (searchdata !== "" && searchdata !== null) {
-      handleSearchHomePage();
+      // handleSearchHomePage();
     }
 
-    // if (contentyear !== "") {
-    //   getolderyeardata();
-    // }
-    // if (format !== "") {
-    //   getformatfilter();
-    // }
-    if (searchrating !== "") {
-      getsearchbyratingfilter();
+    if (Filtertype !== "" || searchdata !== "") {
+      handlefilter();
     }
-    if (searchitem !== "") {
-      handlesearchdescription();
-    }
-    // if (language !== "") {
-    //   handlesearchbylanguage();
+
+    // if (searchitem !== "") {
+    //   handlesearchdescription();
     // }
   }, [
     Params,
@@ -740,20 +759,6 @@ function Productsearch(args) {
   //       // console.log(err);
   //     });
   // };
-  const getsearchbyratingfilter = () => {
-    // console.log(searchrating);
-    axios
-      .get(
-        `https://backend.brahmaand.space/user/filterByRating/${searchrating}`
-      )
-      .then((res) => {
-        // console.log(res.data.data);
-        // setCategry(res.data.data);
-      })
-      .catch((err) => {
-        // console.log(err);
-      });
-  };
 
   const allsearchproduct = () => {
     const searchdata = localStorage.getItem("searchdata");
@@ -779,7 +784,7 @@ function Productsearch(args) {
         searchinput: searchdata,
       })
       .then((res) => {
-        console.log(res.data.data);
+        // console.log(res.data.data);
         if (res.data.data !== "" && res.data.data !== null) {
           setPromotion(res.data.data);
           // localStorage.removeItem("searchdata");
@@ -937,7 +942,7 @@ function Productsearch(args) {
                             value="Free"
                             onClick={() => {
                               setType("Free");
-                              handlefilter("Free");
+                              handlefilter();
                             }}
                           />
                           Free &nbsp;
@@ -955,7 +960,7 @@ function Productsearch(args) {
                             value="Paid"
                             onClick={() => {
                               setType("Paid");
-                              handlefilter("Paid");
+                              handlefilter();
                             }}
                           />
                           Paid &nbsp;
@@ -978,7 +983,7 @@ function Productsearch(args) {
                             value="Video"
                             onClick={() => {
                               setFormat("Video");
-                              handlefilter("Video");
+                              handlefilter();
                             }}
                           />
                           Video &nbsp;
@@ -996,7 +1001,7 @@ function Productsearch(args) {
                             value="Text"
                             onClick={() => {
                               setFormat("Text");
-                              handlefilter("Text");
+                              handlefilter();
                             }}
                           />
                           Text &nbsp;
