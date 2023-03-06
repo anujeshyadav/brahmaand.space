@@ -28,22 +28,30 @@ function Footer() {
     <footer className="footer">
       <Container>
         <Row>
-          <Col lg="3" md="3" sm="6">
+          <Col lg="4" md="4" sm="6">
             <div className="foot-1">
               <Link to="/">
                 <img src={logobottom} alt="" width="150px" />
               </Link>
               <ul>
-                {/* <li>
+                <li>
                   <Link to="#">
-                    Phone: <span>55555565656565</span>
+                    <p>
+                      {" "}
+                      <b>Mobile</b>: (+91) 9958918811
+                    </p>
                   </Link>
-                </li> */}
-                <li className="justify-content-left">
-                  <Link to="#">Email : contactus@brahmaand.space</Link>
                 </li>
                 <li className="justify-content-left">
-                  <Link to="#">Address : Bengaluru, India</Link>
+                  <Link to="#">
+                    <b>Email</b> : contactus@brahmaand.space
+                  </Link>
+                </li>
+                <li className="justify-content-left">
+                  <Link to="#">
+                    <b>Address</b> : Bengaluru, India
+                    <p> PO Box 97845 Baker st. 567,</p>
+                  </Link>
                 </li>
               </ul>
             </div>
@@ -90,7 +98,7 @@ function Footer() {
             </div>
           </Col>
 
-          <Col lg="3" md="3" sm="6">
+          <Col lg="2" md="2" sm="6">
             <div className="foot-1">
               <h4>Support</h4>
               <ul>

@@ -44,12 +44,12 @@ function Header() {
     console.log(string, results);
   };
 
-  const handleOnHover = (result) => {
+  const handleOnHover = result => {
     // the item hovered
     console.log(result);
   };
 
-  const handleOnSelect = (item) => {
+  const handleOnSelect = item => {
     // the item selected
     console.log(item);
   };
@@ -58,7 +58,7 @@ function Header() {
     console.log("Focused");
   };
 
-  const formatResult = (item) => {
+  const formatResult = item => {
     console.log(newitem);
     return (
       <>
@@ -82,7 +82,7 @@ function Header() {
         .post(`https://backend.brahmaand.space/user/search_topic_title`, {
           searchinput: searchdata,
         })
-        .then((res) => {
+        .then(res => {
           if (res.data.data.length == "0") {
             swal("No product found");
           } else {
@@ -92,7 +92,7 @@ function Header() {
             }
           }
         })
-        .catch((err) => {
+        .catch(err => {
           console.log(err);
         });
     }
@@ -101,16 +101,21 @@ function Header() {
     // const onedata = data.split(",");
   };
 
+  const handleEnter = event => {
+    if (event.key === "Enter") {
+      handlesearchtopics();
+    }
+  };
   const [newitem, setNewitem] = useState([]);
   useEffect(() => {
     handlesearchtopics();
     axios
       .get(`https://backend.brahmaand.space/admin/getallCategory`)
-      .then((res) => {
+      .then(res => {
         // console.log(res.data.data);
         setNewitem(res.data.data);
       })
-      .then((err) => {
+      .then(err => {
         // console.log(err);
       });
   }, []);
@@ -174,8 +179,9 @@ function Header() {
               type="text"
               placeholder="Search for the top resources on any subject ... (e.g. Java) "
               className="search"
+              onKeyDown={handleEnter}
               value={searchdata}
-              onChange={(e) => {
+              onChange={e => {
                 setSearchdata(e.target.value);
               }}
             />

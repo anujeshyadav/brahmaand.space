@@ -46,21 +46,21 @@ function Hastag() {
   const gettrendingdata = () => {
     axios
       .get(`https://backend.brahmaand.space/admin/getTrending`)
-      .then((res) => {
+      .then(res => {
         // console.log(res.data.data);
         setTrendingsearch(res.data.data);
       })
-      .catch((err) => {});
+      .catch(err => {});
   };
   const [popblog, setPop] = useState([]);
   const popularblog = () => {
     axios
       .get(`https://backend.brahmaand.space/user/popularBlog`)
 
-      .then((response) => {
-        setPop(response.data.data.slice(0, 3));
+      .then(response => {
+        setPop(response.data.data);
       })
-      .catch((error) => {
+      .catch(error => {
         // console.log(error.response.data.data);
       });
   };
@@ -75,11 +75,11 @@ function Hastag() {
   const allcategory = () => {
     axios
       .get(`https://backend.brahmaand.space/admin/getallCategory`)
-      .then((response) => {
+      .then(response => {
         setCategry(response.data.data);
         // console.log(response.data.data);
       })
-      .catch((error) => {});
+      .catch(error => {});
   };
 
   const [email, setEmail] = useState("");
@@ -88,7 +88,7 @@ function Hastag() {
   function performValidation() {
     return email.length > 14;
   }
-  const handleSubmit = (e) => {
+  const handleSubmit = e => {
     e.preventDefault();
     const userid = localStorage.getItem("userid");
 
@@ -97,11 +97,11 @@ function Hastag() {
         email: email,
         userid: userid,
       })
-      .then((response) => {
+      .then(response => {
         setEmail("");
         swal("Subscribed Successfully");
       })
-      .catch((error) => {});
+      .catch(error => {});
   };
   function isValidEmail(email) {
     const expression =
@@ -113,15 +113,15 @@ function Hastag() {
   const monthlynewslettervid = () => {
     axiosConfig
       .get(`/user/getVideo`)
-      .then((res) => {
+      .then(res => {
         setNewslettervid(res.data.data);
         // console.log(res.data.data);
       })
-      .catch((err) => {
+      .catch(err => {
         // console.log(err);
       });
   };
-  const handleChange = (event) => {
+  const handleChange = event => {
     if (!isValidEmail(event.target.value)) {
       setError("Please Enter correct Email to Subscribe");
     } else {
@@ -135,11 +135,11 @@ function Hastag() {
   const featuredContent = () => {
     axiosConfig
       .get(`/user/get_featured_cnt`)
-      .then((res) => {
+      .then(res => {
         setFeature(res.data.data);
         // console.log(res.data.data);
       })
-      .catch((err) => {
+      .catch(err => {
         console.log(err);
       });
   };
@@ -149,7 +149,6 @@ function Hastag() {
   };
   localStorage.setItem("hastag", "hastag");
   function handlehastagtopic(hastag) {
-    
     localStorage.setItem("hastag", hastag);
 
     if (hastag !== "") {
@@ -157,7 +156,7 @@ function Hastag() {
         .post(`https://backend.brahmaand.space/user/search_topic_title`, {
           searchinput: hastag,
         })
-        .then((res) => {
+        .then(res => {
           console.log(res.data);
           if (
             res.data.data[0]?.sub_category === "" ||
@@ -174,7 +173,7 @@ function Hastag() {
             navigate(`/producthastag/${search}`);
           }
         })
-        .catch((err) => {
+        .catch(err => {
           console.log(err);
         });
     }
@@ -199,7 +198,7 @@ function Hastag() {
             <div className=" row mt-3">
               <div className="col col-lg-12 col-md-12 col-sm-12 col-xs-3">
                 {trendingsearch !== ""
-                  ? trendingsearch?.slice(0, 32).map((trendingtopics) => (
+                  ? trendingsearch?.slice(0, 32).map(trendingtopics => (
                       <button
                         key={trendingtopics._id}
                         onClick={() =>
@@ -223,7 +222,7 @@ function Hastag() {
         <p className="category">Top Categories</p>
         <Container className=" ">
           <Row className="m-3 mb-4">
-            {categry?.slice(0, 8).map((value) => (
+            {categry?.slice(0, 8).map(value => (
               <Col lg="3" md="6" sm="12" className="" key={value?._id}>
                 <Link to={`/subcategory/${value?._id}`}>
                   <div className="bg-1">
@@ -333,41 +332,11 @@ function Hastag() {
           navigation
           pagination={{ clickable: true }}
           scrollbar={{ draggable: true }}
-          onSwiper={(swiper) => console.log(swiper)}
+          onSwiper={swiper => console.log(swiper)}
           onSlideChange={() => console.log("slide change")}
         >
-          {feature?.map((features) => (
+          {feature?.map(features => (
             <SwiperSlide key={features?._id}>
-              {/* <div
-                key={features?._id}
-                style={{ backgroundImage: `url(${features?.thumbnail_img})` }}
-                className="ty-6"
-              >
-                <div className="ty-5" key={features?._id}>
-                  <Nav.Link as={NavLink} className="navbar-link">
-                    <div className="ty-4">
-                      <BsPlay
-                        key={features?._id}
-                        className="bsplaybutton"
-                        size={75}
-                        style={{ backgroundColor: "white" }}
-                        type="submit"
-                        onClick={() => setOpen(true)}
-                      />
-                    </div>
-                    <ModalVideo
-                      key={features?._id}
-                      style={{ borderRadius: "12px" }}
-                      channel="youtube"
-                      autoplay
-                      enablejsapi="1"
-                      isOpen={isOpen}
-                      videoId={features?.video_link}
-                      onClose={() => setOpen(false)}
-                    />
-                  </Nav.Link>
-                </div>
-              </div> */}
               <div className="ifram">
                 <iframe
                   allowfullscreen="true"
@@ -589,7 +558,7 @@ function Hastag() {
           <div className=" col-lg-6 col-md-6 col-sm-12">
             {/* api integrate form here */}
             {newslettervid
-              ?.map((video) => (
+              ?.map(video => (
                 <Col className="container" key={video?._id}>
                   <div
                     style={{ backgroundImage: `url(${video})` }}
@@ -628,8 +597,130 @@ function Hastag() {
 
       <div className="container">
         <p className="category3">Latest Blogs</p>
-        <Row>
-          {popblog?.map((value) => (
+
+        <Swiper
+          breakpoints={{
+            1084: {
+              slidesPerView: 3,
+              direction: "horizontal",
+              spaceBetween: 10,
+            },
+            980: {
+              slidesPerView: 3,
+              direction: "horizontal",
+              spaceBetween: 10,
+            },
+            910: {
+              slidesPerView: 2,
+              direction: "horizontal",
+              spaceBetween: 10,
+            },
+            820: {
+              slidesPerView: 2,
+              direction: "horizontal",
+              spaceBetween: 10,
+            },
+            820: {
+              slidesPerView: 3,
+              direction: "horizontal",
+              spaceBetween: 10,
+            },
+            780: {
+              slidesPerView: 2,
+              direction: "horizontal",
+              spaceBetween: 10,
+            },
+
+            768: {
+              slidesPerView: 2,
+              direction: "horizontal",
+              spaceBetween: 10,
+            },
+            640: {
+              slidesPerView: 1,
+              direction: "horizontal",
+              spaceBetween: 10,
+            },
+            320: {
+              slidesPerView: 1,
+              direction: "horizontal",
+              spaceBetween: 10,
+            },
+            240: {
+              slidesPerView: 1,
+              direction: "horizontal",
+              spaceBetween: 10,
+            },
+          }}
+          className=""
+          modules={[Navigation, Pagination, Scrollbar]}
+          spaceBetween={70}
+          slidesPerView={3}
+          navigation
+          pagination={{ clickable: true }}
+          scrollbar={{ draggable: true }}
+          onSwiper={swiper => console.log(swiper)}
+          onSlideChange={() => console.log("slide change")}
+        >
+          {popblog?.map(value => (
+            <SwiperSlide key={value?._id}>
+              <Card key={value?._id}>
+                <Link key={value?._id} to={`/blogdescription/${value?._id}`}>
+                  <div className="popularimg">
+                    <CardImg
+                      style={{
+                        height: "250px",
+                      }}
+                      src={value?.blogImg}
+                      className="photo"
+                    />
+                  </div>
+                  <CardBody>
+                    <CardTitle>
+                      <b style={{ color: "black" }}>
+                        {HtmlParser(value?.blog_title.slice(0, 40))}
+                      </b>
+                    </CardTitle>
+                    <CardSubtitle>
+                      <b style={{ color: "#5F56C6" }}>
+                        <Moment format="lll">{value?.createdAt}</Moment>
+                      </b>
+                    </CardSubtitle>
+                    <br></br>
+                    <CardText style={{ color: "black" }}>
+                      <ShowMore
+                        className="showmore"
+                        style={{ color: "black" }}
+                        lines={1}
+                        more="Show more"
+                        less="Show less"
+                        anchorClass=""
+                      >
+                        {HtmlParser(value?.desc)}
+                      </ShowMore>
+                    </CardText>
+                    <CardText style={{ color: "black" }}>
+                      posted by
+                      <img
+                        className="mx-3"
+                        src={value?.posted_by_img}
+                        style={{
+                          width: "70px",
+                          height: "65px",
+                          borderRadius: "50%",
+                        }}
+                      />
+                      <b>{value?.posted_by}</b>
+                    </CardText>
+                  </CardBody>
+                </Link>
+              </Card>
+            </SwiperSlide>
+          ))}
+        </Swiper>
+
+        {/* <Row>
+          {popblog?.map(value => (
             <Col lg="4" sm="6" xs="12">
               <Card key={value?._id}>
                 <Link key={value?._id} to={`/blogdescription/${value?._id}`}>
@@ -684,88 +775,7 @@ function Hastag() {
               </Card>
             </Col>
           ))}
-          {/* <Col lg="4" md="6" sm="12" className="Card-Blog">
-            <Card>
-              <Container className="imageslastblog ">
-                <Link to={`/blog`}>
-                  <img
-                    height={250}
-                    style={{ borderRadius: "13px" }}
-                    className="imgBloglast"
-                    src={edu}
-                    alt="img"
-                  />
-                </Link>
-                <h5>30 popular business listings of this pandemic year 2021</h5>
-                <p>
-                  You’ve probably noticed there are dozens of platforms that
-                  offer business listings. Let’s look at a few of the most
-                </p>
-                <p>
-                  <span>
-                    <b>24th Dec, 2021 . 5 min read</b>
-                  </span>
-                </p>
-              </Container>
-            </Card>
-          </Col>
-
-          <Col lg="4" md="6" sm="12" className="Card-Blog">
-            <Card>
-              <Container className="imageslastblog ">
-                <Link to={`/blog`}>
-                  <img
-                    height={250}
-                    style={{ borderRadius: "13px" }}
-                    className="imgBloglast"
-                    src={rate}
-                    alt="img"
-                  />
-                </Link>
-                <h5>Most visited places & top rated shops from our listing</h5>
-                <p>
-                  You’ve probably noticed there are dozens of platforms that
-                  offer business listings. Let’s look at a few of the most
-                  popular sites and...
-                </p>
-                <p>
-                  <span>
-                    <b>24th Dec, 2021 . 5 min read</b>
-                  </span>
-                </p>
-              </Container>
-            </Card>
-          </Col>
-
-          <Col lg="4" md="6" sm="12" className="Card-Blog">
-            <Card>
-              <Container className="imageslastblog ">
-                <Link to={`/blog`}>
-                  <img
-                    height={250}
-                    style={{ borderRadius: "13px" }}
-                    className="imgBloglast"
-                    src={socialnetwork}
-                    alt="img"
-                  />
-                </Link>
-                <h5>
-                  Optimize your business page for national/global customers
-                </h5>
-                <p>
-                  You’ve probably noticed there are dozens of platforms that
-                  offer business listings. Let’s look at a few of the most
-                  popular sites and...
-                </p>
-                <p>
-                  <span>
-                    <b>24th Dec, 2021 . 5 min read</b>
-                  </span>
-                </p>
-              </Container>
-            </Card>
-          </Col> */}
-        </Row>
+        </Row> */}
       </div>
     </>
   );

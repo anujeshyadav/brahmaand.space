@@ -108,17 +108,21 @@ function Productsearch(args) {
     emptyIcon: <i className="far fa-star" />,
     halfIcon: <i className="fa fa-star-half-alt" />,
     // filledIcon: <i className="fa fa-star" />,
-    onChange: (newValue) => {
+    onChange: newValue => {
       setRating(newValue);
     },
   };
+
+  const handleEnter = event => {
+    if (event.key === "Enter") {
+      handlesearchdescription();
+    }
+  };
   const [Filtertype, setFiltertype] = useState("");
 
-  const handlefilter = (filtertype) => {
-   
+  const handlefilter = filtertype => {
     console.log("contentyear Id<<<<<<<<<?????", filtertype);
-   
-  
+
     setFiltertype(filtertype);
 
     axios
@@ -129,11 +133,11 @@ function Productsearch(args) {
         type: type,
         format: format,
       })
-      .then((res) => {
+      .then(res => {
         console.log(res.data.data);
         setCategry(res.data.data);
       })
-      .catch((err) => {
+      .catch(err => {
         console.log(err);
       });
 
@@ -145,14 +149,14 @@ function Productsearch(args) {
         type: type,
         format: format,
       })
-      .then((res) => {
+      .then(res => {
         // console.log(res.data.data);
         if (res.data.data !== "" && res.data.data !== null) {
           setPromotion(res.data.data);
           // localStorage.removeItem("searchdata");
         }
       })
-      .catch((err) => {});
+      .catch(err => {});
   };
 
   const navigate = useNavigate();
@@ -173,26 +177,26 @@ function Productsearch(args) {
           comment: upcom,
           rating: rating,
         })
-        .then((res) => {
+        .then(res => {
           console.log(res.data.data);
           swal("Submitted Successfully");
           toggleedit();
         })
-        .catch((err) => {
+        .catch(err => {
           console.log(err.response.data);
         });
     }
   };
 
-  const handleeditcomment = (id) => {
+  const handleeditcomment = id => {
     axios
       .get(`https://backend.brahmaand.space/admin/getone_coment_list/${id}`)
-      .then((res) => {
+      .then(res => {
         console.log(res.data.data);
         setUpcom(res.data.data?.comment);
         toggleedit();
       })
-      .catch((err) => {
+      .catch(err => {
         console.log(err);
       });
     const user = localStorage.getItem("userId");
@@ -249,10 +253,10 @@ function Productsearch(args) {
   const getYear = () => {
     axios
       .get(`https://backend.brahmaand.space/user/allYear`)
-      .then((response) => {
+      .then(response => {
         setRelyear(response.data.data);
       })
-      .catch((error) => {});
+      .catch(error => {});
   };
   const handleclosemodal = () => {
     setModal(false);
@@ -298,7 +302,7 @@ function Productsearch(args) {
         .post(`https://backend.brahmaand.space/user/search_topic_title`, {
           searchinput: searchdata,
         })
-        .then((res) => {
+        .then(res => {
           console.log(res.data.data);
           if (res.data.data !== "" && res.data.data !== null) {
             setCategry(res.data.data);
@@ -306,21 +310,21 @@ function Productsearch(args) {
             // localStorage.removeItem("searchdata");
           }
         })
-        .catch((err) => {
+        .catch(err => {
           // console.log(err);
         });
     axios
       .post(`https://backend.brahmaand.space/user/search_promotion`, {
         searchinput: searchdata,
       })
-      .then((res) => {
+      .then(res => {
         console.log(res.data.data);
         if (res.data.data !== "" && res.data.data !== null) {
           setPromotion(res.data.data);
           // localStorage.removeItem("searchdata");
         }
       })
-      .catch((err) => {});
+      .catch(err => {});
     // console.log("you are searching");
   };
 
@@ -329,10 +333,10 @@ function Productsearch(args) {
       .post(`https://backend.brahmaand.space/user/search_topic_title`, {
         searchinput: searchitem,
       })
-      .then((res) => {
+      .then(res => {
         setCategry(res.data.data);
       })
-      .catch((err) => {
+      .catch(err => {
         console.log(err);
       });
 
@@ -340,22 +344,22 @@ function Productsearch(args) {
       .post(`https://backend.brahmaand.space/user/search_promotion`, {
         searchinput: searchitem,
       })
-      .then((res) => {
+      .then(res => {
         // console.log(res.data.data);
         if (res.data.data !== "" && res.data.data !== null) {
           setPromotion(res.data.data);
         }
       })
-      .catch((err) => {});
+      .catch(err => {});
   };
 
   const getLanguage = () => {
     axios
       .get(`https://backend.brahmaand.space/user/allLang`)
-      .then((response) => {
+      .then(response => {
         setLngage(response.data.data);
       })
-      .catch((error) => {});
+      .catch(error => {});
   };
   const getUser = async () => {
     const user = await localStorage.getItem("userId");
@@ -366,7 +370,7 @@ function Productsearch(args) {
     }
   };
 
-  const removebookmark = (id) => {
+  const removebookmark = id => {
     console.log(id);
     setliked(id);
     if (myId !== "" && myId !== null) {
@@ -376,20 +380,20 @@ function Productsearch(args) {
           userid: myId,
           status: "false",
         })
-        .then((response) => {
+        .then(response => {
           console.log(response.data.data);
           setActivelike(response.data.data.status);
           swal("you Removed your bookmark ");
           hadlestatusbookmark();
         })
-        .catch((error) => {});
+        .catch(error => {});
     } else {
       swal("User Need to Login first ");
       navigate("/login");
     }
   };
 
-  const addbookmark = (id) => {
+  const addbookmark = id => {
     console.log(id);
     setliked(id);
 
@@ -400,13 +404,13 @@ function Productsearch(args) {
           userid: myId,
           status: "true",
         })
-        .then((response) => {
+        .then(response => {
           console.log(response.data.data);
           setActivelike(response.data.data.status);
           swal("You Bookmark it");
           hadlestatusbookmark();
         })
-        .catch((error) => {
+        .catch(error => {
           if (error.response.data.message == "already exists") {
             swal(" Your already bookmarked It");
           }
@@ -422,15 +426,15 @@ function Productsearch(args) {
       .get(
         `https://backend.brahmaand.space/user/getone_mylikes/${myId}/${liked}`
       )
-      .then((res) => {
+      .then(res => {
         // console.log(res.data.data);
         setHandlebookmark(res.data.data.status);
       })
-      .catch((err) => {
+      .catch(err => {
         // console.log(err.response.data);
       });
   };
-  const handlepromotion = (_id) => {
+  const handlepromotion = _id => {
     setPromotiondata("");
     setliked(_id);
     hadlestatusbookmark();
@@ -441,7 +445,7 @@ function Productsearch(args) {
         .get(
           `https://backend.brahmaand.space/admin/getone_reslist/${promotionId}`
         )
-        .then((res) => {
+        .then(res => {
           // console.log(res.data.data._id);
           if (
             res.data.data._id !== "" ||
@@ -453,27 +457,27 @@ function Productsearch(args) {
             toggleone();
           }
         })
-        .catch((err) => {
+        .catch(err => {
           // console.log(err.data.data);
         });
       axios
         .get(
           `https://backend.brahmaand.space/user/average_rating/${promotionId}`
         )
-        .then((res) => {
+        .then(res => {
           // console.log(res.data);
           setAverageRating(res.data);
         })
-        .catch((err) => {
+        .catch(err => {
           // console.log(err);
         });
       axios
         .get(`https://backend.brahmaand.space/user/comment_list/${promotionId}`)
-        .then((res) => {
+        .then(res => {
           setGetonecomment(res.data.data);
           console.log(res.data.data);
         })
-        .catch((err) => {
+        .catch(err => {
           // console.log(err);
         });
     }
@@ -488,11 +492,11 @@ function Productsearch(args) {
   const currentItems = categry?.slice(itemOffset, endOffset);
 
   const pageCount = Math.ceil(categry?.length / 10);
-  const onchangehandler = (e) => {
+  const onchangehandler = e => {
     settText(e.target.value);
   };
   const [rating, setRating] = useState("");
-  const ratingChanged = (newRating) => {
+  const ratingChanged = newRating => {
     setRating(newRating);
   };
 
@@ -522,11 +526,11 @@ function Productsearch(args) {
   const promotionadmin = () => {
     axios
       .get(`https://backend.brahmaand.space/user/Promotions`)
-      .then((res) => {
+      .then(res => {
         setPromotion(res.data.data);
         // console.log(res.data.data);
       })
-      .catch((err) => {
+      .catch(err => {
         // console.log(err);
       });
   };
@@ -548,7 +552,7 @@ function Productsearch(args) {
           comment: text,
           rating: rating,
         })
-        .then((res) => {
+        .then(res => {
           console.log(res.data);
           if (res.data.message == "success") {
             swal("Your Review Submitted Successfully!");
@@ -560,7 +564,7 @@ function Productsearch(args) {
             swal("Already commented On it wait for aprroval");
           }
         })
-        .catch((err) => {
+        .catch(err => {
           // console.log(err.response.data.message == "already exists");
           if (err.response.data.message == "already exists") {
             swal("You already Commented On It");
@@ -571,7 +575,7 @@ function Productsearch(args) {
     }
   };
 
-  const handleSelection = (_id) => {
+  const handleSelection = _id => {
     setProductdetail("");
 
     setliked(_id);
@@ -585,7 +589,7 @@ function Productsearch(args) {
         .get(
           `https://backend.brahmaand.space/admin/getone_reslist/${selectedId}`
         )
-        .then((res) => {
+        .then(res => {
           // console.log(res.data.data._id);
           // console.log(res);
           if (
@@ -597,7 +601,7 @@ function Productsearch(args) {
             toggle();
           }
         })
-        .catch((err) => {
+        .catch(err => {
           // console.log(err.data.data);
         });
 
@@ -605,26 +609,26 @@ function Productsearch(args) {
         .get(
           `https://backend.brahmaand.space/user/average_rating/${productdes}`
         )
-        .then((res) => {
+        .then(res => {
           // console.log(res.data);
           setAverageRating(res.data);
         })
-        .catch((err) => {
+        .catch(err => {
           // console.log(err);
         });
     }
 
     axios
       .get(`https://backend.brahmaand.space/user/comment_list/${selectedId}`)
-      .then((res) => {
+      .then(res => {
         setGetonecomment(res.data.data);
         // console.log(res.data.data);
       })
-      .catch((err) => {
+      .catch(err => {
         // console.log(err);
       });
   };
-  const handlesuggSelection = (_id) => {
+  const handlesuggSelection = _id => {
     setliked(_id);
     hadlestatusbookmark();
     setProductdetail("");
@@ -637,7 +641,7 @@ function Productsearch(args) {
         .get(
           `https://backend.brahmaand.space/admin/getone_reslist/${productdes}`
         )
-        .then((res) => {
+        .then(res => {
           // console.log(res.data.data._id);
           // console.log(res.data.data);
           if (
@@ -650,7 +654,7 @@ function Productsearch(args) {
             setProductdetail(res.data.data);
           }
         })
-        .catch((err) => {
+        .catch(err => {
           // console.log(err.data.data);
         });
 
@@ -658,22 +662,22 @@ function Productsearch(args) {
         .get(
           `https://backend.brahmaand.space/user/average_rating/${productdes}`
         )
-        .then((res) => {
+        .then(res => {
           // console.log(res.data);
           setAverageRating(res.data);
         })
-        .catch((err) => {
+        .catch(err => {
           // console.log(err);
         });
     }
 
     axios
       .get(`https://backend.brahmaand.space/user/comment_list/${selectedId}`)
-      .then((res) => {
+      .then(res => {
         setGetonecomment(res.data.data);
         // console.log(res.data.data);
       })
-      .catch((err) => {
+      .catch(err => {
         // console.log(err);
       });
   };
@@ -768,7 +772,7 @@ function Productsearch(args) {
         .post(`https://backend.brahmaand.space/user/search_topic_title`, {
           searchinput: searchdata,
         })
-        .then((res) => {
+        .then(res => {
           console.log(res.data.data);
           if (res.data.data !== "" && res.data.data !== null) {
             setCategry(res.data.data);
@@ -776,21 +780,21 @@ function Productsearch(args) {
             // localStorage.removeItem("searchdata");
           }
         })
-        .catch((err) => {
+        .catch(err => {
           // console.log(err);
         });
     axios
       .post(`https://backend.brahmaand.space/user/search_promotion`, {
         searchinput: searchdata,
       })
-      .then((res) => {
+      .then(res => {
         // console.log(res.data.data);
         if (res.data.data !== "" && res.data.data !== null) {
           setPromotion(res.data.data);
           // localStorage.removeItem("searchdata");
         }
       })
-      .catch((err) => {});
+      .catch(err => {});
     // console.log("you are searching");
     // axios
     //   .get(
@@ -812,17 +816,17 @@ function Productsearch(args) {
       .get(
         `https://backend.brahmaand.space/admin/listbysubcategory/${Params.id}`
       )
-      .then((response) => {
+      .then(response => {
         setSuggested(response.data.data);
         // console.log(response.data.data);
       })
-      .catch((error) => {
+      .catch(error => {
         // console.log(error.response.data);
         setLoading(false);
       });
   };
 
-  const handlePageClick = (event) => {
+  const handlePageClick = event => {
     const newOffset = (event.selected * 10) % categry?.length;
     // console.log(
     //   `User requested page number ${event.selected}, which is offset ${newOffset}`
@@ -840,9 +844,10 @@ function Productsearch(args) {
                 <input
                   value={searchitem}
                   type="text"
+                  onKeyDown={handleEnter}
                   placeholder=" Search for the top resources on any subject ... (e.g. Java) "
                   className="searchprd inputareaa searchba "
-                  onChange={(e) => {
+                  onChange={e => {
                     setSearchitem(e.target.value);
                   }}
                 />
@@ -1026,14 +1031,14 @@ function Productsearch(args) {
                               defaultValue="Select Year"
                               value={contentyear}
                               // checked={"Select Year" === contentyear}
-                              onChange={(e) => {
+                              onChange={e => {
                                 setContentyear(e.target.value);
                                 handlefilter(e.target.value);
                               }}
                               className="form-control"
                             >
                               <option>Select Year</option>
-                              {relyear?.map((yr) => {
+                              {relyear?.map(yr => {
                                 return (
                                   <option value={yr?._id} key={yr?._id}>
                                     {yr?.yrName}
@@ -1052,14 +1057,14 @@ function Productsearch(args) {
                             <select
                               defaultValue="Select Language"
                               value={language}
-                              onChange={(e) => {
+                              onChange={e => {
                                 setLanguage(e.target.value);
                                 handlefilter(e.target.value);
                               }}
                               className="form-control"
                             >
                               <option>Select Language</option>
-                              {lngage?.map((language) => {
+                              {lngage?.map(language => {
                                 return (
                                   <option
                                     key={language?._id}
@@ -1137,12 +1142,12 @@ function Productsearch(args) {
                       modules={[Navigation, Scrollbar, A11y]}
                       navigation
                       onSlideChange={() => console.log("slide change")}
-                      onSwiper={(swiper) => console.log(swiper)}
+                      onSwiper={swiper => console.log(swiper)}
                       scrollbar={{ draggable: true }}
                     >
                       {promotion?.length > 0 ? (
                         <>
-                          {promotion?.map((promotion) => (
+                          {promotion?.map(promotion => (
                             <SwiperSlide>
                               <Col key={promotion?._id}>
                                 <div class="product-grid8">
@@ -1190,6 +1195,7 @@ function Productsearch(args) {
                                         key={promotiondata?._id}
                                         className="mdlg"
                                         isOpen={modalone}
+                                        toggle={toggleone}
                                         {...args}
                                       >
                                         <ModalBody key={promotiondata?._id}>
@@ -1273,7 +1279,7 @@ function Productsearch(args) {
                                               </div>
                                               <div className=" d-flex tag-2">
                                                 {promotiondata?.topics?.map(
-                                                  (val) => (
+                                                  val => (
                                                     <Link
                                                       className="d-flex "
                                                       to="#"
@@ -1402,7 +1408,7 @@ function Productsearch(args) {
                                                     <div className="mid-1-b tt-1">
                                                       <p>Language:</p>
                                                       {promotiondata?.language?.map(
-                                                        (lang) => (
+                                                        lang => (
                                                           <span>
                                                             {lang?.language}{" "}
                                                           </span>
@@ -1423,7 +1429,7 @@ function Productsearch(args) {
                                                     <div className="mid-1-b tt-1">
                                                       <p>Year:</p>
                                                       {promotiondata?.relYear?.map(
-                                                        (year) => (
+                                                        year => (
                                                           <Link to="#">
                                                             {year?.yrName}
                                                           </Link>
@@ -1550,7 +1556,7 @@ function Productsearch(args) {
                                                         placeholder=""
                                                       ></textarea>
                                                       <Button
-                                                        onClick={(e) =>
+                                                        onClick={e =>
                                                           handleSubmit(
                                                             e,
                                                             promotiondata._id
@@ -1600,7 +1606,7 @@ function Productsearch(args) {
                                           <div className="review-list">
                                             <h4>Reviews:</h4>
 
-                                            {getonecomment?.map((value) => (
+                                            {getonecomment?.map(value => (
                                               <div className="re-list">
                                                 <div className="re-listimg">
                                                   <img
@@ -1679,9 +1685,7 @@ function Productsearch(args) {
                                                                     value={
                                                                       upcom
                                                                     }
-                                                                    onChange={(
-                                                                      e
-                                                                    ) =>
+                                                                    onChange={e =>
                                                                       setUpcom(
                                                                         e.target
                                                                           .value
@@ -1762,7 +1766,7 @@ function Productsearch(args) {
                                   >
                                     <ul class="rating">
                                       <li>
-                                        {promotion?.topics?.map((topic) => (
+                                        {promotion?.topics?.map(topic => (
                                           <Link className="btt">{topic}</Link>
                                         ))}
                                       </li>
@@ -1841,7 +1845,7 @@ function Productsearch(args) {
                     <Row>
                       <div className="search-st mb-4">
                         {currentItems !== ""
-                          ? currentItems?.map((categry) => (
+                          ? currentItems?.map(categry => (
                               <Row className="mb-4" key={categry?._id}>
                                 <Col md="3" className="alldescriptionimagpage">
                                   <div class="product-image8 st-2">
@@ -1895,7 +1899,7 @@ function Productsearch(args) {
                                         key={Producdetail?._id}
                                         className="mdlg"
                                         isOpen={modal}
-                                        // toggle={handleclosemodal}
+                                        toggle={handleclosemodal}
                                         {...args}
                                       >
                                         <ModalBody>
@@ -1977,7 +1981,7 @@ function Productsearch(args) {
                                               </div>
                                               <div className=" d-flex tag-2">
                                                 {Producdetail?.topics?.map(
-                                                  (val) => (
+                                                  val => (
                                                     <Link
                                                       className="d-flex "
                                                       to="#"
@@ -2113,7 +2117,7 @@ function Productsearch(args) {
                                                       <p>Year:</p>
 
                                                       {Producdetail?.relYear?.map(
-                                                        (year) => (
+                                                        year => (
                                                           <Link>
                                                             {year?.yrName}
                                                           </Link>
@@ -2176,7 +2180,7 @@ function Productsearch(args) {
                                                     <div className="mid-1-b tt-1">
                                                       <p>Language:</p>
                                                       {Producdetail?.language?.map(
-                                                        (lang) => (
+                                                        lang => (
                                                           <span>
                                                             {lang?.language}{" "}
                                                           </span>
@@ -2416,7 +2420,7 @@ function Productsearch(args) {
                                                       ></textarea>
                                                       <Button
                                                         // onClick={handleSubmit}
-                                                        onClick={(e) =>
+                                                        onClick={e =>
                                                           handleSubmit(
                                                             e,
                                                             Producdetail?._id
@@ -2465,7 +2469,7 @@ function Productsearch(args) {
                                           <hr></hr>
                                           <div className="review-list mt-3  ">
                                             <h4>Reviews:</h4>
-                                            {getonecomment?.map((value) => (
+                                            {getonecomment?.map(value => (
                                               <div
                                                 className="re-list"
                                                 key={value._id}
@@ -2564,9 +2568,7 @@ function Productsearch(args) {
                                                                     value={
                                                                       upcom
                                                                     }
-                                                                    onChange={(
-                                                                      e
-                                                                    ) =>
+                                                                    onChange={e =>
                                                                       setUpcom(
                                                                         e.target
                                                                           .value
@@ -2701,7 +2703,7 @@ function Productsearch(args) {
                                 >
                                   <div class="product-content">
                                     <div className="d-flex topicsdataapi">
-                                      {categry?.topics.map((topic) => (
+                                      {categry?.topics.map(topic => (
                                         <h6 style={{ color: "blue" }}>
                                           {topic} &nbsp;
                                         </h6>
@@ -2737,7 +2739,7 @@ function Productsearch(args) {
                                       <ul class="rating mt-2">
                                         <li>
                                           {categry?.relYear[0] !== ""
-                                            ? categry?.relYear?.map((data) => (
+                                            ? categry?.relYear?.map(data => (
                                                 <Link to="#" className="tag">
                                                   {data?.yrName}
                                                 </Link>
@@ -2824,13 +2826,13 @@ function Productsearch(args) {
                 modules={[Navigation, Scrollbar, A11y]}
                 navigation
                 onSlideChange={() => console.log("slide change")}
-                onSwiper={(swiper) => console.log(swiper)}
+                onSwiper={swiper => console.log(swiper)}
                 scrollbar={{ draggable: true }}
                 className=" sld-1 justify-content-center swiper-button-show"
                 // className=" sld-1 swiper-button-show"
               >
                 {suggested !== ""
-                  ? suggested?.map((categry) => (
+                  ? suggested?.map(categry => (
                       <SwiperSlide>
                         <div class="product-grid8" key={categry._id}>
                           <div class="product-image8">
@@ -2843,7 +2845,7 @@ function Productsearch(args) {
                                 key={Producdetail?._id}
                                 className="mdlg"
                                 isOpen={modalsuggestion}
-                                // toggle={handleclosesuggestionmodal}
+                                toggle={handleclosesuggestionmodal}
                                 {...args}
                               >
                                 <ModalBody>
@@ -2918,7 +2920,7 @@ function Productsearch(args) {
                                         </h5>
                                       </div>
                                       <div className=" d-flex tag-2">
-                                        {Producdetail?.topics?.map((val) => (
+                                        {Producdetail?.topics?.map(val => (
                                           <Link className="d-flex " to="#">
                                             {val} &nbsp;
                                           </Link>
@@ -3037,7 +3039,7 @@ function Productsearch(args) {
                                               <p>Year:</p>
 
                                               {Producdetail?.relYear?.map(
-                                                (year) => (
+                                                year => (
                                                   <Link>{year?.yrName}</Link>
                                                 )
                                               )}
@@ -3092,7 +3094,7 @@ function Productsearch(args) {
                                             <div className="mid-1-b tt-1">
                                               <p>Language:</p>
                                               {Producdetail?.language?.map(
-                                                (lang) => (
+                                                lang => (
                                                   <span>{lang?.language} </span>
                                                 )
                                               )}
@@ -3296,7 +3298,7 @@ function Productsearch(args) {
                                                 placeholder=" Enter your Review if you want"
                                               ></textarea>
                                               <Button
-                                                onClick={(e) =>
+                                                onClick={e =>
                                                   handleSubmit(
                                                     e,
                                                     Producdetail?._id
@@ -3344,7 +3346,7 @@ function Productsearch(args) {
                                   <hr></hr>
                                   <div className="review-list mt-3  ">
                                     <h4>Reviews:</h4>
-                                    {getonecomment?.map((value) => (
+                                    {getonecomment?.map(value => (
                                       <div className="re-list">
                                         <div className="re-listimg">
                                           <img
@@ -3413,7 +3415,7 @@ function Productsearch(args) {
                                                               value?.comment
                                                             }
                                                             value={upcom}
-                                                            onChange={(e) =>
+                                                            onChange={e =>
                                                               setUpcom(
                                                                 e.target.value
                                                               )
@@ -3527,7 +3529,7 @@ function Productsearch(args) {
                           >
                             <div className=" d-flex topicdatas">
                               {" "}
-                              {categry?.topics.map((topic) => (
+                              {categry?.topics.map(topic => (
                                 <span
                                   className="d-flex display-inline topicsdata"
                                   style={{ color: "blue" }}
@@ -3565,7 +3567,7 @@ function Productsearch(args) {
                                   </Link> */}
                                   {categry?.relYear[0] !== "" ||
                                   categry?.relYear[0] !== null
-                                    ? categry?.relYear?.map((data) => (
+                                    ? categry?.relYear?.map(data => (
                                         <Link to="#" className="tag">
                                           {" "}
                                           {data?.yrName}{" "}

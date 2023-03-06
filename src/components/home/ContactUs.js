@@ -27,7 +27,7 @@ function ContactUs() {
 
   const userid = localStorage.getItem("userId");
 
-  const contactsubmit = (e) => {
+  const contactsubmit = e => {
     e.preventDefault();
 
     const userid = localStorage.getItem("userId");
@@ -52,7 +52,7 @@ function ContactUs() {
           msg: mesg,
           userid: userid,
         })
-        .then((response) => {
+        .then(response => {
           if (response.data.message === "success");
           {
             swal("Your Details are Submitted Successfully");
@@ -62,7 +62,7 @@ function ContactUs() {
           setName("");
           setMobile("");
         })
-        .catch((error) => {});
+        .catch(error => {});
     }
   };
 
@@ -102,7 +102,7 @@ function ContactUs() {
                         value={name}
                         placeholder="Enter Name here"
                         type="text"
-                        onChange={(e) => setName(e.target.value)}
+                        onChange={e => setName(e.target.value)}
                       />
                       {error && <h6 style={{ color: "red" }}>{error}</h6>}
                     </FormGroup>
@@ -119,7 +119,7 @@ function ContactUs() {
                         value={email}
                         placeholder="Enter Your Mail here"
                         type="email"
-                        onChange={(e) => setEmail(e.target.value)}
+                        onChange={e => setEmail(e.target.value)}
                       />
                       {error && <h6 style={{ color: "red" }}>{error}</h6>}
                     </FormGroup>
@@ -135,7 +135,7 @@ function ContactUs() {
                         value={mobile}
                         placeholder="Enter Your Mobile No."
                         type="text"
-                        onChange={(e) => setMobile(e.target.value)}
+                        onChange={e => setMobile(e.target.value)}
                       />
                     </FormGroup>
                   </Col>
@@ -152,7 +152,7 @@ function ContactUs() {
                       className="form-control"
                       value={mesg}
                       placeholder="Enter your message here"
-                      onChange={(e) => setMesg(e.target.value)}
+                      onChange={e => setMesg(e.target.value)}
                     />
                     {error && <h6 style={{ color: "red" }}>{error}</h6>}
                   </h5>
@@ -182,8 +182,10 @@ function ContactUs() {
                 color="#FC9358"
               />
               <h5>OUR LOCATION</h5>
-              <p>PO Box 97845 Baker st. 567,</p>
-              <p>Madhya Pradesh,india </p>
+              <p> PO Box 97845 Baker st. 567,</p>
+              <p> Bengaluru, India</p>
+              <p> Made with love</p>
+              <p> World's 1st Content aggregator platform</p>
             </div>
           </Col>
 
@@ -196,7 +198,7 @@ function ContactUs() {
               />
               <h5>WRITE SOMETHING</h5>
               <p>WRITE something below,</p>
-              <p>................ </p>
+              <p>... </p>
             </div>
           </Col>
 
@@ -209,8 +211,8 @@ function ContactUs() {
               />
 
               <h5>CONTACT US</h5>
-              <p>Mobile: (+91) 700 444 999</p>
-              <p>(+91) 700 888 222</p>
+              <p>Mobile: (+91) 9958918811</p>
+              {/* <p>(+91) 700 888 222</p> */}
             </div>
           </Col>
         </Row>

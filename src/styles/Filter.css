@@ -461,3 +461,8 @@ div.ex1 {
   box-sizing: content-box;
   /* justify-content: center; */
 }
+
+/* remove modal background */
+.modal-backdrop.show {
+  opacity: 0.1 !important;
+}
