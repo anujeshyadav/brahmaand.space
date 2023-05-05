@@ -81,7 +81,9 @@ import ResetForget from "./components/ResetForget";
 import Productsearch from "./components/filter/Productsearch";
 import ProductHastag from "./components/filter/ProductHastag";
 import Loginplan from "./planable.io/Loginplan";
+import ReactGA from 'react-ga';
 
+ReactGA.initialize('G-YFTXN6J9FY');
 const rootElement = document.getElementById("root");
 render(
   // <Router>
