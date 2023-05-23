@@ -1,27 +1,23 @@
 import axios from "axios";
 import { createContext } from "react";
 import { useEffect, useState, useContext } from "react";
-
-import { useNavigate } from "react-router-dom"
+import ReactGA from "react-ga";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const domain = process.env.REACT_APP_API_DOMAIN_NAME;
 
 const AuthContext = createContext();
 
-
-
 export const getUser = async () => {
-
   const user_token = window.localStorage.getItem("user_token");
 
-  const auth_url =  `${domain}/UserAccountInfo/check-auth`;
+  const auth_url = `${domain}/UserAccountInfo/check-auth`;
 
   if (user_token !== "undefined") {
-
     const config = {
       headers: {
         "Content-Type": "application/json",
-        "Authorization": `Bearer ${user_token}`,
+        Authorization: `Bearer ${user_token}`,
       },
     };
 
@@ -30,37 +26,38 @@ export const getUser = async () => {
       .then(async (response) => {
         if (response.data) {
           const res = await response.data;
-          return { status: "SIGNED_IN", user: res};
+          return { status: "SIGNED_IN", user: res };
         } else {
-          return { status: "SIGNED_OUT", user: null};
+          return { status: "SIGNED_OUT", user: null };
         }
       })
       .catch((err) => {
-
-        return { status: "SIGNED_OUT", user: null};
+        return { status: "SIGNED_OUT", user: null };
       });
   } else {
-    return { status: "SIGNED_OUT", user: null};
+    return { status: "SIGNED_OUT", user: null };
   }
 };
+
+ReactGA.initialize("G-YFTXN6J9FY");
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [token, setToken] = useState(null);
   const [loading, setLoading] = useState(true);
 
-
-    const navigate = useNavigate();
-
+  const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(async () => {
     const temp_auth = await getUser();
     setUser(temp_auth["user"]);
   }, []);
-
+  useEffect(() => {
+    ReactGA.pageview(location.pathname + location.search);
+  }, [location]);
 
   const login = async (body) => {
-
     const config = {
       headers: {
         "Content-Type": "application/json",
@@ -73,11 +70,10 @@ export const AuthProvider = ({ children }) => {
       .post(login_url, body, config)
       .then(async (response) => {
         const res = await response.data;
-        const access_token = res['access_token'];
+        const access_token = res["access_token"];
 
         setToken(access_token);
         window.localStorage.setItem("user_token", access_token);
-
 
         const temp_auth = await getUser();
         setUser(temp_auth["user"]);
@@ -89,16 +85,14 @@ export const AuthProvider = ({ children }) => {
       });
   };
 
-
   const edit_account = async (body) => {
-
-    const temp_token = window.localStorage.getItem("user_token")
-        console.log(temp_token)
+    const temp_token = window.localStorage.getItem("user_token");
+    console.log(temp_token);
 
     const config = {
       headers: {
         "Content-Type": "application/json",
-        "Authorization": `Bearer ${temp_token}`,
+        Authorization: `Bearer ${temp_token}`,
       },
     };
 
@@ -107,7 +101,6 @@ export const AuthProvider = ({ children }) => {
     return await axios
       .post(edit_url, body, config)
       .then(async (response) => {
-
         const temp_auth = await getUser();
         setUser(temp_auth["user"]);
 
@@ -118,17 +111,14 @@ export const AuthProvider = ({ children }) => {
       });
   };
 
-
-
   const reset_password = async (body) => {
-
-    const temp_token = window.localStorage.getItem("user_token")
-        console.log(temp_token)
+    const temp_token = window.localStorage.getItem("user_token");
+    console.log(temp_token);
 
     const config = {
       headers: {
         "Content-Type": "application/json",
-        "Authorization": `Bearer ${temp_token}`,
+        Authorization: `Bearer ${temp_token}`,
       },
     };
 
@@ -137,7 +127,6 @@ export const AuthProvider = ({ children }) => {
     return await axios
       .post(reset_url, body, config)
       .then(async (response) => {
-
         const temp_auth = await getUser();
         setUser(temp_auth["user"]);
 
@@ -148,20 +137,18 @@ export const AuthProvider = ({ children }) => {
       });
   };
 
-
-
   const logout = async () => {
+    window.localStorage.removeItem("user_token");
 
-     window.localStorage.removeItem("user_token");
-
-     setUser(null);
-     setToken(null);
-     navigate("/", {replace: true})
+    setUser(null);
+    setToken(null);
+    navigate("/", { replace: true });
   };
 
-
   return (
-    <AuthContext.Provider value={{ user, token, logout, login, edit_account, reset_password }}>
+    <AuthContext.Provider
+      value={{ user, token, logout, login, edit_account, reset_password }}
+    >
       {children}
     </AuthContext.Provider>
   );
