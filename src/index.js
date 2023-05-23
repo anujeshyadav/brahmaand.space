@@ -25,7 +25,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 // Import Pages
 import Landing from "./pages/index";
-import CreateAccount from "./pages/";
+import CreateAccount from "./pages";
 // import Myaccount from "../src/components/Myaccount.jsx";
 
 // import UserAccountInfo from "./pages/UserAccountInfo";
@@ -52,7 +52,7 @@ import Allcategory from "./components/home/Allcategory";
 import AllSubCategory from "./components/home/AllSubCategory";
 import Notification from "./components/Notification";
 import Paginationnew from "./components/Paginationnew";
-import Blogdescription from "../src/components/Blogdescription";
+import Blogdescription from "./components/Blogdescription";
 import DemoPaginate from "./components/DemoPaginate";
 import Pagination from "./components/Pagination";
 import Posts from "./components/Posts";
@@ -81,7 +81,18 @@ import ResetForget from "./components/ResetForget";
 import Productsearch from "./components/filter/Productsearch";
 import ProductHastag from "./components/filter/ProductHastag";
 import Loginplan from "./planable.io/Loginplan";
+// import ReactGA from "react-ga";
 
+// import { useEffect } from "react";
+// import { useLocation } from "react-router-dom";
+
+// ReactGA.initialize("G-YFTXN6J9FY");
+
+// const location = useLocation();
+
+// useEffect(() => {
+//   ReactGA.pageview(location.pathname + location.search);
+// }, [location]);
 const rootElement = document.getElementById("root");
 render(
   // <Router>

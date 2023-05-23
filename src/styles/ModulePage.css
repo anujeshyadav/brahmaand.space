@@ -1220,4 +1220,8 @@ input[type="range"] {
   height: 250px;
 }
 
-/* css rohit */
+
+.imagemainhead {
+  display: flex;
+  justify-content: center;
+}

@@ -136,7 +136,7 @@ function Header() {
             <Row>
               <Col md="6">
                 <div className="py-20">
-                  <h1>Struggling to Find Relevant Content?</h1>
+                  <h1>Struggling to Find Relevant Content ?</h1>
                   <h5 className=" mx-30 ">
                     Find the best quality content across the universe with our
                     community-driven database and AI-based search engine.

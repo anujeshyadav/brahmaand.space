@@ -2,6 +2,9 @@ import React, { useState, useEffect } from "react";
 import { Navbar, Nav, Container, Col, Row } from "react-bootstrap";
 import axios from "axios";
 import swal from "sweetalert";
+import ReactStars from "react-rating-stars-component";
+import versus from "../../images/versus.png";
+
 import HtmlParser from "react-html-parser";
 import {
   Card,
@@ -41,26 +44,43 @@ function Hastag() {
   const [trendingsearch, setTrendingsearch] = useState([]);
   const [categry, setCategry] = useState([]);
   const [newslettervid, setNewslettervid] = useState([]);
+  const [rating, setRating] = useState("");
+
   const navigate = useNavigate();
 
+  const secondExample = {
+    size: 30,
+    count: 5,
+    color: "#434b4d47",
+    activeColor: "#d9ad26",
+    value: 7.5,
+    a11y: true,
+    isHalf: true,
+    emptyIcon: <i className="far fa-star" />,
+    halfIcon: <i className="fa fa-star-half-alt" />,
+    // filledIcon: <i className="fa fa-star" />,
+    onChange: (newValue) => {
+      setRating(newValue);
+    },
+  };
   const gettrendingdata = () => {
     axios
       .get(`https://backend.brahmaand.space/admin/getTrending`)
-      .then(res => {
+      .then((res) => {
         // console.log(res.data.data);
         setTrendingsearch(res.data.data);
       })
-      .catch(err => {});
+      .catch((err) => {});
   };
   const [popblog, setPop] = useState([]);
   const popularblog = () => {
     axios
       .get(`https://backend.brahmaand.space/user/popularBlog`)
 
-      .then(response => {
+      .then((response) => {
         setPop(response.data.data);
       })
-      .catch(error => {
+      .catch((error) => {
         // console.log(error.response.data.data);
       });
   };
@@ -75,11 +95,11 @@ function Hastag() {
   const allcategory = () => {
     axios
       .get(`https://backend.brahmaand.space/admin/getallCategory`)
-      .then(response => {
+      .then((response) => {
         setCategry(response.data.data);
         // console.log(response.data.data);
       })
-      .catch(error => {});
+      .catch((error) => {});
   };
 
   const [email, setEmail] = useState("");
@@ -88,7 +108,7 @@ function Hastag() {
   function performValidation() {
     return email.length > 14;
   }
-  const handleSubmit = e => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     const userid = localStorage.getItem("userid");
 
@@ -97,11 +117,11 @@ function Hastag() {
         email: email,
         userid: userid,
       })
-      .then(response => {
+      .then((response) => {
         setEmail("");
         swal("Subscribed Successfully");
       })
-      .catch(error => {});
+      .catch((error) => {});
   };
   function isValidEmail(email) {
     const expression =
@@ -113,15 +133,15 @@ function Hastag() {
   const monthlynewslettervid = () => {
     axiosConfig
       .get(`/user/getVideo`)
-      .then(res => {
+      .then((res) => {
         setNewslettervid(res.data.data);
         // console.log(res.data.data);
       })
-      .catch(err => {
+      .catch((err) => {
         // console.log(err);
       });
   };
-  const handleChange = event => {
+  const handleChange = (event) => {
     if (!isValidEmail(event.target.value)) {
       setError("Please Enter correct Email to Subscribe");
     } else {
@@ -135,11 +155,11 @@ function Hastag() {
   const featuredContent = () => {
     axiosConfig
       .get(`/user/get_featured_cnt`)
-      .then(res => {
+      .then((res) => {
         setFeature(res.data.data);
         // console.log(res.data.data);
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err);
       });
   };
@@ -156,7 +176,7 @@ function Hastag() {
         .post(`https://backend.brahmaand.space/user/search_topic_title`, {
           searchinput: hastag,
         })
-        .then(res => {
+        .then((res) => {
           console.log(res.data);
           if (
             res.data.data[0]?.sub_category === "" ||
@@ -173,7 +193,7 @@ function Hastag() {
             navigate(`/producthastag/${search}`);
           }
         })
-        .catch(err => {
+        .catch((err) => {
           console.log(err);
         });
     }
@@ -198,7 +218,7 @@ function Hastag() {
             <div className=" row mt-3">
               <div className="col col-lg-12 col-md-12 col-sm-12 col-xs-3">
                 {trendingsearch !== ""
-                  ? trendingsearch?.slice(0, 32).map(trendingtopics => (
+                  ? trendingsearch?.slice(0, 32).map((trendingtopics) => (
                       <button
                         key={trendingtopics._id}
                         onClick={() =>
@@ -219,10 +239,152 @@ function Hastag() {
         </section>
       </Container>
       <Container>
+        <h2 className="category2 mt-4 mb-4">Trending Warzone</h2>
+        <Swiper
+          breakpoints={{
+            1084: {
+              slidesPerView: 2,
+              direction: "horizontal",
+              spaceBetween: 10,
+            },
+            980: {
+              slidesPerView: 2,
+              direction: "horizontal",
+              spaceBetween: 10,
+            },
+            910: {
+              slidesPerView: 2,
+              direction: "horizontal",
+              spaceBetween: 10,
+            },
+            820: {
+              slidesPerView: 2,
+              direction: "horizontal",
+              spaceBetween: 10,
+            },
+            820: {
+              slidesPerView: 2,
+              direction: "horizontal",
+              spaceBetween: 10,
+            },
+            780: {
+              slidesPerView: 2,
+              direction: "horizontal",
+              spaceBetween: 10,
+            },
+
+            768: {
+              slidesPerView: 2,
+              direction: "horizontal",
+              spaceBetween: 10,
+            },
+            640: {
+              slidesPerView: 1,
+              direction: "horizontal",
+              spaceBetween: 10,
+            },
+            320: {
+              slidesPerView: 1,
+              direction: "horizontal",
+              spaceBetween: 10,
+            },
+            240: {
+              slidesPerView: 1,
+              direction: "horizontal",
+              spaceBetween: 10,
+            },
+          }}
+          className="sld-1"
+          modules={[Navigation, Pagination, Scrollbar]}
+          spaceBetween={80}
+          slidesPerView={3}
+          navigation
+          pagination={{ clickable: true }}
+          scrollbar={{ draggable: true }}
+          onSwiper={(swiper) => console.log(swiper)}
+          onSlideChange={() => console.log("slide change")}
+        >
+          {feature?.map((features) => (
+            <SwiperSlide className="swiperslidescutom" key={features?._id}>
+              <div className="mb-3">
+                <h4>COMEDY</h4>
+              </div>
+              <div className="ifram warzone">
+                <div>
+                  {" "}
+                  <Row className="rowmainheading">
+                    <Col lg="">
+                      <div className="iframmainhead">
+                        <iframe
+                          allowfullscreen="true"
+                          className="iframesetdata"
+                          width="300px"
+                          // height="300px"
+                          style={{ borderRadius: "12px" }}
+                          src={`https://www.youtube.com/embed/${features?.video_link}`}
+                        ></iframe>
+                      </div>
+                    </Col>
+                    <Col lg="2" className="imagehead">
+                      <div className="middlebox">
+                        <div className="imagemain">
+                          <div
+                            className="borderimage"
+                            style={{
+                              borderRadius: "50%",
+                              background: "#5F56C6",
+                            }}
+                          >
+                            <div className="imagemainhead">
+                              <img
+                                // style={{ marginLeft: "20px" }}
+                                className="imageimg"
+                                src={versus}
+                                alt="img"
+                              />
+                            </div>{" "}
+                          </div>
+                        </div>
+                      </div>
+                    </Col>
+                    <Col lg="">
+                      <iframe
+                        allowfullscreen="true"
+                        className="iframesetdata"
+                        width="300px"
+                        // height="300px"
+                        style={{ borderRadius: "12px" }}
+                        src={`https://www.youtube.com/embed/${features?.video_link}`}
+                      ></iframe>
+                    </Col>
+                  </Row>
+                </div>
+
+                <div>
+                  <h4>Carry Minati (4.00)</h4>
+                  <p>
+                    <ReactStars {...secondExample} />
+                  </p>
+                  <div className="mb-3">
+                    <Button
+                      style={{ borderRadius: "10px" }}
+                      size="sm"
+                      className="btlisting"
+                    >
+                      Rate Now
+                    </Button>
+                  </div>
+                </div>
+              </div>
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      </Container>
+      <Container className="mt-3">
         <p className="category">Top Categories</p>
         <Container className=" ">
           <Row className="m-3 mb-4">
-            {categry?.slice(0, 8).map(value => (
+            {categry?.slice(0, 8).map((value) => (
               <Col lg="3" md="6" sm="12" className="" key={value?._id}>
                 <Link to={`/subcategory/${value?._id}`}>
                   <div className="bg-1">
@@ -332,10 +494,10 @@ function Hastag() {
           navigation
           pagination={{ clickable: true }}
           scrollbar={{ draggable: true }}
-          onSwiper={swiper => console.log(swiper)}
+          onSwiper={(swiper) => console.log(swiper)}
           onSlideChange={() => console.log("slide change")}
         >
-          {feature?.map(features => (
+          {feature?.map((features) => (
             <SwiperSlide key={features?._id}>
               <div className="ifram">
                 <iframe
@@ -558,7 +720,7 @@ function Hastag() {
           <div className=" col-lg-6 col-md-6 col-sm-12">
             {/* api integrate form here */}
             {newslettervid
-              ?.map(video => (
+              ?.map((video) => (
                 <Col className="container" key={video?._id}>
                   <div
                     style={{ backgroundImage: `url(${video})` }}
@@ -659,10 +821,10 @@ function Hastag() {
           navigation
           pagination={{ clickable: true }}
           scrollbar={{ draggable: true }}
-          onSwiper={swiper => console.log(swiper)}
+          onSwiper={(swiper) => console.log(swiper)}
           onSlideChange={() => console.log("slide change")}
         >
-          {popblog?.map(value => (
+          {popblog?.map((value) => (
             <SwiperSlide key={value?._id}>
               <Card key={value?._id}>
                 <Link key={value?._id} to={`/blogdescription/${value?._id}`}>
